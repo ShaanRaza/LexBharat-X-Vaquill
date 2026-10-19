@@ -1,0 +1,23 @@
+[
+ {
+  "route": "/",
+  "bp": "desktop",
+  "issues": [],
+  "events": [],
+  "height": 9339
+ },
+ {
+  "route": "/auth/forgot-password",
+  "bp": "desktop",
+  "issues": [],
+  "events": [],
+  "height": 900
+ },
+ {
+  "route": "/auth/login",
+  "bp": "desktop",
+  "issues": [],
+  "events": [],
+  "height": 900
+ }
+]

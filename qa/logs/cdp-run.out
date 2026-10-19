@@ -1,0 +1,27 @@
+desktop: 50/582
+desktop: 100/582
+desktop: 150/582
+desktop: 200/582
+desktop: 250/582
+desktop: 300/582
+desktop: 350/582
+desktop: 400/582
+desktop: 450/582
+desktop: 500/582
+desktop: 550/582
+done desktop: 582 pages in 752s | pages with console/network events: 0 | pages with audit issues: 579
+  issue kinds: {"SMALL-TARGET(<24px)":579,"LOW-CONTRAST":1}
+mobile: 50/582
+mobile: 100/582
+mobile: 150/582
+mobile: 200/582
+mobile: 250/582
+mobile: 300/582
+mobile: 350/582
+mobile: 400/582
+mobile: 450/582
+mobile: 500/582
+mobile: 550/582
+done mobile: 582 pages in 936s | pages with console/network events: 0 | pages with audit issues: 579
+  issue kinds: {"SMALL-TARGET(<24px)":579,"LOW-CONTRAST":1}
+tablet: 50/582

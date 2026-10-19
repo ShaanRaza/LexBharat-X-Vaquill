@@ -1,0 +1,4200 @@
+[
+ {
+  "route": "/",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 14388
+ },
+ {
+  "route": "/about",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3315
+ },
+ {
+  "route": "/accessibility",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4576
+ },
+ {
+  "route": "/affiliates",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4409
+ },
+ {
+  "route": "/alerts",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4380
+ },
+ {
+  "route": "/auth/forgot-password",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 844
+ },
+ {
+  "route": "/auth/login",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 844
+ },
+ {
+  "route": "/auth/signup",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 844
+ },
+ {
+  "route": "/blog",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4659
+ },
+ {
+  "route": "/blog/100-generative-ai-prompts-for-in-house-lawyers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/409a-valuation-playbook-for-corporate-counsel",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3097
+ },
+ {
+  "route": "/blog/aba-formal-opinion-512-generative-ai-lawyers-guide",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/add-legal-research-ai-agent-mcp",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/ai-and-corporate-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/ai-case-law-search-explained",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/ai-chatbot-and-ai-disclosure-laws-by-state",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/ai-compliance-check-ccpa-gdpr-sox",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/ai-contract-negotiation",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/ai-contract-review-lawyers-guide",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3165
+ },
+ {
+  "route": "/blog/ai-employment-contract-review",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/ai-for-criminal-defense-attorneys-guide",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/ai-for-family-law-firms-workflow-playbook",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/ai-for-family-law-solo-small-firm-guide",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/ai-for-personal-injury-lawyers-7-uses",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/ai-governance-policy-for-in-house-legal-template",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/ai-hallucination-sanctions-tracker",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/ai-hallucinations-legal-research-sanctions",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/ai-hiring-and-employment-laws-by-state-what-is-actually-in-force",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/ai-law-search-engine-vs-keyword-search",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/ai-legal-drafting-guide",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/ai-legal-regulation-by-state",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/ai-legal-regulation-update-state-federal",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/ai-legal-research-all-50-states-federal-secondary-sources",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/ai-legal-seat-cost-buyer-guide",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/ai-legal-tools-trained-federal-state-case-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/ai-medical-record-review",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3276
+ },
+ {
+  "route": "/blog/ai-msa-review",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3296
+ },
+ {
+  "route": "/blog/ai-nda-review-software",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/ai-personal-injury-demand-letter-chronology-how-to",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/ai-tools-comparing-document-versions",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3139
+ },
+ {
+  "route": "/blog/ai-value-gap-in-house-outside-counsel",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3273
+ },
+ {
+  "route": "/blog/alabama-attorney-general-opinions-how-to-find-read-and-cite-them",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/amendment-history-point-in-time-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3203
+ },
+ {
+  "route": "/blog/api-call-vs-rag-pipeline-cost-comparison",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/are-aba-formal-opinions-binding-512-ai",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/are-statutes-copyrighted-what-the-law-says-about-copying-it",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/arkansas-attorney-general-opinions-how-to-find-read-and-cite-them",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/attorney-general-opinions-by-state-how-to-find-them",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/attorneys-fees-provisions-by-state",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/autonomous-legal-research-agent-mode-explained",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3299
+ },
+ {
+  "route": "/blog/banking-regulator-guidance-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3290
+ },
+ {
+  "route": "/blog/best-ai-chatbot-legal-writing",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3165
+ },
+ {
+  "route": "/blog/best-ai-contract-review-tools-compared",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3095
+ },
+ {
+  "route": "/blog/best-ai-legal-research-solo-attorneys-budget",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/best-ai-software-plaintiff-law-firms",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/best-ai-tools-for-banking-and-finance-lawyers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/best-ai-tools-for-employment-lawyers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3092
+ },
+ {
+  "route": "/blog/best-ai-tools-for-lawyers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3050
+ },
+ {
+  "route": "/blog/best-ai-tools-for-m-and-a-lawyers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3050
+ },
+ {
+  "route": "/blog/best-ai-tools-for-procurement-lawyers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3069
+ },
+ {
+  "route": "/blog/best-ai-tools-for-real-estate-lawyers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3050
+ },
+ {
+  "route": "/blog/best-ai-tools-for-startup-and-vc-lawyers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3092
+ },
+ {
+  "route": "/blog/best-harvey-alternatives-in-house",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/best-legal-ai-tools-for-in-house-counsel",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/best-legal-data-apis-developers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3114
+ },
+ {
+  "route": "/blog/best-legal-redline-software",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3114
+ },
+ {
+  "route": "/blog/best-legal-research-tools-solo-family-law-attorneys",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/best-matter-management-software-in-house",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/best-spellbook-alternatives",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/best-westlaw-alternatives-solo-small-firms",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/best-westlaw-alternatives-tools-solo-small-firms-switch-to",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/bills-versus-laws-tracking-legislation-is-not-knowing-the-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3097
+ },
+ {
+  "route": "/blog/bloomberg-law-ai-review-honest-assessment",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3254
+ },
+ {
+  "route": "/blog/bloomberg-law-api-what-exists-and-who-can-use-it",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/bluebook-citation-parsing-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3318
+ },
+ {
+  "route": "/blog/boolean-search-legal-databases-developer-guide",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3095
+ },
+ {
+  "route": "/blog/build-litigation-chronology-from-documents-ai",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/build-or-buy-where-your-products-legal-data-should-come-from",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/build-vs-buy-legal-ai-in-house",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3114
+ },
+ {
+  "route": "/blog/building-an-internal-legal-copilot-inhouse-team",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3165
+ },
+ {
+  "route": "/blog/built-in-legal-ai-skills-which-to-use",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/bulk-contract-review-document-matrix",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3268
+ },
+ {
+  "route": "/blog/california-ai-laws-explained-sb-53-and-the-rest",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/california-attorney-general-opinions-how-to-find-read-and-cite-them",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/california-non-compete-section-16600",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/can-ai-analyze-legal-documents-at-scale",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/can-ai-give-legal-advice",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3027
+ },
+ {
+  "route": "/blog/can-ai-interpret-statutes-statutory-interpretation",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/can-chatgpt-be-used-against-you-litigation",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/can-claude-search-statutes-and-regulations-and-how-to-check-the-answer",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/can-copilot-review-a-contract",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/can-gemini-review-a-contract",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/can-you-use-state-statutes-in-a-commercial-product-terms-and-licences",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/casetext-vs-westlaw-pricing",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/cfpb-circulars-enforcement-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/cfr-annual-editions-point-in-time-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/cfr-api-code-of-federal-regulations",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/cftc-fcc-ferc-doe-cpsc-guidance-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/chatgpt-for-lawyers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/choice-of-law-clauses-state-by-state-breakdown",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/claude-fable-5-what-it-means-for-legal-ai",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/claude-for-legal-what-in-house-teams-need-to-know",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/claude-for-legal-work",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/clio-api-guide-and-adding-legal-data-to-a-clio-app",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/clm-ironclad-docusign-contractworks",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3360
+ },
+ {
+  "route": "/blog/cocounsel-alternatives",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/cocounsel-next-generation-what-in-house-should-know",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/cocounsel-review-honest-assessment",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/cocounsel-vs-harvey",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/colorado-ai-act-explained-from-the-statute",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/colorado-non-compete-hb-22-1317",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3296
+ },
+ {
+  "route": "/blog/compare-documents-export-clean-redlines",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/compliance-api-regulatory-data-sources-guide",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/composing-legal-mcps-courtlistener-canlii-lexbharat-workflow",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/congress-gov-api-guide-bills-vs-the-code",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/contract-renewal-tracking",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/contract-review-checklist-in-house-counsel",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/contract-review-skill-setup-lexbharat",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/contract-risk-assessment-framework",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/contract-turnaround-time",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/copilot-for-lawyers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/cost-effective-clm-platforms-compared",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3268
+ },
+ {
+  "route": "/blog/court-records-api-vs-court-data-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/courtlistener-citation-lookup-api-guide",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/courtlistener-mcp-server-us-legal-research",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/day-in-the-matter-intake-to-filing-walkthrough",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/deepfake-laws-by-state-what-is-actually-on-the-books",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/delaware-vs-california-vs-new-york-incorporation",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/do-agency-guidance-documents-have-the-force-of-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/do-harvey-and-legora-have-apis",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/document-matrix-vs-document-comparison",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/docusign-clm-redlining-vs-ai-contract-review",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/does-chatgpt-have-attorney-client-privilege",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3114
+ },
+ {
+  "route": "/blog/doj-justice-manual-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/dol-wage-hour-opinion-letters-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/domain-specific-vs-general-purpose-legal-ai",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/dpa-negotiation-playbook-in-house-counsel",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/dpa-review-field-guide-for-inhouse-counsel",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/drafting-schedule-of-exceptions-m-and-a",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/drag-along-provisions-drafting-venture-deals",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/ecfr-api-official-guide-cfr-as-json-xml-and-bulk-data",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/eeoc-guidance-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/embed-legal-ai-chat-widget-client-portal",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/enterprise-legal-data-security",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/executive-orders-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/export-controls-bis-ddtc-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3318
+ },
+ {
+  "route": "/blog/far-dfars-api-government-contracts",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/fastcase-vlex-and-clio-one-family-which-apis-exist",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/fastcase-vs-lexis-budget-vs-premium",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/federal-agency-guidance-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/federal-holidays-in-the-us-code-and-whether-private-employers-must-observe-them",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/federal-register-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3031
+ },
+ {
+  "route": "/blog/federal-register-api-python-search-rules-and-notices",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/federal-rules-of-civil-procedure-in-plain-english-the-rules-you-meet-first",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/federal-rules-of-procedure-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3290
+ },
+ {
+  "route": "/blog/federal-vs-state-law-which-one-applies-to-you",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/first-legal-hire-in-house-function-with-ai",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/florida-attorney-general-opinions-how-to-find-read-and-cite-them",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/florida-non-compete-enforceability",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3268
+ },
+ {
+  "route": "/blog/frcp-26-explained-initial-disclosures-and-the-scope-of-discovery",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/free-ai-legal-research-tool-what-you-get",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3203
+ },
+ {
+  "route": "/blog/gc-ai-pricing",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3165
+ },
+ {
+  "route": "/blog/gc-ai-review-honest-assessment",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/gc-ai-vs-harvey",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/gemini-for-lawyers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/general-purpose-ai-enters-legal-openai-perplexity",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/generative-ai-for-legal-in-house-guide",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/georgia-restrictive-covenants-act",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/govinfo-api-guide-keys-endpoints-limits-and-bulk-data",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/govinfo-api-vs-legal-data-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/grounding-vs-guessing-legal-ai",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/hallucination-tracker-charlotin-risk-manager",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/harvey-ai-price-increase-per-seat",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3139
+ },
+ {
+  "route": "/blog/harvey-ai-review-honest-assessment",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3165
+ },
+ {
+  "route": "/blog/harvey-ai-subprocessors-data-flow",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/harvey-legora-cocounsel-pricing-reality",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/harvey-subprocessors-legal-ai-vendor-guide",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3296
+ },
+ {
+  "route": "/blog/harvey-vs-legora",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/hipaa-hhs-ocr-guidance-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3271
+ },
+ {
+  "route": "/blog/how-ai-is-transforming-in-house-legal-teams",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/how-ai-legal-research-works-rag",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/how-does-a-bill-become-a-law-from-idea-to-the-us-code",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/how-legal-change-detection-works",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/how-much-does-legora-cost",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/how-much-does-westlaw-cost-solo-small-firm-pricing",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/how-much-legal-work-will-ai-agents-take-in-house",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/how-to-build-document-matrix-compare-contracts",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/how-to-cite-a-statute-or-regulation-in-plain-english",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/how-to-cite-the-federal-register-the-cfr-and-state-administrative-codes",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/how-to-draft-a-contract",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/how-to-evaluate-legal-ai-vendors",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-alabama-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-alaska-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-arizona-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-arkansas-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-california-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-colorado-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-connecticut-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3027
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-delaware-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3027
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-district-of-columbia-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3069
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-florida-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-georgia-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-hawaii-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-idaho-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3095
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-illinois-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3050
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-indiana-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-iowa-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-kansas-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3050
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-kentucky-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-louisiana-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3027
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-maine-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-maryland-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-massachusetts-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-michigan-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-minnesota-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3050
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-mississippi-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3050
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-missouri-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3027
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-montana-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-nebraska-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-nevada-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3027
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-new-hampshire-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3050
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-new-jersey-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3027
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-new-mexico-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3050
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-new-york-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-north-carolina-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3027
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-north-dakota-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3095
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-ohio-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3027
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-oklahoma-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3095
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-oregon-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3027
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-pennsylvania-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3027
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-puerto-rico-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-rhode-island-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-south-carolina-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3095
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-south-dakota-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-tennessee-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-texas-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3027
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-utah-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3095
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-vermont-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3050
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-virginia-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3050
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-washington-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3050
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-west-virginia-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3095
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-wisconsin-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3027
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-wyoming-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/how-to-redline-a-pdf",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3050
+ },
+ {
+  "route": "/blog/how-to-redline-in-google-docs",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3092
+ },
+ {
+  "route": "/blog/how-to-redline-in-word",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/how-to-review-a-saas-agreement",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/how-to-run-a-50-state-survey",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/how-to-search-the-us-code-and-trust-the-result",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/how-to-use-claude-for-legal-research",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/how-to-use-courtlistener-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/how-to-verify-ai-legal-citations-before-filing",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/how-to-verify-legal-ai-accuracy-claim",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/how-us-statutes-define-their-own-words-and-how-to-look-up-a-definition",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/hybrid-semantic-search-legal-corpus",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/illinois-bipa-biometric-privacy-explained",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/illinois-freedom-to-work-act-non-compete",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3203
+ },
+ {
+  "route": "/blog/in-house-contract-review-playbook",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3165
+ },
+ {
+  "route": "/blog/in-house-legal-ai-adoption-what-leaders-do",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/in-house-legal-software-guide",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/in-house-legal-team-size-benchmarks",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/indemnification-caps-by-state",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/insurance-compliance-research-50-states",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3139
+ },
+ {
+  "route": "/blog/ironclad-pricing",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/ironclad-review-honest-assessment",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/irs-guidance-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3290
+ },
+ {
+  "route": "/blog/is-chatgpt-confidential-legal-work",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/is-claude-private-legal",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/blog/is-copilot-private-legal",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3114
+ },
+ {
+  "route": "/blog/is-courtlistener-reliable-free-law-project-data",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/is-gemini-private-legal",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/is-legal-ai-a-bubble",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3165
+ },
+ {
+  "route": "/blog/is-lexisnexis-worth-it-better-alternatives",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/is-perplexity-private-legal",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3114
+ },
+ {
+  "route": "/blog/ivo-alternatives",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/ivo-pricing",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/judges-use-ai-lawyers-sanctioned-double-standard",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/jury-trial-waivers-enforceability-by-state",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3187
+ },
+ {
+  "route": "/blog/kansas-attorney-general-opinions-how-to-find-read-and-cite-them",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/law-change-webhooks-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/law-firm-client-collaboration-ai-shared-matter-workspaces",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/law-firm-vs-in-house-ai-use-cases-mismatch",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/legal-ai-adoption-trust-gap",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3229
+ },
+ {
+  "route": "/blog/legal-ai-agent-in-house-workflow-walkthrough",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/legal-ai-consolidation-wave-in-house-buyers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/legal-ai-for-biotech-pharma-in-house-counsel-fda-compliance",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3296
+ },
+ {
+  "route": "/blog/legal-ai-for-chief-legal-officers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/legal-ai-for-corporate-counsel",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/legal-ai-for-fintech-in-house-counsel-compliance",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3229
+ },
+ {
+  "route": "/blog/legal-ai-for-fractional-general-counsel",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/legal-ai-for-healthcare-in-house-counsel-hipaa",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/legal-ai-for-in-house-counsel",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/legal-ai-for-manufacturing-in-house-counsel-supply-chain",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3318
+ },
+ {
+  "route": "/blog/legal-ai-for-media-entertainment-in-house-counsel-copyright-talent",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3318
+ },
+ {
+  "route": "/blog/legal-ai-for-saas-in-house-counsel",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/legal-ai-funding-arms-race-in-house-buyers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/legal-ai-memory-across-sessions",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/legal-ai-microsoft-word-add-in",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/legal-ai-pilot-30-days",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3114
+ },
+ {
+  "route": "/blog/legal-ai-pricing-benchmark",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/legal-ai-statistics",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/legal-ai-suite-wars-not-search-bar",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/legal-ai-that-avoids-hallucinating-cases",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/legal-ai-tools-solo-practitioners",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/legal-ai-trust-is-the-roi",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/legal-ai-vendors-signed-dpa-eu-us-data-hosting",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/legal-ai-word-add-ins-compared",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/legal-ai-workflows-multi-step-automation",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/legal-api-credits-pricing-explained",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/legal-api-explained",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/legal-api-metadata-fields",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/legal-citation-resolution-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/legal-data-api-schema-contract",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/legal-data-freshness-refresh-cadence",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/legal-data-pipeline-source-to-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/legal-data-provenance-official-sources",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/legal-data-refresh-cadence-roadmap",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/legal-department-kpis-what-to-measure",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/legal-research-api-pricing-internal-knowledge-management",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/legal-research-costs-what-firms-pay",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/legal-research-cursor-claude-code-mcp-guide",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/legal-research-no-data-indexing-confidentiality-checklist",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/legal-research-platform-matter-folder-workspace-organization",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/legalon-pricing",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/legiscan-api-guide-bills-vs-enacted-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/legislative-tracking-software-what-it-does-and-what-sits-underneath",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/legora-alternatives",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3050
+ },
+ {
+  "route": "/blog/legora-legal-ai-review",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/lexbharat-4-layer-citation-verification-explained",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/lexbharat-capabilities-agentic-workflows-benchmarks",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3318
+ },
+ {
+  "route": "/blog/lexis-ai-vs-westlaw-ai",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3005
+ },
+ {
+  "route": "/blog/lexis-ai-vs-westlaw-ai-vs-lexbharat-comparison",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/lexis-plus-ai-and-cocounsel-is-there-an-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/lexis-plus-ai-pricing",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/lexis-plus-ai-review-honest-assessment",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/lexis-plus-vs-westlaw-litigation-research",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/lexisnexis-api-what-the-developer-portal-offers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/lexisnexis-westlaw-api-alternatives-developers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/linksquares-review-honest-assessment",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/liquidated-damages-enforceability-by-state",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3137
+ },
+ {
+  "route": "/blog/liquidation-preference-math-venture-deals",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/louisiana-attorney-general-opinions-how-to-find-read-and-cite-them",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/luminance-alternatives",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/luminance-review-honest-assessment",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/ma-due-diligence-legal-workstream-checklist",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/massachusetts-non-compete-act",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/matter-intake-triage-workflow-solo-gc",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/mcp-registry-legal-ai-app-store-guide",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/midpage-api-what-it-offers-and-who-it-fits",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3092
+ },
+ {
+  "route": "/blog/midpage-vs-lexbharat-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/mississippi-attorney-general-opinions-how-to-find-read-and-cite-them",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3139
+ },
+ {
+  "route": "/blog/most-in-house-legal-work-is-not-legal-risk",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/nda-enforceability-by-state",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/nda-playbook-template-ai-enforced",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/nda-triage-ai-evaluation",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3271
+ },
+ {
+  "route": "/blog/nda-vs-confidentiality-agreement",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/nda-vs-non-compete-vs-non-solicit",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/nebraska-first-ai-license-suspension",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/new-york-non-compete-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3254
+ },
+ {
+  "route": "/blog/new-york-raise-act-explained",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/nlrb-memoranda-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/non-compete-enforceability-by-state",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3165
+ },
+ {
+  "route": "/blog/non-compete-q3-state-updates",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/nyc-local-law-144-automated-hiring-explained",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/ohio-attorney-general-opinions-how-to-find-read-and-cite-them",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/open-states-api-guide-state-legislature-data",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/openlaws-vs-lexbharat-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/openlaws-vs-midpage-vs-lexbharat-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/oregon-110k-ai-hallucination-sanction",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/outside-counsel-guidelines-template-12-rules",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/outside-counsel-rate-benchmarks",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/pacer-api-how-to-get-federal-court-data-programmatically",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/parse-us-code-xml-uslm-into-clean-json",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/perplexity-for-lawyers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3097
+ },
+ {
+  "route": "/blog/personal-injury-ai-guide",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/platforms-version-changes-legal-documents",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/popular-names-of-us-laws-and-where-each-act-lives-in-the-us-code",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/primary-law-explained-for-people-who-do-not-read-statutes",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3139
+ },
+ {
+  "route": "/blog/pull-legal-research-into-internal-app-lexbharat-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/redline-vs-track-changes-lawyers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/reduce-outside-counsel-spend-with-ai",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/regtech-and-compliance-software-categories-and-where-the-rule-text-comes-from",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/regulations-gov-api-guide-rulemaking-data",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/regulatory-change-management-process-software-and-the-data-underneath",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/regulatory-mapping-connect-rules-to-your-obligations",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/regulatory-monitoring-how-to-keep-track-of-rule-changes",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/replace-harvey-claude-lexbharat-mcp-stack",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/right-of-first-refusal-drafting-venture-deals",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/right-to-work-states-which-states-have-the-law-and-where-it-is-written",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/rolling-out-legal-ai-to-your-team",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/rulemaking-explained-proposed-rules-final-rules-and-comments",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3268
+ },
+ {
+  "route": "/blog/safe-vs-convertible-note-vs-priced-round",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/scraping-state-legislature-websites-what-breaks",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/search-matter-files-conversationally-legal-ai",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3268
+ },
+ {
+  "route": "/blog/search-us-statutes-regulations-ai-amendments",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/sec-cyber-disclosure-enforcement-update",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/sec-cybersecurity-disclosure-item-1-05-gc-playbook",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/sexual-harassment-prevention-training-requirements-by-state-for-employers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/small-firm-legal-tech-stack",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/spellbook-autonomous-contract-management-in-house",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3296
+ },
+ {
+  "route": "/blog/spellbook-pricing",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/spellbook-review-honest-assessment",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/state-constitutions-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/state-consumer-protection-laws-udap-statutes-explained",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/state-court-rules-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/state-data-breach-notification-laws-where-each-one-lives-and-what-it-requires",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3209
+ },
+ {
+  "route": "/blog/state-insurance-bulletin-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/state-minimum-wage-and-employment-laws-where-to-read-them",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/state-of-in-house-legal-teams",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/state-privacy-laws-which-states-have-one-and-where-to-read-it",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/state-regulations-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/state-statutes-in-bulk-which-states-publish-xml-json-or-an-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/statute-of-limitations-by-state-pi-contract",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3290
+ },
+ {
+  "route": "/blog/statutes-at-large-session-law-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/ten-questions-to-ask-a-legal-data-vendor",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/term-sheet-review-checklist-corporate-counsel",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/texas-attorney-general-opinions-how-to-find-read-and-cite-them",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/texas-non-compete-enforceability",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/texas-responsible-ai-governance-act-traiga-explained",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/the-state-law-update-guide-how-to-know-when-a-law-has-changed",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/top-ai-tools-for-general-counsel",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3114
+ },
+ {
+  "route": "/blog/top-contract-management-vendors-fortune-500",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/trade-secrets-enforceability-by-state",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/trellis-api-state-court-data-what-it-offers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/types-of-primary-law-us",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/us-law-data-the-complete-guide",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/us-sentencing-guidelines-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/us-state-privacy-laws-in-house-guide",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/us-tax-treaty-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/usc-api-pull-us-code-sections-programmatically",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/usc-api-us-statutes-api-guide",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/usc-vs-cfr-what-the-abbreviations-mean-and-how-they-differ",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/uscis-policy-manual-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3268
+ },
+ {
+  "route": "/blog/use-claude-us-legal-research-mcp",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/uslm-vs-akoma-ntoso-legislative-xml-guide",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/uspto-mpep-tmep-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3290
+ },
+ {
+  "route": "/blog/utah-ai-laws-explained-from-the-statute",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/vendor-security-questionnaire-in-house-counsel",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3296
+ },
+ {
+  "route": "/blog/washington-non-compete-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3271
+ },
+ {
+  "route": "/blog/we-do-not-train-on-your-data-legal-ai-verification",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/westlaw-api-what-exists-who-can-use-it-and-what-it-covers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/westlaw-lexis-openai-training-data-explained",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/westlaw-precision-ai-review-honest-assessment",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/westlaw-vs-lexisnexis-solo-small-firm-breakdown",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3271
+ },
+ {
+  "route": "/blog/westlaw-vs-lexisnexis-vs-lexbharat-pricing-ai-comparison",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3268
+ },
+ {
+  "route": "/blog/westlaw-vs-vlex-coverage-ai-pricing",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/what-does-codified-mean-in-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/what-happened-to-casetext-alternatives",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/what-is-a-document-matrix-legal",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/what-is-a-general-counsel",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/what-is-a-regulation-and-how-is-it-different-from-a-statute",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/what-is-a-session-law-and-how-is-it-different-from-the-code",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/blog/what-is-a-state-register-and-administrative-code",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/what-is-an-administrative-agency-and-what-does-it-do",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/what-is-an-nda",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/what-is-in-house-counsel",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/what-is-legal-data-a-buyers-guide",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/what-is-legal-matter-management-ai-segregation-explainer",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3248
+ },
+ {
+  "route": "/blog/what-is-nda-triage-explained",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/what-is-the-ecfr-is-it-official-and-how-to-search-it",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/what-is-the-federal-register-and-how-to-search-it",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/what-lawyers-really-think-of-legal-ai",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/blog/when-do-new-state-laws-take-effect-default-effective-dates-by-state",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3142
+ },
+ {
+  "route": "/blog/where-to-find-epa-fda-osha-sec-ftc-and-hipaa-regulations",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/where-your-legal-ai-data-actually-goes",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/which-legal-ai-is-best-agentic-suites",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3137
+ },
+ {
+  "route": "/blog/will-ai-replace-in-house-lawyers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/blog/will-ai-replace-paralegals",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/brand",
+  "bp": "mobile",
+  "issues": [
+   "LOW-CONTRAST: 1 e.g. a.flex.items-center 1.07"
+  ],
+  "events": [],
+  "height": 5365
+ },
+ {
+  "route": "/claude-plugin",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 5351
+ },
+ {
+  "route": "/contact",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 2932
+ },
+ {
+  "route": "/cookies",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 6034
+ },
+ {
+  "route": "/customer",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 2724
+ },
+ {
+  "route": "/customer/example-solo-practice",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 2850
+ },
+ {
+  "route": "/delete-data",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4984
+ },
+ {
+  "route": "/docs",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 2667
+ },
+ {
+  "route": "/docs/api-guide/alerts",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1269
+ },
+ {
+  "route": "/docs/api-guide/authentication",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 2063
+ },
+ {
+  "route": "/docs/api-guide/best-practices",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 936
+ },
+ {
+  "route": "/docs/api-guide/bulk-and-sql",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1311
+ },
+ {
+  "route": "/docs/api-guide/changelog",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 951
+ },
+ {
+  "route": "/docs/api-guide/concepts/amendment-history",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 950
+ },
+ {
+  "route": "/docs/api-guide/concepts/citation-formats",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1188
+ },
+ {
+  "route": "/docs/api-guide/concepts/citation-quality",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 972
+ },
+ {
+  "route": "/docs/api-guide/concepts/corpus-types",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1344
+ },
+ {
+  "route": "/docs/api-guide/concepts/formats",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 850
+ },
+ {
+  "route": "/docs/api-guide/concepts/jurisdictions",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 904
+ },
+ {
+  "route": "/docs/api-guide/concepts/response-fields",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1053
+ },
+ {
+  "route": "/docs/api-guide/concepts/search",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1235
+ },
+ {
+  "route": "/docs/api-guide/concepts/section-ids",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1034
+ },
+ {
+  "route": "/docs/api-guide/concepts/section-intelligence",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 903
+ },
+ {
+  "route": "/docs/api-guide/concepts/status-and-currency",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 844
+ },
+ {
+  "route": "/docs/api-guide/coverage",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1595
+ },
+ {
+  "route": "/docs/api-guide/coverage/agency-guidance",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 964
+ },
+ {
+  "route": "/docs/api-guide/coverage/federal",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1222
+ },
+ {
+  "route": "/docs/api-guide/coverage/india",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1071
+ },
+ {
+  "route": "/docs/api-guide/coverage/states",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1187
+ },
+ {
+  "route": "/docs/api-guide/data-privacy",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1325
+ },
+ {
+  "route": "/docs/api-guide/errors",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1247
+ },
+ {
+  "route": "/docs/api-guide/faq",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1051
+ },
+ {
+  "route": "/docs/api-guide/grounding-llms",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 983
+ },
+ {
+  "route": "/docs/api-guide/overview",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1634
+ },
+ {
+  "route": "/docs/api-guide/pagination",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 844
+ },
+ {
+  "route": "/docs/api-guide/point-in-time",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 940
+ },
+ {
+  "route": "/docs/api-guide/quickstart",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1485
+ },
+ {
+  "route": "/docs/api-guide/recipes/browse-hierarchy",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 917
+ },
+ {
+  "route": "/docs/api-guide/recipes/citation-enrichment",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 861
+ },
+ {
+  "route": "/docs/api-guide/recipes/citation-lookup",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1031
+ },
+ {
+  "route": "/docs/api-guide/recipes/compliance-mapping",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 933
+ },
+ {
+  "route": "/docs/api-guide/recipes/coverage-monitoring",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 919
+ },
+ {
+  "route": "/docs/api-guide/recipes/mcp-tool",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 856
+ },
+ {
+  "route": "/docs/api-guide/recipes/multi-state-comparison",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 861
+ },
+ {
+  "route": "/docs/api-guide/recipes/rag-grounding",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1163
+ },
+ {
+  "route": "/docs/api-guide/recipes/statute-chatbot",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1003
+ },
+ {
+  "route": "/docs/api-guide/recipes/subject-corpus",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 855
+ },
+ {
+  "route": "/docs/api-guide/rights-and-licensing",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1066
+ },
+ {
+  "route": "/docs/api-guide/roadmap",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 967
+ },
+ {
+  "route": "/docs/api-guide/session-laws",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1214
+ },
+ {
+  "route": "/docs/api-guide/use-cases",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 993
+ },
+ {
+  "route": "/docs/api-reference",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 2173
+ },
+ {
+  "route": "/docs/api-reference/alerts/get-watches",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1383
+ },
+ {
+  "route": "/docs/api-reference/alerts/post-watches",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1479
+ },
+ {
+  "route": "/docs/api-reference/discover-the-corpus/get-statutes-coverage",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1266
+ },
+ {
+  "route": "/docs/api-reference/discover-the-corpus/get-statutes-divisions",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1479
+ },
+ {
+  "route": "/docs/api-reference/discover-the-corpus/get-statutes-laws",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1314
+ },
+ {
+  "route": "/docs/api-reference/india-pricing/get-india-api-credit-pricing",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 951
+ },
+ {
+  "route": "/docs/api-reference/pricing/get-pricing",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1266
+ },
+ {
+  "route": "/docs/api-reference/search/post-statutes-search",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1622
+ },
+ {
+  "route": "/docs/api-reference/section-lookup/get-statutes-resolve",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1336
+ },
+ {
+  "route": "/docs/api-reference/section-lookup/get-statutes-section-act-id",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1336
+ },
+ {
+  "route": "/docs/api-reference/section-lookup/get-statutes-section-act-id-body",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1427
+ },
+ {
+  "route": "/docs/api-reference/section-lookup/get-statutes-section-act-id-related",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1405
+ },
+ {
+  "route": "/docs/api-reference/section-lookup/get-statutes-sections",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1336
+ },
+ {
+  "route": "/docs/guides/mcp-client",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1690
+ },
+ {
+  "route": "/docs/integrations",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1316
+ },
+ {
+  "route": "/docs/introduction",
+  "bp": "mobile",
+  "issues": [
+   "SMALL-TARGET(<24px): 1 e.g. button.inline-flex.h-10"
+  ],
+  "events": [],
+  "height": 1690
+ },
+ {
+  "route": "/dpa",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 5482
+ },
+ {
+  "route": "/engineering",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4551
+ },
+ {
+  "route": "/engineering/a-spreadsheet-where-every-cell-is-verified",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/engineering/catching-a-fabricated-citation",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/engineering/cutting-a-bm25-index-build-from-four-hours-to-ninety-minutes",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3133
+ },
+ {
+  "route": "/engineering/deep-research-into-a-cited-memo",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/engineering/draft-the-fix-but-earn-it",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3050
+ },
+ {
+  "route": "/engineering/extract-once-read-many",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3203
+ },
+ {
+  "route": "/engineering/how-we-keep-a-legal-ai-product-from-regressing",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3097
+ },
+ {
+  "route": "/engineering/how-we-think-about-hallucination-in-legal-ai",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3086
+ },
+ {
+  "route": "/engineering/hybrid-retrieval-and-the-exact-identifier-problem",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/engineering/knowing-when-you-do-not-know",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3050
+ },
+ {
+  "route": "/engineering/one-retriever-is-not-enough",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3050
+ },
+ {
+  "route": "/engineering/real-word-redlines",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3050
+ },
+ {
+  "route": "/engineering/routing-what-the-user-actually-wants",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3114
+ },
+ {
+  "route": "/engineering/teaching-the-reviewer-how-your-firm-negotiates",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3097
+ },
+ {
+  "route": "/engineering/the-deterministic-layer-under-the-llm",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3050
+ },
+ {
+  "route": "/engineering/the-law-is-not-clean-data",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/engineering/the-tracked-changes-a-document-is-hiding",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3097
+ },
+ {
+  "route": "/engineering/us-statutes-and-regulations-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3161
+ },
+ {
+  "route": "/engineering/verify-ai-citations-in-code",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/engineering/we-made-our-database-deliberately-lose-all-its-data",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3133
+ },
+ {
+  "route": "/engineering/we-ran-1341-prompts-through-our-router",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/engineering/what-our-citation-verifier-checks",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3072
+ },
+ {
+  "route": "/engineering/who-in-legal-ai-shows-their-work",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/engineering/word-tracked-changes-in-python",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/for-lawyers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3747
+ },
+ {
+  "route": "/for-lawyers/ethics",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 5416
+ },
+ {
+  "route": "/legal-aid",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 5185
+ },
+ {
+  "route": "/legal-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 6313
+ },
+ {
+  "route": "/mcp",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4516
+ },
+ {
+  "route": "/open-us-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4689
+ },
+ {
+  "route": "/partners",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 2803
+ },
+ {
+  "route": "/playground",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3849
+ },
+ {
+  "route": "/privacy",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 8351
+ },
+ {
+  "route": "/refund-policy",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4907
+ },
+ {
+  "route": "/security",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 5196
+ },
+ {
+  "route": "/security/vulnerability-disclosure",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4565
+ },
+ {
+  "route": "/sla",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3882
+ },
+ {
+  "route": "/slack",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 2663
+ },
+ {
+  "route": "/support",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 2730
+ },
+ {
+  "route": "/terms",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 15256
+ },
+ {
+  "route": "/use-case/legal-tech-developers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 5003
+ },
+ {
+  "route": "/white-label",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4535
+ },
+ {
+  "route": "/word",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 5845
+ },
+ {
+  "route": "/word/sideload",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3675
+ }
+]

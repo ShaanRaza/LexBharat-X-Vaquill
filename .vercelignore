@@ -1,0 +1,9 @@
+# Keep the deployment upload small and free of local-only material. Anchored with a leading "/" so nothing under src/ can match.
+/qa/
+/docs/screenshots/
+/lexbharat-docs.zip
+/playground-evidence.md
+/recut-evidence.md
+.DS_Store
+.env.local
+.env*.local

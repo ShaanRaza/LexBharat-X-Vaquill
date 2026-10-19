@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design tokens: values observed in the public site's :root CSS. */
+:root {
+  --background: #f2f1ee;
+  --surface: #fff;
+  --raised: #eae9e5;
+  --sunken: #e3e2df;
+  --foreground: #25211d;
+  --muted: #615950;
+  --border: #d9d8d5;
+  --primary: #6e3730;
+  --primary-hover: #5a2d27;
+  --primary-10: #6e37301a;
+  --accent: #eae9e5;
+  --dark: #1e1b17;
+  --success: #2f6b45;
+  --warning: #7d5310;
+  --error: #a4123c;
+  --control-border: #7c746a; /* form-field outline: >= 4:1 on white and on the page background (WCAG 1.4.11) */
+  --code-bg: #f7f6f3;
+  --code-border: #e2e0da;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* RGB channels so Tailwind opacity modifiers (e.g. bg-primary/15) work */
+  --background-rgb: 242 241 238;
+  --surface-rgb: 255 255 255;
+  --raised-rgb: 234 233 229;
+  --sunken-rgb: 227 226 223;
+  --foreground-rgb: 37 33 29;
+  --muted-rgb: 97 89 80;
+  --border-rgb: 217 216 213;
+  --primary-rgb: 110 55 48;
+  --primary-hover-rgb: 90 45 39;
+  --accent-rgb: 234 233 229;
+  --dark-rgb: 30 27 23;
+  --success-rgb: 47 107 69;
+  --warning-rgb: 125 83 16;
+  --error-rgb: 164 18 60;
+}
+
+html { scroll-behavior: auto; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--primary-10); }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+/* Scroll-reveal */
+.reveal { transition: opacity .6s var(--ease-out), transform .6s var(--ease-out); }
+.reveal.reveal-hidden { opacity: 0; transform: translateY(14px); }
+.reveal.reveal-hidden.in { opacity: 1; transform: none; }
+
+@media print {
+  .reveal, .reveal.reveal-hidden { opacity: 1 !important; transform: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal.reveal-hidden { opacity: 1; transform: none; transition: none; }
+}
+
+.btn { display: inline-flex; align-items: center; gap: .5rem; padding: .75rem 2rem; border-radius: 2px; font-weight: 500; font-size: 17px; transition: background .2s var(--ease-out), transform .12s; }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-secondary { background: var(--raised); color: var(--foreground); }
+.btn-secondary:hover { background: var(--sunken); }
+.btn:active { transform: translateY(1px); }
+
+/* Community comment strip: continuous marquee, paused on hover/focus, static + scrollable for reduced motion. */
+.comment-marquee { animation: comment-marquee 70s linear infinite; }
+.comment-marquee-reverse { animation: comment-marquee 80s linear infinite reverse; }
+.comment-marquee-group:hover .comment-marquee, .comment-marquee-group:hover .comment-marquee-reverse,
+.comment-marquee-group:focus-within .comment-marquee, .comment-marquee-group:focus-within .comment-marquee-reverse { animation-play-state: paused; }
+@keyframes comment-marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .comment-marquee-group { overflow-x: auto; }
+  .comment-marquee, .comment-marquee-reverse { animation: none; }
+}
+
+/* Developer console (Playground clone). Tokens captured from the live console's computed styles (docs/PLAYGROUND-TEARDOWN.md):
+   page hsl(36 24% 94%), text hsl(30 13% 10%), muted text hsl(30 9% 38%), secondary/accent hsl(36 20% 90%), border rgb(222 218 211),
+   success hsl(160 84% 39%), destructive hsl(0 84% 60%). Primary stays #6e3730. Scoped so the marketing pages are untouched. */
+.console {
+  --background-rgb: 243 240 236; --foreground-rgb: 29 26 22; --muted-rgb: 106 97 88;
+  --accent-rgb: 235 231 224; --raised-rgb: 235 231 224; --sunken-rgb: 228 223 215; --border-rgb: 222 218 211;
+  --success-rgb: 16 183 129; --error-rgb: 239 68 68;
+  background: rgb(var(--background-rgb)); color: rgb(var(--foreground-rgb)); font-size: 14px;
+}
+.console-pop { animation: console-pop .12s var(--ease-out); }
+@keyframes console-pop { from { opacity: 0; transform: translateY(-4px) scale(.98); } }
+.console-skel { animation: console-pulse 1.4s ease-in-out infinite; }
+@keyframes console-pulse { 50% { opacity: .5; } }
+@media (prefers-reduced-motion: reduce) { .console-pop, .console-skel { animation: none; } }
+
+/* Map states: 0.75 px borders at any zoom; keyboard focus gets a gold 3 px border plus the global focus outline (the old inline outline:none left focus invisible). */
+.us-state { stroke: #f4f1ec; stroke-width: 0.75px; vector-effect: non-scaling-stroke; cursor: pointer; }
+.us-state:focus-visible { stroke: #e0b341; stroke-width: 3px; outline-color: #1e1b17; }
+
+/* Safari/Chrome paint autofilled fields pale yellow/blue. Keep MockForm fields on the site's white surface instead. */
+.mock-form input:-webkit-autofill, .mock-form input:-webkit-autofill:hover, .mock-form input:-webkit-autofill:focus,
+.mock-form textarea:-webkit-autofill, .mock-form select:-webkit-autofill {
+  -webkit-text-fill-color: rgb(var(--foreground-rgb));
+  caret-color: rgb(var(--foreground-rgb));
+  box-shadow: 0 0 0 1000px rgb(var(--surface-rgb)) inset;
+  transition: background-color 600000s 0s;
+}
+/* An autofilled-looking field with no value (placeholder showing) must keep the grey placeholder colour, not the text colour. */
+.mock-form input:-webkit-autofill:placeholder-shown { -webkit-text-fill-color: rgb(var(--muted-rgb)); }

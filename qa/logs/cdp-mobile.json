@@ -1,0 +1,781 @@
+[
+ {
+  "route": "/",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 14388
+ },
+ {
+  "route": "/about",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3315
+ },
+ {
+  "route": "/accessibility",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4576
+ },
+ {
+  "route": "/affiliates",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4409
+ },
+ {
+  "route": "/alerts",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4527
+ },
+ {
+  "route": "/auth/forgot-password",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 844
+ },
+ {
+  "route": "/auth/login",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 844
+ },
+ {
+  "route": "/auth/signup",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 844
+ },
+ {
+  "route": "/blog",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4659
+ },
+ {
+  "route": "/blog/100-generative-ai-prompts-for-in-house-lawyers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/blog/federal-holidays-in-the-us-code-and-whether-private-employers-must-observe-them",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/how-to-find-and-cite-virginia-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3050
+ },
+ {
+  "route": "/blog/regtech-and-compliance-software-categories-and-where-the-rule-text-comes-from",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3226
+ },
+ {
+  "route": "/blog/state-data-breach-notification-laws-where-each-one-lives-and-what-it-requires",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3209
+ },
+ {
+  "route": "/blog/will-ai-replace-paralegals",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/brand",
+  "bp": "mobile",
+  "issues": [
+   "LOW-CONTRAST: 1 e.g. a.flex.items-center 1.07"
+  ],
+  "events": [],
+  "height": 5365
+ },
+ {
+  "route": "/claude-plugin",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 5351
+ },
+ {
+  "route": "/contact",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 2932
+ },
+ {
+  "route": "/cookies",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 6034
+ },
+ {
+  "route": "/customer",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 2724
+ },
+ {
+  "route": "/customer/example-solo-practice",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 2850
+ },
+ {
+  "route": "/delete-data",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4984
+ },
+ {
+  "route": "/docs",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 2667
+ },
+ {
+  "route": "/docs/api-guide/alerts",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1269
+ },
+ {
+  "route": "/docs/api-guide/authentication",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 2063
+ },
+ {
+  "route": "/docs/api-guide/best-practices",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 936
+ },
+ {
+  "route": "/docs/api-guide/bulk-and-sql",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1311
+ },
+ {
+  "route": "/docs/api-guide/changelog",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 951
+ },
+ {
+  "route": "/docs/api-guide/concepts/amendment-history",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 950
+ },
+ {
+  "route": "/docs/api-guide/concepts/citation-formats",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1188
+ },
+ {
+  "route": "/docs/api-guide/concepts/citation-quality",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 972
+ },
+ {
+  "route": "/docs/api-guide/concepts/corpus-types",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1344
+ },
+ {
+  "route": "/docs/api-guide/concepts/formats",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 850
+ },
+ {
+  "route": "/docs/api-guide/concepts/jurisdictions",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 904
+ },
+ {
+  "route": "/docs/api-guide/concepts/response-fields",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1053
+ },
+ {
+  "route": "/docs/api-guide/concepts/search",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1235
+ },
+ {
+  "route": "/docs/api-guide/concepts/section-ids",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1034
+ },
+ {
+  "route": "/docs/api-guide/concepts/section-intelligence",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 903
+ },
+ {
+  "route": "/docs/api-guide/concepts/status-and-currency",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 844
+ },
+ {
+  "route": "/docs/api-guide/coverage",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1595
+ },
+ {
+  "route": "/docs/api-guide/coverage/agency-guidance",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 964
+ },
+ {
+  "route": "/docs/api-guide/coverage/federal",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1222
+ },
+ {
+  "route": "/docs/api-guide/coverage/india",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1071
+ },
+ {
+  "route": "/docs/api-guide/coverage/states",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1187
+ },
+ {
+  "route": "/docs/api-guide/data-privacy",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1325
+ },
+ {
+  "route": "/docs/api-guide/errors",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1247
+ },
+ {
+  "route": "/docs/api-guide/faq",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1051
+ },
+ {
+  "route": "/docs/api-guide/grounding-llms",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 983
+ },
+ {
+  "route": "/docs/api-guide/overview",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1634
+ },
+ {
+  "route": "/docs/api-guide/pagination",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 844
+ },
+ {
+  "route": "/docs/api-guide/point-in-time",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 940
+ },
+ {
+  "route": "/docs/api-guide/quickstart",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1485
+ },
+ {
+  "route": "/docs/api-guide/recipes/browse-hierarchy",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 917
+ },
+ {
+  "route": "/docs/api-guide/recipes/citation-enrichment",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 861
+ },
+ {
+  "route": "/docs/api-guide/recipes/citation-lookup",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1031
+ },
+ {
+  "route": "/docs/api-guide/recipes/compliance-mapping",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 933
+ },
+ {
+  "route": "/docs/api-guide/recipes/coverage-monitoring",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 919
+ },
+ {
+  "route": "/docs/api-guide/recipes/mcp-tool",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 856
+ },
+ {
+  "route": "/docs/api-guide/recipes/multi-state-comparison",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 861
+ },
+ {
+  "route": "/docs/api-guide/recipes/rag-grounding",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1163
+ },
+ {
+  "route": "/docs/api-guide/recipes/statute-chatbot",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1003
+ },
+ {
+  "route": "/docs/api-guide/recipes/subject-corpus",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 855
+ },
+ {
+  "route": "/docs/api-guide/rights-and-licensing",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1066
+ },
+ {
+  "route": "/docs/api-guide/roadmap",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 967
+ },
+ {
+  "route": "/docs/api-guide/session-laws",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1214
+ },
+ {
+  "route": "/docs/api-guide/use-cases",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 993
+ },
+ {
+  "route": "/docs/api-reference",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 2173
+ },
+ {
+  "route": "/docs/api-reference/alerts/get-watches",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1383
+ },
+ {
+  "route": "/docs/api-reference/alerts/post-watches",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1479
+ },
+ {
+  "route": "/docs/api-reference/discover-the-corpus/get-statutes-coverage",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1266
+ },
+ {
+  "route": "/docs/api-reference/discover-the-corpus/get-statutes-divisions",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1479
+ },
+ {
+  "route": "/docs/api-reference/discover-the-corpus/get-statutes-laws",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1314
+ },
+ {
+  "route": "/docs/api-reference/india-pricing/get-india-api-credit-pricing",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 951
+ },
+ {
+  "route": "/docs/api-reference/pricing/get-pricing",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1266
+ },
+ {
+  "route": "/docs/api-reference/search/post-statutes-search",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1622
+ },
+ {
+  "route": "/docs/api-reference/section-lookup/get-statutes-resolve",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1336
+ },
+ {
+  "route": "/docs/api-reference/section-lookup/get-statutes-section-act-id",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1336
+ },
+ {
+  "route": "/docs/api-reference/section-lookup/get-statutes-section-act-id-body",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1427
+ },
+ {
+  "route": "/docs/api-reference/section-lookup/get-statutes-section-act-id-related",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1405
+ },
+ {
+  "route": "/docs/api-reference/section-lookup/get-statutes-sections",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1336
+ },
+ {
+  "route": "/docs/guides/mcp-client",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1690
+ },
+ {
+  "route": "/docs/integrations",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1316
+ },
+ {
+  "route": "/docs/introduction",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 1690
+ },
+ {
+  "route": "/dpa",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 5482
+ },
+ {
+  "route": "/engineering",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4551
+ },
+ {
+  "route": "/engineering/a-spreadsheet-where-every-cell-is-verified",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3184
+ },
+ {
+  "route": "/engineering/cutting-a-bm25-index-build-from-four-hours-to-ninety-minutes",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3133
+ },
+ {
+  "route": "/engineering/hybrid-retrieval-and-the-exact-identifier-problem",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3206
+ },
+ {
+  "route": "/engineering/routing-what-the-user-actually-wants",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3114
+ },
+ {
+  "route": "/engineering/we-made-our-database-deliberately-lose-all-its-data",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3133
+ },
+ {
+  "route": "/engineering/word-tracked-changes-in-python",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3120
+ },
+ {
+  "route": "/for-lawyers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3747
+ },
+ {
+  "route": "/for-lawyers/ethics",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 5416
+ },
+ {
+  "route": "/legal-aid",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 5185
+ },
+ {
+  "route": "/legal-api",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 6313
+ },
+ {
+  "route": "/mcp",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4516
+ },
+ {
+  "route": "/open-us-law",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4689
+ },
+ {
+  "route": "/partners",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 2803
+ },
+ {
+  "route": "/playground",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3849
+ },
+ {
+  "route": "/privacy",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 8351
+ },
+ {
+  "route": "/refund-policy",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4907
+ },
+ {
+  "route": "/security",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 5196
+ },
+ {
+  "route": "/security/vulnerability-disclosure",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4565
+ },
+ {
+  "route": "/sla",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3882
+ },
+ {
+  "route": "/slack",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 2663
+ },
+ {
+  "route": "/support",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 2730
+ },
+ {
+  "route": "/terms",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 15256
+ },
+ {
+  "route": "/use-case/legal-tech-developers",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 5003
+ },
+ {
+  "route": "/white-label",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 4535
+ },
+ {
+  "route": "/word",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 5845
+ },
+ {
+  "route": "/word/sideload",
+  "bp": "mobile",
+  "issues": [],
+  "events": [],
+  "height": 3675
+ }
+]

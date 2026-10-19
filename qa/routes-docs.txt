@@ -1,0 +1,11 @@
+/docs
+/docs/api-guide/coverage
+/docs/api-guide/coverage/federal
+/docs/api-guide/overview
+/docs/api-guide/quickstart
+/docs/api-guide/errors
+/docs/api-guide/grounding-llms
+/docs/api-guide/recipes/citation-lookup
+/docs/api-reference
+/docs/integrations
+/docs/api-reference/india-pricing/get-india-api-credit-pricing

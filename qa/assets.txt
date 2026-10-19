@@ -1,0 +1,9 @@
+/brand/lexbharat-lockup-color.svg
+/brand/lexbharat-lockup-white.svg
+/brand/lexbharat-mark-black.svg
+/brand/lexbharat-mark-color.svg
+/brand/lexbharat-mark-on-dark.svg
+/brand/lexbharat-mark-on-white.svg
+/brand/lexbharat-mark-white.svg
+/docs/llms.txt
+/icon.svg
