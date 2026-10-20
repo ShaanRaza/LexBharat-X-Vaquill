@@ -5,7 +5,8 @@
 #   <OUT>/_manifest/<slug>.json                              [{year, cases, pages}]
 #   <OUT>/_quarantine/<slug>.json                            cases left out, with the reason (never mixed into browse output)
 #   <OUT>/_fields/<slug>.json                                fill rates per field, for docs/JUDGMENTS-HC.md
-# NOT exported for High Courts: judges and bench strength (the source field holds sentence fragments such as "therefore", "inter alia", "pass" for Delhi and Kerala).
+# Judges/bench size: exported only for courts in JUDGE_COURTS and only for cases whose judge entries are ALL name-like (the source field holds sentence fragments such as "therefore", "inter alia", "pass" in most courts).
+# Rules live in export-judgments-hc.sql.
 # Rules (see docs/JUDGMENTS-HC.md): the court comes from the FILE (25 canonical slugs), never from the free-text `court` column (50 spellings).
 # Year = year of decision_date when it parses and lies in 1900-01-01..2026-08-31 (the snapshot end); if decision_date is blank, the record's `year`
 # column when it is 1900..2026 (decisionDate stays null); anything else is quarantined. Never reads `text`; never orders or joins chunks.
@@ -17,40 +18,16 @@ DIR="${1:-/Volumes/LAWSSD/open-india-law}"; OUT="${2:-data/judgments-hc}"
 slug() { case "$1" in jammu-and-kashmir) echo high-court-of-jammu-and-kashmir-and-ladakh;; punjab-and-haryana) echo punjab-and-haryana-high-court;; *) echo "$1-high-court";; esac; }
 YF=1900; YT=2026; if [ -n "${HC_YEARS:-}" ]; then YF="${HC_YEARS%-*}"; YT="${HC_YEARS#*-}"; fi
 TMP="$(mktemp -d)"; trap 'rm -rf "$TMP"' EXIT
+# Courts whose judge field passed the check in docs/JUDGMENTS-HC.md (>=80% of cases have only name-like entries; Patna excluded: names glued to "ORAL").
+JUDGE_COURTS="bombay-high-court gujarat-high-court orissa-high-court"
 mkdir -p "$OUT/_manifest" "$OUT/_quarantine" "$OUT/_fields"
 for f in "$DIR"/in_*_judgments.parquet; do
   stem="$(basename "$f" _judgments.parquet)"; stem="${stem#in_}"; [ "$stem" = "supreme-court" ] && continue
   s="$(slug "$stem")"
   if [ -n "${HC_COURTS:-}" ] && [[ ",$HC_COURTS," != *",$s,"* ]]; then continue; fi
   echo "exporting $s" >&2; rm -rf "$OUT/court=$s"
-  duckdb -c "
-CREATE TEMP TABLE g AS
-SELECT case_id AS \"caseId\", any_value(nullif(trim(title),'')) AS title_raw, any_value(nullif(trim(case_number),'')) AS \"caseNumber\",
-  any_value(nullif(trim(decision_date),'')) AS dd, any_value(nullif(trim(CAST(year AS VARCHAR)),'')) AS yr,
-  any_value(nullif(trim(disposition),'')) AS disposition, any_value(nullif(trim(petitioner),'')) AS petitioner, any_value(nullif(trim(respondent),'')) AS respondent,
-  any_value(nullif(trim(citation),'')) AS citation,
-  any_value(nullif(trim(date_of_registration),'')) AS \"dateOfRegistration\"
-FROM read_parquet('$f') GROUP BY case_id;
-CREATE TEMP TABLE c AS
--- Title artifact: the source writes the missing number as the word None (\"WRIT PETITION None\", \"None None\"). Strip it; a title that becomes empty stays NULL.
-SELECT *, nullif(trim(regexp_replace(title_raw, '\\s*\\bNone\\s*$', '')), '') AS title, try_cast(left(dd,10) AS DATE) AS dt FROM g;
-CREATE TEMP TABLE r AS
-SELECT *, CASE WHEN dt BETWEEN DATE '1900-01-01' AND DATE '2026-08-31' THEN CAST(year(dt) AS INTEGER)
-               WHEN dd IS NULL AND try_cast(yr AS INTEGER) BETWEEN 1900 AND 2026 THEN try_cast(yr AS INTEGER) END AS year_final FROM c;
-COPY (SELECT \"caseId\", CASE WHEN dd IS NOT NULL AND dt IS NULL THEN 'decision_date does not parse' WHEN dt IS NOT NULL THEN 'decision_date outside 1900-01-01..2026-08-31' ELSE 'no usable year' END AS reason, dd AS decision_date_raw, yr AS year_raw
-      FROM r WHERE year_final IS NULL ORDER BY 1) TO '$OUT/_quarantine/$s.json' (FORMAT JSON, ARRAY true);
-CREATE TEMP TABLE p AS
-SELECT \"caseId\", title, \"caseNumber\", strftime(dt, '%Y-%m-%d') AS \"decisionDate\", disposition, petitioner, respondent, citation, \"dateOfRegistration\", year_final AS year,
-  CAST(floor((row_number() OVER (PARTITION BY year_final ORDER BY dt NULLS LAST, \"caseId\") - 1) / 100) AS INTEGER) + 1 AS page
-FROM r WHERE year_final BETWEEN $YF AND $YT;
-COPY (SELECT year, count(*) AS cases, max(page) AS pages FROM p GROUP BY year ORDER BY year DESC) TO '$OUT/_manifest/$s.json' (FORMAT JSON, ARRAY true);
-COPY (SELECT count(*) AS cases, round(100.0*avg((title IS NOT NULL)::int),1) AS title, round(100.0*avg((\"caseNumber\" IS NOT NULL)::int),1) AS case_number,
-  round(100.0*avg((\"decisionDate\" IS NOT NULL)::int),1) AS decision_date, round(100.0*avg((disposition IS NOT NULL)::int),1) AS disposition,
-  round(100.0*avg((petitioner IS NOT NULL)::int),1) AS petitioner, round(100.0*avg((respondent IS NOT NULL)::int),1) AS respondent,
-  round(100.0*avg((citation IS NOT NULL)::int),1) AS citation FROM p) TO '$OUT/_fields/$s.json' (FORMAT JSON, ARRAY false);
-COPY (SELECT \"caseId\", title, \"caseNumber\", \"decisionDate\", disposition, petitioner, respondent, citation, \"dateOfRegistration\", year, page FROM p
-      ORDER BY year, page, \"decisionDate\" NULLS LAST, \"caseId\") TO '$TMP/$s.ndjson' (FORMAT JSON, ARRAY false);
-" >/dev/null
+  JC=false; case " $JUDGE_COURTS " in *" $s "*) JC=true;; esac
+  duckdb -c "$(sed -e "s|__FILE__|$f|g" -e "s|__OUT__|$OUT|g" -e "s|__TMP__|$TMP|g" -e "s|__SLUG__|$s|g" -e "s|__YF__|$YF|g" -e "s|__YT__|$YT|g" -e "s|__JUDGES__|$JC|g" scripts/judgments/export-judgments-hc.sql)"
   python3 scripts/judgments/split_pages.py "$TMP/$s.ndjson" "$OUT/court=$s"; rm -f "$TMP/$s.ndjson"
 done
 echo "done: $(find "$OUT" -name 'data_0.json' | wc -l | tr -d ' ') page files, $(du -sh "$OUT" | cut -f1)" >&2
