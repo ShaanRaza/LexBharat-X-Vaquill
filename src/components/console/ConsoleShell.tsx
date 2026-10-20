@@ -50,9 +50,8 @@ function Icon({ d, size = 18 }: { d: string; size?: number }) {
 // is recreated; New Chat, WhatsApp Bot and Settings are shown but disabled, and "Data API" leads back to the developer console.
 const BOOKS_ICON = "M5 4h4v16H5zM10 4h4v16h-4zM15.6 5.4l3.6-1 3.2 14.6-3.6 1z";
 const WS_ITEMS = [
-  { label: "Data API", href: "/developer?tab=overview", icon: "M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16", state: "link" },
+  { label: "Developer API (demo)", href: "/developer?tab=overview", icon: "M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16", state: "link" },
   { label: "Acts & Judgments", href: "/workspace/browse", icon: BOOKS_ICON, state: "active" },
-  { label: "WhatsApp Bot", href: "", icon: "M4 20l1.4-4.2A8 8 0 1 1 8.2 18.6L4 20z", state: "disabled" },
 ] as const;
 
 export default function ConsoleShell({ tab, variant = "data", children }: { tab?: TabId; variant?: "data" | "workspace"; children: React.ReactNode }) {
@@ -86,9 +85,9 @@ export default function ConsoleShell({ tab, variant = "data", children }: { tab?
   const nav = (
     <nav aria-label={variant === "workspace" ? "Workspace" : "Developer console"} className="flex h-full flex-col">
       <div className="flex items-center justify-between px-4 pb-4 pt-5">
-        <Link href="/developer?tab=overview" className="flex items-baseline gap-0.5 text-[26px] font-medium leading-none tracking-[-0.03em]" aria-label="vaquill AI">
+        <Link href={variant === "workspace" ? "/workspace/browse" : "/developer?tab=overview"} className="flex items-baseline gap-0.5 text-[24px] font-medium leading-none tracking-[-0.03em]" aria-label="LexBharat">
           <svg width="22" height="26" viewBox="0 0 24 28" fill="#6e3730" aria-hidden="true" className="mr-1.5 self-center"><path d="M20 1C9 2 2 9 3 20c0 3 1 6 3 7-1-5 0-10 4-14 3-3 7-4 10-4-5 1-9 4-11 9 5-1 10-5 11-13 .3-1.4.2-3.800 0-4z" /></svg>
-          vaquill<sup className="text-[8px] font-normal tracking-normal text-muted">AI</sup>
+          LexBharat
         </Link>
         <button type="button" onClick={() => (open ? setOpen(false) : setCollapsed(true))} aria-label="Collapse sidebar" className="rounded-[4px] p-1 text-muted hover:bg-accent">
           <Icon d="M15 5l-7 7 7 7" size={16} />
@@ -96,18 +95,13 @@ export default function ConsoleShell({ tab, variant = "data", children }: { tab?
       </div>
       {variant === "workspace" ? (
         <>
-      <NotInClone className="mx-2 mb-3 !rounded-[8px] border border-border !py-2"><Icon d="M12 5v14M5 12h14" /><span className="leading-tight">New Chat<Chip>Not in clone</Chip></span></NotInClone>
       <ul className="space-y-0.5 px-2">
         {WS_ITEMS.map((it) => (
           <li key={it.label}>
-            {it.state === "disabled" ? (
-              <NotInClone><Icon d={it.icon} /><span className="leading-tight">{it.label}<Chip>Not in clone</Chip></span></NotInClone>
-            ) : (
               <Link href={it.href} onClick={() => setOpen(false)} aria-current={it.state === "active" ? "page" : undefined}
                 className={`flex items-center gap-3 rounded-[6px] px-3 py-2.5 text-[14px] transition-colors ${it.state === "active" ? "bg-accent text-foreground" : "text-muted hover:bg-accent/60 hover:text-foreground"}`}>
                 <Icon d={it.icon} /><span className="leading-tight">{it.label}</span>
               </Link>
-            )}
           </li>
         ))}
       </ul>
@@ -144,16 +138,18 @@ export default function ConsoleShell({ tab, variant = "data", children }: { tab?
         </>
       )}
       <div className="mt-auto space-y-1 px-2 pb-4">
-        <NotInClone className="!py-2"><Icon d={SETTINGS_TAB.icon} /><span className="leading-tight">Settings<Chip>Not in clone</Chip></span></NotInClone>
+        {variant === "data" && <NotInClone className="!py-2"><Icon d={SETTINGS_TAB.icon} /><span className="leading-tight">Settings<Chip>Not in clone</Chip></span></NotInClone>}
+        {(variant === "data" || session) && (
         <div className="px-3 py-2">
           <div className="flex items-center gap-3">
             <span aria-hidden className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-accent text-[11px] font-medium uppercase text-muted ring-1 ring-border">{(session?.email ?? "local").slice(0, 2)}</span>
-            <span className="min-w-0 leading-tight"><span className="block truncate text-[14px] font-medium">{session ? "Signed in (mock)" : "Local User"}</span><span className="block truncate text-[12px] text-muted" title={session?.email}>{session?.email ?? "local@example.test"}</span></span>
+            <span className="min-w-0 leading-tight"><span className="block truncate text-[14px] font-medium">{session ? "Signed in" : "Not signed in"}</span><span className="block truncate text-[12px] text-muted" title={session?.email}>{session?.email ?? "Demo console"}</span></span>
           </div>
           {session
-            ? <button type="button" onClick={() => { clearMockSession(); router.push("/auth/login"); }} className="mt-2 inline-flex min-h-8 items-center rounded-[6px] px-2 text-[13px] text-primary hover:bg-accent">Sign out (mock)</button>
-            : <Link href="/auth/login" className="mt-2 inline-flex min-h-8 items-center rounded-[6px] px-2 text-[13px] text-primary hover:bg-accent">Sign in (mock)</Link>}
+            ? <button type="button" onClick={() => { clearMockSession(); router.push("/auth/login"); }} className="mt-2 inline-flex min-h-8 items-center rounded-[6px] px-2 text-[13px] text-primary hover:bg-accent">Sign out</button>
+            : <Link href="/auth/login" className="mt-2 inline-flex min-h-8 items-center rounded-[6px] px-2 text-[13px] text-primary hover:bg-accent">Sign in (demo)</Link>}
         </div>
+        )}
       </div>
     </nav>
   );
@@ -167,7 +163,7 @@ export default function ConsoleShell({ tab, variant = "data", children }: { tab?
         {open && (
           <div className="fixed inset-0 z-[110] md:hidden">
             <button type="button" aria-label="Close menu" className="absolute inset-0 bg-foreground/30" onClick={() => setOpen(false)} />
-            <aside ref={drawer} tabIndex={-1} data-lenis-prevent role="dialog" aria-modal="true" aria-label="Developer console menu" className="relative h-full w-[min(260px,85vw)] overflow-y-auto bg-background shadow-lg outline-none">{nav}</aside>
+            <aside ref={drawer} tabIndex={-1} data-lenis-prevent role="dialog" aria-modal="true" aria-label={variant === "workspace" ? "Workspace menu" : "Developer console menu"} className="relative h-full w-[min(260px,85vw)] overflow-y-auto bg-background shadow-lg outline-none">{nav}</aside>
           </div>
         )}
         <div className="min-w-0 flex-1">
@@ -179,9 +175,9 @@ export default function ConsoleShell({ tab, variant = "data", children }: { tab?
                 ? <><span aria-hidden className="ml-2 text-muted"><Icon d={BOOKS_ICON} size={14} /></span><span className="ml-1.5">Workspace</span></>
                 : <><span className="ml-2 font-mono text-[12px] text-muted">&lt;/&gt;</span><span className="ml-1.5">Data &amp; API</span></>}<span aria-hidden className="ml-1.5 text-[10px] text-muted">▾</span>
             </div>
-            <span className="flex items-center gap-1 rounded-full bg-accent px-2.5 py-1 text-[14px]" title="Jurisdiction: United States"><span aria-hidden>🇺🇸</span><span className="sr-only">United States</span><span aria-hidden className="text-[10px] text-muted">▾</span></span>
+            <span className="flex items-center gap-1 rounded-full bg-accent px-2.5 py-1 text-[14px]" title={variant === "workspace" ? "Jurisdiction: India" : "Jurisdiction: United States"}><span aria-hidden>{variant === "workspace" ? "🇮🇳" : "🇺🇸"}</span><span className="sr-only">{variant === "workspace" ? "India" : "United States"}</span><span aria-hidden className="text-[10px] text-muted">▾</span></span>
             {variant === "data" && <Link href="/docs/api-guide/changelog" className="ml-auto hidden min-h-8 items-center gap-1.5 rounded-full bg-accent/60 px-3 text-[13px] text-[#535151] hover:text-foreground lg:inline-flex">Coverage is expanding fast. <strong className="font-semibold text-foreground">Changelog</strong><span aria-hidden>↗</span></Link>}
-            <span className={`${variant === "data" ? "lg:ml-0" : ""} ml-auto rounded-[2px] border border-warning/50 bg-warning/10 px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-warning`}>Local mock</span>
+            {variant === "data" && <span className="ml-auto rounded-[2px] border border-warning/50 bg-warning/10 px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-warning lg:ml-0">Demo</span>}
           </header>
           <main id="main" tabIndex={-1} className="outline-none px-4 pb-24 pt-2 md:px-8">{children}</main>
         </div>
