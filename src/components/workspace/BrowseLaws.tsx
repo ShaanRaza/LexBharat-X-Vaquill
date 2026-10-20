@@ -25,7 +25,7 @@ function CourtCard({ c, featured, real }: { c: Court; featured?: boolean; real?:
 
 type ActsResponse = { source?: "real" | "mock"; results: ActItem[]; total: number; page: number; pageSize: number; hasMore: boolean; note?: string };
 type CourtsResp = { source: "real" | "mock"; stats: { totalCases: number | null; listableCourts: number }; courts: { slug: string; cases: number | null }[] };
-type ActsStats = { source: "real" | "mock"; acts: number; sections: number; categories: string[]; statuses: string[]; caveats: string[]; attribution?: { text: string; url: string; licence: string; snapshot: string } };
+type ActsStats = { scope?: string; source: "real" | "mock"; acts: number; sections: number; categories: string[]; statuses: string[]; caveats: string[]; attribution?: { text: string; url: string; licence: string; snapshot: string } };
 const fmt = (n: number) => n.toLocaleString("en-IN");
 const PAGE = 8;
 
@@ -71,7 +71,7 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
     <div className="mx-auto max-w-[880px] pt-2">
       <h1 className="text-[28px] font-semibold tracking-[-0.02em]">Browse Laws &amp; Judgments</h1>
       {real ? (
-        <p className="mt-1 text-[16px] text-[#535151]">{fmt(stats.acts)} central and state/UT acts{jreal && jc?.stats.totalCases ? `, and ${fmt(jc.stats.totalCases)} judgment case records across the Supreme Court and ${jc.courts.length - 1} High Courts` : ""}. {jreal ? "Supreme Court cases can be browsed by year; High Courts show counts only." : "Judgments are not live yet: the court pages below are a preview."}</p>
+        <p className="mt-1 text-[16px] text-[#535151]">{fmt(stats.acts)} {stats.scope ?? "acts"}{jreal && jc?.stats.totalCases ? `, and ${fmt(jc.stats.totalCases)} judgment case records across the Supreme Court and ${jc.courts.length - 1} High Courts` : ""}. {jreal ? "Supreme Court cases can be browsed by year; High Courts show counts only." : "Judgments are not live yet: the court pages below are a preview."}</p>
       ) : (
         <p className="mt-1 text-[16px] text-[#535151]">{BROWSE_STATS.acts} Indian acts, and {BROWSE_STATS.judgments} judgments across the Supreme Court and {BROWSE_STATS.highCourts} High Courts, plus {BROWSE_STATS.tribunals} Tribunals. (Display figures, mock.)</p>
       )}
@@ -80,8 +80,8 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
         <h2 id="covers" className="text-[12px] font-semibold uppercase tracking-[0.08em] text-[#535151]">{real ? "What is live here" : "What the Data API covers"}</h2>
         {real && stats ? (
           <ul className="mt-3 space-y-3 text-[15px] leading-relaxed">
-            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-success text-[10px] text-success">✓</span><span><strong className="font-medium">Acts &amp; legislation are live.</strong> <span className="text-[#535151]">{fmt(stats.acts)} central and state/UT acts, with {fmt(stats.sections)} section numbers counted. Act-level information only: the text of sections is not shown yet.</span></span></li>
-            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-warning text-[10px] text-warning">⊘</span><span><strong className="font-medium">{jreal ? "Judgment metadata is live in part." : "Judgments, tribunals and regulators are not live yet."}</strong> <span className="text-[#535151]">{jreal ? "Case counts by year for every court, and case lists for the Supreme Court. Judgment text, tribunals and regulators are not live yet." : "The Judgments tab is a preview. Court counts there are reference figures, not data held here."}</span></span></li>
+            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-success text-[10px] text-success">✓</span><span><strong className="font-medium">Acts &amp; legislation are live.</strong> <span className="text-[#535151]">{fmt(stats.acts)} {stats.scope ?? "acts"}, with {fmt(stats.sections)} section numbers counted. Act-level information only: the text of sections is not shown yet.</span></span></li>
+            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-warning text-[10px] text-warning">⊘</span><span><strong className="font-medium">{jreal ? "Judgment metadata is live in part." : "Judgments and tribunals are not live yet."}</strong> <span className="text-[#535151]">{jreal ? "Case counts by year for every court, and case lists for the Supreme Court. Judgment text and tribunals are not live yet." : "The Judgments tab is a preview. Court counts there are reference figures, not data held here."}</span></span></li>
           </ul>
         ) : (
           <ul className="mt-3 space-y-3 text-[15px] leading-relaxed">

@@ -1,0 +1,38 @@
+-- Phase 3 export: ACT-LEVEL regulator instruments (RBI, SEBI, MCA, ...) from the open-india-law snapshot (CC BY 4.0), as category "regulatory".
+-- Reads in_*_regulations.parquet only. Never selects `text`, never orders or concatenates chunks. Same mapping rules as export-legislation.sql.
+-- Placeholders __DIR__ and __OUT__ are filled in by export-regulations.sh.
+CREATE TEMP TABLE regs AS
+WITH per_act AS (
+  SELECT act_id,
+    any_value(replace(replace(replace(replace(trim(title), '&quot;', '"'), '&#x2F;', '/'), '&amp;', '&'), '&#39;', chr(39))) AS title,
+    any_value(CAST(year AS INTEGER)) AS year_raw,
+    any_value(nullif(trim(department), '')) AS department,
+    any_value(act_status) AS act_status,
+    count(DISTINCT department) AS n_dept, count(DISTINCT act_status) AS n_status, count(DISTINCT title) AS n_title,
+    count(DISTINCT nullif(trim(section_number), '')) AS section_count
+  FROM read_parquet('__DIR__/in_*_regulations.parquet')
+  -- Excluded: tribunal orders (department trib-*, titles are file hashes) and Law Commission reports (titles like '001 Accessible (Pdf 2.3Mb)'). Not regulator instruments.
+  WHERE coalesce(department, '') NOT LIKE 'trib-%' AND coalesce(department, '') <> 'law-commission'
+  GROUP BY act_id
+), derived AS (
+  SELECT *, try_cast(nullif(regexp_extract(title, '(1[6-9][0-9]{2}|20[0-9]{2})', 1), '') AS INTEGER) AS year_from_title FROM per_act
+)
+SELECT act_id AS "actId", title, coalesce(year_raw, year_from_title) AS year, 'regulatory' AS category, department,
+  act_status AS "actStatus", title AS citation, CAST(section_count AS INTEGER) AS "sectionCount",
+  (year_raw IS NULL AND year_from_title IS NOT NULL) AS year_derived, n_dept, n_status, n_title
+FROM derived;
+
+SELECT CASE WHEN count(*) = 0 THEN 'ok' ELSE error('unstable per-act attributes or unexpected status: ' || count(*)) END AS check_values
+FROM regs WHERE n_dept > 1 OR n_status > 1 OR n_title > 1 OR "actStatus" NOT IN ('in_force','repealed','superseded','spent');
+
+COPY (SELECT "actId", title, year, category, department, "actStatus", citation, "sectionCount" FROM regs ORDER BY "actId")
+  TO '__OUT__/acts.regulations.json' (FORMAT JSON, ARRAY true);
+
+COPY (SELECT count(*) AS acts, sum("sectionCount") AS sections,
+  count(*) FILTER ("actStatus" = 'in_force') AS in_force, count(*) FILTER ("actStatus" = 'superseded') AS superseded,
+  count(*) FILTER (year IS NULL) AS year_missing, count(*) FILTER (year_derived) AS year_derived_from_title,
+  count(*) FILTER ("sectionCount" = 0) AS zero_section_count, count(DISTINCT department) AS departments,
+  'open-india-law v2026.08 (in_*_regulations.parquet)' AS source, 'CC BY 4.0' AS licence, strftime(now(), '%Y-%m-%dT%H:%M:%SZ') AS generated_at
+ FROM regs) TO '__OUT__/acts.regulations.meta.json' (FORMAT JSON, ARRAY false);
+
+COPY (SELECT department, count(*) AS acts FROM regs GROUP BY 1 ORDER BY 2 DESC) TO '__OUT__/acts.regulations.departments.json' (FORMAT JSON, ARRAY true);
