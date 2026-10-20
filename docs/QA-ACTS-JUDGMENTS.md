@@ -29,3 +29,13 @@ Method: every check compares what the API or page returns with an independent re
 - **Production is behind local.** `origin/main` is still the Phase 1 commit, so production has no regulators, no judgments pages and none of these fixes until these commits are pushed.
 - Page titles still say "(local mock)" because of the console release toggle; unchanged here.
 - Not tested: other browsers, phones, screen readers, load.
+
+## Update: High Court case-level browse (same day, after the High Court QA)
+Resolved locally (see `docs/JUDGMENTS-HC.md`):
+- High Court year cards are links; `?year=` opens that year's list; `/api/judgments/list` returns real paginated High Court cases.
+- Every list row opens a case detail page (Supreme Court and High Courts share one route scheme); unknown cases give a real 404.
+- Landing copy, cards and caveats now follow what the court can actually do ("counts by year only" when no case source is configured).
+- Court-name spellings no longer matter (court comes from the file); 65 impossible/unparseable-year cases are quarantined and listed in `_quarantine`, not mixed into lists.
+- Local smoke tests passed for Bombay 2025, Delhi 2025, Kerala 2024 and Supreme Court 1990: page loads, year link, non-zero list equal to the year count, paging (including the 100-case file boundary and the last partial page), case detail, real 404, and the no-data-source fallback.
+
+Remaining caveats: production High Courts stay count-only until the exported folder is hosted and `JUDGMENTS_DATA_URL` is set; High Court judges are not shown (source field is corrupt); no search inside a High Court year; High Court links need the `p` page number; case number is missing for 17-57% of cases in some courts (Calcutta, Punjab and Haryana, Allahabad, Delhi).

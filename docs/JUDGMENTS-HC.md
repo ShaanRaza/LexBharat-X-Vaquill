@@ -1,0 +1,87 @@
+# High Court case browse: implementation notes
+
+Added 2026-10-20. High Courts now have the same drill-down as the Supreme Court: year grid, paginated case list, case detail page. Metadata only: no judgment text. Source: open-india-law `v2026.08` (CC BY 4.0), read from the local SSD at export time only.
+
+## Route scheme (stable)
+| URL | What |
+|---|---|
+| `/workspace/browse/judgments/<court-slug>` | Year grid with counts; year cards are links when case lists are available |
+| `/workspace/browse/judgments/<court-slug>?year=YYYY[&page=N]` | Paginated case list (20 per page); `page` restores the list page |
+| `/workspace/browse/judgments/<court-slug>/<YYYY>/<caseId>?p=<file page>&lp=<list page>` | Case detail. `p` is the 100-case export page that holds the case (High Courts need it; the Supreme Court ignores it). `lp` only restores the list page on "back". An unknown or mismatched case returns a real 404. |
+| `GET /api/judgments/courts` | Courts, counts, `listable`/`searchable` per court, stats, caveats, attribution |
+| `GET /api/judgments/years?court=` | Case count per decision year |
+| `GET /api/judgments/list?court=&year=&page=&pageSize=` | Paginated cases (1-100 per page). `available:false` only when no case source is configured. `search=` works for the Supreme Court only (422 otherwise). |
+| `GET /api/judgments/case?court=&year=&id=&p=` | One case |
+
+Court slugs are the 26 in `src/data/workspaceBrowse.ts`. A link without a correct `p` cannot find a High Court case (by design: no index of 15.6M ids); links produced by the list always carry it.
+
+## Export shape (`scripts/judgments/export-judgments-hc.sh`)
+```
+data/judgments-hc/                       (gitignored; 157,336 page files, 5.4 GB for the full snapshot)
+  court=<slug>/year=<YYYY>/page=<N>/data_0.json   JSON array, 100 cases per page, N from 1,
+                                                   sorted by decisionDate (nulls last) then caseId
+  _manifest/<slug>.json                  [{year, cases, pages}]
+  _quarantine/<slug>.json                cases left out, with reason and raw values
+  _fields/<slug>.json                    fill rates (source of the table below)
+```
+Case fields: `caseId, title, caseNumber, decisionDate (YYYY-MM-DD), disposition, petitioner, respondent, citation, dateOfRegistration (as recorded)`. Null fields are omitted. `scripts/judgments/split_pages.py` (stdlib Python) writes the page files from a DuckDB NDJSON stream.
+
+A full run also rewrites `src/data/judgments/court-years.json` and `courts.meta.json` so counts equal the page files exactly (Supreme Court rows are kept). Filtered runs (`HC_COURTS`, `HC_YEARS`) do not touch them.
+
+## Normalization and exclusions
+- **Court names:** the court comes from the source file (25 canonical slugs and display names), never from the free-text `court` column, which has 50 spellings across the files (for example Bombay: "Bombay High Court", "High Court of Bombay", "High Court of Mumbai", blank). Browse results are never split by spelling.
+- **Year:** the year of `decision_date` when it parses and lies in 1900-01-01..2026-08-31; if the date is blank, the record's `year` when 1900-2026 (the case then shows "No decision date recorded"); otherwise the case is quarantined.
+- **Quarantine:** 65 High Court cases (for example Kerala `KLHC010748912008`, date 2088-11-28; 47 unparseable dates and 18 out-of-range dates across many courts). They appear in no list; counts: valid 15,693,475 + quarantined 65 = 15,693,540.
+- **Titles:** the source writes a missing number as the word "None" ("WRIT PETITION None", "None None"); a trailing "None" is stripped and an empty result becomes no title (the UI then shows "Case <number>" or the record id). Titles are otherwise as extracted.
+- **Not exported for High Courts:** `judges` and bench strength. The field holds sentence fragments ("therefore", "inter alia", "pass", "Delhi") for Delhi and Kerala, so it is not shown rather than shown wrong. The Supreme Court's judge names are clean and are kept.
+- **Citation:** blank for every High Court (0%). The detail page says "No reporter citation is available for this record" and the case number is the main identifier.
+- **Party names** are as extracted and can be truncated or contain fragments ("ITS GENERAL SECRETARY Through: None").
+
+## Field fill rates by court (share of cases with the field)
+| Court | Cases | Title | Case no. | Decision date | Disposition | Petitioner | Respondent | Citation |
+|---|---|---|---|---|---|---|---|---|
+| allahabad-high-court | 1,556,323 | 100.0% | 63.3% | 100.0% | 99.4% | 99.9% | 99.9% | 0.0% |
+| andhra-pradesh-high-court | 261,773 | 100.0% | 98.6% | 99.4% | 99.5% | 97.6% | 97.6% | 0.0% |
+| bombay-high-court | 1,578,864 | 100.0% | 99.0% | 99.5% | 99.3% | 99.5% | 99.6% | 0.0% |
+| calcutta-high-court | 340,418 | 100.0% | 43.2% | 99.2% | 98.9% | 99.0% | 99.0% | 0.0% |
+| chhattisgarh-high-court | 509,786 | 100.0% | 85.8% | 99.9% | 99.9% | 100.0% | 100.0% | 0.0% |
+| delhi-high-court | 330,400 | 100.0% | 70.9% | 99.9% | 85.0% | 99.7% | 99.8% | 0.0% |
+| gauhati-high-court | 286,466 | 100.0% | 75.3% | 99.6% | 94.3% | 99.7% | 99.6% | 0.0% |
+| gujarat-high-court | 405,840 | 100.0% | 99.6% | 100.0% | 99.8% | 99.9% | 99.9% | 0.0% |
+| high-court-of-jammu-and-kashmir-and-ladakh | 100,285 | 100.0% | 97.0% | 99.9% | 98.4% | 99.9% | 99.9% | 0.0% |
+| himachal-pradesh-high-court | 254,825 | 100.0% | 98.9% | 99.2% | 98.8% | 97.9% | 97.9% | 0.0% |
+| jharkhand-high-court | 420,729 | 100.0% | 99.8% | 99.7% | 99.7% | 99.9% | 99.9% | 0.0% |
+| karnataka-high-court | 686,152 | 100.0% | 97.2% | 99.8% | 99.8% | 99.3% | 99.3% | 0.0% |
+| kerala-high-court | 1,018,714 | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 0.0% |
+| madhya-pradesh-high-court | 646,344 | 100.0% | 87.2% | 100.0% | 100.0% | 100.0% | 100.0% | 0.0% |
+| madras-high-court | 1,498,010 | 100.0% | 98.5% | 100.0% | 99.6% | 99.7% | 99.7% | 0.0% |
+| manipur-high-court | 16,763 | 100.0% | 99.6% | 99.7% | 99.6% | 99.8% | 99.8% | 0.0% |
+| meghalaya-high-court | 10,827 | 100.0% | 98.9% | 100.0% | 100.0% | 100.0% | 100.0% | 0.0% |
+| orissa-high-court | 685,646 | 100.0% | 99.8% | 99.9% | 99.5% | 98.9% | 98.9% | 0.0% |
+| patna-high-court | 1,614,936 | 100.0% | 100.0% | 99.6% | 98.3% | 99.9% | 99.9% | 0.0% |
+| punjab-and-haryana-high-court | 1,133,710 | 100.0% | 52.4% | 99.8% | 99.9% | 99.9% | 99.9% | 0.0% |
+| rajasthan-high-court | 1,056,767 | 100.0% | 95.6% | 100.0% | 99.7% | 100.0% | 100.0% | 0.0% |
+| sikkim-high-court | 2,219 | 100.0% | 90.9% | 99.6% | 99.8% | 99.6% | 99.6% | 0.0% |
+| telangana-high-court | 1,005,127 | 100.0% | 96.1% | 99.9% | 99.8% | 99.7% | 99.7% | 0.0% |
+| tripura-high-court | 30,062 | 100.0% | 83.3% | 99.7% | 99.6% | 98.2% | 98.2% | 0.0% |
+| uttarakhand-high-court | 205,475 | 100.0% | 91.2% | 99.9% | 99.5% | 98.7% | 98.7% | 0.0% |
+
+Case number is the weakest identifier: Calcutta 43%, Punjab and Haryana 52%, Allahabad 63%, Delhi 71%. Delhi disposition is 85%. Rajasthan has far more `case_id` values (1,056,767) than distinct case numbers (about 308,000), so its counts are records, not cases.
+
+## Where the case pages are read from
+`src/lib/judgments/hcData.ts`: `JUDGMENTS_DATA_DIR` (local folder, development) or `JUDGMENTS_DATA_URL` (https base serving the same layout). With neither set, High Courts are honestly count-only: `listable:false`, cards say "(counts by year only)", year cards are inert, copy says case lists are not available. The Supreme Court is bundled (`src/data/judgments/sc/*.json`, 12 MB) and always works.
+
+## Commands (SSD attached)
+```bash
+scripts/judgments/export-judgments-hc.sh                      # full High Court export, about 3 minutes, needs the DuckDB CLI
+HC_COURTS=delhi-high-court HC_YEARS=2024-2025 scripts/judgments/export-judgments-hc.sh   # a subset (does not refresh counts)
+scripts/judgments/export-judgments.sh                         # Supreme Court case files (unchanged)
+echo "JUDGMENTS_DATA_DIR=data/judgments-hc" > .env.local      # local dev and local production build
+npm run build && npm start
+```
+
+## Production blocker
+5.4 GB in 157,336 files cannot ship in the repo or a Vercel function. Production needs the folder `data/judgments-hc/` uploaded to a static host or object-storage bucket with public read access, then `JUDGMENTS_DATA_URL` set in Vercel (no code change, no new dependency). Until then production High Courts stay count-only, and the UI says so. Choosing and paying for that host is a decision for the project owner.
+
+## Not done
+Search inside a High Court year; a way to find a High Court case from its id alone; judgment text; judges for High Courts; reporter citations for High Courts.
