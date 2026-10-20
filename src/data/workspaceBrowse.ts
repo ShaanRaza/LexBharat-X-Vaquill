@@ -38,7 +38,8 @@ export const decades = () => {
 };
 
 // ---- acts (mock rows, public response shape)
-export type ActItem = { actId: string; title: string; year: number; category: "central" | "state" | "regulatory"; state?: string; department?: string; actNumber?: string; actStatus: "in_force" | "repealed" | "superseded" | "spent"; enactmentDate?: string; citation: string; sectionCount: number };
+/** `year` is null only for real acts whose year is missing in the dataset; `sectionCount` 0 on real data means "not countable" (no section numbers in the data). */
+export type ActItem = { actId: string; title: string; year: number | null; category: "central" | "state" | "regulatory"; state?: string; department?: string; actNumber?: string; actStatus: "in_force" | "repealed" | "superseded" | "spent"; enactmentDate?: string; citation: string; sectionCount: number };
 const a = (n: number, title: string, year: number, category: ActItem["category"], actStatus: ActItem["actStatus"], extra: Partial<ActItem> = {}): ActItem =>
   ({ actId: `MOCK_${String(n).padStart(4, "0")}`, title, year, category, actStatus, citation: title, sectionCount: 20 + ((n * 37) % 180), ...extra });
 export const MOCK_ACTS: ActItem[] = [

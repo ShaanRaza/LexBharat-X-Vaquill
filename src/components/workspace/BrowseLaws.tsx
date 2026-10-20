@@ -3,8 +3,9 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { ACT_CATEGORIES, ACT_STATUSES, ALL_COURTS, BROWSE_STATS, HIGH_COURTS, SUPREME_COURT, type ActItem, type Court } from "@/data/workspaceBrowse";
 
-// "Browse Laws & Judgments" (layout recreated from a screenshot of the original app). Judgments tab: court cards from display data. Acts tab: a
-// client fetch of the local mock /api/mock/acts/list. Everything shown is mock or display data (docs/ACTS-AND-JUDGMENTS.md).
+// "Browse Laws & Judgments" (layout recreated from a screenshot of the original app). Judgments tab: court cards from display data (not live).
+// Acts tab: a client fetch of /api/acts/list, which serves real act-level legislation metadata (open-india-law, CC BY 4.0) unless ACTS_SOURCE=mock,
+// in which case the response says source "mock" and this page labels itself accordingly (docs/ACTS-AND-JUDGMENTS.md, docs/ACTS-PHASE1.md).
 
 const BANK = "M3 10l9-6 9 6M5 10v8M9 10v8M15 10v8M19 10v8M3 20h18";
 const Svg = ({ d, size = 16 }: { d: string; size?: number }) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={d} /></svg>;
@@ -22,7 +23,9 @@ function CourtCard({ c, featured }: { c: Court; featured?: boolean }) {
   );
 }
 
-type ActsResponse = { results: ActItem[]; total: number; page: number; pageSize: number; hasMore: boolean; note?: string };
+type ActsResponse = { source?: "real" | "mock"; results: ActItem[]; total: number; page: number; pageSize: number; hasMore: boolean; note?: string };
+type ActsStats = { source: "real" | "mock"; acts: number; sections: number; categories: string[]; statuses: string[]; caveats: string[]; attribution?: { text: string; url: string; licence: string; snapshot: string } };
+const fmt = (n: number) => n.toLocaleString("en-IN");
 const PAGE = 8;
 
 export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "acts" }) {
@@ -34,6 +37,9 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
   const [page, setPage] = useState(1);
   const [data, setData] = useState<ActsResponse | null>(null);
   const [err, setErr] = useState("");
+  const [stats, setStats] = useState<ActsStats | null>(null);
+
+  useEffect(() => { fetch("/api/acts/stats").then((r) => (r.ok ? r.json() : null)).then((j) => setStats(j as ActsStats | null)).catch(() => setStats(null)); }, []);
 
   useEffect(() => { setPage(1); }, [q, category, status, sort]);
   useEffect(() => {
@@ -44,11 +50,13 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
     if (status) p.set("status", status);
     if (q.trim().length >= 2) p.set("search", q.trim());
     setErr("");
-    fetch(`/api/mock/acts/list?${p}`, { signal: ac.signal }).then(async (r) => { const j = await r.json(); if (!r.ok) throw new Error(j.error ?? String(r.status)); setData(j as ActsResponse); })
+    fetch(`/api/acts/list?${p}`, { signal: ac.signal }).then(async (r) => { const j = await r.json(); if (!r.ok) throw new Error(j.error ?? String(r.status)); setData(j as ActsResponse); })
       .catch((e) => { if ((e as Error).name !== "AbortError") { setErr((e as Error).message || "Could not load acts."); setData(null); } });
     return () => ac.abort();
   }, [tab, q, category, status, sort, page]);
 
+  const real = stats?.source === "real";
+  const categories = stats?.categories ?? [...ACT_CATEGORIES], statuses = stats?.statuses ?? [...ACT_STATUSES];
   const needle = q.trim().toLowerCase();
   const high = useMemo(() => HIGH_COURTS.filter((c) => !needle || c.name.toLowerCase().includes(needle)), [needle]);
   const showSC = !needle || SUPREME_COURT.name.toLowerCase().includes(needle);
@@ -57,14 +65,25 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
   return (
     <div className="mx-auto max-w-[880px] pt-2">
       <h1 className="text-[28px] font-semibold tracking-[-0.02em]">Browse Laws &amp; Judgments</h1>
-      <p className="mt-1 text-[16px] text-[#535151]">{BROWSE_STATS.acts} Indian acts, and {BROWSE_STATS.judgments} judgments across the Supreme Court and {BROWSE_STATS.highCourts} High Courts, plus {BROWSE_STATS.tribunals} Tribunals.</p>
+      {real ? (
+        <p className="mt-1 text-[16px] text-[#535151]">{fmt(stats.acts)} central and state/UT acts. Judgments are not live yet: the court pages below are a preview.</p>
+      ) : (
+        <p className="mt-1 text-[16px] text-[#535151]">{BROWSE_STATS.acts} Indian acts, and {BROWSE_STATS.judgments} judgments across the Supreme Court and {BROWSE_STATS.highCourts} High Courts, plus {BROWSE_STATS.tribunals} Tribunals. (Display figures, mock.)</p>
+      )}
 
       <section aria-labelledby="covers" className="mt-5 rounded-xl bg-surface p-5 shadow-sm ring-1 ring-border/60">
-        <h2 id="covers" className="text-[12px] font-semibold uppercase tracking-[0.08em] text-[#535151]">What the Data API covers</h2>
-        <ul className="mt-3 space-y-3 text-[15px] leading-relaxed">
-          <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-success text-[10px] text-success">✓</span><span><strong className="font-medium">Acts &amp; legislation are live.</strong> <span className="text-[#535151]">The acts endpoints are maintained and serve {BROWSE_STATS.acts} acts across {BROWSE_STATS.sections} sections, mirroring the Government of India&apos;s official repository.</span></span></li>
-          <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-warning text-[10px] text-warning">⊘</span><span><strong className="font-medium">Case law and tribunal decisions are not in the API corpus yet.</strong> <span className="text-[#535151]">You can browse and read them here, and coverage runs to mid-2025 only. If you need them over the API, <Link href="/contact" className="text-primary underline">get in touch</Link>.</span></span></li>
-        </ul>
+        <h2 id="covers" className="text-[12px] font-semibold uppercase tracking-[0.08em] text-[#535151]">{real ? "What is live here" : "What the Data API covers"}</h2>
+        {real && stats ? (
+          <ul className="mt-3 space-y-3 text-[15px] leading-relaxed">
+            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-success text-[10px] text-success">✓</span><span><strong className="font-medium">Acts &amp; legislation are live.</strong> <span className="text-[#535151]">{fmt(stats.acts)} central and state/UT acts, with {fmt(stats.sections)} section numbers counted. Act-level information only: the text of sections is not shown yet.</span></span></li>
+            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-warning text-[10px] text-warning">⊘</span><span><strong className="font-medium">Judgments, tribunals and regulators are not live yet.</strong> <span className="text-[#535151]">The Judgments tab is a preview. Court counts there are reference figures, not data held here.</span></span></li>
+          </ul>
+        ) : (
+          <ul className="mt-3 space-y-3 text-[15px] leading-relaxed">
+            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-success text-[10px] text-success">✓</span><span><strong className="font-medium">Acts &amp; legislation are live.</strong> <span className="text-[#535151]">The acts endpoints are maintained and serve {BROWSE_STATS.acts} acts across {BROWSE_STATS.sections} sections, mirroring the Government of India&apos;s official repository.</span></span></li>
+            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-warning text-[10px] text-warning">⊘</span><span><strong className="font-medium">Case law and tribunal decisions are not in the API corpus yet.</strong> <span className="text-[#535151]">You can browse and read them here, and coverage runs to mid-2025 only. If you need them over the API, <Link href="/contact" className="text-primary underline">get in touch</Link>.</span></span></li>
+          </ul>
+        )}
       </section>
 
       <div className="mt-5">
@@ -100,12 +119,12 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
         <div role="tabpanel" className="mt-6">
           <div className="flex flex-wrap items-center gap-3">
             <label className="sr-only" htmlFor="f-cat">Category</label>
-            <select id="f-cat" className={sel} value={category} onChange={(e) => setCategory(e.target.value)}><option value="">All categories</option>{ACT_CATEGORIES.map((x) => <option key={x}>{x}</option>)}</select>
+            <select id="f-cat" className={sel} value={category} onChange={(e) => setCategory(e.target.value)}><option value="">All categories</option>{categories.map((x) => <option key={x}>{x}</option>)}</select>
             <label className="sr-only" htmlFor="f-status">Status</label>
-            <select id="f-status" className={sel} value={status} onChange={(e) => setStatus(e.target.value)}><option value="">Any status</option>{ACT_STATUSES.map((x) => <option key={x}>{x}</option>)}</select>
+            <select id="f-status" className={sel} value={status} onChange={(e) => setStatus(e.target.value)}><option value="">Any status</option>{statuses.map((x) => <option key={x}>{x}</option>)}</select>
             <label className="sr-only" htmlFor="f-sort">Sort</label>
             <select id="f-sort" className={sel} value={sort} onChange={(e) => setSort(e.target.value)}><option value="year_desc">Newest first</option><option value="year_asc">Oldest first</option><option value="title_asc">Title A to Z</option><option value="title_desc">Title Z to A</option></select>
-            <span className="ml-auto text-[13px] text-muted" role="status">{data ? `${data.total} acts (mock rows)` : ""}</span>
+            <span className="ml-auto text-[13px] text-muted" role="status">{data ? `${fmt(data.total)} acts${data.source === "mock" ? " (mock rows)" : ""}` : ""}</span>
           </div>
           {err && <p role="alert" className="mt-4 rounded-lg border border-error/40 bg-error/5 p-3 text-[14px]">{err}</p>}
           {!data && !err && <div className="mt-4 space-y-2" aria-busy="true">{[0, 1, 2, 3].map((i) => <div key={i} className="console-skel h-16 rounded-xl bg-accent" />)}</div>}
@@ -120,7 +139,7 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
                       {r.state && <span className="rounded-md bg-accent px-2 py-0.5">{r.state}</span>}
                       {r.department && <span className="rounded-md bg-accent px-2 py-0.5">{r.department}</span>}
                       <span className="rounded-md bg-accent px-2 py-0.5">{r.actStatus}</span>
-                      <span>{r.year}</span><span aria-hidden>·</span><span>{r.sectionCount} sections (placeholder)</span><span aria-hidden>·</span><span className="font-mono">{r.actId}</span>
+                      {r.year !== null && <><span>{r.year}</span><span aria-hidden>·</span></>}<span>{data.source === "mock" ? `${r.sectionCount} sections (placeholder)` : r.sectionCount > 0 ? `${fmt(r.sectionCount)} sections` : "section count unavailable"}</span><span aria-hidden>·</span><span className="font-mono">{r.actId}</span>
                     </p>
                   </li>
                 ))}
@@ -132,6 +151,12 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
                 <button type="button" disabled={!data.hasMore} onClick={() => setPage((p) => p + 1)} className="h-9 rounded-lg px-3 ring-1 ring-border hover:bg-accent disabled:opacity-40">Next →</button>
               </div>
               <p className="mt-3 text-[12px] text-muted">{data.note}</p>
+              {real && stats?.attribution && (
+                <div className="mt-2 space-y-1 text-[12px] text-muted">
+                  <p>{stats.attribution.text} Licence: {stats.attribution.licence}, snapshot {stats.attribution.snapshot}. <a href={stats.attribution.url} className="underline" rel="noopener noreferrer" target="_blank">Dataset</a></p>
+                  {stats.caveats.map((c) => <p key={c}>{c}</p>)}
+                </div>
+              )}
             </>
           )}
         </div>

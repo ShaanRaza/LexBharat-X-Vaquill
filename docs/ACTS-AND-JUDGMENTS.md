@@ -1,6 +1,6 @@
 # Acts & Judgments: what was investigated, what is real, what is mocked
 
-Added 2026-10-20. Route: `/workspace/browse` (and `/workspace/browse/judgments/<court>`). Everything on it is mock or display data.
+Added 2026-10-20. Route: `/workspace/browse` (and `/workspace/browse/judgments/<court>`). **Update:** the Acts tab now serves real act-level legislation metadata from the open-india-law dataset (see `docs/ACTS-PHASE1.md`); the Judgments tab and everything below about judgments is still mock or display data. The sections below describe the original mock build.
 
 ## Question
 The original product has an "Acts & Judgments" area (Browse Laws & Judgments: Supreme Court, High Courts, years, an Acts & Legislation tab). Where does its data come from, is it reachable, and what can legitimately be recreated?
