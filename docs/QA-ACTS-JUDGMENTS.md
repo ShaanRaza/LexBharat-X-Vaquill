@@ -39,3 +39,8 @@ Resolved locally (see `docs/JUDGMENTS-HC.md`):
 - Local smoke tests passed for Bombay 2025, Delhi 2025, Kerala 2024 and Supreme Court 1990: page loads, year link, non-zero list equal to the year count, paging (including the 100-case file boundary and the last partial page), case detail, real 404, and the no-data-source fallback.
 
 Remaining caveats: production High Courts stay count-only until the exported folder is hosted and `JUDGMENTS_DATA_URL` is set; High Court judges are not shown (source field is corrupt); no search inside a High Court year; High Court links need the `p` page number; case number is missing for 17-57% of cases in some courts (Calcutta, Punjab and Haryana, Allahabad, Delhi).
+
+## Update: Round 1 upgrade (richer rows, rebrand, filters)
+Done (details in `docs/JUDGMENTS-HC.md`): newest-first lists; parties line; disposition chips; judges and bench size only for Bombay, Gujarat and Orissa (verified cases only); page count; case-reference headline; "No decision date recorded" instead of blanks; Supreme Court in-year disposition filter with counts. Workspace shell is LexBharat-branded (logo, India selector, no mock banner, no "Not in clone" items, titles without "(local mock)"); the simulated notice now sits only on the developer console, reworded without the Vaquill name.
+
+Deferred on purpose: text snippets (no clean source), High Court filters and search (need an index), Supreme Court bench filter (source understates benches). Not changed: the developer console Playground still shows code samples with the host `https://api.vaquill.ai` and `VAQUILL_API_KEY`; they point at another company's API and should be replaced when LexBharat has its own API host.
