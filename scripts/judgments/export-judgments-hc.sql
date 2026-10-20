@@ -12,7 +12,7 @@ FROM read_parquet('__FILE__') GROUP BY case_id;
 CREATE TEMP TABLE c AS
 SELECT *,
   -- The source writes a missing number as the word None ("WRIT PETITION None", "None None"): strip it; an empty result stays NULL.
-  nullif(trim(regexp_replace(regexp_replace(title_raw, '\s*\bNone\s*$', ''), '^None\s+', '')), '') AS title,
+  nullif(nullif(trim(regexp_replace(regexp_replace(title_raw, '\s*\bNone\s*$', ''), '^None\s+', '')), ''), 'None') AS title,
   try_cast(left(dd,10) AS DATE) AS dt,
   -- Party names are shown only when BOTH look like party names. Extraction junk ("picture [72 x 72] intentionally omitted", a leading '+', '>' or '$', an embedded case number such as 354/2024, a file name such as "FA 527 20.odt", or over 150 characters) drops both, never one.
   (petitioner IS NOT NULL AND respondent IS NOT NULL
@@ -54,6 +54,32 @@ SELECT "caseId", title, "caseNumber", strftime(dt, '%Y-%m-%d') AS "decisionDate"
 FROM r WHERE year_final BETWEEN __YF__ AND __YT__;
 
 COPY (SELECT year, count(*) AS cases, max(page) AS pages FROM p GROUP BY year ORDER BY year DESC) TO '__OUT__/_manifest/__SLUG__.json' (FORMAT JSON, ARRAY true);
+
+-- ---- In-year filters, shaped at export time (no index needed). One filter at a time: disposition chip OR bench class.
+-- Each filtered list is its own set of 100-case pages (newest first) under year=Y/disp=<slug>/ or year=Y/bench=<class>/, and every row carries
+-- mainPage, the page of the unfiltered list that holds the same case, so the case detail link still works. year=Y/facets.json holds the counts.
+CREATE TEMP TABLE f AS
+SELECT *, lower(replace("dispositionLabel", ' ', '-')) AS disp_slug,
+  CASE WHEN "benchSize" = 1 THEN 'single' WHEN "benchSize" = 2 THEN 'division' WHEN "benchSize" >= 3 THEN 'larger' END AS bench_class
+FROM p;
+CREATE TEMP TABLE fp AS
+SELECT year, 'disp' AS kind, disp_slug AS key,
+  CAST(floor((row_number() OVER (PARTITION BY year, disp_slug ORDER BY "decisionDate" DESC NULLS LAST, "caseId") - 1) / 100) AS INTEGER) + 1 AS fpage,
+  page AS "mainPage", "caseId", title, "caseNumber", "decisionDate", disposition, "dispositionLabel", petitioner, respondent, citation, "dateOfRegistration", judges, "benchSize", pages
+FROM f WHERE disp_slug IS NOT NULL
+UNION ALL
+SELECT year, 'bench', bench_class,
+  CAST(floor((row_number() OVER (PARTITION BY year, bench_class ORDER BY "decisionDate" DESC NULLS LAST, "caseId") - 1) / 100) AS INTEGER) + 1,
+  page, "caseId", title, "caseNumber", "decisionDate", disposition, "dispositionLabel", petitioner, respondent, citation, "dateOfRegistration", judges, "benchSize", pages
+FROM f WHERE bench_class IS NOT NULL;
+COPY (SELECT year, kind, key, fpage AS page, "mainPage", "caseId", title, "caseNumber", "decisionDate", disposition, "dispositionLabel", petitioner, respondent, citation, "dateOfRegistration", judges, "benchSize", pages
+      FROM fp ORDER BY year, kind, key, fpage, "decisionDate" DESC NULLS LAST, "caseId") TO '__TMP__/__SLUG__.filtered.ndjson' (FORMAT JSON, ARRAY false);
+COPY (
+  SELECT y.year,
+    (SELECT list({'value': "dispositionLabel", 'slug': disp_slug, 'count': c} ORDER BY c DESC, "dispositionLabel") FROM (SELECT "dispositionLabel", disp_slug, count(*) AS c FROM f WHERE f.year = y.year AND disp_slug IS NOT NULL GROUP BY 1, 2)) AS disposition,
+    (SELECT list({'value': bench_class, 'count': c} ORDER BY c DESC) FROM (SELECT bench_class, count(*) AS c FROM f WHERE f.year = y.year AND bench_class IS NOT NULL GROUP BY 1)) AS bench
+  FROM (SELECT DISTINCT year FROM p) y ORDER BY y.year
+) TO '__TMP__/__SLUG__.facets.ndjson' (FORMAT JSON, ARRAY false);
 COPY (SELECT count(*) AS cases, round(100.0*avg((title IS NOT NULL)::int),1) AS title, round(100.0*avg(("caseNumber" IS NOT NULL)::int),1) AS case_number,
   round(100.0*avg(("decisionDate" IS NOT NULL)::int),1) AS decision_date, round(100.0*avg((disposition IS NOT NULL)::int),1) AS disposition,
   round(100.0*avg(("dispositionLabel" IS NOT NULL)::int),1) AS disposition_chip, round(100.0*avg((petitioner IS NOT NULL AND respondent IS NOT NULL)::int),1) AS parties,

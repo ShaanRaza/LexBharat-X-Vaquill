@@ -2,6 +2,9 @@
 # High Court case-level export (metadata only, no judgment text) from the open-india-law snapshot (CC BY 4.0).
 # Layout (hive-style, one JSON array per file, 100 cases per page, newest year first is a UI matter):
 #   <OUT>/court=<slug>/year=<YYYY>/page=<N>/data_0.json      (written by split_pages.py) N starts at 1; cases sorted by decisionDate (nulls last), then caseId
+#   <OUT>/court=<slug>/year=<YYYY>/disp=<label-slug>/page=<N>/data_0.json   same cases filtered by disposition chip (rows add mainPage)
+#   <OUT>/court=<slug>/year=<YYYY>/bench=<single|division|larger>/page=<N>/data_0.json   same, filtered by bench class (3 courts only)
+#   <OUT>/court=<slug>/year=<YYYY>/facets.json                {disposition:[{value,slug,count}], bench:[{value,count}]}
 #   <OUT>/_manifest/<slug>.json                              [{year, cases, pages}]
 #   <OUT>/_quarantine/<slug>.json                            cases left out, with the reason (never mixed into browse output)
 #   <OUT>/_fields/<slug>.json                                fill rates per field, for docs/JUDGMENTS-HC.md
@@ -29,6 +32,7 @@ for f in "$DIR"/in_*_judgments.parquet; do
   JC=false; case " $JUDGE_COURTS " in *" $s "*) JC=true;; esac
   duckdb -c "$(sed -e "s|__FILE__|$f|g" -e "s|__OUT__|$OUT|g" -e "s|__TMP__|$TMP|g" -e "s|__SLUG__|$s|g" -e "s|__YF__|$YF|g" -e "s|__YT__|$YT|g" -e "s|__JUDGES__|$JC|g" scripts/judgments/export-judgments-hc.sql)"
   python3 scripts/judgments/split_pages.py "$TMP/$s.ndjson" "$OUT/court=$s"; rm -f "$TMP/$s.ndjson"
+  python3 scripts/judgments/split_pages.py "$TMP/$s.filtered.ndjson" "$OUT/court=$s" --filtered; python3 scripts/judgments/split_pages.py "$TMP/$s.facets.ndjson" "$OUT/court=$s" --facets; rm -f "$TMP/$s.filtered.ndjson" "$TMP/$s.facets.ndjson"
 done
 echo "done: $(find "$OUT" -name 'data_0.json' | wc -l | tr -d ' ') page files, $(du -sh "$OUT" | cut -f1)" >&2
 # A full run (no HC_COURTS / HC_YEARS filter) also refreshes the committed counts so they match the page files exactly:
