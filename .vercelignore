@@ -7,3 +7,4 @@
 .DS_Store
 .env.local
 .env*.local
+# Auto-deploy check: this comment-only change is used to confirm GitHub pushes trigger Vercel builds.
