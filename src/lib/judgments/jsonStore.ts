@@ -19,13 +19,14 @@ const BASE_COURTS = ALL_COURTS.map((c) => {
   return { slug: c.slug, name: c.name, cases: m?.cases ?? null, firstYear: m?.first_year ?? null, lastYear: m?.last_year ?? null };
 });
 // Supreme Court cases are bundled (src/data/judgments/sc). High Court pages live outside the bundle (see hcData.ts) and are listable only when a data source is configured.
-const courts = (): CourtSummary[] => BASE_COURTS.map((c) => ({ ...c, listable: c.slug === SC || hcSourceKind() !== null, searchable: c.slug === SC }));
+const courts = (): CourtSummary[] => BASE_COURTS.map((c) => ({ ...c, listable: c.slug === SC || hcSourceKind() !== null, searchable: c.slug === SC, filterable: c.slug === SC }));
 const TOTAL = BASE_COURTS.reduce((n, c) => n + (c.cases ?? 0), 0);
 
 async function scYear(year: number): Promise<CaseItem[]> {
   if (!Number.isInteger(year) || !byCourt.get(SC)?.some((y) => y.year === year)) return [];
   const rows = (await import(`@/data/judgments/sc/${year}.json`)).default as Record<string, unknown>[];
-  return rows.map((r) => { const o: Record<string, unknown> = {}; for (const [k, v] of Object.entries(r)) if (v !== null && v !== undefined) o[k] = v; return o as unknown as CaseItem; });
+  // The export is oldest first; the product shows newest first (same order the High Court pages use).
+  return rows.map((r) => { const o: Record<string, unknown> = {}; for (const [k, v] of Object.entries(r)) if (v !== null && v !== undefined) o[k] = v; return o as unknown as CaseItem; }).reverse();
 }
 
 export const jsonJudgmentsStore: JudgmentsStore = {
@@ -35,9 +36,13 @@ export const jsonJudgmentsStore: JudgmentsStore = {
   async list(court, q) {
     if (court === SC) {
       const needle = q.search?.toLowerCase();
-      const all = (await scYear(q.year)).filter((c) => !needle || [c.title, c.citation, c.petitioner, c.respondent].some((f) => f?.toLowerCase().includes(needle)));
+      const year = await scYear(q.year);
+      // Facet counts describe the whole year (before the search and filters), like a normal faceted list.
+      const counts = new Map<string, number>(); for (const c of year) if (c.disposition) counts.set(c.disposition, (counts.get(c.disposition) ?? 0) + 1);
+      const facets = { disposition: [...counts].map(([value, count]) => ({ value, count })).sort((a, b) => b.count - a.count || a.value.localeCompare(b.value)) };
+      const all = year.filter((c) => (!needle || [c.title, c.citation, c.petitioner, c.respondent].some((f) => f?.toLowerCase().includes(needle))) && (!q.disposition || c.disposition === q.disposition));
       const start = (q.page - 1) * q.pageSize;
-      return { available: true, results: all.slice(start, start + q.pageSize), total: all.length };
+      return { available: true, results: all.slice(start, start + q.pageSize), total: all.length, facets };
     }
     if (hcSourceKind() === null) return { available: false, results: [], total: 0 };
     const total = byCourt.get(court)?.find((y) => y.year === q.year)?.cases ?? 0;
@@ -63,7 +68,8 @@ export const jsonJudgmentsStore: JudgmentsStore = {
         hc ? "Case lists are available for the Supreme Court and every High Court, by year. Only Supreme Court cases can be searched inside a year. Judgment text is not available yet."
            : "Only Supreme Court cases can be listed so far. High Courts show counts by year. Judgment text is not available yet.",
         "Years follow the decision date where present. Records with no usable date or year are left out of the lists.",
-        "High Courts rarely carry a reporter citation, so the case number is the main identifier. Party names are as extracted from the judgment and can be incomplete.",
+        "High Courts rarely carry a reporter citation, so the case number is the main identifier. Party names are as extracted from the judgment and can be incomplete or missing.",
+        "Judges and bench size are shown only for Bombay, Gujarat and Orissa and only when every name on the case checks out. Other courts' judge data is unreliable, so it is left out. Short text previews are not available yet.",
       ],
       attribution: { text: "Data: open-india-law (Vaquill), built from public court judgments. Source acknowledgment: eCourts and the Supreme Court of India; source PDFs published by Dattam Labs (CC BY 4.0).", url: "https://huggingface.co/datasets/vaquill/open-india-law", licence: "CC BY 4.0", snapshot: "v2026.08" },
     };

@@ -114,7 +114,7 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
           <input id="browse-q" value={q} onChange={(e) => setQ(e.target.value)} placeholder={tab === "acts" ? "Search act titles…" : "Filter courts by name…"} autoComplete="off"
             className="h-12 w-full rounded-xl bg-accent pl-11 pr-4 text-[15px] outline-none ring-1 ring-transparent placeholder:text-[#65625f] focus:bg-surface focus:ring-primary/50" />
         </div>
-        <p className="mt-2 px-1 text-[13px] text-[#535151]">{tab === "acts" ? "This box searches act titles (at least 2 characters)." : "This box filters the court list by name. Searching inside cases is not available here yet: open a Supreme Court year to search its cases."} <span title="Not part of this clone">Advanced Research</span> (Boolean operators, citation search, section-level matching) is not recreated.</p>
+        <p className="mt-2 px-1 text-[13px] text-[#535151]">{tab === "acts" ? "This box searches act titles (at least 2 characters)." : "This box filters the court list by name. Searching inside cases is not available here yet: open a Supreme Court year to search its cases."} Boolean operators and citation search are not available yet.</p>
       </div>
 
       <div role="tablist" aria-label="Browse" className="mt-6 flex gap-1 border-b border-border/80">

@@ -5,14 +5,14 @@ import ConsoleShell from "@/components/console/ConsoleShell";
 import { ALL_COURTS, decades } from "@/data/workspaceBrowse";
 import CaseList from "@/components/workspace/CaseList";
 import { getJudgmentsStore } from "@/lib/judgments";
-import { BRAND_SUFFIX } from "@/lib/release";
+import { WORKSPACE_SUFFIX } from "@/lib/release";
 
 export function generateStaticParams() { return ALL_COURTS.map((c) => ({ court: c.slug })); }
 export const dynamicParams = false;
 export async function generateMetadata({ params }: { params: Promise<{ court: string }> }): Promise<Metadata> {
   const { court: slug } = await params;
   const c = ALL_COURTS.find((x) => x.slug === slug);
-  return { title: `${c?.name ?? "Court"} judgments | ${BRAND_SUFFIX} (local mock)`, robots: { index: false, follow: false } };
+  return { title: `${c?.name ?? "Court"} judgments | ${WORKSPACE_SUFFIX}`, robots: { index: false, follow: false } };
 }
 
 // Court page: year picker with real case-record counts (Phase 2). Supreme Court years open a case-metadata list; High Courts show counts only
@@ -43,7 +43,7 @@ export default async function CourtPage({ params, searchParams }: { params: Prom
           </>
         )}
         {real && !summary?.listable && <p className="mt-3 rounded-lg bg-accent px-4 py-2.5 text-[13px] text-[#535151]">Counts by year only. Case lists for this court are not available yet.</p>}
-        {picked ? <CaseList court={slug} year={picked} searchable={!!summary?.searchable} initialPage={Math.max(1, Math.floor(Number(pageParam)) || 1)} /> : (
+        {picked ? <CaseList court={slug} year={picked} searchable={!!summary?.searchable} filterable={!!summary?.filterable} initialPage={Math.max(1, Math.floor(Number(pageParam)) || 1)} /> : (
           <div className="mt-6 space-y-7">
             {(real ? decadeList.map(([d, ys]) => ({ label: `${d}s`, years: ys })) : decades().map((d) => ({ label: d.label, years: d.years.map((y) => ({ year: y, cases: null as number | null })) }))).map((d) => (
               <section key={d.label} aria-label={d.label}>

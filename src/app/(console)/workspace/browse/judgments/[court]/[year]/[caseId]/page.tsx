@@ -4,12 +4,12 @@ import { notFound } from "next/navigation";
 import ConsoleShell from "@/components/console/ConsoleShell";
 import { ALL_COURTS } from "@/data/workspaceBrowse";
 import { getJudgmentsStore } from "@/lib/judgments";
-import { BRAND_SUFFIX } from "@/lib/release";
+import { WORKSPACE_SUFFIX } from "@/lib/release";
 
 // Case detail. Route scheme (stable): /workspace/browse/judgments/<court-slug>/<year>/<caseId>?p=<100-case page>&lp=<list page>
 // `p` locates a High Court case inside the exported pages (the Supreme Court ignores it); `lp` only restores the list page on "back".
 // Metadata only: no judgment text exists in this product yet, and the page says so.
-export const metadata: Metadata = { title: `Case | ${BRAND_SUFFIX}`, robots: { index: false, follow: false } };
+export const metadata: Metadata = { title: `Case | ${WORKSPACE_SUFFIX}`, robots: { index: false, follow: false } };
 
 export default async function CasePage({ params, searchParams }: { params: Promise<{ court: string; year: string; caseId: string }>; searchParams: Promise<{ p?: string; lp?: string }> }) {
   const { court: slug, year: yearParam, caseId: rawId } = await params, { p, lp } = await searchParams;
@@ -32,11 +32,13 @@ export default async function CasePage({ params, searchParams }: { params: Promi
     ["Decision date", c.decisionDate ? c.decisionDate.slice(0, 10) : `Not recorded (listed under ${year} from the record's year)`],
     ["Case number", c.caseNumber ?? "Not recorded"],
     ["Reporter citation", c.citation ?? "No reporter citation is available for this record"],
-    ["Disposition", c.disposition ?? "Not recorded"],
+    ["Disposition", c.dispositionLabel && c.disposition && c.dispositionLabel.toLowerCase() !== c.disposition.toLowerCase() ? `${c.dispositionLabel} (as recorded: ${c.disposition})` : (c.dispositionLabel ?? c.disposition ?? "Not recorded")],
     ["Petitioner", c.petitioner ?? "Not recorded"],
     ["Respondent", c.respondent ?? "Not recorded"],
-    ...(c.judges?.length ? ([["Judges", c.judges.join(", ")]] as [string, React.ReactNode][]) : []),
-    ...(c.benchStrength ? ([["Bench strength", String(c.benchStrength)]] as [string, React.ReactNode][]) : []),
+    ...(c.judges?.length ? ([[slug === "supreme-court-of-india" ? "Judges (as listed in the source)" : "Judges", c.judges.join(", ")]] as [string, React.ReactNode][]) : []),
+    // Supreme Court bench strength is not shown: the source lists the authoring judge for most cases (87% "single"), so it understates real benches.
+    ...(c.benchSize ? ([["Bench", c.benchSize === 1 ? "Single judge" : c.benchSize === 2 ? "Division bench" : `${c.benchSize}-judge bench`]] as [string, React.ReactNode][]) : []),
+    ...(c.pages ? ([["Pages (extracted text)", String(c.pages)]] as [string, React.ReactNode][]) : []),
     ...(c.dateOfRegistration ? ([["Registered (as recorded)", c.dateOfRegistration]] as [string, React.ReactNode][]) : []),
     ["Record ID", <span key="id" className="font-mono">{c.caseId}</span>],
   ];
