@@ -14,9 +14,12 @@ export async function GET(req: Request) {
   if (!(await store.courts()).some((c) => c.slug === court)) return Response.json({ error: "Unknown court." }, { status: 404 });
   const summary = (await store.courts()).find((c) => c.slug === court);
   if (search && !summary?.searchable) return bad("Searching inside a year is available for the Supreme Court only.");
-  const disposition = get("disposition");
-  if (disposition && !summary?.filterable) return bad("Filtering inside a year is available for the Supreme Court only.");
-  const { available, results, total, facets } = await store.list(court, { year, page, pageSize, search, disposition });
+  const disposition = get("disposition"), bench = get("bench");
+  if ((disposition || bench) && !summary?.filterable) return bad("Filters are not available for this court yet.");
+  if (bench && court === "supreme-court-of-india") return bad("Bench size is not available for the Supreme Court.");
+  if (disposition && bench) return bad("Use one filter at a time: disposition or bench.");
+  if (bench && !["single", "division", "larger"].includes(bench)) return bad("bench must be single, division or larger.");
+  const { available, results, total, facets } = await store.list(court, { year, page, pageSize, search, disposition, bench });
   return Response.json({ source: store.source, available, searchable: !!summary?.searchable, filterable: !!summary?.filterable, ...(facets ? { facets } : {}), court, year, results, total, page, pageSize, hasMore: (page - 1) * pageSize + pageSize < total,
     note: available ? "Case metadata from the open-india-law dataset (CC BY 4.0). No judgment text." : "Case lists are not available for this court yet." },
     { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=3600" } });

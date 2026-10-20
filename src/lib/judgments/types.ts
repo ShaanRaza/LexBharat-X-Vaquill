@@ -11,6 +11,8 @@ export type CaseItem = {
   benchSize?: number;
   /** Pages of extracted text (the last page the text reaches). */
   pages?: number;
+  /** High Court filtered lists only: the page of the unfiltered list that holds this case (the detail link needs it). */
+  mainPage?: number;
 };
 export type CourtSummary = {
   slug: string; name: string;
@@ -24,7 +26,7 @@ export type CourtSummary = {
   filterable: boolean;
 };
 export type YearCount = { year: number; cases: number | null };
-export type CaseQuery = { year: number; page: number; pageSize: number; search: string | null; disposition?: string | null };
+export type CaseQuery = { year: number; page: number; pageSize: number; search: string | null; disposition?: string | null; bench?: string | null };
 export type Facet = { value: string; count: number };
 export type JudgmentsStats = { source: JudgmentsSource; totalCases: number | null; courts: number; listableCourts: number; caveats: string[]; attribution?: { text: string; url: string; licence: string; snapshot: string } };
 /** The interface routes and pages depend on. The Phase 2 JSON store and the mock store implement it; a Postgres/S3 store can replace them later. */
@@ -32,7 +34,7 @@ export interface JudgmentsStore {
   readonly source: JudgmentsSource;
   courts(): Promise<CourtSummary[]>;
   years(court: string): Promise<YearCount[] | null>;
-  list(court: string, q: CaseQuery): Promise<{ available: boolean; results: CaseItem[]; total: number; facets?: { disposition: Facet[] } }>;
+  list(court: string, q: CaseQuery): Promise<{ available: boolean; results: CaseItem[]; total: number; facets?: { disposition: Facet[]; bench?: Facet[] } }>;
   /** One case. `pageHint` is the 100-case page number carried in the link (High Courts); the Supreme Court ignores it. */
   get(court: string, year: number, caseId: string, pageHint?: number): Promise<CaseItem | null>;
   stats(): Promise<JudgmentsStats>;
