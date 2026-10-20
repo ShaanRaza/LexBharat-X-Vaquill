@@ -10,13 +10,13 @@ import { ACT_CATEGORIES, ACT_STATUSES, ALL_COURTS, BROWSE_STATS, HIGH_COURTS, SU
 const BANK = "M3 10l9-6 9 6M5 10v8M9 10v8M15 10v8M19 10v8M3 20h18";
 const Svg = ({ d, size = 16 }: { d: string; size?: number }) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={d} /></svg>;
 
-function CourtCard({ c, featured }: { c: Court; featured?: boolean }) {
+function CourtCard({ c, featured, real }: { c: Court; featured?: boolean; real?: boolean }) {
   return (
     <Link href={`/workspace/browse/judgments/${c.slug}`} className={`group flex items-center gap-4 rounded-xl bg-surface px-5 py-4 shadow-sm ring-1 transition-colors hover:ring-primary/50 ${featured ? "ring-primary/30" : "ring-border/70"}`}>
       <span className="grid size-11 shrink-0 place-items-center rounded-lg bg-accent text-muted"><Svg d={BANK} size={22} /></span>
       <span className="min-w-0 flex-1 leading-snug">
         <span className="block text-[15px] font-medium text-primary">{c.name}</span>
-        <span className="block text-[13px] text-muted">{c.count ? `${c.count} judgments` : "Count not captured"}</span>
+        <span className="block text-[13px] text-muted">{c.count ? `${c.count} ${real ? "case records" : "judgments"}` : "Count not captured"}</span>
       </span>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-muted transition-transform group-hover:translate-x-0.5" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
     </Link>
@@ -24,6 +24,7 @@ function CourtCard({ c, featured }: { c: Court; featured?: boolean }) {
 }
 
 type ActsResponse = { source?: "real" | "mock"; results: ActItem[]; total: number; page: number; pageSize: number; hasMore: boolean; note?: string };
+type CourtsResp = { source: "real" | "mock"; stats: { totalCases: number | null; listableCourts: number }; courts: { slug: string; cases: number | null }[] };
 type ActsStats = { source: "real" | "mock"; acts: number; sections: number; categories: string[]; statuses: string[]; caveats: string[]; attribution?: { text: string; url: string; licence: string; snapshot: string } };
 const fmt = (n: number) => n.toLocaleString("en-IN");
 const PAGE = 8;
@@ -38,7 +39,9 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
   const [data, setData] = useState<ActsResponse | null>(null);
   const [err, setErr] = useState("");
   const [stats, setStats] = useState<ActsStats | null>(null);
+  const [jc, setJc] = useState<CourtsResp | null>(null);
 
+  useEffect(() => { fetch("/api/judgments/courts").then((r) => (r.ok ? r.json() : null)).then((j) => setJc(j as CourtsResp | null)).catch(() => setJc(null)); }, []);
   useEffect(() => { fetch("/api/acts/stats").then((r) => (r.ok ? r.json() : null)).then((j) => setStats(j as ActsStats | null)).catch(() => setStats(null)); }, []);
 
   useEffect(() => { setPage(1); }, [q, category, status, sort]);
@@ -57,8 +60,10 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
 
   const real = stats?.source === "real";
   const categories = stats?.categories ?? [...ACT_CATEGORIES], statuses = stats?.statuses ?? [...ACT_STATUSES];
+  const jreal = jc?.source === "real";
+  const withCount = (c: Court): Court => { const n = jreal ? jc?.courts.find((x) => x.slug === c.slug)?.cases : null; return n != null ? { ...c, count: fmt(n), seen: true } : jreal ? { ...c, count: null } : c; };
   const needle = q.trim().toLowerCase();
-  const high = useMemo(() => HIGH_COURTS.filter((c) => !needle || c.name.toLowerCase().includes(needle)), [needle]);
+  const high = useMemo(() => HIGH_COURTS.filter((c) => !needle || c.name.toLowerCase().includes(needle)).map(withCount), [needle, jc]); // eslint-disable-line react-hooks/exhaustive-deps
   const showSC = !needle || SUPREME_COURT.name.toLowerCase().includes(needle);
   const sel = "h-9 rounded-lg bg-accent px-3 text-[14px] outline-none ring-1 ring-transparent focus:bg-surface focus:ring-primary/50";
 
@@ -66,7 +71,7 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
     <div className="mx-auto max-w-[880px] pt-2">
       <h1 className="text-[28px] font-semibold tracking-[-0.02em]">Browse Laws &amp; Judgments</h1>
       {real ? (
-        <p className="mt-1 text-[16px] text-[#535151]">{fmt(stats.acts)} central and state/UT acts. Judgments are not live yet: the court pages below are a preview.</p>
+        <p className="mt-1 text-[16px] text-[#535151]">{fmt(stats.acts)} central and state/UT acts{jreal && jc?.stats.totalCases ? `, and ${fmt(jc.stats.totalCases)} judgment case records across the Supreme Court and ${jc.courts.length - 1} High Courts` : ""}. {jreal ? "Supreme Court cases can be browsed by year; High Courts show counts only." : "Judgments are not live yet: the court pages below are a preview."}</p>
       ) : (
         <p className="mt-1 text-[16px] text-[#535151]">{BROWSE_STATS.acts} Indian acts, and {BROWSE_STATS.judgments} judgments across the Supreme Court and {BROWSE_STATS.highCourts} High Courts, plus {BROWSE_STATS.tribunals} Tribunals. (Display figures, mock.)</p>
       )}
@@ -76,7 +81,7 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
         {real && stats ? (
           <ul className="mt-3 space-y-3 text-[15px] leading-relaxed">
             <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-success text-[10px] text-success">✓</span><span><strong className="font-medium">Acts &amp; legislation are live.</strong> <span className="text-[#535151]">{fmt(stats.acts)} central and state/UT acts, with {fmt(stats.sections)} section numbers counted. Act-level information only: the text of sections is not shown yet.</span></span></li>
-            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-warning text-[10px] text-warning">⊘</span><span><strong className="font-medium">Judgments, tribunals and regulators are not live yet.</strong> <span className="text-[#535151]">The Judgments tab is a preview. Court counts there are reference figures, not data held here.</span></span></li>
+            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-warning text-[10px] text-warning">⊘</span><span><strong className="font-medium">{jreal ? "Judgment metadata is live in part." : "Judgments, tribunals and regulators are not live yet."}</strong> <span className="text-[#535151]">{jreal ? "Case counts by year for every court, and case lists for the Supreme Court. Judgment text, tribunals and regulators are not live yet." : "The Judgments tab is a preview. Court counts there are reference figures, not data held here."}</span></span></li>
           </ul>
         ) : (
           <ul className="mt-3 space-y-3 text-[15px] leading-relaxed">
@@ -107,13 +112,13 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
 
       {tab === "judgments" ? (
         <div role="tabpanel" className="mt-8 space-y-8">
-          {showSC && <section><h2 className="flex items-center gap-2 text-[18px] font-semibold"><span className="text-primary"><Svg d={BANK} size={18} /></span>Supreme Court</h2><div className="mt-3"><CourtCard c={SUPREME_COURT} featured /></div></section>}
+          {showSC && <section><h2 className="flex items-center gap-2 text-[18px] font-semibold"><span className="text-primary"><Svg d={BANK} size={18} /></span>Supreme Court</h2><div className="mt-3"><CourtCard c={withCount(SUPREME_COURT)} featured real={jreal} /></div></section>}
           <section>
             <h2 className="flex items-center gap-2 text-[18px] font-semibold"><span className="text-primary"><Svg d={BANK} size={18} /></span>High Courts</h2>
-            {high.length ? <div className="mt-3 grid gap-3 sm:grid-cols-2">{high.map((c) => <CourtCard key={c.slug} c={c} />)}</div> : <p className="mt-3 text-[14px] text-muted">No court matches &ldquo;{q}&rdquo;.</p>}
+            {high.length ? <div className="mt-3 grid gap-3 sm:grid-cols-2">{high.map((c) => <CourtCard key={c.slug} c={c} real={jreal} />)}</div> : <p className="mt-3 text-[14px] text-muted">No court matches &ldquo;{q}&rdquo;.</p>}
           </section>
           {!showSC && !high.length && <p className="text-[14px] text-muted" role="status">No courts match.</p>}
-          <p className="text-[13px] text-muted">{ALL_COURTS.length} courts listed. Counts are shown only where the reference page showed one.</p>
+          <p className="text-[13px] text-muted">{ALL_COURTS.length} courts listed. {jreal ? "Counts are distinct case records in the open-india-law dataset; High Courts show counts by year only." : "Counts are shown only where the reference page showed one."}</p>
         </div>
       ) : (
         <div role="tabpanel" className="mt-6">
