@@ -17,8 +17,8 @@ export async function generateMetadata({ params }: { params: Promise<{ court: st
 
 // Court page: year picker with real case-record counts (Phase 2). Supreme Court years open a case-metadata list; High Courts show counts only
 // (case lists are not published yet). With JUDGMENTS_SOURCE=mock the old placeholder year grid is shown instead. No judgment text anywhere.
-export default async function CourtPage({ params, searchParams }: { params: Promise<{ court: string }>; searchParams: Promise<{ year?: string }> }) {
-  const { court: slug } = await params, { year: yearParam } = await searchParams;
+export default async function CourtPage({ params, searchParams }: { params: Promise<{ court: string }>; searchParams: Promise<{ year?: string; page?: string }> }) {
+  const { court: slug } = await params, { year: yearParam, page: pageParam } = await searchParams;
   const court = ALL_COURTS.find((x) => x.slug === slug);
   if (!court) notFound();
   const store = getJudgmentsStore(), real = store.source === "real";
@@ -43,7 +43,7 @@ export default async function CourtPage({ params, searchParams }: { params: Prom
           </>
         )}
         {real && !summary?.listable && <p className="mt-3 rounded-lg bg-accent px-4 py-2.5 text-[13px] text-[#535151]">Counts by year only. Case lists for this court are not available yet.</p>}
-        {picked ? <CaseList court={slug} year={picked} /> : (
+        {picked ? <CaseList court={slug} year={picked} searchable={!!summary?.searchable} initialPage={Math.max(1, Math.floor(Number(pageParam)) || 1)} /> : (
           <div className="mt-6 space-y-7">
             {(real ? decadeList.map(([d, ys]) => ({ label: `${d}s`, years: ys })) : decades().map((d) => ({ label: d.label, years: d.years.map((y) => ({ year: y, cases: null as number | null })) }))).map((d) => (
               <section key={d.label} aria-label={d.label}>

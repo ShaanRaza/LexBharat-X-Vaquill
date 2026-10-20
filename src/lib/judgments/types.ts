@@ -3,6 +3,8 @@ export type JudgmentsSource = "real" | "mock";
 export type CaseItem = {
   caseId: string; title: string; citation?: string; disposition?: string; decisionDate?: string;
   petitioner?: string; respondent?: string; caseNumber?: string; benchStrength?: number; judges?: string[];
+  /** As recorded in the source (High Courts: dd-mm-yyyy). */
+  dateOfRegistration?: string;
 };
 export type CourtSummary = {
   slug: string; name: string;
@@ -10,6 +12,8 @@ export type CourtSummary = {
   cases: number | null; firstYear: number | null; lastYear: number | null;
   /** true when individual cases can be listed (Supreme Court only for now); other courts have counts by year only. */
   listable: boolean;
+  /** true when text search inside a year works (Supreme Court only; High Court pages are read one 100-case page at a time). */
+  searchable: boolean;
 };
 export type YearCount = { year: number; cases: number | null };
 export type CaseQuery = { year: number; page: number; pageSize: number; search: string | null };
@@ -20,5 +24,7 @@ export interface JudgmentsStore {
   courts(): Promise<CourtSummary[]>;
   years(court: string): Promise<YearCount[] | null>;
   list(court: string, q: CaseQuery): Promise<{ available: boolean; results: CaseItem[]; total: number }>;
+  /** One case. `pageHint` is the 100-case page number carried in the link (High Courts); the Supreme Court ignores it. */
+  get(court: string, year: number, caseId: string, pageHint?: number): Promise<CaseItem | null>;
   stats(): Promise<JudgmentsStats>;
 }
