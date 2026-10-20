@@ -128,6 +128,12 @@ export default function ConsoleShell({ tab, variant = "data", children }: { tab?
             )}
           </li>
         ))}
+        {/* "Acts & Judgments" sits after MCP Server in the original's sidebar; it opens the mock browser at /workspace/browse. */}
+        <li>
+          <Link href="/workspace/browse" onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-[6px] px-3 py-2.5 text-[14px] text-muted transition-colors hover:bg-accent/60 hover:text-foreground">
+            <Icon d={BOOKS_ICON} /><span className="leading-tight">Acts &amp; Judgments</span>
+          </Link>
+        </li>
       </ul>
       <p className="mt-6 px-5 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">Learn</p>
       <ul className="mt-2 space-y-0.5 px-2">
