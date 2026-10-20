@@ -42,3 +42,5 @@ Total counted section numbers: 208,390 (the earlier 211,556 figure counted blank
 
 ## Known limits
 Duplicate-looking titles exist (159 title groups with more than one `act_id`, kept as separate rows). The Delhi file includes state amendments of central acts. Data quality is that of the source files; not legal advice.
+
+> Update: regulators were added in Phase 3 and judgments metadata in Phase 2. See `docs/ACTS-PHASE2-3.md`. The Phase 1 legislation export is unchanged.

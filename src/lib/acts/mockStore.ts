@@ -5,6 +5,7 @@ import type { ActsStore } from "./types";
 
 export const mockActsStore: ActsStore = {
   source: "mock",
+  async get(actId) { return MOCK_ACTS.find((a) => a.actId === actId) ?? null; },
   async list(q) { return runActsQuery(MOCK_ACTS, q); },
   async stats() {
     return {
