@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import ConsoleShell, { CONSOLE_TABS, type TabId } from "./ConsoleShell";
 import PlaygroundApp from "./PlaygroundApp";
@@ -8,27 +9,87 @@ import { useMockKey } from "@/lib/useMockKey";
 const card = "rounded-[8px] border border-border bg-surface p-5";
 const btn = "inline-flex h-9 items-center justify-center rounded-[4px] bg-primary px-4 text-[14px] font-medium text-white transition-colors hover:bg-primary-hover";
 
-// Overview and API Keys are INFERRED, minimal screens (the teardown only observed the Overview's credit card, API key card and usage card
-// at a glance). The balance is a fixed mock figure. Every other tab is an honest placeholder.
+// Overview layout recreated from a screenshot of the original Overview page: credit card, privacy band, API key and Usage cards, Get started list,
+// "Free for non-commercial use" card. Figures are fixed mock values; the key shown is the MOCK key (prefix only); Buy credits, View all and the
+// walkthrough are not recreated (billing and credits are intentionally out of scope).
+const I = ({ d }: { d: string }) => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={d} /></svg>;
+const START = [
+  { href: "/developer?tab=playground", title: "Playground", text: "Run a live request and copy the code for it.", icon: "M6 4l14 8-14 8z" },
+  { href: "/developer?tab=mcp", title: "MCP Server", text: "Use the corpus from Claude, Cursor, or VS Code.", icon: "M14 4l6 6M4 20l8-8M10 6l8 8" },
+  { href: "/developer?tab=law-changes", title: "Law Change Alerts", text: "Get notified when a law you rely on changes.", icon: "M4 6h12M4 12h8M4 18h12M19 8v8" },
+];
+
 function Overview() {
   const { key, create } = useMockKey();
+  const [copied, setCopied] = useState(false);
+  const prefix = key ? `${key.slice(0, 16)}-` : "";
   return (
-    <div className="max-w-[880px] space-y-4">
-      <h1 className="pt-2 text-[21px] font-semibold">Overview</h1>
-      <section className={card}>
-        <p className="text-[12px] text-muted">Credit balance</p>
-        <p className="mt-1 text-[34px] font-semibold leading-none">1,000 <span className="text-[14px] font-normal text-muted">credits</span></p>
-        <p className="mt-2 text-[14px]">On <strong className="font-medium">Pay as you go</strong> (mock)</p>
+    <div className="mx-auto max-w-[880px] pt-2">
+      <div className="flex items-center justify-between gap-3">
+        <h1 className="flex items-center gap-2 text-[26px] font-semibold tracking-[-0.02em]">Overview<span title="US and Indian law, account balance, and usage." className="text-[#65625f]"><I d="M12 16v-4M12 8h.01M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z" /></span></h1>
+        <Link href="/docs" className="inline-flex min-h-8 items-center gap-1.5 text-[13px] text-[#65625f] hover:text-foreground"><I d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z" />Docs</Link>
+      </div>
+
+      <section className="mt-5 flex flex-wrap items-center justify-between gap-4 rounded-xl bg-surface p-5 shadow-sm ring-1 ring-border/60">
+        <div>
+          <p className="text-[13px] text-[#535151]">Credit balance</p>
+          <p className="mt-1 text-[44px] font-semibold leading-none tracking-[-0.02em]">1,000 <span className="text-[16px] font-normal text-[#535151]">credits</span></p>
+          <p className="mt-3 text-[14px]">On <strong className="font-medium">Pay as you go</strong> <span className="text-[#65625f]">(mock)</span></p>
+          <p className="mt-1 text-[14px] text-[#535151]">No usage recorded in the last 30 days.</p>
+        </div>
+        <button type="button" disabled title="Not part of this clone: billing and credits are not recreated" className="inline-flex h-11 items-center gap-2 rounded-lg bg-primary px-5 text-[15px] font-medium text-white opacity-50"><I d="M6 6h15l-2 9H8zM6 6L5 3H2M9 20h.01M18 20h.01" />Buy credits</button>
       </section>
-      <section className={card}>
-        <div className="flex items-center justify-between"><h2 className="text-[17px]">API key</h2><Link href="/developer?tab=api-key" className="text-[13px] text-primary">Manage ↗</Link></div>
-        <p className="mt-3 text-[14px] text-muted">{key ? "A mock key is stored in this browser." : "No active key yet. Create one to start making requests."}</p>
-        {!key && <button type="button" onClick={create} className={`${btn} mt-4`}>Create a key</button>}
+
+      <section className="mt-4 rounded-xl bg-[#ebe7e0]/70 p-4 ring-1 ring-border/50">
+        <div className="flex items-start justify-between gap-3"><p className="flex items-center gap-2 text-[15px] font-medium"><span aria-hidden className="text-[#6e3730]"><I d="M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6z" /></span>The API does not store your query text.</p>
+          <Link href="/security" className="inline-flex min-h-8 shrink-0 items-center text-[13px] text-[#535151] hover:text-foreground">See exactly what is stored</Link></div>
+        <p className="mt-1.5 pl-7 text-[13px] text-[#535151]">Requests exist in memory for the length of the call. We keep per-day call counts for billing, not what you searched for.</p>
       </section>
-      <section className={card}>
-        <h2 className="text-[17px]">Get started</h2>
-        <Link href="/developer?tab=playground" className="mt-3 block rounded-[6px] p-2 hover:bg-accent"><span className="font-medium">Playground</span><span className="block text-[13px] text-muted">Run a live request and copy the code for it.</span></Link>
+
+      <div className="mt-4 grid gap-4 md:grid-cols-2">
+        <section className="rounded-xl bg-surface p-5 shadow-sm ring-1 ring-border/60">
+          <div className="flex items-center justify-between"><h2 className="text-[20px]">API key</h2><Link href="/developer?tab=api-key" className="inline-flex min-h-8 items-center text-[13px] text-primary hover:underline">Manage ↗</Link></div>
+          {key ? (
+            <>
+              <div className="mt-3 flex items-center gap-2 rounded-lg bg-accent px-3 py-2.5"><code className="min-w-0 flex-1 truncate font-mono text-[13px]">{prefix}</code>
+                <button type="button" aria-label={copied ? "Copied" : "Copy key prefix"} onClick={() => { navigator.clipboard?.writeText(prefix).catch(() => {}); setCopied(true); setTimeout(() => setCopied(false), 1500); }} className="grid size-8 place-items-center rounded-md text-[#535151] hover:bg-surface"><I d={copied ? "M5 12.500l4.500 4.500L19 7.500" : "M9 9h11v11H9zM5 15V5a1 1 0 0 1 1-1h10"} /></button></div>
+              <p className="mt-3 text-[13px] text-[#535151]">Only the prefix is shown here. This is a mock key kept in this browser; manage it in the API Keys tab.</p>
+            </>
+          ) : (
+            <>
+              <p className="mt-3 text-[14px] text-[#535151]">No active key yet. Create one to start making requests.</p>
+              <button type="button" onClick={create} className={`${btn} mt-4`}>Create a key</button>
+            </>
+          )}
+        </section>
+        <section className="rounded-xl bg-surface p-5 shadow-sm ring-1 ring-border/60">
+          <div className="flex items-center justify-between"><h2 className="text-[20px]">Usage</h2><span title="Not part of this clone" className="text-[13px] text-[#65625f]">View all ↗</span></div>
+          <div className="mt-3 grid grid-cols-2 gap-4">
+            <div><p className="text-[13px] text-[#535151]">Credits used, all time</p><p className="mt-1 text-[28px] font-medium leading-none">0</p></div>
+            <div><p className="text-[13px] text-[#535151]">Requests on this key</p><p className="mt-1 text-[28px] font-medium leading-none">0</p></div>
+          </div>
+          <p className="mt-4 text-[13px] text-[#535151]">Daily breakdown and transaction history live in Credits &amp; Usage (not recreated).</p>
+        </section>
+      </div>
+
+      <section className="mt-7" aria-labelledby="gs">
+        <div className="flex items-center justify-between"><h2 id="gs" className="text-[22px]">Get started</h2><Link href="/docs/api-guide/quickstart" className="inline-flex min-h-8 items-center gap-1.5 text-[14px] text-[#535151] hover:text-foreground"><I d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z" />Quickstart</Link></div>
+        <ul className="mt-2">
+          {START.map((g) => (
+            <li key={g.title}><Link href={g.href} className="group flex items-center gap-4 rounded-lg px-1 py-3 hover:bg-accent/60">
+              <span className="text-primary"><I d={g.icon} /></span>
+              <span className="min-w-0 flex-1"><span className="block text-[15px] font-medium">{g.title}</span><span className="block text-[14px] text-[#535151]">{g.text}</span></span>
+              <span aria-hidden className="text-[#535151] transition-transform group-hover:translate-x-0.5">↗</span></Link></li>
+          ))}
+        </ul>
       </section>
+
+      <section className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-xl bg-surface p-5 shadow-sm ring-1 ring-border/60">
+        <div className="max-w-[560px]"><h2 className="text-[22px]">Free for non-commercial use</h2>
+          <p className="mt-2 text-[14px] leading-relaxed text-[#535151]">API access is free for personal use, legal aid, and other non-commercial work. Write to us with who you are, your LinkedIn profile, and what you are building, and we will grant you enough credits to cover the year.</p></div>
+        <Link href="/contact" className="inline-flex h-10 items-center gap-2 rounded-lg px-4 text-[14px] ring-1 ring-border hover:bg-accent"><I d="M4 6h16v12H4zM4 7l8 6 8-6" />Email us</Link>
+      </section>
+      <p className="mt-4 text-[12px] text-[#65625f]">Mock page: every figure is fixed, nothing here is tied to a real account, key or balance.</p>
     </div>
   );
 }
