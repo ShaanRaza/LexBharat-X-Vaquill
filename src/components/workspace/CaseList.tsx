@@ -8,22 +8,22 @@ const PAGE = 20;
 
 export default function CaseList({ court, year }: { court: string; year: number }) {
   const [q, setQ] = useState(""); const [page, setPage] = useState(1);
-  const [data, setData] = useState<Resp | null>(null); const [err, setErr] = useState("");
+  const [data, setData] = useState<Resp | null>(null); const [err, setErr] = useState(""); const [retry, setRetry] = useState(0);
   useEffect(() => { setPage(1); }, [q]);
   useEffect(() => {
     const ac = new AbortController(), p = new URLSearchParams({ court, year: String(year), page: String(page), pageSize: String(PAGE) });
     if (q.trim().length >= 2) p.set("search", q.trim());
     setErr("");
-    fetch(`/api/judgments/list?${p}`, { signal: ac.signal }).then(async (r) => { const j = await r.json(); if (!r.ok) throw new Error(j.error ?? String(r.status)); setData(j as Resp); })
+    fetch(`/api/judgments/list?${p}`, { signal: ac.signal }).then(async (r) => { const j = await r.json().catch(() => null); if (!r.ok) throw new Error(typeof j?.error === "string" ? j.error : `The server could not load these cases (status ${r.status}). Please try again.`); if (!j) throw new Error("The server sent an unreadable response. Please try again."); setData(j as Resp); })
       .catch((e) => { if ((e as Error).name !== "AbortError") { setErr((e as Error).message || "Could not load cases."); setData(null); } });
     return () => ac.abort();
-  }, [court, year, q, page]);
+  }, [court, year, q, page, retry]);
   return (
     <div className="mt-5">
       <label htmlFor="case-q" className="sr-only">Search cases in {year}</label>
       <input id="case-q" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search title, parties or citation…" autoComplete="off"
         className="h-11 w-full rounded-xl bg-accent px-4 text-[15px] outline-none ring-1 ring-transparent placeholder:text-[#65625f] focus:bg-surface focus:ring-primary/50" />
-      {err && <p role="alert" className="mt-4 rounded-lg border border-error/40 bg-error/5 p-3 text-[14px]">{err}</p>}
+      {err && <div role="alert" className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-error/40 bg-error/5 p-3 text-[14px]"><span>{err}</span><button type="button" onClick={() => setRetry((n) => n + 1)} className="h-8 rounded-lg px-3 ring-1 ring-border hover:bg-accent">Try again</button></div>}
       {!data && !err && <div className="mt-4 space-y-2" aria-busy="true">{[0, 1, 2].map((i) => <div key={i} className="console-skel h-16 rounded-xl bg-accent" />)}</div>}
       {data && !data.available && <p className="mt-4 rounded-lg bg-accent px-4 py-3 text-[14px] text-[#535151]">{data.note}</p>}
       {data?.available && (

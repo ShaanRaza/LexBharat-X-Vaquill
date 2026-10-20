@@ -17,9 +17,10 @@ WITH per_act AS (
 ), derived AS (
   SELECT *, try_cast(nullif(regexp_extract(title, '(1[6-9][0-9]{2}|20[0-9]{2})', 1), '') AS INTEGER) AS year_from_title FROM per_act
 )
-SELECT act_id AS "actId", title, coalesce(year_raw, year_from_title) AS year, 'regulatory' AS category, department,
+-- Year is NOT derived from the title for regulators: titles cite other years ("Government Stock, 2082", "Act IX of 1872"), which made 87 entries wrong.
+SELECT act_id AS "actId", title, year_raw AS year, 'regulatory' AS category, department,
   act_status AS "actStatus", title AS citation, CAST(section_count AS INTEGER) AS "sectionCount",
-  (year_raw IS NULL AND year_from_title IS NOT NULL) AS year_derived, n_dept, n_status, n_title
+  false AS year_derived, n_dept, n_status, n_title
 FROM derived;
 
 SELECT CASE WHEN count(*) = 0 THEN 'ok' ELSE error('unstable per-act attributes or unexpected status: ' || count(*)) END AS check_values

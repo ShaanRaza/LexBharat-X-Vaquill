@@ -25,8 +25,18 @@ function CourtCard({ c, featured, real }: { c: Court; featured?: boolean; real?:
 
 type ActsResponse = { source?: "real" | "mock"; results: ActItem[]; total: number; page: number; pageSize: number; hasMore: boolean; note?: string };
 type CourtsResp = { source: "real" | "mock"; stats: { totalCases: number | null; listableCourts: number }; courts: { slug: string; cases: number | null }[] };
-type ActsStats = { scope?: string; source: "real" | "mock"; acts: number; sections: number; categories: string[]; statuses: string[]; caveats: string[]; attribution?: { text: string; url: string; licence: string; snapshot: string } };
+type ActsStats = { scope?: string; source: "real" | "mock"; acts: number; sections: number; categories: string[]; statuses: string[]; states?: string[]; departments?: string[]; caveats: string[]; attribution?: { text: string; url: string; licence: string; snapshot: string } };
 const fmt = (n: number) => n.toLocaleString("en-IN");
+// Display labels only: query values stay the raw slugs (state=west-bengal, department=sebi, status=in_force).
+const ACRONYMS: Record<string, string> = { sebi: "SEBI", rbi: "RBI", mca: "MCA", dgft: "DGFT", trai: "TRAI", moefcc: "MoEFCC", cpcb: "CPCB", irdai: "IRDAI", dfs: "DFS", cbic: "CBIC" };
+const label = (v: string) => ACRONYMS[v] ?? (v.includes("_") ? v.replace(/_/g, " ") : v.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" "));
+/** Reads an error message from a failed response without throwing on non-JSON bodies (gateway pages, empty bodies). */
+async function readJson(r: Response): Promise<Record<string, unknown>> {
+  const j = await r.json().catch(() => null);
+  if (!r.ok) throw new Error(typeof j?.error === "string" ? j.error : `The server could not load this list (status ${r.status}). Please try again.`);
+  if (!j) throw new Error("The server sent an unreadable response. Please try again.");
+  return j;
+}
 const PAGE = 8;
 
 export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "acts" }) {
@@ -34,6 +44,9 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
   const [q, setQ] = useState("");
   const [category, setCategory] = useState("");
   const [status, setStatus] = useState("");
+  const [state, setState] = useState("");
+  const [dept, setDept] = useState("");
+  const [retry, setRetry] = useState(0);
   const [sort, setSort] = useState("year_desc");
   const [page, setPage] = useState(1);
   const [data, setData] = useState<ActsResponse | null>(null);
@@ -44,19 +57,21 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
   useEffect(() => { fetch("/api/judgments/courts").then((r) => (r.ok ? r.json() : null)).then((j) => setJc(j as CourtsResp | null)).catch(() => setJc(null)); }, []);
   useEffect(() => { fetch("/api/acts/stats").then((r) => (r.ok ? r.json() : null)).then((j) => setStats(j as ActsStats | null)).catch(() => setStats(null)); }, []);
 
-  useEffect(() => { setPage(1); }, [q, category, status, sort]);
+  useEffect(() => { setPage(1); }, [q, category, status, state, dept, sort]);
   useEffect(() => {
     if (tab !== "acts") return;
     const ac = new AbortController();
     const p = new URLSearchParams({ page: String(page), pageSize: String(PAGE), sort });
     if (category) p.set("category", category);
     if (status) p.set("status", status);
+    if (state) p.set("state", state);
+    if (dept) p.set("department", dept);
     if (q.trim().length >= 2) p.set("search", q.trim());
     setErr("");
-    fetch(`/api/acts/list?${p}`, { signal: ac.signal }).then(async (r) => { const j = await r.json(); if (!r.ok) throw new Error(j.error ?? String(r.status)); setData(j as ActsResponse); })
+    fetch(`/api/acts/list?${p}`, { signal: ac.signal }).then(async (r) => { setData((await readJson(r)) as unknown as ActsResponse); })
       .catch((e) => { if ((e as Error).name !== "AbortError") { setErr((e as Error).message || "Could not load acts."); setData(null); } });
     return () => ac.abort();
-  }, [tab, q, category, status, sort, page]);
+  }, [tab, q, category, status, state, dept, sort, page, retry]);
 
   const real = stats?.source === "real";
   const categories = stats?.categories ?? [...ACT_CATEGORIES], statuses = stats?.statuses ?? [...ACT_STATUSES];
@@ -92,13 +107,13 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
       </section>
 
       <div className="mt-5">
-        <label htmlFor="browse-q" className="sr-only">Search cases, acts, or legislation</label>
+        <label htmlFor="browse-q" className="sr-only">{tab === "acts" ? "Search act titles" : "Filter courts by name"}</label>
         <div className="relative">
           <svg className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#65625f]" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
-          <input id="browse-q" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search cases, acts, or legislation across all courts…" autoComplete="off"
+          <input id="browse-q" value={q} onChange={(e) => setQ(e.target.value)} placeholder={tab === "acts" ? "Search act titles…" : "Filter courts by name…"} autoComplete="off"
             className="h-12 w-full rounded-xl bg-accent pl-11 pr-4 text-[15px] outline-none ring-1 ring-transparent placeholder:text-[#65625f] focus:bg-surface focus:ring-primary/50" />
         </div>
-        <p className="mt-2 px-1 text-[13px] text-[#535151]">Here this box filters the lists below. <span title="Not part of this clone">Advanced Research</span> (Boolean operators, citation search, section-level matching) is not recreated.</p>
+        <p className="mt-2 px-1 text-[13px] text-[#535151]">{tab === "acts" ? "This box searches act titles (at least 2 characters)." : "This box filters the court list by name. Searching inside cases is not available here yet: open a Supreme Court year to search its cases."} <span title="Not part of this clone">Advanced Research</span> (Boolean operators, citation search, section-level matching) is not recreated.</p>
       </div>
 
       <div role="tablist" aria-label="Browse" className="mt-6 flex gap-1 border-b border-border/80">
@@ -124,14 +139,16 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
         <div role="tabpanel" className="mt-6">
           <div className="flex flex-wrap items-center gap-3">
             <label className="sr-only" htmlFor="f-cat">Category</label>
-            <select id="f-cat" className={sel} value={category} onChange={(e) => setCategory(e.target.value)}><option value="">All categories</option>{categories.map((x) => <option key={x}>{x}</option>)}</select>
+            <select id="f-cat" className={sel} value={category} onChange={(e) => { const v = e.target.value; setCategory(v); if (v && v !== "state") setState(""); if (v && v !== "regulatory") setDept(""); }}><option value="">All categories</option>{categories.map((x) => <option key={x} value={x}>{label(x)}</option>)}</select>
+            {stats?.states?.length && (category === "" || category === "state") ? <><label className="sr-only" htmlFor="f-state">State or UT</label><select id="f-state" className={sel} value={state} onChange={(e) => setState(e.target.value)}><option value="">All states and UTs</option>{stats.states.map((x) => <option key={x} value={x}>{label(x)}</option>)}</select></> : null}
+            {stats?.departments?.length && (category === "" || category === "regulatory") ? <><label className="sr-only" htmlFor="f-dept">Regulator</label><select id="f-dept" className={sel} value={dept} onChange={(e) => setDept(e.target.value)}><option value="">All regulators</option>{stats.departments.map((x) => <option key={x} value={x}>{label(x)}</option>)}</select></> : null}
             <label className="sr-only" htmlFor="f-status">Status</label>
-            <select id="f-status" className={sel} value={status} onChange={(e) => setStatus(e.target.value)}><option value="">Any status</option>{statuses.map((x) => <option key={x}>{x}</option>)}</select>
+            <select id="f-status" className={sel} value={status} onChange={(e) => setStatus(e.target.value)}><option value="">Any status</option>{statuses.map((x) => <option key={x} value={x}>{label(x)}</option>)}</select>
             <label className="sr-only" htmlFor="f-sort">Sort</label>
             <select id="f-sort" className={sel} value={sort} onChange={(e) => setSort(e.target.value)}><option value="year_desc">Newest first</option><option value="year_asc">Oldest first</option><option value="title_asc">Title A to Z</option><option value="title_desc">Title Z to A</option></select>
             <span className="ml-auto text-[13px] text-muted" role="status">{data ? `${fmt(data.total)} acts${data.source === "mock" ? " (mock rows)" : ""}` : ""}</span>
           </div>
-          {err && <p role="alert" className="mt-4 rounded-lg border border-error/40 bg-error/5 p-3 text-[14px]">{err}</p>}
+          {err && <div role="alert" className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-error/40 bg-error/5 p-3 text-[14px]"><span>{err}</span><button type="button" onClick={() => setRetry((n) => n + 1)} className="h-8 rounded-lg px-3 ring-1 ring-border hover:bg-accent">Try again</button></div>}
           {!data && !err && <div className="mt-4 space-y-2" aria-busy="true">{[0, 1, 2, 3].map((i) => <div key={i} className="console-skel h-16 rounded-xl bg-accent" />)}</div>}
           {data && (
             <>
@@ -140,10 +157,10 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
                   <li key={r.actId} className="rounded-xl bg-surface px-5 py-4 shadow-sm ring-1 ring-border/60">
                     <p className="text-[15px] font-medium">{r.title}</p>
                     <p className="mt-1.5 flex flex-wrap items-center gap-1.5 text-[12px] text-[#535151]">
-                      <span className="rounded-md bg-accent px-2 py-0.5">{r.category}</span>
-                      {r.state && <span className="rounded-md bg-accent px-2 py-0.5">{r.state}</span>}
-                      {r.department && <span className="rounded-md bg-accent px-2 py-0.5">{r.department}</span>}
-                      <span className="rounded-md bg-accent px-2 py-0.5">{r.actStatus}</span>
+                      <span className="rounded-md bg-accent px-2 py-0.5">{label(r.category)}</span>
+                      {r.state && <span className="rounded-md bg-accent px-2 py-0.5">{label(r.state)}</span>}
+                      {r.department && <span className="rounded-md bg-accent px-2 py-0.5">{label(r.department)}</span>}
+                      <span className="rounded-md bg-accent px-2 py-0.5">{label(r.actStatus)}</span>
                       {r.year !== null && <><span>{r.year}</span><span aria-hidden>·</span></>}<span>{data.source === "mock" ? `${r.sectionCount} sections (placeholder)` : r.sectionCount > 0 ? `${fmt(r.sectionCount)} sections` : "section count unavailable"}</span><span aria-hidden>·</span><span className="font-mono">{r.actId}</span>
                     </p>
                   </li>

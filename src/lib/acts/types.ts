@@ -7,7 +7,7 @@ export type ActsStats = {
   /** Short plain-language description of what the acts list covers, used in page copy. */
   scope?: string;
   /** Values that actually occur in this store, so the UI only offers filters that can match. */
-  categories: string[]; statuses: string[];
+  categories: string[]; statuses: string[]; states?: string[]; departments?: string[];
   /** Present on real data only. */
   attribution?: { text: string; url: string; licence: string; snapshot: string; generatedAt: string };
   /** Plain-language limits of the data, shown to users. */

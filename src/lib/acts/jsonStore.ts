@@ -26,6 +26,8 @@ const stats: ActsStats = {
   source: "real", acts: total, sections: meta.sections + regMeta.sections, central: meta.central, state: meta.state, regulatory: regMeta.acts,
   scope: "central and state/UT acts and regulator instruments",
   categories: ["central", "state", "regulatory"],
+  states: [...new Set(ACTS.map((a) => a.state).filter((x): x is string => !!x))].sort(),
+  departments: [...new Set(ACTS.map((a) => a.department).filter((x): x is string => !!x))].sort(),
   statuses: ["in_force", "repealed", "superseded", "spent"],
   attribution: {
     text: "Data: open-india-law (Vaquill), compiled from India Code, the Government of India's official repository, and regulator websites.",
