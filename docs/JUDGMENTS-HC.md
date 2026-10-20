@@ -10,16 +10,19 @@ Added 2026-10-20. High Courts now have the same drill-down as the Supreme Court:
 | `/workspace/browse/judgments/<court-slug>/<YYYY>/<caseId>?p=<file page>&lp=<list page>` | Case detail. `p` is the 100-case export page that holds the case (High Courts need it; the Supreme Court ignores it). `lp` only restores the list page on "back". An unknown or mismatched case returns a real 404. |
 | `GET /api/judgments/courts` | Courts, counts, `listable`/`searchable` per court, stats, caveats, attribution |
 | `GET /api/judgments/years?court=` | Case count per decision year |
-| `GET /api/judgments/list?court=&year=&page=&pageSize=` | Paginated cases, newest first (1-100 per page). `available:false` only when no case source is configured. `search=` and `disposition=` (value from `facets.disposition`) work for the Supreme Court only (422 otherwise). The response carries `searchable`, `filterable` and, for the Supreme Court, `facets`. |
+| `GET /api/judgments/list?court=&year=&page=&pageSize=` | Paginated cases, newest first (1-100 per page). `available:false` only when no case source is configured. `disposition=` (a value from `facets.disposition`) filters the Supreme Court and every High Court; `bench=single|division|larger` filters Bombay, Gujarat and Orissa; only one filter at a time (422 otherwise). `search=` works for the Supreme Court only. The response carries `searchable`, `filterable` and `facets` (counts for the year). |
 | `GET /api/judgments/case?court=&year=&id=&p=` | One case |
 
 Court slugs are the 26 in `src/data/workspaceBrowse.ts`. A link without a correct `p` cannot find a High Court case (by design: no index of 15.6M ids); links produced by the list always carry it.
 
 ## Export shape (`scripts/judgments/export-judgments-hc.sh`)
 ```
-data/judgments-hc/                       (gitignored; 157,336 page files, 5.4 GB for the full snapshot)
+data/judgments-hc/                       (gitignored; 327,974 files, 11.7 GB of JSON for the full snapshot, about 2.3 GB gzipped)
   court=<slug>/year=<YYYY>/page=<N>/data_0.json   JSON array, 100 cases per page, N from 1,
                                                    sorted by decisionDate DESC (undated last) then caseId
+  court=<slug>/year=<YYYY>/disp=<label-slug>/page=<N>/data_0.json   the same cases filtered by disposition chip; each row adds mainPage
+  court=<slug>/year=<YYYY>/bench=<single|division|larger>/page=<N>/data_0.json   filtered by bench class (Bombay, Gujarat, Orissa only)
+  court=<slug>/year=<YYYY>/facets.json   {disposition:[{value,slug,count}], bench:[{value,count}]}
   _manifest/<slug>.json                  [{year, cases, pages}]
   _quarantine/<slug>.json                cases left out, with reason and raw values
   _fields/<slug>.json                    fill rates (source of the table below)
@@ -84,15 +87,22 @@ echo "JUDGMENTS_DATA_DIR=data/judgments-hc" > .env.local      # local dev and lo
 npm run build && npm start
 ```
 
-## Production blocker
-5.4 GB in 157,336 files cannot ship in the repo or a Vercel function. Production needs the folder `data/judgments-hc/` uploaded to a static host or object-storage bucket with public read access, then `JUDGMENTS_DATA_URL` set in Vercel (no code change, no new dependency). Until then production High Courts stay count-only, and the UI says so. Choosing and paying for that host is a decision for the project owner.
+## Production (Cloudflare R2, or any static host)
+The folder is too big for the repo or a Vercel function, so production reads it from a bucket: set `JUDGMENTS_DATA_URL` to the bucket's public base URL (no code change, no dependency). Without it production High Courts stay honestly count-only.
+```bash
+scripts/judgments/export-judgments-hc.sh          # about 6 minutes, SSD attached
+scripts/judgments/gzip-for-upload.sh              # data/judgments-hc-gz, about 2.3 GB, about 30 minutes (328,000 small files)
+rclone copy data/judgments-hc-gz r2:lexbharat-judgments --header-upload "Content-Encoding: gzip" --header-upload "Content-Type: application/json" --transfers 32 --checkers 32 --progress
+```
+Uploading the uncompressed folder also works but is 11.7 GB (over R2's 10 GB free tier). The gzip upload relies on the objects being served with `Content-Encoding: gzip`, which `fetch()` decompresses transparently.
 
 ## Deferred, with the reason
 | Item | Why it is not in this build |
 |---|---|
 | **Short text snippet** | No clean source. The `description` field is the first ~300 characters of the raw document (letterhead such as "IN THE HIGH COURT OF JUDICATURE AT BOMBAY BENCH AT NAGPUR", file names like "6391-2012.odt", "Page 1 of 4 $~24"); the first text chunk starts with the same boilerplate. A real preview needs a verified rule for finding the operative text of each court's judgments. |
-| **High Court in-year filters (disposition, bench size)** and **High Court search** | A High Court year can hold up to 158,000 cases in up to 1,600 files read 100 at a time. Filtering means reading every file of the year or storing one extra copy of the data per filter value; both need an index or roughly doubling the 5.4 GB. That is the hosting/index decision, deliberately not made here. |
+| **Search by party name inside a High Court year** | A year can hold up to 158,000 cases in up to 1,600 files read 100 at a time. Name search needs an index (a database or search service), which is the hosting decision still open. Filters were possible without one because they are shaped at export time: each filter value has its own pre-built list. |
+| **Combined filters** (disposition and bench together) | Each filtered list is pre-built, so only one filter applies at a time. Combining them would multiply the stored files. |
 | **Supreme Court bench-size filter** | The source's bench field understates real benches (see above). |
 | A way to find a High Court case from its id alone; judgment text; reporter citations for High Courts | No index; text not exported; the source has none. |
 
-Supreme Court in-year disposition filter is live (values and counts come from the year's own data).
+Filters are live: the Supreme Court (disposition, values from the year's data) and every High Court (disposition chips; bench size for Bombay, Gujarat and Orissa). Filter counts are exact because they are counted at export time.
