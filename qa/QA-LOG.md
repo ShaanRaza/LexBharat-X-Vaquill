@@ -75,3 +75,7 @@ Started 2026-10-19 against http://localhost:3100 (Next.js 15.5.28 dev server).
 - `MockForm.tsx`: field `name`/`autocomplete`/`aria-required`; message clears on edit; inputs are re-created after a successful submit so Safari's autofill state cannot linger; autofilled fields stay on the white surface and keep a grey placeholder (`.mock-form` rules in `globals.css`).
 - `/auth/login` now does a **mock sign-in** (`mode="signin"`): valid email -> fake session in `localStorage` (`lb_mock_session`) -> `/developer?tab=playground`; console user block shows "Signed in (mock)" and Sign out (mock). Checked with real clicks locally and on the live alias; empty submit still shows the error and stores nothing; `/auth/forgot-password` unchanged.
 - Re-ran Playground QA (4 widths, 0 problems), keyboard sweep and the 652-route status sweep on a clean production build.
+
+## 2026-10-20: Acts & Judgments browser (mock)
+- New routes `/workspace/browse`, `/workspace/browse?tab=acts`, `/workspace/browse/judgments/<court>` (26 courts) and mock API `/api/mock/acts/list`; Workspace variant of the console shell. Findings and limits in `docs/ACTS-AND-JUDGMENTS.md`.
+- Clean build (694 static pages), `qa/routes-workspace.txt` audited at desktop/tablet/mobile: 0 console/network events, 0 audit issues after fixing clipped court names and a small breadcrumb target; Playground QA 4 widths OK; 656 routes 200.

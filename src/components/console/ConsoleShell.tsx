@@ -46,7 +46,16 @@ function Icon({ d, size = 18 }: { d: string; size?: number }) {
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={d} /></svg>;
 }
 
-export default function ConsoleShell({ tab, children }: { tab: TabId; children: React.ReactNode }) {
+// Workspace variant: the sidebar of the product's "Workspace" area, used by the Acts & Judgments browser (/workspace/browse). Only that page
+// is recreated; New Chat, WhatsApp Bot and Settings are shown but disabled, and "Data API" leads back to the developer console.
+const BOOKS_ICON = "M5 4h4v16H5zM10 4h4v16h-4zM15.6 5.4l3.6-1 3.2 14.6-3.6 1z";
+const WS_ITEMS = [
+  { label: "Data API", href: "/developer?tab=overview", icon: "M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16", state: "link" },
+  { label: "Acts & Judgments", href: "/workspace/browse", icon: BOOKS_ICON, state: "active" },
+  { label: "WhatsApp Bot", href: "", icon: "M4 20l1.4-4.2A8 8 0 1 1 8.2 18.6L4 20z", state: "disabled" },
+] as const;
+
+export default function ConsoleShell({ tab, variant = "data", children }: { tab?: TabId; variant?: "data" | "workspace"; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);       // mobile drawer
   const [collapsed, setCollapsed] = useState(false); // desktop collapse (chevron)
   const router = useRouter();
@@ -75,7 +84,7 @@ export default function ConsoleShell({ tab, children }: { tab: TabId; children: 
   }, [open]);
 
   const nav = (
-    <nav aria-label="Developer console" className="flex h-full flex-col">
+    <nav aria-label={variant === "workspace" ? "Workspace" : "Developer console"} className="flex h-full flex-col">
       <div className="flex items-center justify-between px-4 pb-4 pt-5">
         <Link href="/developer?tab=overview" className="flex items-baseline gap-0.5 text-[26px] font-medium leading-none tracking-[-0.03em]" aria-label="vaquill AI">
           <svg width="22" height="26" viewBox="0 0 24 28" fill="#6e3730" aria-hidden="true" className="mr-1.5 self-center"><path d="M20 1C9 2 2 9 3 20c0 3 1 6 3 7-1-5 0-10 4-14 3-3 7-4 10-4-5 1-9 4-11 9 5-1 10-5 11-13 .3-1.4.2-3.800 0-4z" /></svg>
@@ -85,6 +94,26 @@ export default function ConsoleShell({ tab, children }: { tab: TabId; children: 
           <Icon d="M15 5l-7 7 7 7" size={16} />
         </button>
       </div>
+      {variant === "workspace" ? (
+        <>
+      <NotInClone className="mx-2 mb-3 !rounded-[8px] border border-border !py-2"><Icon d="M12 5v14M5 12h14" /><span className="leading-tight">New Chat<Chip>Not in clone</Chip></span></NotInClone>
+      <ul className="space-y-0.5 px-2">
+        {WS_ITEMS.map((it) => (
+          <li key={it.label}>
+            {it.state === "disabled" ? (
+              <NotInClone><Icon d={it.icon} /><span className="leading-tight">{it.label}<Chip>Not in clone</Chip></span></NotInClone>
+            ) : (
+              <Link href={it.href} onClick={() => setOpen(false)} aria-current={it.state === "active" ? "page" : undefined}
+                className={`flex items-center gap-3 rounded-[6px] px-3 py-2.5 text-[14px] transition-colors ${it.state === "active" ? "bg-accent text-foreground" : "text-muted hover:bg-accent/60 hover:text-foreground"}`}>
+                <Icon d={it.icon} /><span className="leading-tight">{it.label}</span>
+              </Link>
+            )}
+          </li>
+        ))}
+      </ul>
+        </>
+      ) : (
+        <>
       <ul className="space-y-0.5 px-2">
         {MAIN_TABS.map((t) => (
           <li key={t.id}>
@@ -106,6 +135,8 @@ export default function ConsoleShell({ tab, children }: { tab: TabId; children: 
           <li key={l.label}><Link href={l.href} className="flex items-center justify-between rounded-[6px] px-3 py-1.5 text-[13px] text-muted hover:bg-accent/60 hover:text-foreground">{l.label}<span aria-hidden className="text-[11px]">↗</span></Link></li>
         ))}
       </ul>
+        </>
+      )}
       <div className="mt-auto space-y-1 px-2 pb-4">
         <NotInClone className="!py-2"><Icon d={SETTINGS_TAB.icon} /><span className="leading-tight">Settings<Chip>Not in clone</Chip></span></NotInClone>
         <div className="px-3 py-2">
@@ -138,7 +169,9 @@ export default function ConsoleShell({ tab, children }: { tab: TabId; children: 
             <button ref={menuBtn} type="button" aria-label={collapsed ? "Show sidebar" : "Open menu"} aria-expanded={open} onClick={() => (window.matchMedia("(min-width: 768px)").matches ? setCollapsed((c) => !c) : setOpen(true))} className="rounded-[4px] p-2 text-muted hover:bg-accent"><Icon d="M4 7h16M4 12h16M4 17h16" /></button>
             <div className="flex items-center rounded-full bg-accent py-1 pl-1 pr-3 text-[14px]">
               <span className="rounded-full bg-primary px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">Product</span>
-              <span className="ml-2 font-mono text-[12px] text-muted">&lt;/&gt;</span><span className="ml-1.5">Data &amp; API</span><span aria-hidden className="ml-1.5 text-[10px] text-muted">▾</span>
+              {variant === "workspace"
+                ? <><span aria-hidden className="ml-2 text-muted"><Icon d={BOOKS_ICON} size={14} /></span><span className="ml-1.5">Workspace</span></>
+                : <><span className="ml-2 font-mono text-[12px] text-muted">&lt;/&gt;</span><span className="ml-1.5">Data &amp; API</span></>}<span aria-hidden className="ml-1.5 text-[10px] text-muted">▾</span>
             </div>
             <span className="flex items-center gap-1 rounded-full bg-accent px-2.5 py-1 text-[14px]" title="Jurisdiction: United States"><span aria-hidden>🇺🇸</span><span className="sr-only">United States</span><span aria-hidden className="text-[10px] text-muted">▾</span></span>
             <span className="ml-auto rounded-[2px] border border-warning/50 bg-warning/10 px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-warning">Local mock</span>

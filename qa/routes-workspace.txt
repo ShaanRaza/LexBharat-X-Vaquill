@@ -1,0 +1,4 @@
+/workspace/browse
+/workspace/browse?tab=acts
+/workspace/browse/judgments/supreme-court-of-india
+/workspace/browse/judgments/gujarat-high-court

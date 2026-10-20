@@ -76,6 +76,10 @@ vercel --prod -b NEXT_PUBLIC_RELEASE=1
 
 Caveat: the Law Change Alerts demo stores its list in server memory, which does not persist reliably on serverless hosting. The site is `noindex` by design.
 
+## Acts & Judgments browser (mock)
+
+`/workspace/browse` recreates the "Browse Laws & Judgments" area (Supreme Court and High Courts with year pickers, plus an Acts & Legislation tab backed by a mock `/api/mock/acts/list`). All data is mock or display data; the real corpus is not accessible. What was investigated and found is in [docs/ACTS-AND-JUDGMENTS.md](docs/ACTS-AND-JUDGMENTS.md).
+
 ## Developer console Playground (internal REA clone)
 
 `/developer?tab=playground` is a local, fully mocked recreation of the authenticated Vaquill Playground, built from `docs/PLAYGROUND-TEARDOWN.md` (project only; withheld from the zip). What was built, what is mocked vs confirmed, and the remaining gaps are in [docs/PLAYGROUND-BUILD.md](docs/PLAYGROUND-BUILD.md). The console always shows that it is a local mock, even in release builds. Re-run its browser QA (app must be on port 3100) with `node qa/playground-qa.mjs`.
