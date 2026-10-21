@@ -38,4 +38,6 @@ export interface JudgmentsStore {
   /** One case. `pageHint` is the 100-case page number carried in the link (High Courts); the Supreme Court ignores it. */
   get(court: string, year: number, caseId: string, pageHint?: number): Promise<CaseItem | null>;
   stats(): Promise<JudgmentsStats>;
+  /** Opening text of one case (Supreme Court only; null when there is none or no data source is configured). */
+  preview(court: string, year: number, caseId: string): Promise<string | null>;
 }

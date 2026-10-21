@@ -11,5 +11,6 @@ export const mockJudgmentsStore: JudgmentsStore = {
   },
   async list() { return { available: false, results: [], total: 0 }; },
   async get() { return null; },
+  async preview() { return null; },
   async stats() { return { source: "mock", totalCases: null, courts: ALL_COURTS.length, listableCourts: 0, caveats: ["Placeholder court pages. No judgments are held."] }; },
 };

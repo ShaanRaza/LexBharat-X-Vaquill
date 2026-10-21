@@ -5,7 +5,7 @@
 import courtYears from "@/data/judgments/court-years.json";
 import courtsMeta from "@/data/judgments/courts.meta.json";
 import { ALL_COURTS } from "@/data/workspaceBrowse";
-import { HC_PAGE_SIZE, hcSourceKind, readHcFacets, readHcPage, type HcFilter } from "./hcData";
+import { HC_PAGE_SIZE, hcSourceKind, readHcFacets, readHcPage, readScPreviews, type HcFilter } from "./hcData";
 import type { CaseItem, CourtSummary, JudgmentsStore, YearCount } from "./types";
 
 const SC = "supreme-court-of-india";
@@ -65,6 +65,7 @@ export const jsonJudgmentsStore: JudgmentsStore = {
     if (hcSourceKind() === null || !pageHint) return null;
     return (await readHcPage(court, year, pageHint))?.find((c) => c.caseId === caseId) ?? null;
   },
+  async preview(court, year, caseId) { return court === SC ? ((await readScPreviews(year))?.[caseId] ?? null) : null; },
   async stats() {
     const hc = hcSourceKind() !== null;
     return {

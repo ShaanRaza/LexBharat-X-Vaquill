@@ -48,6 +48,13 @@ export async function readHcPage(court: string, year: number, page: number, filt
   return Array.isArray(rows) ? (rows as Record<string, unknown>[]).map(clean) : null;
 }
 
+/** Opening-text previews of one Supreme Court year ({caseId: text}), or null (no source, or no previews for that year). */
+export async function readScPreviews(year: number): Promise<Record<string, string> | null> {
+  if (!okCourtYear("supreme-court-of-india", year)) return null;
+  const m = await readJson(`court=supreme-court-of-india/year=${year}/preview.json`);
+  return m && typeof m === "object" && !Array.isArray(m) ? (m as Record<string, string>) : null;
+}
+
 /** Filter counts for one court-year, or null when the year has none (or no source). */
 export async function readHcFacets(court: string, year: number): Promise<HcFacets | null> {
   if (!okCourtYear(court, year)) return null;
