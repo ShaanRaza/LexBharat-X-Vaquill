@@ -1,0 +1,226 @@
+{
+ "note": "First 1800 characters of the English opening text of 14 Supreme Court cases (4 named, 10 drawn at random with a fixed seed), the dataset's authoring judge, and the output verified by eye against the heading. vocabulary = the verified names those benches need.",
+ "vocabulary": {
+  "JMSHELAT": "J.M. SHELAT",
+  "CKTHAKKER": "C.K. THAKKER",
+  "CAVAIDYIALINGAM": "C.A. VAIDYIALINGAM",
+  "YVCHANDRACHUD": "Y.V. CHANDRACHUD",
+  "MMPUNCHHI": "M.M. PUNCHHI",
+  "JCSHAH": "J.C. SHAH",
+  "SMSIKRI": "S.M. SIKRI",
+  "DKJAIN": "D.K. JAIN",
+  "ALTAMASKABIR": "ALTAMAS KABIR",
+  "PSATHASIVAM": "P. SATHASIVAM",
+  "KRAMASWAMY": "K. RAMASWAMY",
+  "ARLAKSHMANAN": "AR. LAKSHMANAN",
+  "KSUBBARAO": "K. SUBBA RAO",
+  "BLHANSARIA": "B.L. HANSARIA",
+  "RFNARIMAN": "R.F. NARIMAN",
+  "AMAHMADI": "A.M. AHMADI",
+  "AKPATNAIK": "A.K. PATNAIK",
+  "SYEDFAZLALI": "SIR SYED FAZL ALI",
+  "AJAYRASTOGI": "AJAY RASTOGI",
+  "KRISHNAMURARI": "KRISHNA MURARI",
+  "SABDULNAZEER": "S. ABDUL NAZEER",
+  "ANRAY": "A.N. RAY",
+  "KSHEGDE": "K.S. HEGDE",
+  "DIPANKARDATTA": "DIPANKAR DATTA",
+  "VRAMASWAMI": "V. RAMASWAMI",
+  "VRAMASUBRAMANIAN": "V. RAMASUBRAMANIAN",
+  "ABHAYSOKA": "ABHAY S. OKA",
+  "ANIRUDDHABOSE": "ANIRUDDHA BOSE",
+  "MMSUNDRESH": "M.M. SUNDRESH",
+  "DGPALEKAR": "D.G. PALEKAR",
+  "PJAGANMOHANREDDY": "P. JAGANMOHAN REDDY",
+  "PRASHANTKUMARMISHRA": "PRASHANT KUMAR MISHRA",
+  "ANGROVER": "A.N. GROVER",
+  "CYRIACJOSEPH": "CYRIAC JOSEPH",
+  "SNDWIVEDI": "S.N. DWIVEDI",
+  "SATISHCHANDRASHARMA": "SATISH CHANDRA SHARMA",
+  "MHBEG": "M.H. BEG",
+  "KKMATHEW": "K.K. MATHEW",
+  "HRKHANNA": "H.R. KHANNA",
+  "AKMUKHERJEA": "A.K. MUKHERJEA"
+ },
+ "cases": [
+  {
+   "caseId": "1973_INSC_91",
+   "text": "HIS HOLINESS KESAVANANDA BHARAT! SRIPADAGALA VAR U u. STATE OF KERALA April 24, 1973 (S. M. SIKRI, C. J., J. M. SHELAT, K. S. HEGDE, A. N. GROVER, A. N. RAY, P. JAGANMOHAN REDDY, D. G. PALEK.AR, H. R. KHANNA, IC K. MATHEW, M. H. BEG, S. N. DWIVEDI, A. K. MUKHERJEA AND Y. V. CHANDRACHUD, JJ.) Constitution of India, 1950-Artick 368 before Constitution (Twenty Fourth) Amendment Act, 197!-Nature and scope of the amending power. Article 13(2)-'Law' in 13(2) if includes amendment of the Constitution-Distinction between legislative power and constituent power. Article 368-\"Amendment\" meaning of-\"Amcndmcnt\" if includes the power to abrogate the Constitution-If includes the power to alter the basic struc-ture or frame-work of the Constitution, Fundamental Rights-If amendment can take away or abridge the rights guaranteed in Part III. Fundamental Righu--If inalienable natur31 rights so as to operate as restric-tion on the amending power. Implied and inherent limitations-Power of amendment if subject to inherent or implied limitations. Preamble-Nature-Preamble, if operates as a source of implied limitation on the power of amendment. Constitution (Twenty Faurth) Amendment Act 1971-Validity of-Amend· mrot if enlargement of the limits of the Amending power. Article 368-lf there are inherent or implied limitations in the article .. amended. Constitution (Twenty Fifth) Amendment Act, 1971-Validity of. Section 2(a) & (b)-Substitution of 'amount' for 'compensation'-Exclusion of article 19(l)(f) to law in article 31(2)~1£ abrogates the basic structure of the Constitution-Meaning of 'amount'-Scope of judicial review of adequacy. Section 3-lntroduction of new asticle 31C-Nature and object of the articlo-Article if abrogates the essential features of the Constitution-If amounts to dele-gatio",
+   "authoring": [
+    "S.M. SIKRI"
+   ],
+   "bench": [
+    "S.M. SIKRI",
+    "J.M. SHELAT",
+    "K.S. HEGDE",
+    "A.N. GROVER",
+    "A.N. RAY",
+    "P. JAGANMOHAN REDDY",
+    "D.G. PALEKAR",
+    "H.R. KHANNA",
+    "K.K. MATHEW",
+    "M.H. BEG",
+    "S.N. DWIVEDI",
+    "A.K. MUKHERJEA",
+    "Y.V. CHANDRACHUD"
+   ],
+   "caseNumber": null
+  },
+  {
+   "caseId": "2024_INSC_1046",
+   "text": "[2024] 12 S.C.R. 1273 : 2024 INSC 1046 Muskan Enterprises & Anr. v. The State of Punjab & Anr. (Criminal Appeal No. 5491 of 2024) 19 December 2024 [Dipankar Datta* and Prashant Kumar Mishra, JJ.] Issue for Consideration Issue arose whether the High Court was justified in dismissing the subsequent petition u/s.482, Cr. PC on the ground that since the earlier petition had been withdrawn without liberty obtained to apply afresh, the subsequent petition was not maintainable. Headnotes[†] Code of Criminal Procedure, 1973-s.482 – Subsequent petition under – Maintainability – Order of conviction and sentence for offence punishable u/s.138 against appellants – In appeal, the sentence of the the appellants suspended and was granted bail however, directed to deposit 20% of the compensation amount – Appellants filed petition u/s.482, challenging the same – Petition dismissed as withdrawn since it was held in Surinder Singh Deswal’s case that the condition for deposit in terms of s.148, N.I. Act as mandatory – Subsequently, this Court in Jamboo Bhandari’s case held that deposit may not be ordered if the appellate court finds a case to be exceptional – Appellants applied afresh u/s.482 – High Court dismissed the subsequent petition since the earlier petition had been withdrawn without liberty obtained to apply afresh, the subsequent petition was not maintainable – Correctness: Held: High Court unjustified in dismissing the subsequent petition on the ground that the appellants had withdrawn the earlier petition without obtaining leave to file afresh and, thus, the petition under consideration was not maintainable – Principle of res judicata has no application in a criminal proceeding – Change of law can legitimately be regarded as a vital change in circumstance clothing the High Cour",
+   "authoring": [
+    "DIPANKAR DATTA"
+   ],
+   "bench": [
+    "DIPANKAR DATTA",
+    "PRASHANT KUMAR MISHRA"
+   ],
+   "caseNumber": "Criminal Appeal No. 5491 of 2024"
+  },
+  {
+   "caseId": "2025_INSC_1184",
+   "text": "[2025] 10 S.C.R. 263 : 2025 INSC 1184 Nazim & Ors. v. The State of Uttarakhand (Criminal Appeal No. 715 of 2018) 06 October 2025 [M.M. Sundresh and Satish Chandra Sharma,* JJ.] Issue for Consideration Whether the prosecution has succeeded in establishing, beyond a reasonable doubt, a complete chain of circumstances leading only to the conclusion of guilt of the Appellants, or whether the circumstances leave room for reasonable doubt warranting acquittal. Headnotes[†] Circumstantial Evidence – Penal Code, 1860 – ss.302, 201, 120-B – Conviction of the appellants u/ss.302, 201, 120-B, IPC rested largely on the testimony of three prosecution witnesses, PW-2, PW-3 and PW-4 – Interference with: Held: 1.1 Prosecution failed to establish a complete and unbroken chain of circumstances – Evidence on record does not complete the chain of circumstances pointing to the guilt of the accused persons – There are substantial gaps in the case of the prosecution. [Paras 56, 29] 1.2 The first and most glaring circumstance is the omission of the names of the two of the three Appellants in the FIR – PW-1, the complainant and the father of the deceased, expressly named six persons with whom he admittedly had long-standing enmity, yet he did not attribute any role to the present Appellants, ‘N’ and ‘A’ – Both PW-1 and PW-2 were admittedly familiar with them – Despite this, their names were not mentioned in the FIR, nor was any contemporaneous explanation offered for their absence – This significant omission strikes at the root of the prosecution narrative, undermines its credibility, and constitutes a material fact that must weigh heavily in favour of the accused. [Para 29] 1.3 Further, there are improbabilities in PW-2’s testimony, coupled with his unexplained silence at crucial stages – The ",
+   "authoring": [
+    "M.M. SUNDRESH"
+   ],
+   "bench": [
+    "M.M. SUNDRESH",
+    "SATISH CHANDRA SHARMA"
+   ],
+   "caseNumber": "Criminal Appeal No. 715 of 2018"
+  },
+  {
+   "caseId": "2022_INSC_326",
+   "text": "884 SUPREME COURT REPORTS [2022] 1 S.C.R. AVIJAY KUMAR GHAI & ORS. v. THE STATE OF WEST BENGAL & ORS. (Criminal Appeal No. 463 of 2022) BMARCH 22, 2022 [S. ABDUL NAZEER AND KRISHNA MURARI, JJ.] Code of Criminal Procedure, 1973: s. 482 – Quashing ofcomplaint – Appellant No. 1 is the Managing Director of the PublicLimited Company and Appellant Nos.2 and 3 are the Directors ofCthe said Company –The company itself has been arrayed as proformaRespondent No.3 – In January 2008, Respondent No. 2, anauthorized representative of SMC Global Securities Ltd, Delhidesired to make an investment on its behalf with the appellants –Itwas mutually decided between the parties that Respondent No. 2Dwill invest an amount of Rs. 2.5 crore with the company in lieu ofwhich they will be issued 2,50,000 equity shares of the company(Respondent No. 3) – Subsequently, Respondent No. 2 filed shareapplication form along with the cheque of Rs. 2.5 crore – Anallotment letter was issued in favour of Respondent No. 2 whereby2,50,000 shares were issued in lieu of the investment made by him –EThe proforma Respondentno.3 and Respondent No.2 arrived at anunderstanding, regarding the investment made by Respondent No.2. – Having failed to bring the IPO as per memorandum ofunderstanding, Respondent No.2 issued a legal notice to theAppellants, who duly replied to the legal notice denying all theFallegations contained in the legal notice – Respondent No. 2 filed apolice complaint in New Delhi – Respondent No. 2 filed a secondcomplaint underss.406, 409, 420, 468,120B and 34 IPC on the basisof the same cause of action at Kolkata and the same was convertedinto FIR under ss.406, 420, 120B IPC –High Court of Calcutta byimpugned judgment dismissed the quashing as well as the revisionGpetition filed by the Appellants – ",
+   "authoring": [
+    "S. ABDUL NAZEER"
+   ],
+   "bench": [
+    "S. ABDUL NAZEER",
+    "KRISHNA MURARI"
+   ],
+   "caseNumber": "Criminal Appeal No. 463 of 2022"
+  },
+  {
+   "caseId": "2007_INSC_14",
+   "text": "i ST ATE OF JAMMU AND KASHMIR AND ORS. v. ABDUL MAJID JANUARY 5, 2007 [DR. AR. LAKSHMANAN AND ALTAMAS KABIR, JJ.] Interim Order: High Court-Single Judge in a writ peticion directing State Government, inter alia, to pay wages of workman from a specified date-State filing a Letters Patent appeal challenging said order-Division Bench by an interim order directing State Government to deposit the money in terms of Minimum Wages Act and to pay the said amount to respondent within two weeks-Held, direction of Division Bench to pay the amount to respondent pending Letters Patent appeal is not warranted at this stage-However, the direction to deposit the wages in accordance with terms of Minimum Wages Act not interfered with and time granted for the purpose-The amount so deposited shall be subject to final outcome of Letters Patent appeal-Minimum Wages Act, 1948. In a writ petition filed by respondent-workman, the Single Judge of the High Court directed the appellants, inter alia, to pay the respondents minimum wages w.e.f. January 1992 at such rates as were prevalent from time to time. The appellants filed a Letters Patent appeal, and the Division Bench of the High Court by an interim order directed the appellants to deposit the wages in accordance with the terms of Minimum Wages Act from January 1992 to March 2006 and to pay the said amount to the respondents within two weeks. Aggrieved, the State Government filed the instant appeal. Disposing of the appeal, the Court HELD: The direction of Division Bench of the High Court to pay the amount to the respondent within two weeks pending disposal of the Letters Patent Appeal is not warranted at this stage. However, the direction requiring the State to deposit the wages of the respondent in accordance with the terms of Minimum Wages",
+   "authoring": [
+    "AR. LAKSHMANAN"
+   ],
+   "bench": [
+    "AR. LAKSHMANAN",
+    "ALTAMAS KABIR"
+   ],
+   "caseNumber": null
+  },
+  {
+   "caseId": "1967_INSC_11",
+   "text": "BEJOY J,AKSHMI COTION MILLS LTD. v. STATE OF WF.ST BENGAL AND ORS. January 18, 1967 [K. SUBBA RAO, C.J., J. C. SHAH, S. M. SJKRI, V. RAMASWAMI AND C. A. VAIDIALINGAM, JJ.j Constitution of India, Art. 166(2) cu1d (3)-Authen1ica1io11 oc:cordin.i.: to Rules made by Governor-Whether conclusive of the Go\\•ernor having acted in accordance with law. We.st Bengal Land Developnren1 and P/anniflg Act, 1948---.Voti{u:ation under s. 4 and declaration under s. 6--Whether required to be nwde 01z Governor's personal satis/action-Minist.t•r making Standing Order under the Rules of Business made by Governor llnder Art. 166(3)-.Wlrelher proceeding under the Act covered by the Standing Order-Therefore whether required to be dealt with by Minister. 1be Slate Gove.rnment i\"\"ued a notification in February 1955 under s. 4 of the West Bengal Land Development and Planning Act, 1948, to the effect that certain lands, a major portion of which belonged to the appellant. wete likely 10 be needed for a public purpose. This 11Dlifical1on waa signed by the Assistant Secretary in the Land and Revenue Depart· ment of the State Government. A development scheme was then. pre-pared and after objections to it had been invited and disposed of, rhe Land Planning Committee which is the pre.<cribed authority under 1he Act. n:oommended acceptance of the scheme and the issue of a declaration under s. 6 of the Act. This declaration was issued by the Govemmonl in July 1956 and was signed by the Deputy Secretary in the same Drpart-me-at. The appellant filed a writ petition under Art. 226 of the C'A.)nstitulion praying.that the notification under s. 4 and the declaration under :-;. 6 be quashed. It was contended hy him that the entire proceedings \"\"'ere \\'oitl for the reasons, inter alia, (i) that the notification, t",
+   "authoring": [
+    "K. SUBBA RAO",
+    "J.C. SHAH",
+    "S.M. SIKRI",
+    "V. RAMASWAMI",
+    "C.A. VAIDYIALINGAM"
+   ],
+   "bench": null,
+   "caseNumber": null
+  },
+  {
+   "caseId": "1995_INSC_506",
+   "text": "JA WALA RAM AND ANR. v. STATE OF H.P. A AUGUST 28, 1995 (K. RAMASWAMY AND B.L. HANSARIA, JJ.] B Probation of Offenders Act, 1958 : Section 4. Probation-Benefit of-Failure to file underlaking for-Dismissal of appeal-Filing of explanation and unde1taking before Supreme Cowt-Accep-C tance and Directions. The appellants were held entitled to benefit of Section 4 of the Probation of Offenders Act, 1958 by the High Court but their appeal was dismissed for not filing the undertaking of good conduct. They filed their explanation as well as the undertaking before this Court. D Accepting the same, this Court HELD : The appellant shall remain on probation for a period of one year from the date of this order. If they keep good conduct and behaviour during this period, they shall be deemed to have served the sentence. In E case they do not, the authorities would be free to take them into custody to serve the sentence imposed on them. (116-D] CRIMINAL APPELLATE JURISDICTION Criminal Appeal Nos. 1000-1001 of 1995. From the Judgment and Order dated 21.4.95 of the Himachal Pradesh High Court in Crl. A. No. 329 of 1989. F Krishan Mahajan, R.N. Karanjawala and Mrs. Manik Karanjawala, for the Appellants. The following Order of the Court was delivered : G As directed by the Court, the Registry issued notice to the standing counsel for the state of Himachal Pradesh, but no appearance has been entered so far. Nobody has appeared also. H A Leave Granted. The appellants have been convicted under ss.451, 426 read with s.34 of the Indian Penal Code and sentenced to undergo two m0nths imprison-ment. The High Court postponed the sentence under s.4 of Probation of Offender's Act subject to filing an undertaking of good conduct. Since the B appellants had not executed the under taking, the High Court",
+   "authoring": [
+    "K. RAMASWAMY",
+    "B.L. HANSARIA"
+   ],
+   "bench": [
+    "K. RAMASWAMY",
+    "B.L. HANSARIA"
+   ],
+   "caseNumber": null
+  },
+  {
+   "caseId": "2022_INSC_502",
+   "text": "[2022] 3 S.C.R. 151 NARSINGH ISPAT LTD. v. ORIENTAL INSURANCE COMPANY LTD. & ANR. (Civil Appeal No. 10671 of 2016) MAY 02, 2022 [AJAY RASTOGI AND ABHAY S. OKA, JJ.] Insurance – Insurance policy – Exclusion Clause –Applicability of insurance cover – Appellant had taken an insurancepolicy from respondent-insurance company in respect of its’ factory– Claim lodged by appellant on basis of said policy, stating thatabout 50-60 people with arms and ammunition entered its factorypremises and caused substantial damage to the factory, machineryand other equipment – Respondent-insurance company repudiatedappellant’s claim placing reliance on the Exclusion Clause in thepolicy regarding loss or damage caused by the acts of terrorism – Ifwarranted – Held: Wherever an Exclusion Clause is contained inan insurance policy, it would be for the insurer to show that thecase falls within the purview thereof – On facts, respondent-insurerdid not discharge the burden of bringing the case within the fourcorners of the Exclusion Clause in the insurance policy – When thepolicy itself defined the acts of terrorism in the Exclusion Clause,the terms of the policy being a concluded contract governed therights and liabilities of the parties – Definitions of ‘terrorism’ invarious penal statutes could not be relied upon, since the ExclusionClause contained an exhaustive definition of acts of terrorism –Moreover, on facts, the policy explicitly covered a liability arisingout of the damage to the property of the insured due to riots or useof violent means – Hence, the decision to repudiate the insurancepolicy cannot be sustained – There was no warrant for applyingthe Exclusion Clause contained in the insurance policy. Words and Phrases – Words “similar purposes” – Meaning of. Allowing the appeal, the Cour",
+   "authoring": [
+    "AJAY RASTOGI"
+   ],
+   "bench": [
+    "AJAY RASTOGI",
+    "ABHAY S. OKA"
+   ],
+   "caseNumber": "Civil Appeal No. 10671 of 2016"
+  },
+  {
+   "caseId": "1994_INSC_225",
+   "text": "DR. RASH LAL YADAV v. STATE OF BIHAR AND ORS. A JUNE 23, 1994 (A.M. AHMADI AND\"M.M. PUNCHHI, JJ.] B Bihar Non-Government Secondary Schools (Taking over of Manage-ment and Control) Act, 1981 : Sectio'!s 10(6) and 7. Bihar School Service Board-Chairman-Appointment for a tenure of C three years-Functioning of Chairman-Detrimental to the interest of Board-RemovaHleld : State Government's power of removal is not un-guided and absolute-Opportunity to show cause before removal held ex-cluded-Removal can be done within the tenure perioJ-Doctrine of pleasure-Applicability of D Consh\"tution of India, 1950 : Article 14. Statute-{]nguided and ab-solute powe.-Section 10(7) of the Bihar Non-Government Secondary School (Taking over of Management and Control) Act, 1981-Held not violative of Article 14. E Service Law-Tenure post-Removal before expiry of tenure-f'e1.nis-sibility of Administrative la~atural justice-Where the Statute expressly or by implication excludes natural justice-Statute cannot be invalidated for this omission on the ground of aroitrariness. F The appellant was appointed as chairman of the Bibar School Ser-vice Board for a term of there years. Snbseqnent to bis appointment Government received complaints against him regarding mismanagement, conducting farce interviews, improper behaviour with other Board Mem· hers, and inviting applications for appointment of teachers in defiance of G the Government's direction. On the basis of the complaints received the Government concluded that the manner in which the appellant was functioning was not condncive to the proper working of the Board l\\Or was it in public interest. Accordingly, the Government by its order dated April 4, 1991, passed in exercise of its power under sob- section (7) of Section H 231 SUPREME COURT REPORTS [",
+   "authoring": [
+    "A.M. AHMADI"
+   ],
+   "bench": [
+    "A.M. AHMADI",
+    "M.M. PUNCHHI"
+   ],
+   "caseNumber": null
+  },
+  {
+   "caseId": "2008_INSC_1062",
+   "text": "[2008] 13 S.C.R. 714 A B DHIRENDRA PANDUA V. STATE OF ORISSA AND ORS. (Civil Appeal No. 5743 of 2008) SEPTEMBER 19, 2008 [C.K. THAKKER AND D.K. JAIN, JJ.) 01issa Municipality Act, 1950: s.38 - Election petition under - Limitation - Held: No C period of limitation prescribed for presentation of petition un-der s.38 to District Judge. s.16{1)(iv) and s.17(1)(b) - Disqualification of leprosy patient from contesting to post of Councillor in municipality or continuing as such after election - Reasonableness of such 0 classification - Held: Said classification bear reasonable and just relation with the object sought to be achieved by statute and cannot be said to be unreasonable or arbitrary- S. 16(1 )(iv) and 17(1)(b) not violative of Art.14 of Constitution - However, E keeping in view present thinking ar.d researches carried on leprosy as also on tuberculosis, and with professional input, legislature may seriously consider necessity to retain such provisions in the statutes - Constitution of India, 1950 - Ar-ticle 14 - Class legislation. F F s.16(1)(iv) and s.17(1)(b)- Disqualification to hold office as Councillor- Courts below held that at relevant time, elected Council/or was not fully cured of leprosy - Justification of --Held: ,Justified Councillor's own showing on record that he had doubts about the reactivation of the disease and had to G approach District court for appropriate directions to concerned authorities for providing adequate facilities for periodical checks and issue of fitness certificate. Public health: Leprosy - What is. -J } DHIRENDRA PANDUA v. STATE OF ORISSA AND ORS. A Constitution of India, 1950: Article 136 - Re-apprecia- tion of evidence - Scope of. The appellant and the complainant-respondent no.3 were elected as Councillors of two different munic",
+   "authoring": [
+    "C.K. THAKKER"
+   ],
+   "bench": [
+    "C.K. THAKKER",
+    "D.K. JAIN"
+   ],
+   "caseNumber": "Civil Appeal No. 5743 of 2008"
+  },
+  {
+   "caseId": "1952_INSC_17",
+   "text": "S.C.R. SUPREME COURT REPORTS invoked by the · plaintiff, to the property held by a wife in her own right, the foundation on which custom grows would be wanting. When the matter is further probed, it appears that the plaintiff relies not only on custom but partly on custom and partly on the rule of Hindu la:w, namely, that the law which governs the husband will govern the wife , also. Whether the latter rule can be extended to a case like the present ~ a question of some difficulty, on which, as at present advised, we would reserve our opinion. In the circumstances, we prefer to leave the issue of custom undecided, and base our decision on the sole ground, which by itself is sufficient to conclude the appeal, that the plaintiff's marriage with Ram Piari has not been clearly established. The appeal therefore fails and it is dismissed, but in the circumstances of the e;ase and particularly since the appellant has appealed in f orma pauperis, we direct that the parties will bear their own costs in all the courts. 1952 Thakur Gokal Chand v. Parvin Kumari. Fazl Ali f. Appeal dismissed. Agent for the appellant: S. D. Sekhri. Agent for the respondent: Naunit Lal. LACHMAN SINGH AND OTHERS v. THE STATE [SAIYID FAzL Au and VIVIAN BosE JJ.] Evidence Act (1 of 1872), sec. 27-Statements of several accused leading to discoveries-Admissibility-Necessity of proof as to which statement was made first-Scope of sec. 27. Three persons K, M and S, who were accused of murder · made statements to the police which disclosed that the dead bodies after being dismembered were thrown into a stream and the police party thereafter went with the three accused to the stream where each of them pointed out a place where different 1952 March 21. 1952 Lachma11 Singh and Others v. The State. [1952] parts of",
+   "authoring": [
+    "SIR SYED FAZL ALI"
+   ],
+   "bench": null,
+   "caseNumber": null
+  },
+  {
+   "caseId": "2010_INSC_779",
+   "text": "[2010] 13 (ADDL.) S.C.R. 792 AMAR SINGH A V. UNION OF INDIA (Writ Petition (c) No. 317 of 2010) NOVEMBER 15, 2010 B [ALTAMAS KABIR AND CYRIAC JOSEPH, JJ.) CONSTITUTION OF /NOIA, 1950 c c Tenth Schedule - Paragraph 2(1) (a) - Explanation (a) - Disqualification on ground of defection - Members of Parliament - Expelled from the party which set them up in election - Issues as regards status of such expelled members, applicability of the provisions of the Tenth Schedule to such 0 [members, view taken in ][G. ][Vishwanathan's ][case ][in this regard ]and allied issues - Held: Require re-consideration by a larger bench - Matter, accordingly, referred to larger bench. Two prominent political leaders and Members of Parliament - one of the Rajya Sabha. and the other of the E Lok Sabha - who were expelled by the political party which had set them up as candidates for election, filed the instant writ petitions apprehending imminent threat to their continuance as Members of Parliament in view of the decision of the Supreme Court in G. Viswanathan's F case*. It was contended for the petitioners that the decision rendered in G. Viswanathan's case had highly prejudicial consequences for persons expelled from the G membership of a political party which was not the intention of the legislators, as was clear from the debates in respect of the Bill and, therefore, the said case required a revisitation of the law. Referring the matter to the larger Bench, the Court: H A HELD: 1.1 In the back ground of the legislative history of the introduction of the Tenth Schedule in the Constitution of India, in which it was initially intended to include expelled Members within the ambit of the provisions relating to 8 disqualification, the same was dropped after the debate in Parliament in which the dan",
+   "authoring": [
+    "ALTAMAS KABIR"
+   ],
+   "bench": [
+    "ALTAMAS KABIR",
+    "CYRIAC JOSEPH"
+   ],
+   "caseNumber": "Writ Petition (C) No. 317 of 2010"
+  },
+  {
+   "caseId": "2011_INSC_496",
+   "text": "[2011] 8 S.C.R. 258 A UNION OF INDIA & ORS. v. JUJHAR SINGH (Civil Appeal No. 4281 of 2006) JULY 15, 2011 B [P. SATHASIVAM AND A.K. PATNAIK, JJ.) Service Law: c ---c Armed Forces Army Disability pension Army personnel while on annual leave, suffered injuries in a road -accident Medical Board assessed his disability as 60% for -two years After superannuation with normal pension he -claimed disability pension HELD: The Medical Board 0 [clearly opined that the injury was neither attributable ][to ][nor ]-connected with service The injury which had no connection with military service cannot be termed as attributable to or -aggravated by military service The claim was rightly -rejected by the authorities Pension Regulations of the Army E (Part-I), 1961 - Regulation 179 - Entitlement Rules, 1982 --Para 12(d) Government of India Letter NO. 1(1)181/(PEN)C/ Vol. II dated 27. 10. 1998. · --Armed Forces Claim for disability pension Opinion -of Medical Board HELD: In the instant case, medical F authorities have recorded a specific finding to the effect that disability is neither attributable to nor aggravated by the -military service The High Court has failed to appreciate that the Medical Board is a Specialized Authority composed of expert medical doctors and it is the final authority to give G information regarding attributability and aggravation of the disability to the military service and the condition of service resulting in the disablement of the individual. The respondent was enrolled in the Army on H UNION OF INDIA & ORS. v. JUJHAR SINGH 259 . 27.06.1978. On 26.03.1987, when he was at his native A· place on annual leave, he met with an accident and sustained severe injuries and was hospitalized. After he joined the duty, he was kept under observation by the Medical Board a",
+   "authoring": [
+    "P. SATHASIVAM"
+   ],
+   "bench": [
+    "P. SATHASIVAM",
+    "A.K. PATNAIK"
+   ],
+   "caseNumber": "Civil Appeal No. 4281 of 2006"
+  },
+  {
+   "caseId": "2020_INSC_178",
+   "text": "336 SUPREME COURT REPORTS [2020] 4 S.C.R. A VIJAY KARIA & ORS. v. PRYSMIAN CAVI E SISTEMI SRL & ORS. (Civil Appeal No. 1544 of 2020) B FEBRUARY 13, 2020 [R. F. NARIMAN, ANIRUDDHA BOSE ANDV. RAMASUBRAMANIAN, JJ.] Arbitration and Conciliation Act, 1996: s.48(1)(b) –Enforcement of foreign awards – Violation of provisions of FEMAC– Whether amounts to breach of Public Policy of India – If aparticular act violates any provision of FEMA or the Rules framedthereunder, permission of the Reserve Bank of India may be obtainedpost-facto if such violation can be condoned – Neither the award,nor the agreement being enforced by the award, can, therefore, beDheld to be of no effect in law – This being the case, a rectifiablebreach under FEMA can never be held to be a violation of thefundamental policy of Indian law – Further, even if the ReserveBank of India were to take action under FEMA, the non-enforcementof a foreign award on the ground of violation of a FEMA Regulationor Rule would not arise as the award does not become void on thatEcount – The fundamental policy of Indian law, must amount to abreach of some legal principle or legislation which is so basic toIndian law that it is not susceptible of being compromised –“Fundamental Policy” refers to the core values of India’s publicpolicy as a nation, which may find expression not only in statutesFbut also time-honoured, hallowed principles which are followed bythe Courts – Judged from this point of view, resistance to theenforcement of a foreign award cannot be made on this ground. Arbitration and Conciliation Act, 1996: s.48(1)(b) –Enforcement of foreign awards – Refusal at the request of party ifGthat party furnishes to the court that he was unable to present hiscase – Expression “was otherwise unable to present his case” –Interp",
+   "authoring": [
+    "R.F. NARIMAN"
+   ],
+   "bench": [
+    "R.F. NARIMAN",
+    "ANIRUDDHA BOSE",
+    "V. RAMASUBRAMANIAN"
+   ],
+   "caseNumber": "Civil Appeal No. 1544 of 2020"
+  }
+ ]
+}

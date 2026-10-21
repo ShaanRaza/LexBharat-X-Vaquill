@@ -53,3 +53,6 @@ Shipped: richer case detail for all courts with a provenance panel; copyable cit
 
 ## Update: extracted bench and case number, unified dispositions
 Supreme Court cases now show the full bench (47.8% of cases) and the case number (30.3%) extracted from the report heading, labelled "extracted" and left absent when the text is not clean; the dataset's judge stays as "authoring judge". Supreme Court dispositions share one vocabulary with the High Courts, with the recorded value kept visible. Rules and coverage: `docs/JUDGMENTS-HC.md`.
+
+## Update: extraction run on all Supreme Court cases
+Bench 59.5% and case number 32.0% of all cases (case number 86-95% since 2010); shared tested util `src/lib/judgments/extract.mjs`, `npm run test:extract`; bench names shown as badges labelled "Bench (from judgment text)". See `docs/JUDGMENTS-HC.md`.

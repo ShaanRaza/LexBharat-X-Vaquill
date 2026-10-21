@@ -71,14 +71,14 @@ export default function CaseList({ court, year, searchable, filterable, initialP
                     {/* the title link stretches over the whole row; the copy button sits above it */}
                     <Link href={href} className="text-[15px] font-medium text-primary after:absolute after:inset-0 after:rounded-xl after:content-['']">{heading}</Link>
                     {parties && <p className="mt-1 text-[14px] text-foreground/80">{parties}</p>}
-                    {c.benchExtracted?.length ? <p className="mt-1 text-[13px] italic text-[#535151]" title="Bench extracted from the report heading">{c.benchExtracted.join(", ")}</p>
+                    {c.benchExtracted?.length ? <p className="mt-1.5 flex flex-wrap gap-1" title="Bench from the judgment text">{c.benchExtracted.map((j) => <span key={j} className="rounded-md bg-accent px-2 py-0.5 text-[12px] text-foreground/80">{j}</span>)}</p>
                       : c.judges?.length ? <p className="mt-1 text-[13px] italic text-[#535151]">{court === "supreme-court-of-india" ? "Authoring judge: " : ""}{c.judges.join(", ")}</p> : null}
                     <p className="mt-1.5 flex flex-wrap items-center gap-1.5 text-[12px] text-[#535151]">
                       <span className={chip}>{date ?? "No decision date recorded"}</span>
                       {c.citation && <span className="relative z-10 inline-flex items-center gap-1.5"><code className="font-mono text-[12px] text-foreground">{c.citation}</code><CopyButton text={c.citation} label="Copy citation" /></span>}
                       {(c.dispositionLabel ?? (court === "supreme-court-of-india" ? c.disposition : undefined)) && <span className={chip}>{c.dispositionLabel ?? c.disposition}</span>}
-                      {c.benchExtracted?.length ? <span className={chip} title="Counted from the bench extracted from the report heading">{benchLabel(c.benchExtracted.length)} (extracted)</span> : c.benchSize ? <span className={chip}>{benchLabel(c.benchSize)}</span> : null}
-                      {c.caseNumber ? <span>Case no. {c.caseNumber}</span> : c.caseNumberExtracted ? <span title="Extracted from the report heading">{c.caseNumberExtracted} ◐</span> : null}
+                      {c.benchExtracted?.length ? <span className={chip} title="Counted from the bench read from the judgment text">{benchLabel(c.benchExtracted.length)} ◐</span> : c.benchSize ? <span className={chip}>{benchLabel(c.benchSize)}</span> : null}
+                      {c.caseNumber ? <span>Case no. {c.caseNumber}</span> : c.caseNumberExtracted ? <span title="From the judgment text">{c.caseNumberExtracted} ◐</span> : null}
                       {c.pages ? <span>· {c.pages} {c.pages === 1 ? "page" : "pages"}</span> : null}
                       <span className="font-mono">· {c.caseId}</span>
                     </p>

@@ -37,8 +37,8 @@ export default async function CasePage({ params, searchParams }: { params: Promi
     ["Decision date", date ?? `Not recorded (listed under ${year} from the record's year)`],
     ...(sc ? ([["Citation", c.citation ? <span key="c" className="inline-flex items-center gap-2"><code className="font-mono">{c.citation}</code><CopyButton text={c.citation} label="Copy citation" /></span> : "No citation recorded for this case"]] as [string, React.ReactNode][])
            : ([["Reporter citation", "None in this dataset for High Courts. Cite by case number."], ["Case number", c.caseNumber ?? "Not recorded"]] as [string, React.ReactNode][])),
-    ...(sc ? ([["Case number", c.caseNumberExtracted ? <span key="cn">{c.caseNumberExtracted} <span className="text-[12px] text-muted">◐ extracted from the report heading; the dataset has no Supreme Court case numbers</span></span> : "Not in the dataset, and not found in a clean form in the report heading"]] as [string, React.ReactNode][]) : []),
-    ...(c.benchExtracted?.length ? ([["Full bench (extracted)", <span key="fb">{c.benchExtracted.join(", ")} <span className="text-[12px] text-muted">◐ {c.benchExtracted.length} {c.benchExtracted.length === 1 ? "judge" : "judges"}, extracted from the report heading</span></span>]] as [string, React.ReactNode][]) : []),
+    ...(sc ? ([["Case number", c.caseNumberExtracted ? <span key="cn">{c.caseNumberExtracted} <span className="text-[12px] text-muted">◐ from the judgment text; the dataset has no Supreme Court case numbers</span></span> : "Not in the dataset, and not found in a clean form in the report heading"]] as [string, React.ReactNode][]) : []),
+    ...(c.benchExtracted?.length ? ([["Bench (from judgment text)", <span key="fb" className="flex flex-wrap items-center gap-1.5">{c.benchExtracted.map((j) => <span key={j} className="rounded-md bg-accent px-2 py-0.5 text-[13px]">{j}</span>)}<span className="text-[12px] text-muted">◐ {c.benchExtracted.length} {c.benchExtracted.length === 1 ? "judge" : "judges"}, read from the judgment heading</span></span>]] as [string, React.ReactNode][]) : []),
     ["Disposition", c.dispositionLabel && c.disposition && c.dispositionLabel.toLowerCase() !== c.disposition.toLowerCase() ? `${c.dispositionLabel} (as recorded: ${c.disposition})` : (c.dispositionLabel ?? c.disposition ?? "Not recorded")],
     ...(c.title && c.title !== heading ? ([["Case reference (as titled)", c.title]] as [string, React.ReactNode][]) : []),
     ...(c.judges?.length ? ([[sc ? "Authoring judge (as listed in the source)" : "Judges", c.judges.join(", ")]] as [string, React.ReactNode][]) : []),
@@ -61,12 +61,12 @@ export default async function CasePage({ params, searchParams }: { params: Promi
         <p className="mt-1.5 flex flex-wrap items-center gap-2 text-[14px] text-[#535151]">
           <span>{court.name}</span>
           {c.citation ? <><span aria-hidden>·</span><code className="font-mono text-foreground">{c.citation}</code></> : c.caseNumber ? <><span aria-hidden>·</span><span>Case no. {c.caseNumber}</span></> : null}
-          {sc && c.caseNumberExtracted ? <><span aria-hidden>·</span><span title="Extracted from the report heading">{c.caseNumberExtracted} ◐</span></> : null}
+          {sc && c.caseNumberExtracted ? <><span aria-hidden>·</span><span title="From the judgment text">{c.caseNumberExtracted} ◐</span></> : null}
           <span aria-hidden>·</span><span>{date ?? year}</span>
         </p>
         <p className="mt-3 flex flex-wrap items-center gap-1.5 text-[12px] text-[#535151]">
           {(c.dispositionLabel ?? (sc ? c.disposition : undefined)) && <span className={chip}>{c.dispositionLabel ?? c.disposition}</span>}
-          {benchN ? <span className={chip} title={c.benchExtracted?.length ? "Counted from the bench extracted from the report heading" : undefined}>{benchWord(benchN)}{c.benchExtracted?.length ? " (extracted)" : ""}</span> : null}
+          {benchN ? <span className={chip} title={c.benchExtracted?.length ? "Counted from the bench read from the judgment text" : undefined}>{benchWord(benchN)}{c.benchExtracted?.length ? " ◐" : ""}</span> : null}
           {c.pages ? <span className={chip}>{c.pages} {c.pages === 1 ? "page" : "pages"}</span> : null}
           <CopyButton text={ref} label={c.citation ? "Copy citation" : "Copy case reference"} className="!text-[12px] !px-2 !py-0.5" />
           <span className="text-[12px] text-muted">{c.citation ? "Copies the citation" : "Copies the case number with court and date"}</span>
