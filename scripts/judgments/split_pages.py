@@ -4,12 +4,13 @@ usage: split_pages.py <ndjson> <out_court_dir> [--filtered | --facets]
   (default)   rows {year, page, ...case}                  -> year=<Y>/page=<N>/data_0.json
   --filtered  rows {year, kind, key, page, ...case}       -> year=<Y>/<kind>=<key>/page=<N>/data_0.json   (kind: disp | bench)
   --facets    rows {year, disposition[], bench[]}         -> year=<Y>/facets.json
+  --preview   rows {year, caseId, text}                   -> year=<Y>/preview.json   ({caseId: text} for the year)
 Null fields and empty lists are dropped to keep files small."""
 import json, os, sys
 
 src, out = sys.argv[1], sys.argv[2]
 mode = sys.argv[3] if len(sys.argv) > 3 else ""
-cur, buf, n_files = None, [], 0
+cur, buf, n_files, pv = None, [], 0, {}
 
 def write(path, obj):
     os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -32,6 +33,14 @@ def flush():
 with open(src, encoding="utf-8") as fh:
     for line in fh:
         r = json.loads(line)
+        if mode == "--preview":
+            year = r["year"]
+            if year != cur:
+                if cur is not None:
+                    write(os.path.join(out, f"year={cur}", "preview.json"), pv); n_files += 1
+                cur, pv = year, {}
+            pv[r["caseId"]] = r["text"]
+            continue
         if mode == "--facets":
             year = r.pop("year")
             write(os.path.join(out, f"year={year}", "facets.json"), {k: v for k, v in r.items() if v})
@@ -42,5 +51,9 @@ with open(src, encoding="utf-8") as fh:
             flush()
             cur = key
         buf.append({k: v for k, v in r.items() if v is not None and v != []})
-flush()
+if mode == "--preview":
+    if cur is not None:
+        write(os.path.join(out, f"year={cur}", "preview.json"), pv); n_files += 1
+else:
+    flush()
 print(n_files, file=sys.stderr)

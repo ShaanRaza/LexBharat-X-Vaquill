@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 # Writes a gzip-compressed copy of the High Court export for upload (about a fifth of the size), keeping every file name unchanged.
 # Upload it with Content-Encoding: gzip so browsers and the app's fetch() decompress it transparently; see docs/JUDGMENTS-HC.md.
-# Usage: scripts/judgments/gzip-for-upload.sh [SRC=data/judgments-hc] [DEST=data/judgments-hc-gz]
+# Both folders live OUTSIDE the project (../lexbharat-data): hundreds of thousands of files inside the project folder make `next build` run out of memory.
+# Usage: scripts/judgments/gzip-for-upload.sh [SRC=../lexbharat-data/judgments-hc] [DEST=../lexbharat-data/judgments-hc-gz]
 set -euo pipefail
 cd "$(dirname "$0")/../.."
-SRC="${1:-data/judgments-hc}"; DEST="${2:-data/judgments-hc-gz}"
-rm -rf "$DEST"; mkdir -p "$DEST"
+SRC="$(cd "${1:-../lexbharat-data/judgments-hc}" && pwd)"; DEST="${2:-../lexbharat-data/judgments-hc-gz}"
+rm -rf "$DEST"; mkdir -p "$DEST"; DEST="$(cd "$DEST" && pwd)"
 cd "$SRC"
-# only the files the app reads: court=*/**/data_0.json and court=*/year=*/facets.json (not the _manifest, _quarantine, _fields folders)
-find court=* -type f \( -name data_0.json -o -name facets.json \) -print0 | while IFS= read -r -d '' f; do
-  mkdir -p "../$(basename "$DEST")/$(dirname "$f")"; gzip -9 -n -c "$f" > "../$(basename "$DEST")/$f"
+# only the files the app reads: data_0.json, facets.json and preview.json under court=* (not the _manifest, _quarantine, _fields folders)
+find court=* -type f \( -name data_0.json -o -name facets.json -o -name preview.json \) -print0 | while IFS= read -r -d '' f; do
+  mkdir -p "$DEST/$(dirname "$f")"; gzip -9 -n -c "$f" > "$DEST/$f"
 done
-echo "done: $(find "../$(basename "$DEST")" -type f | wc -l | tr -d ' ') files, $(du -sh "../$(basename "$DEST")" | cut -f1)" >&2
+echo "done: $(find "$DEST" -type f | wc -l | tr -d ' ') files, $(du -sh "$DEST" | cut -f1)" >&2

@@ -16,7 +16,7 @@
 # Usage: [HC_COURTS=delhi-high-court,bombay-high-court] [HC_YEARS=2024-2025] scripts/judgments/export-judgments-hc.sh [DATASET_DIR] [OUT_DIR]
 set -euo pipefail
 cd "$(dirname "$0")/../.."
-DIR="${1:-/Volumes/LAWSSD/open-india-law}"; OUT="${2:-data/judgments-hc}"
+DIR="${1:-/Volumes/LAWSSD/open-india-law}"; OUT="${2:-../lexbharat-data/judgments-hc}"
 [ -d "$DIR" ] || { echo "Dataset folder not found: $DIR (is the SSD plugged in?)" >&2; exit 1; }
 slug() { case "$1" in jammu-and-kashmir) echo high-court-of-jammu-and-kashmir-and-ladakh;; punjab-and-haryana) echo punjab-and-haryana-high-court;; *) echo "$1-high-court";; esac; }
 YF=1900; YT=2026; if [ -n "${HC_YEARS:-}" ]; then YF="${HC_YEARS%-*}"; YT="${HC_YEARS#*-}"; fi
