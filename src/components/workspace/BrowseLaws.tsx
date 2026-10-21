@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import ScSearchResults from "./ScSearchResults";
 import { useEffect, useMemo, useState } from "react";
 import { ACT_CATEGORIES, ACT_STATUSES, ALL_COURTS, BROWSE_STATS, HIGH_COURTS, SUPREME_COURT, type ActItem, type Court } from "@/data/workspaceBrowse";
 
@@ -108,13 +109,13 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
       </section>
 
       <div className="mt-5">
-        <label htmlFor="browse-q" className="sr-only">{tab === "acts" ? "Search act titles" : "Filter courts by name"}</label>
+        <label htmlFor="browse-q" className="sr-only">{tab === "acts" ? "Search act titles" : "Search Supreme Court cases or filter courts by name"}</label>
         <div className="relative">
           <svg className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#65625f]" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
-          <input id="browse-q" value={q} onChange={(e) => setQ(e.target.value)} placeholder={tab === "acts" ? "Search act titles…" : "Filter courts by name…"} autoComplete="off"
+          <input id="browse-q" value={q} onChange={(e) => setQ(e.target.value)} placeholder={tab === "acts" ? "Search act titles…" : "Search Supreme Court cases by party or citation, or filter courts…"} autoComplete="off"
             className="h-12 w-full rounded-xl bg-accent pl-11 pr-4 text-[15px] outline-none ring-1 ring-transparent placeholder:text-[#65625f] focus:bg-surface focus:ring-primary/50" />
         </div>
-        <p className="mt-2 px-1 text-[13px] text-[#535151]">{tab === "acts" ? "This box searches act titles (at least 2 characters)." : "This box filters the court list by name. Searching inside cases is not available here yet: open a Supreme Court year to search its cases."} Boolean operators and citation search are not available yet.</p>
+        <p className="mt-2 px-1 text-[13px] text-[#535151]">{tab === "acts" ? "This box searches act titles (at least 2 characters)." : "This box filters the court list by name and, for two or more characters, searches Supreme Court cases of every year by party name or citation. High Court cases are not searchable by name yet: open a court and year to browse and filter them."} Boolean operators and citation search are not available yet.</p>
       </div>
 
       <div role="tablist" aria-label="Browse" className="mt-6 flex gap-1 border-b border-border/80">
@@ -128,6 +129,7 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
 
       {tab === "judgments" ? (
         <div role="tabpanel" className="mt-8 space-y-8">
+          {q.trim().length >= 2 && jreal && <ScSearchResults q={q.trim()} />}
           {showSC && <section><h2 className="flex items-center gap-2 text-[18px] font-semibold"><span className="text-primary"><Svg d={BANK} size={18} /></span>Supreme Court</h2><div className="mt-3"><CourtCard c={withCount(SUPREME_COURT)} featured real={jreal} countsOnly={countsOnly(SUPREME_COURT)} /></div></section>}
           <section>
             <h2 className="flex items-center gap-2 text-[18px] font-semibold"><span className="text-primary"><Svg d={BANK} size={18} /></span>High Courts</h2>

@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import CopyButton from "./CopyButton";
 import type { CaseItem, Facet } from "@/lib/judgments/types";
 
 // Case list for one court and year (newest first). Fetches /api/judgments/list. Metadata only, no judgment text.
@@ -66,21 +67,20 @@ export default function CaseList({ court, year, searchable, filterable, initialP
               const href = `/workspace/browse/judgments/${court}/${year}/${encodeURIComponent(c.caseId)}?p=${hcPage}&lp=${page}`;
               const chip = "rounded-md bg-accent px-2 py-0.5";
               return (
-                <li key={c.caseId}>
-                  <Link href={href} className="block rounded-xl bg-surface px-5 py-4 shadow-sm ring-1 ring-border/60 transition-colors hover:ring-primary/50">
-                    <p className="text-[15px] font-medium text-primary">{heading}</p>
+                <li key={c.caseId} className="relative rounded-xl bg-surface px-5 py-4 shadow-sm ring-1 ring-border/60 transition-colors hover:ring-primary/50">
+                    {/* the title link stretches over the whole row; the copy button sits above it */}
+                    <Link href={href} className="text-[15px] font-medium text-primary after:absolute after:inset-0 after:rounded-xl after:content-['']">{heading}</Link>
                     {parties && <p className="mt-1 text-[14px] text-foreground/80">{parties}</p>}
                     {c.judges?.length ? <p className="mt-1 text-[13px] italic text-[#535151]">{c.judges.join(", ")}</p> : null}
                     <p className="mt-1.5 flex flex-wrap items-center gap-1.5 text-[12px] text-[#535151]">
                       <span className={chip}>{date ?? "No decision date recorded"}</span>
+                      {c.citation && <span className="relative z-10 inline-flex items-center gap-1.5"><code className="font-mono text-[12px] text-foreground">{c.citation}</code><CopyButton text={c.citation} label="Copy citation" /></span>}
                       {(c.dispositionLabel ?? (court === "supreme-court-of-india" ? c.disposition : undefined)) && <span className={chip}>{c.dispositionLabel ?? c.disposition}</span>}
                       {c.benchSize ? <span className={chip}>{benchLabel(c.benchSize)}</span> : null}
                       {c.caseNumber && <span>Case no. {c.caseNumber}</span>}
-                      {c.citation && <span>· {c.citation}</span>}
                       {c.pages ? <span>· {c.pages} {c.pages === 1 ? "page" : "pages"}</span> : null}
                       <span className="font-mono">· {c.caseId}</span>
                     </p>
-                  </Link>
                 </li>
               );
             })}
