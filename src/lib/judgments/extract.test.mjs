@@ -2,15 +2,15 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
-import { buildVocabulary, cleanName, looksLikeName, nameKey, parseCaseNumber, printedBench, verifyBench, withinGuard } from "./extract.mjs";
+import { buildVocabulary, cleanName, looksLikeName, nameKey, parseCaseNumber, printedBench, sameJudge, verifyBench, withinGuard } from "./extract.mjs";
 
 const fx = JSON.parse(readFileSync(new URL("./extract.fixtures.json", import.meta.url), "utf8"));
 const vocab = new Map(Object.entries(fx.vocabulary));
 const pad = (s, n = 3000) => s.padEnd(n, " x");                       // opening chunks are about 3-4 thousand characters long
 const bench = (text, authoring = []) => { const p = printedBench(pad(text)); return p ? verifyBench(p.names, vocab, authoring) : null; };
 
-test("14 real cases: 4 named + 10 drawn at random (fixed seed), output checked by eye against the heading", () => {
-  assert.equal(fx.cases.length, 14);
+test("24 real cases: 4 named + 10 drawn at random (fixed seed) + 10 CJI / single-J headings, output checked by eye against the heading", () => {
+  assert.equal(fx.cases.length, 24);
   for (const c of fx.cases) {
     const p = printedBench(c.text, c.caseId), got = p ? verifyBench(p.names, vocab, c.authoring) : null;
     assert.deepEqual(got, c.bench, `bench of ${c.caseId}`);
@@ -112,4 +112,32 @@ test("bad-match guard: warns and gives up when a match swallows too much of the 
   } finally { console.warn = orig; }
   assert.equal(seen.length, 1);
   assert.match(seen[0], /exceeds the guard/);
+});
+
+test("CJI and single-J headings (2025_INSC_1288 Mihir Rajesh Shah and nine more)", () => {
+  const by = Object.fromEntries(fx.cases.map((c) => [c.caseId, c]));
+  const mihir = by["2025_INSC_1288"];
+  assert.deepEqual(printedBench(mihir.text).names, ["B.R. Gavai", "Augustine George Masih"]);                       // "[B.R. Gavai, CJI and Augustine George Masih,* J.]"
+  assert.deepEqual(verifyBench(printedBench(mihir.text).names, vocab, mihir.authoring), ["B.R. GAVAI", "AUGUSTINE GEORGE MASIH"]);   // the dataset spells the first judge BHUSHAN RAMKRISHNA GAVAI
+  for (const id of ["2020_INSC_534", "1994_INSC_9", "2024_INSC_578", "2019_INSC_891"]) assert.ok(/\bCJI\b/.test(by[id].text.slice(0, 700)), `${id} has CJI`);
+  for (const id of ["2004_INSC_630", "1981_INSC_27", "2007_INSC_459", "1993_INSC_208"]) assert.ok(/\bJ\.?\s*[\])]/.test(by[id].text.slice(0, 700)) && !/JJ/.test(by[id].text.slice(0, 120)), `${id} ends in a single J.`);
+  assert.deepEqual(printedBench(pad("[C.K. THAKKER, J.] x")).names, ["C.K. THAKKER"]);                                       // a bench of one
+  assert.deepEqual(printedBench(pad("[R.C. LAHOTI, CJ. AND ASHOK BHAN, J.] x")).names, ["R.C. LAHOTI", "ASHOK BHAN"]);
+  assert.deepEqual(printedBench(pad("[A. B. CADRE AND C. D. FOX, J.] x")).names, ["A. B. CADRE", "C. D. FOX"]);             // two names, single J.
+  assert.equal(printedBench(pad("[SEE ALSO THE STATE OF KERALA V. SOMEONE, J.] x")), null);                              // a J. ending does not make a non-name list a bench
+});
+
+test("authoring-judge check: initials and surname, case and dots ignored; any one of several names is enough", () => {
+  assert.ok(sameJudge("BHUSHAN RAMKRISHNA GAVAI", "B.R. Gavai"));
+  assert.ok(sameJudge("D.Y. CHANDRACHUD", "DR. DHANANJAYA Y CHANDRACHUD"));
+  assert.ok(sameJudge("RAJENDRA MAL LODHA", "R.M. LODHA"));
+  assert.ok(sameJudge("a.k. sikri", "A. K. SIKRI"));
+  assert.ok(!sameJudge("M.R. SHAH", "M.B. SHAH"));                                  // second initial differs
+  assert.ok(!sameJudge("A.K. SIKRI", "S.M. SIKRI"));                                // first initial differs
+  assert.ok(!sameJudge("S.M. SIKRI", "S.M. SINHA"));                                // surname differs
+  const v = new Map([[nameKey("B.R. GAVAI"), "B.R. GAVAI"], [nameKey("AUGUSTINE GEORGE MASIH"), "AUGUSTINE GEORGE MASIH"]]);
+  assert.deepEqual(verifyBench(["B.R. Gavai", "Augustine George Masih"], v, ["BHUSHAN RAMKRISHNA GAVAI"]), ["B.R. GAVAI", "AUGUSTINE GEORGE MASIH"]);
+  assert.deepEqual(verifyBench(["B.R. Gavai", "Augustine George Masih"], v, ["SOMEONE ELSE", "AUGUSTINE GEORGE MASIH"]), ["B.R. GAVAI", "AUGUSTINE GEORGE MASIH"]);   // any of several
+  assert.equal(verifyBench(["B.R. Gavai", "Augustine George Masih"], v, ["SOMEONE ELSE"]), null);                      // none on the bench: no bench shown
+  assert.deepEqual(verifyBench(["B.R. Gavai", "Augustine George Masih"], v, []), ["B.R. GAVAI", "AUGUSTINE GEORGE MASIH"]);   // no authoring field: nothing to contradict
 });

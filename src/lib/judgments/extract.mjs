@@ -117,14 +117,27 @@ function repair(key, vocab) {
   const hits = [...vocab.keys()].filter((k) => k.length >= 10 && nearVariant(key, k));
   return hits.length === 1 ? vocab.get(hits[0]) : undefined;
 }
-/** The verified bench (display spellings) or null. Every name must be in the vocabulary (or repair to exactly one vocabulary name), none repeated, and the dataset's
- *  authoring judge (if any) must be on the bench. */
+/** "First initial(s) + last name token": B.R. Gavai, BHUSHAN RAMKRISHNA GAVAI and "DR. B. R. GAVAI" all give { surname: GAVAI, initials: BR }. Case, dots and honorifics do not matter. */
+function initialsSurname(name) {
+  const t = name.toUpperCase().replace(/^(?:DR|MR|MRS|MS|SHRI|SMT|SIR)\.?\s+/, "").replace(/\./g, " ").split(/\s+/).filter(Boolean);
+  const surname = t.length ? t[t.length - 1] : "", initials = t.slice(0, -1).map((w) => w[0]).join("");
+  return { surname, initials };
+}
+/** Same judge? The surname must match, and the first initial; a second initial must match too when both names give one ("M.R. SHAH" is not "M.B. SHAH"). */
+export function sameJudge(a, b) {
+  const x = initialsSurname(a), y = initialsSurname(b);
+  if (!x.surname || x.surname !== y.surname) return false;
+  const n = Math.min(x.initials.length, y.initials.length, 2);
+  return n >= 1 ? x.initials.slice(0, n) === y.initials.slice(0, n) : x.initials === y.initials;
+}
+
+/** The verified bench (display spellings) or null. Every name must be in the vocabulary (or repair to exactly one vocabulary name), none repeated, and the dataset's authoring
+ *  field must agree: at least ONE of its names must be on the bench, compared by initials and surname (the dataset spells out first names the report abbreviates). */
 export function verifyBench(names, vocab, authoring = []) {
   if (!names?.length) return null;
   const out = names.map((n) => vocab.get(nameKey(n)) ?? repair(nameKey(n), vocab));
   if (out.some((o) => !o) || new Set(out).size !== out.length) return null;
-  const keys = new Set(out.map(nameKey));
-  return authoring.every((a) => keys.has(nameKey(a))) ? out : null;
+  return !authoring.length || authoring.some((a) => out.some((o) => sameJudge(a, o))) ? out : null;
 }
 
 // ---------------------------------------------------------------- case number

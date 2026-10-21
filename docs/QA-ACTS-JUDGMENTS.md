@@ -56,3 +56,6 @@ Supreme Court cases now show the full bench (47.8% of cases) and the case number
 
 ## Update: extraction run on all Supreme Court cases
 Bench 59.5% and case number 32.0% of all cases (case number 86-95% since 2010); shared tested util `src/lib/judgments/extract.mjs`, `npm run test:extract`; bench names shown as badges labelled "Bench (from judgment text)". See `docs/JUDGMENTS-HC.md`.
+
+## Update: CJI / single-J headings and initials-based authoring check
+Bench now found for 24,229 of 37,014 Supreme Court cases (65.5%): headings such as "[B.R. Gavai, CJI and Augustine George Masih,* J.]" (2025_INSC_1288) work, and the dataset's authoring field is compared by initials and surname, any one name sufficing. Tests: `npm run test:extract` (12 groups).

@@ -1,5 +1,5 @@
 {
- "note": "First 1800 characters of the English opening text of 14 Supreme Court cases (4 named, 10 drawn at random with a fixed seed), the dataset's authoring judge, and the output verified by eye against the heading. vocabulary = the verified names those benches need.",
+ "note": "First 1800 characters of the English opening text of Supreme Court cases (4 named, 10 drawn at random with a fixed seed, 10 whose heading ends in a single J. or contains CJI), the dataset's authoring judge, and the output verified by eye against the heading. vocabulary = the verified names those benches need.",
  "vocabulary": {
   "JMSHELAT": "J.M. SHELAT",
   "CKTHAKKER": "C.K. THAKKER",
@@ -40,7 +40,23 @@
   "MHBEG": "M.H. BEG",
   "KKMATHEW": "K.K. MATHEW",
   "HRKHANNA": "H.R. KHANNA",
-  "AKMUKHERJEA": "A.K. MUKHERJEA"
+  "AKMUKHERJEA": "A.K. MUKHERJEA",
+  "BRGAVAI": "B.R. GAVAI",
+  "AUGUSTINEGEORGEMASIH": "AUGUSTINE GEORGE MASIH",
+  "SABOBDE": "S.A. BOBDE",
+  "ASBOPANNA": "A.S. BOPANNA",
+  "MNVENKATACHALIAH": "M.N. VENKATACHALIAH",
+  "ASANAND": "A.S. ANAND",
+  "DHANANJAYAYCHANDRACHUD": "DR. DHANANJAYA Y CHANDRACHUD",
+  "PAMIDIGHANTAMSRINARASIMHA": "PAMIDIGHANTAM SRI NARASIMHA",
+  "JBPARDIWALA": "J.B. PARDIWALA",
+  "RANJANGOGOI": "RANJAN GOGOI",
+  "RCLAHOTI": "R.C. LAHOTI",
+  "ASHOKBHAN": "ASHOK BHAN",
+  "APSEN": "A.P. SEN",
+  "KGBALAKRISHNAN": "K.G. BALAKRISHNAN",
+  "GPMATHUR": "G.P. MATHUR",
+  "GNRAY": "G.N. RAY"
  },
  "cases": [
   {
@@ -221,6 +237,129 @@
     "V. RAMASUBRAMANIAN"
    ],
    "caseNumber": "Civil Appeal No. 1544 of 2020"
+  },
+  {
+   "caseId": "2025_INSC_1288",
+   "text": "Mihir Rajesh Shah v. State of Maharashtra and Another (Criminal Appeal No. 2195 of 2025) 06 November 2025 [B.R. Gavai, CJI and Augustine George Masih,* J.] Issue for Consideration Whether in each and every case, even arising out of an offence under Penal Code, 1860 now Bharatiya Nyaya Sanhita, 2023 would it be necessary to furnish grounds of arrest to an accused either before arrest or forthwith after arrest; whether, even in exceptional cases, where on account of certain exigencies it will not be possible to furnish the grounds of arrest either before arrest or immediately after arrest, the arrest would be vitiated on the ground of non-compliance with the provisions of Section 50 of the CrPC 1973 (now Section 47 of BNSS 2023). Headnotes[†] Constitution of India – Art.22(1) – Constitutional mandate of – Code of Criminal Procedure, 1973 – s.50 – Bharatiya Nagarik Suraksha Sanhita, 2023 – s.47 – Whether in each and every case, even arising out of an offence under Penal Code, 1860 now Bharatiya Nyaya Sanhita, 2023 would it be necessary to furnish grounds of arrest to an accused either before arrest or forthwith after arrest: Held: Constitutional mandate of informing the arrestee the grounds of arrest is mandatory in all offences under all statutes including offences under IPC 1860 (now BNS 2023) – The grounds of arrest must be communicated in writing to the arrestee in the language he/she understands – In case(s) where, the arresting officer/person is unable to communicate the grounds of arrest in writing on or soon after arrest, it be so done orally – The said grounds be communicated in writing within a reasonable time and in any case at least two hours prior to production of the arrestee for remand proceedings before the magistrate – In case of non-compliance, the arrest",
+   "authoring": [
+    "BHUSHAN RAMKRISHNA GAVAI",
+    "AUGUSTINE GEORGE MASIH"
+   ],
+   "bench": [
+    "B.R. GAVAI",
+    "AUGUSTINE GEORGE MASIH"
+   ],
+   "caseNumber": "Criminal Appeal No. 2195 of 2025"
+  },
+  {
+   "caseId": "2020_INSC_534",
+   "text": "[2020] 8 S.C.R. 89 R. POORNIMA AND ORS. v. UNION OF INDIA AND ORS. (Writ Petition (Civil) No. 1172 of 2019) SEPTEMBER 04, 2020 [S. A. BOBDE, CJI, A. S. BOPANNA ANDV. RAMASUBRAMANIAN, JJ.] Constitution of India – Art. 217(2) – Explanation (a) and(aa) u/Art. 217(2) – The petitioners as well as the respondent nos.24 to 29 were duly selected and appointed as District Judges byway of direct recruitment in the year 2011 – The respondent nos. 5to 23 were appointed as Judicial Officers in the cadre below that ofDistrict Judges – After long service, they gained promotion to thepost of District Judges – But their promotion happened after thedate on which the petitioners were directly recruited as DistrictJudges – This is how and why the petitioners became seniors to therespondent nos. 5 to 23 – The grievance of the petitioners is thatdespite being the senior-most in the cadre of District Judges, theyhave been overlooked and their juniors now recommended forelevation to the High Court as Judges – The Collegium of the HighCourt found that the petitioners had not completed 10 years ofservice in a Judicial Office as required by Art. 217(2)(a) – Therefore,recommended the names of persons who fulfilled the eligibilitycriteria – Writ petition – Petitioners contended that the qualificationsprescribed in sub-clauses (a) and (b) of clause (2) of Art. 217 arein the alternative, but Art. 217 does not create separate streams forappointment, with independent quotas for such streams and tointerpret Explanation (a) in such a manner that only a person whoresigned from Judicial service and became an Advocate will beeligible to club both the periods, will result in unfair and hostilediscrimination of Judicial officers, offending Art. 14 and suchinterpretation has to be avoided – Held: The clause (2",
+   "authoring": [
+    "S.A. BOBDE"
+   ],
+   "bench": [
+    "S.A. BOBDE",
+    "A.S. BOPANNA",
+    "V. RAMASUBRAMANIAN"
+   ],
+   "caseNumber": "Writ Petition (Civil) No. 1172 of 2019"
+  },
+  {
+   "caseId": "1994_INSC_9",
+   "text": "A UNION OF INDIA v. HARNAM SINGH JANUARY 13, 1994 B [M.N. VENKATACHALIAH, CJI AND AS. ANAND, J.] : Administrative Tribunals Act, 1985 : Sections 5(1)(2) and (6). Tribunal--Power of Single Member to dispose of cases-Observations in judg-ment under review-Deletion of. c Dismissing the Review Petition Filed against the decision in Union of India v. Hamam Singh, (1993) 2 S.C.C. 162, this Court HELD : The observation in the judgment under review to the effect that \"ordinarily keeping in view the Judgment of this Court in Amulya D [Chandra Kalita's ][case ...... is under consideration ...... \" is deleted as ][ii ][is ]susceptible or aQ interpretation denuding the efficacy or the judgment in Dr. Mahabal Ram's case. To which reference was not made at the hearing or the main appeal. (119-B, DJ Amulya Chandra Kalita v. Union of India, (1991) 1 S.C.C. 181 and E Dr. Mahabal Ram v. Indian Council of Agricultural Research and Ors., (1991) 2 L.L.J. 112, referred to. CIVIL APPELLATE JURISDICTION: Review Petition (C) No. 1384 of 1993. F IN Civil Appeal No. 502 of 1993. From the Judgment and Order dated 29.5.92 of the Central Ad-ministrative Tribunal, Principal Bench, New Delhi in O.A.No. 1252 of 1992. G Mrs. Shyamala Pappu and J.D. Jain for the Petitioner. The following Order of the Court was delivered : 1. We have heard Smt. Shyamla Pappu, learned senior counsel for H [the respondent ][who ][has preferred this review petition. On a consideration ]118 x__ \"--I _ _.( - --( }-' ·- - of the matter, we find that the grounds raised in support of the review, do A not justify our interference with the earlier order 9th February, 1993. 2. However, there is one other aspect which might bear considera-tion. In the course of the order, it was observed : \"Ordinarily, keeping in view the judgment of",
+   "authoring": [
+    "M.N. VENKATACHALIAH",
+    "A.S. ANAND"
+   ],
+   "bench": [
+    "M.N. VENKATACHALIAH",
+    "A.S. ANAND"
+   ],
+   "caseNumber": null
+  },
+  {
+   "caseId": "2024_INSC_578",
+   "text": "[2024] 8 S.C.R. 207 : 2024 INSC 578 Government of NCT of Delhi v. Office of Lieutenant Governor of Delhi (Writ Petition (Civil) No. 348 of 2023) 05 August 2024 [Dr Dhananjaya Y Chandrachud, CJI, Pamidighantam Sri Narasimha* and J.B. Pardiwala, JJ.] Issue for Consideration Whether the Lt. Governor can exercise power of nomination under Section 3(3)(b)(i) of the Delhi Municipal Corporation Act, 1957 as a statutory duty attached to his office or he is bound by the aid and advice of the Council of Ministers of NCTD as provided in Article 239AA(4) of the Constitution of India. Headnotes[†] Delhi Municipal Corporation Act, 1957 – s.3(3)(b)(i) – Interpretation – Delhi Municipal Corporation (Amendment) Act No. 67 of 1993 – Constitution (Sixty-Ninth Amendment) Act, 1991 – Article 239AA(4), 239AB – Government of National Capital Territory Act, 1991 – ss.41-45 – Nomination of 10 persons with special knowledge in municipal administration to the Delhi Municipal Corporation, by the Lt. Governor u/s.3(3)(b)(i) – Whether to be on the aid and advice of the Council of Ministers or the Lt. Governor is to act as per his discretion: Held: s.3(3)(b)(i) of the Delhi Municipal Corporation Act is a Parliamentary enactment vesting the power of nomination of persons with special knowledge in municipal administration with the Lt. Governor – The said power is to be exercised as a statutory duty of the Lt. Governor and not as the executive power of the Government of NCTD – The context in which the power is located confirms that the Lt. Governor is intended to act as per the mandate of the statute and not to be guided by the aid and advice of the Council of Ministers – Notifications issued by the Lt. Governor u/s.3(3)(b)(i) nominating ten members to the Corporation are not in violation of Article 239",
+   "authoring": [
+    "D.Y. CHANDRACHUD"
+   ],
+   "bench": [
+    "DR. DHANANJAYA Y CHANDRACHUD",
+    "PAMIDIGHANTAM SRI NARASIMHA",
+    "J.B. PARDIWALA"
+   ],
+   "caseNumber": "Writ Petition (Civil) No. 348 of 2023"
+  },
+  {
+   "caseId": "2019_INSC_891",
+   "text": "ASSAM PUBLIC WORKS v. UNION OF INDIA & ORS. (Writ Petition (C) No. 274 of 2009) AUGUST 13, 2019 [RANJAN GOGOI, CJI AND R. F. NARIMAN, J.] Citizenship Act, 1955: ss.3, 6 – State of Assam – Report ofState Coordinator – Action proposed in Paragraph 7(a) that forany NRC Applications/Claimants, if parent/legacy person throughwhom eligibility is sought to be established is a DV or DF or PFT,then such persons will not be included in NRC irrespective of thestatus of the other parent – Challenged on the ground that the saidaction ran contrary to the provisions of s.3(1)(a) of the Act whichdealt with acquisition of citizenship by birth in the case of everyperson born in India on or after the 26.1.1950 but before 1.7.1987– Held: The purport and effect of provisions of s.3(1)(a) and (b) ofthe Act is pending consideration before a Constitution Bench ofthis court in Writ Petition (c) No.311 of 2015 – The issue pending iswhether the expression “every person born in India” would applyonly to persons born to Indian citizens and whether the expression“either of whose parents is a citizen of India at the time of his birth”in s.3(1)(b) of the Act would apply to only a person who is born toparents one of whom is a citizen and the other a foreigner, providedhe or she has entered India lawfully and his/her stay in India is notin contravention of applicable Indian laws. Citizenship Act, 1955: State of Assam – Report of StateCoordinator – Actions proposed in Paragraph 7(b) and 7(c) thatthose persons born before 3.12.2004, if the parent through whomlegacy is drawn is not DV or DF or PFT and is found eligible forinclusion in NRC, but the other parent from whom legacy is notdrawn is a DV or DF or PFT, then, such descendants may be includedin NRC; and those persons who are born on or after 3.12. 20",
+   "authoring": [
+    "RANJAN GOGOI"
+   ],
+   "bench": [
+    "RANJAN GOGOI",
+    "R.F. NARIMAN"
+   ],
+   "caseNumber": "Writ Petition (C) No. 274 of 2009"
+  },
+  {
+   "caseId": "2004_INSC_630",
+   "text": "A FRIENDS COLONY DEVELOPMENT COMMITTEE v. ST A TE OF ORIS SA AND ORS. NOVEMBER l, 2004 B [R.C. LAHOTI, CJ. AND ASHOK BHAN, J.] Urban Development: Unauthorised construction-Order for demolition of-Plea for C regularization by compounding-Held: Deviations from sanctioned plan permissible only as exception-Condonation and compounding of the deviations is permissible only when it is bona fide or are attributable to some misunderstanding and where the benefit gained by the demolition would be far less than the disadvantage suffered-Deliberate deviations not D compoundable-Deviations by professional builders can be assumed to be deliberate-Compounding of deviations made by the builders should be dealt with at a higher level by multi-membered High Powered Committee-Staff strength to be suitably increased to keep constant and vigilant watch on illegal and unauthorized construction-Orissa Development Authorities Act. E Respondent Nos. 2 and 3, (a company engaged in building activities and its Managing Director) applied for construction of a multi-storeyed building to the Development Authority. The Authority sanctioned construction of a four storeyed building in accordance with the sanctioned building plans. The building was constructed in excess of the sanctioned plan on all the floors F and even a fifth floor was constructed. Authority initiated proceeding u/s 92 ofOrissa Development Authorities Act, against the builder for demolition of the offending portions. Builder pleaded for compounding for the deviations. Appellant, a society whose object was to oversee the development of residential area in question made representation to the Authority, Municipality, Pollution G Control Board and the State Government complaining of the offending construction. Authority directed demoliti",
+   "authoring": [
+    "R.C. LAHOTI"
+   ],
+   "bench": [
+    "R.C. LAHOTI",
+    "ASHOK BHAN"
+   ],
+   "caseNumber": null
+  },
+  {
+   "caseId": "1981_INSC_27",
+   "text": "• .. • A DUDH NATH PANDEY v. THE STATE OF U.P. February 11, 1981 B [Y. V. CHANDRACHUD, C.J. AND A. P. SEN, J.] Indian Penal Code-Section 302-For the offence of murder the nornial s~n­tence is sentence of life imprisonment and not of death-Witnesses failed ta rtveal the whole truth-Considerations to be taken into account while dealing with the qurestion of sentence for the offence of murder. C Concurrent findings of two courts below-Supreme Court, if could examine their correctness. Plea of alibi-Its postulates. The prosecution alleged that when the appellant, a motor-car driver who was living as a tenant in the out-house of the bungalow belonging to the famil; of the deceased, developed a fancy for the sister of the deceased. His overtures created resentment in the family and the deceased took upon himself the task of preventing the appellant from pursuing his sister. The appellant's effort to take custody of the deceased's sister through legal proceedings had failed; sometime later on a complaint to the police that the appellant had been making indecent overtW'es towards her he was arrested. A day before the day of the occurrence the appel-lant was alleged to have threatened to kill the deceased if he oppooed his ( appel · lant's) marriage with his sister. It was further alleged that while the deceased was returning home on his scooter after leaving his sister in the school where she was working as a teacher, the appellant fired a shot at him with a pistol at which the deceased fell dead instantaneously. D E He was convicted under section 302 J.P .C. and sentene:ed to death. Tue order of conviction and sentence was confirmed by the High Court. F On the question of sentence HELD : 1. The Sessions Court and the High Court were right in convicting the appellant under sect",
+   "authoring": [
+    "Y.V. CHANDRACHUD"
+   ],
+   "bench": [
+    "Y.V. CHANDRACHUD",
+    "A.P. SEN"
+   ],
+   "caseNumber": null
+  },
+  {
+   "caseId": "2006_INSC_419",
+   "text": "- A MIS. JAIN STUDIOS LTD. THROUGH. ITS PRESIDENT v. SHIN SATELLITE PUBLIC CO. LTD. JULY I I, 2006 B [C.K. THAKKER, J.] Constitution of India, 1950-Article 137-Review of Order passed in Arbitration Petition, its restoration-Petition seeking Permission to nominate Mr. Satpal, retired Judge of High Court as one of the Arbitrators in accordance C with UNCITRAL Model-Preliminary objection that review petition not maintainable since the decision of Chief Justice of India or his nomir;ee under section 11(6) appointing Mr. Pendse, retired Judge of High Court as sole arbitrator is judicial and final-Prayer as to :1ppointment of a,.ffitrator was made earlier and was rejected-Held: Order passed by Chief Justice of India or his nominee under section 1 I (6) appointing sole arbitrator, is an Order D covered by Article 13 7 and is subject to review, thus Review Petition is maintainable-Once prayer to appoint arbitrator was refused in arbitration petition, it cannot be sought by indirect method by filing review petition-It is not rehearing of the original matter-Power of review is to be exercised with extreme care, caution and circumspection and only in exceptional cases- E Prayer for clarification of Order as to stand taken by applicant granted-However, reconsideration of the Order and nomination of arbitrator rejected-Arbitration and Conciliation Act, 1996-Section 11 (6). SBP & Company v. Patel Engineering Ltd, [2005) 8 SCC 618, referred F to. CIVIL ORIGINAL JURISDICTION : Review Petition (Civil) (D) No. 5970 of 2006 (Under Article 137 of the Constitution of India). G IN Arbitration Petition No. I of 2005. K.N. Bhat, Ugra Shankar Prasad for the Petitioner. H 410 SUPREME COURT REPORTS [2006] SUPP. 3 S.C.R. A Nikhil Nayyar for the Respondent. The Order of the Court was delivered by C",
+   "authoring": [
+    "C.K. THAKKER"
+   ],
+   "bench": [
+    "C.K. THAKKER"
+   ],
+   "caseNumber": null
+  },
+  {
+   "caseId": "2007_INSC_459",
+   "text": ",,. • t ~ .,, - ~ - . ~ A ABDUL V AHAB ABDUL MAJID SHAIKH AND ORS. v. STA TE OF GUJARAT APRIL 24, 2007 B [K.G. BALAKRISHNAN, CJ. AND G.P. MA THUR, J.] Evidence Act, 1872: S.30-Confession by co-accused-Corroborated by other evidence- c Hence truthful and voluntary-On the basis of confession, complicity of A l to A 4 in the abduction proved beyond doubt-Conviction upheld-Penal Code, 1860-ss. 342, 365, 384 r.w.s. 120 B-TADA Act, s.15. Penal Code, 1860: D Ss. 342, 365, 384 r. w. Ss. 120 B-Recovery of money from the house of A-6 and A-7-Prosecution could not prove that the money recovered was actually ransom paid by agent of victim to the abductor-Moreover, in the confession of co-accused, he did not involve these accused-Acquittal upheld. E Terrorist and Disruptive Activities (Prevention) Act, 1987: Ss. 3 and 5-Conviction under-Abduction of businessman/or ransom-Held, such an act cannot be termed as act committed with intent to overawe the public-No evidence that accused intended to strike terror in locality-Accused rightly acquitted for offence under the Act. F Prosecution case was that on 19.1.1994 when victim PW-3 was walking towards his office, a van stopped near him and pulled him into the van. His head and face were covered with cap. He was taken to the cellar of a building. The accused persons made a demand of Rs. 5 lakhs from partner of his construction company. G The relative of victims, PW-4 came with Rs 3 lakhs at the decided place and handed over the ransom money to a person sent by abductors. PW-2 lodged a complaint to the police on the same day. A case was registered by PW 14 Police Inspector and investigation started. During H 549 550 SUPREME COURT REPORTS [2007] 5 S.C.R. A [investigation, the ][house ][of ][A-6 ][was ][searched ][on ][23.3.1994 ][and a ][sum",
+   "authoring": [
+    "K.G. BALAKRISHNAN"
+   ],
+   "bench": [
+    "K.G. BALAKRISHNAN",
+    "G.P. MATHUR"
+   ],
+   "caseNumber": null
+  },
+  {
+   "caseId": "1993_INSC_208",
+   "text": "RATTAN LAL SHARMA v. MANAGING COMMITTEE, DR. HARi RAM (CO-EDUCATION) HIGHER SECONDARY SCHOOL AND ORS. ., [M.N. VENKA TACHALIAH CJ. AND G.N. RAY J.] ., MAY 14, 1993 Nawral Justice-Bias-Reasonable apprehension of bias- Member of enquiry committee deposing in support of a charge on behalf of administration-Held, it is a flagrant violation of principles of natural j11stice-Ne1110 Debet essejudex in propria cause-Punjab Aided Schools (SeCll-rity of Service) Act, 1969, S.3, A B C The appellant, appointed Principal of Dr. Hari Ram (Co-education) Higher Secondary School, was placed under suspension and a charge-sheet containing.12 charges issued to him. Charge No.12 accused him of use of an unaccounted sum of Rs. 129.37, gil'en to him by Maru Ram, teacher-in-charge of amalgamated fund. D The enquiry committee constituted comprised 3 members, of which the said Maru Ram was a member. Maru Ram deposed as a witness for the administration in support of charge no. 12. The appellant's objection to the E inclusion ofMaru Ram on the enquiry committee was O\\'erruled, and he was found guilty of some of the charges including the said charge and the Managing Committee proposed to dismiss him from service. The appellant's application for inspection of documents to enable him to make his representation before the Deputy Commissioner-the confirm-ing authority under S.3(2) of the Punjab Aided Schools (Security of Service) Act, 1969-was rejected by the Managing Committee, the Deputy Commis-sioner and the Commissioner. F The appellant then filed a writ petition in the High Court for quashing G the enquir~· report and the orders passed by the Managing Committee, the Deput~·.Commissioner and the Commissioner. The Managing Committee, opposing the petition, contended that the enquiry committee was no",
+   "authoring": [
+    "M.N. VENKATACHALIAH"
+   ],
+   "bench": [
+    "M.N. VENKATACHALIAH",
+    "G.N. RAY"
+   ],
+   "caseNumber": null
   }
  ]
 }
