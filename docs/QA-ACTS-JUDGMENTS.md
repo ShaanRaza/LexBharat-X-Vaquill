@@ -50,3 +50,6 @@ In-year disposition filters now work for every High Court (counts exact, from ex
 
 ## Update: lawyer workflow additions
 Shipped: richer case detail for all courts with a provenance panel; copyable citation on Supreme Court rows and pages; Supreme Court opening-text preview (89.0% of cases); cross-year Supreme Court search by party or citation. Not shipped: act chips on judgments (no field in the dataset), High Court previews (size, letterhead), topic search and High Court name search (need an index). Details: `docs/JUDGMENTS-HC.md`.
+
+## Update: extracted bench and case number, unified dispositions
+Supreme Court cases now show the full bench (47.8% of cases) and the case number (30.3%) extracted from the report heading, labelled "extracted" and left absent when the text is not clean; the dataset's judge stays as "authoring judge". Supreme Court dispositions share one vocabulary with the High Courts, with the recorded value kept visible. Rules and coverage: `docs/JUDGMENTS-HC.md`.
