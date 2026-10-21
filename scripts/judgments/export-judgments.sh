@@ -38,3 +38,5 @@ for y in $(duckdb -noheader -list -c "SELECT DISTINCT year FROM '$TMP/sc.parquet
   duckdb -c "COPY (SELECT * EXCLUDE (year) FROM '$TMP/sc.parquet' WHERE year = $y ORDER BY \"decisionDate\", \"caseId\") TO '$OUT/sc/$y.json' (FORMAT JSON, ARRAY true)"
 done
 rm -rf "$TMP"; ls "$OUT/sc" | wc -l; du -sh "$OUT"
+# Fields extracted from report text (full bench, case number) are merged into the year files just written.
+scripts/judgments/export-sc-fields.sh "$DIR"
