@@ -9,7 +9,9 @@
     "start": "next start --port 3100",
     "dev:release": "NEXT_PUBLIC_RELEASE=1 next dev --port 3100",
     "build:demo": "NEXT_PUBLIC_RELEASE=0 next build",
-    "test:extract": "node --test src/lib/judgments/"
+    "test:extract": "node --test src/lib/judgments/",
+    "qa:sweep": "node scripts/judgments/qa-sweep.mjs",
+    "qa:live": "node --experimental-websocket scripts/judgments/qa-live.mjs"
   },
   "dependencies": {
     "lenis": "^1.3.0",

@@ -2,6 +2,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
+import { displayDisposition } from "./disposition.mjs";
 import { buildVocabulary, cleanName, looksLikeName, nameKey, parseCaseNumber, printedBench, sameJudge, verifyBench, withinGuard } from "./extract.mjs";
 
 const fx = JSON.parse(readFileSync(new URL("./extract.fixtures.json", import.meta.url), "utf8"));
@@ -140,4 +141,17 @@ test("authoring-judge check: initials and surname, case and dots ignored; any on
   assert.deepEqual(verifyBench(["B.R. Gavai", "Augustine George Masih"], v, ["SOMEONE ELSE", "AUGUSTINE GEORGE MASIH"]), ["B.R. GAVAI", "AUGUSTINE GEORGE MASIH"]);   // any of several
   assert.equal(verifyBench(["B.R. Gavai", "Augustine George Masih"], v, ["SOMEONE ELSE"]), null);                      // none on the bench: no bench shown
   assert.deepEqual(verifyBench(["B.R. Gavai", "Augustine George Masih"], v, []), ["B.R. GAVAI", "AUGUSTINE GEORGE MASIH"]);   // no authoring field: nothing to contradict
+});
+
+test("disposition labels: equivalent spellings unify, the rest keep their meaning (regression: 'IAs' was upper-cased to 'IAS')", () => {
+  for (const raw of ["Appeal(s) allowed", "Case Allowed", "allowed"]) assert.equal(displayDisposition(raw), "Allowed");
+  assert.equal(displayDisposition("Case Partly allowed"), "Partly allowed");
+  assert.equal(displayDisposition("Disposed off"), "Disposed of");
+  assert.equal(displayDisposition("Leave Granted & Disposed off"), "Leave granted and disposed of");
+  assert.equal(displayDisposition("IA disposed"), "IA disposed");
+  assert.equal(displayDisposition("Permission to File SLP/Appeal-allowed and matter dismissed(including all pending IAs)"), "Permission to file SLP/appeal-allowed and matter dismissed(including all pending IAs)");
+  assert.equal(displayDisposition("Transferred to High Court"), "Transferred to High Court");
+  assert.equal(displayDisposition("   "), undefined);
+  assert.equal(displayDisposition(null), undefined);
+  for (const raw of ["Appeal(s) allowed", "Leave Granted & Allowed", "Dismissed After", "Proceedings closed/dropped"]) { const l = displayDisposition(raw); assert.equal(displayDisposition(l), l, `${raw} is stable`); }
 });

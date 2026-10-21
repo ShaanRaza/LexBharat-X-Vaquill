@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import CopyButton from "./CopyButton";
-import { displayDisposition } from "@/lib/judgments/disposition";
+import { displayDisposition } from "@/lib/judgments/disposition.mjs";
 
 // Supreme Court cases across all years, found by words in the title (both parties) or the citation. Static index; not full-text search.
 type Hit = { caseId: string; year: number; title: string; citation?: string; decisionDate?: string; disposition?: string };

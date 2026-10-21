@@ -6,7 +6,7 @@ import courtYears from "@/data/judgments/court-years.json";
 import courtsMeta from "@/data/judgments/courts.meta.json";
 import { ALL_COURTS } from "@/data/workspaceBrowse";
 import { HC_PAGE_SIZE, hcSourceKind, readHcFacets, readHcPage, readScPreviews, type HcFilter } from "./hcData";
-import { displayDisposition } from "./disposition";
+import { displayDisposition } from "./disposition.mjs";
 import type { CaseItem, CourtSummary, JudgmentsStore, YearCount } from "./types";
 
 const SC = "supreme-court-of-india";
