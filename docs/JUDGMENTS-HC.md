@@ -17,7 +17,7 @@ Court slugs are the 26 in `src/data/workspaceBrowse.ts`. A link without a correc
 
 ## Export shape (`scripts/judgments/export-judgments-hc.sh`)
 ```
-data/judgments-hc/                       (gitignored; 327,974 files, 11.7 GB of JSON for the full snapshot, about 2.3 GB gzipped)
+../lexbharat-data/judgments-hc/          (OUTSIDE the project, 327,974 files, 11.7 GB of JSON for the full snapshot, about 2.5 GB gzipped)
   court=<slug>/year=<YYYY>/page=<N>/data_0.json   JSON array, 100 cases per page, N from 1,
                                                    sorted by decisionDate DESC (undated last) then caseId
   court=<slug>/year=<YYYY>/disp=<label-slug>/page=<N>/data_0.json   the same cases filtered by disposition chip; each row adds mainPage
@@ -83,7 +83,7 @@ Case number is the weakest identifier: Calcutta 43%, Punjab and Haryana 52%, All
 scripts/judgments/export-judgments-hc.sh                      # full High Court export, about 3 minutes, needs the DuckDB CLI
 HC_COURTS=delhi-high-court HC_YEARS=2024-2025 scripts/judgments/export-judgments-hc.sh   # a subset (does not refresh counts)
 scripts/judgments/export-judgments.sh                         # Supreme Court case files (unchanged)
-echo "JUDGMENTS_DATA_DIR=data/judgments-hc" > .env.local      # local dev and local production build
+echo "JUDGMENTS_DATA_DIR=../lexbharat-data/judgments-hc" > .env.local      # local dev and local production build
 npm run build && npm start
 ```
 
@@ -91,8 +91,8 @@ npm run build && npm start
 The folder is too big for the repo or a Vercel function, so production reads it from a bucket: set `JUDGMENTS_DATA_URL` to the bucket's public base URL (no code change, no dependency). Without it production High Courts stay honestly count-only.
 ```bash
 scripts/judgments/export-judgments-hc.sh          # about 6 minutes, SSD attached
-scripts/judgments/gzip-for-upload.sh              # data/judgments-hc-gz, about 2.3 GB, about 30 minutes (328,000 small files)
-rclone copy data/judgments-hc-gz r2:lexbharat-judgments --header-upload "Content-Encoding: gzip" --header-upload "Content-Type: application/json" --transfers 32 --checkers 32 --progress
+scripts/judgments/gzip-for-upload.sh              # ../lexbharat-data/judgments-hc-gz, about 2.5 GB, about 40 minutes (328,000 small files)
+rclone copy ../lexbharat-data/judgments-hc-gz r2:lexbharat-judgments --header-upload "Content-Encoding: gzip" --header-upload "Content-Type: application/json" --transfers 32 --checkers 32 --progress
 ```
 Uploading the uncompressed folder also works but is 11.7 GB (over R2's 10 GB free tier). The gzip upload relies on the objects being served with `Content-Encoding: gzip`, which `fetch()` decompresses transparently.
 
@@ -106,3 +106,22 @@ Uploading the uncompressed folder also works but is 11.7 GB (over R2's 10 GB fre
 | A way to find a High Court case from its id alone; judgment text; reporter citations for High Courts | No index; text not exported; the source has none. |
 
 Filters are live: the Supreme Court (disposition, values from the year's data) and every High Court (disposition chips; bench size for Bombay, Gujarat and Orissa). Filter counts are exact because they are counted at export time.
+
+## Lawyer-facing additions (case detail, Supreme Court search and opening text)
+**Keep the export folders outside the project.** With 328,000 to 656,000 files inside the project folder, `next build` ran out of memory (4 GB heap, 7+ minutes); outside it builds in about 15 seconds. All scripts now default to `../lexbharat-data/`.
+
+### Case detail (`/workspace/browse/judgments/<court>/<year>/<caseId>`, all courts)
+Heading is the parties line (petitioner v. respondent) when both passed the sanity check, otherwise the title or case number. Then court, citation (Supreme Court: monospace, copyable) or case number with the note "None in this dataset for High Courts. Cite by case number.", decision date, disposition, judges and bench where verified, pages, record ID, and a Copy button (Supreme Court: the citation; High Courts: "Case no. X, Court (decided date)", never an invented citation). Supreme Court list rows show the citation next to the date with the same copy button.
+The page ends with **Where each field comes from**: every field marked as recorded, imperfect or absent, with the reason (`src/lib/judgments/provenance.ts`).
+
+### Supreme Court opening text (`export-sc-preview.sh`)
+Finding: one SC `case_id` holds several parallel documents (English plus Hindi, Punjabi, Gujarati and others; `language_code` tells them apart) and `chunk_index` repeats across them: only 602 of 37,014 cases have a clean 0..n-1 sequence, and offsets increase in only 70% of consecutive chunk pairs. So chunks cannot be ordered or joined, and "first chunk" is ambiguous.
+A safe document start exists for most cases: the single chunk with `language_code = 'en'` AND `char_start = 0` (exactly one in 35,592 cases; none in 1,422). Its first ~900 characters, minus the "Case:/Section:" header lines and `[TITLE]` markers, are the preview; it must be at least 200 characters and at least 85% of its words must look like words (OCR noise fails). Result: **32,946 of 37,014 cases (89.0%)** have a preview; the rest show "No clean English opening text". Previews are mostly the SCR headnote (parties, date, bench, subject, holding), with occasional OCR slips such as "BHARAT!", so the page labels them "as extracted". Hosted per year: `court=supreme-court-of-india/year=YYYY/preview.json` (`{caseId: text}`), next to the High Court pages, so production needs the upload.
+**High Courts: no preview.** About 1 KB for each of 15.7 million cases would be roughly 15 GB, and the first lines are court letterhead, not holdings.
+
+### Cross-year Supreme Court search (`GET /api/judgments/search?q=`)
+A pre-built static index (`scripts/judgments/build-sc-index.py`, 5.5 MB, bundled; needs no SSD and no new dependency) matches words at the start of words in the case title (which carries both parties) and in the citation: "kesavananda", "state of punjab", "Sharma v Devi Lal", "[1985] 2 S.C.R. 224" all work, in a few milliseconds. Results whose title or citation contains the whole phrase come first; each group is newest first. The browse page shows these results above the court list.
+**Not built, and why:** search by topic or holding (needs full text, which cannot be ordered safely) and High Court name search (15.7 million records, no index). Options for a later decision: Postgres full-text search (needs a hosted Postgres and a driver), or a search service (Typesense, Meilisearch, OpenSearch). Both are new infrastructure.
+
+### Acts referred to: not shown
+Judgments carry no act-reference field. The legislation files' `acts_referenced` links acts to acts. Linking a judgment to the acts it interprets would mean guessing from text we cannot order, so no chips are shown; the provenance panel says so.

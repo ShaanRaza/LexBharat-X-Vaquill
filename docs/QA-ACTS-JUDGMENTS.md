@@ -47,3 +47,6 @@ Deferred on purpose: text snippets (no clean source), High Court filters and sea
 
 ## Update: High Court filters
 In-year disposition filters now work for every High Court (counts exact, from export-time facets) and a bench-size filter for Bombay, Gujarat and Orissa; one filter at a time. Tested locally: Bombay 2025, Delhi 2025, Kerala 2024 (facet totals equal list totals, filtered lists walked page by page with no gaps or repeats, filtered rows open the right case detail, newest first). Still deferred: party-name search for High Courts (needs an index), combined filters. Fixed: a case title that was exactly "None" showed as "None" in the list.
+
+## Update: lawyer workflow additions
+Shipped: richer case detail for all courts with a provenance panel; copyable citation on Supreme Court rows and pages; Supreme Court opening-text preview (89.0% of cases); cross-year Supreme Court search by party or citation. Not shipped: act chips on judgments (no field in the dataset), High Court previews (size, letterhead), topic search and High Court name search (need an index). Details: `docs/JUDGMENTS-HC.md`.
