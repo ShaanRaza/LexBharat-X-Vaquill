@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import CopyButton from "./CopyButton";
+import { displayDisposition } from "@/lib/judgments/disposition";
 
 // Supreme Court cases across all years, found by words in the title (both parties) or the citation. Static index; not full-text search.
 type Hit = { caseId: string; year: number; title: string; citation?: string; decisionDate?: string; disposition?: string };
@@ -36,7 +37,7 @@ export default function ScSearchResults({ q }: { q: string }) {
                 <p className="mt-1.5 flex flex-wrap items-center gap-1.5 text-[12px] text-[#535151]">
                   {fmtDate(c.decisionDate) && <span className={chip}>{fmtDate(c.decisionDate)}</span>}
                   {c.citation && <span className="relative z-10 inline-flex items-center gap-1.5"><code className="font-mono text-[12px] text-foreground">{c.citation}</code><CopyButton text={c.citation} label="Copy citation" /></span>}
-                  {c.disposition && <span className={chip}>{c.disposition}</span>}
+                  {c.disposition && <span className={chip} title={`As recorded: ${c.disposition}`}>{displayDisposition(c.disposition)}</span>}
                   <span className="font-mono">· {c.caseId}</span>
                 </p>
               </li>

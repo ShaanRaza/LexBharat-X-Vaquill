@@ -6,6 +6,7 @@ import courtYears from "@/data/judgments/court-years.json";
 import courtsMeta from "@/data/judgments/courts.meta.json";
 import { ALL_COURTS } from "@/data/workspaceBrowse";
 import { HC_PAGE_SIZE, hcSourceKind, readHcFacets, readHcPage, readScPreviews, type HcFilter } from "./hcData";
+import { displayDisposition } from "./disposition";
 import type { CaseItem, CourtSummary, JudgmentsStore, YearCount } from "./types";
 
 const SC = "supreme-court-of-india";
@@ -26,7 +27,7 @@ async function scYear(year: number): Promise<CaseItem[]> {
   if (!Number.isInteger(year) || !byCourt.get(SC)?.some((y) => y.year === year)) return [];
   const rows = (await import(`@/data/judgments/sc/${year}.json`)).default as Record<string, unknown>[];
   // The export is oldest first; the product shows newest first (same order the High Court pages use).
-  return rows.map((r) => { const o: Record<string, unknown> = {}; for (const [k, v] of Object.entries(r)) if (v !== null && v !== undefined) o[k] = v; return o as unknown as CaseItem; }).reverse();
+  return rows.map((r) => { const o: Record<string, unknown> = {}; for (const [k, v] of Object.entries(r)) if (v !== null && v !== undefined) o[k] = v; const c = o as unknown as CaseItem; const label = displayDisposition(c.disposition); if (label) c.dispositionLabel = label; return c; }).reverse();
 }
 
 export const jsonJudgmentsStore: JudgmentsStore = {
@@ -38,9 +39,9 @@ export const jsonJudgmentsStore: JudgmentsStore = {
       const needle = q.search?.toLowerCase();
       const year = await scYear(q.year);
       // Facet counts describe the whole year (before the search and filters), like a normal faceted list.
-      const counts = new Map<string, number>(); for (const c of year) if (c.disposition) counts.set(c.disposition, (counts.get(c.disposition) ?? 0) + 1);
+      const counts = new Map<string, number>(); for (const c of year) if (c.dispositionLabel) counts.set(c.dispositionLabel, (counts.get(c.dispositionLabel) ?? 0) + 1);
       const facets = { disposition: [...counts].map(([value, count]) => ({ value, count })).sort((a, b) => b.count - a.count || a.value.localeCompare(b.value)) };
-      const all = year.filter((c) => (!needle || [c.title, c.citation, c.petitioner, c.respondent].some((f) => f?.toLowerCase().includes(needle))) && (!q.disposition || c.disposition === q.disposition));
+      const all = year.filter((c) => (!needle || [c.title, c.citation, c.petitioner, c.respondent].some((f) => f?.toLowerCase().includes(needle))) && (!q.disposition || c.dispositionLabel === q.disposition));
       const start = (q.page - 1) * q.pageSize;
       return { available: true, results: all.slice(start, start + q.pageSize), total: all.length, facets };
     }

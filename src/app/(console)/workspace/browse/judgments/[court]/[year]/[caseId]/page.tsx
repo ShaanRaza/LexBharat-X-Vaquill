@@ -27,6 +27,8 @@ export default async function CasePage({ params, searchParams }: { params: Promi
   const parties = c.petitioner && c.respondent ? `${c.petitioner} v. ${c.respondent}` : null;
   const heading = parties ?? c.title ?? (c.caseNumber ? `Case ${c.caseNumber}` : `Case record ${c.caseId}`);
   const date = longDate(c.decisionDate);
+  const benchN = c.benchExtracted?.length ?? c.benchSize;
+  const benchWord = (n: number) => (n === 1 ? "Single judge" : n === 2 ? "Division bench" : `${n}-judge bench`);
   // Best identifier to copy: the Supreme Court citation; otherwise the case number with court and date. Never an invented citation.
   const ref = c.citation ?? `${c.caseNumber ? `Case no. ${c.caseNumber}` : `Record ${c.caseId}`}, ${court.name}${date ? ` (decided ${date})` : `, ${year}`}`;
   const chip = "rounded-md bg-accent px-2 py-0.5";
@@ -35,15 +37,17 @@ export default async function CasePage({ params, searchParams }: { params: Promi
     ["Decision date", date ?? `Not recorded (listed under ${year} from the record's year)`],
     ...(sc ? ([["Citation", c.citation ? <span key="c" className="inline-flex items-center gap-2"><code className="font-mono">{c.citation}</code><CopyButton text={c.citation} label="Copy citation" /></span> : "No citation recorded for this case"]] as [string, React.ReactNode][])
            : ([["Reporter citation", "None in this dataset for High Courts. Cite by case number."], ["Case number", c.caseNumber ?? "Not recorded"]] as [string, React.ReactNode][])),
+    ...(sc ? ([["Case number", c.caseNumberExtracted ? <span key="cn">{c.caseNumberExtracted} <span className="text-[12px] text-muted">◐ extracted from the report heading; the dataset has no Supreme Court case numbers</span></span> : "Not in the dataset, and not found in a clean form in the report heading"]] as [string, React.ReactNode][]) : []),
+    ...(c.benchExtracted?.length ? ([["Full bench (extracted)", <span key="fb">{c.benchExtracted.join(", ")} <span className="text-[12px] text-muted">◐ {c.benchExtracted.length} {c.benchExtracted.length === 1 ? "judge" : "judges"}, extracted from the report heading</span></span>]] as [string, React.ReactNode][]) : []),
     ["Disposition", c.dispositionLabel && c.disposition && c.dispositionLabel.toLowerCase() !== c.disposition.toLowerCase() ? `${c.dispositionLabel} (as recorded: ${c.disposition})` : (c.dispositionLabel ?? c.disposition ?? "Not recorded")],
     ...(c.title && c.title !== heading ? ([["Case reference (as titled)", c.title]] as [string, React.ReactNode][]) : []),
-    ...(c.judges?.length ? ([[sc ? "Judges (as listed in the source)" : "Judges", c.judges.join(", ")]] as [string, React.ReactNode][]) : []),
-    ...(c.benchSize ? ([["Bench", c.benchSize === 1 ? "Single judge" : c.benchSize === 2 ? "Division bench" : `${c.benchSize}-judge bench`]] as [string, React.ReactNode][]) : []),
+    ...(c.judges?.length ? ([[sc ? "Authoring judge (as listed in the source)" : "Judges", c.judges.join(", ")]] as [string, React.ReactNode][]) : []),
+    ...(!sc && c.benchSize ? ([["Bench", benchWord(c.benchSize)]] as [string, React.ReactNode][]) : []),
     ...(c.pages ? ([["Pages (extracted text)", String(c.pages)]] as [string, React.ReactNode][]) : []),
     ...(c.dateOfRegistration ? ([["Registered (as recorded)", c.dateOfRegistration]] as [string, React.ReactNode][]) : []),
     ["Record ID", <span key="id" className="font-mono">{c.caseId}</span>],
   ];
-  const prov = provenanceRows(slug, { parties: !!parties, judges: !!c.judges?.length, bench: !!c.benchSize, pages: !!c.pages, preview: !!preview, citation: !!c.citation, caseNumber: !!c.caseNumber, disposition: !!(c.disposition || c.dispositionLabel), date: !!c.decisionDate });
+  const prov = provenanceRows(slug, { parties: !!parties, judges: !!c.judges?.length, bench: !!benchN, benchExtracted: !!c.benchExtracted?.length, caseNumberExtracted: !!c.caseNumberExtracted, pages: !!c.pages, preview: !!preview, citation: !!c.citation, caseNumber: !!c.caseNumber, disposition: !!(c.disposition || c.dispositionLabel), date: !!c.decisionDate });
   const mark = { shown: "✓", partly: "◐", absent: "–" } as const;
   return (
     <ConsoleShell variant="workspace">
@@ -57,11 +61,12 @@ export default async function CasePage({ params, searchParams }: { params: Promi
         <p className="mt-1.5 flex flex-wrap items-center gap-2 text-[14px] text-[#535151]">
           <span>{court.name}</span>
           {c.citation ? <><span aria-hidden>·</span><code className="font-mono text-foreground">{c.citation}</code></> : c.caseNumber ? <><span aria-hidden>·</span><span>Case no. {c.caseNumber}</span></> : null}
+          {sc && c.caseNumberExtracted ? <><span aria-hidden>·</span><span title="Extracted from the report heading">{c.caseNumberExtracted} ◐</span></> : null}
           <span aria-hidden>·</span><span>{date ?? year}</span>
         </p>
         <p className="mt-3 flex flex-wrap items-center gap-1.5 text-[12px] text-[#535151]">
           {(c.dispositionLabel ?? (sc ? c.disposition : undefined)) && <span className={chip}>{c.dispositionLabel ?? c.disposition}</span>}
-          {c.benchSize ? <span className={chip}>{c.benchSize === 1 ? "Single judge" : c.benchSize === 2 ? "Division bench" : `${c.benchSize}-judge bench`}</span> : null}
+          {benchN ? <span className={chip} title={c.benchExtracted?.length ? "Counted from the bench extracted from the report heading" : undefined}>{benchWord(benchN)}{c.benchExtracted?.length ? " (extracted)" : ""}</span> : null}
           {c.pages ? <span className={chip}>{c.pages} {c.pages === 1 ? "page" : "pages"}</span> : null}
           <CopyButton text={ref} label={c.citation ? "Copy citation" : "Copy case reference"} className="!text-[12px] !px-2 !py-0.5" />
           <span className="text-[12px] text-muted">{c.citation ? "Copies the citation" : "Copies the case number with court and date"}</span>

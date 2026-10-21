@@ -7,6 +7,10 @@ export type CaseItem = {
   dateOfRegistration?: string;
   /** High Courts: normalized chip text for the ~20 common dispositions (Allowed, Dismissed, Disposed of...); absent for the other spellings. */
   dispositionLabel?: string;
+  /** Supreme Court, extracted from the report heading "[A and B, JJ.]" (scripts/judgments/extract-sc-fields.py): the full bench, only when every name checks out. `judges` stays the dataset's authoring judge. */
+  benchExtracted?: string[];
+  /** Supreme Court, extracted from the heading "(Criminal Appeal No. 512 of 2020)" when the pattern matches cleanly. */
+  caseNumberExtracted?: string;
   /** High Courts, only where the judge list passed the name check (Bombay, Gujarat, Orissa): number of judges named. */
   benchSize?: number;
   /** Pages of extracted text (the last page the text reaches). */
