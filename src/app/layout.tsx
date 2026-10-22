@@ -11,9 +11,9 @@ const mono = Source_Code_Pro({ subsets: ["latin"], variable: "--font-mono", disp
 const serif = Newsreader({ subsets: ["latin"], variable: "--font-serif", display: "swap" });
 
 export const metadata: Metadata = {
-  title: RELEASE ? "LexBharat | US primary law API" : "LexBharat | US primary law API (local mock)",
+  title: RELEASE ? "LexBharat | Indian Acts and court judgments" : "LexBharat | Indian Acts and court judgments (local mock)",
   description:
-    RELEASE ? "LexBharat: an open API for US primary law, with a source link on every section." : "LexBharat: local educational build of an API marketing page. Placeholder content and mocked backend.",
+    RELEASE ? "LexBharat: browse Indian Acts and court judgment metadata, with the source credited on every page." : "LexBharat: local educational build of an API marketing page. Placeholder content and mocked backend.",
   robots: { index: false, follow: false },
 };
 
