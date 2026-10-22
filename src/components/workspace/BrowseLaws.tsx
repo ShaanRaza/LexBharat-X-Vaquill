@@ -112,6 +112,7 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
 
       <div className="mt-5">
         <SearchField id="browse-q" value={q} onChange={setQ} label={tab === "acts" ? "Search act titles" : "Search cases by party name or case number, or filter courts by name"}
+          shortPlaceholder={tab === "acts" ? "Act name" : "Party name or 933/2024"}
           placeholder={tab === "acts" ? "Try \"Companies Act\" or \"Bharatiya Nyaya Sanhita\"" : "Try \"State of UP\", a surname, or a case number like 933/2024"} />
         <p className="mt-2 px-1 text-[13px] text-[#535151]">{tab === "acts" ? "This box searches act titles (at least 2 characters)." : "Type 2 or more characters to search Supreme Court and High Court cases of every year by party name or case number as recorded in the dataset (not judgment text); the court list below also narrows by name."} Boolean operators and citation search are not available yet.</p>
       </div>

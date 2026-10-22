@@ -60,7 +60,7 @@ export default function CaseList({ court, year, courtName, searchable, filterabl
   const facets = cross ? undefined : data?.facets, pages = data ? Math.max(1, Math.ceil(data.total / data.pageSize)) : 1;
   return (
     <div className="mt-5">
-      {searchable && <SearchField id="case-q" value={q} onChange={setQ} label={`Search ${courtName ?? "cases"}`} placeholder={isHc ? "Try a petitioner or respondent name, a case number like 933/2024, or a year" : "Try a party name, a title word, a citation or a case number like 5491/2024"} />}
+      {searchable && <SearchField id="case-q" value={q} onChange={setQ} shortPlaceholder={isHc ? "Party name or 933/2024" : "Party name or 5491/2024"} label={`Search ${courtName ?? "cases"}`} placeholder={isHc ? "Try a petitioner or respondent name, a case number like 933/2024, or a year" : "Try a party name, a title word, a citation or a case number like 5491/2024"} />}
       {(searchable || filterable) && <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] text-[#535151]">
         <span role="group" aria-label="Where to search" className="inline-flex overflow-hidden rounded-lg ring-1 ring-border">
           {([["year", `${year} only`], ["all", "All years"]] as const).map(([v, l]) => <button key={v} type="button" aria-pressed={scope === v} onClick={() => setScope(v)} className={`px-3 py-1 ${scope === v ? "bg-primary text-white" : "bg-surface text-[#3f3a35] hover:bg-accent"}`}>{l}</button>)}

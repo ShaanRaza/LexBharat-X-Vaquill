@@ -1,12 +1,13 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 
 // Top bar of the Acts & Judgments workspace: product switcher, country selector and a "Data API" link. Original layout, our own markup and icons.
 // To launch the Legal Workspace product later: in PRODUCTS set `soon: false` and give it an `href` (and `current` moves wherever it should). Nothing else changes.
 // Countries other than India are listed as "Coming soon" and are not selectable: only Indian data exists, so nothing here switches any data.
 export const PRODUCTS = [
-  { id: "data", name: "Legal Data & API", sub: "Acts, judgments and legal data, by API.", href: "/developer?tab=overview", current: true, soon: false },
+  { id: "data", name: "Legal Data & API", sub: "Acts, judgments and legal data, by API.", href: "/workspace/browse", current: true, soon: false },
   { id: "workspace", name: "Legal Workspace", sub: "Draft, review and research in one place.", href: "", current: false, soon: true },
 ];
 export const COUNTRIES = [
@@ -20,7 +21,7 @@ type Item = { id: string; label: string; sub?: string; flag?: string; checked: b
 const Chevron = () => <svg aria-hidden width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-muted"><path d="M6 9l6 6 6-6" /></svg>;
 
 function TopMenu({ title, ariaLabel, items, open, setOpen, testid, trigger, triggerClass }: { title: string; ariaLabel: string; items: Item[]; open: boolean; setOpen: (o: boolean) => void; testid: string; trigger: React.ReactNode; triggerClass: string }) {
-  const root = useRef<HTMLDivElement>(null), btn = useRef<HTMLButtonElement>(null), refs = useRef<(HTMLElement | null)[]>([]), uid = useId();
+  const here = usePathname(), root = useRef<HTMLDivElement>(null), btn = useRef<HTMLButtonElement>(null), refs = useRef<(HTMLElement | null)[]>([]), uid = useId();
   const close = (refocus: boolean) => { setOpen(false); if (refocus) btn.current?.focus(); };
   useEffect(() => {
     if (!open) return;
@@ -37,7 +38,7 @@ function TopMenu({ title, ariaLabel, items, open, setOpen, testid, trigger, trig
     else if (e.key === "Home") { e.preventDefault(); move(0); }
     else if (e.key === "End") { e.preventDefault(); move(items.length - 1); }
     else if (e.key === "Tab") setOpen(false);
-    else if (e.key === "Enter" || e.key === " ") { e.preventDefault(); const it = items[i]; if (!it.soon) { if (it.href) refs.current[i]?.click(); else close(true); } }
+    else if (e.key === "Enter" || e.key === " ") { e.preventDefault(); const it = items[i]; if (!it.soon) { if (it.href && it.href.split("?")[0] !== here) refs.current[i]?.click(); else close(true); } }
   };
   return (
     <div ref={root} className="sm:relative">
@@ -55,7 +56,7 @@ function TopMenu({ title, ariaLabel, items, open, setOpen, testid, trigger, trig
               <span aria-hidden className="w-4 shrink-0 text-center text-[14px] text-primary">{it.checked ? "✓" : ""}</span>
             </>;
             const common = { role: "menuitemradio" as const, "aria-checked": it.checked, "aria-disabled": it.soon || undefined, tabIndex: -1, onKeyDown: (e: React.KeyboardEvent) => onKey(e, i), className: cls };
-            return it.href && !it.soon
+            return it.href && !it.soon && it.href.split("?")[0] !== here   // the page you are already on just closes the menu
               ? <Link key={it.id} href={it.href} ref={(el) => { refs.current[i] = el; }} {...common} onClick={() => setOpen(false)}>{body}</Link>
               : <div key={it.id} ref={(el) => { refs.current[i] = el; }} {...common} onClick={() => { if (!it.soon) close(true); }}>{body}</div>;
           })}
