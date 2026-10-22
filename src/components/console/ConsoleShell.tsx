@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import TopBar from "./TopBar";
 import { clearMockSession, useMockSession } from "@/lib/mockSession";
 
 // Layout of the authenticated developer console as captured in docs/PLAYGROUND-TEARDOWN.md: collapsible left sidebar, top bar with a
@@ -167,15 +168,15 @@ export default function ConsoleShell({ tab, variant = "data", children }: { tab?
           </div>
         )}
         <div className="min-w-0 flex-1">
-          <header className="flex flex-wrap items-center gap-x-3 gap-y-2 px-4 py-3 md:px-8">
+          <header className="relative flex flex-wrap items-center gap-x-3 gap-y-2 px-4 py-3 md:px-8">
             <button ref={menuBtn} type="button" aria-label={collapsed ? "Show sidebar" : "Open menu"} aria-expanded={open} onClick={() => (window.matchMedia("(min-width: 768px)").matches ? setCollapsed((c) => !c) : setOpen(true))} className="rounded-[4px] p-2 text-muted hover:bg-accent"><Icon d="M4 7h16M4 12h16M4 17h16" /></button>
+            {variant === "workspace" ? <TopBar /> : <>
             <div className="flex items-center rounded-full bg-accent py-1 pl-1 pr-3 text-[14px]">
               <span className="rounded-full bg-primary px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">Product</span>
-              {variant === "workspace"
-                ? <><span aria-hidden className="ml-2 text-muted"><Icon d={BOOKS_ICON} size={14} /></span><span className="ml-1.5">Workspace</span></>
-                : <><span className="ml-2 font-mono text-[12px] text-muted">&lt;/&gt;</span><span className="ml-1.5">Data &amp; API</span></>}<span aria-hidden className="ml-1.5 text-[10px] text-muted">▾</span>
+              <span className="ml-2 font-mono text-[12px] text-muted">&lt;/&gt;</span><span className="ml-1.5">Data &amp; API</span><span aria-hidden className="ml-1.5 text-[10px] text-muted">▾</span>
             </div>
-            <span className="flex items-center gap-1 rounded-full bg-accent px-2.5 py-1 text-[14px]" title={variant === "workspace" ? "Jurisdiction: India" : "Jurisdiction: United States"}><span aria-hidden>{variant === "workspace" ? "🇮🇳" : "🇺🇸"}</span><span className="sr-only">{variant === "workspace" ? "India" : "United States"}</span><span aria-hidden className="text-[10px] text-muted">▾</span></span>
+            <span className="flex items-center gap-1 rounded-full bg-accent px-2.5 py-1 text-[14px]" title="Jurisdiction: United States"><span aria-hidden>🇺🇸</span><span className="sr-only">United States</span><span aria-hidden className="text-[10px] text-muted">▾</span></span>
+            </>}
             {variant === "data" && <Link href="/docs/api-guide/changelog" className="ml-auto hidden min-h-8 items-center gap-1.5 rounded-full bg-accent/60 px-3 text-[13px] text-[#535151] hover:text-foreground lg:inline-flex">Coverage is expanding fast. <strong className="font-semibold text-foreground">Changelog</strong><span aria-hidden>↗</span></Link>}
             {variant === "data" && <span className="ml-auto rounded-[2px] border border-warning/50 bg-warning/10 px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-warning lg:ml-0">Demo</span>}
           </header>

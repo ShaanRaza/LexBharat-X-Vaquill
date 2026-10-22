@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import CaseSearchResults from "./CaseSearchResults";
-import SearchField from "./SearchField";
+import SearchField, { clearFiltersCls, filterLabel, filterSelect } from "./SearchField";
 import { useEffect, useMemo, useState } from "react";
 import { ACT_CATEGORIES, ACT_STATUSES, ALL_COURTS, BROWSE_STATS, HIGH_COURTS, SUPREME_COURT, type ActItem, type Court } from "@/data/workspaceBrowse";
 
@@ -83,7 +83,8 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
   const needle = q.trim().toLowerCase();
   const high = useMemo(() => HIGH_COURTS.filter((c) => !needle || c.name.toLowerCase().includes(needle)).map(withCount), [needle, jc]); // eslint-disable-line react-hooks/exhaustive-deps
   const showSC = !needle || SUPREME_COURT.name.toLowerCase().includes(needle);
-  const sel = "h-9 rounded-lg bg-accent px-3 text-[14px] outline-none ring-1 ring-transparent focus:bg-surface focus:ring-primary/50";
+  const sel = filterSelect, anyFilter = !!(category || state || dept || status || sort !== "year_desc");
+  const clearFilters = () => { setCategory(""); setState(""); setDept(""); setStatus(""); setSort("year_desc"); };
 
   return (
     <div className="mx-auto max-w-[880px] pt-2">
@@ -137,16 +138,17 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
         </div>
       ) : (
         <div role="tabpanel" className="mt-6">
-          <div className="flex flex-wrap items-center gap-3">
-            <label className="sr-only" htmlFor="f-cat">Category</label>
-            <select id="f-cat" className={sel} value={category} onChange={(e) => { const v = e.target.value; setCategory(v); if (v && v !== "state") setState(""); if (v && v !== "regulatory") setDept(""); }}><option value="">All categories</option>{categories.map((x) => <option key={x} value={x}>{label(x)}</option>)}</select>
-            {stats?.states?.length && (category === "" || category === "state") ? <><label className="sr-only" htmlFor="f-state">State or UT</label><select id="f-state" className={sel} value={state} onChange={(e) => setState(e.target.value)}><option value="">All states and UTs</option>{stats.states.map((x) => <option key={x} value={x}>{label(x)}</option>)}</select></> : null}
-            {stats?.departments?.length && (category === "" || category === "regulatory") ? <><label className="sr-only" htmlFor="f-dept">Regulator</label><select id="f-dept" className={sel} value={dept} onChange={(e) => setDept(e.target.value)}><option value="">All regulators</option>{stats.departments.map((x) => <option key={x} value={x}>{label(x)}</option>)}</select></> : null}
-            <label className="sr-only" htmlFor="f-status">Status</label>
-            <select id="f-status" className={sel} value={status} onChange={(e) => setStatus(e.target.value)}><option value="">Any status</option>{statuses.map((x) => <option key={x} value={x}>{label(x)}</option>)}</select>
-            <label className="sr-only" htmlFor="f-sort">Sort</label>
-            <select id="f-sort" className={sel} value={sort} onChange={(e) => setSort(e.target.value)}><option value="year_desc">Newest first</option><option value="year_asc">Oldest first</option><option value="title_asc">Title A to Z</option><option value="title_desc">Title Z to A</option></select>
-            <span className="ml-auto text-[13px] text-muted" role="status">{data ? `${fmt(data.total)} acts${data.source === "mock" ? " (mock rows)" : ""}` : ""}</span>
+          <div className="flex flex-wrap items-end gap-3">
+            <div className="flex flex-col gap-1"><label htmlFor="f-cat" className={filterLabel}>Category</label>
+            <select id="f-cat" className={sel(!!(category))} value={category} onChange={(e) => { const v = e.target.value; setCategory(v); if (v && v !== "state") setState(""); if (v && v !== "regulatory") setDept(""); }}><option value="">All categories</option>{categories.map((x) => <option key={x} value={x}>{label(x)}</option>)}</select></div>
+            {stats?.states?.length && (category === "" || category === "state") ? <><div className="flex flex-col gap-1"><label htmlFor="f-state" className={filterLabel}>State or UT</label><select id="f-state" className={sel(!!(state))} value={state} onChange={(e) => setState(e.target.value)}><option value="">All states and UTs</option>{stats.states.map((x) => <option key={x} value={x}>{label(x)}</option>)}</select></div></> : null}
+            {stats?.departments?.length && (category === "" || category === "regulatory") ? <><div className="flex flex-col gap-1"><label htmlFor="f-dept" className={filterLabel}>Regulator</label><select id="f-dept" className={sel(!!(dept))} value={dept} onChange={(e) => setDept(e.target.value)}><option value="">All regulators</option>{stats.departments.map((x) => <option key={x} value={x}>{label(x)}</option>)}</select></div></> : null}
+            <div className="flex flex-col gap-1"><label htmlFor="f-status" className={filterLabel}>Status</label>
+            <select id="f-status" className={sel(!!(status))} value={status} onChange={(e) => setStatus(e.target.value)}><option value="">Any status</option>{statuses.map((x) => <option key={x} value={x}>{label(x)}</option>)}</select></div>
+            <div className="flex flex-col gap-1"><label htmlFor="f-sort" className={filterLabel}>Sort</label>
+            <select id="f-sort" className={sel(!!(sort !== "year_desc"))} value={sort} onChange={(e) => setSort(e.target.value)}><option value="year_desc">Newest first</option><option value="year_asc">Oldest first</option><option value="title_asc">Title A to Z</option><option value="title_desc">Title Z to A</option></select></div>
+            {anyFilter && <button type="button" onClick={clearFilters} className={clearFiltersCls}>Clear filters</button>}
+            <span className="ml-auto self-end pb-3 text-[13px] text-muted" role="status">{data ? `${fmt(data.total)} acts${data.source === "mock" ? " (mock rows)" : ""}` : ""}</span>
           </div>
           {err && <div role="alert" className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-error/40 bg-error/5 p-3 text-[14px]"><span>{err}</span><button type="button" onClick={() => setRetry((n) => n + 1)} className="h-8 rounded-lg px-3 ring-1 ring-border hover:bg-accent">Try again</button></div>}
           {!data && !err && <div className="mt-4 space-y-2" aria-busy="true">{[0, 1, 2, 3].map((i) => <div key={i} className="console-skel h-16 rounded-xl bg-accent" />)}</div>}

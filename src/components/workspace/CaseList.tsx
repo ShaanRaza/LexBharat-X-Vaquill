@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import CaseRow from "./CaseRow";
-import SearchField from "./SearchField";
+import SearchField, { clearFiltersCls, filterLabel, filterSelect } from "./SearchField";
 import { displayDisposition } from "@/lib/judgments/disposition.mjs";
 import type { CaseItem, Facet } from "@/lib/judgments/types";
 
@@ -56,23 +56,24 @@ export default function CaseList({ court, year, courtName, searchable, filterabl
     }, q ? 250 : 0);
     return () => { clearTimeout(t); ac.abort(); };
   }, [court, year, q, scope, disp, bench, page, retry, hcSearch, scAll, browseAll, searching]);
-  const field = "h-11 rounded-xl bg-accent px-4 text-[15px] outline-none ring-1 ring-transparent focus:bg-surface focus:ring-primary/50";
+  const field = filterSelect(false);
   const facets = cross ? undefined : data?.facets, pages = data ? Math.max(1, Math.ceil(data.total / data.pageSize)) : 1;
   return (
     <div className="mt-5">
       {searchable && <SearchField id="case-q" value={q} onChange={setQ} label={`Search ${courtName ?? "cases"}`} placeholder={isHc ? "Try a petitioner or respondent name, a case number like 933/2024, or a year" : "Try a party name, a title word, a citation or a case number like 5491/2024"} />}
       {(searchable || filterable) && <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] text-[#535151]">
         <span role="group" aria-label="Where to search" className="inline-flex overflow-hidden rounded-lg ring-1 ring-border">
-          {([["year", `${year} only`], ["all", "All years"]] as const).map(([v, l]) => <button key={v} type="button" aria-pressed={scope === v} onClick={() => setScope(v)} className={`px-3 py-1 ${scope === v ? "bg-primary text-white" : "hover:bg-accent"}`}>{l}</button>)}
+          {([["year", `${year} only`], ["all", "All years"]] as const).map(([v, l]) => <button key={v} type="button" aria-pressed={scope === v} onClick={() => setScope(v)} className={`px-3 py-1 ${scope === v ? "bg-primary text-white" : "bg-surface text-[#3f3a35] hover:bg-accent"}`}>{l}</button>)}
         </span>
         {searchable && <span>{isHc ? "Searches party names, case numbers and case years as recorded in the dataset, not judgment text." : "Searches the title (both parties), citation and case number from the judgment heading, not judgment text."}</span>}
       </div>}
       {(filterable && !cross && (facets?.disposition.length || facets?.bench?.length)) ? (
-        <div className="mt-3 flex flex-wrap gap-3">
-          {facets?.disposition.length ? <><label htmlFor="case-disp" className="sr-only">Disposition</label>
-            <select id="case-disp" value={disp} onChange={(e) => { setDisp(e.target.value); setBench(""); }} className={field}><option value="">Any disposition</option>{facets.disposition.map((f) => <option key={f.value} value={f.value}>{f.value} ({f.count.toLocaleString("en-IN")})</option>)}</select></> : null}
-          {facets?.bench?.length ? <><label htmlFor="case-bench" className="sr-only">Bench size</label>
-            <select id="case-bench" value={bench} onChange={(e) => { setBench(e.target.value); setDisp(""); }} className={field}><option value="">Any bench size</option>{facets.bench.map((f) => <option key={f.value} value={f.value}>{BENCH_FILTER[f.value] ?? f.value} ({f.count.toLocaleString("en-IN")})</option>)}</select></> : null}
+        <div className="mt-3 flex flex-wrap items-end gap-3">
+          {facets?.disposition.length ? <div className="flex flex-col gap-1"><label htmlFor="case-disp" className={filterLabel}>Disposition</label>
+            <select id="case-disp" value={disp} onChange={(e) => { setDisp(e.target.value); setBench(""); }} className={filterSelect(!!disp)}><option value="">Any disposition</option>{facets.disposition.map((f) => <option key={f.value} value={f.value}>{f.value} ({f.count.toLocaleString("en-IN")})</option>)}</select></div> : null}
+          {facets?.bench?.length ? <div className="flex flex-col gap-1"><label htmlFor="case-bench" className={filterLabel}>Bench size</label>
+            <select id="case-bench" value={bench} onChange={(e) => { setBench(e.target.value); setDisp(""); }} className={filterSelect(!!bench)}><option value="">Any bench size</option>{facets.bench.map((f) => <option key={f.value} value={f.value}>{BENCH_FILTER[f.value] ?? f.value} ({f.count.toLocaleString("en-IN")})</option>)}</select></div> : null}
+          {(disp || bench) && <button type="button" onClick={() => { setDisp(""); setBench(""); }} className={clearFiltersCls}>Clear filters</button>}
         </div>
       ) : null}
       {!searchable && <p className="mt-3 rounded-lg bg-accent px-4 py-2.5 text-[13px] text-[#535151]">Newest first.{filterable ? " Filters apply one at a time. Bench size is offered only for courts whose judge data is reliable." : " Filters are not available for this court yet."} Searching by party name is not available for High Courts on this site yet: it needs the High Court search index, which is not loaded here. Short text previews are not available yet. High Court records usually have a case number but no reporter citation.</p>}
