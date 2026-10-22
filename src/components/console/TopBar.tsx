@@ -7,7 +7,7 @@ import { useEffect, useId, useRef, useState } from "react";
 // To launch the Legal Workspace product later: in PRODUCTS set `soon: false` and give it an `href` (and `current` moves wherever it should). Nothing else changes.
 // Countries other than India are listed as "Coming soon" and are not selectable: only Indian data exists, so nothing here switches any data.
 export const PRODUCTS = [
-  { id: "data", name: "Legal Data & API", sub: "Acts, judgments and legal data, by API.", href: "/workspace/browse", current: true, soon: false },
+  { id: "data", name: "Legal Data & API", sub: "Acts, judgments and legal data, by API.", href: "", current: true, soon: false },
   { id: "workspace", name: "Legal Workspace", sub: "Draft, review and research in one place.", href: "", current: false, soon: true },
 ];
 export const COUNTRIES = [

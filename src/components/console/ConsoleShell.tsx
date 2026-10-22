@@ -6,7 +6,8 @@ import TopBar from "./TopBar";
 import { clearMockSession, useMockSession } from "@/lib/mockSession";
 
 // Layout of the authenticated developer console as captured in docs/PLAYGROUND-TEARDOWN.md: collapsible left sidebar, top bar with a
-// hamburger, the "PRODUCT · Data & API" pill and a US-flag jurisdiction picker. Sidebar width, icons and the mobile drawer are INFERRED
+// hamburger, product switcher and country selector. ONE shell for every page: the developer console (variant "data") and the Acts & Judgments
+// browser (variant "workspace") share the same sidebar and top bar; the variant only picks the highlighted item and the console-only badges. Sidebar width, icons and the mobile drawer are INFERRED
 // (the teardown only observed ~800 px). The wordmark is typeset text, not the real logo file.
 
 // Tab status (every sidebar item is either a working destination or intentionally disabled):
@@ -47,13 +48,7 @@ function Icon({ d, size = 18 }: { d: string; size?: number }) {
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={d} /></svg>;
 }
 
-// Workspace variant: the sidebar of the product's "Workspace" area, used by the Acts & Judgments browser (/workspace/browse). Only that page
-// is recreated; New Chat, WhatsApp Bot and Settings are shown but disabled, and "Data API" leads back to the developer console.
 const BOOKS_ICON = "M5 4h4v16H5zM10 4h4v16h-4zM15.6 5.4l3.6-1 3.2 14.6-3.6 1z";
-const WS_ITEMS = [
-  { label: "Developer API (demo)", href: "/developer?tab=overview", icon: "M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16", state: "link" },
-  { label: "Acts & Judgments", href: "/workspace/browse", icon: BOOKS_ICON, state: "active" },
-] as const;
 
 export default function ConsoleShell({ tab, variant = "data", children }: { tab?: TabId; variant?: "data" | "workspace"; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);       // mobile drawer
@@ -84,9 +79,9 @@ export default function ConsoleShell({ tab, variant = "data", children }: { tab?
   }, [open]);
 
   const nav = (
-    <nav aria-label={variant === "workspace" ? "Workspace" : "Developer console"} className="flex h-full flex-col">
+    <nav aria-label="Console" className="flex h-full flex-col">
       <div className="flex items-center justify-between px-4 pb-4 pt-5">
-        <Link href={variant === "workspace" ? "/workspace/browse" : "/developer?tab=overview"} className="flex items-baseline gap-0.5 text-[24px] font-medium leading-none tracking-[-0.03em]" aria-label="LexBharat">
+        <Link href="/developer?tab=overview" className="flex items-baseline gap-0.5 text-[24px] font-medium leading-none tracking-[-0.03em]" aria-label="LexBharat">
           <svg width="22" height="26" viewBox="0 0 24 28" fill="#6e3730" aria-hidden="true" className="mr-1.5 self-center"><path d="M20 1C9 2 2 9 3 20c0 3 1 6 3 7-1-5 0-10 4-14 3-3 7-4 10-4-5 1-9 4-11 9 5-1 10-5 11-13 .3-1.4.2-3.800 0-4z" /></svg>
           LexBharat
         </Link>
@@ -94,21 +89,6 @@ export default function ConsoleShell({ tab, variant = "data", children }: { tab?
           <Icon d="M15 5l-7 7 7 7" size={16} />
         </button>
       </div>
-      {variant === "workspace" ? (
-        <>
-      <ul className="space-y-0.5 px-2">
-        {WS_ITEMS.map((it) => (
-          <li key={it.label}>
-              <Link href={it.href} onClick={() => setOpen(false)} aria-current={it.state === "active" ? "page" : undefined}
-                className={`flex items-center gap-3 rounded-[6px] px-3 py-2.5 text-[14px] transition-colors ${it.state === "active" ? "bg-accent text-foreground" : "text-muted hover:bg-accent/60 hover:text-foreground"}`}>
-                <Icon d={it.icon} /><span className="leading-tight">{it.label}</span>
-              </Link>
-          </li>
-        ))}
-      </ul>
-        </>
-      ) : (
-        <>
       <ul className="space-y-0.5 px-2">
         {MAIN_TABS.map((t) => (
           <li key={t.id}>
@@ -123,9 +103,10 @@ export default function ConsoleShell({ tab, variant = "data", children }: { tab?
             )}
           </li>
         ))}
-        {/* "Acts & Judgments" sits after MCP Server in the original's sidebar; it opens the mock browser at /workspace/browse. */}
+        {/* "Acts & Judgments" sits after MCP Server in the original's sidebar; highlighted on every page under /workspace/browse. */}
         <li>
-          <Link href="/workspace/browse" onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-[6px] px-3 py-2.5 text-[14px] text-muted transition-colors hover:bg-accent/60 hover:text-foreground">
+          <Link href="/workspace/browse" onClick={() => setOpen(false)} aria-current={variant === "workspace" ? "page" : undefined}
+            className={`flex items-center gap-3 rounded-[6px] px-3 py-2.5 text-[14px] transition-colors ${variant === "workspace" ? "bg-accent text-foreground" : "text-muted hover:bg-accent/60 hover:text-foreground"}`}>
             <Icon d={BOOKS_ICON} /><span className="leading-tight">Acts &amp; Judgments</span>
           </Link>
         </li>
@@ -136,11 +117,8 @@ export default function ConsoleShell({ tab, variant = "data", children }: { tab?
           <li key={l.label}><Link href={l.href} className="flex items-center justify-between rounded-[6px] px-3 py-1.5 text-[13px] text-muted hover:bg-accent/60 hover:text-foreground">{l.label}<span aria-hidden className="text-[11px]">↗</span></Link></li>
         ))}
       </ul>
-        </>
-      )}
       <div className="mt-auto space-y-1 px-2 pb-4">
-        {variant === "data" && <NotInClone className="!py-2"><Icon d={SETTINGS_TAB.icon} /><span className="leading-tight">Settings<Chip>Not in clone</Chip></span></NotInClone>}
-        {(variant === "data" || session) && (
+        <NotInClone className="!py-2"><Icon d={SETTINGS_TAB.icon} /><span className="leading-tight">Settings<Chip>Not in clone</Chip></span></NotInClone>
         <div className="px-3 py-2">
           <div className="flex items-center gap-3">
             <span aria-hidden className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-accent text-[11px] font-medium uppercase text-muted ring-1 ring-border">{(session?.email ?? "local").slice(0, 2)}</span>
@@ -150,7 +128,6 @@ export default function ConsoleShell({ tab, variant = "data", children }: { tab?
             ? <button type="button" onClick={() => { clearMockSession(); router.push("/auth/login"); }} className="mt-2 inline-flex min-h-8 items-center rounded-[6px] px-2 text-[13px] text-primary hover:bg-accent">Sign out</button>
             : <Link href="/auth/login" className="mt-2 inline-flex min-h-8 items-center rounded-[6px] px-2 text-[13px] text-primary hover:bg-accent">Sign in (demo)</Link>}
         </div>
-        )}
       </div>
     </nav>
   );
@@ -164,21 +141,15 @@ export default function ConsoleShell({ tab, variant = "data", children }: { tab?
         {open && (
           <div className="fixed inset-0 z-[110] md:hidden">
             <button type="button" aria-label="Close menu" className="absolute inset-0 bg-foreground/30" onClick={() => setOpen(false)} />
-            <aside ref={drawer} tabIndex={-1} data-lenis-prevent role="dialog" aria-modal="true" aria-label={variant === "workspace" ? "Workspace menu" : "Developer console menu"} className="relative h-full w-[min(260px,85vw)] overflow-y-auto bg-background shadow-lg outline-none">{nav}</aside>
+            <aside ref={drawer} tabIndex={-1} data-lenis-prevent role="dialog" aria-modal="true" aria-label="Console menu" className="relative h-full w-[min(260px,85vw)] overflow-y-auto bg-background shadow-lg outline-none">{nav}</aside>
           </div>
         )}
         <div className="min-w-0 flex-1">
           <header className="relative flex flex-wrap items-center gap-x-3 gap-y-2 px-4 py-3 md:px-8">
             <button ref={menuBtn} type="button" aria-label={collapsed ? "Show sidebar" : "Open menu"} aria-expanded={open} onClick={() => (window.matchMedia("(min-width: 768px)").matches ? setCollapsed((c) => !c) : setOpen(true))} className="rounded-[4px] p-2 text-muted hover:bg-accent"><Icon d="M4 7h16M4 12h16M4 17h16" /></button>
-            {variant === "workspace" ? <TopBar /> : <>
-            <div className="flex items-center rounded-full bg-accent py-1 pl-1 pr-3 text-[14px]">
-              <span className="rounded-full bg-primary px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">Product</span>
-              <span className="ml-2 font-mono text-[12px] text-muted">&lt;/&gt;</span><span className="ml-1.5">Data &amp; API</span><span aria-hidden className="ml-1.5 text-[10px] text-muted">▾</span>
-            </div>
-            <span className="flex items-center gap-1 rounded-full bg-accent px-2.5 py-1 text-[14px]" title="Jurisdiction: United States"><span aria-hidden>🇺🇸</span><span className="sr-only">United States</span><span aria-hidden className="text-[10px] text-muted">▾</span></span>
-            </>}
-            {variant === "data" && <Link href="/docs/api-guide/changelog" className="ml-auto hidden min-h-8 items-center gap-1.5 rounded-full bg-accent/60 px-3 text-[13px] text-[#535151] hover:text-foreground lg:inline-flex">Coverage is expanding fast. <strong className="font-semibold text-foreground">Changelog</strong><span aria-hidden>↗</span></Link>}
-            {variant === "data" && <span className="ml-auto rounded-[2px] border border-warning/50 bg-warning/10 px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-warning lg:ml-0">Demo</span>}
+            <TopBar />
+            {variant === "data" && <Link href="/docs/api-guide/changelog" className="hidden min-h-8 items-center gap-1.5 rounded-full bg-accent/60 px-3 text-[13px] text-[#535151] hover:text-foreground lg:inline-flex">Coverage is expanding fast. <strong className="font-semibold text-foreground">Changelog</strong><span aria-hidden>↗</span></Link>}
+            {variant === "data" && <span className="rounded-[2px] border border-warning/50 bg-warning/10 px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-warning">Demo</span>}
           </header>
           <main id="main" tabIndex={-1} className="outline-none px-4 pb-24 pt-2 md:px-8">{children}</main>
         </div>
