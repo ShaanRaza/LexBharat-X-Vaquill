@@ -9,7 +9,7 @@ import { HC_PAGE_SIZE, hcSourceKind, readHcFacets, readHcPage, readScPreviews, t
 import { displayDisposition } from "./disposition.mjs";
 import { hcSearchMeta } from "./hcSearch";
 import { hayOf, matchesWords, queryWords } from "./scMatch";
-import type { CaseItem, CourtSummary, JudgmentsStore, YearCount } from "./types";
+import type { CaseItem, CaseQuery, CourtSummary, JudgmentsStore, YearCount } from "./types";
 
 const SC = "supreme-court-of-india";
 type Row = { court: string; year: number; cases: number };
@@ -32,11 +32,34 @@ async function scYear(year: number): Promise<CaseItem[]> {
   return rows.map((r) => { const o: Record<string, unknown> = {}; for (const [k, v] of Object.entries(r)) if (v !== null && v !== undefined) o[k] = v; const c = o as unknown as CaseItem; const label = displayDisposition(c.disposition); if (label) c.dispositionLabel = label; return c; }).reverse();
 }
 
+/** "All years" with no search: pages walk the years newest first using the real per-year counts, and only the 100-case file(s) (or SC year file) that the requested page needs are read. */
+async function listAllYears(court: string, q: CaseQuery): Promise<{ available: boolean; results: CaseItem[]; total: number }> {
+  const isSc = court === SC;
+  if (!isSc && hcSourceKind() === null) return { available: false, results: [], total: 0 };
+  const years = [...(byCourt.get(court) ?? [])].filter((y) => (y.cases ?? 0) > 0).sort((a, b) => b.year - a.year);
+  const total = years.reduce((n, y) => n + (y.cases ?? 0), 0), start = (q.page - 1) * q.pageSize, end = Math.min(start + q.pageSize, total), out: CaseItem[] = [];
+  let base = 0;
+  for (const y of years) {
+    const n = y.cases ?? 0, from = Math.max(start, base), to = Math.min(end, base + n);
+    if (from < to) {
+      const lo = from - base, hi = to - base;
+      if (isSc) out.push(...(await scYear(y.year)).slice(lo, hi).map((c, i) => ({ ...c, year: y.year, mainPage: Math.floor((lo + i) / HC_PAGE_SIZE) + 1 } as CaseItem)));
+      else for (let p = Math.floor(lo / HC_PAGE_SIZE) + 1; p <= Math.floor((hi - 1) / HC_PAGE_SIZE) + 1; p++) {
+        const pg = await readHcPage(court, y.year, p); if (!pg) return { available: false, results: [], total };
+        const a = (p - 1) * HC_PAGE_SIZE; out.push(...pg.slice(Math.max(lo - a, 0), hi - a).map((c) => ({ ...c, year: y.year, mainPage: p } as CaseItem)));
+      }
+    }
+    base += n; if (base >= end) break;
+  }
+  return { available: true, results: out, total };
+}
+
 export const jsonJudgmentsStore: JudgmentsStore = {
   source: "real",
   async courts() { return courts(!!(await hcSearchMeta())); },
   async years(court) { return byCourt.get(court) ?? (BASE_COURTS.some((c) => c.slug === court) ? [] : null); },
   async list(court, q) {
+    if (q.year === 0) return listAllYears(court, q);
     if (court === SC) {
       const words = q.search ? queryWords(q.search) : null;   // same word matching as the cross-year search (scMatch.ts); a query with no letters or digits matches nothing
       const year = await scYear(q.year);

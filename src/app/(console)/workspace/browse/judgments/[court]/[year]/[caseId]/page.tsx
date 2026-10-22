@@ -15,15 +15,15 @@ export const metadata: Metadata = { title: `Case | ${WORKSPACE_SUFFIX}`, robots:
 
 const longDate = (d?: string) => (d ? new Date(`${d.slice(0, 10)}T00:00:00Z`).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }) : null);
 
-export default async function CasePage({ params, searchParams }: { params: Promise<{ court: string; year: string; caseId: string }>; searchParams: Promise<{ p?: string; lp?: string }> }) {
-  const { court: slug, year: yearParam, caseId: rawId } = await params, { p, lp } = await searchParams;
+export default async function CasePage({ params, searchParams }: { params: Promise<{ court: string; year: string; caseId: string }>; searchParams: Promise<{ p?: string; lp?: string; ya?: string }> }) {
+  const { court: slug, year: yearParam, caseId: rawId } = await params, { p, lp, ya } = await searchParams;
   const court = ALL_COURTS.find((c) => c.slug === slug), year = Number(yearParam), caseId = decodeURIComponent(rawId);
   if (!court || !Number.isInteger(year)) notFound();
   const store = getJudgmentsStore(), sc = slug === SC_SLUG;
   const c = await store.get(slug, year, caseId, p ? Math.floor(Number(p)) || undefined : undefined);
   if (!c) notFound(); // a real 404: the link does not match a case in the exported list (see the route scheme above)
   const [stats, preview] = await Promise.all([store.stats(), sc ? store.preview(slug, year, caseId) : Promise.resolve(null)]);
-  const back = `/workspace/browse/judgments/${slug}?year=${year}${lp && Number(lp) > 1 ? `&page=${Math.floor(Number(lp))}` : ""}`;
+  const back = `/workspace/browse/judgments/${slug}?year=${year}${ya === "1" ? "&years=all" : ""}${lp && Number(lp) > 1 ? `&page=${Math.floor(Number(lp))}` : ""}`;
   const parties = c.petitioner && c.respondent ? `${c.petitioner} v. ${c.respondent}` : null;
   const heading = parties ?? c.title ?? (c.caseNumber ? `Case ${c.caseNumber}` : `Case record ${c.caseId}`);
   const date = longDate(c.decisionDate);
