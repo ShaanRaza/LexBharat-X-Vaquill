@@ -7,6 +7,7 @@ import courtsMeta from "@/data/judgments/courts.meta.json";
 import { ALL_COURTS } from "@/data/workspaceBrowse";
 import { HC_PAGE_SIZE, hcSourceKind, readHcFacets, readHcPage, readScPreviews, type HcFilter } from "./hcData";
 import { displayDisposition } from "./disposition.mjs";
+import { hcSearchMeta } from "./hcSearch";
 import type { CaseItem, CourtSummary, JudgmentsStore, YearCount } from "./types";
 
 const SC = "supreme-court-of-india";
@@ -20,7 +21,7 @@ const BASE_COURTS = ALL_COURTS.map((c) => {
   return { slug: c.slug, name: c.name, cases: m?.cases ?? null, firstYear: m?.first_year ?? null, lastYear: m?.last_year ?? null };
 });
 // Supreme Court cases are bundled (src/data/judgments/sc). High Court pages live outside the bundle (see hcData.ts) and are listable only when a data source is configured.
-const courts = (): CourtSummary[] => BASE_COURTS.map((c) => ({ ...c, listable: c.slug === SC || hcSourceKind() !== null, searchable: c.slug === SC, filterable: c.slug === SC || hcSourceKind() !== null }));
+const courts = (searchIndex: boolean): CourtSummary[] => BASE_COURTS.map((c) => ({ ...c, listable: c.slug === SC || hcSourceKind() !== null, searchable: c.slug === SC || searchIndex, filterable: c.slug === SC || hcSourceKind() !== null }));
 const TOTAL = BASE_COURTS.reduce((n, c) => n + (c.cases ?? 0), 0);
 
 async function scYear(year: number): Promise<CaseItem[]> {
@@ -32,7 +33,7 @@ async function scYear(year: number): Promise<CaseItem[]> {
 
 export const jsonJudgmentsStore: JudgmentsStore = {
   source: "real",
-  async courts() { return courts(); },
+  async courts() { return courts(!!(await hcSearchMeta())); },
   async years(court) { return byCourt.get(court) ?? (BASE_COURTS.some((c) => c.slug === court) ? [] : null); },
   async list(court, q) {
     if (court === SC) {
@@ -73,7 +74,7 @@ export const jsonJudgmentsStore: JudgmentsStore = {
       source: "real", totalCases: TOTAL, courts: BASE_COURTS.length, listableCourts: hc ? BASE_COURTS.length : 1,
       caveats: [
         "Counts are distinct case records in the dataset, not official case totals. Coverage is uneven: several High Courts start around 2015.",
-        hc ? "Case lists are available for the Supreme Court and every High Court, by year, with a disposition filter (and a bench-size filter for Bombay, Gujarat and Orissa). Searching by name works for the Supreme Court only. Judgment text is not available yet."
+        hc ? "Case lists are available for the Supreme Court and every High Court, by year, with a disposition filter (and a bench-size filter for Bombay, Gujarat and Orissa). Searching by party name or case number works for the Supreme Court and, when the High Court search index is available, for the High Courts. Judgment text is not searched and is not available yet."
            : "Only Supreme Court cases can be listed so far. High Courts show counts by year. Judgment text is not available yet.",
         "Years follow the decision date where present. Records with no usable date or year are left out of the lists.",
         "High Courts rarely carry a reporter citation, so the case number is the main identifier. Party names are as extracted from the judgment and can be incomplete or missing.",

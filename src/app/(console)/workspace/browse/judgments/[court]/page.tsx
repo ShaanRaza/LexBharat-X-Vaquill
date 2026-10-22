@@ -43,7 +43,7 @@ export default async function CourtPage({ params, searchParams }: { params: Prom
           </>
         )}
         {real && !summary?.listable && <p className="mt-3 rounded-lg bg-accent px-4 py-2.5 text-[13px] text-[#535151]">Counts by year only. Case lists for this court are not available yet.</p>}
-        {picked ? <CaseList court={slug} year={picked} searchable={!!summary?.searchable} filterable={!!summary?.filterable} initialPage={Math.max(1, Math.floor(Number(pageParam)) || 1)} /> : (
+        {picked ? <CaseList court={slug} year={picked} courtName={court.name} searchable={!!summary?.searchable} filterable={!!summary?.filterable} initialPage={Math.max(1, Math.floor(Number(pageParam)) || 1)} /> : (
           <div className="mt-6 space-y-7">
             {(real ? decadeList.map(([d, ys]) => ({ label: `${d}s`, years: ys })) : decades().map((d) => ({ label: d.label, years: d.years.map((y) => ({ year: y, cases: null as number | null })) }))).map((d) => (
               <section key={d.label} aria-label={d.label}>

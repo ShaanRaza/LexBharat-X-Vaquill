@@ -8,8 +8,8 @@ cd "$(dirname "$0")/../.."
 SRC="$(cd "${1:-../lexbharat-data/judgments-hc}" && pwd)"; DEST="${2:-../lexbharat-data/judgments-hc-gz}"
 rm -rf "$DEST"; mkdir -p "$DEST"; DEST="$(cd "$DEST" && pwd)"
 cd "$SRC"
-# only the files the app reads: data_0.json, facets.json and preview.json under court=* (not the _manifest, _quarantine, _fields folders)
-find court=* -type f \( -name data_0.json -o -name facets.json -o -name preview.json \) -print0 | while IFS= read -r -d '' f; do
+# only the files the app reads: data_0.json, facets.json and preview.json under court=*, and the search index under search/ (not the _manifest, _quarantine, _fields folders)
+find court=* search -type f \( -name data_0.json -o -name facets.json -o -name preview.json -o -name 'shard=*.json' -o -name meta.json \) -print0 | while IFS= read -r -d '' f; do
   mkdir -p "$DEST/$(dirname "$f")"; gzip -9 -n -c "$f" > "$DEST/$f"
 done
 echo "done: $(find "$DEST" -type f | wc -l | tr -d ' ') files, $(du -sh "$DEST" | cut -f1)" >&2

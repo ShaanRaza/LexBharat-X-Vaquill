@@ -24,7 +24,7 @@ export type CourtSummary = {
   cases: number | null; firstYear: number | null; lastYear: number | null;
   /** true when individual cases can be listed (Supreme Court only for now); other courts have counts by year only. */
   listable: boolean;
-  /** true when text search inside a year works (Supreme Court only; High Court pages are read one 100-case page at a time). */
+  /** true when search by party name or case number works for this court (Supreme Court always; High Courts when the search index is present, see hcSearch.ts). */
   searchable: boolean;
   /** true when in-year filters (disposition) work: Supreme Court only. High Court years are read one 100-case page at a time, so a filter would need every page of the year. */
   filterable: boolean;

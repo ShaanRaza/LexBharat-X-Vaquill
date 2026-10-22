@@ -13,7 +13,7 @@ export async function GET(req: Request) {
   const store = getJudgmentsStore();
   if (!(await store.courts()).some((c) => c.slug === court)) return Response.json({ error: "Unknown court." }, { status: 404 });
   const summary = (await store.courts()).find((c) => c.slug === court);
-  if (search && !summary?.searchable) return bad("Searching inside a year is available for the Supreme Court only.");
+  if (search && court !== "supreme-court-of-india") return bad("High Court search is served by /api/judgments/search-hc.");
   const disposition = get("disposition"), bench = get("bench");
   if ((disposition || bench) && !summary?.filterable) return bad("Filters are not available for this court yet.");
   if (bench && court === "supreme-court-of-india") return bad("Bench size is not available for the Supreme Court.");

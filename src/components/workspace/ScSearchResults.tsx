@@ -22,14 +22,12 @@ export default function ScSearchResults({ q }: { q: string }) {
   }, [q, page, retry]);
   const chip = "rounded-md bg-accent px-2 py-0.5";
   return (
-    <section aria-labelledby="sc-hits" className="mt-6">
-      <h2 id="sc-hits" className="text-[18px] font-semibold">Supreme Court cases matching &ldquo;{q}&rdquo;</h2>
-      <p className="mt-1 text-[13px] text-muted">Words in the case title (both parties) or the citation, all years, newest first. This is not a full-text search of judgments, and High Courts are not searched.</p>
+    <section aria-labelledby="sc-hits" className="mt-4">
+      <h2 id="sc-hits" className="text-[18px] font-semibold">Supreme Court cases{data ? <span className="ml-2 text-[14px] font-normal text-muted">{data.total.toLocaleString("en-IN")} {data.total === 1 ? "case" : "cases"}</span> : null}</h2>
       {err && <div role="alert" className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-error/40 bg-error/5 p-3 text-[14px]"><span>{err}</span><button type="button" onClick={() => setRetry((n) => n + 1)} className="h-8 rounded-lg px-3 ring-1 ring-border hover:bg-accent">Try again</button></div>}
       {!data && !err && <div className="mt-3 space-y-2" aria-busy="true">{[0, 1].map((i) => <div key={i} className="console-skel h-14 rounded-xl bg-accent" />)}</div>}
       {data && (
         <>
-          <p className="mt-3 text-[13px] text-muted" role="status">{data.total.toLocaleString("en-IN")} {data.total === 1 ? "case" : "cases"}</p>
           <ul className="mt-2 space-y-2">
             {data.results.map((c) => (
               <li key={c.caseId} className="relative rounded-xl bg-surface px-5 py-4 shadow-sm ring-1 ring-border/60 transition-colors hover:ring-primary/50">

@@ -11,7 +11,8 @@
     "build:demo": "NEXT_PUBLIC_RELEASE=0 next build",
     "test:extract": "node --test src/lib/judgments/",
     "qa:sweep": "node scripts/judgments/qa-sweep.mjs",
-    "qa:live": "node --experimental-websocket scripts/judgments/qa-live.mjs"
+    "qa:live": "node --experimental-websocket scripts/judgments/qa-live.mjs",
+    "index:hc-search": "node --max-old-space-size=6000 scripts/judgments/build-hc-search-index.mjs"
   },
   "dependencies": {
     "lenis": "^1.3.0",
