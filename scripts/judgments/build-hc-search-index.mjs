@@ -2,7 +2,7 @@
 // Builds the compact High Court search index from the exported case pages (scripts/judgments/export-judgments-hc.sh).
 // usage: node scripts/judgments/build-hc-search-index.mjs [DATA_DIR=../lexbharat-data/judgments-hc] [--years 2020-2025] [--courts a,b]
 //
-// What each case contributes: the WORDS of its petitioner/respondent (or title when parties were not extracted) and its CASE NUMBER, as recorded. No text, no snippets.
+// What each case contributes: the WORDS of its petitioner/respondent (or title when parties were not extracted), its CASE NUMBER ("#933/2024") and the YEAR in it ("@2024"), as recorded. No text, no snippets.
 // Layout (written next to the case pages, served the same way: JUDGMENTS_DATA_DIR or JUDGMENTS_DATA_URL):
 //   <DATA_DIR>/search/meta.json            { version, courts[], segments[[year, courtIdx, startId, count]], shards, docs, built }
 //   <DATA_DIR>/search/shard=NNN.json       { "<word or #number/year>": [firstId, delta, delta, ...] }   ascending ids, delta encoded
@@ -12,7 +12,7 @@ import { createWriteStream, existsSync, mkdirSync, readFileSync, readdirSync, rm
 import { once } from "node:events";
 import { createInterface } from "node:readline";
 import path from "node:path";
-import { SHARDS, caseKeys, shardOf, tokenize } from "../../src/lib/judgments/hcSearchCore.mjs";
+import { SHARDS, caseKeys, caseYears, shardOf, tokenize } from "../../src/lib/judgments/hcSearchCore.mjs";
 
 const args = process.argv.slice(2), opt = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
 const DATA = path.resolve(args.find((a, i) => !a.startsWith("--") && (i === 0 || !args[i - 1].startsWith("--"))) ?? "../lexbharat-data/judgments-hc");
@@ -41,7 +41,7 @@ for (const sg of segs) {
     for (const c of rows) {
       const id = sg.start + ord++;
       const words = tokenize(c.petitioner && c.respondent ? `${c.petitioner} ${c.respondent}` : (c.title ?? "").replace(/^\S*\d\/\d{4}\s+of\s+/i, ""));
-      for (const t of [...words, ...caseKeys(c.caseNumber, c.title)]) { const sk = sinks[shardOf(t)]; sk.buf.push(`${t}\t${id}\n`); postings++; }
+      for (const t of [...words, ...caseKeys(c.caseNumber, c.title), ...caseYears(c.caseNumber, c.title)]) { const sk = sinks[shardOf(t)]; sk.buf.push(`${t}\t${id}\n`); postings++; }
       docs++;
     }
     for (let k = 0; k < SHARDS; k++) if (sinks[k].buf.length > 4000) flush(k);

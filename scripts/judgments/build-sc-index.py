@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """Builds the Supreme Court cross-year search index from the already-exported year files (src/data/judgments/sc/*.json). Standard library only; needs no SSD.
-Output: src/data/judgments/sc-index.generated.ts exporting one string, the JSON {"cols": [...], "rows": [[caseId, year, title, citation, decisionDate, disposition], ...]}, newest first.
-Search matches words in the case title (which carries both parties) and the citation. It is NOT full-text search of judgments."""
+Output: src/data/judgments/sc-index.generated.ts exporting one string, the JSON {"cols": [...], "rows": [[caseId, year, title, citation, decisionDate, disposition, caseNumber], ...]}, newest first.
+Search matches words in the case title (which carries both parties), the citation and the case number extracted from the judgment heading. It is NOT full-text search of judgments."""
 import glob, json, os, re
 rows = []
 for f in glob.glob("src/data/judgments/sc/*.json"):
     year = int(os.path.basename(f)[:-5])
     for c in json.load(open(f)):
-        rows.append([c["caseId"], year, c.get("title") or "", c.get("citation") or "", (c.get("decisionDate") or "")[:10], c.get("disposition") or ""])
+        rows.append([c["caseId"], year, c.get("title") or "", c.get("citation") or "", (c.get("decisionDate") or "")[:10], c.get("disposition") or "", c.get("caseNumberExtracted") or ""])
 rows.sort(key=lambda r: (r[4], r[0]), reverse=True)
-out = {"cols": ["caseId", "year", "title", "citation", "decisionDate", "disposition"], "rows": rows}
+out = {"cols": ["caseId", "year", "title", "citation", "decisionDate", "disposition", "caseNumber"], "rows": rows}
 # Written as a TypeScript string constant on purpose: importing a 37,000-row JSON file makes the TypeScript compiler infer a gigantic type and run out of memory.
 payload = json.dumps(out, ensure_ascii=False, separators=(",", ":"))
 path = "src/data/judgments/sc-index.generated.ts"

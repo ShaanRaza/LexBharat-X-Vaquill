@@ -7,17 +7,17 @@ import type { CaseItem } from "@/lib/judgments/types";
 type Hit = CaseItem & { court: string; courtName: string; year: number; mainPage: number };
 type Resp = { indexAvailable: boolean; results: Hit[]; total: number; page: number; pageSize: number; hasMore: boolean; note?: string };
 
-export default function HcSearchResults({ q }: { q: string }) {
+export default function HcSearchResults({ q, court }: { q: string; court?: string }) {
   const [page, setPage] = useState(1); const [data, setData] = useState<Resp | null>(null); const [err, setErr] = useState(""); const [retry, setRetry] = useState(0);
   useEffect(() => { setPage(1); }, [q]);
   useEffect(() => {
     const ac = new AbortController(), t = setTimeout(() => {
       setErr("");
-      fetch(`/api/judgments/search-hc?q=${encodeURIComponent(q)}&page=${page}&pageSize=10`, { signal: ac.signal }).then(async (r) => { const j = await r.json().catch(() => null); if (!r.ok) throw new Error(typeof j?.error === "string" ? j.error : `Search failed (status ${r.status}). Please try again.`); setData(j as Resp); })
+      fetch(`/api/judgments/search-hc?q=${encodeURIComponent(q)}${court ? `&court=${court}` : ""}&page=${page}&pageSize=10`, { signal: ac.signal }).then(async (r) => { const j = await r.json().catch(() => null); if (!r.ok) throw new Error(typeof j?.error === "string" ? j.error : `Search failed (status ${r.status}). Please try again.`); setData(j as Resp); })
         .catch((e) => { if ((e as Error).name !== "AbortError") { setErr((e as Error).message || "Search failed."); setData(null); } });
     }, 250);
     return () => { clearTimeout(t); ac.abort(); };
-  }, [q, page, retry]);
+  }, [q, court, page, retry]);
   return (
     <section aria-labelledby="hc-hits" className="mt-6">
       <h2 id="hc-hits" className="text-[18px] font-semibold">High Court cases{data?.indexAvailable ? <span className="ml-2 text-[14px] font-normal text-muted">{data.total.toLocaleString("en-IN")} {data.total === 1 ? "case" : "cases"}</span> : null}</h2>

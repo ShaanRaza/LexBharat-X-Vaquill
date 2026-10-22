@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import ConsoleShell from "@/components/console/ConsoleShell";
 import { ALL_COURTS, decades } from "@/data/workspaceBrowse";
 import CaseList from "@/components/workspace/CaseList";
+import CourtSearch from "@/components/workspace/CourtSearch";
 import { getJudgmentsStore } from "@/lib/judgments";
 import { WORKSPACE_SUFFIX } from "@/lib/release";
 
@@ -44,6 +45,8 @@ export default async function CourtPage({ params, searchParams }: { params: Prom
         )}
         {real && !summary?.listable && <p className="mt-3 rounded-lg bg-accent px-4 py-2.5 text-[13px] text-[#535151]">Counts by year only. Case lists for this court are not available yet.</p>}
         {picked ? <CaseList court={slug} year={picked} courtName={court.name} searchable={!!summary?.searchable} filterable={!!summary?.filterable} initialPage={Math.max(1, Math.floor(Number(pageParam)) || 1)} /> : (
+          <>
+          {summary?.searchable && <CourtSearch court={slug} courtName={court.name} isSupreme={slug === "supreme-court-of-india"} />}
           <div className="mt-6 space-y-7">
             {(real ? decadeList.map(([d, ys]) => ({ label: `${d}s`, years: ys })) : decades().map((d) => ({ label: d.label, years: d.years.map((y) => ({ year: y, cases: null as number | null })) }))).map((d) => (
               <section key={d.label} aria-label={d.label}>
@@ -59,6 +62,7 @@ export default async function CourtPage({ params, searchParams }: { params: Prom
               </section>
             ))}
           </div>
+          </>
         )}
         {real && stats.attribution && <div className="mt-8 space-y-1 text-[12px] text-muted"><p>{stats.attribution.text} Licence: {stats.attribution.licence}, snapshot {stats.attribution.snapshot}. <a href={stats.attribution.url} className="underline" rel="noopener noreferrer" target="_blank">Dataset</a></p>{stats.caveats.map((c) => <p key={c}>{c}</p>)}</div>}
       </div>

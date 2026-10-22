@@ -53,7 +53,7 @@ export async function searchHighCourts(opts: { q: string; court?: string; year?:
   const meta = await hcSearchMeta();
   if (!meta) return { indexAvailable: false, total: 0, results: [], note: "The High Court search index is not available here." };
   const plan = planQuery(opts.q);
-  if (!plan.keys.length && !plan.words.length) return { indexAvailable: true, total: 0, results: [], built: meta.built, note: "Type at least one name (two letters or more) or a case number such as 933/2024." };
+  if (!plan.keys.length && !plan.words.length) return { indexAvailable: true, total: 0, results: [], built: meta.built, note: "Type a name (two letters or more), a case number such as 933/2024, or a year such as 2024." };
   const ci = opts.court ? meta.courts.indexOf(opts.court) : -1;
   if (opts.court && ci < 0) return { indexAvailable: true, total: 0, results: [], built: meta.built };
   // id ranges that satisfy the court / year filter (segments are year-major, so one year is one run of ids per court)

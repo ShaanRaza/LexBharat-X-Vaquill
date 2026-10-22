@@ -5,6 +5,8 @@ import { searchSupremeCourt } from "@/lib/judgments/scSearch";
 
 export async function GET(req: Request) {
   const q = new URL(req.url).searchParams, get = (k: string) => q.get(k)?.trim() || null;
+  const court = get("court");
+  if (court && court !== "supreme-court-of-india") return Response.json({ error: "court must be supreme-court-of-india for this endpoint (High Courts: /api/judgments/search-hc)." }, { status: 422 });
   const text = get("q") ?? "", page = Number(get("page") ?? 1), pageSize = Number(get("pageSize") ?? 10);
   const bad = (error: string) => Response.json({ error }, { status: 422 });
   if (text.length < 2 || text.length > 200) return bad("q must be 2 to 200 characters.");

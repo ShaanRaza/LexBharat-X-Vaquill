@@ -1,7 +1,7 @@
 // Unit tests for the High Court search core (tokenising, case-number keys, query planning). Run: npm run test:extract
 import assert from "node:assert/strict";
 import test from "node:test";
-import { SHARDS, caseKeys, planQuery, shardOf, tokenize } from "./hcSearchCore.mjs";
+import { SHARDS, caseKeys, caseYears, planQuery, shardOf, tokenize } from "./hcSearchCore.mjs";
 
 test("tokenize: whole words, accent-free, no stop words or case-type words, each once", () => {
   assert.deepEqual(tokenize("GURUKRUPA INDUSTRIES THROUGH SUNIL GHANSHAMDAS PANCH"), ["gurukrupa", "industries", "sunil", "ghanshamdas", "panch"]);
@@ -37,4 +37,18 @@ test("shardOf: stable, in range, words sharing three letters share a shard", () 
   assert.equal(shardOf("kumar"), shardOf("kum"));
   for (const t of ["a", "ab", "sharma", "#933/2024", "zz"]) assert.ok(shardOf(t) >= 0 && shardOf(t) < SHARDS);
   assert.equal(shardOf("sharma"), shardOf("sharma"));
+});
+
+test("years: a bare year is a query by itself (regression: '2024' on the Bombay 2025 page gave 0 because digits never reach the word index)", () => {
+  assert.deepEqual(planQuery("2024"), { keys: ["@2024"], words: [] });
+  assert.deepEqual(planQuery("kumar 2024"), { keys: ["@2024"], words: ["kumar"] });
+  assert.deepEqual(planQuery("1999 and 2015"), { keys: ["@1999", "@2015"], words: [] });
+  assert.deepEqual(planQuery("933/2024"), { keys: ["#933/2024"], words: [] });                  // a case number is one key, not a number plus a year
+  assert.deepEqual(planQuery("12345"), { keys: [], words: [] });                                // other bare numbers are not indexed
+  assert.deepEqual(planQuery("year 2400"), { keys: [], words: ["year"] });                      // not a plausible year
+  assert.deepEqual(caseYears("933 of 2024", "WP/933/2024 of X", "1742/9 of 2019"), ["@2024", "@2019"]);
+  assert.deepEqual(caseYears("A482/42016/2023 of X"), ["@2023"]);
+  assert.deepEqual(caseYears(null, "no number here"), []);
+  assert.equal(shardOf("@2024"), shardOf("@2024"));
+  assert.ok(shardOf("@2024") >= 0 && shardOf("@2024") < SHARDS);
 });

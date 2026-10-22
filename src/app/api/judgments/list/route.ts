@@ -11,7 +11,7 @@ export async function GET(req: Request) {
   if (![page, pageSize].every(Number.isInteger) || page < 1 || pageSize < 1 || pageSize > 100) return bad("page must be >= 1 and pageSize 1 to 100.");
   if (search && (search.length < 2 || search.length > 200)) return bad("search must be 2 to 200 characters.");
   const store = getJudgmentsStore();
-  if (!(await store.courts()).some((c) => c.slug === court)) return Response.json({ error: "Unknown court." }, { status: 404 });
+  if (!(await store.courts()).some((c) => c.slug === court)) return bad("Unknown court: use one of the court slugs from /api/judgments/courts.");
   const summary = (await store.courts()).find((c) => c.slug === court);
   if (search && court !== "supreme-court-of-india") return bad("High Court search is served by /api/judgments/search-hc.");
   const disposition = get("disposition"), bench = get("bench");
