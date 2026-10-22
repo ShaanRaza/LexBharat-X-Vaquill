@@ -11,7 +11,7 @@ import type { CaseItem, Facet } from "@/lib/judgments/types";
 // (/api/judgments/list) or in all years (/api/judgments/search); High Courts = party names, case numbers and case years from the static index (/api/judgments/search-hc). What a row shows is decided at export time (docs/JUDGMENTS-HC.md).
 const SC = "supreme-court-of-india";
 type Resp = { available: boolean; facets?: { disposition: Facet[]; bench?: Facet[] }; results: (CaseItem & { year?: number; mainPage?: number })[]; total: number; page: number; pageSize: number; hasMore: boolean; note?: string };
-const PAGE = 20, HC_PAGE = 100;   // the High Court export stores 100 cases per file; the detail link carries that file number
+const PAGE = 12, HC_PAGE = 100;   // the High Court export stores 100 cases per file; the detail link carries that file number
 /** Page numbers to show: first, last and a window around the current page; 0 marks a gap. */
 const pageList = (cur: number, last: number): number[] => {
   const set = new Set([1, last, cur - 1, cur, cur + 1]); const out: number[] = [];
