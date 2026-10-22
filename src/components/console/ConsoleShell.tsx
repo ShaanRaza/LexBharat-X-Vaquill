@@ -39,9 +39,9 @@ const Chip = ({ children }: { children: React.ReactNode }) => <span className="m
 
 const LEARN = [
   { label: "API Docs", href: "/docs" },
-  { label: "Coverage", href: "/#coverage" },
+  { label: "Coverage", href: "/workspace/browse" },
   { label: "MCP Guide", href: "/mcp" },
-  { label: "Open dataset", href: "/open-us-law" },
+  { label: "Open dataset", href: "https://huggingface.co/datasets/vaquill/open-india-law" },
 ];
 
 function Icon({ d, size = 18 }: { d: string; size?: number }) {

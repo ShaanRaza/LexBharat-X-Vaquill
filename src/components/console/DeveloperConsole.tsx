@@ -26,7 +26,7 @@ function Overview() {
   return (
     <div className="mx-auto max-w-[880px] pt-2">
       <div className="flex items-center justify-between gap-3">
-        <h1 className="flex items-center gap-2 text-[26px] font-semibold tracking-[-0.02em]">Overview<span title="US and Indian law, account balance, and usage." className="text-[#65625f]"><I d="M12 16v-4M12 8h.01M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z" /></span></h1>
+        <h1 className="flex items-center gap-2 text-[26px] font-semibold tracking-[-0.02em]">Overview<span title="Demo: the sample API data, key and credits here are simulated, and the sample data is US law. The real Indian Acts and judgments are under Acts & Judgments." className="text-[#65625f]"><I d="M12 16v-4M12 8h.01M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z" /></span></h1>
         <Link href="/docs" className="inline-flex min-h-8 items-center gap-1.5 text-[13px] text-[#65625f] hover:text-foreground"><I d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z" />Docs</Link>
       </div>
 

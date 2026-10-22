@@ -418,7 +418,8 @@ export default function PlaygroundApp({ initialEndpoint }: { initialEndpoint: st
       )}
 
       {/* Endpoint picker */}
-      <div className="mt-4">
+      <p className="mt-4 text-[12px] font-medium uppercase tracking-wide text-muted">Sample US endpoints (demo)</p>
+      <div className="mt-1.5">
         <Listbox ariaLabel="Endpoint" value={ep.id} onChange={pick} items={items} panelClass="w-[min(32rem,92vw)]" maxHeight="max-h-[min(36rem,80vh)]"
           triggerClass="flex w-full cursor-pointer items-center justify-between gap-3 rounded-[6px] bg-accent px-3 py-2 text-left text-[14px]"
           triggerContent={<><span className="flex min-w-0 flex-wrap items-center gap-x-2.5 gap-y-0.5"><MethodBadge m={ep.method} /><span className="font-medium">{ep.name}</span><span className="truncate font-mono text-[12px] text-muted">{ep.path}</span></span><span aria-hidden className="text-[11px] text-muted">▾</span></>} />
