@@ -68,12 +68,19 @@ export async function searchHighCourts(opts: { q: string; court?: string; year?:
   const ids: number[] = [];
   for (const id of lists[0]) if (inRange(id) && lists.slice(1).every((l) => has(l, id))) ids.push(id);
   const start = (opts.page - 1) * opts.pageSize, slice = ids.slice(start, start + opts.pageSize), segs = meta.segments;
-  const results: HcHit[] = [];
-  for (const id of slice) {
+  const locs = slice.map((id) => {
     let lo = 0, hi = segs.length - 1;   // last segment whose start <= id
     while (lo < hi) { const m = (lo + hi + 1) >> 1; if (segs[m][2] <= id) lo = m; else hi = m - 1; }
-    const [year, c, s0] = segs[lo], ord = id - s0, court = meta.courts[c], p = Math.floor(ord / 100) + 1, row = (await page(court, year, p))?.[ord % 100];
-    if (row) results.push({ ...row, court, courtName: ALL_COURTS.find((x) => x.slug === court)?.name ?? court, year, mainPage: p });
+    const [year, c, s0] = segs[lo], ord = id - s0;
+    return { year, court: meta.courts[c], p: Math.floor(ord / 100) + 1, at: ord % 100 };
+  });
+  // the distinct page files the slice needs are fetched in parallel (at most 10 at a time); the rows are then assembled in the original order
+  const need = [...new Map(locs.map((l) => [`${l.court}/${l.year}/${l.p}`, l])).values()], got = new Map<string, CaseItem[] | null>();
+  for (let i = 0; i < need.length; i += 10) await Promise.all(need.slice(i, i + 10).map(async (l) => { got.set(`${l.court}/${l.year}/${l.p}`, await page(l.court, l.year, l.p)); }));
+  const results: HcHit[] = [];
+  for (const l of locs) {
+    const row = got.get(`${l.court}/${l.year}/${l.p}`)?.[l.at];
+    if (row) results.push({ ...row, court: l.court, courtName: ALL_COURTS.find((x) => x.slug === l.court)?.name ?? l.court, year: l.year, mainPage: l.p });
   }
   return { indexAvailable: true, total: ids.length, results, built: meta.built };
 }

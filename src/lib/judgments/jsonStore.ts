@@ -104,7 +104,7 @@ export const jsonJudgmentsStore: JudgmentsStore = {
         "High Courts rarely carry a reporter citation, so the case number is the main identifier. Party names are as extracted from the judgment and can be incomplete or missing.",
         "Judges and bench size are shown only for Bombay, Gujarat and Orissa and only when every name on the case checks out. Other courts' judge data is unreliable, so it is left out. Short text previews are not available yet.",
       ],
-      attribution: { text: "Data: open-india-law (Vaquill), built from public court judgments. Source acknowledgment: eCourts and the Supreme Court of India; source PDFs published by Dattam Labs (CC BY 4.0).", url: "https://huggingface.co/datasets/vaquill/open-india-law", licence: "CC BY 4.0", snapshot: "v2026.08" },
+      attribution: { text: "Data: open-india-law (Vaquill AI), built from public court judgments. Source acknowledgment: eCourts and the Supreme Court of India; source PDFs published by Dattam Labs (CC BY 4.0).", url: "https://huggingface.co/datasets/vaquill/open-india-law", licence: "CC BY 4.0", snapshot: "v2026.08" },
     };
   },
 };

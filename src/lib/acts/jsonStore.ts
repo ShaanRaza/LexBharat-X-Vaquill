@@ -30,7 +30,7 @@ const stats: ActsStats = {
   departments: [...new Set(ACTS.map((a) => a.department).filter((x): x is string => !!x))].sort(),
   statuses: ["in_force", "repealed", "superseded", "spent"],
   attribution: {
-    text: "Data: open-india-law (Vaquill), compiled from India Code, the Government of India's official repository, and regulator websites.",
+    text: "Data: open-india-law (Vaquill AI), compiled from India Code, the Government of India's official repository, and regulator websites.",
     url: "https://huggingface.co/datasets/vaquill/open-india-law", licence: meta.licence, snapshot: "v2026.08", generatedAt: regMeta.generated_at > meta.generated_at ? regMeta.generated_at : meta.generated_at,
   },
   caveats: [

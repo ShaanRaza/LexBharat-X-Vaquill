@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Schibsted_Grotesk, Source_Code_Pro, Newsreader } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import DataAttribution from "@/components/DataAttribution";
 import { RELEASE } from "@/lib/release";
 
 const sans = Schibsted_Grotesk({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[100] focus:rounded-control focus:bg-foreground focus:px-4 focus:py-2 focus:text-background">Skip to main content</a>
         <SmoothScroll />
         {children}
+        <DataAttribution />
       </body>
     </html>
   );

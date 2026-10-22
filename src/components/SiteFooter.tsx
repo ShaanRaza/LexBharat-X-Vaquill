@@ -36,7 +36,7 @@ export default function SiteFooter() {
       <div className="mx-auto grid max-w-[1152px] gap-10 lg:grid-cols-[1.3fr_repeat(3,1fr)]">
         <div>
           <Wordmark />
-          <p className="mt-4 max-w-[340px] text-[14px] leading-relaxed text-muted">LexBharat: an open API for US primary law, with a source link on every section.{RELEASE ? "" : " (mock copy)"}</p>
+          <p className="mt-4 max-w-[340px] text-[14px] leading-relaxed text-muted">LexBharat: browse Indian Acts and court judgment metadata, with the source credited on every page.{RELEASE ? "" : " (mock copy)"}</p>
           <p className="mt-3 text-[14px] text-primary">hello@lexbharat.example</p>
           <p className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-1 text-[13px] text-muted">
             <Link href="/slack" className="inline-flex min-h-6 items-center whitespace-nowrap hover:text-primary">Community</Link>
