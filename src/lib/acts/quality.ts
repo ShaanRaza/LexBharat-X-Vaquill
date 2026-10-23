@@ -2,12 +2,15 @@
 // nothing here knows about colours, classes or components.
 import type { AssembledSection, SectionStatus } from "./reassemble.mjs";
 
+/** Plain wording shown wherever a section is flagged "possibly incomplete" (Act page and search results), next to a link to the Act on India Code. */
+export const INCOMPLETE_NOTICE = "This section may be incomplete or mixed with nearby text in the source data. Check India Code before relying on it.";
+
 export type Tone = "neutral" | "complete" | "warn" | "bad" | "info";
 export type FlagInfo = { label: string; tone: Tone; explain: string };
 
 export const STATUS_INFO: Record<SectionStatus, FlagInfo> = {
   complete: { label: "No problems detected", tone: "complete", explain: "No lost characters, missing parts or mismatched headers were found in this section's text. This is an automatic check, not proof that it matches the official text." },
-  possibly_incomplete: { label: "Possibly incomplete", tone: "warn", explain: "An automatic check found a sign that text may be missing, repeated or out of order. Compare with the official source before relying on it." },
+  possibly_incomplete: { label: "Possibly incomplete", tone: "warn", explain: INCOMPLETE_NOTICE },
   garbled: { label: "Text unreliable", tone: "bad", explain: "The text of this section is unreliable in the source dataset (scrambled characters from PDF extraction)." },
 };
 

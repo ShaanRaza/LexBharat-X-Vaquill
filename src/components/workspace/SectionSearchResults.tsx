@@ -2,11 +2,11 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Badge, Highlight, Notice, Panel } from "@/components/kit";
-import { STATUS_INFO } from "@/lib/acts/quality";
+import { STATUS_INFO, INCOMPLETE_NOTICE, officialSourceUrl } from "@/lib/acts/quality";
 
 // Results of the Acts-tab search box over the TEXT of Central and State Acts (GET /api/acts/search). Presentation and fetching only; the search itself lives in
 // src/lib/acts/searchStore.ts. Colours, sizes and radii come from the tokens through Tailwind names and the shared kit.
-type Hit = { actId: string; actTitle: string; year: number | null; category: string; state: string | null; sectionKey: string; number: string | null; heading: string | null; chapter: string | null; status: keyof typeof STATUS_INFO; snippet: string; via: "text" | "lookup" };
+type Hit = { actId: string; actTitle: string; year: number | null; category: string; state: string | null; sourceUrl: string | null; sectionKey: string; number: string | null; heading: string | null; chapter: string | null; status: keyof typeof STATUS_INFO; snippet: string; via: "text" | "lookup" };
 type Resp = { searchAvailable: boolean; message?: string; results: Hit[]; total: number; totalCapped?: boolean; page: number; pageSize: number; hasMore: boolean; mode?: "text" | "lookup"; note?: string };
 const label = (v: string) => v.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 
@@ -43,6 +43,9 @@ export default function SectionSearchResults({ q }: { q: string }) {
                 </Link>
                 <p className="mt-0.5 text-ui-sm text-secondary">{h.actTitle}{h.chapter ? ` · ${h.chapter}` : ""}</p>
                 {h.snippet && <p className="mt-2 text-ui-base leading-relaxed text-foreground"><Highlight snippet={h.snippet} /></p>}
+                {h.status === "possibly_incomplete" && (
+                  <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Possibly incomplete.</strong> {INCOMPLETE_NOTICE} <a className="font-medium underline" href={officialSourceUrl(h.sourceUrl)} target="_blank" rel="noopener noreferrer">Open on India Code</a></p></Notice>
+                )}
                 <p className="mt-2 flex flex-wrap items-center gap-1.5">
                   <Badge>{label(h.category)}</Badge>{h.state && <Badge>{label(h.state)}</Badge>}{h.year !== null && <Badge>{h.year}</Badge>}
                   {h.via === "lookup" && <Badge tone="info">Section lookup</Badge>}

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Badge, Notice, Panel, StatusDot } from "@/components/kit";
-import { PROVENANCE, CHAPTER_NOTE } from "@/lib/acts/quality";
+import { PROVENANCE, CHAPTER_NOTE, INCOMPLETE_NOTICE } from "@/lib/acts/quality";
 import type { ActTextView as View } from "@/lib/acts/viewModel";
 
 // Presentation only: every value arrives ready-made from src/lib/acts/viewModel.ts. Colours, sizes and radii come from the shared tokens (Tailwind names + kit components).
@@ -80,7 +80,12 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
                   <Badge tone={sel.statusInfo.tone} title={sel.statusInfo.explain}>{sel.statusInfo.label}</Badge>
                   {sel.flags.map((f) => <Badge key={f.key} tone={f.info.tone} title={f.info.explain}>{f.info.label}</Badge>)}
                 </p>
-                {sel.status === "possibly_incomplete" && <p className="mt-2 text-ui-sm text-secondary">{sel.statusInfo.explain} Built from {sel.chunkCount} piece{sel.chunkCount === 1 ? "" : "s"} of the dataset.</p>}
+                {sel.status === "possibly_incomplete" && (
+                  <Notice tone="warn" role="status" title="This section may be incomplete" className="mt-3">
+                    <p>{INCOMPLETE_NOTICE} <a className="font-medium underline" href={view.sourceUrl} target="_blank" rel="noopener noreferrer">Open this Act on India Code</a></p>
+                    <p className="text-ui-sm">Built from {sel.chunkCount} piece{sel.chunkCount === 1 ? "" : "s"} of the dataset.</p>
+                  </Notice>
+                )}
 
                 {sel.blocks === null ? (
                   <Notice tone="bad" title="Text for this section is unreliable in the source dataset" role="status" className="mt-4">

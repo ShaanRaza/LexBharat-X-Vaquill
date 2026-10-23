@@ -1,0 +1,360 @@
+{
+ "about": "50 realistic Indian-law questions. A result counts as a hit when it belongs to `act` and its text contains `anchor` (a phrase from the statute); `section` is the section number it should be. All 50 were checked against the loaded data (Neon): the anchor is present in that Act and under the expected section number; 4 of those sections are flagged possibly_incomplete.",
+ "knownGapsInTheData": [
+  "Code of Civil Procedure, 1908: sections 11 and 20 are not in the data (those numbers hold Order/rule text)",
+  "Limitation Act, 1963: only 43 of its sections are present; sections 4, 5 and 7 to 10 are missing",
+  "Indian Contract Act, 1872: sections 16, 73 and 124 are missing"
+ ],
+ "questions": [
+  {
+   "id": 1,
+   "question": "What is the notice period before filing a cheque bounce complaint?",
+   "act": "The Negotiable Instruments Act, 1881",
+   "section": "138",
+   "anchor": "receipt of information by him from the bank regarding the return of the cheque as unpaid"
+  },
+  {
+   "id": 2,
+   "question": "Within how many days must a cheque bounce complaint be filed after the cause of action arises?",
+   "act": "The Negotiable Instruments Act, 1881",
+   "section": "142",
+   "anchor": "within one month of the date on which the cause of action arises"
+  },
+  {
+   "id": 3,
+   "question": "What is the punishment for dishonour of a cheque for insufficient funds?",
+   "act": "The Negotiable Instruments Act, 1881",
+   "section": "138",
+   "anchor": "twice the amount of the cheque"
+  },
+  {
+   "id": 4,
+   "question": "Is there a legal presumption in favour of the holder of a cheque?",
+   "act": "The Negotiable Instruments Act, 1881",
+   "section": "139",
+   "anchor": "unless the contrary is proved, that the holder of a cheque received the cheque"
+  },
+  {
+   "id": 5,
+   "question": "Who is liable when a company's cheque bounces?",
+   "act": "The Negotiable Instruments Act, 1881",
+   "section": "141",
+   "anchor": "was in charge of, and was responsible to, the company"
+  },
+  {
+   "id": 6,
+   "question": "Can a cheque bounce case be settled by compounding the offence?",
+   "act": "The Negotiable Instruments Act, 1881",
+   "section": "147",
+   "anchor": "shall be compoundable"
+  },
+  {
+   "id": 7,
+   "question": "What is presumed about consideration for a negotiable instrument?",
+   "act": "The Negotiable Instruments Act, 1881",
+   "section": "118",
+   "anchor": "made or drawn for consideration"
+  },
+  {
+   "id": 8,
+   "question": "What makes an agreement a valid contract?",
+   "act": "The Indian Contract Act, 1872",
+   "section": "10",
+   "anchor": "All agreements are contracts if they are made by the free consent"
+  },
+  {
+   "id": 9,
+   "question": "What is free consent in contract law?",
+   "act": "The Indian Contract Act, 1872",
+   "section": "14",
+   "anchor": "Consent is said to be free when it is not caused by"
+  },
+  {
+   "id": 10,
+   "question": "When can a contract be avoided if consent was obtained by coercion or misrepresentation?",
+   "act": "The Indian Contract Act, 1872",
+   "section": "19",
+   "anchor": "the agreement is a contract voidable at the option of the party whose consent was so caused"
+  },
+  {
+   "id": 11,
+   "question": "What counts as fraud that makes a contract voidable?",
+   "act": "The Indian Contract Act, 1872",
+   "section": "17",
+   "anchor": "Fraud means and includes any of the following acts"
+  },
+  {
+   "id": 12,
+   "question": "Who is competent to enter into a contract?",
+   "act": "The Indian Contract Act, 1872",
+   "section": "11",
+   "anchor": "Every person is competent to contract who is of the age of majority"
+  },
+  {
+   "id": 13,
+   "question": "Can a court award reasonable compensation when a contract fixes a penalty for breach?",
+   "act": "The Indian Contract Act, 1872",
+   "section": "74",
+   "anchor": "reasonable compensation not exceeding the amount so named"
+  },
+  {
+   "id": 14,
+   "question": "Is an agreement in restraint of trade valid?",
+   "act": "The Indian Contract Act, 1872",
+   "section": "27",
+   "anchor": "restrained from exercising a lawful profession, trade or business of any kind, is to that extent void"
+  },
+  {
+   "id": 15,
+   "question": "Is an agreement without consideration void?",
+   "act": "The Indian Contract Act, 1872",
+   "section": "25",
+   "anchor": "An agreement made without consideration is void"
+  },
+  {
+   "id": 16,
+   "question": "How far is a surety liable for the debt of the principal debtor?",
+   "act": "The Indian Contract Act, 1872",
+   "section": "128",
+   "anchor": "liability of the surety is co-extensive with that of the principal debtor"
+  },
+  {
+   "id": 17,
+   "question": "What is a contract of guarantee and who is the surety?",
+   "act": "The Indian Contract Act, 1872",
+   "section": "126",
+   "anchor": "contract of guarantee is a contract to perform the promise"
+  },
+  {
+   "id": 18,
+   "question": "What is the punishment for murder?",
+   "act": "The Bharatiya Nyaya Sanhita, 2023",
+   "section": "103",
+   "anchor": "Whoever commits murder shall be punished with death or imprisonment for life"
+  },
+  {
+   "id": 19,
+   "question": "What is the punishment for theft?",
+   "act": "The Bharatiya Nyaya Sanhita, 2023",
+   "section": "303",
+   "anchor": "Whoever commits theft shall be punished"
+  },
+  {
+   "id": 20,
+   "question": "What is the offence of cheating and its punishment?",
+   "act": "The Bharatiya Nyaya Sanhita, 2023",
+   "section": "318",
+   "anchor": "Whoever, by deceiving any person, fraudulently or dishonestly induces"
+  },
+  {
+   "id": 21,
+   "question": "What is criminal breach of trust?",
+   "act": "The Bharatiya Nyaya Sanhita, 2023",
+   "section": "316",
+   "anchor": "being in any manner entrusted with property, or with any dominion over property"
+  },
+  {
+   "id": 22,
+   "question": "What is the punishment for defamation?",
+   "act": "The Bharatiya Nyaya Sanhita, 2023",
+   "section": "356",
+   "anchor": "by words either spoken or intended to be read, or by signs or by visible representations"
+  },
+  {
+   "id": 23,
+   "question": "What is dowry death and its punishment?",
+   "act": "The Bharatiya Nyaya Sanhita, 2023",
+   "section": "80",
+   "anchor": "death of a woman is caused by any burns or bodily injury"
+  },
+  {
+   "id": 24,
+   "question": "Can I get anticipatory bail if I fear arrest?",
+   "act": "The Code of Criminal Procedure",
+   "section": "438",
+   "anchor": "reason to believe that he may be arrested on an accusation of having committed a non-bailable offence"
+  },
+  {
+   "id": 25,
+   "question": "When can a person accused of a non-bailable offence be released on bail?",
+   "act": "The Code of Criminal Procedure",
+   "section": "437",
+   "anchor": "accused of, or suspected of, the commission of any non-bailable offence is arrested or detained without warrant"
+  },
+  {
+   "id": 26,
+   "question": "Is the accused entitled to default bail if the police do not file the chargesheet in 60 or 90 days?",
+   "act": "The Code of Criminal Procedure",
+   "section": "167",
+   "anchor": "shall be released on bail if he is prepared to and does furnish bail"
+  },
+  {
+   "id": 27,
+   "question": "How is an FIR registered for a cognizable offence?",
+   "act": "The Code of Criminal Procedure",
+   "section": "154",
+   "anchor": "Every information relating to the commission of a cognizable offence"
+  },
+  {
+   "id": 28,
+   "question": "When can a court appoint an arbitrator?",
+   "act": "The Arbitration and Conciliation Act, 1996",
+   "section": "11",
+   "anchor": "parties are free to agree on a procedure for appointing the arbitrator"
+  },
+  {
+   "id": 29,
+   "question": "Can a court grant interim relief before arbitration starts?",
+   "act": "The Arbitration and Conciliation Act, 1996",
+   "section": "9",
+   "anchor": "before or during arbitral proceedings or at any time after the making of the arbitral award"
+  },
+  {
+   "id": 30,
+   "question": "On what grounds can an arbitral award be set aside and within what time?",
+   "act": "The Arbitration and Conciliation Act, 1996",
+   "section": "34",
+   "anchor": "Recourse to a Court against an arbitral award may be made only by an application for setting aside"
+  },
+  {
+   "id": 31,
+   "question": "How is a domestic arbitral award enforced?",
+   "act": "The Arbitration and Conciliation Act, 1996",
+   "section": "36",
+   "anchor": "enforced in accordance with the provisions of the Code of Civil Procedure"
+  },
+  {
+   "id": 32,
+   "question": "What is an arbitration agreement?",
+   "act": "The Arbitration and Conciliation Act, 1996",
+   "section": "7",
+   "anchor": "arbitration agreement means an agreement by the parties to submit to arbitration"
+  },
+  {
+   "id": 33,
+   "question": "How does the property of a Hindu male who dies without a will devolve?",
+   "act": "The Hindu Succession Act, 1956",
+   "section": "8",
+   "anchor": "property of a male Hindu dying intestate shall devolve according to the provisions of this Chapter"
+  },
+  {
+   "id": 34,
+   "question": "Does an acknowledgment in writing extend the limitation period?",
+   "act": "The Limitation Act, 1963",
+   "section": "18",
+   "anchor": "acknowledgment of liability"
+  },
+  {
+   "id": 35,
+   "question": "How is a sale of immovable property defined and completed?",
+   "act": "The Transfer of Property Act, 1882",
+   "section": "54",
+   "anchor": "transfer of ownership in exchange for a price paid or promised"
+  },
+  {
+   "id": 36,
+   "question": "What is the difference between a condition and a warranty in a sale of goods?",
+   "act": "The Sale of Goods Act, 1930",
+   "section": "12",
+   "anchor": "stipulation in a contract of sale with reference to goods which are the subject thereof may be a condition or a warranty"
+  },
+  {
+   "id": 37,
+   "question": "What is a lease of immovable property?",
+   "act": "The Transfer of Property Act, 1882",
+   "section": "105",
+   "anchor": "transfer of a right to enjoy such property, made for a certain time"
+  },
+  {
+   "id": 38,
+   "question": "How is a gift of immovable property made valid?",
+   "act": "The Transfer of Property Act, 1882",
+   "section": "123",
+   "anchor": "transfer must be effected by a registered instrument"
+  },
+  {
+   "id": 39,
+   "question": "Where can a consumer file a complaint about defective goods or deficient service?",
+   "act": "The Consumer Protection Act, 2019",
+   "section": "35",
+   "anchor": "may be filed with a District Commission"
+  },
+  {
+   "id": 40,
+   "question": "What is a partnership and who is a partner?",
+   "act": "The Indian Partnership Act, 1932",
+   "section": "4",
+   "anchor": "relation between persons who have agreed to share the profits of a business"
+  },
+  {
+   "id": 41,
+   "question": "What are the inherent powers of a civil court?",
+   "act": "The Code of Civil Procedure, 1908",
+   "section": "151",
+   "anchor": "inherent power of the Court to make such orders as may be necessary for the ends of justice"
+  },
+  {
+   "id": 42,
+   "question": "What are the duties of directors of a company?",
+   "act": "The Companies Act, 2013",
+   "section": "166",
+   "anchor": "director of a company shall act in accordance with the articles of the company"
+  },
+  {
+   "id": 43,
+   "question": "Who can apply to the Tribunal for oppression and mismanagement?",
+   "act": "The Companies Act, 2013",
+   "section": "241",
+   "anchor": "prejudicial to public interest or in a manner prejudicial or oppressive to him or any other member"
+  },
+  {
+   "id": 44,
+   "question": "What is the punishment for fraud under company law?",
+   "act": "The Companies Act, 2013",
+   "section": "447",
+   "anchor": "found to be guilty of fraud"
+  },
+  {
+   "id": 45,
+   "question": "What is the punishment for identity theft using a computer?",
+   "act": "The Information Technology Act, 2000",
+   "section": "66C",
+   "anchor": "fraudulently or dishonestly make use of the electronic signature, password or any other unique identification feature"
+  },
+  {
+   "id": 46,
+   "question": "When are online intermediaries exempt from liability for third party content?",
+   "act": "The Information Technology Act, 2000",
+   "section": "79",
+   "anchor": "intermediary shall not be liable for any third party information"
+  },
+  {
+   "id": 47,
+   "question": "What is the time limit to reply to an RTI application?",
+   "act": "The Right to Information Act, 2005",
+   "section": "7",
+   "anchor": "within thirty days of the receipt of the request"
+  },
+  {
+   "id": 48,
+   "question": "What is the punishment for drunk driving?",
+   "act": "The Motor Vehicles Act, 1988",
+   "section": "185",
+   "anchor": "has, in his blood, alcohol exceeding 30 mg. per 100 ml. of blood"
+  },
+  {
+   "id": 49,
+   "question": "Is gratuity payable after five years of service?",
+   "act": "The PAYMENT OF GRATUITY ACT, 1972",
+   "section": "4",
+   "anchor": "rendered continuous service for not less than five years"
+  },
+  {
+   "id": 50,
+   "question": "How can spouses obtain a divorce by mutual consent?",
+   "act": "The Hindu Marriage Act, 1955",
+   "section": "13B",
+   "anchor": "presented to the district court by both the parties to a marriage together"
+  }
+ ]
+}

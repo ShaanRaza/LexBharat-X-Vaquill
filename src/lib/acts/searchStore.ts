@@ -4,9 +4,12 @@ import { actMatcher, hasDevanagari, hasSearchableChars, parseSectionLookup } fro
 
 export const MARK_OPEN = "", MARK_CLOSE = ""; // private-use markers around matched words in snippets; the UI turns them into highlights
 export const PAGE_SIZE = 12, MAX_RESULTS = 1000;
+/** Re-ranking of the best 1,000 text matches for broad queries: a match whose whole query is in the heading counts 1.6x, a Central Act 1.3x, an Act no longer in force 0.75x. Exact section lookups never go through this. */
+export const HEADING_BOOST = 1.6, CENTRAL_BOOST = 1.3, NOT_IN_FORCE_FACTOR = 0.75;
+const RANK_BOOST = `(CASE WHEN to_tsvector('english', coalesce(s.heading, '')) @@ q.tq THEN ${HEADING_BOOST} ELSE 1 END) * (CASE WHEN a.category = 'central' THEN ${CENTRAL_BOOST} ELSE 1 END) * (CASE WHEN a.act_status = 'in_force' THEN 1 ELSE ${NOT_IN_FORCE_FACTOR} END)`;
 
 export type SectionHit = {
-  actId: string; actTitle: string; year: number | null; category: string; state: string | null; actStatus: string;
+  actId: string; actTitle: string; year: number | null; category: string; state: string | null; actStatus: string; sourceUrl: string | null;
   sectionKey: string; number: string | null; heading: string | null; chapter: string | null; status: string; flags: string[];
   snippet: string; via: "text" | "lookup";
 };
@@ -17,7 +20,7 @@ export type SearchOutcome =
 /** First readable words of a section for a lookup result: skips markdown headings and all-capitals heading lines that lead some sections. */
 const leadSnippet = (body: string) => body.split(/\n{2,}/).map((p) => p.trim()).filter((p) => p && !/^#/.test(p) && !(p.length < 200 && p === p.toUpperCase())).join(" ").replace(/\*\*/g, "").replace(/\s+/g, " ").slice(0, 220);
 
-const COLS = `s.act_id AS "actId", a.title AS "actTitle", a.year, a.category, a.state, a.act_status AS "actStatus", s.section_key AS "sectionKey", s.number, s.heading, s.chapter, s.status, s.flags`;
+const COLS = `s.act_id AS "actId", a.title AS "actTitle", a.year, a.category, a.state, a.act_status AS "actStatus", a.source_url AS "sourceUrl", s.section_key AS "sectionKey", s.number, s.heading, s.chapter, s.status, s.flags`;
 
 export const searchAvailable = () => dbConfigured();
 
@@ -49,8 +52,9 @@ export async function searchSections(q: string, page = 1, pageSize = PAGE_SIZE):
     if (offset >= MAX_RESULTS) return empty(`Only the first ${MAX_RESULTS} matches can be paged through. Narrow the search.`);
     const rows = await query<Omit<SectionHit, "via"> & { total: string | number }>(
       `WITH q AS (SELECT websearch_to_tsquery('english', $1) AS tq),
-            m AS (SELECT s.act_id, s.section_key, ts_rank_cd(s.tsv, q.tq, 32) AS rank FROM act_sections s, q WHERE s.tsv @@ q.tq ORDER BY rank DESC, s.act_id, s.ord LIMIT ${MAX_RESULTS + 1}),
-            p AS (SELECT *, (SELECT count(*) FROM m) AS total FROM m OFFSET $2 LIMIT $3)
+            c AS MATERIALIZED (SELECT s.act_id, s.section_key, ts_rank_cd(s.tsv, q.tq, 32) AS base FROM act_sections s, q WHERE s.tsv @@ q.tq ORDER BY base DESC, s.act_id, s.ord LIMIT ${MAX_RESULTS + 1}),
+            m AS MATERIALIZED (SELECT c.act_id, c.section_key, c.base * ${RANK_BOOST} AS rank FROM c JOIN act_sections s USING (act_id, section_key) JOIN acts a ON a.act_id = s.act_id, q),
+            p AS (SELECT *, (SELECT count(*) FROM m) AS total FROM m ORDER BY rank DESC, act_id, section_key OFFSET $2 LIMIT $3)
        SELECT ${COLS}, p.total,
               ts_headline('english', left(s.body, 20000), q.tq, 'MaxFragments=2, MaxWords=26, MinWords=10, ShortWord=2, FragmentDelimiter=" … ", StartSel=${MARK_OPEN}, StopSel=${MARK_CLOSE}') AS snippet
        FROM p JOIN act_sections s USING (act_id, section_key) JOIN acts a ON a.act_id = s.act_id, q ORDER BY p.rank DESC, s.act_id, s.ord`, [q, offset, pageSize], 15000);

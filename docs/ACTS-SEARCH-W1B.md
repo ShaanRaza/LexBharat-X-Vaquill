@@ -30,3 +30,19 @@ Neon Free allows 1 GB of Postgres storage per project (checked on neon.com/docs/
 
 ## Limits
 Broad words ("section") match thousands of rows; they are ranked within the first 1,000 matches and take about 0.8 s. Ranking is `ts_rank_cd` (no semantic understanding). Sections flagged `possibly_incomplete` are searchable and show their flag. No Vercel environment variable was set; production keeps showing "not available yet" until `DATABASE_URL` is set there.
+
+## Update 2026-10-23 (production check, ranking, label)
+**Production** (https://lexbharat-bay.vercel.app, after the redeploy): search and Act pages read from Neon. Timings from one location, including the Vercel function: first search after 6+ minutes idle **4.1 s** (Neon wake-up plus function start); other new searches **0.9 to 2.3 s** (the broadest words are slowest); a repeated search is served from the CDN cache in about **0.12 s**. "free consent" 419 results, top Contract Act s.14; a Hindi word returns the clear "not searchable yet" message; empty input returns HTTP 422 "Type at least 2 characters."
+
+**Ranking** (`searchStore.ts`): the best 1,000 text matches are re-ranked: whole query found in the heading x1.6, Central Act x1.3, an Act no longer in force x0.75. Section lookups never go through this and stay first. (A first version without `MATERIALIZED` CTEs made "section" take 15 s; fixed, now 0.8 s.) Top 3 before and after (C = Central, S = State):
+| Query | Before | After |
+|---|---|---|
+| cheque | Rajasthan Urban Improvement Act s28; Tripura VAT Act s4; NI Act s6 | NI Act s6; NI Act s138; NI Act s131 |
+| consent | BNS (state draft); Companies Act 1956 (state); Digital Personal Data Protection Act s6 | Indian Christian Marriage Act s45; BNS s28; Indian Contract Act s19 |
+| arbitration | Arbitration & Conciliation Act (state copy, no section); same Act s29B; Portuguese CPC | Arbitration and Conciliation Act s11, s28, s31 |
+| bail | CrPC 1973 (state copy) s439; same, no section; BNSS s480 | BNSS s480; BNSS s430; BNSS s478 |
+| rent control court | Kerala Buildings Act s10 (twice); a State rent Act s11 | State rent Act s5; Tripura Building Act s17 "Orders of Rent Control Court"; Kerala Act s19 |
+| dishonour of cheque | NI Act s138; Punjab Tax on Luxuries Act s16; BNS (state draft) | unchanged |
+Clear gains for "cheque", "arbitration", "bail"; "consent" now lists Central Acts but not the most useful one first; "rent control court" is mixed. The W1b test table still passes (same results and counts; "wilful default" now ranks a municipal-corporation section first and "very broad" still returns 1000+).
+
+**"Possibly incomplete" label:** shown as a warning box with the wording "This section may be incomplete or mixed with nearby text in the source data. Check India Code before relying on it." and a link to the Act on India Code, on the Act page (above the text) and under every affected search result.
