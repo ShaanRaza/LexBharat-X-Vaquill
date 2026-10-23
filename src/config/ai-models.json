@@ -1,11 +1,11 @@
 {
-  "about": "Which model answers each task. Spec = provider:model. Override any task with an environment variable AI_MODEL_<TASK> (CHAT, ANSWER_CHECK, QUERY_REWRITE, DRAFTING, REVIEW, RERUN), for example AI_MODEL_CHAT=anthropic:claude-haiku-5-5. Providers: gemini (GEMINI_API_KEY), anthropic (ANTHROPIC_API_KEY), litellm (LITELLM_BASE_URL + LITELLM_API_KEY, any OpenAI-compatible endpoint). thinking: off | minimal | low | medium | high. firstTokenMs: give up on a model that has produced no text by then (0 = never) and use the fallback; fallback: tried in order when a model is busy or unavailable (override with AI_FALLBACK_<TASK>, comma-separated, empty = none). See docs/PAID-SWITCHOVER.md.",
+  "about": "Which model answers each task. Spec = provider:model. Override any task with an environment variable AI_MODEL_<TASK> (CHAT, ANSWER_CHECK, QUERY_REWRITE, TEMPLATE_PICK, DRAFTING, REVIEW, RERUN), for example AI_MODEL_CHAT=anthropic:claude-haiku-5-5. Providers: gemini (GEMINI_API_KEY), anthropic (ANTHROPIC_API_KEY), litellm (LITELLM_BASE_URL + LITELLM_API_KEY, any OpenAI-compatible endpoint). thinking: off | minimal | low | medium | high. firstTokenMs: give up on a model that has produced no text by then (0 = never) and use the fallback; fallback: tried in order when a model is busy or unavailable (override with AI_FALLBACK_<TASK>, comma-separated, empty = none). See docs/PAID-SWITCHOVER.md.",
   "tasks": {
     "chat": {
       "model": "gemini:gemini-3.6-flash",
       "thinking": "off",
       "temperature": 0.2,
-      "maxOutputTokens": 1800,
+      "maxOutputTokens": 2500,
       "timeoutMs": 45000,
       "fallback": [
         "gemini:gemini-3.5-flash-lite"
@@ -62,6 +62,16 @@
       "thinking": "off",
       "temperature": 0,
       "maxOutputTokens": 300,
+      "timeoutMs": 12000,
+      "firstTokenMs": 8000,
+      "json": true,
+      "fallback": []
+    },
+    "templatePick": {
+      "model": "gemini:gemini-3.5-flash-lite",
+      "thinking": "off",
+      "temperature": 0,
+      "maxOutputTokens": 200,
       "timeoutMs": 12000,
       "firstTokenMs": 8000,
       "json": true,

@@ -4,11 +4,12 @@ import type { ReactNode } from "react";
 import { Badge } from "@/components/kit";
 import LogoutLink from "@/components/LogoutLink";
 import ChatHistory from "@/components/workspace/chat/ChatHistory";
+import DraftHistory from "@/components/workspace/drafting/DraftHistory";
 import workspace from "@/config/workspace.json";
 
 // Sidebar of the Legal Workspace product (also the contents of the phone menu): New chat, Dashboard, Chat with its past chats, Acts & Judgments, then Drafting / Review / Vault, which stay
 // greyed with "Coming soon" until their flag in src/config/workspace.json is switched on. Presentation only; colours, sizes and radii come from the tokens.
-export type LawTab = "dashboard" | "chat" | "browse";
+export type LawTab = "dashboard" | "chat" | "browse" | "drafting";
 const PATHS = {
   dashboard: "M3 3h7v9H3zM14 3h7v5h-7zM14 12h7v9h-7zM3 16h7v5H3z",
   chat: "M4 5h16v11H9l-5 4z",
@@ -46,7 +47,12 @@ export default function WorkspaceNav({ active, logo, onNavigate }: { active?: La
           <div className="ml-4 mt-0.5 max-h-52 overflow-y-auto border-l border-border pl-2" data-lenis-prevent><ChatHistory onNavigate={onNavigate} /></div>
         </li>
         <li><Item href="/workspace/browse" icon="browse" label="Acts & Judgments" active={active === "browse"} onNavigate={onNavigate} /></li>
-        {feats.map(([key, f]) => <li key={key}>{f.enabled ? <Item href={f.href} icon={key} label={f.label} active={false} onNavigate={onNavigate} /> : <Soon icon={key} label={f.label} />}</li>)}
+        {feats.map(([key, f]) => (
+          <li key={key}>
+            {f.enabled ? <Item href={f.href} icon={key} label={f.label} active={active === key} onNavigate={onNavigate} /> : <Soon icon={key} label={f.label} />}
+            {f.enabled && key === "drafting" && <div className="ml-4 mt-0.5 max-h-44 overflow-y-auto border-l border-border pl-2" data-lenis-prevent><DraftHistory onNavigate={onNavigate} /></div>}
+          </li>
+        ))}
       </ul>
       <div className="space-y-1 px-5 pb-4 pt-3">
         <p className="text-ui-xs text-muted">Your chats are saved on this browser only.</p>

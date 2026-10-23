@@ -93,3 +93,32 @@ Labels now vary: 9 Supported, 1 Check sources, 2 Not found. Mechanical check of 
 Other W4b tests: the cut-off path (a model that drops the connection after the first part): the partial answer and its citation chip stay, the note "The answer was cut off. Try again." shows, nothing is lost, the message is saved with the flag, and the question counts. Rewrite skipped (model answering 429): the page shows "Search help was skipped because the model is busy, so the sections found may be less complete." and the answer still arrives.
 
 **Free-tier budget now:** each question is up to three model calls: rewrite (lite), answer (3.6, falling back to lite), check (lite; none for "not found"), and one Voyage request (all queries batched). With lite at 15 requests a minute and 3.6 at 5 a minute that is roughly 5 full-quality questions a minute across all users.
+
+
+## W5: chat polish
+
+- **Cited sources first.** Under an answer, "Sources cited" lists the sources the answer actually cites (always visible); every other retrieved source is folded under "Also searched (N)", closed by default, with the search terms that were used.
+- **Act linked once.** In the answer text an Act name is linked to its section only on its first mention; later mentions stay plain text. The `[n]` chips are never limited.
+- **Unnumbered sources.** A source with no section number shows the Act name, "Unnumbered text" and a short preview of its first words, never "Text block".
+- **Every source shows its Act name** first on its line (Act name, then section and heading). The source list previously put the Act name last in a muted style; the Payment and Settlement Systems Act s25 line is the one that read as missing it.
+- **Fuller answers.** For an offence, a right or a procedure the answer now has a fixed order: the direct answer, "Conditions and time limits:" (every condition and period the retrieved text gives), and "Related provisions:" (up to four, each with its Act, section and what it covers, from the retrieved text). Even a question that asks only for the penalty gets the conditions. The query-rewrite step also asks for one query about closely related provisions, which is how the Payment and Settlement Systems Act s25 (electronic funds transfer) is found for a cheque question (in 3 of 4 runs).
+- **Citations are guaranteed to exist**: a line that names a retrieved "Section N of <Act>" but lacks the chip gets it added by code; an answer that states law and cites nothing cannot be labelled Supported.
+
+### W5: the 12 questions again (2026-10-23, real Gemini and Voyage)
+Result: 9 Supported, 1 Check sources, 2 Not found. Every source line now begins with the Act name.
+
+| # | Question | Label | Sources cited (first three) | Notes |
+|---|---|---|---|---|
+| 1 | What is the punishment for cheque bounce? | Supported | Negotiable Instruments Act s138; Negotiable Instruments Act s142; Negotiable Instruments Act s140 | Direct answer, then **Conditions and time limits** (six months validity, 30-day notice, 15-day payment) and **Related provisions** (ss 140, 142, 143A/148 and the Payment and Settlement Systems Act s25 for electronic transfers, each with what it covers) |
+| 2 | Notice period before filing a cheque bounce complaint | Supported | Negotiable Instruments Act s138; Negotiable Instruments Act s142; Negotiable Instruments Act s106 | Finds NI Act s138 first (the rewrite names it) |
+| 3 | Can a minor enter a contract? | Supported | Indian Contract Act s11; Indian Contract Act s68; Presidency Small Cause Courts Act s32 | Indian Contract Act s11 first, s68 (necessaries supplied to a minor) also retrieved |
+| 4 | Maharashtra rent control: grounds for eviction | Check sources | Maharashtra Rent Control Act s16; Maharashtra Rent Control Act s42; Maharashtra Rent Control Act s19 | Checker: the answer covers clause (a)-(f) but not every ground of s16(1); lists the missing grounds |
+| 5 | How can I get anticipatory bail? | Supported | CODE OF CRIMINAL PROCEDURE s438; CODE OF CRIMINAL PROCEDURE s439; CODE OF CRIMINAL PROCEDURE s38 |  |
+| 6 | What is the time limit to reply to an RTI application? | Supported | Right to Information Act s7; Right to Information Act s11; Right to Information Act s24 |  |
+| 7 | What are the grounds for divorce under the Hindu Marriage Act? | Supported | Hindu Marriage Act s13; Hindu Marriage Act s13B; Hindu Marriage Act s23 |  |
+| 8 | What does section 138 of the NI Act say? | Supported | Negotiable Instruments Act s138; Negotiable Instruments Act s141; Negotiable Instruments Act s140 |  |
+| 9 | Can a tenant in Karnataka sublet the premises? | Supported | KARNATAKA RENT ACT s32; KARNATAKA RENT ACT s27; KARNATAKA RENT ACT s33 | Karnataka Rent Act s32 among the sources |
+| 10 | Is an unstamped document admissible in evidence in Maharashtra? | Supported | Maharashtra Stamp Act s34; Maharashtra Stamp Act s35; Maharashtra Stamp Act s33 |  |
+| 11 | What did the Supreme Court hold in the Arnesh Kumar judgment about arrests? | Not found in the Acts | none | Says it found no judgment and that judgments are not included; cites nothing (re-run after the first pass cited all ten sources) |
+| 12 | Who won the cricket world cup in 2011? | Not found in the Acts | none | Not a legal question; says nothing was found |
+

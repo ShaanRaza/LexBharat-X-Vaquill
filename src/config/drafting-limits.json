@@ -1,0 +1,1 @@
+{ "about": "Drafts per browser per day and per rolling 7 days, and all browsers together per calendar month (India time). Override with DRAFT_LIMIT_DAILY, DRAFT_LIMIT_WEEKLY, DRAFT_LIMIT_MONTHLY_GLOBAL. maxSaved is how many drafts one browser can keep.", "daily": 5, "weekly": 20, "monthlyGlobal": 600, "maxSaved": 30 }

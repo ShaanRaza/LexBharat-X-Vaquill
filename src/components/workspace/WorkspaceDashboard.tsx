@@ -15,8 +15,8 @@ function Action({ title, text, href }: { title: string; text: string; href?: str
     : <div role="link" aria-disabled="true" className="block cursor-not-allowed rounded-card bg-surface/60 p-card text-muted ring-1 ring-border/40">{body}</div>;
 }
 
-const LIVE = ["Acts search: by words, by “exact phrase”, or a section lookup like “138 NI Act”", "Smart search (by meaning) over Central and State Acts", "Chat: plain-English answers from Act sections, with a link to each section used"];
-const SOON = ["Smart search over judgments", "Drafting", "Review", "Vault"];
+const LIVE = ["Acts search: by words, by “exact phrase”, or a section lookup like “138 NI Act”", "Smart search (by meaning) over Central and State Acts", "Chat: plain-English answers from Act sections, with a link to each section used", "Drafting: five templates (cheque-bounce notice, legal notice, NDA, rent agreement, service agreement) grounded in the Acts"];
+const SOON = ["Smart search over judgments", "Review", "Vault"];
 
 export default function WorkspaceDashboard() {
   const [chats, setChats] = useState<Chat[] | null>(null);
@@ -33,7 +33,7 @@ export default function WorkspaceDashboard() {
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
           <Action href="/workspace/chat" title="Ask a legal question" text="Get an answer from Indian Acts, with numbered citations." />
           <Action href="/workspace/browse" title="Search Acts & Judgments" text="Look up an Act or a section, or browse Supreme Court and High Court cases." />
-          <Action href={f.drafting.enabled ? f.drafting.href : undefined} title={f.drafting.action} text="Prepare a first draft from your instructions." />
+          <Action href={f.drafting.enabled ? f.drafting.href : undefined} title={f.drafting.action} text="Prepare a first draft from a template, with the Acts it relies on." />
           <Action href={f.review.enabled ? f.review.href : undefined} title={f.review.action} text="Check a contract against the law and flag problems." />
         </div>
       </section>

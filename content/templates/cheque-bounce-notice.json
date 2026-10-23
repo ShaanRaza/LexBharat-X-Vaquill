@@ -1,0 +1,213 @@
+{
+  "id": "cheque-bounce-notice",
+  "title": "Demand notice for a dishonoured cheque (section 138, Negotiable Instruments Act)",
+  "description": "A legal notice from the payee to the drawer of a cheque that was returned unpaid, demanding payment so that a complaint under section 138 can follow if the money is not paid.",
+  "keywords": [
+    "cheque bounce",
+    "dishonoured cheque",
+    "section 138",
+    "NI Act",
+    "demand notice",
+    "returned unpaid"
+  ],
+  "docTitle": "LEGAL NOTICE UNDER SECTION 138 OF THE NEGOTIABLE INSTRUMENTS ACT, 1881",
+  "fields": [
+    {
+      "key": "payee_name",
+      "label": "Payee's name (person sending the notice)",
+      "type": "text",
+      "required": true,
+      "group": "Parties"
+    },
+    {
+      "key": "payee_address",
+      "label": "Payee's address",
+      "type": "textarea",
+      "required": true,
+      "group": "Parties"
+    },
+    {
+      "key": "advocate_name",
+      "label": "Advocate sending the notice (if any)",
+      "type": "text",
+      "required": false,
+      "group": "Parties",
+      "hint": "Leave empty if the payee sends the notice directly.",
+      "ifMissing": "omit"
+    },
+    {
+      "key": "drawer_name",
+      "label": "Drawer's name (person who gave the cheque)",
+      "type": "text",
+      "required": true,
+      "group": "Parties"
+    },
+    {
+      "key": "drawer_address",
+      "label": "Drawer's address",
+      "type": "textarea",
+      "required": true,
+      "group": "Parties"
+    },
+    {
+      "key": "debt_description",
+      "label": "Debt or liability the cheque was given for",
+      "type": "textarea",
+      "required": true,
+      "group": "Cheque",
+      "hint": "For example: repayment of a loan, price of goods supplied, rent due."
+    },
+    {
+      "key": "cheque_number",
+      "label": "Cheque number",
+      "type": "text",
+      "required": true,
+      "group": "Cheque"
+    },
+    {
+      "key": "cheque_date",
+      "label": "Date on the cheque",
+      "type": "date",
+      "required": true,
+      "group": "Cheque"
+    },
+    {
+      "key": "cheque_amount",
+      "label": "Cheque amount",
+      "type": "amount",
+      "required": true,
+      "group": "Cheque",
+      "hint": "Digits only, for example 250000."
+    },
+    {
+      "key": "drawee_bank",
+      "label": "Bank and branch on which the cheque was drawn",
+      "type": "text",
+      "required": true,
+      "group": "Cheque"
+    },
+    {
+      "key": "presentation_date",
+      "label": "Date the cheque was presented for payment",
+      "type": "date",
+      "required": true,
+      "group": "Dishonour"
+    },
+    {
+      "key": "return_memo_date",
+      "label": "Date of the bank's return memo",
+      "type": "date",
+      "required": true,
+      "group": "Dishonour"
+    },
+    {
+      "key": "return_reason",
+      "label": "Reason given by the bank",
+      "type": "select",
+      "required": true,
+      "group": "Dishonour",
+      "options": [
+        "Funds insufficient",
+        "Exceeds arrangement",
+        "Payment stopped by drawer",
+        "Account closed",
+        "Other (state it in the extra instructions)"
+      ]
+    },
+    {
+      "key": "info_received_date",
+      "label": "Date the payee received the bank's information that the cheque was returned",
+      "type": "date",
+      "required": true,
+      "group": "Dishonour",
+      "hint": "The notice must be sent within 30 days of this date; check the retrieved section."
+    },
+    {
+      "key": "notice_date",
+      "label": "Date of this notice",
+      "type": "date",
+      "required": false,
+      "group": "Notice",
+      "ifMissing": "placeholder",
+      "placeholder": "Date of this notice"
+    },
+    {
+      "key": "place",
+      "label": "Place",
+      "type": "text",
+      "required": false,
+      "group": "Notice",
+      "ifMissing": "placeholder"
+    }
+  ],
+  "relies_on": [
+    {
+      "lookup": "138 NI Act",
+      "why": "The offence, the 30-day notice and the 15-day payment period."
+    },
+    {
+      "lookup": "142 NI Act",
+      "why": "Complaint must be made in writing by the payee and within the time stated."
+    }
+  ],
+  "search_queries": [
+    "dishonour of cheque for insufficiency of funds notice demand payment fifteen days"
+  ],
+  "sections": [
+    {
+      "id": "heading",
+      "title": "Heading and addressee",
+      "instruction": "Do not repeat the document title (it is added separately). Write the line 'By registered post with acknowledgement due, speed post and email' as a line the sender can edit, the date (use the notice date; if missing use the placeholder) and the place. Then the addressee block: 'To,' followed by the drawer's name and address. Keep it short and formal."
+    },
+    {
+      "id": "introduction",
+      "title": "Subject and introduction",
+      "instruction": "Write a one-line 'Subject:' line naming the cheque number, date and amount and that it was returned unpaid. Then an introductory paragraph: the notice is sent on behalf of / by the payee (use the advocate if one is named, otherwise the payee), and that the notice is issued under section 138 of the Negotiable Instruments Act, 1881 (cite only the retrieved section)."
+    },
+    {
+      "id": "facts",
+      "title": "Facts",
+      "instruction": "State the facts as numbered paragraphs, only from the details given: (1) the debt or liability, (2) the cheque (number, date, amount, bank and branch), (3) its presentation on the stated date, (4) its return unpaid with the bank's stated reason and the return memo date, and (5) the date the payee received the bank's information. Never add facts, dates or amounts that were not given; use the placeholders instead."
+    },
+    {
+      "id": "legal-position",
+      "title": "Legal position",
+      "instruction": "In numbered paragraphs, explain from the retrieved section 138 text ONLY: the offence and its punishment as stated there, and the two conditions this notice relies on: the notice must be given within the period stated in the retrieved text after the payee receives information of the return, and the drawer then has the period stated in the retrieved text to pay. State those periods exactly as the retrieved text states them (for example '30 days' and '15 days' if that is what the text says). Mention that the cheque was presented within its validity period as the section requires, using the dates given. Do not cite any other provision."
+    },
+    {
+      "id": "demand",
+      "title": "Demand",
+      "instruction": "Demand that the drawer pay the cheque amount (in figures and words as given) within the payment period stated in the retrieved section 138 text, counted from the receipt of this notice. Add a sentence that the demand is for the cheque amount and that the payee also reserves the right to claim interest and costs (do not state any rate or figure). Say how payment can be made using a placeholder for the payee's payment details."
+    },
+    {
+      "id": "consequences",
+      "title": "Consequences of non-payment",
+      "instruction": "Say that if the amount is not paid within that period the payee will file a complaint before the competent Magistrate under section 138 read with the retrieved cognizance provision (section 142) and will seek the punishment the retrieved text provides, at the drawer's risk as to cost and consequences. State that the notice is without prejudice to other rights and remedies, including civil recovery."
+    },
+    {
+      "id": "closing",
+      "title": "Reservation and signature",
+      "instruction": "",
+      "fixed": "This notice is issued without prejudice to all other rights and remedies available to the payee in law. A copy of this notice has been kept for our record.\n\nYours faithfully,\n\n________________________\n{{advocate_name|payee_name}}\nDate: {{notice_date}}\nPlace: {{place}}"
+    }
+  ],
+  "reminders": [
+    {
+      "id": "thirty-days",
+      "text": "Check the dates: the notice must go out within the period the section allows after the payee learns of the return. Count from {{info_received_date}} and keep proof of the date it was sent."
+    },
+    {
+      "id": "proof",
+      "text": "Keep proof of dispatch and delivery (postal receipt, tracking record, email log) and attach copies of the cheque and the bank's return memo."
+    },
+    {
+      "id": "company",
+      "text": "If the drawer is a company, consider also addressing the notice to the persons in charge of its business (see the provision on offences by companies) and check the company's registered address."
+    },
+    {
+      "id": "review",
+      "text": "Have the notice reviewed and signed by a qualified lawyer before sending."
+    }
+  ],
+  "style": "notice"
+}

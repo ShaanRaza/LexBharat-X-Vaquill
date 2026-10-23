@@ -1,0 +1,27 @@
+export type FieldType = "text" | "textarea" | "date" | "amount" | "number" | "select" | "state";
+export type TemplateField = { key: string; label: string; type: FieldType; required: boolean; placeholder?: string; ifMissing?: "placeholder" | "omit"; group?: string; hint?: string; options?: string[]; when?: { field: string; equals: string } };
+export type TemplateSection = { id: string; title: string; instruction: string; fixed?: string };
+export type Lookup = { lookup: string; why: string };
+export type Template = {
+  id: string; title: string; description: string; keywords?: string[]; docTitle: string; docTitleBy?: { field: string; map: Record<string, string> }; style: "notice" | "agreement"; fields: TemplateField[]; sections: TemplateSection[];
+  relies_on?: Lookup[]; state_relies_on?: Record<string, Lookup[]>; conditional_relies_on?: (Lookup & { when: { field: string; equals: string } })[];
+  search_queries?: string[]; reminders?: { id: string; text: string; states?: string[] }[];
+};
+export type ResolvedField = { key: string; label: string; group: string | null; required: boolean; type: FieldType; value: string; display: string | null; placeholder: string; missing: boolean; ifMissing: "placeholder" | "omit" };
+export function rupeesInWords(n: number): string;
+export function indianGrouping(n: number): string;
+export function parseAmount(raw: unknown): { rupees: number; paise: number } | null;
+export function formatAmount(raw: unknown): string | null;
+export function formatDate(iso: unknown): string | null;
+export function placeholderFor(label: string): string;
+export function docTitleFor(template: Template, values: Record<string, string>): string;
+export function fieldVisible(f: TemplateField, values: Record<string, string>): boolean;
+export function formatValue(field: TemplateField, raw: unknown): string | null;
+export function resolveFields(template: Template, values: Record<string, string>): ResolvedField[];
+export function validateInput(template: Template, values: Record<string, string>): { errors: Record<string, string> };
+export function fillTokens(text: string, resolved: ResolvedField[]): string;
+export function relianceFor(template: Template, values: Record<string, string>): Lookup[];
+export function remindersFor(template: Template, values: Record<string, string>): { id: string; text: string }[];
+export function validateTemplate(t: unknown): string[];
+export function periodEnd(iso: unknown, months: unknown): string | null;
+export function derivedFacts(template: Template, values: Record<string, string>): { label: string; display: string }[];

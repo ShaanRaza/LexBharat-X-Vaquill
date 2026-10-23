@@ -1,0 +1,179 @@
+{
+  "id": "nda",
+  "title": "Non-disclosure agreement (confidentiality agreement)",
+  "description": "An agreement under which one or both parties promise to keep shared business information confidential. Governed by the Indian Contract Act, 1872.",
+  "keywords": [
+    "NDA",
+    "confidentiality",
+    "non-disclosure",
+    "confidential information",
+    "trade secrets"
+  ],
+  "docTitle": "NON-DISCLOSURE AGREEMENT",
+  "fields": [
+    {
+      "key": "effective_date",
+      "label": "Effective date",
+      "type": "date",
+      "required": true,
+      "group": "Agreement"
+    },
+    {
+      "key": "nda_type",
+      "label": "Type",
+      "type": "select",
+      "required": true,
+      "group": "Agreement",
+      "options": [
+        "One-way (one party discloses)",
+        "Mutual (both parties disclose)"
+      ]
+    },
+    {
+      "key": "party_a_name",
+      "label": "First party's name (the disclosing party if one-way)",
+      "type": "text",
+      "required": true,
+      "group": "Parties"
+    },
+    {
+      "key": "party_a_address",
+      "label": "First party's address",
+      "type": "textarea",
+      "required": true,
+      "group": "Parties"
+    },
+    {
+      "key": "party_b_name",
+      "label": "Second party's name (the receiving party if one-way)",
+      "type": "text",
+      "required": true,
+      "group": "Parties"
+    },
+    {
+      "key": "party_b_address",
+      "label": "Second party's address",
+      "type": "textarea",
+      "required": true,
+      "group": "Parties"
+    },
+    {
+      "key": "purpose",
+      "label": "Purpose of sharing the information",
+      "type": "textarea",
+      "required": true,
+      "group": "Terms",
+      "hint": "For example: evaluating a possible software development partnership."
+    },
+    {
+      "key": "extra_confidential",
+      "label": "Specific information to treat as confidential (optional)",
+      "type": "textarea",
+      "required": false,
+      "group": "Terms",
+      "ifMissing": "omit",
+      "placeholder": "Specific confidential information"
+    },
+    {
+      "key": "term_years",
+      "label": "How many years the confidentiality lasts",
+      "type": "number",
+      "required": false,
+      "group": "Terms",
+      "ifMissing": "placeholder",
+      "placeholder": "Number of years"
+    },
+    {
+      "key": "jurisdiction_city",
+      "label": "City whose courts have jurisdiction",
+      "type": "text",
+      "required": true,
+      "group": "Terms"
+    }
+  ],
+  "relies_on": [
+    {
+      "lookup": "10 Indian Contract Act",
+      "why": "What makes an agreement a contract."
+    },
+    {
+      "lookup": "27 Indian Contract Act",
+      "why": "Agreements in restraint of trade are void; the NDA must not restrain a lawful profession or business."
+    },
+    {
+      "lookup": "74 Indian Contract Act",
+      "why": "Compensation for breach where a sum is named in the contract."
+    }
+  ],
+  "search_queries": [
+    "agreement in restraint of trade void",
+    "compensation for breach of contract penalty stipulated"
+  ],
+  "sections": [
+    {
+      "id": "parties",
+      "title": "Title, date and parties",
+      "instruction": "Write the opening: 'This Non-Disclosure Agreement is made on [effective date] between' the two parties with their addresses, and say whether it is one-way (first party discloses, second receives) or mutual, as chosen. Use 'Disclosing Party' and 'Receiving Party' (or 'each Party' for mutual)."
+    },
+    {
+      "id": "purpose",
+      "title": "Background and purpose",
+      "instruction": "Write short recitals: why the parties are sharing information, using the purpose given, and that each is willing to keep it confidential on these terms."
+    },
+    {
+      "id": "definition",
+      "title": "Confidential information",
+      "instruction": "Define 'Confidential Information' broadly but clearly (information in any form that is marked or would reasonably be understood as confidential), include the specific items given, and list the standard exclusions: already public without breach, already known to the receiver, received lawfully from a third party, independently developed. Number the clauses."
+    },
+    {
+      "id": "obligations",
+      "title": "Obligations of the receiving party",
+      "instruction": "Number the obligations: use only for the purpose, keep as secret as its own, disclose only to those who need to know and are bound to keep it secret, no copying beyond what the purpose needs, tell the other party promptly of any leak, and permitted disclosure required by law (with notice where lawful)."
+    },
+    {
+      "id": "term",
+      "title": "Term and return of information",
+      "instruction": "State that the confidentiality obligations last for the number of years given from the effective date (use the placeholder [NUMBER OF YEARS] if missing), what happens on request or at the end (return or destroy, and confirm in writing). Do not invent any other period."
+    },
+    {
+      "id": "remedies",
+      "title": "Remedies and limits",
+      "instruction": "State that the disclosing party may seek an injunction and damages for breach. Add that nothing in the agreement restrains either party from carrying on a lawful profession, trade or business (this reflects the retrieved rule on agreements in restraint of trade; cite only the retrieved text). Do not state a penalty or liquidated sum unless one was given; if the retrieved compensation provision is mentioned, describe it only as the retrieved text does."
+    },
+    {
+      "id": "law",
+      "title": "Governing law and jurisdiction",
+      "instruction": "State that the agreement is governed by the laws of India and that the courts at the city given have jurisdiction (use the placeholder if missing). Add that it is a contract under the Indian Contract Act, 1872 only if the retrieved text supports the point."
+    },
+    {
+      "id": "general",
+      "title": "General terms",
+      "instruction": "Number short clauses: entire agreement, amendment in writing signed by both, no waiver, severability, notices in writing to the addresses above, counterparts."
+    },
+    {
+      "id": "signature",
+      "title": "Signatures",
+      "instruction": "",
+      "fixed": "IN WITNESS WHEREOF the parties have signed this Agreement on the date first written above.\n\nFor {{party_a_name}} (First Party)\n\n________________________\nName: {{party_a_name}}\nDate:\n\nFor {{party_b_name}} (Second Party)\n\n________________________\nName: {{party_b_name}}\nDate:"
+    }
+  ],
+  "reminders": [
+    {
+      "id": "stamp",
+      "text": "Check the stamp duty and any stamping requirement for an agreement of this kind in the state where it will be signed or used. An unstamped or under-stamped agreement may not be accepted as evidence until the duty and any penalty are paid."
+    },
+    {
+      "id": "signing",
+      "text": "Both parties should sign every page or the last page and keep an original each; consider witnesses."
+    },
+    {
+      "id": "scope",
+      "text": "Check that the definition of confidential information and the number of years suit the deal, and that nothing in the agreement restrains the receiving party's lawful business more than needed."
+    },
+    {
+      "id": "review",
+      "text": "Have the agreement reviewed by a qualified lawyer before it is signed."
+    }
+  ],
+  "style": "agreement"
+}

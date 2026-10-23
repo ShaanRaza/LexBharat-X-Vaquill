@@ -1,10 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { citedNumbers, sanitizeCitations, linkSegments } from "./citations.mjs";
+import { citedNumbers, sanitizeCitations, linkSegments, ensureCitations } from "./citations.mjs";
 import { extractLookups } from "./lookups.mjs";
 import { buildChatPrompt, retrievalQuery, parseCheck, buildCheckPrompt, sourceBlock, SOURCE_CHARS, detectNotFound, CHECK_LABELS } from "./prompt.mjs";
 import { buildRewritePrompt, parseRewrite, mergeRanked } from "./rewrite.mjs";
-import { toBlocks } from "./format.mjs";
+import { toBlocks, previewOf } from "./format.mjs";
 import { evaluateLimits, readLimits } from "./limits.mjs";
 import limitConfig from "../../config/chat-limits.json" with { type: "json" };
 
@@ -21,7 +21,7 @@ test("sanitizeCitations removes sources that were never retrieved and keeps the 
 test("linkSegments: [n] chips, and statute names linked only to the right retrieved section", () => {
   const segs = linkSegments("Under Section 138 of the Negotiable Instruments Act, 1881 the drawer is punished [1]. Section 142 of the NI Act sets the time [2][9].", sources);
   const kinds = segs.map((s) => (s.type === "text" ? "t" : s.type === "cite" ? `c${s.n}` : `s${s.n}`));
-  assert.deepEqual(kinds.filter((k) => k !== "t"), ["s1", "c1", "s2", "c2"]);   // [9] is not a source: dropped
+  assert.deepEqual(kinds.filter((k) => k !== "t"), ["s1", "c1", "c2"]);   // [9] is not a source: dropped; the NI Act is linked only on its first mention, the chips are not limited
   assert.ok(segs.find((s) => s.type === "statute" && s.n === 1).text.startsWith("Section 138 of the Negotiable Instruments Act"));
   assert.equal(segs.map((s) => (s.type === "cite" ? "" : s.text)).join("").includes("[9]"), false);
 });
@@ -75,6 +75,7 @@ test("detectNotFound: the model's 'I couldn't find it' reply with no citation, a
   assert.equal(detectNotFound("I couldn't find the notice period in the Acts I searched."), true);
   assert.equal(detectNotFound("I couldn’t find any information about the Arnesh Kumar judgment. Court judgments are not included."), true);
   assert.equal(detectNotFound("Under Section 138 [3] the punishment is two years. I could not find the fine."), false);   // cites a source: the checker decides
+  assert.equal(detectNotFound("I couldn't find the Arnesh Kumar judgment in the Acts I searched; judgments are not included [1][2][3]."), true);   // short "found nothing" reply that tagged sources
   assert.equal(detectNotFound("Under Section 138 the punishment is two years."), false);
 });
 test("parseRewrite keeps up to 3 clean, different queries and survives bad output; buildRewritePrompt carries the earlier question", () => {
@@ -105,4 +106,23 @@ test("limits: daily, weekly and global monthly each stop a question with a clear
   assert.match(evaluateLimits({ day: 30, week: 30, month: 30 }, L).message, /30 questions/);
   assert.deepEqual(readLimits(limitConfig, {}), { daily: 30, weekly: 150, monthlyGlobal: 3000 });
   assert.deepEqual(readLimits(limitConfig, { CHAT_LIMIT_DAILY: "5", CHAT_LIMIT_WEEKLY: "oops", CHAT_LIMIT_MONTHLY_GLOBAL: "-1" }), { daily: 5, weekly: 150, monthlyGlobal: 3000 });
+});
+test("an Act is linked only on its first mention; another Act is linked on its own first mention; chips always stay", () => {
+  const segs = linkSegments("Section 138 of the Negotiable Instruments Act, 1881 [1]. Section 438 of the CrPC [3]. Section 142 of the Negotiable Instruments Act [2]. Again Section 138 of the NI Act [1].", sources);
+  assert.deepEqual(segs.filter((s) => s.type === "statute").map((s) => s.n), [1, 3]);
+  assert.equal(segs.filter((s) => s.type === "cite").length, 4);
+  assert.equal(segs.map((s) => (s.type === "cite" ? "" : s.text)).join("").includes("Section 142 of the Negotiable Instruments Act"), true);   // still shown, just not linked
+});
+test("previewOf: first readable words, no headings or markup, trimmed at a word", () => {
+  assert.equal(previewOf("## CHAPTER I\n\nTHE PRELIMINARY\n\n**Short title.** This Act may be called the Foo Act, and it extends to the whole of India except somewhere else entirely and so on and on and on, with more words after that."), "Short title. This Act may be called the Foo Act, and it extends to the whole of India except somewhere else entirely and so on and on and …");
+  assert.equal(previewOf("short"), "short");
+});
+test("the chat prompt asks for conditions, time limits, steps and related provisions, always with the Act name", () => {
+  const p = buildChatPrompt({ question: "q", sources: [] }).system;
+  assert.ok(p.includes("every condition that must be met")); assert.ok(p.includes("Related provisions:")); assert.ok(p.includes("Conditions and time limits:")); assert.ok(p.includes("An answer that states law with no [n] at all is not acceptable")); assert.ok(p.includes("cites nothing")); assert.ok(p.includes("EVEN IF the question asks only about the penalty")); assert.ok(p.includes("Always name the Act"));
+  assert.ok(sourceBlock({ n: 2, actTitle: "The Foo Act, 2001", number: null, text: "x" }).startsWith("[2] The Foo Act, 2001 — Unnumbered text"));
+});
+test("ensureCitations adds the chip to a line that names a retrieved section but has none; leaves cited lines and unknown mentions alone", () => {
+  const t = "Under Section 138 of the Negotiable Instruments Act, 1881 the drawer is punished.\nThe drawer pays within fifteen days.\nSection 138 of the Negotiable Instruments Act, 1881 also applies [1].\nSection 420 of the Indian Penal Code is unrelated.\nSection 438 of the CrPC allows bail.";
+  assert.equal(ensureCitations(t, sources), "Under Section 138 of the Negotiable Instruments Act, 1881 the drawer is punished. [1]\nThe drawer pays within fifteen days.\nSection 138 of the Negotiable Instruments Act, 1881 also applies [1].\nSection 420 of the Indian Penal Code is unrelated.\nSection 438 of the CrPC allows bail. [3]");
 });

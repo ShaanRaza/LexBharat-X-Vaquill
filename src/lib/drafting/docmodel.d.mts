@@ -1,0 +1,15 @@
+export type Run = { text: string; bold?: boolean; italics?: boolean; underline?: boolean };
+export type Block = { type: "heading"; level: number; runs: Run[] } | { type: "p"; runs: Run[] } | { type: "list"; ordered: boolean; start: number; items: Run[][] };
+export type DocNode = { type: string; attrs?: Record<string, unknown>; content?: DocNode[]; text?: string; marks?: { type: string }[] };
+export type Doc = { type: "doc"; content: DocNode[] };
+export type SectionText = { id: string; title: string; text: string; status: "ok" | "failed" };
+export const NOT_GENERATED: (title: string) => string;
+export function placeholdersIn(text: string): string[];
+export function textToNodes(text: string, orderedStart?: number | null): DocNode[];
+export function countNumbered(text: string): number;
+export function buildDoc(docTitle: string, sections: SectionText[], opts?: { continueNumbering?: boolean }): Doc;
+export function docToBlocks(doc: Doc | null | undefined): Block[];
+export function docToText(doc: Doc | null | undefined): string;
+export function unverifiedMentions(text: string, sources: { n: number; number: string | null; actTitle: string }[]): { text: string }[];
+export function inventedAmounts(text: string, allowed: string[]): string[];
+export function validDoc(doc: unknown, maxNodes?: number): doc is Doc;

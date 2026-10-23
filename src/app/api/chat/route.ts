@@ -7,7 +7,7 @@ import { AiError, aiConfigured, aiModelFor, completeAi, streamAi } from "@/lib/a
 import { isBrowserId } from "@/lib/access/token.mjs";
 import limitConfig from "@/config/chat-limits.json";
 import { evaluateLimits, readLimits } from "@/lib/chat/limits.mjs";
-import { sanitizeCitations } from "@/lib/chat/citations.mjs";
+import { citedNumbers, ensureCitations, sanitizeCitations } from "@/lib/chat/citations.mjs";
 import { buildChatPrompt, buildCheckPrompt, detectNotFound, parseCheck } from "@/lib/chat/prompt.mjs";
 import { buildRewritePrompt, parseRewrite } from "@/lib/chat/rewrite.mjs";
 import { citationOf, retrieveSources } from "@/lib/chat/retrieve";
@@ -90,7 +90,7 @@ export async function POST(req: Request) {
           }
         } catch (e) { if (!answer.trim()) throw e; cutOff = true; }
         if (!answer.trim()) throw new AiError("unavailable", "The model returned no answer.");
-        const clean = sanitizeCitations(answer.trim(), ret.sources.length);
+        const clean = sanitizeCitations(ensureCitations(answer.trim(), ret.sources), ret.sources.length);
         if (clean.text !== answer) send({ type: "replace", text: clean.text });
         if (cutOff) {
           const check: CheckResult = { label: "check", unsupported: [], cutOff: true };
@@ -110,6 +110,8 @@ export async function POST(req: Request) {
             check = { label: p.label, unsupported: p.unsupported, missing: p.missing, ...(p.unreadable ? { unavailable: true } : {}) };
           } catch { check = { label: "check", unsupported: [], unavailable: true }; }
         }
+        // an answer that states law but cites no source cannot be "Supported"
+        if ((check.label === "supported" || check.label === "partial") && citedNumbers(clean.text).length === 0) check = { label: "check", unsupported: check.unsupported, missing: [...(check.missing ?? []), "The answer does not cite any source."] };
         send({ type: "check", ...check });
         await addMessage(chatId, { role: "assistant", content: clean.text, citations: cites, check, model });
         send({ type: "done" }); controller.close();

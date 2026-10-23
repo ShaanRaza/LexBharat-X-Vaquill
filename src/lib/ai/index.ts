@@ -3,7 +3,7 @@ import config from "@/config/ai-models.json";
 import { streamTask as _stream, completeTask as _complete } from "./run.mjs";
 import { providerConfigured, resolveTask } from "./models.mjs";
 
-export type AiTask = "chat" | "answerCheck" | "queryRewrite" | "drafting" | "review" | "rerun";
+export type AiTask = "chat" | "answerCheck" | "queryRewrite" | "templatePick" | "drafting" | "review" | "rerun";
 export type AiInput = { system?: string; messages: { role: "user" | "assistant"; content: string }[]; temperature?: number; maxOutputTokens?: number; json?: boolean; timeoutMs?: number; signal?: AbortSignal };
 export type AiEvent = { type: "text"; text: string } | { type: "done"; usage: { inputTokens: number; outputTokens: number }; model: string; finish?: string | null };
 export { AiError } from "./models.mjs";

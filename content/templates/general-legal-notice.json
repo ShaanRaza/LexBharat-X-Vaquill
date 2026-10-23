@@ -1,0 +1,162 @@
+{
+  "id": "general-legal-notice",
+  "title": "General legal notice",
+  "description": "A formal notice to a person or company setting out facts, stating what you require and by when. Use it for money owed, breach of an agreement, a dispute that needs a written demand, or any other matter where a written notice should come first.",
+  "keywords": [
+    "legal notice",
+    "demand",
+    "breach",
+    "recovery",
+    "dispute",
+    "notice before suit"
+  ],
+  "docTitle": "LEGAL NOTICE",
+  "fields": [
+    {
+      "key": "sender_name",
+      "label": "Sender's name",
+      "type": "text",
+      "required": true,
+      "group": "Parties"
+    },
+    {
+      "key": "sender_address",
+      "label": "Sender's address",
+      "type": "textarea",
+      "required": true,
+      "group": "Parties"
+    },
+    {
+      "key": "advocate_name",
+      "label": "Advocate sending the notice (if any)",
+      "type": "text",
+      "required": false,
+      "group": "Parties"
+    },
+    {
+      "key": "recipient_name",
+      "label": "Recipient's name",
+      "type": "text",
+      "required": true,
+      "group": "Parties"
+    },
+    {
+      "key": "recipient_address",
+      "label": "Recipient's address",
+      "type": "textarea",
+      "required": true,
+      "group": "Parties"
+    },
+    {
+      "key": "subject",
+      "label": "Subject in one line",
+      "type": "text",
+      "required": true,
+      "group": "Matter",
+      "hint": "For example: Notice for refund of advance paid for a flat booking."
+    },
+    {
+      "key": "facts",
+      "label": "What happened (facts, dates, amounts)",
+      "type": "textarea",
+      "required": true,
+      "group": "Matter"
+    },
+    {
+      "key": "demand",
+      "label": "What you require the recipient to do",
+      "type": "textarea",
+      "required": true,
+      "group": "Matter"
+    },
+    {
+      "key": "deadline_days",
+      "label": "Days allowed to comply",
+      "type": "number",
+      "required": false,
+      "group": "Matter",
+      "hint": "For example 15. If you leave it empty the draft shows a placeholder.",
+      "ifMissing": "placeholder",
+      "placeholder": "Number of days"
+    },
+    {
+      "key": "earlier_communication",
+      "label": "Earlier communication (optional)",
+      "type": "textarea",
+      "required": false,
+      "group": "Matter"
+    },
+    {
+      "key": "notice_date",
+      "label": "Date of this notice",
+      "type": "date",
+      "required": false,
+      "group": "Notice",
+      "ifMissing": "placeholder",
+      "placeholder": "Date of this notice"
+    },
+    {
+      "key": "place",
+      "label": "Place",
+      "type": "text",
+      "required": false,
+      "group": "Notice",
+      "ifMissing": "placeholder"
+    }
+  ],
+  "relies_on": [],
+  "search_queries": [],
+  "sections": [
+    {
+      "id": "heading",
+      "title": "Heading and addressee",
+      "instruction": "Do not repeat the heading (it is added separately). Write a line for the mode of service the sender can edit, the date and place (placeholders if missing), then 'To,' and the recipient's name and address."
+    },
+    {
+      "id": "introduction",
+      "title": "Subject and introduction",
+      "instruction": "Write the 'Subject:' line from the subject given. Then an introduction saying who sends the notice (the advocate for the sender if one is named, otherwise the sender) and that the notice concerns the matter in the subject line."
+    },
+    {
+      "id": "facts",
+      "title": "Facts",
+      "instruction": "Set out the facts as numbered paragraphs, in the order given, using only the details provided. Mention any earlier communication if it was given. Never add facts, dates or amounts; use placeholders for anything missing."
+    },
+    {
+      "id": "legal-position",
+      "title": "Legal position",
+      "instruction": "If retrieved sections clearly apply to these facts, state in plain words the legal position they support and name the Act and section for each; use only the retrieved text. If no retrieved section clearly applies, write one paragraph saying the sender relies on its rights in law and under any agreement, and cite no statute. Never cite a provision that was not retrieved."
+    },
+    {
+      "id": "demand",
+      "title": "Demand",
+      "instruction": "State exactly what the recipient must do, as given, and the time allowed (the number of days given; if none, use the placeholder [NUMBER OF DAYS]) counted from receipt of the notice. Amounts must be repeated exactly as given."
+    },
+    {
+      "id": "consequences",
+      "title": "Consequences and reservation",
+      "instruction": "State that if the demand is not met within the time allowed the sender will take appropriate legal action at the recipient's cost and risk, without further notice, and that the notice is without prejudice to the sender's other rights. Do not name a court or a specific proceeding unless the facts given do."
+    },
+    {
+      "id": "closing",
+      "title": "Signature",
+      "instruction": "",
+      "fixed": "A copy of this notice has been retained for our record.\n\nYours faithfully,\n\n________________________\n{{advocate_name|sender_name}}\nDate: {{notice_date}}\nPlace: {{place}}"
+    }
+  ],
+  "reminders": [
+    {
+      "id": "proof",
+      "text": "Keep proof of dispatch and delivery and copies of every document the notice mentions."
+    },
+    {
+      "id": "limitation",
+      "text": "Check whether a limitation period is running for the claim; sending a notice does not stop time running."
+    },
+    {
+      "id": "review",
+      "text": "Have the notice reviewed and signed by a qualified lawyer before sending."
+    }
+  ],
+  "style": "notice"
+}

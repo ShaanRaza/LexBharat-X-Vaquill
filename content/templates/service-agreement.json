@@ -1,0 +1,226 @@
+{
+  "id": "service-agreement",
+  "title": "Service agreement",
+  "description": "An agreement under which a service provider (a consultant, agency or freelancer) agrees to do work for a client for a fee. Covers scope, fees, term, ownership of the work, confidentiality, liability and disputes.",
+  "keywords": [
+    "service agreement",
+    "consulting",
+    "freelance",
+    "vendor",
+    "work for hire",
+    "fees"
+  ],
+  "docTitle": "SERVICE AGREEMENT",
+  "fields": [
+    {
+      "key": "effective_date",
+      "label": "Effective date",
+      "type": "date",
+      "required": true,
+      "group": "Agreement"
+    },
+    {
+      "key": "client_name",
+      "label": "Client's name",
+      "type": "text",
+      "required": true,
+      "group": "Parties"
+    },
+    {
+      "key": "client_address",
+      "label": "Client's address",
+      "type": "textarea",
+      "required": true,
+      "group": "Parties"
+    },
+    {
+      "key": "provider_name",
+      "label": "Service provider's name",
+      "type": "text",
+      "required": true,
+      "group": "Parties"
+    },
+    {
+      "key": "provider_address",
+      "label": "Service provider's address",
+      "type": "textarea",
+      "required": true,
+      "group": "Parties"
+    },
+    {
+      "key": "services",
+      "label": "Services to be provided",
+      "type": "textarea",
+      "required": true,
+      "group": "Work"
+    },
+    {
+      "key": "fees",
+      "label": "Fees and basis (for example fixed fee, monthly retainer, hourly)",
+      "type": "text",
+      "required": true,
+      "group": "Work",
+      "hint": "Include the amount, for example: fixed fee of 150000."
+    },
+    {
+      "key": "payment_terms",
+      "label": "When and how the provider is paid (optional)",
+      "type": "textarea",
+      "required": false,
+      "group": "Work",
+      "ifMissing": "placeholder",
+      "placeholder": "Payment schedule"
+    },
+    {
+      "key": "term",
+      "label": "Duration of the agreement (for example 6 months)",
+      "type": "text",
+      "required": true,
+      "group": "Term"
+    },
+    {
+      "key": "termination_days",
+      "label": "Notice period for ending early, in days (optional)",
+      "type": "number",
+      "required": false,
+      "group": "Term",
+      "ifMissing": "placeholder",
+      "placeholder": "Notice period in days"
+    },
+    {
+      "key": "ip_ownership",
+      "label": "Who owns the finished work",
+      "type": "select",
+      "required": true,
+      "group": "Work",
+      "options": [
+        "The client owns the deliverables",
+        "The provider keeps ownership and licenses the client"
+      ]
+    },
+    {
+      "key": "liability_cap",
+      "label": "Limit on the provider's liability (optional)",
+      "type": "text",
+      "required": false,
+      "group": "Terms",
+      "hint": "For example: the fees paid in the last 6 months.",
+      "ifMissing": "placeholder",
+      "placeholder": "Liability limit, if any"
+    },
+    {
+      "key": "dispute",
+      "label": "How disputes are resolved",
+      "type": "select",
+      "required": true,
+      "group": "Terms",
+      "options": [
+        "Arbitration",
+        "Courts"
+      ]
+    },
+    {
+      "key": "jurisdiction_city",
+      "label": "City (seat of arbitration or courts)",
+      "type": "text",
+      "required": true,
+      "group": "Terms"
+    }
+  ],
+  "relies_on": [
+    {
+      "lookup": "10 Indian Contract Act",
+      "why": "What makes an agreement a contract."
+    },
+    {
+      "lookup": "74 Indian Contract Act",
+      "why": "Compensation for breach where a sum is named in the contract."
+    }
+  ],
+  "conditional_relies_on": [
+    {
+      "when": {
+        "field": "dispute",
+        "equals": "Arbitration"
+      },
+      "lookup": "7 Arbitration and Conciliation Act",
+      "why": "What an arbitration agreement is and that it must be in writing."
+    }
+  ],
+  "search_queries": [
+    "agreement in restraint of trade void",
+    "compensation for breach of contract penalty stipulated"
+  ],
+  "sections": [
+    {
+      "id": "parties",
+      "title": "Title, date and parties",
+      "instruction": "Write the opening 'This Service Agreement is made on [effective date]' between the client and the service provider with addresses."
+    },
+    {
+      "id": "services",
+      "title": "Services",
+      "instruction": "Write the services clause from the description given, as numbered sub-clauses; add that the provider will perform them with reasonable skill and care and in line with timelines agreed in writing. Do not add deliverables or deadlines that were not given."
+    },
+    {
+      "id": "fees",
+      "title": "Fees and payment",
+      "instruction": "State the fees and basis exactly as given (figures and words where an amount was given), the payment terms if given (otherwise use the placeholder [PAYMENT SCHEDULE]), that invoices are in writing, that taxes such as GST are payable as applicable by law (without stating a rate), and expenses only if agreed in writing."
+    },
+    {
+      "id": "term",
+      "title": "Term and termination",
+      "instruction": "State the duration as given, how either party may end the agreement early (the notice period given, otherwise [NOTICE PERIOD IN DAYS]), ending for material breach not remedied within a placeholder period [CURE PERIOD], and what happens to fees earned up to the end."
+    },
+    {
+      "id": "ip",
+      "title": "Ownership of the work",
+      "instruction": "Write the clause matching the choice given: either the client owns the deliverables on payment, or the provider keeps ownership and grants the client a licence to use them; also pre-existing materials stay with their owner."
+    },
+    {
+      "id": "confidentiality",
+      "title": "Confidentiality",
+      "instruction": "Write a concise confidentiality clause: each party keeps the other's confidential information secret, uses it only for this agreement, with the usual exclusions (public, already known, lawfully received, independently developed), surviving the end of the agreement for a period placeholder [CONFIDENTIALITY PERIOD]."
+    },
+    {
+      "id": "liability",
+      "title": "Liability",
+      "instruction": "State the liability limit if one was given, exactly as given; if none was given, write only that liability is as the law provides and add the placeholder [LIABILITY LIMIT, IF ANY]. Mention the retrieved compensation provision only in the way the retrieved text describes it, and do not state any penalty sum that was not given."
+    },
+    {
+      "id": "disputes",
+      "title": "Governing law and disputes",
+      "instruction": "State that Indian law governs. If arbitration was chosen, write an arbitration clause in writing with the seat at the city given and a placeholder [NUMBER OF ARBITRATORS], referring to the retrieved arbitration provision only as its text supports; if courts were chosen, give the courts at the city jurisdiction."
+    },
+    {
+      "id": "general",
+      "title": "General terms",
+      "instruction": "Number short clauses: independent contractor (no employment), entire agreement, amendment in writing, no assignment without consent, notices in writing to the addresses above, severability."
+    },
+    {
+      "id": "signature",
+      "title": "Signatures",
+      "instruction": "",
+      "fixed": "IN WITNESS WHEREOF the parties have signed this Agreement on the date first written above.\n\nFor {{client_name}} (Client)\n\n________________________\nName: {{client_name}}\nDate:\n\nFor {{provider_name}} (Service Provider)\n\n________________________\nName: {{provider_name}}\nDate:"
+    }
+  ],
+  "reminders": [
+    {
+      "id": "stamp",
+      "text": "Check the stamp duty and any stamping requirement for an agreement of this kind in the state where it is signed. Do not rely on a figure that is not from the state's current rules."
+    },
+    {
+      "id": "tax",
+      "text": "Check GST and income-tax (TDS) treatment of the fees with an accountant; the agreement states only that taxes are payable as the law requires."
+    },
+    {
+      "id": "scope",
+      "text": "Check the services description and timelines are specific enough that both sides would agree on whether the work was done."
+    },
+    {
+      "id": "review",
+      "text": "Have the agreement reviewed by a qualified lawyer before it is signed."
+    }
+  ],
+  "style": "agreement"
+}

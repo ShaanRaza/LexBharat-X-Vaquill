@@ -1,8 +1,23 @@
 {
   "about": "Legal Workspace pages that are not built yet. Set \"enabled\": true to switch one on: it becomes a normal link in the sidebar and a live card on the dashboard (the page at `href` must exist).",
   "features": {
-    "drafting": { "enabled": false, "label": "Drafting", "href": "/workspace/drafting", "action": "Draft a document" },
-    "review":   { "enabled": false, "label": "Review",   "href": "/workspace/review",   "action": "Review a contract" },
-    "vault":    { "enabled": false, "label": "Vault",    "href": "/workspace/vault",    "action": "Open the vault" }
+    "drafting": {
+      "enabled": true,
+      "label": "Drafting",
+      "href": "/workspace/drafting",
+      "action": "Draft a document"
+    },
+    "review": {
+      "enabled": false,
+      "label": "Review",
+      "href": "/workspace/review",
+      "action": "Review a contract"
+    },
+    "vault": {
+      "enabled": false,
+      "label": "Vault",
+      "href": "/workspace/vault",
+      "action": "Open the vault"
+    }
   }
 }

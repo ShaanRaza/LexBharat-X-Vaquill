@@ -5,6 +5,7 @@ export const REWRITE_SYSTEM = `You turn a question about Indian law into search 
 - 2 or 3 queries, each under 120 characters.
 - Query 1: the question restated with the legal terms an Act would use, for example "competency to contract age of majority minor agreement void".
 - The other queries: the Acts and sections most likely to answer it, written like "Indian Contract Act section 11" or "Negotiable Instruments Act section 138 notice demand payment". Name an Act and section only if you are fairly sure; otherwise use legal terms.
+- If the question is about an offence, a right or a procedure, make one of the queries about closely related provisions on the same subject in other forms or other Acts (for example the electronic-transfer equivalent of a cheque offence, or the penalty and cognizance sections).
 - If the question names a State or Union Territory, keep its name in the queries.
 - Do not answer the question. Indian law only.`;
 

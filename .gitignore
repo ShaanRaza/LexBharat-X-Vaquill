@@ -20,3 +20,4 @@ data/judgments-hc/
 data/judgments-hc-gz/
 # Large data files copied for the CDN at build time (scripts/copy-static-data.mjs)
 public/data/
+src/content/templates.generated.json

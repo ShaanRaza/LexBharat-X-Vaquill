@@ -1,0 +1,311 @@
+{
+  "id": "rent-agreement",
+  "title": "Rent / leave and licence agreement for a residential or commercial property",
+  "description": "An agreement for letting a flat, house or shop for a period, with rent, deposit, rules of use and how it ends. You choose the state, because registration and stamping rules are state specific.",
+  "keywords": [
+    "rent agreement",
+    "leave and licence",
+    "tenancy",
+    "lease",
+    "landlord",
+    "licensor",
+    "tenant"
+  ],
+  "docTitle": "RENT AGREEMENT",
+  "fields": [
+    {
+      "key": "state",
+      "label": "State or Union Territory where the property is",
+      "type": "state",
+      "required": true,
+      "group": "Property",
+      "options": [
+        "Andhra Pradesh",
+        "Arunachal Pradesh",
+        "Assam",
+        "Bihar",
+        "Chhattisgarh",
+        "Goa",
+        "Gujarat",
+        "Haryana",
+        "Himachal Pradesh",
+        "Jharkhand",
+        "Karnataka",
+        "Kerala",
+        "Madhya Pradesh",
+        "Maharashtra",
+        "Manipur",
+        "Meghalaya",
+        "Mizoram",
+        "Nagaland",
+        "Odisha",
+        "Punjab",
+        "Rajasthan",
+        "Sikkim",
+        "Tamil Nadu",
+        "Telangana",
+        "Tripura",
+        "Uttar Pradesh",
+        "Uttarakhand",
+        "West Bengal",
+        "Andaman and Nicobar Islands",
+        "Chandigarh",
+        "Dadra and Nagar Haveli and Daman and Diu",
+        "Delhi",
+        "Jammu and Kashmir",
+        "Ladakh",
+        "Lakshadweep",
+        "Puducherry"
+      ]
+    },
+    {
+      "key": "arrangement",
+      "label": "Type of arrangement",
+      "type": "select",
+      "required": true,
+      "group": "Property",
+      "options": [
+        "Leave and licence (licensor and licensee)",
+        "Tenancy (landlord and tenant)"
+      ]
+    },
+    {
+      "key": "property_address",
+      "label": "Address of the property",
+      "type": "textarea",
+      "required": true,
+      "group": "Property"
+    },
+    {
+      "key": "property_description",
+      "label": "Description (floor, area, fittings) (optional)",
+      "type": "textarea",
+      "required": false,
+      "group": "Property"
+    },
+    {
+      "key": "use",
+      "label": "Use of the property",
+      "type": "select",
+      "required": true,
+      "group": "Property",
+      "options": [
+        "Residential",
+        "Commercial"
+      ]
+    },
+    {
+      "key": "owner_name",
+      "label": "Owner's name (landlord or licensor)",
+      "type": "text",
+      "required": true,
+      "group": "Parties"
+    },
+    {
+      "key": "owner_address",
+      "label": "Owner's address",
+      "type": "textarea",
+      "required": true,
+      "group": "Parties"
+    },
+    {
+      "key": "occupier_name",
+      "label": "Occupier's name (tenant or licensee)",
+      "type": "text",
+      "required": true,
+      "group": "Parties"
+    },
+    {
+      "key": "occupier_address",
+      "label": "Occupier's permanent address",
+      "type": "textarea",
+      "required": true,
+      "group": "Parties"
+    },
+    {
+      "key": "start_date",
+      "label": "Start date",
+      "type": "date",
+      "required": true,
+      "group": "Term"
+    },
+    {
+      "key": "term_months",
+      "label": "Period in months",
+      "type": "number",
+      "required": true,
+      "group": "Term"
+    },
+    {
+      "key": "lock_in_months",
+      "label": "Lock-in period in months (optional)",
+      "type": "number",
+      "required": false,
+      "group": "Term",
+      "ifMissing": "omit"
+    },
+    {
+      "key": "notice_days",
+      "label": "Notice period for ending the agreement, in days (optional)",
+      "type": "number",
+      "required": false,
+      "group": "Term",
+      "ifMissing": "placeholder",
+      "placeholder": "Notice period in days"
+    },
+    {
+      "key": "monthly_rent",
+      "label": "Monthly rent",
+      "type": "amount",
+      "required": true,
+      "group": "Money",
+      "hint": "Digits only, for example 25000."
+    },
+    {
+      "key": "deposit",
+      "label": "Security deposit",
+      "type": "amount",
+      "required": true,
+      "group": "Money"
+    },
+    {
+      "key": "maintenance",
+      "label": "Maintenance charges and who pays them (optional)",
+      "type": "text",
+      "required": false,
+      "group": "Money",
+      "ifMissing": "placeholder",
+      "placeholder": "Maintenance charges"
+    },
+    {
+      "key": "place",
+      "label": "Place of signing",
+      "type": "text",
+      "required": false,
+      "group": "Signing"
+    }
+  ],
+  "relies_on": [
+    {
+      "lookup": "105 Transfer of Property Act",
+      "why": "What a lease is."
+    },
+    {
+      "lookup": "107 Transfer of Property Act",
+      "why": "How leases are made; a lease of more than one year needs a registered instrument."
+    },
+    {
+      "lookup": "17 Registration Act",
+      "why": "Documents whose registration is compulsory."
+    }
+  ],
+  "state_relies_on": {
+    "Maharashtra": [
+      {
+        "lookup": "55 Maharashtra Rent Control Act",
+        "why": "Agreements for leave and licence or letting must be registered."
+      },
+      {
+        "lookup": "36A Maharashtra Stamp Act",
+        "why": "Stamp duty provision for leave and licence agreements."
+      }
+    ],
+    "Karnataka": [
+      {
+        "lookup": "4 Karnataka Rent Act",
+        "why": "A letting must be by an agreement in writing."
+      },
+      {
+        "lookup": "16 Karnataka Rent Act",
+        "why": "Receipt for rent and other charges."
+      }
+    ]
+  },
+  "search_queries": [
+    "lease of immovable property how made registered instrument",
+    "{{state}} rent act tenancy agreement registration"
+  ],
+  "sections": [
+    {
+      "id": "parties",
+      "title": "Title, date and parties",
+      "instruction": "Do not write the title (it is added separately). Write the opening 'This agreement is made at [place] on [date of signing]' and the two parties with addresses, calling them Licensor/Licensee or Landlord/Tenant as chosen. Use the placeholder [DATE OF SIGNING] for the date of signing and the placeholders shown for anything missing."
+    },
+    {
+      "id": "premises",
+      "title": "Premises and use",
+      "instruction": "Describe the property (address and description given) and state that it is given only for the use chosen. For a leave and licence agreement say plainly that the licensee gets a licence to use the premises and no interest in the property is created; for a tenancy say it is a letting for the period."
+    },
+    {
+      "id": "term",
+      "title": "Period and lock-in",
+      "instruction": "State the start date, the period in months and the end date, using the end date worked out under Facts exactly (if none is shown, use the placeholder [END DATE]), the lock-in period if given (leave it out if not given), and that renewal needs a fresh written agreement. Do not invent a lock-in or renewal terms."
+    },
+    {
+      "id": "rent",
+      "title": "Rent, deposit and charges",
+      "instruction": "State the monthly rent and the security deposit exactly as given (figures and words), that the deposit is refundable without interest unless agreed otherwise and after adjusting proven dues (say this only as a term of this agreement, not as a rule of law), the due date for rent using the placeholder [RENT DUE DATE], the maintenance charges as given, and that electricity, water and similar bills are paid as actually used unless the maintenance field says otherwise. Do not state any stamp duty or registration fee amount."
+    },
+    {
+      "id": "conduct",
+      "title": "Use, repairs and restrictions",
+      "instruction": "Number practical clauses: no sub-letting or parting with possession, no illegal or nuisance use, minor repairs by the occupier and structural repairs by the owner, entry by the owner on reasonable notice, no structural changes without written consent."
+    },
+    {
+      "id": "ending",
+      "title": "Ending the agreement and handing back",
+      "instruction": "State how either party may end it (the notice period given, or the placeholder [NOTICE PERIOD IN DAYS]), what happens if the occupier stays on, and handing back vacant possession in the condition received, with the deposit adjusted for proven dues."
+    },
+    {
+      "id": "law",
+      "title": "Registration, stamping and state law",
+      "instruction": "Write one clause saying the agreement will be stamped and registered as required by the law applicable in the state chosen. Then, for the state chosen only, add a short clause that reflects the retrieved state provisions (for example that the agreement is in writing, or that it must be registered) using only the retrieved text, citing the Act and section. If no state-specific section was retrieved, say only that the parties will comply with the stamping and registration law of that state. Never state a stamp duty amount unless it appears in a retrieved section."
+    },
+    {
+      "id": "signature",
+      "title": "Signatures and witnesses",
+      "instruction": "",
+      "fixed": "IN WITNESS WHEREOF the parties have signed this agreement on the date first written above.\n\n{{owner_name}} (Owner)\n\n________________________\n\n{{occupier_name}} (Occupier)\n\n________________________\n\nWitnesses:\n1. [WITNESS 1 NAME AND ADDRESS]\n2. [WITNESS 2 NAME AND ADDRESS]"
+    }
+  ],
+  "reminders": [
+    {
+      "id": "stamp",
+      "text": "Stamp duty: check the duty payable on this kind of agreement in the state chosen and pay it before or when signing. Do not rely on any figure that is not from the state's current rules."
+    },
+    {
+      "id": "registration",
+      "text": "Registration: check whether this agreement must be registered in the state chosen and by when (the Registration Act and the state's own law decide this). Plan a visit to the Sub-Registrar if it must be."
+    },
+    {
+      "id": "notarisation",
+      "text": "Notarisation: check whether a notary is customary or needed where you are; it does not replace stamping or registration."
+    },
+    {
+      "id": "verification",
+      "text": "Check whether the local police or housing society needs a tenant or licensee verification form or no-objection certificate.",
+      "states": [
+        "Maharashtra",
+        "Karnataka",
+        "Delhi",
+        "Tamil Nadu",
+        "Telangana",
+        "Andhra Pradesh",
+        "Kerala",
+        "Gujarat"
+      ]
+    },
+    {
+      "id": "review",
+      "text": "Have the agreement reviewed by a qualified lawyer before it is signed."
+    }
+  ],
+  "style": "agreement",
+  "docTitleBy": {
+    "field": "arrangement",
+    "map": {
+      "Leave and licence (licensor and licensee)": "LEAVE AND LICENCE AGREEMENT",
+      "Tenancy (landlord and tenant)": "RENT AGREEMENT"
+    }
+  }
+}
