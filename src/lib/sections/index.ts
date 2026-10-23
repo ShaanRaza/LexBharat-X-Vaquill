@@ -1,7 +1,8 @@
-// Section-text seam. Production default: NOT available. When ACTS_TEXT_DATA_DIR points at the output of scripts/acts/export-act-text.sh, the store serves
-// reassembled text with computed quality flags (src/lib/acts/reassemble.mjs). Chunk order is a documented RULE, not ground truth, so every section carries
-// flags and the route/UI show them (docs/CHUNK-ORDER-VALIDATION.md, docs/ACTS-TEXT-W1A.md). Garbled text is never returned.
+// Section-text seam for GET /api/acts/<id>/sections. Serves from Neon (DATABASE_URL) or the local files (ACTS_TEXT_DATA_DIR); otherwise { available: false }.
+// Chunk order is a documented rule, not ground truth, so every section carries flags (docs/ACTS-TEXT-W1A.md). Garbled text is never returned.
+import { query, dbConfigured } from "@/lib/acts/db";
 import { getActText } from "@/lib/acts/sectionText";
+import { toSectionRecord } from "@/lib/acts/sectionRecord.mjs";
 
 export type SectionText = { sectionNumber: string | null; title?: string; text: string; status: string; flags: string[] };
 export type SectionsResult = { available: true; sections: SectionText[] } | { available: false; reason: string };
@@ -9,12 +10,15 @@ export interface SectionsStore { get(actId: string): Promise<SectionsResult> }
 
 const store: SectionsStore = {
   async get(actId) {
-    const r = await getActText(actId);
-    if (!r.available) return { available: false, reason: r.message };
-    return {
-      available: true,
-      sections: r.doc.sections.map((s) => ({ sectionNumber: s.number, title: s.heading ?? undefined, text: s.status === "garbled" ? "" : s.text, status: s.status, flags: s.flags })),
-    };
+    if (dbConfigured()) {
+      try {
+        const rows = await query<{ number: string | null; heading: string | null; body: string | null; status: string; flags: string[] }>(`SELECT number, heading, body, status, flags FROM act_sections WHERE act_id = $1 ORDER BY ord`, [actId]);
+        if (rows.length) return { available: true, sections: rows.map((r) => ({ sectionNumber: r.number, title: r.heading ?? undefined, text: r.status === "garbled" ? "" : r.body ?? "", status: r.status, flags: r.flags })) };
+      } catch { /* fall through to files */ }
+    }
+    const t = await getActText(actId);
+    if (t.available) return { available: true, sections: t.doc.sections.map((s, i) => { const r = toSectionRecord(s, i); return { sectionNumber: r.number, title: r.heading ?? undefined, text: r.body ?? "", status: r.status, flags: r.flags }; }) };
+    return { available: false, reason: t.message };
   },
 };
 export const getSectionsStore = (): SectionsStore => store;

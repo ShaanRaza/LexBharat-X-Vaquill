@@ -9,13 +9,15 @@
     "start": "next start --port 3100",
     "dev:release": "NEXT_PUBLIC_RELEASE=1 next dev --port 3100",
     "build:demo": "NEXT_PUBLIC_RELEASE=0 next build",
-    "test:extract": "node --test src/lib/judgments/extract.test.mjs src/lib/judgments/hcSearchCore.test.mjs src/lib/acts/reassemble.test.mjs",
+    "test:extract": "node --test src/lib/judgments/extract.test.mjs src/lib/judgments/hcSearchCore.test.mjs src/lib/acts/reassemble.test.mjs src/lib/acts/searchQuery.test.mjs",
     "index:acts-text": "scripts/acts/export-act-text.sh",
+    "load:acts-neon": "scripts/acts/load-neon.sh",
     "qa:sweep": "node scripts/judgments/qa-sweep.mjs",
     "qa:live": "node --experimental-websocket scripts/judgments/qa-live.mjs",
     "index:hc-search": "node --max-old-space-size=6000 scripts/judgments/build-hc-search-index.mjs"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.2.0",
     "lenis": "^1.3.0",
     "next": "15.5.28",
     "react": "19.1.10",

@@ -31,6 +31,7 @@ export function sectionFlagList(s: Pick<AssembledSection, "status" | "flags">): 
   return order.filter((k) => s.flags.includes(k)).map((k) => ({ key: k, info: FLAG_INFO[k] }));
 }
 
+export const CHAPTER_NOTE = "Chapter labels appear only when they pass automatic checks.";
 export const WHY_CHAPTER_HIDDEN = "Chapter labels are shown only when they pass automatic checks (consistent across the section's pieces, readable, contiguous through the Act and not contradicted by the text). This one did not, so none is shown.";
 
 export const INDIA_CODE_HOME = "https://www.indiacode.nic.in/";

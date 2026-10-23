@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import CaseSearchResults from "./CaseSearchResults";
+import SectionSearchResults from "./SectionSearchResults";
 import SearchField, { clearFiltersCls, filterLabel, filterSelect } from "./SearchField";
 import { useEffect, useMemo, useState } from "react";
 import { ACT_CATEGORIES, ACT_STATUSES, ALL_COURTS, BROWSE_STATS, HIGH_COURTS, SUPREME_COURT, type ActItem, type Court } from "@/data/workspaceBrowse";
@@ -27,7 +28,7 @@ function CourtCard({ c, featured, real, countsOnly }: { c: Court; featured?: boo
 
 type ActsResponse = { source?: "real" | "mock"; results: ActItem[]; total: number; page: number; pageSize: number; hasMore: boolean; note?: string };
 type CourtsResp = { source: "real" | "mock"; stats: { totalCases: number | null; listableCourts: number }; courts: { slug: string; cases: number | null; listable?: boolean }[] };
-type ActsStats = { scope?: string; source: "real" | "mock"; acts: number; sections: number; categories: string[]; statuses: string[]; states?: string[]; departments?: string[]; caveats: string[]; attribution?: { text: string; url: string; licence: string; snapshot: string } };
+type ActsStats = { sectionText?: boolean; scope?: string; source: "real" | "mock"; acts: number; sections: number; categories: string[]; statuses: string[]; states?: string[]; departments?: string[]; caveats: string[]; attribution?: { text: string; url: string; licence: string; snapshot: string } };
 const fmt = (n: number) => n.toLocaleString("en-IN");
 // Display labels only: query values stay the raw slugs (state=west-bengal, department=sebi, status=in_force).
 const ACRONYMS: Record<string, string> = { sebi: "SEBI", rbi: "RBI", mca: "MCA", dgft: "DGFT", trai: "TRAI", moefcc: "MoEFCC", cpcb: "CPCB", irdai: "IRDAI", dfs: "DFS", cbic: "CBIC" };
@@ -99,7 +100,7 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
         <h2 id="covers" className="text-[12px] font-semibold uppercase tracking-[0.08em] text-secondary">{real ? "What is live here" : "What the Data API covers"}</h2>
         {real && stats ? (
           <ul className="mt-3 space-y-3 text-[15px] leading-relaxed">
-            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-success text-[10px] text-success">✓</span><span><strong className="font-medium">Acts &amp; legislation are live.</strong> <span className="text-secondary">{fmt(stats.acts)} {stats.scope ?? "acts"}, with {fmt(stats.sections)} section numbers counted. Act-level information only: the text of sections is not shown yet.</span></span></li>
+            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-success text-[10px] text-success">✓</span><span><strong className="font-medium">Acts &amp; legislation are live.</strong> <span className="text-secondary">{fmt(stats.acts)} {stats.scope ?? "acts"}, with {fmt(stats.sections)} section numbers counted. {stats.sectionText ? "Section text and search cover Central and State Acts (not regulator instruments); each section shows a quality flag." : "Act-level information only: the text of sections is not shown yet."}</span></span></li>
             <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-warning text-[10px] text-warning">⊘</span><span><strong className="font-medium">{jreal ? "Judgment metadata is live in part." : "Judgments and tribunals are not live yet."}</strong> <span className="text-secondary">{jreal ? ((jc?.stats.listableCourts ?? 1) > 1 ? "Case lists by year with case-level detail for the Supreme Court and every High Court. Judgment text and tribunals are not live yet." : "Case counts by year for every court, and case lists for the Supreme Court. High Court case lists are not available yet. Judgment text and tribunals are not live yet.") : "The Judgments tab is a preview. Court counts there are reference figures, not data held here."}</span></span></li>
           </ul>
         ) : (
@@ -114,7 +115,7 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
         <SearchField id="browse-q" value={q} onChange={setQ} label={tab === "acts" ? "Search act titles" : "Search cases by party name or case number, or filter courts by name"}
           shortPlaceholder={tab === "acts" ? "Act name" : "Party name or 933/2024"}
           placeholder={tab === "acts" ? "Try \"Companies Act\" or \"Bharatiya Nyaya Sanhita\"" : "Try \"State of UP\", a surname, or a case number like 933/2024"} />
-        <p className="mt-2 px-1 text-[13px] text-secondary">{tab === "acts" ? "This box searches act titles (at least 2 characters)." : "Type 2 or more characters to search Supreme Court and High Court cases of every year by party name or case number as recorded in the dataset (not judgment text); the court list below also narrows by name."} Boolean operators and citation search are not available yet.</p>
+        <p className="mt-2 px-1 text-[13px] text-secondary">{tab === "acts" ? "This box searches the text of sections (words, \"exact phrase\", or a lookup like \"138 NI Act\") and act titles. At least 2 characters." : "Type 2 or more characters to search Supreme Court and High Court cases of every year by party name or case number as recorded in the dataset (not judgment text); the court list below also narrows by name."} Boolean operators and citation search are not available yet.</p>
       </div>
 
       <div role="tablist" aria-label="Browse" className="mt-6 flex gap-1 border-b border-border/80">
@@ -139,7 +140,9 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
         </div>
       ) : (
         <div role="tabpanel" className="mt-6">
-          <div className="flex flex-wrap items-end gap-3">
+          {q.trim().length >= 2 && <SectionSearchResults q={q.trim()} />}
+          {q.trim().length >= 2 && <h2 className="mt-8 text-ui-lead font-semibold">Acts whose title matches</h2>}
+          <div className="mt-2 flex flex-wrap items-end gap-3">
             <div className="flex flex-col gap-1"><label htmlFor="f-cat" className={filterLabel}>Category</label>
             <select id="f-cat" className={sel(!!(category))} value={category} onChange={(e) => { const v = e.target.value; setCategory(v); if (v && v !== "state") setState(""); if (v && v !== "regulatory") setDept(""); }}><option value="">All categories</option>{categories.map((x) => <option key={x} value={x}>{label(x)}</option>)}</select></div>
             {stats?.states?.length && (category === "" || category === "state") ? <><div className="flex flex-col gap-1"><label htmlFor="f-state" className={filterLabel}>State or UT</label><select id="f-state" className={sel(!!(state))} value={state} onChange={(e) => setState(e.target.value)}><option value="">All states and UTs</option>{stats.states.map((x) => <option key={x} value={x}>{label(x)}</option>)}</select></div></> : null}

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Badge, Notice, Panel, StatusDot } from "@/components/kit";
-import { PROVENANCE, WHY_CHAPTER_HIDDEN } from "@/lib/acts/quality";
+import { PROVENANCE, CHAPTER_NOTE } from "@/lib/acts/quality";
 import type { ActTextView as View } from "@/lib/acts/viewModel";
 
 // Presentation only: every value arrives ready-made from src/lib/acts/viewModel.ts. Colours, sizes and radii come from the shared tokens (Tailwind names + kit components).
@@ -15,7 +15,7 @@ export function ProvenanceNote({ sectionStatusLabel }: { sectionStatusLabel?: st
   return (
     <Notice title="Where this text comes from" role="note">
       <p>Source dataset: <a className="underline" href={PROVENANCE.datasetUrl} target="_blank" rel="noopener noreferrer">{PROVENANCE.dataset}</a>. Snapshot {PROVENANCE.snapshot}. Licence: {PROVENANCE.licence}.</p>
-      <p>The text was extracted by machine from official documents. It can contain errors, gaps or scrambled characters, so every section shows a quality flag{sectionStatusLabel ? <> (this section: <strong className="font-medium text-foreground">{sectionStatusLabel}</strong>)</> : null}. Not legal advice; check the official source.</p>
+      <p>The text was extracted by machine from official documents. It can contain errors, gaps or scrambled characters, so every section shows a quality flag{sectionStatusLabel ? <> (this section: <strong className="font-medium text-foreground">{sectionStatusLabel}</strong>)</> : null}. {" "}{CHAPTER_NOTE} Not legal advice; check the official source.</p>
     </Notice>
   );
 }
@@ -76,7 +76,6 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
               <Panel>
                 <h2 id="sec-title" className="text-ui-lead font-semibold">{view.hasSectionNumbers && sel.key.startsWith("s") ? `Section ${sel.label}` : sel.label}{sel.heading ? ` — ${sel.heading}` : ""}</h2>
                 {sel.chapter && <p className="mt-1 text-ui-sm text-secondary">{sel.chapter}</p>}
-                {sel.chapterHidden && <p className="mt-1 text-ui-xs text-secondary" title={WHY_CHAPTER_HIDDEN}>Chapter label not shown: it did not pass the automatic checks.</p>}
                 <p className="mt-3 flex flex-wrap items-center gap-1.5">
                   <Badge tone={sel.statusInfo.tone} title={sel.statusInfo.explain}>{sel.statusInfo.label}</Badge>
                   {sel.flags.map((f) => <Badge key={f.key} tone={f.info.tone} title={f.info.explain}>{f.info.label}</Badge>)}

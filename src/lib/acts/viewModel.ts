@@ -1,15 +1,18 @@
-// Builds the plain data the Act text page shows. LOGIC ONLY: no JSX, no classes, no colours (tones are meanings the UI kit maps to a look).
+// Builds the plain data the Act text page shows from section RECORDS (the same shape whether they came from Neon or from the local files).
+// LOGIC ONLY: no JSX, no classes, no colours (tones are meanings the UI kit maps to a look).
 import { toDisplayBlocks, cleanHeading, type DisplayBlock } from "./cleanText.mjs";
-import type { AssembledSection } from "./reassemble.mjs";
+import type { SectionRecord } from "./sectionRecord.mjs";
 import { STATUS_INFO, sectionFlagList, officialSourceUrl, type FlagInfo, type Tone } from "./quality";
-import type { ActTextDoc } from "./sectionText";
 
-export type SectionListItem = { key: string; label: string; heading: string | null; status: AssembledSection["status"]; tone: Tone; statusLabel: string; noNumber: boolean };
+/** A stored section; `body` may be left out for sections that are only listed (the page needs the text of the selected one). */
+export type ListedSection = Omit<SectionRecord, "body"> & { body?: string | null };
+
+export type SectionListItem = { key: string; label: string; heading: string | null; status: SectionRecord["status"]; tone: Tone; statusLabel: string; noNumber: boolean };
 export type SectionView = {
   key: string; label: string; heading: string | null;
-  /** Shown only when the chapter label passed every check; `chapterHidden` is true when the dataset has a label that did not. */
-  chapter: string | null; chapterHidden: boolean;
-  status: AssembledSection["status"]; statusInfo: FlagInfo; flags: { key: string; info: FlagInfo }[];
+  /** Only present when the chapter label passed every check. */
+  chapter: string | null;
+  status: SectionRecord["status"]; statusInfo: FlagInfo; flags: { key: string; info: FlagInfo }[];
   /** null for garbled sections: the text is never handed to the UI. */
   blocks: DisplayBlock[] | null; chunkCount: number;
   prev: { key: string; label: string } | null; next: { key: string; label: string } | null;
@@ -20,26 +23,29 @@ export type ActTextView = {
   selected: SectionView | null;
 };
 
-const labelOf = (s: AssembledSection, blockIndex: number) => (s.kind === "s" && s.number ? s.number : `Text block ${blockIndex}`);
-
-export function buildActTextView(doc: ActTextDoc, wantedKey: string | undefined): ActTextView {
+export function labelsFor(sections: Pick<ListedSection, "number">[]): string[] {
   let b = 0;
-  const labels = doc.sections.map((s) => labelOf(s, s.kind === "s" && s.number ? 0 : ++b));
-  const list: SectionListItem[] = doc.sections.map((s, i) => ({
-    key: s.key, label: labels[i], heading: cleanHeading(s.heading), status: s.status, tone: STATUS_INFO[s.status].tone, statusLabel: STATUS_INFO[s.status].label, noNumber: s.flags.includes("no_section_number"),
+  return sections.map((s) => (s.number ? s.number : `Text block ${++b}`));
+}
+
+/** The key that will be shown: the wanted one when it exists, otherwise the first section. */
+export const selectedKey = (sections: Pick<ListedSection, "sectionKey">[], wanted: string | undefined) => (sections.find((s) => s.sectionKey === wanted) ?? sections[0])?.sectionKey;
+
+export function buildActTextView(sections: ListedSection[], sourceUrl: string | null | undefined, wantedKey: string | undefined): ActTextView {
+  const labels = labelsFor(sections);
+  const list: SectionListItem[] = sections.map((s, i) => ({
+    key: s.sectionKey, label: labels[i], heading: cleanHeading(s.heading), status: s.status, tone: STATUS_INFO[s.status].tone, statusLabel: STATUS_INFO[s.status].label, noNumber: s.flags.includes("no_section_number"),
   }));
-  const counts = { sections: doc.sections.length, complete: 0, possibly_incomplete: 0, garbled: 0 };
-  for (const s of doc.sections) counts[s.status]++;
-  const idx = Math.max(0, doc.sections.findIndex((s) => s.key === wantedKey));
-  const s = doc.sections[idx];
+  const counts = { sections: sections.length, complete: 0, possibly_incomplete: 0, garbled: 0 };
+  for (const s of sections) counts[s.status]++;
+  const key = selectedKey(sections, wantedKey), idx = sections.findIndex((s) => s.sectionKey === key);
+  const s = idx >= 0 ? sections[idx] : undefined;
   const selected: SectionView | null = s ? {
-    key: s.key, label: labels[idx], heading: cleanHeading(s.heading),
-    chapter: s.chapter ? [`Chapter ${s.chapter.roman}`, cleanHeading(s.chapter.name)].filter(Boolean).join(" — ") : null,
-    chapterHidden: !s.chapter && s.chapterRaw !== null,
+    key: s.sectionKey, label: labels[idx], heading: cleanHeading(s.heading), chapter: s.chapter,
     status: s.status, statusInfo: STATUS_INFO[s.status], flags: sectionFlagList(s),
-    blocks: s.status === "garbled" ? null : toDisplayBlocks(s.displayText ?? s.text), chunkCount: s.chunkCount,
-    prev: idx > 0 ? { key: doc.sections[idx - 1].key, label: labels[idx - 1] } : null,
-    next: idx < doc.sections.length - 1 ? { key: doc.sections[idx + 1].key, label: labels[idx + 1] } : null,
+    blocks: s.status === "garbled" || s.body == null ? null : toDisplayBlocks(s.body), chunkCount: s.chunkCount,
+    prev: idx > 0 ? { key: sections[idx - 1].sectionKey, label: labels[idx - 1] } : null,
+    next: idx < sections.length - 1 ? { key: sections[idx + 1].sectionKey, label: labels[idx + 1] } : null,
   } : null;
-  return { hasSectionNumbers: doc.hasSectionNumbers, sourceUrl: officialSourceUrl(doc.sourceUrl), list, counts, selected };
+  return { hasSectionNumbers: sections.some((x) => x.number), sourceUrl: officialSourceUrl(sourceUrl), list, counts, selected };
 }
