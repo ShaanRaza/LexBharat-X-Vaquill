@@ -20,3 +20,6 @@ Suffix families after the section token: bare (`_s004`), part (`_p0`, `_p1`), de
 - No reconstruction runs anywhere. `sectionCount` counts distinct `section_number` values and does not depend on order.
 - `GET /api/acts/<actId>/sections` exists but always answers `{ available: false }` (`src/lib/sections`).
 - To turn text on later: (1) get a ground truth, for example compare a few hundred acts with the India Code pages named in `source_url`; (2) define and test an order rule for `_p`, `_d` and numeric suffixes; (3) handle the 11 + 30 broken families; (4) implement `SectionsStore` and enable it behind an env flag.
+
+## Update 2026-10-23 (W1a)
+Reassembly now exists, local only (`ACTS_TEXT_DATA_DIR`), with an explicit ordering rule and computed per-section flags instead of a claim of validation. Production still serves no section text. See `docs/ACTS-TEXT-W1A.md`.

@@ -90,22 +90,22 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
     <div className="mx-auto max-w-[880px] pt-2">
       <h1 className="text-[28px] font-semibold tracking-[-0.02em]">Browse Laws &amp; Judgments</h1>
       {real ? (
-        <p className="mt-1 text-[16px] text-[#535151]">{fmt(stats.acts)} {stats.scope ?? "acts"}{jreal && jc?.stats.totalCases ? `, and ${fmt(jc.stats.totalCases)} judgment case records across the Supreme Court and ${jc.courts.length - 1} High Courts` : ""}. {jreal ? ((jc?.stats.listableCourts ?? 1) > 1 ? "Case lists are available for the Supreme Court and every High Court, by year." : "Supreme Court cases can be browsed by year; High Courts show counts only.") : "Judgments are not live yet: the court pages below are a preview."}</p>
+        <p className="mt-1 text-[16px] text-secondary">{fmt(stats.acts)} {stats.scope ?? "acts"}{jreal && jc?.stats.totalCases ? `, and ${fmt(jc.stats.totalCases)} judgment case records across the Supreme Court and ${jc.courts.length - 1} High Courts` : ""}. {jreal ? ((jc?.stats.listableCourts ?? 1) > 1 ? "Case lists are available for the Supreme Court and every High Court, by year." : "Supreme Court cases can be browsed by year; High Courts show counts only.") : "Judgments are not live yet: the court pages below are a preview."}</p>
       ) : (
-        <p className="mt-1 text-[16px] text-[#535151]">{BROWSE_STATS.acts} Indian acts, and {BROWSE_STATS.judgments} judgments across the Supreme Court and {BROWSE_STATS.highCourts} High Courts, plus {BROWSE_STATS.tribunals} Tribunals. (Display figures, mock.)</p>
+        <p className="mt-1 text-[16px] text-secondary">{BROWSE_STATS.acts} Indian acts, and {BROWSE_STATS.judgments} judgments across the Supreme Court and {BROWSE_STATS.highCourts} High Courts, plus {BROWSE_STATS.tribunals} Tribunals. (Display figures, mock.)</p>
       )}
 
       <section aria-labelledby="covers" className="mt-5 rounded-xl bg-surface p-5 shadow-sm ring-1 ring-border/60">
-        <h2 id="covers" className="text-[12px] font-semibold uppercase tracking-[0.08em] text-[#535151]">{real ? "What is live here" : "What the Data API covers"}</h2>
+        <h2 id="covers" className="text-[12px] font-semibold uppercase tracking-[0.08em] text-secondary">{real ? "What is live here" : "What the Data API covers"}</h2>
         {real && stats ? (
           <ul className="mt-3 space-y-3 text-[15px] leading-relaxed">
-            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-success text-[10px] text-success">✓</span><span><strong className="font-medium">Acts &amp; legislation are live.</strong> <span className="text-[#535151]">{fmt(stats.acts)} {stats.scope ?? "acts"}, with {fmt(stats.sections)} section numbers counted. Act-level information only: the text of sections is not shown yet.</span></span></li>
-            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-warning text-[10px] text-warning">⊘</span><span><strong className="font-medium">{jreal ? "Judgment metadata is live in part." : "Judgments and tribunals are not live yet."}</strong> <span className="text-[#535151]">{jreal ? ((jc?.stats.listableCourts ?? 1) > 1 ? "Case lists by year with case-level detail for the Supreme Court and every High Court. Judgment text and tribunals are not live yet." : "Case counts by year for every court, and case lists for the Supreme Court. High Court case lists are not available yet. Judgment text and tribunals are not live yet.") : "The Judgments tab is a preview. Court counts there are reference figures, not data held here."}</span></span></li>
+            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-success text-[10px] text-success">✓</span><span><strong className="font-medium">Acts &amp; legislation are live.</strong> <span className="text-secondary">{fmt(stats.acts)} {stats.scope ?? "acts"}, with {fmt(stats.sections)} section numbers counted. Act-level information only: the text of sections is not shown yet.</span></span></li>
+            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-warning text-[10px] text-warning">⊘</span><span><strong className="font-medium">{jreal ? "Judgment metadata is live in part." : "Judgments and tribunals are not live yet."}</strong> <span className="text-secondary">{jreal ? ((jc?.stats.listableCourts ?? 1) > 1 ? "Case lists by year with case-level detail for the Supreme Court and every High Court. Judgment text and tribunals are not live yet." : "Case counts by year for every court, and case lists for the Supreme Court. High Court case lists are not available yet. Judgment text and tribunals are not live yet.") : "The Judgments tab is a preview. Court counts there are reference figures, not data held here."}</span></span></li>
           </ul>
         ) : (
           <ul className="mt-3 space-y-3 text-[15px] leading-relaxed">
-            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-success text-[10px] text-success">✓</span><span><strong className="font-medium">Acts &amp; legislation are live.</strong> <span className="text-[#535151]">The acts endpoints are maintained and serve {BROWSE_STATS.acts} acts across {BROWSE_STATS.sections} sections, mirroring the Government of India&apos;s official repository.</span></span></li>
-            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-warning text-[10px] text-warning">⊘</span><span><strong className="font-medium">Case law and tribunal decisions are not in the API corpus yet.</strong> <span className="text-[#535151]">You can browse and read them here, and coverage runs to mid-2025 only. If you need them over the API, <Link href="/contact" className="text-primary underline">get in touch</Link>.</span></span></li>
+            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-success text-[10px] text-success">✓</span><span><strong className="font-medium">Acts &amp; legislation are live.</strong> <span className="text-secondary">The acts endpoints are maintained and serve {BROWSE_STATS.acts} acts across {BROWSE_STATS.sections} sections, mirroring the Government of India&apos;s official repository.</span></span></li>
+            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-warning text-[10px] text-warning">⊘</span><span><strong className="font-medium">Case law and tribunal decisions are not in the API corpus yet.</strong> <span className="text-secondary">You can browse and read them here, and coverage runs to mid-2025 only. If you need them over the API, <Link href="/contact" className="text-primary underline">get in touch</Link>.</span></span></li>
           </ul>
         )}
       </section>
@@ -114,13 +114,13 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
         <SearchField id="browse-q" value={q} onChange={setQ} label={tab === "acts" ? "Search act titles" : "Search cases by party name or case number, or filter courts by name"}
           shortPlaceholder={tab === "acts" ? "Act name" : "Party name or 933/2024"}
           placeholder={tab === "acts" ? "Try \"Companies Act\" or \"Bharatiya Nyaya Sanhita\"" : "Try \"State of UP\", a surname, or a case number like 933/2024"} />
-        <p className="mt-2 px-1 text-[13px] text-[#535151]">{tab === "acts" ? "This box searches act titles (at least 2 characters)." : "Type 2 or more characters to search Supreme Court and High Court cases of every year by party name or case number as recorded in the dataset (not judgment text); the court list below also narrows by name."} Boolean operators and citation search are not available yet.</p>
+        <p className="mt-2 px-1 text-[13px] text-secondary">{tab === "acts" ? "This box searches act titles (at least 2 characters)." : "Type 2 or more characters to search Supreme Court and High Court cases of every year by party name or case number as recorded in the dataset (not judgment text); the court list below also narrows by name."} Boolean operators and citation search are not available yet.</p>
       </div>
 
       <div role="tablist" aria-label="Browse" className="mt-6 flex gap-1 border-b border-border/80">
         {([["judgments", "Judgments", "M5 4h12a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2zM9 4v16"], ["acts", "Acts & Legislation", "M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z"]] as const).map(([id, label, icon]) => (
           <button key={id} role="tab" aria-selected={tab === id} onClick={() => setTab(id)}
-            className={`relative -mb-px inline-flex items-center gap-2 px-4 py-2.5 text-[14px] ${tab === id ? "font-medium text-foreground" : "text-[#535151] hover:text-foreground"}`}>
+            className={`relative -mb-px inline-flex items-center gap-2 px-4 py-2.5 text-[14px] ${tab === id ? "font-medium text-foreground" : "text-secondary hover:text-foreground"}`}>
             <Svg d={icon} />{label}{tab === id && <span aria-hidden className="absolute inset-x-0 bottom-0 h-0.5 bg-foreground" />}
           </button>
         ))}
@@ -158,8 +158,8 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
               <ul className="mt-4 space-y-2">
                 {data.results.map((r) => (
                   <li key={r.actId} className="rounded-xl bg-surface px-5 py-4 shadow-sm ring-1 ring-border/60">
-                    <p className="text-[15px] font-medium">{r.title}</p>
-                    <p className="mt-1.5 flex flex-wrap items-center gap-1.5 text-[12px] text-[#535151]">
+                    <p className="text-[15px] font-medium">{data.source === "real" ? <Link href={`/workspace/browse/acts/${r.actId}`} className="text-primary hover:underline">{r.title}</Link> : r.title}</p>
+                    <p className="mt-1.5 flex flex-wrap items-center gap-1.5 text-[12px] text-secondary">
                       <span className="rounded-md bg-accent px-2 py-0.5">{label(r.category)}</span>
                       {r.state && <span className="rounded-md bg-accent px-2 py-0.5">{label(r.state)}</span>}
                       {r.department && <span className="rounded-md bg-accent px-2 py-0.5">{label(r.department)}</span>}

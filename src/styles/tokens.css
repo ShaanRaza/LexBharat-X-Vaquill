@@ -1,0 +1,77 @@
+/* THE design-token file. Colours, radii, type scale and spacing live here and nowhere else; components use them through Tailwind classes (tailwind.config.ts)
+   or var(--token). To reskin, edit this file only. */
+/* Design tokens: values observed in the public site's :root CSS. */
+:root {
+  --background: #f2f1ee;
+  --surface: #fff;
+  --raised: #eae9e5;
+  --sunken: #e3e2df;
+  --foreground: #25211d;
+  --muted: #615950;
+  --border: #d9d8d5;
+  --primary: #6e3730;
+  --primary-hover: #5a2d27;
+  --primary-10: #6e37301a;
+  --accent: #eae9e5;
+  --dark: #1e1b17;
+  --success: #2f6b45;
+  --warning: #7d5310;
+  --error: #a4123c;
+  --control-border: #7c746a; /* form-field outline: >= 4:1 on white and on the page background (WCAG 1.4.11) */
+  --code-bg: #f7f6f3;
+  --code-border: #e2e0da;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* RGB channels so Tailwind opacity modifiers (e.g. bg-primary/15) work */
+  --background-rgb: 242 241 238;
+  --surface-rgb: 255 255 255;
+  --raised-rgb: 234 233 229;
+  --sunken-rgb: 227 226 223;
+  --foreground-rgb: 37 33 29;
+  --muted-rgb: 97 89 80;
+  --border-rgb: 217 216 213;
+  --primary-rgb: 110 55 48;
+  --primary-hover-rgb: 90 45 39;
+  --accent-rgb: 234 233 229;
+  --dark-rgb: 30 27 23;
+  --success-rgb: 47 107 69;
+  --warning-rgb: 125 83 16;
+  --error-rgb: 164 18 60;
+}
+
+/* ---- Additions for shared UI kit and the Acts text pages. Everything a reskin needs is in this file. ---- */
+:root {
+  /* text colours that used to be written as #535151 / #3f3a35 inside components */
+  --text-secondary-rgb: 83 81 81;
+  --text-ink-rgb: 63 58 53;
+  --on-primary: #fff;
+
+  /* semantic quality colours (point at the palette above; change here to reskin) */
+  --quality-complete-rgb: var(--success-rgb);
+  --quality-warn-rgb: var(--warning-rgb);
+  --quality-bad-rgb: var(--error-rgb);
+  --quality-info-rgb: var(--muted-rgb);
+
+  /* radii */
+  --radius-control: 2px;
+  --radius-panel: 6px;
+  --radius-chip: 6px;
+  --radius-card: 12px;
+
+  /* type scale (px) */
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-ui: 14px;
+  --text-body: 15px;
+  --text-lead: 16px;
+  --text-title: 28px;
+  --leading-reading: 1.7;
+
+  /* spacing used by shared components */
+  --pad-card: 1.25rem;
+  --pad-chip-x: 0.5rem;
+  --gap-stack: 0.75rem;
+
+  /* fonts: the families themselves are loaded in app/layout.tsx and exposed as --font-sans / --font-mono / --font-serif */
+  --font-reading: var(--font-serif), Georgia, serif;
+}

@@ -1,45 +1,7 @@
+@import "../styles/tokens.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Design tokens: values observed in the public site's :root CSS. */
-:root {
-  --background: #f2f1ee;
-  --surface: #fff;
-  --raised: #eae9e5;
-  --sunken: #e3e2df;
-  --foreground: #25211d;
-  --muted: #615950;
-  --border: #d9d8d5;
-  --primary: #6e3730;
-  --primary-hover: #5a2d27;
-  --primary-10: #6e37301a;
-  --accent: #eae9e5;
-  --dark: #1e1b17;
-  --success: #2f6b45;
-  --warning: #7d5310;
-  --error: #a4123c;
-  --control-border: #7c746a; /* form-field outline: >= 4:1 on white and on the page background (WCAG 1.4.11) */
-  --code-bg: #f7f6f3;
-  --code-border: #e2e0da;
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-
-  /* RGB channels so Tailwind opacity modifiers (e.g. bg-primary/15) work */
-  --background-rgb: 242 241 238;
-  --surface-rgb: 255 255 255;
-  --raised-rgb: 234 233 229;
-  --sunken-rgb: 227 226 223;
-  --foreground-rgb: 37 33 29;
-  --muted-rgb: 97 89 80;
-  --border-rgb: 217 216 213;
-  --primary-rgb: 110 55 48;
-  --primary-hover-rgb: 90 45 39;
-  --accent-rgb: 234 233 229;
-  --dark-rgb: 30 27 23;
-  --success-rgb: 47 107 69;
-  --warning-rgb: 125 83 16;
-  --error-rgb: 164 18 60;
-}
 
 html { scroll-behavior: auto; }
 html.lenis, html.lenis body { height: auto; }
