@@ -10,4 +10,3 @@ export function accessState(env: Record<string, string | undefined>, nodeEnv: st
 export function isPublicPath(pathname: string): boolean;
 export function isStaticPath(pathname: string): boolean;
 export function safeNext(n: unknown): string;
-export function createFailureLimiter(o?: { limit?: number; windowMs?: number; maxKeys?: number; now?: () => number }): { status(key: string): { blocked: boolean; retryAfterSec: number }; fail(key: string): void; clear(key: string): void };

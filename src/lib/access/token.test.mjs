@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { constantTimeEqual, passwordMatches, signAccessToken, verifyAccessToken, newBrowserId, isBrowserId, accessState, isPublicPath, safeNext, createFailureLimiter, ACCESS_TTL_MS } from "./token.mjs";
+import { constantTimeEqual, passwordMatches, signAccessToken, verifyAccessToken, newBrowserId, isBrowserId, accessState, isPublicPath, safeNext, ACCESS_TTL_MS } from "./token.mjs";
 
 const secret = "s".repeat(40);
 test("constantTimeEqual: equal, different, different length, empty", () => {
@@ -46,13 +46,4 @@ test("isPublicPath: only the password page, its API, and static files", () => {
 test("safeNext keeps only same-site paths", () => {
   assert.equal(safeNext("/workspace/chat?x=1"), "/workspace/chat?x=1");
   for (const bad of ["//evil.com", "https://evil.com", "/\\evil", "javascript:alert(1)", "", undefined, "/access", "/access?next=/"]) assert.equal(safeNext(bad), "/", String(bad));
-});
-test("failure limiter: 5 failures block for the window, success clears, keys are independent", () => {
-  let t = 0; const l = createFailureLimiter({ limit: 5, windowMs: 1000, now: () => t });
-  for (let i = 0; i < 4; i++) l.fail("a");
-  assert.equal(l.status("a").blocked, false);
-  l.fail("a"); const s = l.status("a"); assert.equal(s.blocked, true); assert.equal(s.retryAfterSec, 1);
-  assert.equal(l.status("b").blocked, false);
-  t = 1001; assert.equal(l.status("a").blocked, false);
-  for (let i = 0; i < 5; i++) l.fail("c"); l.clear("c"); assert.equal(l.status("c").blocked, false);
 });

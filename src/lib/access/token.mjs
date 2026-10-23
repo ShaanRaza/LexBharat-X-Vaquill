@@ -61,14 +61,3 @@ export const isStaticPath = (pathname) => pathname.startsWith("/_next/") || path
 
 /** Only a path on this site: "/x", never "//host" or "https://host". */
 export const safeNext = (n) => (typeof n === "string" && /^\/(?!\/)[^\\\r\n]*$/.test(n) && !n.startsWith("/access") ? n : "/");
-
-/** Wrong-password limiter: `limit` failures per `windowMs` per key blocks that key until the oldest failure ages out. A correct password clears the key. */
-export function createFailureLimiter({ limit = 5, windowMs = 15 * 60 * 1000, maxKeys = 5000, now = () => Date.now() } = {}) {
-  const fails = new Map();
-  const live = (key) => (fails.get(key) ?? []).filter((t) => t > now() - windowMs);
-  return {
-    status(key) { const l = live(key); return l.length >= limit ? { blocked: true, retryAfterSec: Math.max(1, Math.ceil((l[0] + windowMs - now()) / 1000)) } : { blocked: false, retryAfterSec: 0 }; },
-    fail(key) { const l = live(key); l.push(now()); fails.delete(key); fails.set(key, l); if (fails.size > maxKeys) fails.delete(fails.keys().next().value); },
-    clear(key) { fails.delete(key); },
-  };
-}

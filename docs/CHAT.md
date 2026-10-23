@@ -51,7 +51,7 @@ Automated check of every cited statement (61 in the 3.6-flash run): each number 
 | Area | Test | Result |
 |---|---|---|
 | Password | Not logged in: pages redirect to the password page, APIs return 401 | Pass |
-| Password | Wrong password: "That password is not correct." (no hint); 5 wrong attempts then 429 "Try again in 15 minutes", even the right password from that address | Pass |
+| Password | Wrong password: "Wrong password, try again." after about one second (no hint, no lockout, no attempt limit). The earlier 5-attempts-per-15-minutes lockout was removed afterwards (see below) | Pass |
 | Password | Right password: cookie set (httpOnly, SameSite=Lax, 30 days, `Secure` when the request is HTTPS), lands on the page asked for; tampered or forged cookie rejected | Pass |
 | Password | Cookie persists across requests; logout clears it; the browser id cookie survives logout | Pass |
 | Password | Production build with `ACCESS_PASSWORD` empty: every page and API returns 503, the password page says "Site not configured", login refused | Pass |
@@ -63,3 +63,5 @@ Automated check of every cited statement (61 in the 3.6-flash run): each number 
 | Phone | Chat page at 375 px wide | Fits, no sideways scroll |
 
 **Main Neon database after the tests:** 692 MB (unchanged); the three chat tables took 272 kB for 27 chats and 54 messages (about 10 kB per chat with indexes). Test chats were deleted afterwards.
+
+**Change after the first W4 commit:** the wrong-password lockout was removed. A wrong password is answered after about 1 second with "Wrong password, try again."; there is no other limit. The signed 30-day cookie, logout and fail-closed behaviour are unchanged.
