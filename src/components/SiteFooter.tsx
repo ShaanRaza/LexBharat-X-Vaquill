@@ -5,6 +5,7 @@ import { Wordmark } from "./Nav";
 import MockBadge from "./MockBadge";
 import { footerGroups } from "@/data/site";
 import { RELEASE } from "@/lib/release";
+import LogoutLink from "./LogoutLink";
 
 function Newsletter() {
   const [email, setEmail] = useState("");
@@ -56,7 +57,7 @@ export default function SiteFooter() {
       </div>
       <div className="mx-auto mt-12 flex max-w-[1152px] flex-wrap items-start justify-between gap-8 border-t border-border pt-8">
         <Newsletter />
-        <p className="text-[13px] text-muted">{RELEASE ? "© LexBharat." : "LexBharat local build. Placeholder content, mocked backend. © LexBharat."}</p>
+        <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] text-muted"><span>{RELEASE ? "© LexBharat." : "LexBharat local build. Placeholder content, mocked backend. © LexBharat."}</span><LogoutLink /></p>
       </div>
     </footer>
   );

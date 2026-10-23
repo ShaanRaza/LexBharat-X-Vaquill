@@ -4,6 +4,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import DataAttribution from "@/components/DataAttribution";
 import { RELEASE } from "@/lib/release";
+import AccessDevBanner from "@/components/AccessDevBanner";
 
 const sans = Schibsted_Grotesk({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 const mono = Source_Code_Pro({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${sans.variable} ${mono.variable} ${serif.variable}`}>
       <body>
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[100] focus:rounded-control focus:bg-foreground focus:px-4 focus:py-2 focus:text-background">Skip to main content</a>
+        <AccessDevBanner />
         <SmoothScroll />
         {children}
         <DataAttribution />

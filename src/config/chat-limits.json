@@ -1,0 +1,1 @@
+{ "about": "Questions per browser per day and per rolling 7 days, and all browsers together per calendar month (India time). Override with CHAT_LIMIT_DAILY, CHAT_LIMIT_WEEKLY, CHAT_LIMIT_MONTHLY_GLOBAL.", "daily": 30, "weekly": 150, "monthlyGlobal": 3000 }

@@ -1,8 +1,10 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import TopBar from "./TopBar";
+import LogoutLink from "@/components/LogoutLink";
+import ChatHistory from "@/components/workspace/chat/ChatHistory";
 import { clearMockSession, useMockSession } from "@/lib/mockSession";
 
 // Layout of the authenticated developer console as captured in docs/PLAYGROUND-TEARDOWN.md: collapsible left sidebar, top bar with a
@@ -50,10 +52,10 @@ function Icon({ d, size = 18 }: { d: string; size?: number }) {
 
 const BOOKS_ICON = "M5 4h4v16H5zM10 4h4v16h-4zM15.6 5.4l3.6-1 3.2 14.6-3.6 1z";
 
-export default function ConsoleShell({ tab, variant = "data", children }: { tab?: TabId; variant?: "data" | "workspace"; children: React.ReactNode }) {
+export default function ConsoleShell({ tab, variant = "data", children }: { tab?: TabId; variant?: "data" | "workspace" | "lawspace"; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);       // mobile drawer
   const [collapsed, setCollapsed] = useState(false); // desktop collapse (chevron)
-  const router = useRouter();
+  const router = useRouter(), pathname = usePathname();
   const session = useMockSession(); // MOCK sign-in record from /auth/login (this browser only), or null
   const menuBtn = useRef<HTMLButtonElement>(null);
   const drawer = useRef<HTMLElement>(null);
@@ -78,9 +80,8 @@ export default function ConsoleShell({ tab, variant = "data", children }: { tab?
     return () => { document.body.style.overflow = prev; document.removeEventListener("keydown", key); mq.removeEventListener("change", grow); menuBtn.current?.focus(); };
   }, [open]);
 
-  const nav = (
-    <nav aria-label="Console" className="flex h-full flex-col">
-      <div className="flex items-center justify-between px-4 pb-4 pt-5">
+  const logoRow = (
+    <div className="flex items-center justify-between px-4 pb-4 pt-5">
         <Link href="/developer?tab=overview" className="flex items-baseline gap-0.5 text-[24px] font-medium leading-none tracking-[-0.03em]" aria-label="LexBharat">
           <svg width="22" height="26" viewBox="0 0 24 28" fill="#6e3730" aria-hidden="true" className="mr-1.5 self-center"><path d="M20 1C9 2 2 9 3 20c0 3 1 6 3 7-1-5 0-10 4-14 3-3 7-4 10-4-5 1-9 4-11 9 5-1 10-5 11-13 .3-1.4.2-3.800 0-4z" /></svg>
           LexBharat
@@ -88,7 +89,11 @@ export default function ConsoleShell({ tab, variant = "data", children }: { tab?
         <button type="button" onClick={() => (open ? setOpen(false) : setCollapsed(true))} aria-label="Collapse sidebar" className="rounded-[4px] p-1 text-muted hover:bg-accent">
           <Icon d="M15 5l-7 7 7 7" size={16} />
         </button>
-      </div>
+    </div>
+  );
+  const dataNav = (
+    <nav aria-label="Console" className="flex h-full flex-col">
+      {logoRow}
       <ul className="space-y-0.5 px-2">
         {MAIN_TABS.map((t) => (
           <li key={t.id}>
@@ -127,10 +132,32 @@ export default function ConsoleShell({ tab, variant = "data", children }: { tab?
           {session
             ? <button type="button" onClick={() => { clearMockSession(); router.push("/auth/login"); }} className="mt-2 inline-flex min-h-8 items-center rounded-[6px] px-2 text-[13px] text-primary hover:bg-accent">Sign out</button>
             : <Link href="/auth/login" className="mt-2 inline-flex min-h-8 items-center rounded-[6px] px-2 text-[13px] text-primary hover:bg-accent">Sign in (demo)</Link>}
+          <div className="mt-1 px-2"><LogoutLink /></div>
         </div>
       </div>
     </nav>
   );
+
+  // Legal Workspace sidebar: Chat first, a link across to Acts & Judgments, then this browser's past chats.
+  const lawNav = (
+    <nav aria-label="Legal Workspace" className="flex h-full flex-col">
+      {logoRow}
+      <ul className="space-y-0.5 px-2">
+        <li><Link href="/workspace/chat" onClick={() => setOpen(false)} aria-current={pathname === "/workspace/chat" ? "page" : undefined}
+          className={`flex items-center gap-3 rounded-chip px-3 py-2.5 text-ui-base transition-colors ${pathname === "/workspace/chat" ? "bg-accent text-foreground" : "text-muted hover:bg-accent/60 hover:text-foreground"}`}>
+          <Icon d="M4 5h16v11H9l-5 4zM8 9h8M8 12h5" /><span className="leading-tight">New chat</span></Link></li>
+        <li><Link href="/workspace/browse" onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-chip px-3 py-2.5 text-ui-base text-muted transition-colors hover:bg-accent/60 hover:text-foreground">
+          <Icon d={BOOKS_ICON} /><span className="leading-tight">Acts &amp; Judgments</span></Link></li>
+      </ul>
+      <p className="mt-6 px-5 text-ui-xs font-semibold uppercase tracking-[0.12em] text-muted">Your chats</p>
+      <div className="mt-2 min-h-0 flex-1 overflow-y-auto px-2" data-lenis-prevent><ChatHistory onNavigate={() => setOpen(false)} /></div>
+      <div className="space-y-1 px-5 pb-4 pt-3">
+        <p className="text-ui-xs text-muted">Your chats are saved on this browser only.</p>
+        <LogoutLink />
+      </div>
+    </nav>
+  );
+  const nav = variant === "lawspace" ? lawNav : dataNav;
 
   return (
     <div className="console min-h-screen">

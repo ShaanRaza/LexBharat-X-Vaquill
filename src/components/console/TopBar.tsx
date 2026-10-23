@@ -4,18 +4,19 @@ import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 
 // Top bar of the Acts & Judgments workspace: product switcher, country selector and a "Data API" link. Original layout, our own markup and icons.
-// To launch the Legal Workspace product later: in PRODUCTS set `soon: false` and give it an `href` (and `current` moves wherever it should). Nothing else changes.
+// The current product follows the page: anything under /workspace/chat is the Legal Workspace, everything else is Legal Data & API.
 // Countries other than India are listed as "Coming soon" and are not selectable: only Indian data exists, so nothing here switches any data.
 export const PRODUCTS = [
-  { id: "data", name: "Legal Data & API", sub: "Acts, judgments and legal data, by API.", href: "", current: true, soon: false },
-  { id: "workspace", name: "Legal Workspace", sub: "Draft, review and research in one place.", href: "", current: false, soon: true },
+  { id: "data", name: "Legal Data & API", sub: "Acts, judgments and legal data, by API.", href: "/developer?tab=overview", soon: false },
+  { id: "workspace", name: "Legal Workspace", sub: "Draft, review and research in one place. Chat is the first page.", href: "/workspace/chat", soon: false },
 ];
 export const COUNTRIES = [
   { id: "in", name: "India", flag: "🇮🇳", current: true, soon: false },
   { id: "us", name: "United States", flag: "🇺🇸", current: false, soon: true },
   { id: "gb", name: "United Kingdom", flag: "🇬🇧", current: false, soon: true },
 ];
-export const TOP_LINKS = [{ label: "Data API", href: "/developer?tab=overview" }];   // add future links here; none are shown unless they exist
+export const TOP_LINKS = [{ label: "Data API", href: "/developer?tab=overview" }];
+export const productFor = (path: string) => (path.startsWith("/workspace/chat") ? "workspace" : "data");   // add future links here; none are shown unless they exist
 
 type Item = { id: string; label: string; sub?: string; flag?: string; checked: boolean; soon: boolean; href?: string };
 const Chevron = () => <svg aria-hidden width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-muted"><path d="M6 9l6 6 6-6" /></svg>;
@@ -68,12 +69,12 @@ function TopMenu({ title, ariaLabel, items, open, setOpen, testid, trigger, trig
 
 export default function TopBar() {
   const [open, setOpen] = useState<"product" | "country" | null>(null);   // one menu at a time
-  const product = PRODUCTS.find((p) => p.current) ?? PRODUCTS[0], country = COUNTRIES.find((c) => c.current) ?? COUNTRIES[0];
+  const here = usePathname(), current = productFor(here), product = PRODUCTS.find((p) => p.id === current) ?? PRODUCTS[0], country = COUNTRIES.find((c) => c.current) ?? COUNTRIES[0];
   const pill = "flex items-center gap-2 rounded-full bg-surface py-1 pl-1 pr-3 text-[14px] ring-1 ring-border hover:bg-accent focus-visible:outline-2";
   return (
     <>
       <TopMenu title="Switch product" ariaLabel={`Switch product, current: ${product.name}`} testid="product-switcher" open={open === "product"} setOpen={(o) => setOpen(o ? "product" : null)}
-        items={PRODUCTS.map((p) => ({ id: p.id, label: p.name, sub: p.sub, checked: p.current, soon: p.soon, href: p.href }))}
+        items={PRODUCTS.map((p) => ({ id: p.id, label: p.name, sub: p.sub, checked: p.id === current, soon: p.soon, href: p.href }))}
         triggerClass={pill} trigger={<><span className="rounded-full bg-primary px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">Product</span><span className="font-medium">{product.name}</span><Chevron /></>} />
       <TopMenu title="Country" ariaLabel={`Country, current: ${country.name}`} testid="country-switcher" open={open === "country"} setOpen={(o) => setOpen(o ? "country" : null)}
         items={COUNTRIES.map((c) => ({ id: c.id, label: c.name, flag: c.flag, checked: c.current, soon: c.soon }))}

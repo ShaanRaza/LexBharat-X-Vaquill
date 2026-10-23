@@ -1,0 +1,13 @@
+export const ACCESS_COOKIE: string, BROWSER_COOKIE: string, ACCESS_TTL_MS: number;
+export function sha256Hex(s: string): Promise<string>;
+export function constantTimeEqual(a: string, b: string): boolean;
+export function passwordMatches(input: string | null | undefined, expected: string | null | undefined): Promise<boolean>;
+export function signAccessToken(o: { password: string; secret: string; now?: number; ttlMs?: number }): Promise<string>;
+export function verifyAccessToken(token: string | null | undefined, o: { password: string; secret: string; now?: number }): Promise<boolean>;
+export function newBrowserId(): string;
+export function isBrowserId(v: unknown): v is string;
+export function accessState(env: Record<string, string | undefined>, nodeEnv: string | undefined): { state: "ready" | "dev-open" | "misconfigured"; password: string; secret: string };
+export function isPublicPath(pathname: string): boolean;
+export function isStaticPath(pathname: string): boolean;
+export function safeNext(n: unknown): string;
+export function createFailureLimiter(o?: { limit?: number; windowMs?: number; maxKeys?: number; now?: () => number }): { status(key: string): { blocked: boolean; retryAfterSec: number }; fail(key: string): void; clear(key: string): void };

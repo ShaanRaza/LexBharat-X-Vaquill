@@ -1,0 +1,107 @@
+// POST /api/chat {chatId?, message} -> streamed answer as newline-delimited JSON events:
+//   {type:"start", chatId} {type:"sources", sources:[...]} {type:"delta", text} {type:"replace", text} {type:"check", label, unsupported} {type:"done"} | {type:"error", code, message}
+// GET  /api/chat -> this browser's chats (newest first), usage and the limits.
+// Needs the access cookie (middleware) and the anonymous browser id (x-lb-bid, set by the middleware). Answers use ONLY the retrieved Act sections; the answer check labels the result.
+import { dbConfigured } from "@/lib/acts/db";
+import { AiError, aiConfigured, aiModelFor, completeAi, streamAi } from "@/lib/ai";
+import { isBrowserId } from "@/lib/access/token.mjs";
+import limitConfig from "@/config/chat-limits.json";
+import { evaluateLimits, readLimits } from "@/lib/chat/limits.mjs";
+import { sanitizeCitations } from "@/lib/chat/citations.mjs";
+import { buildChatPrompt, buildCheckPrompt, parseCheck } from "@/lib/chat/prompt.mjs";
+import { citationOf, retrieveSources } from "@/lib/chat/retrieve";
+import { addMessage, chatTitle, countQuestion, createChat, deleteChat, deleteMessage, isChatId, listChats, ownsChat, recentTurns, uncountQuestion, usageFor, type CheckResult } from "@/lib/chat/store";
+
+export const maxDuration = 60;
+const noStore = { "Cache-Control": "no-store" };
+const MAX_MESSAGE = 1000;
+const limits = () => readLimits(limitConfig, process.env as Record<string, string | undefined>);
+const bidOf = (req: Request) => { const b = req.headers.get("x-lb-bid"); return isBrowserId(b) ? b : null; };
+const json = (body: unknown, status = 200, extra: Record<string, string> = {}) => Response.json(body, { status, headers: { ...noStore, ...extra } });
+
+export async function GET(req: Request) {
+  const bid = bidOf(req);
+  if (!bid) return json({ error: "No browser id." }, 400);
+  if (!dbConfigured()) return json({ chats: [], configured: false });
+  try {
+    const [chats, used] = await Promise.all([listChats(bid), usageFor(bid)]);
+    const l = limits();
+    return json({ configured: true, chats, usage: { day: used.day, week: used.week }, limits: { daily: l.daily, weekly: l.weekly } });
+  } catch { return json({ chats: [], configured: true, error: "Could not load your chats." }, 503); }
+}
+
+export async function POST(req: Request) {
+  const bid = bidOf(req);
+  if (!bid) return json({ error: "No browser id." }, 400);
+  const body = (await req.json().catch(() => null)) as { chatId?: unknown; message?: unknown } | null;
+  const message = typeof body?.message === "string" ? body.message.replace(/\s+/g, " ").trim() : "";
+  if (message.length < 3) return json({ error: "Type a question (at least 3 characters)." }, 422);
+  if (message.length > MAX_MESSAGE) return json({ error: `Questions can be at most ${MAX_MESSAGE} characters (yours is ${message.length}).` }, 422);
+  if (!dbConfigured()) return json({ error: "Chat is not set up yet (no database)." }, 503);
+  if (!aiConfigured("chat")) return json({ error: "Chat is not set up yet (no model key)." }, 503);
+  const chatIdIn = body?.chatId === undefined || body?.chatId === null || body?.chatId === "" ? null : body.chatId;
+  if (chatIdIn !== null && !isChatId(chatIdIn)) return json({ error: "That chat was not found." }, 404);
+
+  // limits (per browser per day and week, all browsers per month)
+  let verdict;
+  try { verdict = evaluateLimits(await usageFor(bid), limits()); } catch { return json({ error: "Chat could not check its limits. Please try again." }, 503); }
+  if (!verdict.allowed) return json({ error: verdict.message, reason: verdict.reason }, 429);
+  if (chatIdIn && !(await ownsChat(bid, chatIdIn).catch(() => false))) return json({ error: "That chat was not found." }, 404);
+
+  const enc = new TextEncoder();
+  const stream = new ReadableStream({
+    async start(controller) {
+      const send = (o: unknown) => { try { controller.enqueue(enc.encode(JSON.stringify(o) + "\n")); } catch { /* client went away */ } };
+      let chatId = chatIdIn as string | null, createdChat = false, userMsgId: number | null = null, counted = false;
+      const rollback = async () => {
+        try { if (createdChat && chatId) await deleteChat(bid, chatId); else if (userMsgId !== null) await deleteMessage(userMsgId); if (counted) await uncountQuestion(bid); } catch { /* best effort */ }
+      };
+      try {
+        await countQuestion(bid); counted = true;
+        const history = chatId ? await recentTurns(chatId) : [];
+        if (!chatId) { chatId = await createChat(bid, chatTitle(message)); createdChat = true; }
+        userMsgId = await addMessage(chatId, { role: "user", content: message });
+        send({ type: "start", chatId });
+
+        const ret = await retrieveSources(message, history);
+        const cites = ret.sources.map(citationOf);
+        send({ type: "sources", sources: cites, searchMode: ret.searchMode });
+        if (!ret.sources.length) {
+          const text = "I couldn't find any sections in the Acts I searched that relate to this question. This tool searches Indian Central and State Acts only; judgments are not included yet. Try describing the situation in other words, or name the Act and section.";
+          send({ type: "delta", text });
+          await addMessage(chatId, { role: "assistant", content: text, citations: [], check: null, model: null });
+          send({ type: "done" }); controller.close(); return;
+        }
+
+        const prompt = buildChatPrompt({ question: message, history, sources: ret.sources });
+        let answer = "", model = aiModelFor("chat");
+        for await (const ev of streamAi("chat", { system: prompt.system, messages: prompt.messages })) {
+          if (ev.type === "text") { answer += ev.text; send({ type: "delta", text: ev.text }); } else if (ev.type === "done") model = ev.model;
+        }
+        if (!answer.trim()) throw new AiError("unavailable", "The model returned no answer.");
+        const clean = sanitizeCitations(answer.trim(), ret.sources.length);
+        if (clean.text !== answer) send({ type: "replace", text: clean.text });
+
+        // answer check: a second, cheap call. If it fails the answer is labelled "Check sources" (the cautious label), never left unlabelled.
+        let check: CheckResult;
+        try {
+          const cp = buildCheckPrompt({ question: message, answer: clean.text, sources: ret.sources });
+          const raw = await completeAi("answerCheck", { system: cp.system, messages: cp.messages, json: true });
+          const p = parseCheck(raw.text);
+          check = { label: p.label, unsupported: p.unsupported, ...(p.unreadable ? { unavailable: true } : {}) };
+        } catch { check = { label: "check", unsupported: [], unavailable: true }; }
+        send({ type: "check", ...check });
+        await addMessage(chatId, { role: "assistant", content: clean.text, citations: cites, check, model });
+        send({ type: "done" }); controller.close();
+      } catch (e) {
+        await rollback();
+        const ai = e instanceof AiError ? e : null;
+        const busy = ai && (ai.kind === "rate_limit" || ai.kind === "unavailable" || ai.kind === "timeout");
+        send({ type: "error", code: busy ? "busy" : ai?.kind === "blocked" ? "blocked" : "failed",
+          message: busy ? "Busy, try again in a minute." : ai?.kind === "blocked" ? "The model declined to answer this question. Try rewording it." : "Something went wrong and your question was not counted. Please try again." });
+        try { controller.close(); } catch { /* already closed */ }
+      }
+    },
+  });
+  return new Response(stream, { headers: { ...noStore, "Content-Type": "application/x-ndjson; charset=utf-8", "X-Accel-Buffering": "no" } });
+}
