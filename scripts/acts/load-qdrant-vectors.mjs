@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-// Loads the Central Act vectors exported by export-qdrant-vectors.mjs into the VECTOR database as halfvec(DIM) + HNSW (cosine), keyed by chunk id and (act_id, section_key).
-// Truncates the stored 1024-d vectors to DIM and renormalises (Matryoshka; identical to asking Voyage for DIM dimensions). Unmatched points (no Neon section) are skipped.
-// usage: node scripts/acts/load-central-vectors.mjs [dim=256] [table=central_emb_<dim>]
+// Loads the vectors exported by export-qdrant-vectors.mjs into the VECTOR database as halfvec(DIM) + HNSW (cosine), keyed by chunk id and (act_id, section_key).
+// Truncates to DIM and renormalises when the exported file has more dimensions (Matryoshka; identical to asking Voyage for DIM dimensions). Unmatched points (no shown Neon section) are skipped.
+// usage: node scripts/acts/load-qdrant-vectors.mjs [scope=central] [dim=256] [table=<scope>_emb_<dim>]      (scope: central | state; reads ../lexbharat-data/vectors/<scope>-qdrant-*)
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -9,10 +9,11 @@ import { execFileSync } from "node:child_process";
 import { pgEnv, redact } from "./bakeoff-lib.mjs";
 import { truncateNormalize } from "../../src/lib/acts/fusion.mjs";
 
-const DIM = Number(process.argv[2] ?? 256), T = process.argv[3] ?? `central_emb_${DIM}`, D0 = 1024, V = "../lexbharat-data/vectors";
-const metaRows = fs.readFileSync(`${V}/central-qdrant-chunks.jsonl`, "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l));
-const buf = fs.readFileSync(`${V}/central-qdrant-1024.f32`);
-if (buf.length !== metaRows.length * D0 * 4) throw new Error("vector file and chunk list differ in length");
+const SCOPE = process.argv[2] ?? "central", DIM = Number(process.argv[3] ?? 256), T = process.argv[4] ?? `${SCOPE}_emb_${DIM}`, V = "../lexbharat-data/vectors";
+const metaRows = fs.readFileSync(`${V}/${SCOPE}-qdrant-chunks.jsonl`, "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l));
+const fFile = fs.readdirSync(V).find((f) => f.startsWith(`${SCOPE}-qdrant-`) && f.endsWith(".f32"));
+const buf = fs.readFileSync(`${V}/${fFile}`), D0 = Math.round(buf.length / metaRows.length / 4);
+if (buf.length !== metaRows.length * D0 * 4 || D0 < DIM) throw new Error("vector file and chunk list differ in length, or the file has fewer dimensions than requested");
 const psql = (args) => { try { return execFileSync("psql", ["-v", "ON_ERROR_STOP=1", "-At", ...args], { env: pgEnv("VECTOR_DATABASE_URL"), maxBuffer: 1 << 28 }).toString(); } catch (e) { throw new Error(redact(e.stderr?.toString() ?? e.message)); } };
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "vec-")), csv = path.join(tmp, "v.csv"), out = fs.createWriteStream(csv);
 let rows = 0, skipped = 0;

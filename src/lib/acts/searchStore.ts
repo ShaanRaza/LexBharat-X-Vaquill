@@ -1,9 +1,9 @@
 // Keyword search over Act section text in Neon (Postgres full-text search, 'english' config). LOGIC ONLY: no styling. The caller (route handler) validates input.
 import { query, dbConfigured } from "./db";
 import { actMatcher, hasDevanagari, hasSearchableChars, parseSectionLookup } from "./searchQuery.mjs";
-import { chooseMode, distinctSections, highlightQuery, rankSections } from "./semantic.mjs";
+import { chooseMode, distinctSections, highlightQuery, rankSections, statesIn } from "./semantic.mjs";
 import { embedQuery, voyageConfigured } from "./embed";
-import { nearestChunks, vectorConfigured } from "./vectorDb";
+import { vectorStores, vectorConfigured } from "./vectorStore";
 
 export const MARK_OPEN = "", MARK_CLOSE = ""; // private-use markers around matched words in snippets; the UI turns them into highlights
 export const PAGE_SIZE = 12, MAX_RESULTS = 1000;
@@ -15,6 +15,8 @@ export type SectionHit = {
   actId: string; actTitle: string; year: number | null; category: string; state: string | null; actStatus: string; sourceUrl: string | null;
   sectionKey: string; number: string | null; heading: string | null; chapter: string | null; status: string; flags: string[];
   snippet: string; via: "text" | "lookup" | "semantic";
+  /** Semantic results only: how many other filings of this same section (the same Act filed under other states) were folded into this one. */
+  copies?: number;
 };
 export type SearchOutcome =
   | { available: false; reason: "not_configured" | "unreachable"; message: string }
@@ -82,19 +84,29 @@ async function textSearch(q: string, page: number, pageSize: number): Promise<Se
   }
 }
 
-// ---- search by meaning (Central Acts). Query -> voyage-4 (256-d) -> nearest chunks in the vector database -> distinct sections -> metadata and snippets from the section database.
-export const SEM_CHUNKS = 150, SEM_MAX = 60;
+// ---- search by meaning (Central + State Acts). Query -> voyage-4 -> nearest chunks from each corpus's vector store (src/lib/acts/vectorStore.ts) -> distinct sections ->
+// metadata and snippets from the section database.
+export const SEM_CHUNKS = 200, SEM_POOL = 300, SEM_MAX = 60;
 export const semanticReady = () => voyageConfigured() && vectorConfigured();
-const SEMANTIC_NOTE = 'Ranked by meaning, over Central Acts. For State Acts, exact words or a "quoted phrase", use "Search exact words".';
+const SEMANTIC_NOTE = 'Ranked by meaning, over Central and State Acts. For exact words use a "quoted phrase" or "Search exact words".';
 
 async function semanticSearch(q: string, page: number, pageSize: number): Promise<SearchOutcome> {
-  const near = await nearestChunks(await embedQuery(q), SEM_CHUNKS);
-  const cands = distinctSections(near, SEM_CHUNKS);
-  const info = new Map((await query<{ actId: string; sectionKey: string; actStatus: string; status: string }>(
-    `SELECT s.act_id AS "actId", s.section_key AS "sectionKey", a.act_status AS "actStatus", s.status FROM act_sections s JOIN acts a ON a.act_id = s.act_id
-     JOIN unnest($1::text[], $2::text[]) AS k(a, sk) ON s.act_id = k.a AND s.section_key = k.sk`, [cands.map((c) => c.actId), cands.map((c) => c.sectionKey)]))
+  const stores = vectorStores();
+  // one query embedding per vector size in use (normally just one)
+  const vectors = new Map<number, Promise<number[]>>();
+  const vec = (dim: number) => (vectors.has(dim) ? vectors.get(dim)! : vectors.set(dim, embedQuery(q, dim)).get(dim)!);
+  const settled = await Promise.allSettled(stores.map(async (st) => st.nearest(await vec(st.dim), SEM_CHUNKS)));
+  const ok = settled.filter((r): r is PromiseFulfilledResult<Awaited<ReturnType<(typeof stores)[number]["nearest"]>>> => r.status === "fulfilled");
+  if (!ok.length) throw new Error("no vector store answered");
+  const near = ok.flatMap((r) => r.value).sort((a, b) => a.distance - b.distance);
+  const cands = distinctSections(near, SEM_POOL);
+  const info = new Map((await query<{ actId: string; sectionKey: string; actStatus: string; status: string; central: boolean; title: string; number: string | null; state: string | null }>(
+    `SELECT s.act_id AS "actId", s.section_key AS "sectionKey", a.act_status AS "actStatus", s.status, (a.category = 'central') AS central, a.title, s.number, a.state
+     FROM act_sections s JOIN acts a ON a.act_id = s.act_id JOIN unnest($1::text[], $2::text[]) AS k(a, sk) ON s.act_id = k.a AND s.section_key = k.sk`, [cands.map((c) => c.actId), cands.map((c) => c.sectionKey)]))
     .map((m) => [`${m.actId}|${m.sectionKey}`, m]));
-  const list = rankSections(cands, info, SEM_MAX); // similarity x 0.9 for Acts not in force; garbled sections dropped
+  // similarity x 0.9 for Acts not in force; Central Acts x1.3, or, when the question names a State, that State's Acts x1.2; garbled sections dropped;
+  // the same section filed several times collapses into one result (the Central filing wins)
+  const list = rankSections(cands, info, SEM_MAX, undefined, { states: statesIn(q) }) as { actId: string; sectionKey: string; copies: number }[];
   const slice = list.slice((page - 1) * pageSize, page * pageSize);
   const base = { available: true as const, total: list.length, totalCapped: false, page, pageSize, hasMore: page * pageSize < list.length, mode: "semantic" as const, note: SEMANTIC_NOTE, semantic: { used: true } };
   if (!slice.length) return { ...base, results: [], note: "No section is close in meaning. Try describing the situation in other words." };
@@ -105,8 +117,9 @@ async function semanticSearch(q: string, page: number, pageSize: number): Promis
             CASE WHEN q.tq IS NULL THEN NULL ELSE ts_headline('english', left(s.body, 20000), q.tq, 'MaxFragments=2, MaxWords=26, MinWords=10, ShortWord=2, FragmentDelimiter=" … ", StartSel=${MARK_OPEN}, StopSel=${MARK_CLOSE}') END AS snippet
      FROM k JOIN act_sections s ON s.act_id = k.act_id AND s.section_key = k.section_key JOIN acts a ON a.act_id = s.act_id, q ORDER BY k.n`,
     [slice.map((c) => c.actId), slice.map((c) => c.sectionKey), highlightQuery(q)], 15000);
+  const copies = new Map(slice.map((c) => [`${c.actId}|${c.sectionKey}`, c.copies]));
   // a snippet with highlighted words when the question's own words occur; otherwise the first readable words of the section
-  const results = rows.map(({ body, snippet, ...r }): SectionHit => ({ ...r, snippet: snippet && snippet.includes(MARK_OPEN) ? snippet : leadSnippet(body ?? ""), via: "semantic" }));
+  const results = rows.map(({ body, snippet, ...r }): SectionHit => ({ ...r, snippet: snippet && snippet.includes(MARK_OPEN) ? snippet : leadSnippet(body ?? ""), via: "semantic", copies: copies.get(`${r.actId}|${r.sectionKey}`) ?? 0 }));
   return { ...base, results };
 }
 

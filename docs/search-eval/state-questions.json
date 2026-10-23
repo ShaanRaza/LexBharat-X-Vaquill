@@ -1,0 +1,110 @@
+{
+ "about": "15 realistic questions on State Acts (rent control, stamp duty, money-lending, apartments) for the semantic-search test. A result is a hit when it belongs to an Act whose title starts with `act` in that `state` and its text contains `anchor` (a phrase from the statute); `section` is the section number it should be. All 15 anchors were checked against the section text in Neon. Duplicate filings of the same Act count as hits.",
+ "questions": [
+  {
+   "question": "Can a landlord in Maharashtra switch off water or electricity to a tenant?",
+   "state": "Maharashtra",
+   "act": "The Maharashtra Rent Control Act",
+   "section": "29",
+   "anchor": "cut-off or withhold any essential supply or service enjoyed by the tenant"
+  },
+  {
+   "question": "Does a leave and licence agreement have to be registered in Maharashtra?",
+   "state": "Maharashtra",
+   "act": "The Maharashtra Rent Control Act",
+   "section": "55",
+   "anchor": "any agreement for leave and licence or letting of any premises"
+  },
+  {
+   "question": "Can a tenant in Maharashtra sub-let the premises without the landlord's permission?",
+   "state": "Maharashtra",
+   "act": "The Maharashtra Rent Control Act",
+   "section": "26",
+   "anchor": "it shall not be lawful for tenant to sub-let or give on licence"
+  },
+  {
+   "question": "How is the fair rent of a building fixed in Kerala?",
+   "state": "Kerala",
+   "act": "The Kerala Buildings (Lease and Rent Control) Act",
+   "section": "5",
+   "anchor": "fix the fair rent for such building after holding such enquiry as it thinks fit"
+  },
+  {
+   "question": "Tenant in Kerala does not know the landlord's address. Can he deposit the rent?",
+   "state": "Kerala",
+   "act": "The Kerala Buildings (Lease and Rent Control) Act",
+   "section": "10",
+   "anchor": "Where the address of the landlord or his authorised agent is not known to the tenant"
+  },
+  {
+   "question": "What must an officer do when an instrument that is not duly stamped comes before him in Karnataka?",
+   "state": "Karnataka",
+   "act": "The Karnataka Stamp Act",
+   "section": "33",
+   "anchor": "chargeable in his opinion, with duty"
+  },
+  {
+   "question": "Is a document without proper stamp duty accepted as evidence in Maharashtra?",
+   "state": "Maharashtra",
+   "act": "The Maharashtra Stamp Act",
+   "section": "34",
+   "anchor": "shall be admitted in evidence for any purpose by any person having by law or consent of parties authority to receive evidence"
+  },
+  {
+   "question": "What stamp duty applies to a leave and licence agreement in Maharashtra?",
+   "state": "Maharashtra",
+   "act": "The Maharashtra Stamp Act",
+   "section": "36A",
+   "anchor": "Where the leave and licence agreement purports to be for a term not exceeding sixty months"
+  },
+  {
+   "question": "Must a rent agreement be in writing in Karnataka?",
+   "state": "Karnataka",
+   "act": "The Karnataka Rent Act",
+   "section": "4",
+   "anchor": "except by an agreement in writing"
+  },
+  {
+   "question": "Who gets the tenancy when a tenant dies in Karnataka?",
+   "state": "Karnataka",
+   "act": "The Karnataka Rent Act",
+   "section": "5",
+   "anchor": "In the event of death of a tenant, the right of tenancy shall devolve"
+  },
+  {
+   "question": "The landlord refuses to take rent in Karnataka. Can the tenant deposit it?",
+   "state": "Karnataka",
+   "act": "The Karnataka Rent Act",
+   "section": "17",
+   "anchor": "Where the landlord does not accept any rent and other charges tendered by the tenant"
+  },
+  {
+   "question": "Can an unlicensed money lender in Maharashtra recover a loan through court?",
+   "state": "Maharashtra",
+   "act": "The Maharashtra MoneyLending (Regulation) Act",
+   "section": "13",
+   "anchor": "No court shall pass a decree in favour of a money-lender in any suit unless"
+  },
+  {
+   "question": "Who sets the maximum interest a money lender can charge in Maharashtra?",
+   "state": "Maharashtra",
+   "act": "The Maharashtra MoneyLending (Regulation) Act",
+   "section": "31",
+   "anchor": "fix the maximum rates of interest to be charged by a money-lender"
+  },
+  {
+   "question": "Can a landlord in Telangana cut off water or other amenities from a tenant?",
+   "state": "Telangana",
+   "act": "The Telangana Buildings (Lease, Rent and Eviction) Control Act",
+   "section": "14",
+   "anchor": "No landlord shall, without just or sufficient cause, cut off or withhold any of the amenities enjoyed by the tenant"
+  },
+  {
+   "question": "How are common expenses of an apartment building shared among owners in Maharashtra?",
+   "state": "Maharashtra",
+   "act": "The Maharashtra Apartment Ownership Act",
+   "section": "10",
+   "anchor": "common profits of the property shall be distributed among, and the common expenses shall be charged to, the apartment owners"
+  }
+ ]
+}

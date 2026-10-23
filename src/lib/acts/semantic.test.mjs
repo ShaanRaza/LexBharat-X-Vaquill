@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { hasQuotedPhrase, chooseMode, cacheKey, LruCache, createRateLimiter, clientKey, vectorLiteral, distinctSections, highlightQuery, rankSections } from "./semantic.mjs";
+import { hasQuotedPhrase, chooseMode, cacheKey, LruCache, createRateLimiter, clientKey, vectorLiteral, distinctSections, highlightQuery, rankSections, copyKey, statesIn } from "./semantic.mjs";
 
 test("quoted phrases are detected (straight and curly quotes), single quotes and lone quotes are not", () => {
   assert.equal(hasQuotedPhrase('"dishonour of cheque" penalty'), true);
@@ -53,4 +53,37 @@ test("rankSections: repealed Acts count 0.9x, garbled and unknown sections are d
   assert.deepEqual(rankSections(cands, info).map((r) => r.actId), ["B", "A"]); // 0.67 beats 0.7 x 0.9 = 0.63
   assert.deepEqual(rankSections(cands, info, 1).map((r) => r.actId), ["B"]);
   assert.deepEqual(rankSections([{ actId: "A", sectionKey: "s1", distance: 0.30 }, { actId: "B", sectionKey: "s1", distance: 0.30 }], new Map([["A|s1", { actStatus: "in_force", status: "complete" }], ["B|s1", { actStatus: "in_force", status: "complete" }]])).map((r) => r.actId), ["A", "B"]);
+});
+test("copyKey: same Act filed under different titles/years/spacing shares a key; blocks without a number do not", () => {
+  assert.equal(copyKey("The CODE OF CRIMINAL PROCEDURE, 1973", "438"), copyKey("The Code of Criminal Procedure,1973", "438"));
+  assert.equal(copyKey("The INDIAN-PENAL-CODE-1860", "302"), copyKey("The Indian Penal Code", "302"));
+  assert.notEqual(copyKey("The Factories Act, 1948", "7"), copyKey("The Factories Act, 1948", "7A"));
+  assert.equal(copyKey("The Factories Act, 1948", null), null);
+});
+test("rankSections collapses copies of one section: the Central filing wins and the State copies never outrank it", () => {
+  const mk = (title, central, status = "in_force") => ({ actStatus: status, status: "complete", central, title, number: "438" });
+  const info = new Map([["C|s438", mk("The Code of Criminal Procedure, 1973", true)], ["M|s438", mk("The CODE OF CRIMINAL PROCEDURE, 1973", false)], ["P|s438", mk("The Code of Criminal Procedure,1973", false)], ["X|s5", { actStatus: "in_force", status: "complete", central: false, title: "Other Act", number: "5" }]]);
+  const cands = [{ actId: "M", sectionKey: "s438", distance: 0.20 }, { actId: "P", sectionKey: "s438", distance: 0.21 }, { actId: "C", sectionKey: "s438", distance: 0.22 }, { actId: "X", sectionKey: "s5", distance: 0.25 }];
+  const r = rankSections(cands, info, 60, 0.9, { central: 1 });
+  assert.deepEqual(r.map((x) => x.actId), ["C", "X"]);
+  assert.equal(r[0].copies, 2); assert.equal(r[0].central, true);
+  assert.ok(Math.abs(r[0].score - 0.8) < 1e-9); // takes the best score in the group (the State copy's 0.80)
+});
+test("rankSections between two State copies keeps the better-scoring one", () => {
+  const info = new Map([["A|s1", { actStatus: "in_force", status: "complete", central: false, title: "Kerala Act", number: "5" }], ["B|s1", { actStatus: "in_force", status: "complete", central: false, title: "The Kerala Act", number: "5" }]]);
+  const r = rankSections([{ actId: "A", sectionKey: "s1", distance: 0.4 }, { actId: "B", sectionKey: "s1", distance: 0.3 }], info);
+  assert.deepEqual(r.map((x) => x.actId), ["B"]); assert.equal(r[0].copies, 1);
+});
+test("statesIn finds State and UT names, including two-word names and spellings, and ignores look-alike words", () => {
+  assert.deepEqual([...statesIn("rent control in Maharashtra")], ["maharashtra"]);
+  assert.deepEqual([...statesIn("What is stamp duty in Tamil Nadu and Kerala?")].sort(), ["kerala", "tamil-nadu"]);
+  assert.deepEqual([...statesIn("Orissa land law")], ["odisha"]);
+  assert.equal(statesIn("what is the goal of arbitration, a bihari tradition").size, 0);
+  assert.equal(statesIn("how to get anticipatory bail").size, 0);
+});
+test("rankSections boosts: Central x1.3 when no state is named; the named State's Acts x1.2 (Central gets none then)", () => {
+  const info = new Map([["C|s1", { actStatus: "in_force", status: "complete", central: true, title: "Central Rent Act", number: "1", state: null }], ["M|s1", { actStatus: "in_force", status: "complete", central: false, title: "Maharashtra Rent Act", number: "1", state: "maharashtra" }]]);
+  const cands = [{ actId: "M", sectionKey: "s1", distance: 0.30 }, { actId: "C", sectionKey: "s1", distance: 0.35 }];
+  assert.deepEqual(rankSections(cands, info).map((x) => x.actId), ["C", "M"]);                                        // 0.65 x 1.3 = 0.845 > 0.70
+  assert.deepEqual(rankSections(cands, info, 60, 0.9, { states: new Set(["maharashtra"]) }).map((x) => x.actId), ["M", "C"]); // 0.70 x 1.2 = 0.84 > 0.65
 });
