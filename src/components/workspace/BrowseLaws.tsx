@@ -115,7 +115,7 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
         <SearchField id="browse-q" value={q} onChange={setQ} label={tab === "acts" ? "Search act titles" : "Search cases by party name or case number, or filter courts by name"}
           shortPlaceholder={tab === "acts" ? "Act name" : "Party name or 933/2024"}
           placeholder={tab === "acts" ? "Try \"Companies Act\" or \"Bharatiya Nyaya Sanhita\"" : "Try \"State of UP\", a surname, or a case number like 933/2024"} />
-        <p className="mt-2 px-1 text-[13px] text-secondary">{tab === "acts" ? "This box searches the text of sections (words, \"exact phrase\", or a lookup like \"138 NI Act\") and act titles. At least 2 characters." : "Type 2 or more characters to search Supreme Court and High Court cases of every year by party name or case number as recorded in the dataset (not judgment text); the court list below also narrows by name."} Boolean operators and citation search are not available yet.</p>
+        <p className="mt-2 px-1 text-[13px] text-secondary">{tab === "acts" ? "This box searches section text by meaning (ask a question or describe a situation), or by exact words (\"quoted phrase\", or a lookup like \"138 NI Act\"), and also act titles. At least 2 characters." : "Type 2 or more characters to search Supreme Court and High Court cases of every year by party name or case number as recorded in the dataset (not judgment text); the court list below also narrows by name."} Boolean operators and citation search are not available yet.</p>
       </div>
 
       <div role="tablist" aria-label="Browse" className="mt-6 flex gap-1 border-b border-border/80">

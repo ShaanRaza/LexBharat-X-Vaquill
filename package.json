@@ -12,7 +12,7 @@
     "start": "next start --port 3100",
     "dev:release": "NEXT_PUBLIC_RELEASE=1 next dev --port 3100",
     "build:demo": "NEXT_PUBLIC_RELEASE=0 next build",
-    "test:extract": "node --test src/lib/judgments/extract.test.mjs src/lib/judgments/hcSearchCore.test.mjs src/lib/acts/reassemble.test.mjs src/lib/acts/searchQuery.test.mjs src/lib/acts/gaps.test.mjs src/lib/acts/fusion.test.mjs",
+    "test:extract": "node --test src/lib/judgments/extract.test.mjs src/lib/judgments/hcSearchCore.test.mjs src/lib/acts/reassemble.test.mjs src/lib/acts/searchQuery.test.mjs src/lib/acts/gaps.test.mjs src/lib/acts/fusion.test.mjs src/lib/acts/semantic.test.mjs",
     "index:acts-text": "scripts/acts/export-act-text.sh",
     "load:acts-neon": "scripts/acts/load-neon.sh",
     "qa:sweep": "node scripts/judgments/qa-sweep.mjs",

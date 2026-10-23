@@ -13,6 +13,9 @@ CREATE TABLE acts (
   act_status    text NOT NULL,
   source_url    text,
   section_count integer NOT NULL,
+  raw_category  text,                   -- the dataset's own value; `category` may be corrected by scripts/acts/fix-misfiled-central.mjs (run after every load)
+  raw_state     text,
+  category_note text,
   title_tsv     tsvector GENERATED ALWAYS AS (to_tsvector('english', title)) STORED
 );
 CREATE TABLE act_sections (

@@ -4,26 +4,26 @@ import { useEffect, useState } from "react";
 import { Badge, Highlight, Notice, Panel } from "@/components/kit";
 import { STATUS_INFO, INCOMPLETE_NOTICE, MISSING_NOTICE, officialSourceUrl } from "@/lib/acts/quality";
 
-// Results of the Acts-tab search box over the TEXT of Central and State Acts (GET /api/acts/search). Presentation and fetching only; the search itself lives in
+// Results of the Acts-tab search box over Central and State Acts (GET /api/acts/search): by meaning by default, exact words on request. Presentation and fetching only; the search itself lives in
 // src/lib/acts/searchStore.ts. Colours, sizes and radii come from the tokens through Tailwind names and the shared kit.
-type Hit = { actId: string; actTitle: string; year: number | null; category: string; state: string | null; sourceUrl: string | null; sectionKey: string; number: string | null; heading: string | null; chapter: string | null; status: keyof typeof STATUS_INFO; snippet: string; via: "text" | "lookup" };
-type Resp = { searchAvailable: boolean; message?: string; results: Hit[]; total: number; totalCapped?: boolean; page: number; pageSize: number; hasMore: boolean; mode?: "text" | "lookup"; note?: string; missing?: { actTitle: string; number: string; sourceUrl: string | null } };
+type Hit = { actId: string; actTitle: string; year: number | null; category: string; state: string | null; sourceUrl: string | null; sectionKey: string; number: string | null; heading: string | null; chapter: string | null; status: keyof typeof STATUS_INFO; snippet: string; via: "text" | "lookup" | "semantic" };
+type Resp = { searchAvailable: boolean; message?: string; results: Hit[]; total: number; totalCapped?: boolean; page: number; pageSize: number; hasMore: boolean; mode?: "text" | "lookup" | "semantic"; note?: string; missing?: { actTitle: string; number: string; sourceUrl: string | null } };
 const label = (v: string) => v.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 
 export default function SectionSearchResults({ q }: { q: string }) {
-  const [page, setPage] = useState(1), [data, setData] = useState<Resp | null>(null), [err, setErr] = useState(""), [retry, setRetry] = useState(0);
-  useEffect(() => { setPage(1); }, [q]);
+  const [exact, setExact] = useState(false), [page, setPage] = useState(1), [data, setData] = useState<Resp | null>(null), [err, setErr] = useState(""), [retry, setRetry] = useState(0);
+  useEffect(() => { setPage(1); setExact(false); }, [q]);
   useEffect(() => {
     const ac = new AbortController(), t = setTimeout(() => {
       setErr("");
-      fetch(`/api/acts/search?q=${encodeURIComponent(q)}&page=${page}`, { signal: ac.signal }).then(async (r) => {
+      fetch(`/api/acts/search?q=${encodeURIComponent(q)}&page=${page}${exact ? "&exact=1" : ""}`, { signal: ac.signal }).then(async (r) => {
         const j = await r.json().catch(() => null);
         if (!r.ok) throw new Error(typeof j?.error === "string" ? j.error : `Search failed (status ${r.status}).`);
         setData(j as Resp);
       }).catch((e) => { if ((e as Error).name !== "AbortError") { setErr((e as Error).message || "Search failed."); setData(null); } });
     }, 250);
     return () => { clearTimeout(t); ac.abort(); };
-  }, [q, page, retry]);
+  }, [q, page, retry, exact]);
 
   const pages = data ? Math.max(1, Math.ceil(data.total / data.pageSize)) : 1;
   return (
@@ -35,6 +35,8 @@ export default function SectionSearchResults({ q }: { q: string }) {
       {data?.searchAvailable && (
         <>
           {data.note && <p className="mt-1 text-ui-sm text-muted">{data.note}</p>}
+          {data.mode === "semantic" && <button type="button" onClick={() => { setExact(true); setPage(1); }} className="mt-1 text-ui-sm font-medium text-primary underline">Search exact words instead</button>}
+          {exact && data.mode === "text" && <button type="button" onClick={() => { setExact(false); setPage(1); }} className="mt-1 text-ui-sm font-medium text-primary underline">Search by meaning instead</button>}
           {data.missing && (
             <Notice tone="warn" role="status" className="mt-3">
               <p><strong className="font-medium text-foreground">Section {data.missing.number} of {data.missing.actTitle}.</strong> {MISSING_NOTICE.replace(" Read it on India Code.", "")} <a className="font-medium underline" href={officialSourceUrl(data.missing.sourceUrl)} target="_blank" rel="noopener noreferrer">Read it on India Code</a>.</p>
@@ -54,6 +56,7 @@ export default function SectionSearchResults({ q }: { q: string }) {
                 <p className="mt-2 flex flex-wrap items-center gap-1.5">
                   <Badge>{label(h.category)}</Badge>{h.state && <Badge>{label(h.state)}</Badge>}{h.year !== null && <Badge>{h.year}</Badge>}
                   {h.via === "lookup" && <Badge tone="info">Section lookup</Badge>}
+                  {h.via === "semantic" && <Badge tone="info" title="Found by meaning, not by matching your exact words">By meaning</Badge>}
                   <Badge tone={STATUS_INFO[h.status].tone} title={STATUS_INFO[h.status].explain}>{STATUS_INFO[h.status].label}</Badge>
                 </p>
               </Panel>

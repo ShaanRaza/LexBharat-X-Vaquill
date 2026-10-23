@@ -1,6 +1,9 @@
 // Keyword search over Act section text in Neon (Postgres full-text search, 'english' config). LOGIC ONLY: no styling. The caller (route handler) validates input.
 import { query, dbConfigured } from "./db";
 import { actMatcher, hasDevanagari, hasSearchableChars, parseSectionLookup } from "./searchQuery.mjs";
+import { chooseMode, distinctSections, highlightQuery, rankSections } from "./semantic.mjs";
+import { embedQuery, voyageConfigured } from "./embed";
+import { nearestChunks, vectorConfigured } from "./vectorDb";
 
 export const MARK_OPEN = "", MARK_CLOSE = ""; // private-use markers around matched words in snippets; the UI turns them into highlights
 export const PAGE_SIZE = 12, MAX_RESULTS = 1000;
@@ -11,11 +14,13 @@ const RANK_BOOST = `(CASE WHEN to_tsvector('english', coalesce(s.heading, '')) @
 export type SectionHit = {
   actId: string; actTitle: string; year: number | null; category: string; state: string | null; actStatus: string; sourceUrl: string | null;
   sectionKey: string; number: string | null; heading: string | null; chapter: string | null; status: string; flags: string[];
-  snippet: string; via: "text" | "lookup";
+  snippet: string; via: "text" | "lookup" | "semantic";
 };
 export type SearchOutcome =
   | { available: false; reason: "not_configured" | "unreachable"; message: string }
-  | { available: true; results: SectionHit[]; total: number; totalCapped: boolean; page: number; pageSize: number; hasMore: boolean; mode: "text" | "lookup"; note: string;
+  | { available: true; results: SectionHit[]; total: number; totalCapped: boolean; page: number; pageSize: number; hasMore: boolean; mode: "text" | "lookup" | "semantic"; note: string;
+      /** How the query was searched: used=true for search by meaning; otherwise why keyword search ran instead (exact_requested, quoted_phrase, hindi, semantic_unavailable, semantic_error). */
+      semantic?: { used: boolean; reason?: string };
       /** Set when the asked-for section number is confidently missing from our data (gaps.mjs): the UI shows the notice and the India Code link. */
       missing?: { actTitle: string; actId: string; number: string; sourceUrl: string | null } };
 
@@ -51,11 +56,8 @@ async function lookupHits(q: string, page: number, pageSize: number): Promise<Se
   return { available: true, results: slice, total: all.length, totalCapped: false, page, pageSize, hasMore: page * pageSize < all.length, mode: "lookup", note: `Section lookup: section ${lk.number} of the Act matching "${lk.actPhrase}".` };
 }
 
-export async function searchSections(q: string, page = 1, pageSize = PAGE_SIZE): Promise<SearchOutcome> {
-  if (!dbConfigured()) return { available: false, reason: "not_configured", message: "Section search is not available yet." };
+async function textSearch(q: string, page: number, pageSize: number): Promise<SearchOutcome> {
   try {
-    const lookup = await lookupHits(q, page, pageSize);
-    if (lookup) return lookup;
     const empty = (note: string): SearchOutcome => ({ available: true, results: [], total: 0, totalCapped: false, page, pageSize, hasMore: false, mode: "text", note });
     if (!hasSearchableChars(q)) return empty("The search has no letters or numbers to look for.");
     const offset = (page - 1) * pageSize;
@@ -78,4 +80,58 @@ export async function searchSections(q: string, page = 1, pageSize = PAGE_SIZE):
   } catch (e) {
     return { available: false, reason: "unreachable", message: "Section search could not be reached. Please try again in a moment." };
   }
+}
+
+// ---- search by meaning (Central Acts). Query -> voyage-4 (256-d) -> nearest chunks in the vector database -> distinct sections -> metadata and snippets from the section database.
+export const SEM_CHUNKS = 150, SEM_MAX = 60;
+export const semanticReady = () => voyageConfigured() && vectorConfigured();
+const SEMANTIC_NOTE = 'Ranked by meaning, over Central Acts. For State Acts, exact words or a "quoted phrase", use "Search exact words".';
+
+async function semanticSearch(q: string, page: number, pageSize: number): Promise<SearchOutcome> {
+  const near = await nearestChunks(await embedQuery(q), SEM_CHUNKS);
+  const cands = distinctSections(near, SEM_CHUNKS);
+  const info = new Map((await query<{ actId: string; sectionKey: string; actStatus: string; status: string }>(
+    `SELECT s.act_id AS "actId", s.section_key AS "sectionKey", a.act_status AS "actStatus", s.status FROM act_sections s JOIN acts a ON a.act_id = s.act_id
+     JOIN unnest($1::text[], $2::text[]) AS k(a, sk) ON s.act_id = k.a AND s.section_key = k.sk`, [cands.map((c) => c.actId), cands.map((c) => c.sectionKey)]))
+    .map((m) => [`${m.actId}|${m.sectionKey}`, m]));
+  const list = rankSections(cands, info, SEM_MAX); // similarity x 0.9 for Acts not in force; garbled sections dropped
+  const slice = list.slice((page - 1) * pageSize, page * pageSize);
+  const base = { available: true as const, total: list.length, totalCapped: false, page, pageSize, hasMore: page * pageSize < list.length, mode: "semantic" as const, note: SEMANTIC_NOTE, semantic: { used: true } };
+  if (!slice.length) return { ...base, results: [], note: "No section is close in meaning. Try describing the situation in other words." };
+  const rows = await query<Omit<SectionHit, "snippet" | "via"> & { body: string | null; snippet: string | null }>(
+    `WITH k AS (SELECT * FROM unnest($1::text[], $2::text[]) WITH ORDINALITY AS t(act_id, section_key, n)),
+          q AS (SELECT CASE WHEN $3 = '' THEN NULL ELSE websearch_to_tsquery('english', $3) END AS tq)
+     SELECT ${COLS}, left(s.body, 400) AS body,
+            CASE WHEN q.tq IS NULL THEN NULL ELSE ts_headline('english', left(s.body, 20000), q.tq, 'MaxFragments=2, MaxWords=26, MinWords=10, ShortWord=2, FragmentDelimiter=" … ", StartSel=${MARK_OPEN}, StopSel=${MARK_CLOSE}') END AS snippet
+     FROM k JOIN act_sections s ON s.act_id = k.act_id AND s.section_key = k.section_key JOIN acts a ON a.act_id = s.act_id, q ORDER BY k.n`,
+    [slice.map((c) => c.actId), slice.map((c) => c.sectionKey), highlightQuery(q)], 15000);
+  // a snippet with highlighted words when the question's own words occur; otherwise the first readable words of the section
+  const results = rows.map(({ body, snippet, ...r }): SectionHit => ({ ...r, snippet: snippet && snippet.includes(MARK_OPEN) ? snippet : leadSnippet(body ?? ""), via: "semantic" }));
+  return { ...base, results };
+}
+
+const FALLBACK_NOTE: Record<string, string> = {
+  semantic_unavailable: "Search by meaning is not set up here, so this is a keyword search.",
+  semantic_error: "Search by meaning is not responding right now, so this is a keyword search.",
+};
+
+/** Section lookups ("138 NI Act") and quoted phrases use keyword search. Everything else is searched by meaning when it is set up (VOYAGE_API_KEY and VECTOR_DATABASE_URL),
+ *  and falls back to keyword search, with a short note, when it is not or when it fails. `exact` forces keyword search. */
+export async function searchSections(q: string, page = 1, pageSize = PAGE_SIZE, opts: { exact?: boolean } = {}): Promise<SearchOutcome> {
+  if (!dbConfigured()) return { available: false, reason: "not_configured", message: "Section search is not available yet." };
+  try {
+    const lookup = await lookupHits(q, page, pageSize);
+    if (lookup) return lookup;
+  } catch {
+    return { available: false, reason: "unreachable", message: "Section search could not be reached. Please try again in a moment." };
+  }
+  const chosen = chooseMode(q, { exact: !!opts.exact, hindi: hasDevanagari(q), semanticReady: semanticReady() });
+  let reason: string | null = chosen.reason;
+  if (chosen.mode === "semantic" && hasSearchableChars(q)) {
+    try { return await semanticSearch(q, page, pageSize); } catch { reason = "semantic_error"; }
+  }
+  const out = await textSearch(q, page, pageSize);
+  if (!out.available) return out;
+  const note = reason && FALLBACK_NOTE[reason] ? `${FALLBACK_NOTE[reason]} ${out.note}` : out.note;
+  return { ...out, note, semantic: { used: false, ...(reason ? { reason } : {}) } };
 }

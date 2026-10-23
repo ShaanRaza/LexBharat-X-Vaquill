@@ -26,5 +26,6 @@ run -c "\\copy act_sections (act_id,section_key,ord,number,heading,chapter,statu
 run -f scripts/acts/neon-missing.sql
 run -c "\\copy act_missing_sections (act_id,number) FROM '$TMP/missing.csv' WITH (FORMAT csv)"
 run -f scripts/acts/neon-indexes.sql
+node scripts/acts/fix-misfiled-central.mjs --apply   # re-applies the Central corrections (keeps raw_category = the dataset's value)
 run -At -c "select 'acts', count(*) from acts union all select 'sections', count(*) from act_sections union all select 'sections with text', count(*) from act_sections where body is not null"
 run -At -c "select 'database', pg_size_pretty(pg_database_size(current_database())) union all select 'act_sections table (heap+toast)', pg_size_pretty(pg_table_size('act_sections')) union all select 'gin index', pg_size_pretty(pg_relation_size('act_sections_tsv_gin')) union all select 'all indexes', pg_size_pretty(pg_indexes_size('act_sections')+pg_indexes_size('acts'))"

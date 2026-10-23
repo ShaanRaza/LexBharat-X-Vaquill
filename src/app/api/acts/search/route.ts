@@ -1,8 +1,15 @@
-// GET /api/acts/search?q=<words, "exact phrase", or a section lookup like "138 NI Act">&page=
-// Keyword search over the TEXT of Central and State Acts (Neon Postgres full-text search). 12 results per page, same paging fields as /api/judgments/search-hc.
-// Without DATABASE_URL: 200 with searchAvailable:false (never an error page).
+// GET /api/acts/search?q=<a question, words, "exact phrase", or a section lookup like "138 NI Act">&page=&exact=1
+// Default: search BY MEANING over Central Acts (voyage-4 query embedding + vector database). Section lookups ("138 NI Act"), "quoted phrases" and exact=1 use keyword search over the
+// text of Central and State Acts (Neon Postgres full-text search). When search by meaning is not set up (VOYAGE_API_KEY / VECTOR_DATABASE_URL) or fails, keyword search answers with a note.
+// 12 results per page, same paging fields as /api/judgments/search-hc. Without DATABASE_URL: 200 with searchAvailable:false (never an error page).
+// Limit: 30 searches per minute per caller address (in memory, per server instance), so the embedding key cannot be run up through this endpoint.
 import { normalizeQuery, hasDevanagari } from "@/lib/acts/searchQuery.mjs";
+import { createRateLimiter, clientKey } from "@/lib/acts/semantic.mjs";
 import { searchSections, PAGE_SIZE } from "@/lib/acts/searchStore";
+
+const SEARCHES_PER_MINUTE = 30;
+const g = globalThis as unknown as { __actsSearchLimiter?: ReturnType<typeof createRateLimiter> };
+const limiter = (g.__actsSearchLimiter ??= createRateLimiter({ limit: SEARCHES_PER_MINUTE, windowMs: 60_000 }));
 
 export async function GET(req: Request) {
   const p = new URL(req.url).searchParams;
@@ -12,8 +19,11 @@ export async function GET(req: Request) {
   const q = nq.q;
   const page = Number(p.get("page") ?? 1);
   if (!Number.isInteger(page) || page < 1 || page > 1000) return bad("page must be a whole number from 1 to 1000.");
-  const r = await searchSections(q, page, PAGE_SIZE);
+  const rl = limiter.check(clientKey(req.headers));
+  if (!rl.ok) return Response.json({ error: `Too many searches. Please wait ${rl.retryAfterSec} seconds and try again.` }, { status: 429, headers: { "Retry-After": String(rl.retryAfterSec), "Cache-Control": "no-store" } });
+  const r = await searchSections(q, page, PAGE_SIZE, { exact: p.get("exact") === "1" });
   if (!r.available) return Response.json({ searchAvailable: false, reason: r.reason, message: r.message, results: [], total: 0, page, pageSize: PAGE_SIZE, hasMore: false }, { headers: { "Cache-Control": "no-store" } });
-  return Response.json({ searchAvailable: true, scope: "text of Central and State Acts (English)", hindiNotSearchable: hasDevanagari(q), ...r },
+  const scope = r.mode === "semantic" ? "meaning of Central Acts (English)" : "text of Central and State Acts (English)";
+  return Response.json({ searchAvailable: true, scope, hindiNotSearchable: hasDevanagari(q), ...r },
     { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=3600" } });
 }
