@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Badge, Notice, Panel, StatusDot } from "@/components/kit";
-import { PROVENANCE, CHAPTER_NOTE, INCOMPLETE_NOTICE } from "@/lib/acts/quality";
+import { PROVENANCE, CHAPTER_NOTE, INCOMPLETE_NOTICE, MISSING_NOTICE } from "@/lib/acts/quality";
 import type { ActTextView as View } from "@/lib/acts/viewModel";
 
 // Presentation only: every value arrives ready-made from src/lib/acts/viewModel.ts. Colours, sizes and radii come from the shared tokens (Tailwind names + kit components).
@@ -52,7 +52,7 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
           <aside aria-label="Sections of this Act" className="lg:sticky lg:top-4 lg:self-start">
             <Panel className="p-0">
               <p className="border-b border-border/70 px-4 py-3 text-ui-sm text-secondary" role="status">
-                {fmt(view.counts.sections)} {view.hasSectionNumbers ? "sections" : "text blocks"}: {fmt(view.counts.complete)} no problems detected, {fmt(view.counts.possibly_incomplete)} possibly incomplete, {fmt(view.counts.garbled)} unreliable.
+                {fmt(view.counts.sections)} {view.hasSectionNumbers ? "sections" : "text blocks"}: {fmt(view.counts.complete)} no problems detected, {fmt(view.counts.possibly_incomplete)} possibly incomplete, {fmt(view.counts.garbled)} unreliable{view.counts.missing ? `, ${fmt(view.counts.missing)} missing from our source data` : ""}.
               </p>
               <ul className="max-h-[70vh] overflow-y-auto py-1">
                 {view.list.map((it) => {
@@ -74,12 +74,17 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
             {!view.hasSectionNumbers && <Notice tone="warn" title="Section numbers are not available for this Act" className="mb-4"><p>The dataset has no section numbers for it, so its text is shown as unnumbered blocks in the dataset&apos;s order.</p></Notice>}
             {sel ? (
               <Panel>
-                <h2 id="sec-title" className="text-ui-lead font-semibold">{view.hasSectionNumbers && sel.key.startsWith("s") ? `Section ${sel.label}` : sel.label}{sel.heading ? ` — ${sel.heading}` : ""}</h2>
+                <h2 id="sec-title" className="text-ui-lead font-semibold">{view.hasSectionNumbers && (sel.key.startsWith("s") || sel.missing) ? `Section ${sel.label}` : sel.label}{sel.heading ? ` — ${sel.heading}` : ""}</h2>
                 {sel.chapter && <p className="mt-1 text-ui-sm text-secondary">{sel.chapter}</p>}
-                <p className="mt-3 flex flex-wrap items-center gap-1.5">
+                {sel.missing && (
+                  <Notice tone="warn" role="status" className="mt-4">
+                    <p className="font-medium text-foreground">{MISSING_NOTICE.replace(" Read it on India Code.", "")} <a className="underline" href={view.sourceUrl} target="_blank" rel="noopener noreferrer">Read it on India Code</a>.</p>
+                  </Notice>
+                )}
+                {!sel.missing && <p className="mt-3 flex flex-wrap items-center gap-1.5">
                   <Badge tone={sel.statusInfo.tone} title={sel.statusInfo.explain}>{sel.statusInfo.label}</Badge>
                   {sel.flags.map((f) => <Badge key={f.key} tone={f.info.tone} title={f.info.explain}>{f.info.label}</Badge>)}
-                </p>
+                </p>}
                 {sel.status === "possibly_incomplete" && (
                   <Notice tone="warn" role="status" title="This section may be incomplete" className="mt-3">
                     <p>{INCOMPLETE_NOTICE} <a className="font-medium underline" href={view.sourceUrl} target="_blank" rel="noopener noreferrer">Open this Act on India Code</a></p>
@@ -87,7 +92,7 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
                   </Notice>
                 )}
 
-                {sel.blocks === null ? (
+                {sel.missing ? null : sel.blocks === null ? (
                   <Notice tone="bad" title="Text for this section is unreliable in the source dataset" role="status" className="mt-4">
                     <p>These characters could not be checked, or were scrambled when the source was extracted, so we do not show them.</p>
                     <p><a className="underline" href={view.sourceUrl} target="_blank" rel="noopener noreferrer">Read this Act on India Code</a></p>

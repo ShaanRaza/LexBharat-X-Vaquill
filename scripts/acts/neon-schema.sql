@@ -1,6 +1,7 @@
 -- Section search schema (Neon Postgres). Loaded by scripts/acts/load-neon.sh from ../lexbharat-data/acts-text. Central and State/UT Acts only.
 -- FTS config: 'english' (see docs/ACTS-SEARCH-W1B.md): stemming (dishonour / dishonoured, cheque / cheques) and stop-word removal shrink the index; the text is English
 -- legal prose (Hindi pieces are not loaded). Headings weigh more (A) than the body (B).
+DROP TABLE IF EXISTS act_missing_sections;
 DROP TABLE IF EXISTS act_sections;
 DROP TABLE IF EXISTS acts;
 CREATE TABLE acts (

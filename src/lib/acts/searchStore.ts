@@ -15,7 +15,9 @@ export type SectionHit = {
 };
 export type SearchOutcome =
   | { available: false; reason: "not_configured" | "unreachable"; message: string }
-  | { available: true; results: SectionHit[]; total: number; totalCapped: boolean; page: number; pageSize: number; hasMore: boolean; mode: "text" | "lookup"; note: string };
+  | { available: true; results: SectionHit[]; total: number; totalCapped: boolean; page: number; pageSize: number; hasMore: boolean; mode: "text" | "lookup"; note: string;
+      /** Set when the asked-for section number is confidently missing from our data (gaps.mjs): the UI shows the notice and the India Code link. */
+      missing?: { actTitle: string; actId: string; number: string; sourceUrl: string | null } };
 
 /** First readable words of a section for a lookup result: skips markdown headings and all-capitals heading lines that lead some sections. */
 const leadSnippet = (body: string) => body.split(/\n{2,}/).map((p) => p.trim()).filter((p) => p && !/^#/.test(p) && !(p.length < 200 && p === p.toUpperCase())).join(" ").replace(/\*\*/g, "").replace(/\s+/g, " ").slice(0, 220);
@@ -35,7 +37,15 @@ async function lookupHits(q: string, page: number, pageSize: number): Promise<Se
     `SELECT ${COLS}, left(s.body, 400) AS body FROM acts a JOIN act_sections s ON s.act_id = a.act_id
      WHERE ${where} AND upper(s.number) = upper($${params.length + 1})
      ORDER BY (a.category = 'central') DESC, (a.act_status = 'in_force') DESC, length(a.title), s.ord LIMIT 24`, [...params, lk.number]);
-  if (!rows.length) return null;
+  if (!rows.length) {
+    const num = /^\d{1,4}$/.test(lk.number) ? Number(lk.number) : null;
+    if (num === null) return null;
+    const gone = await query<{ actId: string; actTitle: string; sourceUrl: string | null }>(
+      `SELECT a.act_id AS "actId", a.title AS "actTitle", a.source_url AS "sourceUrl" FROM acts a JOIN act_missing_sections m ON m.act_id = a.act_id WHERE ${where} AND m.number = $${params.length + 1}
+       ORDER BY (a.category = 'central') DESC, (a.act_status = 'in_force') DESC, length(a.title) LIMIT 1`, [...params, num]).catch(() => []);
+    if (!gone.length) return null;
+    return { available: true, results: [], total: 0, totalCapped: false, page, pageSize, hasMore: false, mode: "lookup", note: `Section ${lk.number} of ${gone[0].actTitle} is missing from our source data.`, missing: { ...gone[0], number: lk.number } };
+  }
   const all = rows.map(({ body, ...r }): SectionHit => ({ ...r, snippet: leadSnippet(body ?? ""), via: "lookup" }));
   const slice = all.slice((page - 1) * pageSize, page * pageSize);
   return { available: true, results: slice, total: all.length, totalCapped: false, page, pageSize, hasMore: page * pageSize < all.length, mode: "lookup", note: `Section lookup: section ${lk.number} of the Act matching "${lk.actPhrase}".` };

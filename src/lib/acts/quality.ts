@@ -14,6 +14,10 @@ export const STATUS_INFO: Record<SectionStatus, FlagInfo> = {
   garbled: { label: "Text unreliable", tone: "bad", explain: "The text of this section is unreliable in the source dataset (scrambled characters from PDF extraction)." },
 };
 
+/** Shown for a section number we are confident is missing from the source data (rule: gaps.mjs). */
+export const MISSING_NOTICE = "This section is missing from our source data. Read it on India Code.";
+export const MISSING_INFO: FlagInfo = { label: "Missing from our source data", tone: "info", explain: MISSING_NOTICE };
+
 export const FLAG_INFO: Record<string, FlagInfo> = {
   devanagari: { label: "Contains Hindi", tone: "info", explain: "This section includes Devanagari (Hindi) text." },
   no_section_number: { label: "No section number", tone: "info", explain: "The dataset has no section number for this text, so it cannot be placed in the Act's numbering." },

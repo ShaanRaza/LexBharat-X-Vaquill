@@ -18,3 +18,5 @@ qa/us-map-after.jpg
 .DS_Store
 data/judgments-hc/
 data/judgments-hc-gz/
+# Large data files copied for the CDN at build time (scripts/copy-static-data.mjs)
+public/data/

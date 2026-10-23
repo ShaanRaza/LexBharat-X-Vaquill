@@ -5,6 +5,7 @@
 import courtYears from "@/data/judgments/court-years.json";
 import courtsMeta from "@/data/judgments/courts.meta.json";
 import { ALL_COURTS } from "@/data/workspaceBrowse";
+import { staticJson } from "@/lib/staticData";
 import { HC_PAGE_SIZE, hcSourceKind, readHcFacets, readHcPage, readScPreviews, type HcFilter } from "./hcData";
 import { displayDisposition } from "./disposition.mjs";
 import { hcSearchMeta } from "./hcSearch";
@@ -21,13 +22,15 @@ const BASE_COURTS = ALL_COURTS.map((c) => {
   const m = (courtsMeta as { court: string; cases: number; first_year: number | null; last_year: number | null }[]).find((x) => x.court === c.slug);
   return { slug: c.slug, name: c.name, cases: m?.cases ?? null, firstYear: m?.first_year ?? null, lastYear: m?.last_year ?? null };
 });
-// Supreme Court cases are bundled (src/data/judgments/sc). High Court pages live outside the bundle (see hcData.ts) and are listable only when a data source is configured.
+// Supreme Court cases are static files served from public/data/judgments/sc (copied from src/data/judgments/sc at build time; see src/lib/staticData.ts). High Court pages live outside the bundle (see hcData.ts) and are listable only when a data source is configured.
 const courts = (searchIndex: boolean): CourtSummary[] => BASE_COURTS.map((c) => ({ ...c, listable: c.slug === SC || hcSourceKind() !== null, searchable: c.slug === SC || searchIndex, filterable: c.slug === SC || hcSourceKind() !== null }));
 const TOTAL = BASE_COURTS.reduce((n, c) => n + (c.cases ?? 0), 0);
 
 async function scYear(year: number): Promise<CaseItem[]> {
   if (!Number.isInteger(year) || !byCourt.get(SC)?.some((y) => y.year === year)) return [];
-  const rows = (await import(`@/data/judgments/sc/${year}.json`)).default as Record<string, unknown>[];
+  // The year files are static assets on the CDN (public/data/judgments/sc), not part of the server function.
+  const rows = await staticJson<Record<string, unknown>[]>(`judgments/sc/${year}.json`).catch(() => null);
+  if (!rows) return [];
   // The export is oldest first; the product shows newest first (same order the High Court pages use).
   return rows.map((r) => { const o: Record<string, unknown> = {}; for (const [k, v] of Object.entries(r)) if (v !== null && v !== undefined) o[k] = v; const c = o as unknown as CaseItem; const label = displayDisposition(c.disposition); if (label) c.dispositionLabel = label; return c; }).reverse();
 }

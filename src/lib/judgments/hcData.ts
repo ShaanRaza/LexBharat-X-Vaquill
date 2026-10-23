@@ -30,7 +30,9 @@ const SLUG = /^[a-z0-9-]{1,40}$/;
 export async function readDataJson(rel: string, opts: { noCache?: boolean } = {}): Promise<unknown | null> {
   try {
     if (process.env.JUDGMENTS_DATA_DIR) {
-      const root = path.resolve(process.cwd(), process.env.JUDGMENTS_DATA_DIR);
+      // path.resolve(<one runtime value>) resolves against the working directory at run time. Writing process.cwd() here made the build tracer treat the WHOLE project
+      // folder (.next/cache, .git, node_modules ...) as a dependency of every judgments function (about 745 MB each).
+      const root = path.resolve(process.env.JUDGMENTS_DATA_DIR);
       return JSON.parse(await readFile(path.join(root, rel), "utf8"));
     }
     if (process.env.JUDGMENTS_DATA_URL) {

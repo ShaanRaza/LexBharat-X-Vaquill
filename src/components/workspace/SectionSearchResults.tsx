@@ -2,12 +2,12 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Badge, Highlight, Notice, Panel } from "@/components/kit";
-import { STATUS_INFO, INCOMPLETE_NOTICE, officialSourceUrl } from "@/lib/acts/quality";
+import { STATUS_INFO, INCOMPLETE_NOTICE, MISSING_NOTICE, officialSourceUrl } from "@/lib/acts/quality";
 
 // Results of the Acts-tab search box over the TEXT of Central and State Acts (GET /api/acts/search). Presentation and fetching only; the search itself lives in
 // src/lib/acts/searchStore.ts. Colours, sizes and radii come from the tokens through Tailwind names and the shared kit.
 type Hit = { actId: string; actTitle: string; year: number | null; category: string; state: string | null; sourceUrl: string | null; sectionKey: string; number: string | null; heading: string | null; chapter: string | null; status: keyof typeof STATUS_INFO; snippet: string; via: "text" | "lookup" };
-type Resp = { searchAvailable: boolean; message?: string; results: Hit[]; total: number; totalCapped?: boolean; page: number; pageSize: number; hasMore: boolean; mode?: "text" | "lookup"; note?: string };
+type Resp = { searchAvailable: boolean; message?: string; results: Hit[]; total: number; totalCapped?: boolean; page: number; pageSize: number; hasMore: boolean; mode?: "text" | "lookup"; note?: string; missing?: { actTitle: string; number: string; sourceUrl: string | null } };
 const label = (v: string) => v.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 
 export default function SectionSearchResults({ q }: { q: string }) {
@@ -35,6 +35,11 @@ export default function SectionSearchResults({ q }: { q: string }) {
       {data?.searchAvailable && (
         <>
           {data.note && <p className="mt-1 text-ui-sm text-muted">{data.note}</p>}
+          {data.missing && (
+            <Notice tone="warn" role="status" className="mt-3">
+              <p><strong className="font-medium text-foreground">Section {data.missing.number} of {data.missing.actTitle}.</strong> {MISSING_NOTICE.replace(" Read it on India Code.", "")} <a className="font-medium underline" href={officialSourceUrl(data.missing.sourceUrl)} target="_blank" rel="noopener noreferrer">Read it on India Code</a>.</p>
+            </Notice>
+          )}
           <ul className="mt-3 space-y-2">
             {data.results.map((h) => (
               <Panel as="li" key={`${h.actId}-${h.sectionKey}`} className="px-card py-4">
@@ -53,7 +58,7 @@ export default function SectionSearchResults({ q }: { q: string }) {
                 </p>
               </Panel>
             ))}
-            {!data.results.length && <li className="rounded-card border border-dashed border-border p-6 text-center text-ui-base text-muted">{data.note ?? "No section matches."}</li>}
+            {!data.results.length && !data.missing && <li className="rounded-card border border-dashed border-border p-6 text-center text-ui-base text-muted">{data.note ?? "No section matches."}</li>}
           </ul>
           {data.total > data.pageSize && (
             <div className="mt-3 flex items-center justify-between text-ui-base">

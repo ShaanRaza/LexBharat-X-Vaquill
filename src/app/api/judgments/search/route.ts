@@ -13,7 +13,7 @@ export async function GET(req: Request) {
   if (![page, pageSize].every(Number.isInteger) || page < 1 || pageSize < 1 || pageSize > 50) return bad("page must be >= 1 and pageSize 1 to 50.");
   const store = getJudgmentsStore();
   if (store.source === "mock") return Response.json({ source: "mock", scope: "supreme-court-of-india", results: [], total: 0, page, pageSize, hasMore: false, note: "Search is not available in mock mode." });
-  const { results, total } = searchSupremeCourt(text, page, pageSize);
+  const { results, total } = await searchSupremeCourt(text, page, pageSize);
   return Response.json({ source: store.source, scope: "supreme-court-of-india", results, total, page, pageSize, hasMore: page * pageSize < total,
     note: "Matches words in the Supreme Court case title (both parties) and citation, across all years. Not a full-text search of judgments; High Courts are not included." },
     { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=3600" } });

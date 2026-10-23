@@ -2,50 +2,67 @@
 // LOGIC ONLY: no JSX, no classes, no colours (tones are meanings the UI kit maps to a look).
 import { toDisplayBlocks, cleanHeading, type DisplayBlock } from "./cleanText.mjs";
 import type { SectionRecord } from "./sectionRecord.mjs";
-import { STATUS_INFO, sectionFlagList, officialSourceUrl, type FlagInfo, type Tone } from "./quality";
+import { STATUS_INFO, MISSING_INFO, sectionFlagList, officialSourceUrl, type FlagInfo, type Tone } from "./quality";
 
 /** A stored section; `body` may be left out for sections that are only listed (the page needs the text of the selected one). */
 export type ListedSection = Omit<SectionRecord, "body"> & { body?: string | null };
 
-export type SectionListItem = { key: string; label: string; heading: string | null; status: SectionRecord["status"]; tone: Tone; statusLabel: string; noNumber: boolean };
+export type SectionListItem = { key: string; label: string; heading: string | null; status: SectionRecord["status"] | "missing"; tone: Tone; statusLabel: string; noNumber: boolean; missing: boolean };
 export type SectionView = {
   key: string; label: string; heading: string | null;
   /** Only present when the chapter label passed every check. */
   chapter: string | null;
-  status: SectionRecord["status"]; statusInfo: FlagInfo; flags: { key: string; info: FlagInfo }[];
-  /** null for garbled sections: the text is never handed to the UI. */
+  status: SectionRecord["status"] | "missing"; statusInfo: FlagInfo; flags: { key: string; info: FlagInfo }[];
+  /** True for a section number we are confident is missing from the source data: there is no text, only the notice. */
+  missing: boolean;
+  /** null for garbled or missing sections: the text is never handed to the UI. */
   blocks: DisplayBlock[] | null; chunkCount: number;
   prev: { key: string; label: string } | null; next: { key: string; label: string } | null;
 };
 export type ActTextView = {
   hasSectionNumbers: boolean; sourceUrl: string;
-  list: SectionListItem[]; counts: { sections: number; complete: number; possibly_incomplete: number; garbled: number };
+  list: SectionListItem[]; counts: { sections: number; complete: number; possibly_incomplete: number; garbled: number; missing: number };
   selected: SectionView | null;
 };
 
-export function labelsFor(sections: Pick<ListedSection, "number">[]): string[] {
-  let b = 0;
-  return sections.map((s) => (s.number ? s.number : `Text block ${++b}`));
+type Row = { kind: "section"; s: ListedSection; label: string } | { kind: "missing"; n: number; label: string };
+const baseNumber = (n: string | null) => { const m = /^(\d{1,4})/.exec(n ?? ""); return m ? Number(m[1]) : null; };
+
+/** Sections in reading order with a placeholder for every confidently-missing number put where it belongs. */
+function rowsFor(sections: ListedSection[], missing: number[]): Row[] {
+  const rows: Row[] = [], todo = [...missing].sort((a, b) => a - b);
+  let blocks = 0;
+  for (const s of sections) {
+    const b = baseNumber(s.number);
+    if (b !== null) while (todo.length && todo[0] < b) { const n = todo.shift() as number; rows.push({ kind: "missing", n, label: String(n) }); }
+    rows.push({ kind: "section", s, label: s.number ? s.number : `Text block ${++blocks}` });
+  }
+  for (const n of todo) rows.push({ kind: "missing", n, label: String(n) });
+  return rows;
+}
+const keyOf = (r: Row) => (r.kind === "missing" ? `m${r.n}` : r.s.sectionKey);
+
+/** The key that will be shown: the wanted one when it exists (a missing number can be asked for as "s016" or "m16"), otherwise the first section. */
+export function selectedKey(rows: { key: string }[], wanted: string | undefined) {
+  if (wanted && rows.some((r) => r.key === wanted)) return wanted;
+  const m = /^s0*(\d+)$/i.exec(wanted ?? "");
+  if (m && rows.some((r) => r.key === `m${m[1]}`)) return `m${m[1]}`;
+  return rows[0]?.key;
 }
 
-/** The key that will be shown: the wanted one when it exists, otherwise the first section. */
-export const selectedKey = (sections: Pick<ListedSection, "sectionKey">[], wanted: string | undefined) => (sections.find((s) => s.sectionKey === wanted) ?? sections[0])?.sectionKey;
-
-export function buildActTextView(sections: ListedSection[], sourceUrl: string | null | undefined, wantedKey: string | undefined): ActTextView {
-  const labels = labelsFor(sections);
-  const list: SectionListItem[] = sections.map((s, i) => ({
-    key: s.sectionKey, label: labels[i], heading: cleanHeading(s.heading), status: s.status, tone: STATUS_INFO[s.status].tone, statusLabel: STATUS_INFO[s.status].label, noNumber: s.flags.includes("no_section_number"),
-  }));
-  const counts = { sections: sections.length, complete: 0, possibly_incomplete: 0, garbled: 0 };
+export function buildActTextView(sections: ListedSection[], sourceUrl: string | null | undefined, wantedKey: string | undefined, missing: number[] = []): ActTextView {
+  const rows = rowsFor(sections, missing), keys = rows.map((r) => ({ key: keyOf(r) }));
+  const list: SectionListItem[] = rows.map((r) => r.kind === "missing"
+    ? { key: keyOf(r), label: r.label, heading: null, status: "missing", tone: "info", statusLabel: "Missing from our source data", noNumber: false, missing: true }
+    : { key: keyOf(r), label: r.label, heading: cleanHeading(r.s.heading), status: r.s.status, tone: STATUS_INFO[r.s.status].tone, statusLabel: STATUS_INFO[r.s.status].label, noNumber: r.s.flags.includes("no_section_number"), missing: false });
+  const counts = { sections: sections.length, complete: 0, possibly_incomplete: 0, garbled: 0, missing: missing.length };
   for (const s of sections) counts[s.status]++;
-  const key = selectedKey(sections, wantedKey), idx = sections.findIndex((s) => s.sectionKey === key);
-  const s = idx >= 0 ? sections[idx] : undefined;
-  const selected: SectionView | null = s ? {
-    key: s.sectionKey, label: labels[idx], heading: cleanHeading(s.heading), chapter: s.chapter,
-    status: s.status, statusInfo: STATUS_INFO[s.status], flags: sectionFlagList(s),
-    blocks: s.status === "garbled" || s.body == null ? null : toDisplayBlocks(s.body), chunkCount: s.chunkCount,
-    prev: idx > 0 ? { key: sections[idx - 1].sectionKey, label: labels[idx - 1] } : null,
-    next: idx < sections.length - 1 ? { key: sections[idx + 1].sectionKey, label: labels[idx + 1] } : null,
-  } : null;
+  const key = selectedKey(keys, wantedKey), idx = rows.findIndex((r) => keyOf(r) === key);
+  const r = idx >= 0 ? rows[idx] : undefined;
+  const near = (i: number) => (i >= 0 && i < rows.length ? { key: keyOf(rows[i]), label: rows[i].label } : null);
+  const selected: SectionView | null = !r ? null : r.kind === "missing"
+    ? { key: keyOf(r), label: r.label, heading: null, chapter: null, status: "missing", statusInfo: MISSING_INFO, flags: [], missing: true, blocks: null, chunkCount: 0, prev: near(idx - 1), next: near(idx + 1) }
+    : { key: keyOf(r), label: r.label, heading: cleanHeading(r.s.heading), chapter: r.s.chapter, status: r.s.status, statusInfo: STATUS_INFO[r.s.status], flags: sectionFlagList(r.s), missing: false,
+        blocks: r.s.status === "garbled" || r.s.body == null ? null : toDisplayBlocks(r.s.body), chunkCount: r.s.chunkCount, prev: near(idx - 1), next: near(idx + 1) };
   return { hasSectionNumbers: sections.some((x) => x.number), sourceUrl: officialSourceUrl(sourceUrl), list, counts, selected };
 }
