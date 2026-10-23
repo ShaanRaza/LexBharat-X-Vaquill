@@ -4,11 +4,11 @@ import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 
 // Top bar of the Acts & Judgments workspace: product switcher, country selector and a "Data API" link. Original layout, our own markup and icons.
-// The current product follows the page: anything under /workspace/chat is the Legal Workspace, everything else is Legal Data & API.
+// The current product comes from the shell that renders the bar (ConsoleShell variant): the Legal Workspace pages use the "lawspace" shell, everything else is Legal Data & API.
 // Countries other than India are listed as "Coming soon" and are not selectable: only Indian data exists, so nothing here switches any data.
 export const PRODUCTS = [
   { id: "data", name: "Legal Data & API", sub: "Acts, judgments and legal data, by API.", href: "/developer?tab=overview", soon: false },
-  { id: "workspace", name: "Legal Workspace", sub: "Draft, review and research in one place. Chat is the first page.", href: "/workspace/chat", soon: false },
+  { id: "workspace", name: "Legal Workspace", sub: "Research, draft and review in one place.", href: "/workspace", soon: false },
 ];
 export const COUNTRIES = [
   { id: "in", name: "India", flag: "🇮🇳", current: true, soon: false },
@@ -67,9 +67,9 @@ function TopMenu({ title, ariaLabel, items, open, setOpen, testid, trigger, trig
   );
 }
 
-export default function TopBar() {
+export default function TopBar({ product: current }: { product: "data" | "workspace" }) {
   const [open, setOpen] = useState<"product" | "country" | null>(null);   // one menu at a time
-  const here = usePathname(), current = productFor(here), product = PRODUCTS.find((p) => p.id === current) ?? PRODUCTS[0], country = COUNTRIES.find((c) => c.current) ?? COUNTRIES[0];
+  const product = PRODUCTS.find((p) => p.id === current) ?? PRODUCTS[0], country = COUNTRIES.find((c) => c.current) ?? COUNTRIES[0];
   const pill = "flex items-center gap-2 rounded-full bg-surface py-1 pl-1 pr-3 text-[14px] ring-1 ring-border hover:bg-accent focus-visible:outline-2";
   return (
     <>

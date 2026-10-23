@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import ConsoleShell from "@/components/console/ConsoleShell";
+import BrowseShell from "@/components/console/BrowseShell";
 import CopyButton from "@/components/workspace/CopyButton";
 import { ALL_COURTS } from "@/data/workspaceBrowse";
 import { getJudgmentsStore } from "@/lib/judgments";
@@ -50,7 +50,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
   const prov = provenanceRows(slug, { parties: !!parties, judges: !!c.judges?.length, bench: !!benchN, benchExtracted: !!c.benchExtracted?.length, caseNumberExtracted: !!c.caseNumberExtracted, pages: !!c.pages, preview: !!preview, citation: !!c.citation, caseNumber: !!c.caseNumber, disposition: !!(c.disposition || c.dispositionLabel), date: !!c.decisionDate });
   const mark = { shown: "✓", partly: "◐", absent: "–" } as const;
   return (
-    <ConsoleShell variant="workspace">
+    <BrowseShell>
       <div className="mx-auto max-w-[880px] pt-2">
         <nav aria-label="Breadcrumb" className="text-[14px] text-[#535151]">
           <Link href="/workspace/browse" className="inline-flex min-h-8 items-center hover:text-primary hover:underline">Browse Laws &amp; Judgments</Link><span aria-hidden> / </span>
@@ -92,6 +92,6 @@ export default async function CasePage({ params, searchParams }: { params: Promi
         <Link href={back} className="mt-4 inline-flex h-9 items-center rounded-lg px-3 text-[14px] ring-1 ring-border hover:bg-accent">← Back to {year} cases</Link>
         {stats.attribution && <p className="mt-6 text-[12px] text-muted">{stats.attribution.text} Licence: {stats.attribution.licence}, snapshot {stats.attribution.snapshot}. <a href={stats.attribution.url} className="underline" rel="noopener noreferrer" target="_blank">Dataset</a> Verify against the official source before relying on it; this is not legal advice.</p>}
       </div>
-    </ConsoleShell>
+    </BrowseShell>
   );
 }

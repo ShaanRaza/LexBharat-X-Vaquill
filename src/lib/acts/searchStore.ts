@@ -2,7 +2,7 @@
 import { query, dbConfigured } from "./db";
 import { actMatcher, hasDevanagari, hasSearchableChars, parseSectionLookup } from "./searchQuery.mjs";
 import { chooseMode, distinctSections, highlightQuery, rankSections, statesIn } from "./semantic.mjs";
-import { embedQuery, voyageConfigured } from "./embed";
+import { embedMany, embedQuery, voyageConfigured } from "./embed";
 import { vectorStores, vectorConfigured } from "./vectorStore";
 
 export const MARK_OPEN = "", MARK_CLOSE = ""; // private-use markers around matched words in snippets; the UI turns them into highlights
@@ -147,4 +147,11 @@ export async function searchSections(q: string, page = 1, pageSize = PAGE_SIZE, 
   if (!out.available) return out;
   const note = reason && FALLBACK_NOTE[reason] ? `${FALLBACK_NOTE[reason]} ${out.note}` : out.note;
   return { ...out, note, semantic: { used: false, ...(reason ? { reason } : {}) } };
+}
+
+/** Embeds several queries in one Voyage request ahead of searching them (see embedMany). Section lookups need no embedding and are skipped. */
+export async function primeSemanticQueries(queries: string[]): Promise<void> {
+  if (!semanticReady()) return;
+  const need = queries.filter((q) => !parseSectionLookup(q) && hasSearchableChars(q) && !hasDevanagari(q));
+  for (const dim of new Set(vectorStores().map((st) => st.dim))) await embedMany(need, dim);
 }

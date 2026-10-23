@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ConsoleShell from "@/components/console/ConsoleShell";
+import BrowseShell from "@/components/console/BrowseShell";
 import BrowseLaws from "@/components/workspace/BrowseLaws";
 import { WORKSPACE_SUFFIX } from "@/lib/release";
 
@@ -8,5 +8,5 @@ export const metadata: Metadata = { title: `Browse Laws & Judgments | ${WORKSPAC
 // /workspace/browse: the "Acts & Judgments" area. `?tab=acts` opens the Acts & Legislation tab.
 export default async function BrowsePage({ searchParams }: { searchParams: Promise<{ tab?: string }> }) {
   const { tab } = await searchParams;
-  return <ConsoleShell variant="workspace"><BrowseLaws initialTab={tab === "acts" ? "acts" : "judgments"} /></ConsoleShell>;
+  return <BrowseShell><BrowseLaws initialTab={tab === "acts" ? "acts" : "judgments"} /></BrowseShell>;
 }

@@ -1,5 +1,5 @@
 // POST /api/chat {chatId?, message} -> streamed answer as newline-delimited JSON events:
-//   {type:"start", chatId} {type:"sources", sources:[...]} {type:"delta", text} {type:"replace", text} {type:"check", label, unsupported} {type:"done"} | {type:"error", code, message}
+//   {type:"start", chatId} {type:"note", text} {type:"sources", sources:[...], queries:[...]} {type:"delta", text} {type:"replace", text} {type:"cutoff"} {type:"check", label, unsupported, missing} {type:"done"} | {type:"error", code, message}
 // GET  /api/chat -> this browser's chats (newest first), usage and the limits.
 // Needs the access cookie (middleware) and the anonymous browser id (x-lb-bid, set by the middleware). Answers use ONLY the retrieved Act sections; the answer check labels the result.
 import { dbConfigured } from "@/lib/acts/db";
@@ -8,7 +8,8 @@ import { isBrowserId } from "@/lib/access/token.mjs";
 import limitConfig from "@/config/chat-limits.json";
 import { evaluateLimits, readLimits } from "@/lib/chat/limits.mjs";
 import { sanitizeCitations } from "@/lib/chat/citations.mjs";
-import { buildChatPrompt, buildCheckPrompt, parseCheck } from "@/lib/chat/prompt.mjs";
+import { buildChatPrompt, buildCheckPrompt, detectNotFound, parseCheck } from "@/lib/chat/prompt.mjs";
+import { buildRewritePrompt, parseRewrite } from "@/lib/chat/rewrite.mjs";
 import { citationOf, retrieveSources } from "@/lib/chat/retrieve";
 import { addMessage, chatTitle, countQuestion, createChat, deleteChat, deleteMessage, isChatId, listChats, ownsChat, recentTurns, uncountQuestion, usageFor, type CheckResult } from "@/lib/chat/store";
 
@@ -63,33 +64,52 @@ export async function POST(req: Request) {
         userMsgId = await addMessage(chatId, { role: "user", content: message });
         send({ type: "start", chatId });
 
-        const ret = await retrieveSources(message, history);
+        // 1. query rewrite: one cheap call -> 2-3 search queries. Skipped, with a note, if the model is busy (it is also in the per-minute budget).
+        let extra: string[] = [];
+        try { const rp = buildRewritePrompt({ question: message, history }); extra = parseRewrite((await completeAi("queryRewrite", { system: rp.system, messages: rp.messages, json: true })).text, message); }
+        catch { send({ type: "note", text: "Search help was skipped because the model is busy, so the sections found may be less complete." }); }
+        // 2. retrieve for the question and each rewritten query, merged
+        const ret = await retrieveSources(message, history, extra);
         const cites = ret.sources.map(citationOf);
-        send({ type: "sources", sources: cites, searchMode: ret.searchMode });
+        send({ type: "sources", sources: cites, searchMode: ret.searchMode, queries: [message, ...extra].slice(0, 4) });
         if (!ret.sources.length) {
           const text = "I couldn't find any sections in the Acts I searched that relate to this question. This tool searches Indian Central and State Acts only; judgments are not included yet. Try describing the situation in other words, or name the Act and section.";
           send({ type: "delta", text });
-          await addMessage(chatId, { role: "assistant", content: text, citations: [], check: null, model: null });
+          const check: CheckResult = { label: "not_found", unsupported: [] };
+          send({ type: "check", ...check });
+          await addMessage(chatId, { role: "assistant", content: text, citations: [], check, model: null });
           send({ type: "done" }); controller.close(); return;
         }
 
+        // 3. the answer, streamed. If the model fails AFTER some text, the partial answer is kept and marked as cut off.
         const prompt = buildChatPrompt({ question: message, history, sources: ret.sources });
-        let answer = "", model = aiModelFor("chat");
-        for await (const ev of streamAi("chat", { system: prompt.system, messages: prompt.messages })) {
-          if (ev.type === "text") { answer += ev.text; send({ type: "delta", text: ev.text }); } else if (ev.type === "done") model = ev.model;
-        }
+        let answer = "", model = aiModelFor("chat"), cutOff = false;
+        try {
+          for await (const ev of streamAi("chat", { system: prompt.system, messages: prompt.messages })) {
+            if (ev.type === "text") { answer += ev.text; send({ type: "delta", text: ev.text }); } else if (ev.type === "done") model = ev.model;
+          }
+        } catch (e) { if (!answer.trim()) throw e; cutOff = true; }
         if (!answer.trim()) throw new AiError("unavailable", "The model returned no answer.");
         const clean = sanitizeCitations(answer.trim(), ret.sources.length);
         if (clean.text !== answer) send({ type: "replace", text: clean.text });
+        if (cutOff) {
+          const check: CheckResult = { label: "check", unsupported: [], cutOff: true };
+          send({ type: "cutoff" });
+          await addMessage(chatId, { role: "assistant", content: clean.text, citations: cites, check, model });
+          send({ type: "done" }); controller.close(); return;
+        }
 
-        // answer check: a second, cheap call. If it fails the answer is labelled "Check sources" (the cautious label), never left unlabelled.
+        // 4. answer check: a second, cheap call. "Not found" answers need no call. If the check fails the answer is labelled "Check sources", never left unlabelled.
         let check: CheckResult;
-        try {
-          const cp = buildCheckPrompt({ question: message, answer: clean.text, sources: ret.sources });
-          const raw = await completeAi("answerCheck", { system: cp.system, messages: cp.messages, json: true });
-          const p = parseCheck(raw.text);
-          check = { label: p.label, unsupported: p.unsupported, ...(p.unreadable ? { unavailable: true } : {}) };
-        } catch { check = { label: "check", unsupported: [], unavailable: true }; }
+        if (detectNotFound(clean.text)) check = { label: "not_found", unsupported: [] };
+        else {
+          try {
+            const cp = buildCheckPrompt({ question: message, answer: clean.text, sources: ret.sources });
+            const raw = await completeAi("answerCheck", { system: cp.system, messages: cp.messages, json: true });
+            const p = parseCheck(raw.text);
+            check = { label: p.label, unsupported: p.unsupported, missing: p.missing, ...(p.unreadable ? { unavailable: true } : {}) };
+          } catch { check = { label: "check", unsupported: [], unavailable: true }; }
+        }
         send({ type: "check", ...check });
         await addMessage(chatId, { role: "assistant", content: clean.text, citations: cites, check, model });
         send({ type: "done" }); controller.close();

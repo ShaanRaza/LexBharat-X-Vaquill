@@ -6,7 +6,7 @@ import type { Citation, CheckResult } from "@/lib/chat/store";
 
 // The chat page: question box, streamed answers with citations, the honest-limits notes. Presentation and fetching only; retrieval, prompts, citations and limits are in src/lib/chat
 // and src/app/api/chat. Colours, sizes and radii come from the tokens through Tailwind names and the shared kit.
-type Msg = { role: "user" | "assistant"; content: string; citations?: Citation[]; check?: CheckResult | null; pending?: boolean; error?: string };
+type Msg = { role: "user" | "assistant"; content: string; citations?: Citation[]; check?: CheckResult | null; pending?: boolean; error?: string; queries?: string[]; note?: string };
 type Usage = { day: number; daily: number } | null;
 const EXAMPLES = ["What is the punishment for cheque bounce?", "Can a minor enter into a contract?", "Maharashtra rent control: grounds for eviction"];
 const MAX = 1000;
@@ -55,10 +55,12 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
           if (!line) continue;
           const e = JSON.parse(line);
           if (e.type === "start") { if (!chatId) { current.current = e.chatId; setChatId(e.chatId); window.history.replaceState(null, "", `/workspace/chat/${e.chatId}`); window.dispatchEvent(new Event("lb-chats-changed")); } }
-          else if (e.type === "sources") patch((a) => ({ ...a, citations: e.sources }));
+          else if (e.type === "sources") patch((a) => ({ ...a, citations: e.sources, queries: e.queries }));
+          else if (e.type === "note") patch((a) => ({ ...a, note: e.text }));
+          else if (e.type === "cutoff") patch((a) => ({ ...a, check: { label: "check", unsupported: [], cutOff: true } }));
           else if (e.type === "delta") patch((a) => ({ ...a, content: a.content + e.text }));
           else if (e.type === "replace") patch((a) => ({ ...a, content: e.text }));
-          else if (e.type === "check") patch((a) => ({ ...a, check: { label: e.label, unsupported: e.unsupported, unavailable: e.unavailable } }));
+          else if (e.type === "check") patch((a) => ({ ...a, check: { label: e.label, unsupported: e.unsupported, missing: e.missing, unavailable: e.unavailable } }));
           else if (e.type === "error") { failed = true; throw new Error(e.message); }
         }
         if (done) break;
@@ -87,7 +89,7 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
         )}
         {msgs.map((m, i) => m.role === "user"
           ? <div key={i} className="flex justify-end"><p className="max-w-[85%] whitespace-pre-wrap rounded-card bg-primary/10 px-4 py-2.5 text-ui-body text-foreground">{m.content}</p></div>
-          : <Panel as="article" key={i} className="px-card py-4">{m.pending && !m.content ? <p className="text-ui-base text-muted">Searching the Acts…</p> : <AnswerView text={m.content} sources={m.citations ?? []} check={m.check} pending={m.pending} />}</Panel>)}
+          : <Panel as="article" key={i} className="px-card py-4">{m.pending && !m.content ? <p className="text-ui-base text-muted">Searching the Acts…</p> : <AnswerView text={m.content} sources={m.citations ?? []} check={m.check} pending={m.pending} queries={m.queries} note={m.note} />}</Panel>)}
         <div ref={end} />
       </div>
       <div className="sticky bottom-0 bg-background pb-4 pt-2">

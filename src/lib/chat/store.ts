@@ -3,7 +3,7 @@
 import { query } from "@/lib/acts/db";
 
 export type Citation = { n: number; actId: string; sectionKey: string; actTitle: string; number: string | null; heading: string | null; status: string; category: string; state: string | null };
-export type CheckResult = { label: "supported" | "partial" | "check"; unsupported: string[]; unavailable?: boolean };
+export type CheckResult = { label: "supported" | "partial" | "check" | "not_found"; unsupported: string[]; missing?: string[]; unavailable?: boolean; cutOff?: boolean };
 export type StoredMessage = { id: number; role: "user" | "assistant"; content: string; citations: Citation[] | null; check: CheckResult | null; model: string | null; createdAt: string };
 export type ChatSummary = { id: string; title: string; updatedAt: string };
 

@@ -2,12 +2,14 @@
 
 Written 2026-10-23. Part of the Legal Workspace (`/workspace/chat`), Acts only. Everything here runs on free plans; paid switches are in `docs/PAID-SWITCHOVER.md`.
 
-## What it does
+## What it does (updated in W4b: steps 1b, 2 and 4 are new)
 
-1. **Retrieve.** The question goes to the Acts search: exact section lookups named in the question ("section 138 of the NI Act") first, then search by meaning over Central + State Acts (`src/lib/chat/retrieve.ts`; the same search as the Acts tab, with the keyword fallback). Up to 8 sections, each with its text (first 2,600 characters sent).
+1a. **Rewrite the question (W4b).** One cheap call (`queryRewrite`, `gemini-3.5-flash-lite`) turns the question into 2-3 search queries: the question in legal terms, and the Acts and sections most likely to answer it ("Indian Contract Act section 11"). If the model is busy the step is skipped and the answer page says so.
+1. **Retrieve.** The question goes to the Acts search: exact section lookups named in the question ("section 138 of the NI Act") first, then search by meaning over Central + State Acts (`src/lib/chat/retrieve.ts`; the same search as the Acts tab, with the keyword fallback). The question and each rewritten query are searched (one batched Voyage request for all of them), "<Act> section N" queries are run as exact lookups, the lists are merged (a section found by several queries rises) and de-duplicated: up to 10 sections, each with its text (first 2,600 characters sent).
 2. **Answer.** The model is told to answer only from the numbered sources, cite `[n]`, name the statute and section in words, say plainly when the sources do not answer, and say that judgments are not included yet (`src/lib/chat/prompt.mjs`). The answer streams.
 3. **Citations are checked, not trusted.** After the answer, any `[n]` that is not a retrieved source is removed (`sanitizeCitations`). In the browser, `[n]` becomes a numbered chip linking to the exact section page, and "Section 138 of the Negotiable Instruments Act" is linked only when a retrieved source has that section of that Act (`linkSegments`); ambiguous mentions are left as plain text.
-4. **Answer check.** A second, cheap call reads the answer and its sources and returns `supported`, `partial` or `check` plus the list of claims the sources do not back. The UI shows "Supported", "Partly supported" or "Check sources" (no percentages) and lists those claims. If the check cannot run the label is "Check sources" with a note, never blank.
+4. **Answer check (honest labels, W4b).** A second, cheap call reads the question, the answer and the sources. Labels: **Supported** only when the answer is complete and every claim is backed; **Partly supported** when some claims lack support (they are listed); **Check sources** when the answer is incomplete or the sources only partly cover the question (what is missing is listed); **Not found in the Acts** when the answer says it could not find it (no model call needed). No percentages. If the check cannot run the label is "Check sources" with a note, never blank.
+4b. **If the model fails mid-answer (W4b)** the partial answer is kept and marked "The answer was cut off. Try again." (the question still counts; if it fails before any text, the user sees "Busy" and nothing is counted).
 5. **Saved.** Title, messages, citation metadata (no section text, no embeddings) and the check result go to the main Neon database (`chats`, `chat_messages`, `chat_usage`; `scripts/chat/chat-schema.sql`), keyed to the anonymous browser id. Only the browser that made a chat can open or delete it.
 
 ## Honest limits shown in the UI
@@ -65,3 +67,29 @@ Automated check of every cited statement (61 in the 3.6-flash run): each number 
 **Main Neon database after the tests:** 692 MB (unchanged); the three chat tables took 272 kB for 27 chats and 54 messages (about 10 kB per chat with indexes). Test chats were deleted afterwards.
 
 **Change after the first W4 commit:** the wrong-password lockout was removed. A wrong password is answered after about 1 second with "Wrong password, try again."; there is no other limit. The signed 30-day cookie, logout and fail-closed behaviour are unchanged.
+
+
+## W4b: the 12 questions again (labels, query rewrite)
+
+Run 2026-10-23 through the real route (real Gemini and Voyage).
+
+| # | Question | Citations used | Label | Notes |
+|---|---|---|---|---|
+| 1 | Punishment for cheque bounce | NI Act s138 | Supported | |
+| 2 | Notice period before filing a cheque bounce complaint | NI Act s138, s142 | Supported | **Fixed**: the rewrite names "Negotiable Instruments Act section 138", which is now an exact lookup (before: "couldn't find") |
+| 3 | Can a minor enter a contract? | Indian Contract Act s11 | **Check sources** | **Retrieval fixed** (s11 first, s68 also found). The checker says the answer does not state what happens to a minor's contract, which s11 alone does not say |
+| 4 | Maharashtra rent control: grounds for eviction | Maharashtra Rent Control Act s16, s19 | Supported | |
+| 5 | How can I get anticipatory bail? | CrPC s438, s38; BNSS s482 | Supported | |
+| 6 | Time limit to reply to an RTI application | RTI Act s7, s5 | Supported | |
+| 7 | Grounds for divorce, Hindu Marriage Act | HMA s13, s13B, s4 | Supported | |
+| 8 | What does section 138 of the NI Act say? | NI Act s138 | Supported | The rewrite step was skipped (model busy) and the page said so; the exact lookup still found s138 |
+| 9 | Can a tenant in Karnataka sublet? | Karnataka Rent Act s32 | Supported | |
+| 10 | Is an unstamped document admissible in Maharashtra? | Maharashtra Stamp Act s34 | Supported | First run: "Busy" (both models silent for 12 s). Fixed by giving the last model in the chain its full timeout; rerun worked |
+| 11 | What did the Supreme Court hold in Arnesh Kumar? | none | **Not found in the Acts** | Says judgments are not included |
+| 12 | Who won the 2011 cricket world cup? | none | **Not found in the Acts** | |
+
+Labels now vary: 9 Supported, 1 Check sources, 2 Not found. Mechanical check of the cited statements (41): no number or number-word is missing from the cited section text; the 5 hits are section numbers named in the claim ("under section 13") which come from the section's metadata. "Supported" is still the checker model's judgment, not a proof: question 4 (eviction grounds) and 5 (bail) were judged complete, which a lawyer should confirm.
+
+Other W4b tests: the cut-off path (a model that drops the connection after the first part): the partial answer and its citation chip stay, the note "The answer was cut off. Try again." shows, nothing is lost, the message is saved with the flag, and the question counts. Rewrite skipped (model answering 429): the page shows "Search help was skipped because the model is busy, so the sections found may be less complete." and the answer still arrives.
+
+**Free-tier budget now:** each question is up to three model calls: rewrite (lite), answer (3.6, falling back to lite), check (lite; none for "not found"), and one Voyage request (all queries batched). With lite at 15 requests a minute and 3.6 at 5 a minute that is roughly 5 full-quality questions a minute across all users.

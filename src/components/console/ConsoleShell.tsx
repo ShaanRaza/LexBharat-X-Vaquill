@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import TopBar from "./TopBar";
 import LogoutLink from "@/components/LogoutLink";
-import ChatHistory from "@/components/workspace/chat/ChatHistory";
+import WorkspaceNav, { type LawTab } from "@/components/workspace/WorkspaceNav";
 import { clearMockSession, useMockSession } from "@/lib/mockSession";
 
 // Layout of the authenticated developer console as captured in docs/PLAYGROUND-TEARDOWN.md: collapsible left sidebar, top bar with a
@@ -52,12 +52,14 @@ function Icon({ d, size = 18 }: { d: string; size?: number }) {
 
 const BOOKS_ICON = "M5 4h4v16H5zM10 4h4v16h-4zM15.6 5.4l3.6-1 3.2 14.6-3.6 1z";
 
-export default function ConsoleShell({ tab, variant = "data", children }: { tab?: TabId; variant?: "data" | "workspace" | "lawspace"; children: React.ReactNode }) {
+export default function ConsoleShell({ tab, variant = "data", lawTab, children }: { tab?: TabId; variant?: "data" | "workspace" | "lawspace"; lawTab?: LawTab; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);       // mobile drawer
   const [collapsed, setCollapsed] = useState(false); // desktop collapse (chevron)
-  const router = useRouter(), pathname = usePathname();
+  const router = useRouter();
   const session = useMockSession(); // MOCK sign-in record from /auth/login (this browser only), or null
   const menuBtn = useRef<HTMLButtonElement>(null);
+  // Acts & Judgments is one set of pages used by both products: remember which product you are in (read by BrowseShell on the server) so it shows the matching sidebar.
+  useEffect(() => { document.cookie = `lb_product=${variant === "lawspace" ? "workspace" : "data"}; path=/; max-age=31536000; samesite=lax`; }, [variant]);
   const drawer = useRef<HTMLElement>(null);
 
   // Narrow-screen drawer (INFERRED behavior): Escape closes, page scroll is locked while open, focus moves in and returns to the menu button,
@@ -80,9 +82,9 @@ export default function ConsoleShell({ tab, variant = "data", children }: { tab?
     return () => { document.body.style.overflow = prev; document.removeEventListener("keydown", key); mq.removeEventListener("change", grow); menuBtn.current?.focus(); };
   }, [open]);
 
-  const logoRow = (
+  const logoRowFor = (home: string) => (
     <div className="flex items-center justify-between px-4 pb-4 pt-5">
-        <Link href="/developer?tab=overview" className="flex items-baseline gap-0.5 text-[24px] font-medium leading-none tracking-[-0.03em]" aria-label="LexBharat">
+        <Link href={home} className="flex items-baseline gap-0.5 text-[24px] font-medium leading-none tracking-[-0.03em]" aria-label="LexBharat">
           <svg width="22" height="26" viewBox="0 0 24 28" fill="#6e3730" aria-hidden="true" className="mr-1.5 self-center"><path d="M20 1C9 2 2 9 3 20c0 3 1 6 3 7-1-5 0-10 4-14 3-3 7-4 10-4-5 1-9 4-11 9 5-1 10-5 11-13 .3-1.4.2-3.800 0-4z" /></svg>
           LexBharat
         </Link>
@@ -91,6 +93,7 @@ export default function ConsoleShell({ tab, variant = "data", children }: { tab?
         </button>
     </div>
   );
+  const logoRow = logoRowFor("/developer?tab=overview");
   const dataNav = (
     <nav aria-label="Console" className="flex h-full flex-col">
       {logoRow}
@@ -138,32 +141,15 @@ export default function ConsoleShell({ tab, variant = "data", children }: { tab?
     </nav>
   );
 
-  // Legal Workspace sidebar: Chat first, a link across to Acts & Judgments, then this browser's past chats.
-  const lawNav = (
-    <nav aria-label="Legal Workspace" className="flex h-full flex-col">
-      {logoRow}
-      <ul className="space-y-0.5 px-2">
-        <li><Link href="/workspace/chat" onClick={() => setOpen(false)} aria-current={pathname === "/workspace/chat" ? "page" : undefined}
-          className={`flex items-center gap-3 rounded-chip px-3 py-2.5 text-ui-base transition-colors ${pathname === "/workspace/chat" ? "bg-accent text-foreground" : "text-muted hover:bg-accent/60 hover:text-foreground"}`}>
-          <Icon d="M4 5h16v11H9l-5 4zM8 9h8M8 12h5" /><span className="leading-tight">New chat</span></Link></li>
-        <li><Link href="/workspace/browse" onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-chip px-3 py-2.5 text-ui-base text-muted transition-colors hover:bg-accent/60 hover:text-foreground">
-          <Icon d={BOOKS_ICON} /><span className="leading-tight">Acts &amp; Judgments</span></Link></li>
-      </ul>
-      <p className="mt-6 px-5 text-ui-xs font-semibold uppercase tracking-[0.12em] text-muted">Your chats</p>
-      <div className="mt-2 min-h-0 flex-1 overflow-y-auto px-2" data-lenis-prevent><ChatHistory onNavigate={() => setOpen(false)} /></div>
-      <div className="space-y-1 px-5 pb-4 pt-3">
-        <p className="text-ui-xs text-muted">Your chats are saved on this browser only.</p>
-        <LogoutLink />
-      </div>
-    </nav>
-  );
+  // Legal Workspace sidebar (src/components/workspace/WorkspaceNav.tsx); the same component fills the phone menu.
+  const lawNav = <WorkspaceNav active={lawTab} logo={logoRowFor("/workspace")} onNavigate={() => setOpen(false)} />;
   const nav = variant === "lawspace" ? lawNav : dataNav;
 
   return (
     <div className="console min-h-screen">
       <div className="flex">
         {/* desktop sidebar */}
-        {!collapsed && <aside className="sticky top-0 hidden h-screen w-[200px] shrink-0 border-r border-border md:block">{nav}</aside>}
+        {!collapsed && <aside className={`sticky top-0 hidden h-screen shrink-0 border-r border-border md:block ${variant === "lawspace" ? "w-[236px]" : "w-[200px]"}`}>{nav}</aside>}
         {/* mobile drawer */}
         {open && (
           <div className="fixed inset-0 z-[110] md:hidden">
@@ -174,7 +160,7 @@ export default function ConsoleShell({ tab, variant = "data", children }: { tab?
         <div className="min-w-0 flex-1">
           <header className="relative flex flex-wrap items-center gap-x-3 gap-y-2 px-4 py-3 md:px-8">
             <button ref={menuBtn} type="button" aria-label={collapsed ? "Show sidebar" : "Open menu"} aria-expanded={open} onClick={() => (window.matchMedia("(min-width: 768px)").matches ? setCollapsed((c) => !c) : setOpen(true))} className="rounded-[4px] p-2 text-muted hover:bg-accent"><Icon d="M4 7h16M4 12h16M4 17h16" /></button>
-            <TopBar />
+            <TopBar product={variant === "lawspace" ? "workspace" : "data"} />
             {variant === "data" && <Link href="/docs/api-guide/changelog" className="hidden min-h-8 items-center gap-1.5 rounded-full bg-accent/60 px-3 text-[13px] text-[#535151] hover:text-foreground lg:inline-flex">Coverage is expanding fast. <strong className="font-semibold text-foreground">Changelog</strong><span aria-hidden>↗</span></Link>}
             {variant === "data" && <span className="rounded-[2px] border border-warning/50 bg-warning/10 px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-warning">Demo</span>}
           </header>

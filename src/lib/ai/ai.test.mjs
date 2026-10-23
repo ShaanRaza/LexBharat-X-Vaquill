@@ -21,7 +21,7 @@ test("parseModelSpec accepts provider:model and rejects the rest", () => {
   for (const bad of ["", "gemini", "openai:gpt", ":x", undefined]) assert.throws(() => parseModelSpec(bad));
 });
 test("the shipped config defines every task and parses", () => {
-  for (const t of ["chat", "answerCheck", "drafting", "review", "rerun"]) { const r = resolveTask(t, config, {}); assert.ok(r.primary.model); assert.ok(r.maxOutputTokens > 0); }
+  for (const t of ["chat", "answerCheck", "queryRewrite", "drafting", "review", "rerun"]) { const r = resolveTask(t, config, {}); assert.ok(r.primary.model); assert.ok(r.maxOutputTokens > 0); }
 });
 test("switching a task to Claude is an env/config change only", () => {
   assert.equal(resolveTask("chat", config, {}).primary.provider, "gemini");
@@ -109,4 +109,9 @@ test("a model that is silent past firstTokenMs is abandoned and the fallback ans
   // started streaming, then slow: the first-token deadline must not apply any more
   const slowTail = { ok: true, status: 200, text: async () => "", body: new ReadableStream({ async start(c) { c.enqueue(new TextEncoder().encode(gem({ candidates: [{ content: { parts: [{ text: "first " }] } }] }))); await new Promise((x) => setTimeout(x, 120)); c.enqueue(new TextEncoder().encode(gem({ candidates: [{ content: { parts: [{ text: "second" }] } }] }))); c.close(); } }) };
   assert.equal((await completeTask("chat", { messages: [{ role: "user", content: "q" }] }, { config: { tasks: { chat: { model: "gemini:a", firstTokenMs: 50, timeoutMs: 5000 } } }, env, fetchImpl: fakeFetch(slowTail) })).text, "first second");
+});
+test("the first-token deadline is not applied to the last model in the chain", async () => {
+  const cfg = { tasks: { chat: { model: "gemini:only", firstTokenMs: 30, timeoutMs: 5000 } } };
+  const late = { ok: true, status: 200, text: async () => "", body: new ReadableStream({ async start(c) { await new Promise((x) => setTimeout(x, 120)); c.enqueue(new TextEncoder().encode(gem({ candidates: [{ content: { parts: [{ text: "late but fine" }] } }] }))); c.close(); } }) };
+  assert.equal((await completeTask("chat", { messages: [{ role: "user", content: "q" }] }, { config: cfg, env, fetchImpl: fakeFetch(late) })).text, "late but fine");
 });

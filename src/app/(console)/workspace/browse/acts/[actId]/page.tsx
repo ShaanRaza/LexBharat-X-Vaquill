@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import ConsoleShell from "@/components/console/ConsoleShell";
+import BrowseShell from "@/components/console/BrowseShell";
 import ActTextView, { type TextState } from "@/components/workspace/ActTextView";
 import { getActsStore } from "@/lib/acts";
 import { loadActText } from "@/lib/acts/actText";
@@ -24,8 +24,8 @@ export default async function ActPage({ params, searchParams }: { params: Promis
   const state: TextState = text.available ? { available: true, view: text.view } : { available: false, reason: text.reason, message: text.message };
   const meta = [label(act.category), act.state ? label(act.state) : null, act.department ? label(act.department) : null, label(act.actStatus), act.year !== null ? String(act.year) : null].filter((x): x is string => !!x);
   return (
-    <ConsoleShell variant="workspace">
+    <BrowseShell>
       <ActTextView header={{ actId, title: act.title, meta, officialUrl: text.available ? text.officialUrl : officialSourceUrl(null) }} state={state} />
-    </ConsoleShell>
+    </BrowseShell>
   );
 }

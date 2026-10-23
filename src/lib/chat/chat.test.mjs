@@ -2,7 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { citedNumbers, sanitizeCitations, linkSegments } from "./citations.mjs";
 import { extractLookups } from "./lookups.mjs";
-import { buildChatPrompt, retrievalQuery, parseCheck, buildCheckPrompt, sourceBlock, SOURCE_CHARS } from "./prompt.mjs";
+import { buildChatPrompt, retrievalQuery, parseCheck, buildCheckPrompt, sourceBlock, SOURCE_CHARS, detectNotFound, CHECK_LABELS } from "./prompt.mjs";
+import { buildRewritePrompt, parseRewrite, mergeRanked } from "./rewrite.mjs";
 import { toBlocks } from "./format.mjs";
 import { evaluateLimits, readLimits } from "./limits.mjs";
 import limitConfig from "../../config/chat-limits.json" with { type: "json" };
@@ -54,15 +55,42 @@ test("retrievalQuery lets a very short follow-up borrow the previous question", 
   assert.equal(retrievalQuery("What is the time limit for filing a cheque bounce complaint?", h), "What is the time limit for filing a cheque bounce complaint?");
   assert.equal(retrievalQuery("and for a company?", []), "and for a company?");
 });
-test("parseCheck: labels, fenced JSON, claims, and the cautious default for unreadable output", () => {
-  assert.deepEqual(parseCheck('{"label":"supported","unsupported_claims":[]}'), { label: "supported", unsupported: [] });
-  assert.deepEqual(parseCheck('```json\n{"label":"partial","unsupported_claims":["fine is 5 lakh"]}\n```'), { label: "partial", unsupported: ["fine is 5 lakh"] });
-  assert.equal(parseCheck('{"label":"supported","unsupported_claims":["x"]}').label, "partial");      // "supported" with claims listed is not supported
+test("parseCheck: four honest labels, fenced JSON, claims, missing points, and the cautious default for unreadable output", () => {
+  assert.deepEqual(parseCheck('{"label":"supported","unsupported_claims":[],"missing":[]}'), { label: "supported", unsupported: [], missing: [] });
+  assert.deepEqual(parseCheck('```json\n{"label":"partial","unsupported_claims":["fine is 5 lakh"]}\n```'), { label: "partial", unsupported: ["fine is 5 lakh"], missing: [] });
+  assert.equal(parseCheck('{"label":"supported","unsupported_claims":["x"]}').label, "partial");            // "supported" with unbacked claims is not supported
+  assert.equal(parseCheck('{"label":"supported","unsupported_claims":[],"missing":["the Contract Act rule"]}').label, "check");   // "supported" but incomplete
+  assert.equal(parseCheck('{"label":"partial","unsupported_claims":[],"missing":["x"]}').label, "check");
+  assert.deepEqual(parseCheck('{"label":"incomplete","unsupported_claims":[],"missing":["notice period"]}'), { label: "check", unsupported: [], missing: ["notice period"] });
   assert.equal(parseCheck('{"label":"unsupported","unsupported_claims":[]}').label, "check");
+  assert.equal(parseCheck('{"label":"not_found","unsupported_claims":[]}').label, "not_found");
   assert.equal(parseCheck("sure, here you go: {\"label\":\"supported\",\"unsupported_claims\":[]}").label, "supported");
   const bad = parseCheck("I think it is fine"); assert.equal(bad.label, "check"); assert.equal(bad.unreadable, true);
   assert.equal(parseCheck('{"label":"banana"}').label, "check");
-  assert.ok(buildCheckPrompt({ question: "q", answer: "a", sources: [{ n: 1, actTitle: NI, number: "138", text: "t" }] }).messages[0].content.includes("Answer to check:\na"));
+  assert.deepEqual(Object.keys(CHECK_LABELS).sort(), ["check", "not_found", "partial", "supported"]); assert.equal(CHECK_LABELS.not_found, "Not found in the Acts");
+  const cp = buildCheckPrompt({ question: "q", answer: "a", sources: [{ n: 1, actTitle: NI, number: "138", text: "t" }] });
+  assert.ok(cp.messages[0].content.includes("Answer to check:\na")); assert.ok(cp.system.includes("COMPLETE for the question AND every statement"));
+});
+test("detectNotFound: the model's 'I couldn't find it' reply with no citation, and nothing else", () => {
+  assert.equal(detectNotFound("I couldn't find the notice period in the Acts I searched."), true);
+  assert.equal(detectNotFound("I couldn’t find any information about the Arnesh Kumar judgment. Court judgments are not included."), true);
+  assert.equal(detectNotFound("Under Section 138 [3] the punishment is two years. I could not find the fine."), false);   // cites a source: the checker decides
+  assert.equal(detectNotFound("Under Section 138 the punishment is two years."), false);
+});
+test("parseRewrite keeps up to 3 clean, different queries and survives bad output; buildRewritePrompt carries the earlier question", () => {
+  const q = "Can a minor enter a contract?";
+  assert.deepEqual(parseRewrite('{"queries":["competency to contract age of majority minor","Indian Contract Act section 11","  Indian Contract Act section 11 ","can a minor enter a contract?","x","Indian Contract Act section 10","one more"]}', q), ["competency to contract age of majority minor", "Indian Contract Act section 11", "Indian Contract Act section 10"]);
+  assert.deepEqual(parseRewrite('```json\n{"queries":["a b c"]}\n```', q), ["a b c"]);
+  assert.deepEqual(parseRewrite("no json here", q), []); assert.deepEqual(parseRewrite('{"queries":"nope"}', q), []); assert.deepEqual(parseRewrite('{"queries":[1,null,{}]}', q), []);
+  assert.equal(parseRewrite(JSON.stringify({ queries: ["y".repeat(300)] }), q)[0].length, 120);
+  const rp = buildRewritePrompt({ question: "and for a company?", history: [{ role: "user", content: "punishment for cheque bounce" }, { role: "assistant", content: "..." }] });
+  assert.ok(rp.messages[0].content.includes("Previous question in this chat: punishment for cheque bounce")); assert.ok(rp.system.includes("Do not answer the question"));
+});
+test("mergeRanked: lookups first, sections found by several queries rise, duplicates removed, limit respected", () => {
+  const merged = mergeRanked([["a", "b", "c"], ["d", "b"], ["e", "b", "a"]], 4, ["x"]);
+  assert.deepEqual(merged, ["x", "b", "a", "d"]);
+  assert.deepEqual(mergeRanked([["a", "b"]], 5, ["a"]), ["a", "b"]);
+  assert.deepEqual(mergeRanked([[], []], 3), []);
 });
 test("toBlocks makes paragraphs and lists and drops markdown noise", () => {
   const b = toBlocks("**Punishment**\nUp to two years [1].\n\n- first point\n- second point\n\n1. step one\n2. step two\n\n## Heading\nEnd.");

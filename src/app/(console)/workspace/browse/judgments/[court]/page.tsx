@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import ConsoleShell from "@/components/console/ConsoleShell";
+import BrowseShell from "@/components/console/BrowseShell";
 import { ALL_COURTS, decades } from "@/data/workspaceBrowse";
 import CaseList from "@/components/workspace/CaseList";
 import CourtSearch from "@/components/workspace/CourtSearch";
@@ -30,7 +30,7 @@ export default async function CourtPage({ params, searchParams }: { params: Prom
   const decadeList = [...groups.entries()].sort((a, b) => b[0] - a[0]);
   const fmt = (n: number) => n.toLocaleString("en-IN");
   return (
-    <ConsoleShell variant="workspace">
+    <BrowseShell>
       <div className="mx-auto max-w-[880px] pt-2">
         <nav aria-label="Breadcrumb" className="text-[14px] text-[#535151]"><Link href="/workspace/browse" className="inline-flex min-h-8 items-center hover:text-primary hover:underline">Browse Laws &amp; Judgments</Link><span aria-hidden> / </span>
           {picked ? <><Link href={`/workspace/browse/judgments/${slug}`} className="hover:text-primary hover:underline">{court.name}</Link><span aria-hidden> / </span><span>{picked}</span></> : <span>{court.name}</span>}</nav>
@@ -66,6 +66,6 @@ export default async function CourtPage({ params, searchParams }: { params: Prom
         )}
         {real && stats.attribution && <div className="mt-8 space-y-1 text-[12px] text-muted"><p>{stats.attribution.text} Licence: {stats.attribution.licence}, snapshot {stats.attribution.snapshot}. <a href={stats.attribution.url} className="underline" rel="noopener noreferrer" target="_blank">Dataset</a></p>{stats.caveats.map((c) => <p key={c}>{c}</p>)}</div>}
       </div>
-    </ConsoleShell>
+    </BrowseShell>
   );
 }

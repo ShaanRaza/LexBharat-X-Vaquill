@@ -1,38 +1,56 @@
-// Finds the sections a chat answer may use: exact section lookups named in the question ("section 138 of the NI Act") first, then the Acts search (by meaning over Central + State Acts,
-// keyword fallback), each with its text. LOGIC ONLY. The model sees only what is returned here, and citations are checked against it.
+// Finds the sections a chat answer may use. LOGIC ONLY. The model sees only what is returned here, and citations are checked against it.
+//   1. exact section lookups named in the question ("section 138 of the NI Act") come first;
+//   2. the question and up to 3 rewritten search queries are each searched with the Acts search (by meaning over Central + State Acts, keyword fallback, lookups for "<Act> section N");
+//   3. the lists are merged (a section found by several queries rises) and de-duplicated, then each section's text is loaded.
 import { query } from "@/lib/acts/db";
-import { searchSections, type SectionHit } from "@/lib/acts/searchStore";
+import { primeSemanticQueries, searchSections, type SectionHit } from "@/lib/acts/searchStore";
 import { extractLookups } from "./lookups.mjs";
 import { retrievalQuery, MAX_SOURCES } from "./prompt.mjs";
+import { mergeRanked } from "./rewrite.mjs";
 
 export type ChatSource = {
   n: number; actId: string; sectionKey: string; actTitle: string; year: number | null; category: string; state: string | null; inForce: boolean; sourceUrl: string | null;
   number: string | null; heading: string | null; status: string; text: string; via: string;
 };
-export type Retrieval = { sources: ChatSource[]; searchMode: "semantic" | "text" | "lookup" | "none"; note: string };
+export type Retrieval = { sources: ChatSource[]; searchMode: "semantic" | "text" | "lookup" | "none"; note: string; queries: string[] };
 
-export async function retrieveSources(question: string, history: { role: string; content: string }[] = [], k = MAX_SOURCES): Promise<Retrieval> {
-  const picked: SectionHit[] = []; const seen = new Set<string>();
-  const take = (hits: SectionHit[], max: number) => { for (const h of hits) { const key = `${h.actId}|${h.sectionKey}`; if (seen.has(key) || h.status === "garbled" || picked.length >= k || max-- <= 0) continue; seen.add(key); picked.push(h); } };
+const keyOf = (h: SectionHit) => `${h.actId}|${h.sectionKey}`;
+
+export async function retrieveSources(question: string, history: { role: string; content: string }[] = [], extraQueries: string[] = [], k = MAX_SOURCES): Promise<Retrieval> {
+  const hits = new Map<string, SectionHit>(), first: string[] = [], lists: string[][] = [];
   let mode: Retrieval["searchMode"] = "none", note = "";
-  for (const l of extractLookups(question)) {
+  const usable = (h: SectionHit) => h.status !== "garbled";
+  // exact lookups: sections named in the question (2 hits each), then sections the rewritten queries name, such as "Indian Contract Act section 11" (1 hit each; the model's guess is only a lead:
+  // what gets cited is the section text that comes back)
+  const wanted = [...extractLookups(question).map((l) => [l, 2] as const), ...extraQueries.flatMap((q) => extractLookups(q)).map((l) => [l, 1] as const)];
+  const seenLookup = new Set<string>();
+  for (const [l, take] of wanted.filter(([l]) => !seenLookup.has(l.toLowerCase()) && !!seenLookup.add(l.toLowerCase())).slice(0, 5)) {
     const r = await searchSections(l, 1, 3);
-    if (r.available && r.mode === "lookup") { take(r.results, 2); mode = "lookup"; }
+    if (r.available && r.mode === "lookup") { mode = "lookup"; for (const h of r.results.filter(usable).slice(0, take)) { hits.set(keyOf(h), h); if (!first.includes(keyOf(h))) first.push(keyOf(h)); } }
   }
-  const r = await searchSections(retrievalQuery(question, history), 1, 12);
-  if (r.available) { take(r.results, k); if (mode === "none") mode = r.mode; note = r.note; }
-  if (!picked.length) return { sources: [], searchMode: mode, note };
+  const queries = [retrievalQuery(question, history), ...extraQueries];
+  await primeSemanticQueries(queries);   // one Voyage request for all of them
+  const results = await Promise.all(queries.map((q) => searchSections(q, 1, 12)));
+  results.forEach((r, i) => {
+    if (!r.available) return;
+    if (i === 0) { note = r.note; if (mode === "none") mode = r.mode; }
+    const own = r.results.filter(usable).slice(0, r.mode === "lookup" ? 2 : 8);   // an "<Act> section N" query is an exact hit: keep just the top matches
+    own.forEach((h) => hits.set(keyOf(h), h));
+    lists.push(own.map(keyOf));
+  });
+  const picked = mergeRanked(lists, k, first).map((key) => hits.get(key)!).filter(Boolean);
+  if (!picked.length) return { sources: [], searchMode: mode, note, queries };
   const rows = await query<{ act_id: string; section_key: string; body: string | null }>(
     `SELECT s.act_id, s.section_key, left(s.body, 4000) AS body FROM act_sections s JOIN unnest($1::text[], $2::text[]) AS k(a, sk) ON s.act_id = k.a AND s.section_key = k.sk`, [picked.map((h) => h.actId), picked.map((h) => h.sectionKey)]);
   const body = new Map(rows.map((x) => [`${x.act_id}|${x.section_key}`, x.body ?? ""]));
   const sources: ChatSource[] = [];
   for (const h of picked) {
-    const text = body.get(`${h.actId}|${h.sectionKey}`)?.trim();
+    const text = body.get(keyOf(h))?.trim();
     if (!text) continue;
     sources.push({ n: sources.length + 1, actId: h.actId, sectionKey: h.sectionKey, actTitle: h.actTitle, year: h.year, category: h.category, state: h.state, inForce: h.actStatus === "in_force", sourceUrl: h.sourceUrl,
       number: h.number, heading: h.heading, status: h.status, text, via: h.via });
   }
-  return { sources, searchMode: mode, note };
+  return { sources, searchMode: mode, note, queries };
 }
 
 /** What is stored and sent to the browser for a source: no section text. */

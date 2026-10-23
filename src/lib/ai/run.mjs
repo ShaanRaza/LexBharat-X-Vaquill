@@ -12,7 +12,8 @@ export async function* streamTask(task, input, { config, env, fetchImpl }) {
   for (const spec of chain) {
     if (!providerConfigured(spec.provider, env)) { lastErr = new AiError("not_configured", `${spec.provider} is not set up.`); continue; }
     let started = false;
-    const ac = new AbortController(), ttft = input.firstTokenMs ?? t.firstTokenMs;
+    // the first-token deadline applies only while there is another model to fall back to; the last one in the chain is given its full timeout
+    const ac = new AbortController(), ttft = spec === chain[chain.length - 1] ? 0 : (input.firstTokenMs ?? t.firstTokenMs);
     const onCaller = () => ac.abort(); input.signal?.addEventListener("abort", onCaller);
     let timer = ttft ? setTimeout(() => ac.abort(), ttft) : null;
     try {

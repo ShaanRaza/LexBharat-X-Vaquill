@@ -1,5 +1,5 @@
 // The chat prompt. PURE logic. The model sees numbered sources and must answer only from them.
-export const SOURCE_CHARS = 2600, MAX_SOURCES = 8, HISTORY_TURNS = 4;
+export const SOURCE_CHARS = 2600, MAX_SOURCES = 10, HISTORY_TURNS = 4;
 
 export const SYSTEM_PROMPT = `You are LexBharat's research assistant for Indian law. You answer ONLY from the numbered sources given with the question. The sources are sections of Indian Acts (Central and State). You have no other information: no judgments, no case law, no news.
 
@@ -36,24 +36,39 @@ export function retrievalQuery(question, history = []) {
 }
 
 // ---- the answer check
-export const CHECK_SYSTEM = `You check an answer about Indian law against the sources it was written from. Reply with JSON only: {"label": "supported" | "partial" | "unsupported", "unsupported_claims": [string]}.
-- "supported": every statement of what the law says is backed by the cited sources.
-- "partial": some statements are backed and some are not, or the answer leaves out a main point the sources answer.
-- "unsupported": the main claims are not backed by the sources, or the answer cites sources that do not say what it claims.
-List each claim that is not backed (short, quoted or paraphrased, at most 5). An honest "I couldn't find this in the sources" answer is "supported". Ignore style.`;
+export const CHECK_SYSTEM = `You check an answer about Indian law against the numbered sources it was written from, and against the question. Reply with JSON only:
+{"label": "supported" | "partial" | "incomplete" | "not_found", "unsupported_claims": [string], "missing": [string]}
+
+Labels (be strict):
+- "not_found": the answer says it could not find the answer in the sources and states no law as an answer.
+- "supported": the answer is COMPLETE for the question AND every statement of what the law says is backed by the sources it cites. Use it only when both are true.
+- "partial": the answer covers the question, but some statements of law are not backed by the cited sources (list them in unsupported_claims).
+- "incomplete": the sources only partly cover the question, or the answer leaves out a main point the question needs, or it answers a different question than the one asked, or it answers only from a loosely related Act. Put what is missing in "missing" (short phrases).
+unsupported_claims: each statement that is not backed (short, at most 5). missing: what a complete answer would still need (at most 3). Ignore style and length.`;
 
 export function buildCheckPrompt({ question, answer, sources }) {
   const block = sources.map((s) => `[${s.n}] ${s.actTitle} — ${s.number ? `Section ${s.number}` : "Text block"}\n${clip(s.text, SOURCE_CHARS)}`).join("\n\n");
   return { system: CHECK_SYSTEM, messages: [{ role: "user", content: `Sources:\n\n${block || "(none)"}\n\nQuestion: ${question}\n\nAnswer to check:\n${answer}` }] };
 }
 
-export const CHECK_LABELS = { supported: "Supported", partial: "Partly supported", check: "Check sources" };
-/** Parses the checker's JSON into { label: "supported"|"partial"|"check", unsupported: [string] }. Anything unreadable becomes "check" (the cautious label). */
+export const CHECK_LABELS = { supported: "Supported", partial: "Partly supported", check: "Check sources", not_found: "Not found in the Acts" };
+
+/** True when the answer is the model's "I couldn't find it" reply: it says so and cites no source. (No model call is needed for these.) */
+export function detectNotFound(answer) {
+  const t = String(answer);
+  return /(couldn[’']t find|could not find|can[’']?not find|no (relevant )?(information|sections?) (was|were)? ?found|not included)/i.test(t) && !/\[\d/.test(t);
+}
+
+/** Parses the checker's JSON into { label: "supported"|"partial"|"check"|"not_found", unsupported: [string], missing: [string] }. Anything unreadable becomes "check" (the cautious label).
+ *  "incomplete" and "unsupported" from the model both become "Check sources"; "supported" with claims listed is "partial", and "supported" with something missing is "check". */
 export function parseCheck(raw) {
   let j = null;
   try { j = JSON.parse(String(raw).replace(/^```(?:json)?\s*|\s*```$/g, "").trim()); } catch { const m = /\{[\s\S]*\}/.exec(String(raw)); if (m) { try { j = JSON.parse(m[0]); } catch { /* fall through */ } } }
-  if (!j || typeof j !== "object") return { label: "check", unsupported: [], unreadable: true };
-  const label = j.label === "supported" ? "supported" : j.label === "partial" ? "partial" : "check";
-  const list = Array.isArray(j.unsupported_claims) ? j.unsupported_claims.filter((x) => typeof x === "string" && x.trim()).map((x) => x.trim().slice(0, 300)).slice(0, 5) : [];
-  return { label: label === "supported" && list.length ? "partial" : label, unsupported: list };
+  if (!j || typeof j !== "object") return { label: "check", unsupported: [], missing: [], unreadable: true };
+  const list = (v, n) => (Array.isArray(v) ? v.filter((x) => typeof x === "string" && x.trim()).map((x) => x.trim().slice(0, 300)).slice(0, n) : []);
+  const unsupported = list(j.unsupported_claims, 5), missing = list(j.missing, 3);
+  let label = j.label === "supported" ? "supported" : j.label === "partial" ? "partial" : j.label === "not_found" ? "not_found" : "check";
+  if (label === "supported" && unsupported.length) label = "partial";
+  if ((label === "supported" || label === "partial") && missing.length) label = "check";
+  return { label, unsupported, missing };
 }
