@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 156.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+# NOTE: this section is repealed or omitted: the text is only the note saying so.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 156
+Heading: Repeals
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Rep. by the Second Repealing and Amending Act, 1914 (17 of 1914), s. 3 and Sch. II.

@@ -1,0 +1,41 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 35.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 26% of its own words are in the PDF.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 35
+Heading: Costs
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Subject to such conditions and limitations as may be prescribed, and to the provisions of any law for the time being in force, the costs of and incident to all suits shall be in the discretion of the Court, and the Court shall have full power to determine by whom or out of what property and to what extent such costs are to be paid, and to give all necessary directions for the purposes aforesaid. The fact that the Court has no jurisdiction to try the suit shall be no bar to the exercise of such powers.
+(2) Where the Court directs that any costs shall not follow the event, the Court shall state its reasons in writing. * * * * * *[35. Costs.— (1) In relation to any Commercial dispute, the Court, notwithstanding anything contained in any other law for the time being in force or Rule, has the discretion to determine:
+(a) whether costs are payable by one party to another;
+(b) the quantum of those costs; and
+(c) when they are to be paid.
+Explanation.—For the purpose of clause (a), the expression “costs” shall mean reasonable costs relating to—
+(i) the fees and expenses of the witnesses incurred;
+(ii) legal fees and expenses incurred;
+(iii) any other expenses incurred in connection with the proceedings.
+(2) If the Court decides to make an order for payment of costs, the general rule is that the unsuccessful party shall be ordered to pay the costs of the successful party:
+Provided that the Court may make an order deviating from the general rule for reasons to be recorded in writing.
+
+Illustration
+The Plaintiff, in his suit, seeks a money decree for breach of contract, and damages. The Court holds that the Plaintiff is entitled to the money decree. However, it returns a finding that the claim for damages is frivolous and vexatious. In such circumstances the Court may impose costs on the Plaintiff, despite the Plaintiff being the successful party, for having raised frivolous claims for damages.
+(3) In making an order for the payment of costs, the Court shall have regard to the following circumstances, including—
+(a) the conduct of the parties;
+(b) whether a party has succeeded on part of its case, even if that party has not been wholly successful;
+(c) whether the party had made a frivolous counter-claim leading to delay in the disposal of the case;
+(d) whether any reasonable offer to settle is made by a party and unreasonably refused by the other party; and
+(e) whether the party had made a frivolous claim and instituted a vexatious proceeding wasting the time of the Court.
+(4) The orders which the Court may make under this provision include an order that a party must pay––
+(a) a proportion of another party’s costs;
+(b) a stated amount in respect of another party’s costs;
+(c) costs from or until a certain date;
+(d) costs incurred before proceedings have begun;
+(e) costs relating to particular steps taken in the proceedings;
+(f) costs relating to a distinct part of the proceedings; and
+(g) interest on costs from or until a certain date.]

@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 6.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 81% of the PDF's words, of which 0% of its own words are in the PDF.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 6
+Heading: Pecuniary jurisdiction
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Save in so far as is otherwise expressly provided, nothing herein contained shall operate to give any Court jurisdiction over suits the amount or value of the subject-matter of which exceeds the pecuniary limits (if any) of its ordinary jurisdiction.

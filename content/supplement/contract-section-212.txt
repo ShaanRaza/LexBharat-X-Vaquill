@@ -1,0 +1,20 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 212.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 58% of its own words are in the PDF.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 212
+Heading: Skill and diligence required from agent
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+An agent is bound to conduct the business of the agency with as much skill as is generally possessed by persons engaged in similar business, unless the principal has notice of his want of skill. The agent is always bound to act with reasonable diligence, and to use such skill as he possesses; and to make compensation to his principal in respect of the direct consequences of his own neglect, want of skill, or misconduct, but not in respect of loss or damage which are indirectly or remotely caused by such neglect, want of skill, or misconduct.
+
+Illustrations
+(a) A, a merchant in Calcutta, has an agent, B, in London, to whom a sum of money is paid on A’s account, with orders to remit. B retains the money for a considerable time. A, in consequence of not receiving the money, becomes insolvent. B is liable for the money and interest from the day on which it ought to have been paid, according to the usual rate, and for any further direct loss-as, e.g., by variation of rate of exchange-but not further.
+(b) A, an agent for the sale of goods, having authority to sell on credit, sells to B on credit, without making the proper and usual enquiries as to the solvency of B. B, at the time of such sale, is insolvent. A must make compensation to his principal in respect of any loss thereby sustained.
+(c) A, an insurance-broker employed by B to effect an insurance on a ship, omits to see that the usual clauses are inserted in the policy. The ship is after wards lost. In consequence of the omission of the clauses nothing can be recovered from the underwriters. A is bound to make good the loss to B.
+(d) A, a merchant in England, directs B, his agent at Bombay, who accepts the agency, to send him 100 bales of cotton by a certain ship. B, having it in his power to send the cotton, omits to do so. The ship arrives safely in England. Soon after her arrival the price of cotton rises. B is bound to make good to A the profit which he might have made by the 100 bales of cotton at the time the ship arrived, but not any profit he might have made by the subsequent rise.

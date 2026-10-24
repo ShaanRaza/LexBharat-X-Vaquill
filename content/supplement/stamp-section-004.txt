@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 4.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 76% of the PDF's words, of which 16% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 4
+Heading: Several instruments used in single transaction of sale, mortgage or settlement
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where, in the case of any sale, mortgage or settlement, several instruments are employed for completing the transaction, the principal instrument only shall be chargeable with the duty prescribed in Schedule I, for the conveyance, mortgage or settlement, and each of the other instruments shall be chargeable with a duty of one rupee instead of the duty (if any) prescribed for it in that Schedule.
+(2) The parties may determine for themselves which of the instrument so employed shall, for the purposes of sub-section (1), be deemed to be the principal instrument:
+Provided that the duty chargeable on the instrument so determined shall be the highest duty which would be chargeable in respect of any of the said instruments employed.
+[(3) Notwithstanding anything contained in sub-sections (1) and (2), in the case of any issue, sale or transfer of securities, the instrument on which stamp-duty is chargeable under section 9A shall be the principal instrument for the purpose of this section and no stamp-duty shall be charged on any other instruments relating to any such transaction.]

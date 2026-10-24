@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Negotiable Instruments Act, 1881, section 3.
+# Extracted 2026-10-24 from India Code's PDF a1881-26.pdf (the PDF was created 2023-06-26; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 37% of the PDF's words, of which 3% of its own words are in the PDF.
+Act: The Negotiable Instruments Act, 1881
+Act ID: IND_central_2189
+Section: 3
+Heading: Interpretation-clause
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/82bf1927-5e52-4aab-a876-50552c5952cd/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+In this Act— * * * * * “Banker”.— [“banker” includes any person acting as a banker and any post office savings bank;]

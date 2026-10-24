@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 43.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 32% of the PDF's words, of which 28% of its own words are in the PDF.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 43
+Heading: Execution of decrees passed by Civil Courts in places to which this Code does not extend
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Any decree passed by any Civil Court established in any part of India to which the provisions of this Code do not extend, or by any Court established or continued by the authority of the Central Government outside India, may, if it cannot be executed within the jurisdiction of the Court by which it was passed, be executed in the manner herein provided within the jurisdiction of any Court in the territories to which this Code extends.

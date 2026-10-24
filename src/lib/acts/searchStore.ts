@@ -72,6 +72,7 @@ async function textSearch(q: string, page: number, pageSize: number): Promise<Se
                 -- the open-india-law rows use their GIN index directly (not through the view, which would lose it); the few hand-filled sections are searched on the fly
                 SELECT s.act_id, s.section_key, ts_rank_cd(s.tsv, q.tq, 32) AS base FROM act_sections s, q WHERE s.tsv @@ q.tq
                   AND NOT EXISTS (SELECT 1 FROM act_sections_supplement r WHERE r.act_id = s.act_id AND r.replaces AND upper(r.number) = upper(s.number))
+                  AND NOT EXISTS (SELECT 1 FROM act_copy_of c JOIN act_sections_supplement r ON r.act_id = c.central_id WHERE c.copy_id = s.act_id AND upper(r.number) = upper(s.number))
                 UNION ALL
                 SELECT x.act_id, x.section_key, ts_rank_cd(${SUPP_TSV}, q.tq, 32) FROM act_sections_supplement x, q WHERE ${SUPP_TSV} @@ q.tq
               ) u ORDER BY u.base DESC, u.act_id, u.section_key LIMIT ${MAX_RESULTS + 1}),
@@ -98,6 +99,17 @@ export const SEM_CHUNKS = 200, SEM_POOL = 300, SEM_MAX = 60;
 export const semanticReady = () => voyageConfigured() && vectorConfigured();
 const SEMANTIC_NOTE = 'Ranked by meaning, over Central and State Acts. For exact words use a "quoted phrase" or "Search exact words".';
 
+/** Keys ("actId|sectionKey") whose own vectors must be ignored because a hand-filled section took their place: replaced rows, and the same-numbered rows of State-filed copies of the Act. Cached for a minute. */
+let replacedCache: { at: number; keys: Set<string> } | null = null;
+async function replacedKeys(): Promise<Set<string>> {
+  if (replacedCache && Date.now() - replacedCache.at < 60000) return replacedCache.keys;
+  const rows = await query<{ k: string }>(
+    `SELECT act_id || '|' || section_key AS k FROM act_sections_supplement WHERE replaces
+     UNION SELECT c.copy_id || '|' || s.section_key FROM act_copy_of c JOIN act_sections_supplement x ON x.act_id = c.central_id JOIN act_sections s ON s.act_id = c.copy_id AND upper(s.number) = upper(x.number)`).catch(() => []);
+  replacedCache = { at: Date.now(), keys: new Set(rows.map((r) => r.k)) };
+  return replacedCache.keys;
+}
+
 async function semanticSearch(q: string, page: number, pageSize: number): Promise<SearchOutcome> {
   const stores = vectorStores();
   // one query embedding per vector size in use (normally just one)
@@ -106,7 +118,7 @@ async function semanticSearch(q: string, page: number, pageSize: number): Promis
   const settled = await Promise.allSettled(stores.map(async (st) => st.nearest(await vec(st.dim), SEM_CHUNKS)));
   if (!settled.some((r) => r.status === "fulfilled")) throw new Error("no vector store answered");
   // sections whose text was replaced by a hand-filled one: their old vectors describe the wrong text, so only the supplement store's vectors count for them
-  const replaced = new Set((await query<{ k: string }>(`SELECT act_id || '|' || section_key AS k FROM act_sections_supplement WHERE replaces`).catch(() => [])).map((r) => r.k));
+  const replaced = await replacedKeys();
   const near = settled.flatMap((r, i) => (r.status === "fulfilled" ? r.value.filter((h) => stores[i].corpus === "supplement" || !replaced.has(`${h.actId}|${h.sectionKey}`)) : []))
     .sort((a, b) => a.distance - b.distance);
   const cands = distinctSections(near, SEM_POOL);

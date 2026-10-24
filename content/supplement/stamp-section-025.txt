@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 25.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 97% of the PDF's words, of which 28% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 25
+Heading: Valuation in case of annuity, etc.
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where an instrument is executed to secure the payment of an annuity or other sum payable periodically, or where the consideration for a conveyance is an annuity or other sum payable periodically, the amount secured by such instrument or the consideration for such conveyance, as the case may be, shall, for the purposes of this Act, be deemed to be,—
+(a) where the sum is payable for a definite period so that the total amount to be paid can be previously ascertained—such total amount;
+(b) where the sum is payable in perpetuity or for an indefinite time not terminable with any life in being at the date of such instrument or conveyance—the total amount which, according to the terms of such instrument or conveyance, will or may be payable during the period of twenty years calculated from the date on which the first payment becomes due; and
+(c) where the sum is payable for an indefinite time terminable with any life in being at the date of such instrument or conveyance—the maximum amount which will or may be payable as aforesaid during the period of twelve years calculated from the date on which the first payment becomes due.

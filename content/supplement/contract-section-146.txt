@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 146.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 43% of its own words are in the PDF.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 146
+Heading: Co-sureties liable to contribute equally
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where two or more persons are co-sureties for the same debt or duty, either jointly or severally, and whether under the same or different contracts, and whether with or without the knowledge of each other, the co-sureties, in the absence of any contract to the contrary, are liable, as between themselves, to pay each an equal share of the whole debt, or of that part of it which remains unpaid by the principal debtor.
+
+Illustrations
+(a) A, B and C are sureties to D for the sum of 3,000 rupees lent to E. E makes default in payment. A, B and C are liable, as between themselves, to pay 1,000 rupees each.
+(b) A, B and C are sureties to D for the sum of 1,000 rupees lent to E, and there is a contract between A, B and C that A is to be responsible to the extent of one-quarter, B to the extent of one- quarter, and C to the extent of one-half. E makes default in payment. As between the sureties, A is liable to pay 250 rupees, B 250 rupees, and C 500 rupees.

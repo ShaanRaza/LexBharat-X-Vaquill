@@ -1,0 +1,23 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 58.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 44% of the PDF's words, of which 32% of its own words are in the PDF.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 58
+Heading: Detention and release
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Every person detained in the civil prison in execution of a decree shall be so detained,—
+(a) where the decree is for the payment of a sum of money exceeding [ [five thousand rupees], for a period not exceeding three months, and,]
+[(b) where the decree is for the payment of a sum of money exceeding two thousand rupees, but not exceeding five thousand rupees, for a period not exceeding six weeks:]
+(i) on the amount mentioned in the warrant for his detention being paid to the officer in charge of the civil prison, or
+(ii) on the decree against him being otherwise fully satisfied, or
+(iii) on the request of the person on whose application he has been so detained, or
+(iv) on the omission by the person, on whose application he has been so detained, to pay subsistence allowance:
+Provided, also, that he shall not be released from such detention under clause (ii) or clause (iii), without the order of the Court.
+[(1A) For the removal of doubts, it is hereby declared that no order for detention of the judgment-debtor in civil prison in execution of a decree for the payment of money shall be made, where the total amount of the decree does not exceed [two thousand rupees.]]
+(2) A judgment-debtor released from detention under this section shall not merely by reason of his release be discharged from his debt, but he shall not be liable to be re-arrested under the decree in execution of which he was detained in the civil prison.

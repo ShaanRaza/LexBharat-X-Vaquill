@@ -1,0 +1,20 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 3.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 60% of the PDF's words, of which 17% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 3
+Heading: Instruments chargeable with duty
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Subject to the provisions of this Act and the exemptions contained in Schedule I, the following instruments shall be chargeable with duty of the amount indicated in that Schedule as the proper duty therefore respectively, that is to say—
+(a) every instrument mentioned in that Schedule which, not having been previously executed by any person, is executed in [India] on or after the first day of July, 1899;
+(b) every bill of exchange [payable otherwise than on demand] *** or promissory note drawn or made out of [India] on or after that day and accepted or paid, or presented for acceptance or payment, or endorsed, transferred or otherwise negotiated, in [India]; and
+(c) every instrument (other than a bill of exchange, *** or promissory note) mentioned in that Schedule, which, not having been previously executed by any person, is executed out of [India] on or after that day, relates to any property situate, or to any matter or thing done or to be done, in [India] and is received in [India]:
+Provided that no duty shall be chargeable in respect of—
+(1) any instrument executed by, or on behalf of, or in favour of, the Government in cases where, but for this exemption, the Government would be liable to pay the duty chargeable in respect of such instrument;
+(2) any instrument for the sale, transfer or other disposition, either absolutely or byway of mortgage or otherwise, of any ship or vessel, or any part, interest, share or property of or in any ship or vessel registered under the Merchant Shipping Act 1894, Act No. 57 & 58 Vict. c. 60 or under Act XIX of 1838 Act No. or the Indian Registration of Ships Act, 1841, (CX of 1841) as amended by subsequent Acts.

@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 51.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 51
+Heading: Promisor not bound to perform, unless reciprocal promisee ready and willing to perform
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+When a contract consists of reciprocal promises to be simultaneously performed, no promisor need perform his promise unless the promisee is ready and willing to perform his reciprocal promise.
+
+Illustrations
+(a) A and B contract that A shall deliver goods to B to be paid for by B on delivery. A need not deliver the goods, unless B is ready and willing to pay for the goods on delivery. B need not pay for the goods, unless A is ready and willing to deliver them on payment.
+(b) A and B contract that A shall deliver goods to B at a price to be paid by instalments, the first instalment to be paid on delivery. A need not deliver, unless B is ready and willing to pay the first instalment on delivery. B need not pay the first instalment, unless A is ready and willing to deliver the goods on payment of the first instalment.

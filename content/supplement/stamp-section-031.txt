@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 31.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 20% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 31
+Heading: Adjudication as to proper stamp
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) When any instrument, whether executed or not and whether previously stamped or not, is brought to the Collector, and the person bringing it applies to have the opinion of that officer as to the duty (if any) with which it is chargeable, and pays a fee of such amount (not exceeding five rupees and not less than [fifty naye paise]) as the Collector may in each case direct, the Collector shall determine the duty (if any) with which, in his judgment, the instrument is chargeable.
+(2) For this purpose the Collector may require to be furnished with an abstract of the instrument, and also with such affidavit or other evidence as he may deem necessary to prove that all the facts and circumstances affecting the chargeability of the instrument with duty, or the amount of the duty with which it is chargeable, are fully and truly set forth therein, and may refuse to proceed upon any such application until such abstract and evidence have been furnished accordingly:
+Provided that—
+(a) no evidence furnished in pursuance of this section shall be used against any person in any civil proceeding, except in an inquiry as to the duty with which the instrument to which it relates is chargeable; and
+(b) every person by whom any such evidence is furnished, shall, on payment of the full duty with which the instrument to which it relates, is chargeable, be relieved from any penalty which he may have incurred under this Act by reason of the omission to state truly in such instrument any of the facts or circumstances aforesaid.

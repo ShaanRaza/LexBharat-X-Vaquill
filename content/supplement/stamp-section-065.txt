@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 65.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 10% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 65
+Heading: Penalty for refusal to give receipt, and for devices to evade duty on receipts
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+–Any person who,––
+(a) being required under section 30 to give a receipt, refuses or neglects to give the same; or, (b) with intent to defraud the Government of any duty, upon a payment of money or delivery of property exceeding twenty rupees in amount or value, gives a receipt for an amount or value not exceeding twenty rupees, or separates or divides the money or property paid or delivered; shall be punishable with fine which may extend to one hundred rupees.

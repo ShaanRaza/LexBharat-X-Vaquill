@@ -1,0 +1,22 @@
+# FILL-IN FILE: The Prevention of Corruption Act, 1988, section 7.
+# Extracted 2026-10-24 from India Code's PDF a1988-49.pdf (the PDF was created 2025-08-12; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Prevention of Corruption Act, 1988
+Act ID: IND_central_1558
+Section: 7
+Heading: Offence relating to public servant being bribed
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/54dfd58e-7946-4041-b25d-5e0c85ba9aca/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Any public servant who,—
+(a) obtains or accepts or attempts to obtain from any person, an undue advantage, with the intention to perform or cause performance of public duty improperly or dishonestly or to forbear or cause forbearance to perform such duty either by himself or by another public servant; or
+(b) obtains or accepts or attempts to obtain, an undue advantage from any person as a reward for the improper or dishonest performance of a public duty or for forbearing to perform such duty either by himself or another public servant; or
+(c) performs or induces another public servant to perform improperly or dishonestly a public duty or to forbear performance of such duty in anticipation of or in consequence of accepting an undue advantage from any person, shall be punishable, with imprisonment for a term which shall not be less than three years but which may extend to seven years and shall also be liable to fine.
+Explanation 1.—For the purpose of this section, the obtaining, accepting, or the attempting to obtain an undue advantage shall itself constitute an offence even if the performance of a public duty by public servant, is not or has not been improper.
+Illustration.—A public servant, ‘S’ asks a person, ‘P’ to give him an amount of five thousand rupees to process his routine ration card application on time. ‘S’ is guilty of an offence under this section.
+Explanation 2.—For the purpose of this section,—
+(i) the expressions “obtains” or “accepts” or “attempts to obtain” shall cover cases where a person being a public servant, obtains or “accepts” or attempts to obtain, any undue advantage for himself or for another person, by abusing his position as a public servant or by using his personal influence over another public servant; or by any other corrupt or illegal means;
+(ii) it shall be immaterial whether such person being a public servant obtains or accepts, or attempts to obtain the undue advantage directly or through a third party.

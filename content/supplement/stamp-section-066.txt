@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 66.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 89% of the PDF's words, of which 31% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 66
+Heading: Penalty for not making out policy or making one not duly stamped
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+–Any person who––
+(a) receives, or takes credit for, any premium or consideration for any contract of insurance and does not, within one month after receiving, or taking credit for, such premium or consideration, make out and execute a duly stamped policy of such insurance; or
+(b) makes, executes or delivers out any policy which is not duly stamped, or pays or allows in account, or agrees to pay or allow in account, any money upon, or in respect of, any such policy; shall be punishable with fine which may extend to two hundred rupees. Arunachal Pradesh Amendment of sections 66,-In section 66, in clause (b), for the words “two hundred rupees”, the words “five hundred rupees” shall be substituted. [Vide Arunachal Pradesh 3 of 2010, s. 2]

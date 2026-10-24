@@ -1,0 +1,20 @@
+# FILL-IN FILE: The Negotiable Instruments Act, 1881, section 101.
+# Extracted 2026-10-24 from India Code's PDF a1881-26.pdf (the PDF was created 2023-06-26; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Negotiable Instruments Act, 1881
+Act ID: IND_central_2189
+Section: 101
+Heading: Contents of protest
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/82bf1927-5e52-4aab-a876-50552c5952cd/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+A protest under section 100 must contain—
+(a) either the instrument itself, or a literal transcript of the instrument and of everything written or printed thereupon;
+(b) the name of the person for whom and against whom the instrument has been protested;
+(c) a statement that payment or acceptance, or better security, as the case may be, has been demanded of such person by the notary public; the terms of his answer, if any, or a statement that he gave no answer, or that he could not be found;
+(d) when the note or bill has been dishonoured, the place and time of dishonour, and, when better security has been refused, the place and time of refusal;
+(e) the subscription of the notary public making the protest;
+(f) in the event of an acceptance for honour or of a payment for honour, the name of the person by whom, of the person for whom, and the manner in which, such acceptance or payment was offered and effected. [A notary public may make the demand mentioned in clause (c) of this section either in person or by his clerk or, where authorized by agreement or usage, by registered letter.]

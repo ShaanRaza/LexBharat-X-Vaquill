@@ -1,0 +1,22 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 32.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 98% of the PDF's words, of which 10% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 32
+Heading: Certificate by Collector
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) When an instrument brought to the Collector under section 31 is, in his opinion, one of a description chargeable with duty, and
+(a) the Collector determines that it is already fully stamped, or
+(b) the duty determined by the Collector under section 31, or such a sum as, with the duty already paid in respect of the instrument, is equal to the duty so determined, has been paid, the Collector shall certify by endorsement on such instrument that the full duty (stating the amount) with which it is chargeable has been paid.
+(2) When such instrument is, in his opinion, not chargeable with duty, the Collector shall certify in manner aforesaid that such instrument is not so chargeable.
+(3) Any instrument upon which an endorsement has been made under this section, shall be deemed to be duly stamped or not chargeable with duty, as the case may be; and, if chargeable with duty, shall be receivable in evidence or otherwise, and may be acted upon and registered as if it had been originally duly stamped:
+Provided that nothing in this section shall authorize the Collector to endorse—
+(a) any instrument executed or first executed in [India] and brought to him after the expiration of one month from the date of its execution or first execution, as the case may be;
+(b) any instrument executed or first executed out of [India] and brought to him after the expiration of three months after it has been first received in [India]; or
+(c) any instrument chargeable [with a duty not exceeding ten naye paise], or any bill of exchange or promissory note, when brought to him, after the drawing or execution thereof, on paper not duly stamped.

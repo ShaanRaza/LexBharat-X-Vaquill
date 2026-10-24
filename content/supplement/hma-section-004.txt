@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Hindu Marriage Act, 1955, section 4.
+# Extracted 2026-10-24 from India Code's PDF a1955-25.pdf (the PDF was created 2026-05-06; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 20% of its own words are in the PDF.
+Act: The Hindu Marriage Act, 1955
+Act ID: IND_central_1560
+Section: 4
+Heading: Overriding effect of Act
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/526166d6-239d-4b6c-8999-c776179dea69/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Save as otherwise expressly provided in this Act,—
+(a) any text rule or interpretation of Hindu law or any custom or usage as part of that law in force immediately before the commencement of this Act shall cease to have effect with respect to any matter for which provision is made in this Act;
+(b) any other law in force immediately before the commencement of this Act shall cease to have effect in so far as it is inconsistent with any of the provisions contained in this Act.

@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Prevention of Corruption Act, 1988, section 24.
+# Extracted 2026-10-24 from India Code's PDF a1988-49.pdf (the PDF was created 2025-08-12; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+# NOTE: this section is repealed or omitted: the text is only the note saying so.
+Act: The Prevention of Corruption Act, 1988
+Act ID: IND_central_1558
+Section: 24
+Heading: Statement by bribe giver not to subject him to prosecution
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/54dfd58e-7946-4041-b25d-5e0c85ba9aca/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Omitted by the Prevention of Corruption (Amendment) Act, 2018 (16 of 2018), s. 17 (w.e.f. 26-7-2018).

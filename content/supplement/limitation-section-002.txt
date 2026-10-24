@@ -1,0 +1,33 @@
+# FILL-IN FILE: The Limitation Act, 1963, section 2.
+# Extracted 2026-10-24 from India Code's PDF A1963-36.pdf (the PDF was created 2026-10-12; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 38% of the PDF's words, of which 28% of its own words are in the PDF.
+Act: The Limitation Act, 1963
+Act ID: IND_central_1565
+Section: 2
+Heading: Definitions
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/8c2f3bc0-5daf-4d11-971f-ad5f9b78b74b/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+In this Act, unless the context otherwise requires,—
+(a) “applicant” includes—
+(i) a petitioner;
+(iii) any person whose estate is represented by the applicant as executor, administrator or other representative;
+(b) “application” includes a petition;
+(c) “bill of exchange” includes a hundi and a cheque;
+(d) “bond” includes any instrument whereby a person obliges himself to pay money to another, on condition that the obligation shall be void if a specified act is performed, or is not performed, as the case may be;
+(e) “defendant” includes—
+(ii) any person whose estate is represented by the defendant as executor, administrator or other representative;
+(f) “easement” includes a right not arising from contract, by which one person is entitled to remove and appropriate for his own profit any part of the soil belonging to another or anything growing in, or attached to, or subsisting upon, the land of another;
+(g) “foreign country” means any country other than India;
+(h) “good faith”—nothing shall be deemed to be done in good faith which is not done with due care and attention;
+(i) “plaintiff” includes—
+(i) any person from or through whom a plaintiff derives his right to sue;
+(ii) any person whose estate is represented by the plaintiff as executor, administrator or other representative;
+(j) “period of limitation” means the period of limitation prescribed for any suit, appeal or application by the Schedule, and “prescribed period” means the period of limitation computed in accordance with the provisions of this Act;
+(k) “promissory note” means any instrument whereby the maker engages absolutely to pay a specified sum of money to another at a time therein limited, or on demand, or at sight;
+(l) “suit” does not include an appeal or an application;
+(m) “tort" means a civil wrong which is not exclusively the breach of a contract or the breach of a trust;
+(n) “trustee” does not include a benamidar, a mortgagee remaining in possession after the mortgage has been satisfied or a person in wrongful possession without title.

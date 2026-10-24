@@ -1,0 +1,19 @@
+# FILL-IN FILE: The Negotiable Instruments Act, 1881, section 6.
+# Extracted 2026-10-24 from India Code's PDF a1881-26.pdf (the PDF was created 2023-06-26; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 51% of its own words are in the PDF.
+Act: The Negotiable Instruments Act, 1881
+Act ID: IND_central_2189
+Section: 6
+Heading: “Cheque.”
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/82bf1927-5e52-4aab-a876-50552c5952cd/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+A “cheque” is a bill of exchange drawn on a specified banker and not expressed to be payable otherwise than on demand and it includes the electronic image of a truncated cheque and a cheque in the electronic form.
+Explanation I.—For the purposes of this section, the expressions—
+[(a) “a cheque in the electronic form” means a cheque drawn in electronic form by using any computer resource and signed in a secure system with digital signature (with or without biometrics signature) and asymmetric crypto system or with electronic signature, as the case may be;]
+(b) “a truncated cheque” means a cheque which is truncated during the course of a clearing cycle, either by the clearing house or by the bank whether paying or receiving payment, immediately on generation of an electronic image for transmission, substituting the further physical movement of the cheque in writing.
+Explanation II.— For the purposes of this section, the expression “clearing house” means the clearing house managed by the Reserve Bank of India or a clearing house recognised as such by the Reserve Bank of India.]
+[Explanation III.—For the purposes of this section, the expressions “asymmetric crypto system”, “computer resource”, “digital signature”, “electronic form” and “electronic signature” shall have the same meanings respectively assigned to them in the Information Technology Act, 2000(21 of 2000).

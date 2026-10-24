@@ -1,0 +1,20 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 50.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 40% of its own words are in the PDF.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 50
+Heading: Performance in manner or at time prescribed or sanctioned by promisee
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The performance of any promise may be made in any manner, or at any time which the promisee prescribes or sanctions.
+
+Illustrations
+(a) B owes A 2,000 rupees. A desires B to pay the amount to A’s account with C, a banker. B, who also banks with C, orders the amount to be transferred from his account to A’s credit, and this is done by C. Afterwards, and before A knows of the transfer, C fails. There has been a good payment by B.
+(b) A and B are mutually indebted. A and B settle an account by setting off one item against another, and B pays A the balance found to be due from him upon such settlement. This amounts to a payment by A and B, respectively, of the sums which they owed to each other.
+(c) A owes B 2,000 rupees. B accepts some of A’s goods in reduction of the debt. The delivery of goods operates as a part payment.
+(d) A desires B, who owes him Rs. 100, to send him a note for Rs. 100 by post. The debt is discharged as soon as B puts into the post a letter containing the note duly addressed to A.

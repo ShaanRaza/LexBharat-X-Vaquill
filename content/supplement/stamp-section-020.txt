@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 20.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 78% of the PDF's words, of which 16% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 20
+Heading: Conversion of amount expressed in foreign currencies
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where an instrument is chargeable with ad valorem duty in respect of any money expressed in any currency other than that of [India] such duty shall be calculated on the value of such money in the currency of [India] according to the current rate of exchange on the day of the date of the instrument.
+(2) The Central Government may, from time to time, by notification in the Official Gazette, prescribe a rate of exchange for the conversion of British or any foreign currency into the currency of [India] for the purposes of calculating stamp-duty, and such rate shall be deemed to be the current rate for the purposes of sub-section (1).

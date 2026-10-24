@@ -1,0 +1,21 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 33.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 6% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 33
+Heading: Examination and impounding of instruments
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Every person having by law or consent of parties authority to receive evidence, and every person in charge of a public office, except an officer of police, before whom any instrument, chargeable, in his opinion, with duty, is produced or comes in the performance of his functions, shall, if it appears to him that such instrument is not duly stamped, impound the same.
+(2) For that purpose every such person shall examine every instrument so chargeable and so produced or coming before him, in order to ascertain whether it is stamped with a stamp of the value and description required by the law in force in [India] when such instrument was executed or first executed:
+Provided that—
+(a) nothing herein contained shall be deemed to require any Magistrate or Judge of a Criminal Court to examine or impound, if he does not think fit so to do, any instrument coming before him in the course of any proceeding other than a proceeding under Chapter XII or Chapter XXXVI of the Code of Criminal Procedure, 1898 (V of 1898);
+(b) in the case of a Judge of a High Court, the duty of examining and impounding any instrument under this section may be delegated to such officer as the Court appoints in this behalf.
+(3) For the purposes of this section, in cases of doubt, —
+(a) [the [State Government]] may determine what offices shall be deemed to be public offices; and
+(b) [the [State Government]] may determine who shall be deemed to be persons in charge of public offices.

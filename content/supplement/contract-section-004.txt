@@ -1,0 +1,19 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 4.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 57% of the PDF's words, of which 14% of its own words are in the PDF.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 4
+Heading: Communication when complete
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The communication of a proposal is complete when it comes to the knowledge of the person to whom it is made. The communication of an acceptance is complete,— as against the proposer, when it is put in a course of transmission to him, so as to be out of the power of the acceptor; as against the acceptor, when it comes to the knowledge of the proposer. The communication of a revocation is complete,— as against the person who makes it, when it is put into a course of transmission to the person to whom it is made, so as to be out of the power of the person who makes it; as against the person to whom it is made, when it comes to his knowledge.
+
+Illustrations
+(a) A proposes, by letter, to sell a house to B at a certain price. The communication of the proposal is complete when B receives the letter.
+(b) B accepts A’s proposal by a letter sent by post. The communication of the acceptance is complete, as against A when the letter is posted; as against B, when the letter is received by A.
+(c) A revokes his proposal by telegram. The revocation is complete as against A when the telegram is despatched. It is complete as against B when B receives it. B revokes his acceptance by telegram. B’s revocation is complete as against B when the telegram is despatched, and as against A when it reaches him.

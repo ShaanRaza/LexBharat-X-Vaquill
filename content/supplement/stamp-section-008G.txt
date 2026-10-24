@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 8G.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 8G
+Heading: Strategic sale, disinvestment, etc., of immovable property by Government company not liable to stamp duty
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Notwithstanding anything contained in this Act or any other law for the time being in force, any instrument for conveyance or transfer of a business or asset or right in any immovable property from a Government company, its subsidiary, unit or joint venture, (i) by way of strategic sale or disinvestment or demerger or any other scheme of arrangements or through any law, to another Government company or to the Central Government or any State Government or to the development financial institution established by any law made by Parliament; or
+(ii) which is to be wound up, closed, struck-off, liquidated or otherwise shut down, to another Government company or to the Central Government or any State Government, after approval of the Central Government or the State Government, as the case may be, shall not be liable to duty under this Act.
+Explanation.—For the purposes of this section, “Government company” shall have the same meaning as assigned to it in clause (45) of section 2 of the Companies Act, 2013 (18 of 2013).

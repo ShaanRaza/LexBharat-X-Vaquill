@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 34.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 34
+Heading: When event on which contract is contingent to be deemed impossible, if it is the future conduct of a living person
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+If the future event on which a contract is contingent is the way in which a person will act at an unspecified time, the event shall be considered to become impossible when such person does anything which renders it impossible that he should so act within any definite time, or otherwise than under further contingencies.
+
+Illustration
+A agrees to pay B a sum of money if B marries C. C marries D. The marriage of B to C must now be considered impossible, although it is possible that D may die and that C may afterwards marry B.

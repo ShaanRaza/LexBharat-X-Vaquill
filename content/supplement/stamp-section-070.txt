@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 70.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 70
+Heading: Institution and conduct of prosecutions
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+–(1) No prosecution in respect of any offence punishable under this Act or any Act hereby repealed, shall be instituted without the sanction of the Collector or such other officer as [the [State Government]] generally, or the Collector specially, authorizes in that behalf.
+(2) The Chief Controlling Revenue-authority, or any officer generally or specially authorized by it in this behalf, may stay any such prosecution or compound any such offence.
+(3) The amount of any such composition shall be recoverable in the manner provided by section 48.

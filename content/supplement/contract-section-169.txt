@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 169.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 169
+Heading: When finder of thing commonly on sale may sell it
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+When a thing which is commonly the subject of sale is lost, if the owner cannot with reasonable diligence be found, or if he refuses, upon demand, to pay the lawful charges of the finder, the finder may sell it—
+(1) when the thing is in danger of perishing or of losing the greater part of its value, or, (2) when the lawful charges of the finder, in respect of the thing found, amount to two-thirds of its value.

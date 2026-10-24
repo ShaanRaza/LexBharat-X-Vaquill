@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 87B.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 86% of the PDF's words, of which 61% of its own words are in the PDF.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 87B
+Heading: Applications of sections 85 and 86 to Rulers of former Indian States
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+[(1) In the case of any suit by or against the Ruler of any former Indian State which is based wholly or in part upon a cause of action which arose before the commencement of the Constitution or any proceeding arising out of such suit, the provisions of section 85 and sub-sections (1) and (3) of section 86 shall apply in relation to such Ruler as they apply in relation to the Ruler of a foreign State.]
+(2) In this section—
+(a) “former Indian State” means any such Indian State as the Central Government may, by notification in the Official Gazette, specify for the purposes of this section; ***
+[(b) “Commencement of the Constitution” means the 26th day of January, 1950; and
+(c) “Ruler”, in relation to a former Indian State, has the same meaning as in article 363 of the Constitution. ]

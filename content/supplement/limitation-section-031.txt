@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Limitation Act, 1963, section 31.
+# Extracted 2026-10-24 from India Code's PDF A1963-36.pdf (the PDF was created 2026-10-12; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 7% of its own words are in the PDF.
+Act: The Limitation Act, 1963
+Act ID: IND_central_1565
+Section: 31
+Heading: Provisions as to barred or pending suits, etc.
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/8c2f3bc0-5daf-4d11-971f-ad5f9b78b74b/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Nothing in this Act shall,—
+(a) enable any suit, appeal or application to be instituted, preferred or made, for which the period of limitation prescribed by the Indian Limitation Act, 1908 (9 of 1908), expired before the commencement of this Act; or
+(b) affect any suit, appeal or application instituted, preferred or made before, and pending at, such commencement.

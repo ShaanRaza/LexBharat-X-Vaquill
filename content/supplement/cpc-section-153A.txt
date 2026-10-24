@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 153A.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 153A
+Heading: Power to amend decree or order where appeal is summarily dismissed
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where an Appellate Court dismisses an appeal under rule 11 of Order XLI, the power of the Court to amend, under section 152, the decree or order appealed against may be exercised by the Court which had passed the decree or order in the first instance, notwithstanding that the dismissal of the appeal has the effect of confirming the decree or order, as the case may be, passed by the Court of first instance.

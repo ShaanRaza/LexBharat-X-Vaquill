@@ -4,11 +4,18 @@
 import fs from "node:fs";
 import { execFileSync } from "node:child_process";
 import { pdfLines } from "./pdf-text.mjs";
+import { listSections, startAt } from "./list-sections.mjs";
 
 const START = (n) => new RegExp(`^\\[?${n}\\.\\s*(.+)$`);                  // "28. Heading.—..." or "[28. Heading.—..."
-const ANY_START = /^\[?(\d{1,3})([A-Z]{0,3})\.\s*(.{1,200}?)\.\s*[—–-]/;      // any section start: has "Heading.—"
+const ANY_START = /^\[?(\d{1,3})([A-Z]{0,3})\.\s*(.{1,200}?)\.?[”"’]?\s*[—–]/;      // any section start: has "Heading.—"
 /** Joins two printed lines: a word broken at a hyphen at the end of the line ("pre-" + "emption") is joined without a space. */
-const join2 = (a, b) => (/[a-z]-$/.test(a) && /^[a-z]/.test(b) ? a + b : a + " " + b);
+let VOCAB = new Set();   // every word printed in this PDF; decides whether a word broken at a hyphen is one word ("sub-" + "ordinate" = "subordinate") or a compound ("pre-" + "emption" = "pre-emption")
+const vocabFor = (lines) => new Set(lines.flatMap((l) => l.text.toLowerCase().split(/[^\p{L}]+/u)).filter((w) => w.length > 2));
+const join2 = (a, b) => {
+  const m = /([A-Za-z]+)-$/.exec(a), r = /^([a-z]+)/.exec(b);
+  if (m && r) return VOCAB.has((m[1] + r[1]).toLowerCase()) ? a.slice(0, -1) + b : a + b;
+  return /[0-9]-$/.test(a) && /^[0-9]/.test(b) ? a + b : a + " " + b;
+};
 const tidy = (s) => s.replace(/\s+([,.;:)])/g, "$1").replace(/\(\s+/g, "(").replace(/\s{2,}/g, " ").trim();
 
 /** Paragraphs from lines: a line starts a new paragraph when it begins "(a)", "(1)", "Explanation", "Illustration(s)", "Provided", "Exception" AND the previous line ended a sentence or a list item (so "clause\n(c) of section 5" stays one sentence). */
@@ -24,57 +31,61 @@ function paragraphs(texts) {
   return out.flatMap((x) => tidy(x).split(/(?<=[.\]*;:])\s+(?=\[?(?:Exception|Explanation|Provided that)\b|\[?\s*\(\d{1,2}[A-Z]{0,2}\)\s)/));
 }
 
-export function cutSection(lines, number) {
-  const probe = (i) => (ANY_START.test(lines[i].text) ? lines[i].text : lines[i].text + " " + (lines[i + 1]?.text ?? ""));
-  const isStart = (i, n) => START(n).test(lines[i].text) && ANY_START.test(probe(i));
-  const idx = lines.findIndex((_, i) => isStart(i, number));
-  if (idx < 0) {
-    // a repealed or omitted section is printed as "28. [Heading.] Rep. by ..." : heading in brackets, then the note
-    const rep = new RegExp(`^\\[?${number}\\.\\s*\\[(.+?)\\.?\\]\\s*((?:Rep\\.|Omitted|Ins\\.|Subs\\.).*)$`), ri = lines.findIndex((l) => rep.test(l.text));
-    if (ri < 0) return { ok: false, why: `no line starts with "${number}." and a heading ending in ".—"` };
-    const m = rep.exec(lines[ri].text); let e = ri + 1; const parts = [m[2]];
-    while (e < lines.length && !/^\[?\d{1,3}[A-Z]{0,3}\.\s/.test(lines[e].text) && !/^(PART|CHAPTER|SCHEDULE)\b/i.test(lines[e].text) && e - ri < 4) parts.push(lines[e++].text);
-    return { ok: true, repealed: true, heading: tidy(m[1]), firstLine: lines[ri].text, pages: [lines[ri].page, lines[e - 1].page], lineCount: e - ri, text: tidy(parts.reduce((a, b) => join2(a, b))), duplicate: null, nextStart: lines[e]?.text.slice(0, 70) ?? "(end of file)" };
-  }
-  const dupe = lines.findIndex((_, i) => i > idx && isStart(i, number));
+const PART = /^\[?(PART|CHAPTER)\s+[IVXLCDM\d]+[A-Z]?\b|^\[?(THE\s+)?((FIRST|SECOND|THIRD|FOURTH|FIFTH)\s+)?SCHEDULE\s*[IVX\d]*\s*(\(.{0,40}\))?\s*$/;
+
+/** The section that starts at line index `at` (from listSections) or, when `at` is left out, the one numbered `number`. */
+export function cutSection(lines, number, at) {
+  VOCAB = vocabFor(lines);
+  if (at === undefined) { const hit = listSections(lines).find((x) => x.number === String(number)); if (!hit) return { ok: false, why: `section ${number} is not in the list of sections of this PDF` }; at = hit.line; }
+  const st = startAt(lines, at); if (!st) return { ok: false, why: "that line is not a section start" };
+  const wanted = st.n, suffix = st.suf;
   let end = lines.length;
-  const wanted = parseInt(number, 10), suffix = String(number).replace(/^\d+/, "");
-  for (let i = idx + 1; i < lines.length; i++) {
-    if (/^(PART|CHAPTER|THE (FIRST|SECOND|THIRD|FOURTH|FIFTH) SCHEDULE|SCHEDULE)\s*[IVXLCDM\d]*[A-Z]?\s*$/i.test(lines[i].text)) { end = i; break; }
-    const rp = /^\[?(\d{1,3})([A-Z]{0,3})\.\s*\[.+?\]\s*(?:Rep\.|Omitted|Ins\.|Subs\.)/.exec(lines[i].text);   // a repealed or omitted section ends this one too
-    const m = rp ?? ANY_START.exec(probe(i)); if (!m || !/^\[?\d/.test(lines[i].text)) continue;
-    if (Number(m[1]) > wanted || (Number(m[1]) === wanted && m[2] > suffix)) { end = i; break; }
+  for (let i = at + 1; i < lines.length; i++) {
+    if (PART.test(lines[i].text)) { end = i; break; }
+    const s2 = startAt(lines, i);
+    if (s2 && (s2.n > wanted || (s2.n === wanted && s2.suf > suffix))) { end = i; break; }
   }
-  const joined = probe(idx), m0 = /^\[?\d{1,3}[A-Z]{0,3}\.\s*(.*?)\.\s*[—–]\s*/.exec(joined);
+  const texts = lines.slice(at, end).filter((l, k) => k === 0 || !l.centered || /^(Illustrations?|Explanations?\b|STATE AMENDMENTS?\b|[*\s]+$)/i.test(l.text)).map((l) => l.text), pages = [lines[at].page, lines[Math.max(at, end - 1)].page], next = lines[end]?.text.slice(0, 70) ?? "(end of file)";
+  if (st.kind === "repealed") {
+    // "N. [Heading ...] Rep. by ..." (the bracket can wrap onto the next line) or "[N. Heading.] Omitted by ..."
+    const cutJ = texts.findIndex((t, k) => k >= 1 && /^STATE AMENDMENTS?\b/i.test(t)), j = texts.slice(0, cutJ >= 0 ? Math.min(4, cutJ) : 4).reduce((a, b) => (a ? join2(a, b) : b), ""), m = /^\[?\d{1,3}[A-Z]{0,3}\.\s*\[(.+?)\]\s*(.*)$/.exec(j) ?? /^\[\d{1,3}[A-Z]{0,3}\.\s*(.+?)\]\s*(.*)$/.exec(j);
+    if (!m) return { ok: false, why: "could not read the repeal note" };
+    const used = texts.slice(0, 4).filter((_, k) => k < texts.length).length, cutR = texts.findIndex((t, k) => k >= 1 && /^STATE AMENDMENTS?\b/i.test(t)), tail = texts.slice(used, cutR >= 0 ? cutR : undefined).reduce((a, b) => (a ? join2(a, b) : b), "");
+    return { ok: true, repealed: true, heading: tidy(m[1]).replace(/(?<!\b(?:etc|viz|cf))\.$/i, ""), firstLine: texts[0], pages, lineCount: end - at, text: tidy(`${m[2]} ${tail}`), duplicate: null, nextStart: next };
+  }
+  const headOnly = st.kind === "headOnly", twoLines = st.kind === "wrapped";
+  const joined = headOnly ? `${texts[0]} —` : twoLines ? `${texts[0]} ${texts[1]}` : texts[0], m0 = /^\[?\d{1,3}[A-Z]{0,3}\.\s*(.*?)\s*[—–]\s*/.exec(joined);
   if (!m0) return { ok: false, why: "could not split heading from text" };
-  const heading = tidy(m0[1]);
-  const texts = lines.slice(idx, end).map((l) => l.text);
-  const merged = tidy(texts.slice(0, joined === lines[idx].text ? 1 : 2).reduce((a, b) => (a ? join2(a, b) : b), ""));
+  const heading = tidy(m0[1]).replace(/(?<!\b(?:etc|viz|cf))\.$/i, "");
+  const skip = headOnly ? 1 : twoLines ? 2 : 1;
+  const merged = headOnly ? "" : tidy(texts.slice(0, skip).reduce((a, b) => (a ? join2(a, b) : b), ""));
   const rest = merged.slice(merged.search(/[—–]/) + 1).trim();
   // state amendments printed under a section of a Central Act are not part of the Central text
-  const all = [rest, ...texts.slice(joined === lines[idx].text ? 1 : 2)].filter(Boolean), cutAt = all.findIndex((t) => /^STATE AMENDMENTS?\b/i.test(t) || /\bSTATE AMENDMENTS?\s*$/i.test(t));
+  const all = [rest, ...texts.slice(skip)].filter(Boolean), cutAt = all.findIndex((t) => /^STATE AMENDMENTS?\b/i.test(t) || /\bSTATE AMENDMENTS?\s*$/i.test(t));
   const kept = cutAt >= 0 ? all.slice(0, cutAt) : all;
   while (kept.length && /^[\s*]+$/.test(kept[kept.length - 1])) kept.pop();
-  const paras = paragraphs(kept);
-  let text = paras.join("\n");
+  // a cross-heading printed between sections ("Sale", or letter-spaced "S a l e") belongs to neither: a short last line with no closing punctuation after a line that ended a sentence
+  for (let k = 0; k < 2 && kept.length > 1; k++) { const last = kept[kept.length - 1], prev = kept[kept.length - 2]; if ((/^(?:\p{L} ){2,}\p{L}$/u.test(last) || (last.length <= 50 && /^[A-Z]/.test(last) && !/[.;:—–\]),*]$/.test(last) && /[.;:\]]$/.test(prev))) && !/^\(/.test(last)) kept.pop(); else break; }
+  let text = paragraphs(kept).join("\n");
   // the printed amendment brackets that wrap the whole section: only an unmatched leading "[" or trailing "]" is dropped
   const opens = (text.match(/\[/g) ?? []).length, closes = (text.match(/\]/g) ?? []).length;
   if (opens < closes) text = text.replace(/\]\s*$/, "");
   if (opens > closes) text = text.replace(/^\[\s*/, "");
   text = text.replace(/\n(Illustrations?)\n/g, "\n\n$1\n");
-  return { ok: true, heading, firstLine: lines[idx].text, pages: [lines[idx].page, lines[Math.max(idx, end - 1)].page], lineCount: end - idx, text, duplicate: dupe >= 0 ? lines[dupe].text.slice(0, 60) : null, nextStart: lines[end]?.text.slice(0, 70) ?? "(end of file)" };
+  return { ok: true, heading, firstLine: texts[0], pages, lineCount: end - at, text, duplicate: null, nextStart: next };
 }
 
 /** Every alphanumeric word of the section is found, in order, in the PDF's own text (pdftotext) between the pages it spans. Returns the first word that is not. */
 export function checkAgainstPdf(file, sec) {
   const raw = execFileSync("pdftotext", ["-f", String(sec.pages[0]), "-l", String(sec.pages[1] + 1), file, "-"], { maxBuffer: 1 << 28 }).toString().normalize("NFKC");
-  const words = (s) => s.toLowerCase().normalize("NFKC").replace(/(\p{L})-\s*(?=\p{L})/gu, "$1").match(/\p{L}+|\p{N}+/gu) ?? [];   // letters and digits are separate words ("3notified" has a footnote number glued on); "pre-emption" and "pre-\nemption" and "preemption" count as the same word
+  const words = (s) => s.toLowerCase().normalize("NFKC").replace(/-/g, "").match(/\p{L}+|\p{N}+/gu) ?? [];   // letters and digits are separate words ("3notified" has a footnote number glued on); "pre-emption" and "pre-\nemption" and "preemption" count as the same word
   const hay = words(raw); let j = 0, bad = null;
   for (const w of words(sec.heading + " " + sec.text)) { while (j < hay.length && hay[j] !== w) j++; if (j >= hay.length) { bad = w; break; } j++; }
   if (!bad) return null;
   // the PDF's own text can list the pieces of a page in a different order (an inserted clause before its neighbour): then every word must at least be there as often as we use it
   const count = (arr) => arr.reduce((m, w) => m.set(w, (m.get(w) ?? 0) + 1), new Map()), have = count(hay), need = count(words(sec.heading + " " + sec.text));
-  for (const [w, n] of need) if ((have.get(w) ?? 0) < n) return w;
+  const composite = (w) => { for (let k = 3; k <= w.length - 3; k++) if (have.has(w.slice(0, k)) && have.has(w.slice(k))) return true; return false; };   // a word the PDF breaks across lines in an odd place ("sub-" ... "ordinate")
+  for (const [w, n] of need) if ((have.get(w) ?? 0) < n && !composite(w)) return w;
   return null;
 }
 

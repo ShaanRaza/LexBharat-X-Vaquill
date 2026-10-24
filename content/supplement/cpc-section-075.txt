@@ -1,0 +1,21 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 75.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 31% of the PDF's words, of which 22% of its own words are in the PDF.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 75
+Heading: Power of Court to issue commissions
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Subject to such conditions and limitations as may be prescribed, the Court may issue a commission—
+(a) to examine any person;
+(b) to make a local investigation;
+(c) to examine or adjust accounts; or
+(d) to make a partition;
+[(e) to hold a scientific, technical, or expert investigation;
+(f) to conduct sale of property which is subject to speedy and natural decay and which is in the custody of the Court pending the determination of the suit;
+(g) to perform any ministerial act.]

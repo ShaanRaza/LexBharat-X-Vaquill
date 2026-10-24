@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Prevention of Corruption Act, 1988, section 3.
+# Extracted 2026-10-24 from India Code's PDF a1988-49.pdf (the PDF was created 2025-08-12; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 24% of the PDF's words, of which 29% of its own words are in the PDF.
+Act: The Prevention of Corruption Act, 1988
+Act ID: IND_central_1558
+Section: 3
+Heading: Power to appoint special Judges
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/54dfd58e-7946-4041-b25d-5e0c85ba9aca/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) The Central Government or the State Government may, by notification in the Official Gazette, appoint as many special Judges as may be necessary for such area or areas or for such case or group of cases as may be specified in the notification to try the following offences, namely:—
+(a) any offence punishable under this Act; and
+(b) any conspiracy to commit or any attempt to commit or any abetment of any of the offences specified in clause (a).
+(2) A person shall not be qualified for appointment as a special Judge under this Act unless he is or has been a Sessions Judge or an Additional Sessions Judge or an Assistant Sessions Judge under the Code of Criminal Procedure, 1973 (2 of 1974).

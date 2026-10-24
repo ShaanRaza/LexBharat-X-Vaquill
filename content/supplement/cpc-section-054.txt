@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 54.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 56% of the PDF's words, of which 30% of its own words are in the PDF.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 54
+Heading: Partition of estate or separation of share
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where the decree is for the partition of an undivided estate assessed to the payment of revenue to the Government, or for the separate possession of a share of such an estate, the partition of the estate or the separation of the share shall be made by the Collector or any gazetted subordinate of the Collector deputed by him in this behalf, in accordance with the law (if any) for the time being in force relating to the partition, or the separate possession of shares, of such estates.

@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 53.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 28% of its own words are in the PDF.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 53
+Heading: Liability of party preventing event on which the contract is to take effect
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+When a contract contains reciprocal promises, and one party to the contract prevents the other from performing his promise, the contract becomes voidable at the option of the party so prevented; and he is entitled to compensation from the other party for any loss which he may sustain in consequence of the non-performance of the contract.
+
+Illustration
+A and B contract that B shall execute certain work for A for a thousand rupees. B is ready and willing to execute the work accordingly, but A prevents him from doing so. The contract is voidable at the option of B; and, if he elects to rescind it, he is entitled to recover from A compensation for any loss which he has incurred by its non-performance.

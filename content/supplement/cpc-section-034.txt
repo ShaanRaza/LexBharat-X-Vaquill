@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 34.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 52% of the PDF's words, of which 35% of its own words are in the PDF.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 34
+Heading: Interest
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where and in so far as a decree is for the payment of money, the Court may, in the decree, order interest at such rate as the Court deems reasonable to be paid on the principal sum adjudged, from the date of the suit to the date of the decree, in addition to any interest adjudged on such principal sum for any period prior to the institution of the suit, [with further interest at such rate not exceeding six per cent. per annum as the Court deems reasonable on such principal sum], from the date of the decree to the date of payment, or to such earlier date as the Court thinks fit:
+[Provided that where the liability in relation to the sum so adjudged had arisen out of a commercial transaction, the rate of such further interest may exceed six per cent. per annum, but shall not exceed the contractual rate of interest or where there is no contractual rate, the rate at which moneys are lent or advanced by nationalised banks in relation to commercial transactions.
+Explanation I.—In this sub-section, “nationalised bank” means a corresponding new bank as defined in the Banking Companies (Acquisition and Transfer of Undertakings) Act, 1970 (5 of 1970).
+Explanation II.—For the purposes of this section, a transaction is a commercial transaction, if it is connected with the industry, trade or business of the party incurring the liability.]
+(2) Where such a decree is silent with respect to the payment of further interest [on such principal sum] from the date of the decree to the date of payment or other earlier date, the Court shall be deemed to have refused such interest, and a separate suit therefor shall not lie.

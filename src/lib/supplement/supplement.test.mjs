@@ -25,3 +25,37 @@ test("the hash changes with the text or any header field, not with line endings"
   const a = parseSupplementFile(HEAD() + BODY).entry, b = parseSupplementFile((HEAD() + BODY).replace(/\n/g, "\r\n")).entry, c = parseSupplementFile(HEAD() + BODY + " More.").entry, d = parseSupplementFile(HEAD({ date: "2026-10-25" }) + BODY).entry;
   assert.equal(entryHash(a), entryHash(b)); assert.notEqual(entryHash(a), entryHash(c)); assert.notEqual(entryHash(a), entryHash(d));
 });
+
+// ---- reading sections out of an Act PDF (scripts/supplement): synthetic lines, as pdf-text.mjs would deliver them
+import { listSections } from "../../../scripts/supplement/list-sections.mjs";
+import { cutSection } from "../../../scripts/supplement/extract-sections.mjs";
+const L = (text, o = {}) => ({ page: 1, y: 500, size: 11, x: 72, xEnd: 500, centered: false, text, ...o });
+const ACT = [
+  L("1. Short title.—This Act may be called the Test Act, 1900."),
+  L("2. Definitions.—In this Act,—"), L("(a) “thing” means a thing;"), L("(b) “other” means other things within clause"), L("(c) of section 5 applies."),
+  L("Illustrations", { centered: true }), L("(a) A does a thing."),
+  L("Sale", { centered: true, x: 200, xEnd: 300 }),
+  L("3. Heading that wraps over two"), L("lines.—The text of three."),
+  L("STATE AMENDMENTS", { centered: true }), L("Assam"), L("3A. Inserted by a state.—Not part of the Central Act."),
+  L("4. [Repealed.] Rep. by Act 9 of 1950."),
+  L("5. Presumption of something."), L("Presumption in case of advances.—The text of five, pre-"), L("emption and sub-"), L("ordinate things."),
+  L("[6. Omitted heading.] Omitted by Act 3 of 1960."),
+  L("CHAPTER II", { centered: true }), L("7. Seventh.—Text of seven subordinate."),
+  L("THE SCHEDULE", { centered: true }),
+];
+test("sections are listed in order: wrapped headings, repealed notes, a heading alone on its line; state insertions and the schedule are not sections", () => {
+  const s = listSections(ACT);
+  assert.deepEqual(s.map((x) => x.number), ["1", "2", "3", "4", "5", "6", "7"]);
+  assert.deepEqual(s.map((x) => x.kind), ["strict", "strict", "wrapped", "repealed", "headOnly", "repealed", "strict"]);
+});
+test("a section is cut at the next section, without cross-headings, state amendments or the schedule", () => {
+  const at = (n) => listSections(ACT).find((x) => x.number === n).line;
+  const two = cutSection(ACT, "2", at("2"));
+  assert.equal(two.heading, "Definitions"); assert.match(two.text, /^In this Act,—\n\(a\) “thing” means a thing;\n\(b\) “other” means other things within clause \(c\) of section 5 applies\.\n\nIllustrations\n\(a\) A does a thing\.$/);   // "(c)" mid-sentence stays in the sentence
+  assert.ok(!/Sale/.test(two.text));
+  const three = cutSection(ACT, "3", at("3")); assert.equal(three.heading, "Heading that wraps over two lines"); assert.equal(three.text, "The text of three."); assert.ok(!/Assam|3A/.test(three.text));
+  const four = cutSection(ACT, "4", at("4")); assert.equal(four.heading, "Repealed"); assert.equal(four.repealed, true); assert.equal(four.text, "Rep. by Act 9 of 1950.");
+  const five = cutSection(ACT, "5", at("5")); assert.equal(five.heading, "Presumption of something"); assert.match(five.text, /^Presumption in case of advances\.—The text of five, pre-emption and subordinate things\.$/);
+  const six = cutSection(ACT, "6", at("6")); assert.equal(six.heading, "Omitted heading"); assert.equal(six.text, "Omitted by Act 3 of 1960.");
+  assert.equal(cutSection(ACT, "7", at("7")).text, "Text of seven subordinate.");
+});

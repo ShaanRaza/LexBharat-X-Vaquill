@@ -1,0 +1,19 @@
+# FILL-IN FILE: The Limitation Act, 1963, section 6.
+# Extracted 2026-10-24 from India Code's PDF A1963-36.pdf (the PDF was created 2026-10-12; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 41% of its own words are in the PDF.
+Act: The Limitation Act, 1963
+Act ID: IND_central_1565
+Section: 6
+Heading: Legal disability
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/8c2f3bc0-5daf-4d11-971f-ad5f9b78b74b/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where a person entitled to institute a suit or make an application for the execution of a decree is, at the time from which the prescribed period is to be reckoned, a minor or insane, or an idiot, he may institute the suit or make the application within the same period after the disability has ceased, as would otherwise have been allowed from the time specified there for in the third column of the Schedule.
+(2) Where such person is, at the time from which the prescribed period is to be reckoned, affected by two such disabilities, or where, before his disability has ceased, he is affected by another disability, he may institute the suit or make the application within the same period after both disabilities have ceased, as would otherwise have been allowed from the time so specified.
+(3) Where the disability continues up to the death of that person, his legal representative may institute the suit or make the application within the same period after the death, as would otherwise have been allowed from the time so specified.
+(4) Where the legal representative referred to in sub-section (3) is, at the date of the death of the person whom he represents, affected by any such disability, the rules contained sub-sections (1) and (2) shall apply.
+(5) Where a person under disability dies after the disability ceases but within the period allowed to him under this section, his legal representative may institute the suit or make the application within the same period after the death, as would otherwise have been available to that person had he not died.
+Explanation.—For the purposes of this section, ‘minor’ includes a child in the womb.

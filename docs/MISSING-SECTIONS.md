@@ -265,3 +265,41 @@ Neon: main database 692 MB before and after (limit used 900 MB).
 5. NI Act s.13 (explanations (i) to (iii) and sub-section (2), and whether India Code shows the same two typos).
 
 **Still missing.** Everything else in the lists above, because there is no permitted source for it yet; the process is now cheap to repeat: download the Act's PDF on India Code, add a fill-in file per section (copy one, change the Act, Act ID and Section lines), run `node scripts/supplement/extract-all.mjs` and `fill-files.mjs` (add the Act to the maps in those scripts), then `npm run load:supplement`. One more gap you will see: about 15 copies of the CPC and other Acts are filed under individual States in the dataset (see "What the data itself shows"); they keep their old wrong text, because the filled sections belong to the Central Act only.
+
+## W7b: every missing or wrong section of the 8 Acts (2026-10-24)
+Same PDFs, same method, extended from the 30 chosen sections to **every** section the PDFs print (`scripts/supplement/list-sections.mjs`, `fill-all.mjs`). **489 more sections were filled and loaded (519 in all), with 609 passages embedded.** Neon main database 692 MB before, 693 MB after.
+
+**How a section was judged** (our open-india-law rows are never changed; a filled section hides the old row by number):
+- **Missing:** no row with that number in the Act's data.
+- **Wrong:** a row exists but (a) fewer than 90% of the PDF section's words are in it (incomplete or different text), or (b) fewer than 60% of its own words are in the PDF section (the right text mixed with other text: neighbouring sections, state amendments, headings), or (c) it has no usable text. The thresholds were chosen after reading samples; the rows left alone are the ones that match the PDF.
+- **The list of sections comes from the PDF itself:** every `N. Heading.—`, wrapped heading, heading alone on its line (the text then starts with its own side-note), and repealed or omitted section (`N. [Heading.] Rep. by ...`, `[N. Heading.] Omitted ...`), in strictly increasing order from section 1 to the first Schedule. State amendments (quoted insertions, and anything after a STATE AMENDMENTS heading that does not reach a higher section number) are skipped, so a section a State inserted is never taken for a Central one. Repealed and omitted sections are filled too (the text is the repeal note), so the Act pages stop showing false "missing" notices.
+- **Nothing written from memory; every word checked against the PDF:** 519 of 519 pass. Lines the checker could not match (the PDF printing "sub-" and "ordinate" far apart, a footnote number glued to a word) are handled by rules, not by hand: only deletions and joins of PDF text. Section numbers and headings come from the PDF's own start line; the next section must start at a higher number. Unsure sections would have been left empty and listed: there were none.
+
+| Act | Sections in the PDF | Fine in our data (left alone) | **Added** (missing) | **Replaced** (wrong) | of which incomplete or different / mixed with other text | Filled in the first 30 | Total filled |
+|---|---:|---:|---:|---:|---|---:|---:|
+| The Indian Contract Act, 1872 | 268 | 65 | **146** | 51 | 14 / 37 | 6 | 203 |
+| The Code of Civil Procedure, 1908 | 168 | 37 | **16** | 109 | 78 / 31 | 6 | 131 |
+| The Limitation Act, 1963 | 32 | 14 | **0** | 7 | 4 / 3 | 11 | 18 |
+| The Negotiable Instruments Act, 1881 | 155 | 115 | **12** | 25 | 7 / 18 | 3 | 40 |
+| The Specific Relief Act, 1963 | 46 | 38 | **2** | 5 | 1 / 4 | 1 | 8 |
+| The Prevention of Corruption Act, 1988 | 35 | 22 | **6** | 6 | 2 / 4 | 1 | 13 |
+| The Hindu Marriage Act, 1955 | 35 | 19 | **4** | 11 | 5 / 6 | 1 | 16 |
+| The Indian Stamp Act, 1899 | 90 | 0 | **19** | 70 | 25 / 45 | 1 | 90 |
+| **Total** | 829 | 310 | **205** | 284 | 136 / 148 | 30 | 519 |
+
+Notes on the table: (1) "Sections in the PDF" counts every numbered or lettered section including repealed ones (the Contract Act's 1872 numbering runs to 266 with lettered sections). (2) Our Indian Stamp Act data has none of its sections under the right number (the numbers are shifted: for example number 12 holds the text of section 3), so all 90 were replaced. (3) Each row's "Total filled" = added + replaced + the earlier 30 for that Act.
+
+**Files:** `content/supplement/<act>-section-<number>.txt`, 519 of them, each with the heading, Source URL (the Act PDF on India Code), Date copied, a comment saying whether it was missing or what the old text was like, and the section text. They are law text, committed. The PDFs are not.
+
+**State-filed copies never show wrong text above the Central version.** Our data has two State filings of these Acts: "The code of civil procedure 1908" under Chhattisgarh (173 rows, 164 identical to the Central rows, so it carries the same wrong text) and a garbled 12-section "The Indian Stamp Act,1899" under Madhya Pradesh. The loader finds such copies by title (same words ignoring "The", case, spaces and punctuation; table `act_copy_of`) and the database view `act_sections_v` hides a copy's section wherever the Central Act has a filled section with the same number. The view feeds keyword search, section lookup, the Act pages, Chat, Drafting and Review; smart search also ignores the copy's old vectors (the Central filled section has its own). Result: of the Chhattisgarh copy's 173 rows 111 are hidden (62 stay: numbers the Central Act has right), and the Madhya Pradesh copy (12 rows) is hidden entirely.
+
+| Check | Result |
+|---|---|
+| Database: copy rows still visible at a filled Central number | 0 of 111 (Chhattisgarh CPC), 0 of 12 (Madhya Pradesh Stamp Act) |
+| Keyword search and lookups (9 queries, 3 pages each, CPC and Stamp topics): copy results at a filled number | 0 leaks; 14 results from the Central Acts |
+| Smart search (17 queries, 3 pages each): copy results at a filled number | 0 leaks; 36 results from the Central Acts |
+| Chat (6 questions on res judicata, where to sue, attachment of salary, stamp duty, unstamped instruments, public charities): sources from a copy at a filled number | 0 of 60 sources; 31 from the Central CPC and Stamp Act; 4 Supported, 2 "Check sources" (the labels depend on the model; Gemini 3.5 flash-lite) |
+| Drafting (a notice about an unstamped agreement and where to sue): copies in the legal basis | 0; the basis was the Central Stamp Act s.35, 36, 42, 44, 61 and CPC s.11 |
+| Review (the service agreement test): copies among the sources | 0 of 14; the foreign-courts and damages points still cite Contract Act s.28 and s.73 |
+
+**Still wrong or missing after this.** Anything in the other Acts of the top-100 list (about 3,100 numbers); and sections these 8 Acts print that are Orders, Rules and Schedules (the CPC's Orders, the Limitation Act's Schedule, the Stamp Act's Schedule I) are not sections and were not filled. If a State-filed copy of another Act appears later, run `npm run load:supplement` again: it finds copies by title every time. Please spot-check more than the five sections listed earlier if you can; 519 sections is a lot of text to rely on without a second pair of eyes, and the highest-risk ones are in the Stamp Act (90 replaced, all by text from a 356-page PDF with long state-amendment blocks).

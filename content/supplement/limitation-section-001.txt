@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Limitation Act, 1963, section 1.
+# Extracted 2026-10-24 from India Code's PDF A1963-36.pdf (the PDF was created 2026-10-12; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 14% of the PDF's words, of which 24% of its own words are in the PDF.
+Act: The Limitation Act, 1963
+Act ID: IND_central_1565
+Section: 1
+Heading: Short title, extent and commencement
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/8c2f3bc0-5daf-4d11-971f-ad5f9b78b74b/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) This Act may be called the Limitation Act, 1963.
+(2) It extends to the whole of India ***.
+(3) It shall come into force on such date as the Central Government may, by notification in the Official Gazette, appoint.

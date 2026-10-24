@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 69.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 99% of the PDF's words, of which 15% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 69
+Heading: Penalty for breach of rule relating to sale of stamps and for unauthorised sale
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+–(a) Any person appointed to sell stamps who disobeys any rule made under section 74; and
+(b) any person not so appointed who sells or offers for sale any stamp (other than a [ten naye paise or five nayepaise] adhesive stamp); shall be punishable with imprisonment for a term which may extend to six months, or with fine which may extend to five hundred rupees, or with both.

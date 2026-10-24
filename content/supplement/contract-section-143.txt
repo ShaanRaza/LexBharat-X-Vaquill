@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 143.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 57% of the PDF's words, of which 99% of its own words are in the PDF.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 143
+Heading: Guarantee obtained by concealment invalid
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Any guarantee which the creditor has obtained by means of keeping silence as to material circumstances, is invalid.
+
+Illustrations
+(a) A engages B as clerk to collect money for him. B fails to account for some of his receipts, and A in consequence calls upon him to furnish security for his duly accounting. C gives his guarantee for B’s duly accounting. A does not acquaint C with B’s previous conduct. B afterwards makes default. The guarantee is invalid.
+(b) A guarantees to C payment for iron to be supplied by him to B to the amount of 2,000 tons. B and C have privately agreed that B should pay five rupees per ton beyond the market price, such excess to be applied in liquidation of an old debt. This agreement is concealed from A. A is not liable as a surety.

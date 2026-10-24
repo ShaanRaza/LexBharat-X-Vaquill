@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 238.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 20% of its own words are in the PDF.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 238
+Heading: Effect, on agreement, of misrepresentation of fraud, by agent
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Misrepresentation made, or frauds committed, by agents acting in the course of their business for their principals, have the same effect on agreements made by such agents as if such misrepresentations or frauds had been made or committed by the principals; but misrepresentations made, or frauds committed, by agents, in matters which do not fall within their authority, do not affect their principals.
+
+Illustrations
+(a) A, being B’s agent for the sale of goods, induces C to buy them by a misrepresentation, which he was not authorized by B to make. The contract is voidable, as between B and C, at the option of C.
+(b) A, the captain of B’s ship, signs bills of lading without having received on board the goods mentioned therein. The bills of lading are void as between B and the pretended cosignor.

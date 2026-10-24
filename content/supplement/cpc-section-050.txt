@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 50.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 26% of its own words are in the PDF.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 50
+Heading: Legal representative
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where a judgment-debtor dies before the decree has been fully satisfied, the holder of the decree may apply to the Court which passed it to execute the same against the legal representative of the deceased.
+(2) Where the decree is executed against such legal representative, he shall be liable only to the extent of the property of the deceased which has come to his hands and has not been duly disposed of; and, for the purpose of ascertaining such liability, the Court executing the decree may, of its own motion or on the application of the decree-holder, compel such legal representative to produce such accounts as it thinks fit.

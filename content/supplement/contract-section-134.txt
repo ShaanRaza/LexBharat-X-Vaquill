@@ -1,0 +1,19 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 134.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 134
+Heading: Discharge of surety by release or discharge of principal debtor
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The surety is discharged by any contract between the creditor and the principal debtor, by which the principal debtor is released, or by any act or omission of the creditor, the legal consequence of which is the discharge of the principal debtor.
+
+Illustrations
+(a) A gives a guarantee to C for goods to be supplied by C to B. C supplies goods to B, and afterwards B becomes embarrassed and contracts with his creditors (including C) to assign to them his property in consideration of their releasing him from their demands. Here B is released from his debt by the contract with C, and A is discharged from his suretyship.
+(b) A contracts with B to grow a crop of indigo on A’s land and to deliver it to B at a fixed rate, and C guarantees A’s performance of this contract. B diverts a stream of water which is necessary for the irrigation of A’s land and thereby prevents him from raising the indigo. C is no longer liable on his guarantee.
+(c) A contracts with B for a fixed price to build a house for B within a stipulated time, B supplying the necessary timber. C guarantees A’s performance of the contract. B omits to supply the timber. C is discharged from his suretyship.

@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 224.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 224
+Heading: Non-liability of employer of agent to do a criminal act
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where one person employs another to do an act which is criminal, the employer is not liable to the agent, either upon an express or an implied promise, to indemnify him against the consequences of that Act.
+
+Illustrations
+(a) A employs B to beat C, and agrees to indemnify him against all consequences of the act. B thereupon beats C, and has to pay damages to C for so doing. A is not liable to indemnify B for those damages.
+(b) B, the proprietor of a newspaper, publishes, at A’s request, a libel upon C in the paper, and A agrees to indemnify B against the consequences of the publication, and all costs and damages of any action in respect thereof. B is sued by C and has to pay damages, and also incurs expenses. A is not liable to B upon the indemnity.

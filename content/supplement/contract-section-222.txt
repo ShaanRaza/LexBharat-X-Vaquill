@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 222.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 222
+Heading: Agent to be indemnified against consequences of lawful acts
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The employer of an agent is bound to indemnify him against the consequences of all lawful acts done by such agent in exercise of the authority conferred upon him.
+
+Illustrations
+(a) B, at Singapur, under instructions from A of Calcutta, contracts with C to deliver certain goods to him. A does not send the goods to B, and C sues B for breach of contract. B informs A of the suit, and A authorizes him to defend the suit. B defends the suit, and is compelled to pay damages and costs, and incurs expenses. A is liable to B for such damages, costs and expenses.
+(b) B, a broker at Calcutta, by the orders of A, a merchant there, contracts with C for the purchase of 10 casks of oil for A. Afterwards A refuses to receive the oil, and C sues B. B informs A, who repudiates the contract altogether. B defends, but unsuccessfully, and has to pay damages and costs and incurs expenses. A is liable to B for such damages, costs and expenses.

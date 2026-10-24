@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 59.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 20% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 59
+Heading: Procedure in disposing of case stated
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) The High Court, *** upon the hearing of any such case, shall decide the questions raised thereby, and shall deliver its judgment thereon containing the grounds on which such decision is founded.
+(2) The Court shall send to the Revenue-authority by which the case was stated, a copy of such judgment under the seal of the Court and the signature of the Registrar; and the Revenue-authority shall, on receiving such copy, dispose of the case conformably to such judgment.

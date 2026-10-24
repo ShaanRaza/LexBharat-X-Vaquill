@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 54A.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 54A
+Heading: Allowances for stamps in denominations of annas
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Notwithstanding anything contained in section 54, when any person is possessed of a stamp or stamps in any denominations, other than in denominations of annas four of multiples thereof and such stamp or stamps has or have not been spoiled, the Collector shall repay to such person the value of such stamp or stamps in money calculated in accordance with the provisions of sub-section (2) of section 14 of the Indian Coinage Act, 1906, (3 of 1906) upon such person delivering up, within six months from the commencement of the Indian Stamp (Amendment) Act,1958 (19 of 1958), such stamp or stamps to the Collector.

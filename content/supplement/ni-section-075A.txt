@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Negotiable Instruments Act, 1881, section 75A.
+# Extracted 2026-10-24 from India Code's PDF a1881-26.pdf (the PDF was created 2023-06-26; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Negotiable Instruments Act, 1881
+Act ID: IND_central_2189
+Section: 75A
+Heading: Excuse for delay in presentment for acceptance or payment
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/82bf1927-5e52-4aab-a876-50552c5952cd/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Delay in presentment [for acceptance or payment] is excused if the delay is caused by circumstances beyond the control of the holder, and not imputable to his default, misconduct or negligence. When the cause of delay ceases to operate, presentment must be made within a reasonable time.

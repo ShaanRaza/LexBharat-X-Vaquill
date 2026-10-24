@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Specific Relief Act, 1963, section 20.
+# Extracted 2026-10-24 from India Code's PDF A1963-47.pdf (the PDF was created 2026-10-12; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Specific Relief Act, 1963
+Act ID: IND_central_1583
+Section: 20
+Heading: Substituted performance of contract
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/aba411f8-4c8d-4c8e-af29-64d442ae80f0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Without prejudice to the generality of the provisions contained in the Indian Contract Act, 1872 (9 of 1872), and, except as otherwise agreed upon by the parties, where the contract is broken due to non-performance of promise by any party, the party who suffers by such breach shall have the option of substituted performance through a third party or by his own agency, and, recover the expenses and other costs actually incurred, spent or suffered by him, from the party committing such breach.
+(2) No substituted performance of contract under sub-section (1) shall be undertaken unless the party who suffers such breach has given a notice in writing, of not less than thirty days, to the party in breach calling upon him to perform the contract within such time as specified in the notice, and on his refusal or failure to do so, he may get the same performed by a third party or by his own agency:
+Provided that the party who suffers such breach shall not be entitled to recover the expenses and costs under sub-section (1) unless he has got the contract performed through a third party or by his own agency.
+(3) Where the party suffering breach of contract has got the contract performed through a third party or by his own agency after giving notice under sub-section (1), he shall not be entitled to claim relief of specific performance against the party in breach.
+(4) Nothing in this section shall prevent the party who has suffered breach of contract from claiming compensation from the party in breach.

@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 54.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 98% of the PDF's words, of which 11% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 54
+Heading: Allowance for stamps not required for use
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+When any person is possessed of a stamp or stamps which have not been spoiled or rendered unfit or useless for the purpose intended, but for which he has no immediate use, the Collector shall repay to such person the value of such stamp or stamps in money, deducting [ten nayepaise] for each rupee or portion of a rupee, upon such person delivering up the same to be cancelled, and proving to the Collector's satisfaction—
+(a) that such stamp or stamps were purchased by such person with a bona fide intention to use them; and
+(b) that he has paid the full price thereof; and
+(c) that they were so purchased within the period of six months next preceding the date on which they were so delivered:
+Provided that, where the person is a licensed vendor of stamps, the Collector may, if he thinks fit, make the repayment of the sum actually paid by the vendor without any such deduction as aforesaid.

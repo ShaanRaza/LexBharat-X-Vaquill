@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 37.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 37% of its own words are in the PDF.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 37
+Heading: Definition of Court which passed a decree
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The expression “Court which passed a decree,” or words to that effect, shall, in relation to the execution of decrees, unless there is anything repugnant in the subject or context, be deemed to include,—
+(a) where the decree to be executed has been passed in the exercise of appellate jurisdiction, the Court of first instance, and
+(b) where the Court of first instance has ceased to exist or to have jurisdiction to execute it, the Court which, if the suit wherein the decree was passed was instituted at the time of making the application for the execution of the decree, would have jurisdiction to try such suit.
+[Explanation.—The Court of first instance does not cease to have jurisdiction to execute a decree merely on the ground that after the institution of the suit wherein the decree was passed or after the passing of the decree, any area has been transferred from the jurisdiction of that Court to the jurisdiction of any other Court; but, in every such case, such other Court shall also have jurisdiction to execute the decree, if at the time of making the application for execution of the decree it would have jurisdiction to try the said suit.]

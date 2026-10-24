@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 180.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 180
+Heading: Suit by bailor or bailee against wrong-doer
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+If a third person wrongfully deprives the bailee of the use or possession of the goods bailed, or does them any injury, the bailee is entitled to use such remedies as the owner might have used in the like case if no bailment had been made; and either the bailor or the bailee may bring a suit against a third person for such deprivation or injury.

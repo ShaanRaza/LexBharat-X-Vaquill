@@ -1,0 +1,22 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 57.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 91% of the PDF's words, of which 22% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 57
+Heading: Statement of case by Chief-Controlling Revenue-authority to High Court
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) The Chief Controlling Revenue-authority may state any case referred to it under section 56, sub-section (2), or otherwise coming to its notice, and refer such case, with its own opinion thereon,—
+[(a) if it arises in a State, to the High Court for that State;
+[(b) if it arises in the Union territory of the Delhi, to the High Court of Delhi;] * * * * *
+[(c) if it arises in the Union territory of the Arunachal Pradesh or Mizoram, to the Gauhati High Court (the High Court of Assam, Nagaland, Meghalaya, Manipur and Tripura;)]
+(d) if it arises in the Union territory of the Andaman and Nicobar Islands, to the High Court at Calcutta;
+(e) if it arises in the Union territory of the [Lakshadweep], to the High Court of Kerala;]
+[(ee) if it arises in the Union territory of the Chandigarh, to the High Court of Punjab and Haryana;]
+[(f) if it arises in the Union territory of Dadra and Nagar Haveli, to the High Court of Bombay.]
+(2) Every such case shall be decided by not less than three Judges of the High Court *** to which it is referred, and in case of difference the opinion of the majority shall prevail.

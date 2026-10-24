@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 230.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 230
+Heading: Agent cannot personally enforce, nor be bound by, contracts on behalf of principal
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+In the absence of any contract to that effect, an agent cannot personally enforce contracts entered into by him on behalf of his principal, nor is he personally bound by them. Presumption of contract to contrary—Such a contract shall be presumed to exist in the following cases:—
+(1) where the contract is made by an agent for the sale or purchase of goods for a merchant resident abroad;
+(2) where the agent does not disclose the name of his principal;
+(3) where the principal, though disclosed, cannot be sued.

@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 7.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 65% of the PDF's words, of which 1% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 7
+Heading: Policies of sea-insurance
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+* * * * *
+(4) Where any sea-insurance is made for or upon a voyage and also for time, or to extend to or cover any time beyond thirty days after the ship shall have arrived at her destination and been there moored at anchor, the policy shall be charged with duty as a policy for or upon a voyage, and also with duty as a policy for time.

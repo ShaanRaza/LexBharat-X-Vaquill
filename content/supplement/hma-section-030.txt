@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Hindu Marriage Act, 1955, section 30.
+# Extracted 2026-10-24 from India Code's PDF a1955-25.pdf (the PDF was created 2026-05-06; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 16% of the PDF's words, of which 47% of its own words are in the PDF.
+# NOTE: this section is repealed or omitted: the text is only the note saying so.
+Act: The Hindu Marriage Act, 1955
+Act ID: IND_central_1560
+Section: 30
+Heading: Repeals
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/526166d6-239d-4b6c-8999-c776179dea69/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Rep. by the Repealing and Amending Act, 1960 (58 of 1960), s. 2 and the First Schedule (w.e.f. 26-12-1960). 1. “The Hindu Code as drafted by the Rau Committee was introduced in the Legislative Assembly in 1947 and was referred to a Select Committee of the Constituent Assembly of India (Legislative) on 9th April, 1948. The Select Committee submitted its report on the 29th August, 1948 and their revised draft was discussed at consideration length by the Provisional Parliament, but as the Bill could not be passed before the dissolution of that Parliament it now stands lapsed. 2. As stated earlier by Government, the Code is now being split up into separate parts of the purpose of facilitating discussion and passage in Parliament, and the present Bill is the first of a series of such parts and deals with marriage and divorce. The earlier Bill has now been considerably revised, one significant change being the omission of all provisions relating to civil marriages, a subject dealt with in the Special Marriage Bill now pending before the Council of States (see the Special Marriage Act, 1954 (43 of 1954). The notes on clauses explain the various provisions contained in the Bill. NEW DELHI; The 8th December, 1952. ` C.C. BISWAS.

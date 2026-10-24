@@ -5,6 +5,7 @@ import fs from "node:fs";
 import { getDocumentProxy } from "unpdf";
 
 const SUP_MAX = 7.6;                       // raised footnote markers are set at about 7 pt; body text is 11, illustrations 8 to 9
+const FOOTNOTE = /^\d{1,3}\.\s+(?:Subs\.|Ins\.|Added\b|Omitted\b|Rep\.|The words\b|Cf\.|See\b|Clause\b|Sub-section\b|Re-?numbered|Now\b|Vide\b|Substituted\b|Inserted\b)/;
 const isMarker = (s) => /^[\d*†‡]{1,3}$/.test(s.trim());
 
 export async function pdfLines(file) {
@@ -29,15 +30,20 @@ export async function pdfLines(file) {
       const its = r.items.sort((a, b) => a.transform[4] - b.transform[4]); let text = "", end = null;
       for (const it of its) { const x = it.transform[4]; if (end !== null && x - end > 1.2 && !text.endsWith(" ") && !it.str.startsWith(" ")) text += " "; text += it.str; end = x + it.width; }
       text = text.replace(/\s+/g, " ").trim().replace(/\s+([,.;:])/g, "$1").replace(/(\((?:[a-z]{1,3}|[ivx]+|\d{1,3}[A-Z]?)\))(?=[A-Za-z“‘])/g, "$1 ");   // a gap left by a removed marker; a missing space after "(a)"
-      return { page: p, y: r.y, size: Math.max(...its.map((i) => i.height)), text };
+      return { page: p, y: r.y, size: Math.max(...its.map((i) => i.height)), text, x: its[0].transform[4], xEnd: Math.max(...its.map((i) => i.transform[4] + i.width)) };
     }).filter((l) => l.text);
+    // centred lines (cross-headings between sections, "Illustration" labels): equal space left and right, clearly inside the text block
+    const left = Math.min(...lines.map((l) => l.x)), right = Math.max(...lines.map((l) => l.xEnd));
+    for (const l of lines) l.centered = l.x - left > 40 && Math.abs((l.x - left) - (right - l.xEnd)) < 24;
     // the page number: a lone number near the bottom
     lines = lines.filter((l) => !(l.y < 80 && /^\d{1,4}$/.test(l.text)));
     // the footnotes: from the first small line BELOW the first marker that starts with "<marker number>." to the end of the page
-    if (markers.size) {
-      const at = lines.findIndex((l) => l.y < markerY - 1 && l.size <= 9.6 && [...markers].some((m) => l.text.startsWith(`${m}.`) || l.text.startsWith(`${m} `)));
-      if (at >= 0) lines = lines.slice(0, at);
-    }
+    let cut = -1;
+    if (markers.size) cut = lines.findIndex((l) => l.y < markerY - 1 && l.size <= 9.6 && [...markers].some((m) => l.text.startsWith(`${m}.`) || l.text.startsWith(`${m} `)));
+    // a footnote whose marker could not be seen (it sits in a heading, or is glued to other text): a small line "N. Subs. by ...", "N. Ins. by ..." and so on
+    const cut2 = lines.findIndex((l) => l.y < 160 && FOOTNOTE.test(l.text));
+    if (cut2 >= 0 && (cut < 0 || cut2 < cut)) cut = cut2;   // the earlier of the two: footnote 1 can be set in the body's size while footnote 2 is small   // footnotes are at the foot of the page, in the body's size in some PDFs
+    if (cut >= 0) lines = lines.slice(0, cut);
     out.push(...lines);
   }
   return out;

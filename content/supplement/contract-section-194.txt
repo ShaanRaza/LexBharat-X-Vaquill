@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 194.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 194
+Heading: Relation between principal and person duly appointed by agent to act in business of agency
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where an agent, holding an express or implied authority to name another person to act for the principal in the business of the agency, has named another person accordingly, such person is not a sub-agent, but an agent of the principal for such part of the business of the agency as is entrusted to him.
+
+Illustrations
+(a) A directs B, his solicitor, to sell his estate by auction, and to employ an auctioneer for the purpose. B names C, an auctioneer, to conduct the sale. C is not a sub-agent, but is A’s agent for the conduct of the sale.
+(b) A authorizes B, a merchant in Calcutta, to recover the moneys due to A from C & Co. B instructs D, a solicitor, to take legal proceedings against C & Co. for the recovery of the money. D is not a sub-agent, but is solicitor for A.

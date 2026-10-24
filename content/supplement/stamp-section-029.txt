@@ -1,0 +1,27 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 29.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 29
+Heading: Duties by whom payable
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+In the absence of an agreement to the contrary, the expense of providing the proper stamp shall be borne —
+(a) in the case of any instrument described in any of the following Articles of Schedule I, namely:— No. 2. (Administration Bond), [No. 6 (Agreement relating to Deposit of Title-deeds, Pawn or Pledge),] No. 13 (Bill of exchange), No. 15 (Bond), No. 16 (Bottomry Bond), No. 26 (Customs Bond), * * * * * No. 32 (Further charge), No. 34 (Indemnity-Bond), No. 40 (Mortgage-deed), No. 49 (Promissory-note), No. 55 (Release), No. 56 (Respondentia Bond), No. 57 (Security-bond or Mortgage-deed), No. 58 (Settlement), * * * * * * * * * * No. 62 (c). (Transfer of any interest secured by a bond, mortgage-deed or policy of insurance),— by the person drawing, making or executing such instrument:
+[(b) in the case of a policy of insurance other than fire-insurance—by the person effecting the insurance;
+(bb) in the case of a policy of fire-insurance— by the person issuing the policy;]
+(c) in the case of a conveyance (including re-conveyance of mortgaged property) by the grantee: in the case of a lease or agreement to lease—by the lessee or intended lessee:
+(d) in the case of a counterpart of a lease—by the lessor;
+(e) in the case of an instrument of exchange [including swap]—by the parties in equal shares, (f) in the case of a certificate of sale—by the purchaser of the property to which such certificate relates; ***
+(g) in the case of an instrument of partition—by the parties thereto in proportion to their respective shares in the whole property partitioned or, when the partition is made in execution of an order passed by a Revenue-authority or Civil Court or arbitrator, in such proportion as such authority, Court or arbitrator directs.
+[(h) in the case of sale of security through stock exchange, by the buyer of such security;
+(i) in the case of sale of security otherwise than through a stock exchange, by the seller of such security;
+(j) in the case of transfer of security through a depository, by the transferor of such security;
+(k) in the case of transfer of security otherwise than through a stock exchange or depository, by the transferor of such security;
+(l) in the case of issue of security, whether through a stock exchange or a depository or otherwise, by the issuer of such security; and
+(m) in the case of any other instrument not specified herein, by the person making, drawing or executing such instrument.]

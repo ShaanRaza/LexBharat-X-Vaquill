@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 132.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 20% of its own words are in the PDF.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 132
+Heading: Liability of two persons, primarily liable, not affected by arrangement between them that one shall be surety on other’s default
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where two persons contract with a third person to undertake a certain liability, and also contract with each other that one of them shall be liable only on the default of the other, the third person not being a party to such contract, the liability of each of such two persons to the third person under the first contract is not affected by the existence of the second contract, although such third person may have been aware of its existence.
+
+Illustration
+A and B make a joint and several promissory note to C. A makes it, in fact, as surety for B, and C knows this at the time when the note is made. The fact that A, to the knowledge of C, made the note as surety for B, is no answer to a suit by C against A upon the note.

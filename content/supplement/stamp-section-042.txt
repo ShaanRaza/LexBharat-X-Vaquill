@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 42.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 97% of the PDF's words, of which 37% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 42
+Heading: Endorsement of instruments on which duty has been paid under section 35, 40 or 41
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) When the duty and penalty (if any), leviable in respect of any instrument have been paid under section 35, section 40 or section 41, the person admitting such instrument in evidence or the Collector, as the case may be, shall certify by endorsement thereon that the proper duty or, as the case may be, the proper duty and penalty (stating the amount of each) have been levied in respect thereof, and the name and residence of the person paying them.
+(2) Every instrument so endorsed shall thereupon be admissible in evidence, and may be registered and acted upon and authenticated as if it had been duly stamped, and shall be delivered on his application in this behalf to the person from whose possession it came into the hands of the officer impounding it, or as such person may direct:
+Provided that—
+(a) no instrument which has been admitted in evidence upon payment of duty and a penalty under section 35, shall be so delivered before the expiration of one month from the date of such impounding, or if the Collector has certified that its further detention is necessary and has not cancelled such certificate;
+(b) nothing in this section shall affect the Code of Civil Procedure (XIV of 1882), section 144, clause 3.

@@ -1,0 +1,20 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 54.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 54
+Heading: Effect of default as to that promise which should be first performed, in contract consisting of reciprocal promises
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+When a contract consists of reciprocal promises, such that one of them cannot be performed, or that its performance cannot be claimed till the other has been performed, and the promisor of the promise last mentioned fails to perform it, such promisor cannot claim the performance of the reciprocal promise, and must make compensation to the other party to the contract for any loss which such other party may sustain by the non-performance of the contract.
+
+Illustrations
+(a) A hires B’s ship to take in and convey, from Calcutta to the Mauritius, a cargo to be provided by A, B receiving a certain freight for its conveyance. A does not provide any cargo for the ship. A cannot claim the performance of B’s promise, and must make compensation to B for the loss which B sustains by the non-performance of the contract.
+(b) A contracts with B to execute certain builder’s work for a fixed price, B supplying the scaffolding and timber necessary for the work. B refuses to furnish any scaffolding or timber, and the work cannot be executed. A need not execute the work, and B is bound to make compensation to A for any loss caused to him by the non-performance of the contract.
+(c) A contracts with B to deliver to him, at a specified price, certain merchandise on board a ship which cannot arrive for a month, and B engages to pay for the merchandise within a week from the date of the contract. B does not pay within the week. A’s promise to deliver need not be performed, and B must make compensation.
+(d) A promises B to sell him one hundred bales of merchandise, to be delivered next day, and B promises A to pay for them within a month. A does not deliver according to his promise. B’s promise to pay need not be performed, and A must make compensation.

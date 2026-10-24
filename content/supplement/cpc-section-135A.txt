@@ -1,0 +1,26 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 135A.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 135A
+Heading: Exemption of members of legislative bodies from arrest and detention under civil process
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+[(1) No person shall be liable to arrest or detention in prison under civil process—
+(a) if he is a member of—
+(i) either House of Parliament, or
+(ii) the Legislative Assembly or Legislative Council of a State, or
+(iii) a Legislative Assembly of a Union territory, during the continuance of any meeting of such House of Parliament or, as the case may be, of the Legislative Assembly or the Legislative Council;
+(b) if he is a member of any committee of—
+(i) either House of Parliament, or
+(ii) the Legislative Assembly of a State or Union territory, or
+(iii) the Legislative Council of a State, during the continuance of any meeting of such committee;
+(c) if he is a member of—
+(i) either House of Parliament, or
+(ii) a Legislative Assembly or Legislative Council of a State having both such Houses, during the continuance of a joint sitting, meeting, conference or joint committee of the Houses of Parliament or, Houses of the State Legislature, as the case may be, and during the forty days before and after such meeting, sitting or conference.]
+(2) A person released from detention under sub-section (1) shall, subject to the provisions, of the said sub-section, be liable to re-arrest and to the further detention to which he would have been liable if he had not been released under the provisions of sub-section (1).

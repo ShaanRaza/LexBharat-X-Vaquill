@@ -1,0 +1,22 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 42.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 23% of its own words are in the PDF.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 42
+Heading: Powers of Court in executing transferred decree
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+[(1)] The Court executing a decree sent to it shall have the same powers in executing such decree as if it had been passed by itself. All persons is disobeying or obstructing the execution of the decree shall be punishable by such Court in the same manner as if it had passed the decree. And its order in executing such decree shall be subject to the same rules in respect of appeal as if the decree had passed by itself.
+[(2) Without prejudice to the generality of the provisions of sub-section (1), the powers of the Court under that sub-section shall include the following powers of the Court which passed the decree, namely:—
+(a) power to send the decree for execution to another Court under section 39;
+(b) power to execute the decree against the legal representative of the deceased judgment-debtor under section 50;
+(c) power to order attachment of a decree.
+(3) A Court passing an order in exercise of the powers specified in sub-section (2) shall send a copy thereof to the Court which passed the decree.
+(4) Nothing in this section shall be deemed to confer on the Court to which a decree is sent for execution any of the following powers, namely:—
+(a) power to order execution at the instance of the transferee of the decree;
+(b) in the case of a decree passed against a firm, power to grant leave to execute such decree against any person, other than such a person as is referred to in clause (b), or clause (c) of sub-rule (1) of rule 50 of Order XXI. ]

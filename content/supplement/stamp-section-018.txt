@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 18.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 18
+Heading: Instruments other than bills and notes executed out of India
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Every instrument chargeable with duty executed only out of [India], and not being a bill of exchange *** or promissory note, may be stamped within three months after it has been first received in [India].
+(2) Where any such instrument cannot, with reference to the description of stamp prescribed therefore, be duly stamped by a private person, it may be taken within the said period of three months to the Collector, who shall stamp the same, in such manner as the [State Government] may by rule prescribe, with a stamp of such value as the person so taking such instrument may require and pay for.

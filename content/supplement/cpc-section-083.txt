@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 83.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 45% of the PDF's words, of which 21% of its own words are in the PDF.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 83
+Heading: When aliens may sue
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Alien enemies residing in India with the permission of the Central Government, and alien friends, may sue in any Court otherwise competent to try the suit, as if they were citizens of India, but alien enemies residing in India without such permission, or residing in a foreign country, shall not sue in any such Court.
+Explanation.—Every person residing in a foreign country, the Government of which is at war with India and carrying on business in that country without a licence in that behalf granted by the Central Government, shall, for the purpose of this section, be deemed to be an alien enemy residing in a foreign country.

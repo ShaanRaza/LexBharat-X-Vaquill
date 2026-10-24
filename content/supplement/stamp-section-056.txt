@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 56.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 99% of the PDF's words, of which 15% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 56
+Heading: Control of, and statement of case to, Chief Controlling Revenue-authority
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) The powers exercisable by a Collector under Chapter IV and Chapter V [and under clause (a) of the first proviso to section 26] shall in all cases be subject to the control of the Chief Controlling Revenue-authority.
+(2) If any Collector, acting under section 31, section 40 or section 41, feels doubt as to the amount of duty with which any instrument is chargeable, he may draw up a statement of the case, and refer it, with his own opinion thereon, for the decision of the Chief Controlling Revenue-authority.
+(3) Such authority shall consider the case and send a copy of its decision to the Collector, who shall proceed to asses and charge the duty (if any) in conformity with such decision.

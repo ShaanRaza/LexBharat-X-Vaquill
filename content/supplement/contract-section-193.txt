@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 193.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 33% of its own words are in the PDF.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 193
+Heading: Agent’s responsibility for sub-agent appointed without authority
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where an agent, without having authority to do so, has appointed a person to act as a sub-agent, the agent stands towards such person in the relation of a principal to an agent, and is responsible for his acts both to the principal and to third persons; the principal is not represented, by or responsible for the acts of the person so employed, nor is that person responsible to the principal.

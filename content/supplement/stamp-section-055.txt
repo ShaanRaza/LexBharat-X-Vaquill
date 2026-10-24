@@ -1,0 +1,20 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 55.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 99% of the PDF's words, of which 35% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 55
+Heading: Allowance on renewal of certain debentures
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+When any duly stamped debenture is renewed by the issue of a new debenture in the same terms, the Collector shall, upon application made within one month, repay to the person issuing such debenture, the value of the stamp on the original or on the new debenture, whichever shall be less:
+Provided that the original debenture is produced before the Collector and cancelled by him in such manner as [the State Government] may direct.
+Explanation.—A debenture shall be deemed to be renewed in the same terms within the meaning of this section notwithstanding the following changes:—
+(a) the issue of two or more debentures in place of one original debenture, the total amount secured being the same;
+(b) the issue of one debenture in place of two or more original debentures, the total amount secured being the same;
+(c) the substitution of the name of the holder at the time of renewal for the name of the original holder; and
+(d) the alteration of the rate of interest or the dates of payment thereof.

@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 82.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 7% of the PDF's words, of which 48% of its own words are in the PDF.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 82
+Heading: Execution of decree
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+[(1) Where, in a suit by or against the Government or by or against a public officer in respect of any act purporting to be done by him in his official capacity, a decree is passed against the Union of India or a State or, as the case may be, the public officer, such decree shall not be executed except in accordance with the provisions of sub-section (2).]
+(2) Execution shall not be issued on any such decree unless it remains unsatisfied for the period of three months computed from the date of [such decree].
+[(3) The provisions of sub-sections (1) and (2) shall apply in relation to an order or award as they apply in relation to a decree, if the order or award—
+(a) is passed or made against [the Union of India] or a State or a public officer in respect of any such act as aforesaid, whether by a Court or by any other authority; and
+(b) is capable of being executed under the provisions of this Code or of any other law for the time being in force as if it were a decree.]

@@ -36,15 +36,26 @@ for (const stmt of fs.readFileSync("scripts/supplement/supplement-schema.sql", "
 if (vec) await q(vec, "CREATE TABLE IF NOT EXISTS supplement_emb_256 (chunk_id text PRIMARY KEY, act_id text NOT NULL, section_key text NOT NULL, embedding halfvec(256) NOT NULL)");
 const existing = new Map((await q(main, "select act_id, number, file_hash, file_name from act_sections_supplement")).map((r) => [`${r.act_id}|${r.number}`, r]));
 
+const actCache = new Map();
+/** One query per Act: its title and its open-india-law rows (number -> first row, and the reading order of the last row before a given number). */
+async function actInfo(actId) {
+  if (actCache.has(actId)) return actCache.get(actId);
+  const title = (await q(main, "select title from acts where act_id = $1", [actId]))[0]?.title ?? null;
+  const rows = title ? await q(main, "select number, ord from act_sections where act_id = $1 and number is not null order by ord", [actId]) : [];
+  const byNumber = new Map(); for (const r of rows) { const k = r.number.toUpperCase(); if (!byNumber.has(k)) byNumber.set(k, r); }
+  const nums = rows.filter((r) => /^[0-9]+$/.test(r.number)).map((r) => [Number(r.number), Number(r.ord)]);
+  const info = { title, byNumber, before: (n) => nums.filter(([k]) => k < n).reduce((m, [, o]) => Math.max(m, o), 0) };
+  actCache.set(actId, info); return info;
+}
 const stats = { added: 0, updated: 0, unchanged: 0, removed: 0, failed: 0, chunks: 0 };
 const toEmbed = [];   // { entry, chunks }
 for (const p of good) {
   const e = p.entry, key = `${e.actId}|${e.number}`, hash = entryHash(e);
-  const act = (await q(main, "select title from acts where act_id = $1", [e.actId]))[0];
-  if (!act) { say(`  PROBLEM ${p.f}: no Act with the Act ID ${e.actId}.`); stats.failed++; continue; }
-  const base = (await q(main, "select section_key, ord from act_sections where act_id = $1 and upper(number) = $2 order by ord", [e.actId, e.number]))[0];
+  const A = await actInfo(e.actId);
+  if (!A.title) { say(`  PROBLEM ${p.f}: no Act with the Act ID ${e.actId}.`); stats.failed++; continue; }
+  const act = { title: A.title }, base = A.byNumber.get(e.number);
   if (base && !e.replaces) { say(`  PROBLEM ${p.f}: section ${e.number} of ${act.title} is already in the data. If that text is wrong, set "Replaces existing text: yes".`); stats.failed++; continue; }
-  const ord = base ? Number(base.ord) : Number((await q(main, `select coalesce(max(ord), 0) as o from act_sections where act_id = $1 and number ~ '^[0-9]+$' and number::int < $2`, [e.actId, parseInt(e.number, 10)]))[0].o);
+  const ord = base ? Number(base.ord) : A.before(parseInt(e.number, 10));
   const prev = existing.get(key);
   if (prev && prev.file_hash === hash) { stats.unchanged++; continue; }
   await q(main, `insert into act_sections_supplement (act_id, number, section_key, ord, heading, body, replaces, source, source_url, copied_on, file_name, file_hash, loaded_at)
@@ -89,6 +100,11 @@ if (toEmbed.length && vec) {
     stats.chunks += batch.length; say(`  embedded ${stats.chunks} of ${all.length} passages`);
   }
 }
+// State-filed copies of a Central Act that has filled sections (same title): their same-numbered sections are hidden by the view act_sections_v
+const norm = "regexp_replace(regexp_replace(lower(%T), '^the\\s+', ''), '[^a-z0-9]', '', 'g')";
+await q(main, "delete from act_copy_of where central_id not in (select distinct act_id from act_sections_supplement)");
+const copies = await q(main, `insert into act_copy_of (copy_id, central_id) select a2.act_id, a1.act_id from acts a1 join acts a2 on a2.act_id <> a1.act_id and ${norm.replace("%T", "a2.title")} = ${norm.replace("%T", "a1.title")} where a1.act_id in (select distinct act_id from act_sections_supplement) on conflict (copy_id) do update set central_id = excluded.central_id returning copy_id, central_id`);
+for (const c of copies) say(`  State-filed copy ${c.copy_id} of ${c.central_id}: its same-numbered sections are hidden where the Central Act has a filled section`);
 const total = (await q(main, "select count(*) as n from act_sections_supplement"))[0].n;
 say(`\nDone: ${stats.added} added, ${stats.updated} updated, ${stats.unchanged} unchanged, ${stats.removed} removed, ${stats.failed} failed. ${total} supplement section(s) in the database, ${stats.chunks} passage(s) embedded now.`);
 say(`Main database: ${before} MB before, ${await mb()} MB after (stop line ${MAIN_LIMIT_MB} MB).`);

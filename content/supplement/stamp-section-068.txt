@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 68.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 99% of the PDF's words, of which 31% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 68
+Heading: Penalty for post-dating bills, and for other devices to defraud the revenue
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+–Any person who, ––
+(a) with intent to defraud the Government of duty, draws, makes or issues any bill of exchange or promissory note bearing a date subsequent to that on which such bill or note is actually drawn or made; or, (b) knowing that such bill or note has been so post-dated, endorses, transfers, presents for acceptance or payment, or accepts, pays or receives payment of, such bill or note, or in any manner negotiate the same; or, (c) with the like intent, practices or is concerned in any act, contrivance or device not specially provided for by this Act or any other law for the time being in force; shall be punishable with fine which may extend to one thousand rupees.

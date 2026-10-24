@@ -1,0 +1,22 @@
+# FILL-IN FILE: The Hindu Marriage Act, 1955, section 5.
+# Extracted 2026-10-24 from India Code's PDF a1955-25.pdf (the PDF was created 2026-05-06; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 4% of the PDF's words, of which 11% of its own words are in the PDF.
+Act: The Hindu Marriage Act, 1955
+Act ID: IND_central_1560
+Section: 5
+Heading: Conditions for a Hindu marriage
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/526166d6-239d-4b6c-8999-c776179dea69/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+A marriage may be solemnized between any two Hindus, if the following conditions are fulfilled, namely:—
+(i) neither party has a spouse living at the time of the marriage;
+[(ii) at the time of the marriage, neither party—
+(a) is incapable of giving a valid consent to it in consequence of unsoundness of mind; or
+(b) though capable of giving a valid consent, has been suffering from mental disorder of such a kind or to such an extent as to be unfit for marriage and the procreation of children; or
+(c) has been subject to recurrent attacks of insanity ***;]
+(iii) the bridegroom has completed the age of [twenty-one years] and the bride, the age of [eighteen years] at the time of the marriage;
+(iv) the parties are not within the degrees of prohibited relationship unless the custom or usage governing each of them permits of a marriage between the two;
+(v) the parties are not sapindas of each other, unless the custom or usage governing each of them permits of a marriage between the two;

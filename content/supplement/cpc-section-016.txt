@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 16.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 58% of the PDF's words, of which 9% of its own words are in the PDF.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 16
+Heading: Suits to be instituted where subject-matter situate
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Subject to the pecuniary or other limitations prescribed by any law, suits—
+(a) for the recovery of immovable property with or without rent or profits, (b) for the partition of immovable property, (c) for foreclosure, sale or redemption in the case of a mortgage of or charge upon immovable property, (d) or the determination of any other right to or interest in immovable property, (e) for compensation for wrong to immovable property, (f) for the recovery of movable property actually under distraint or attachment, shall be instituted in the Court within the local limits of whose jurisdiction the property is situate:
+Provided that a suit to obtain relief respecting, or compensation for wrong to, immovable property held by or on behalf of the defendant may, where the relief sought can be entirely obtained through his personal obedience, be instituted either in the Court within the local limits of whose jurisdiction the property is situate, or in the Court within the local limits of whose jurisdiction the defendant actually and voluntarily resides, or carries on business, or personally works for gain.
+Explanation.—In this section “property” means property situate in [India].

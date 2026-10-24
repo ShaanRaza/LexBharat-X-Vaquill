@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 47.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 47
+Heading: Power of payer to stamp bills, and promissory notes received by him unstamped
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+When any bill of exchange [or promissory note] chargeable [with a duty not exceeding ten nayepaise] is presented for payment unstamped, the person to whom it is so presented, may affix thereto the necessary adhesive stamp, and, upon cancelling the same in manner hereinbefore provided, may pay the sum payable upon such bill [or note], and may charge the duty against the person who ought to have paid the same, or deduct it from the sum payable as aforesaid, and such bill [or note], shall, so far as respects the duty, be deemed good and valid:
+Provided that nothing herein contained shall relieve any person from any penalty or proceeding to which he may be liable in relation to such bill, [or note].

@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 237.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 237
+Heading: Liability of principal inducing belief that agent’s unauthorized acts were authorized
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+When an agent has, without authority, done acts or incurred obligations to third persons on behalf of his principal, the principal is bound by such acts or obligations, if he has by his words or conduct induced such third persons to believe that such acts and obligations were within the scope of the agent’s authority.
+
+Illustrations
+(a) A consigns goods to B for sale, and gives him instructions not to sell under a fixed price. C, being ignorant of B’s instructions, enters into a contract with B to buy the goods at a price lower than the reserved price. A is bound by the contract.
+(b) A entrusts B with negotiable instruments endorsed in blank. B sells them to C in violation of private orders from A. The sale is good.

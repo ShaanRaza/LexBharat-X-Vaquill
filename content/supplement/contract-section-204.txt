@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 204.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 204
+Heading: Revocation where authority has been partly exercised
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The principal cannot revoke the authority given to his agent after the authority has been partly exercised, so far as regards such acts and obligations as arise from acts already done in the agency.
+
+Illustrations
+(a) A authorizes B to buy 1,000 bales of cotton on account of A, and to pay for it out of A’s moneys remaining in B’s hands. B buys 1,000 bales of cotton in his own name, so as to make himself personally liable for the price. A cannot revoke B’s authority so far as regards payment for the cotton.
+(b) A authorizes B to buy 1,000 bales of cotton on account of A, and to pay for it out of A’s moneys remaining in B’s hands. B buys 1,000 bales of cotton in A’s name, and so as not to render himself personally liable for the price. A can revoke B’s authority to pay for the cotton.

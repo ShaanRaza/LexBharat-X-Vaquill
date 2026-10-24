@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 69.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 69
+Heading: Reimbursement of person paying money due by another, in payment of which he is interested
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+A person who is interested in the payment of money which another is bound by law to pay, and who therefore pays it, is entitled to be reimbursed by the other.
+
+Illustration
+B holds land in Bengal, on a lease granted by A, the zamindar. The revenue payable by A to the Government being in arrear, his land is advertised for sale by the Government. Under the revenue law, the consequence of such sale will be the annulment of B’s lease. B, to prevent the sale and the consequent annulment of his own lease, pays to the Government the sum due from A. A is bound to make good to B the amount so paid.

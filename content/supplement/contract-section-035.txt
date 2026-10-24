@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 35.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 35
+Heading: When contracts become void which are contingent on happening of specified event within fixed time
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Contingent contracts to do or not to do anything if a specified uncertain event happens within a fixed time become void if, at the expiration of the time fixed, such event has not happened, or if, before the time fixed, such event becomes impossible. When contracts may be enforced, which are contingent on specified event not happening within fixed time.—Contingent contracts to do or not to do anything, if a specified uncertain event does not happen within a fixed time may be enforced by law when the time fixed has expired and such event has not happened or, before the time fixed has expired, if it becomes certain that such event will not happen.
+
+Illustrations
+(a) A promises to pay B a sum of money if a certain ship returns within a year. The contract may be enforced if the ship returns within the year, and becomes void if the ship is burnt within the year.
+(b) A promises to pay B a sum of money if a certain ship does not return within a year. The contract may be enforced if the ship does not return within the year, or is burnt within the year.

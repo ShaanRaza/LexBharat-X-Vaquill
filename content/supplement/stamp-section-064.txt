@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 64.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 99% of the PDF's words, of which 12% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 64
+Heading: Penalty for omission to comply with provisions of section 27
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+–Any person who, with intent to defraud the Government,––
+(a) executes any instrument in which all the facts and circumstances required by section 27 to be set forth in such instrument are not fully and truly set forth; or
+(b) being employed or concerned in or about the preparation of any instrument, neglects or omits fully and truly to set forth therein all such facts and circumstances; or
+(c) does any other act calculated to deprive the Government of any duty or penalty under this Act; shall be punishable with fine which may extend to five thousand rupees.

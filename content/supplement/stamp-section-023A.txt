@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 23A.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 23A
+Heading: Certain instruments connected with mortgages of marketable securities to be chargeable as agreements
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where an instrument (not being a promissory note or bill of exchange)—
+(a) is given upon the occasion of the deposit of any marketable security by way of security for money advanced or to be advanced by way of loan, or for an existing or future debt, or
+(b) makes redeemable or qualifies a duly stamped transfer, intended as a security, of any marketable security, it shall be chargeable with duty as if it were an agreement or memorandum of an agreement chargeable with duty under [Article No. 5 (c)] of Schedule I.
+(2) A release or discharge of any such instrument shall only be chargeable with the like duty. 

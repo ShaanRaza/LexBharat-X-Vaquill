@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 52.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 40% of the PDF's words, of which 43% of its own words are in the PDF.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 52
+Heading: Enforcement of decree against legal representative
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where a decree is passed against a party as the legal representative of a deceased person, and the decree is for the payment of money out of the property of the deceased, it may be executed by the attachment and sale of any such property.
+(2) Where no such property remains in the possession of the judgment-debtor and he fails to satisfy the Court that he has duly applied such property of the deceased as is proved to have come into his possession, the decree may be executed against the judgment-debtor to the extent of the property in respect of which he has failed so to satisfy the Court in the same manner as if the decree had been against him personally.

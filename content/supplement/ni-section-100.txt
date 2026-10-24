@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Negotiable Instruments Act, 1881, section 100.
+# Extracted 2026-10-24 from India Code's PDF a1881-26.pdf (the PDF was created 2023-06-26; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 36% of its own words are in the PDF.
+Act: The Negotiable Instruments Act, 1881
+Act ID: IND_central_2189
+Section: 100
+Heading: Protest
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/82bf1927-5e52-4aab-a876-50552c5952cd/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+When a promissory note or bill of exchange has been dishonoured by non-acceptance or non-payment, the holder may, within a reasonable time, cause such dishonour to be noted and certified by a notary public. Such certificate is called a protest.
+Protest for better security.—When the acceptor of a bill of exchange has become insolvent, or his credit has been publicly impeached, before the maturity of the bill, the holder may, within a reasonable time, cause a notary public to demand better security of the acceptor, and on its being refused may, within a reasonable time, cause such facts to be noted and certified as aforesaid. Such certificate is called a protest for better security.

@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 231.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 231
+Heading: Rights of parties to a contract made by agent not disclosed
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+If an agent makes a contract with a person who neither knows, nor has reason to suspect, that he is an agent, his principal may require the performance of the contract; but the other contracting party has, as against the principal, the same rights as he would have had as against the agent if the agent had been principal. If the principal discloses himself before the contract is completed, the other contracting party may refuse to fulfil the contract, if he can show that, if he had known who was the principal in the contract, or if he had known that the agent was not a principal, he would not have entered into the contract.

@@ -1,0 +1,21 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 39.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 59% of the PDF's words, of which 26% of its own words are in the PDF.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 39
+Heading: Transfer of decree
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) The Court which passed a decree may, on the application of the decree-holder, send it for execution to another Court [of competent jurisdiction],—
+(a) if the person against whom the decree is passed actually and voluntarily resides or carries on business, or personally works for gain, within the local limits of the jurisdiction of such other Court, or
+(b) if such person has not property within the local limits of the jurisdiction of the Court which passed the decree sufficient to satisfy such decree and has property within the local limits of the jurisdiction of such other Court, or
+(c) if the decree directs the sale or delivery of immovable property situate outside the local limits of the jurisdiction of the Court which passed it, or
+(d) if the Court which passed the decree considers for any other reason, which it shall record in writing, that the decree should be executed by such other Court.
+(2) The Court which passed a decree may of its own motion send it for execution to any subordinate Court of competent jurisdiction.
+[(3) For the purposes of this section, a Court shall be deemed to be a Court of competent jurisdiction if, at the time of making the application for the transfer of decree to it, such Court would have jurisdiction to try the suit in which such decree was passed.]
+[(4) Nothing in this section shall be deemed to authorise the Court which passed a decree to execute such decree against any person or property outside the local limits of its jurisdiction.]

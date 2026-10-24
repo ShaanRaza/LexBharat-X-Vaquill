@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Specific Relief Act, 1963, section 14.
+# Extracted 2026-10-24 from India Code's PDF A1963-47.pdf (the PDF was created 2026-10-12; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Specific Relief Act, 1963
+Act ID: IND_central_1583
+Section: 14
+Heading: Contracts not specifically enforceable
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/aba411f8-4c8d-4c8e-af29-64d442ae80f0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The following contracts cannot be specifically enforced, namely:—
+(a) where a party to the contract has obtained substituted performance of contract in accordance with the provisions of section 20;
+(b) a contract, the performance of which involves the performance of a continuous duty which the court cannot supervise;
+(c) a contract which is so dependent on the personal qualifications of the parties that the court cannot enforce specific performance of its material terms; and
+(d) a contract which is in its nature determinable.

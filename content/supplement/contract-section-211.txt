@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 211.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 211
+Heading: Agent’s duty in conducting principal’s business
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+An agent is bound to conduct the business of his principal according to the directions given by the principal, or, in the absence of any such directions, according to the custom which prevails in doing business of the same kind at the place where the agent conducts such business. When the agent acts otherwise, if any loss be sustained, he must make it good to his principal, and if any profit accrues, he must account for it.
+
+Illustrations
+(a) A, an agent engaged in carrying on for B a business, in which it is the custom to invest from time to time, at interest, the moneys which may be in hand, omits to make such investment. A must make good to B the interest usually obtained by such investments.
+(b) B, a broker, in whose business it is not the custom to sell on credit, sells goods of A on credit to C, whose credit at the time was very high. C, before payment, becomes insolvent. B must make good the loss to A.

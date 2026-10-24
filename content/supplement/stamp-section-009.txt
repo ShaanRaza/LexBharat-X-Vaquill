@@ -1,0 +1,19 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 9.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 53% of the PDF's words, of which 26% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 9
+Heading: Power to reduce, remit or compound duties
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+[(1)] [The *** Government] may, by rule or order published in the Official Gazette, —
+(a) reduce or remit, whether prospectively or retrospectively, in the whole or any part of [the territories under its administration], the duties with which any instruments or any particular class of instruments, or any of the instruments belonging to such class, or any instruments when executed by or in favour of any particular class of persons, or by or in favour of any members of such class, are chargeable, and
+(b) provide for the composition or consolidation of duties [of policies of insurance and] in the case of issues by any incorporated company or other body corporate [or of transfers (where there is a single transferee, whether incorporated or not)] of debentures, bonds or other marketable securities.
+[(2) In this section the expression “the Government” means, —
+(a) in relation to stamp-duty in respect of bills of exchange, cheques, promissory notes, bills of lading, letters of credit, policies of insurance, transfer of shares, debentures, proxies and receipts, and in relation to any other stamp-duty chargeable under this Act and falling within entry 96 in List I in the [Seventh Schedule to the Constitution, expect the subject matters referred to in clause (b) of sub-section (1)]; the Central Government;
+(b) Save as aforesaid, the State Government.]

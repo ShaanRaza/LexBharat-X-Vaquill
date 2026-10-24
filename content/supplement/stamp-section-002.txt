@@ -1,0 +1,93 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 2.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 71% of the PDF's words, of which 13% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 2
+Heading: Definitions
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+In this Act, unless there is something repugnant in the subject or context,—
+[(1) Allotment list.—“allotment list” means a list containing details of allotment of the securities intimated by the issuer to the depository under sub-section (2) of section 8 of the Depositories Act, 1996 (22 of 1996);
+(1A) “banker” includes a bank and any person acting as a banker;]
+(2) Bill of exchange.—“bill of exchange” means a bill of exchange as defined by the Negotiable Instruments Act, 1881, (26 of 1881), and includes also a hundi, and any other document entitling or purporting to entitle any person, whether named therein or not, to payment by any other person of, or to draw upon any other person for, any sum of money;
+(3) Bill of exchange payable on demand. —“bill of exchange payable on demand” includes—
+(a) an order for the payment of any sum of money by a bill of exchange or promissory note, or for the delivery of any bill of exchange or promissory note in satisfaction of any sum of money, or for the payment of any sum of money out of any particular fund which may or may not be available, or upon any condition or contingency which may or may not be performed or happen;
+(b) an order for the payment of any sum of money weekly, monthly or at any other stated period; and
+(c) a letter of credit, that is to say, any instrument by which one person authorises another to give credit to the person in whose favour it is drawn;
+(4) Bill of lading.— “bill of lading” includes a “through bill of lading”, but does not include a mate's receipt:
+(5) Bond.— “bond” includes—
+(a) any instrument whereby a person obliges himself to pay money to another, on condition that the obligation shall be void if a specified act is performed, or is not performed, as the case may be;
+(b) any instrument attested by a witness and not payable to order or bearer, whereby a person obliges himself to pay money to another; and
+(c) any instrument so attested, whereby a person obliges himself to deliver grain or other agricultural produce to another; [but does not include a debenture;]
+(6) Chargeable.—“chargeable” means, as applied to an instrument executed or first executed after the commencement of this Act, chargeable under this Act, and, as applied to any other instrument, chargeable under the law in force in [India] when such instrument was executed or, where several persons executed the instrument at different times, first executed;
+(7) Cheque.—“cheque” means a bill of exchange drawn on a specified banker and not expressed to be payable otherwise than on demand;
+[(7A) “clearance list” means a list of transactions of sale and purchase relating to contracts traded on the stock exchanges submitted to a clearing corporation in accordance with the law for the time being in force in this behalf;
+(7B) “clearing corporation” means an entity established to undertake the activity of clearing and settlement of transactions in securities or other instruments and includes a clearing house of a recognised stock exchange;] * * * * * *
+(9) Collector.—“Collector” —
+(a) means, within the limits of the towns of Calcutta, Madras and Bombay, the Collector of Calcutta, Madras and Bombay, respectively, and, without those limits, the Collector of a district; and
+(b) includes a Deputy Commissioner and any officer whom [the [State Government]] may, by notification in the Official Gazette, appoint in this behalf;
+(10) Conveyance.—“conveyance” includes a conveyance on sale and every instrument by which property, whether moveable or immovable, is transferred inter vivos and which is not otherwise specifically provided for by schedule I;
+[(10A) debenture.––“debenture” includes––
+(i) debenture stock, bonds or any other instrument of a company evidencing a debt, whether constituting a charge on the assets of the company or not;
+(ii) bonds in the nature of debenture issued by any incorporated company or body corporate;
+(iii) certificate of deposit, commercial usance bill, commercial paper and such other debt instrument of original or initial maturity upto one year as the Reserve Bank of India may specify from time to time;
+(iv) securitised debt instruments; and
+(v) any other debt instruments specified by the Securities and Exchange Board of India from time to time;
+(10B) “depository” includes––
+(a) a depository as defined in clause (e) of sub-section (1) of section 2 of the Depositories Act, 1996 (22 of 1996); and
+(b) any other entity declared by the Central Government, by notification in the Official Gazette, to be a depository for the purposes of this Act;]
+(11) Duly stamped. —“duly stamped”, as applied to an instrument, means that the instrument bears an adhesive or impressed stamp of not less than the proper amount and that such stamp has been affixed or used in accordance with the law for the time being in force in [India]:
+(12) Executed and execution. — “executed” and “execution” used with reference to instruments, mean “signed” and “signature” [and includes attribution of electronic record within the meaning of section 11 of the Information Technology Act, 2000 (21 of 2000);] * * * * *
+(13) Impressed stamp. — “impressed stamp” includes—
+(a) labels affixed and impressed by the proper officer; and
+(b) stamps embossed or engraved on stamped paper;
+[(13A) India. — “India” means the territory of India excluding the State of Jammu and Kashmir;]
+[(14) “instrument” includes—
+(a) every document, by which any right or liability is, or purports to be, created, transferred, limited, extended, extinguished or recorded;
+(b) a document, electronic or otherwise, created for a transaction in a stock exchange or depository by which any right or liability is, or purports to be, created, transferred, limited, extended, extinguished or recorded; and
+(c) any other document mentioned in Schedule I, but does not include such instruments as may be specified by the Government, by notification in the Official Gazette.]
+(15) Instrument of partition.— “instrument of partition” means any instrument where by co-owners of any property divide or agree to divide such property in severalty, and includes also a final order for effecting a partition passed by any Revenue-authority or any Civil Court and an award by an arbitrator directing a partition;
+[(15A) Issue.— “issue” means any person making an issue of securities;]
+(16) Lease.— “lease” means a lease of immovable property, and includes also—
+(a) a patta;
+(b) a kabuliyat or other undertaking in writing, not being a counterpart of a lease, to cultivate, occupy, or pay or deliver rent for, immovable property;
+(c) any instrument by which tolls of any description are let;
+(d) any writing on an application for a lease intended to signify that the application is granted;
+[(16A) Marketable security.— “marketable security” means a security capable of being traded in any stock exchange in India;
+(16B) Market value.—“market value”, in relation to an instrument through which—
+(b) any security which is transferred through a depository but not traded in the stock exchange, means the price or the consideration mentioned in such instrument;
+(c) any security is dealt otherwise than in the stock exchange or depository, means the price or consideration mentioned in such instrument;]
+(17) Mortgage-deed.— “mortgage-deed” includes every instrument whereby, for the purpose of securing money advanced, or to be advanced, by way of loan, or an existing or future debt, or the performance of an engagement, one person transfers, or creates, to, or in favour of, another, a right over or in respect of specified property;
+(18) Paper.—“paper” includes vellum, parchment or any other material on which an instrument may be written;
+(19) Policy of insurance.—“policy of insurance” includes—
+(a) any instrument by which one person, in consideration of a premium, engages to indemnify another against loss, damage or liability arising from an unknown or contingent event;
+(b) a life-policy, and any policy insuring any person against accident or sickness, and any other personal insurance; *** * * * * *
+[(19A) Policy of group insurance.—“policy of group insurance” means any instrument covering not less than fifty or such smaller number as the Central Government may approve, either generally or with reference to any particular case, by which an insurer, in consideration of a premium paid by an employer or by an employer and his employees jointly, engages to cover, with or without medical examination and for the sole benefit of persons other than the employer, the lives of all the employees or of any class of them, determined by conditions pertaining to the employment, for amounts of insurance based upon a plan which precludes individual selection:]
+(20) Policy of sea-insurance or sea-policy.—“Policy of sea-insurance” or “sea-policy”—
+(a) means any insurance made upon any ship or vessel (whether for marine or inland navigation), or upon the machinery, tackle or furniture of any ship or vessel, or upon any goods, merchandise or property of any description whatever on board of any ship or vessel, or upon the freight of, or any other interest which may be lawfully insured in, or relating to, any ship or vessel; and
+(b) includes any insurance of goods, merchandise or property for any transit which includes, not only a sea risk within the meaning of clause (a), but also any other risk incidental to the transit insured from the commencement of the transit to the ultimate destination covered by the insurance: Where any person, in consideration of any sum of money paid or to be paid for additional freight or otherwise, agrees to take upon himself any risk attending goods, merchandise or property of any description whatever while on board of any ship or vessel, or engages to indemnify the owner of any such goods, merchandise or property from any risk, loss or damage, such agreement or engagement shall be deemed to be a contract for sea-insurance;
+(21) Power-of-attorney.—“power-of-attorney” includes any instrument (not chargeable with a fee under the law relating to Court-fees for the time being in force) empowering a specified person to act for and in the name of the person executing it;
+(22) Promissory note.—“promissory note” means a promissory note as defined by the Negotiable Instruments Act, 1881 (XXVI of 1881); It also includes a note promising the payment of any sum of money out of any particular fund which may or may not be available, or upon any condition or contingency which may or may not be performed or happen;
+(23) Receipt.—“receipt” includes any note, memorandum or writing—
+(a) where by any money, or any bill of exchange, cheque or promissory note is acknowledged to have been received, or
+(b) where by any other moveable property is acknowledged to have been received in satisfaction of a debt, or
+(c) where by any debt or demand, or any part of a debt or demand, is acknowledged to have been satisfied or discharged, or
+(d) which signifies or imports any such acknowledgment, and whether the same is or is not signed with the name of any person; ***
+[(23A) Securities.—“securities” includes—
+(i) securities as defined in clause (h) of section 2 of the Securities Contracts (Regulation) Act, 1956 (42 of 1956);
+(ii) a “derivative” as defined in clause (a) of section 45U of the Reserve Bank of India Act, 1934 (2 of 1934);
+(iii) a certificate of deposit, commercial usance bill, commercial paper, repo on corporate bonds and such other debt instrument of original or initial maturity upto one year as the Reserve Bank of India ma specify from time to time; and
+(iv) any other instrument declared by the Central Government, by notification in the Official Gazette, to be securities for the purposes of this Act.]
+(24) Settlement.—“settlement” means any non-testamentary disposition, in writing, of moveable or immovable property made—
+(a) in consideration of marriage, (b) for the purpose of distributing property of the settler among his family or those for whom he desires to provide, or for the purpose of providing for some person dependent on him, or
+(c) for any religious or charitable purpose; and includes an agreement in writing to make such a disposition [and, where any such disposition has not been made in writing, any instrument recording, whether by way of declaration of trust or otherwise, the terms of any such disposition]; ***
+[(25) Soldier. —“soldier” includes any person below the rank of non-commissioned officer who is enrolled under the Indian Army Act, 1911(8 of 1911).]
+[(26) Stamp. — “stamp” means any mark, seal or endorsement by any agency or person duly authorised by the State Government, and includes an adhesive or impressed stamp, for the purposes of duty chargeable under this Act.]
+[(27) Stock exchange.—“stock exchange” includes—
+(i) a recognised stock exchange as defined in clause (f) of section 2 of the Securities Contracts (Regulation) Act, 1956 (42 of 1956); and
+(ii) such other platform for trading or reporting a deal in securities, as may be specified by the Central Government, by notification in the Official Gazette, for the purposes of this Act.]

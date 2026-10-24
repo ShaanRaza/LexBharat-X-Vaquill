@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 150.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 150
+Heading: Bailor’s duty to disclose faults in goods bailed
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The bailor is bound to disclose to the bailee faults in the goods bailed, of which the bailor is aware, and which materially interfere with the use of them, or expose the bailee to extraordinary risks; and if he does not make such disclosure, he is responsible for damage arising to the bailee directly from such faults. If the goods are bailed for hire, the bailor is responsible for such damage, whether he was or was not aware of the existence of such faults in the goods bailed.
+
+Illustrations
+(a) A lends a horse, which he knows to be vicious, to B. He does not disclose the fact that the horse is vicious. The horse runs away. B is thrown and injured. A is responsible to B for damage sustained.
+(b) A hires a carriage of B. The carriage is unsafe, though B is not aware of it, and A is injured. B is responsible to A for the injury.

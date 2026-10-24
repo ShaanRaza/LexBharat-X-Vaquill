@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 156.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 156
+Heading: Effect of mixture without bailor’s consent, when the goods can be separated
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+If the bailee, without the consent of the bailor, mixes the goods of the bailor with his own goods, and the goods can be separated or divided, the property in the goods remains in the parties respectively; but the bailee is bound to bear the expense of separation or division, and any damage arising from the mixture.
+
+Illustration
+A bails 100 bales of cotton marked with a particular mark to B. B, without A’s consent, mixes the 100 bales with other bales of his own, bearing a different mark: A is entitled to have his 100 bales returned, and B is bound to bear all the expense incurred in the separation of the bales, and any other incidental damage.

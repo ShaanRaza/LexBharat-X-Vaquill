@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Hindu Marriage Act, 1955, section 21C.
+# Extracted 2026-10-24 from India Code's PDF a1955-25.pdf (the PDF was created 2026-05-06; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 28% of its own words are in the PDF.
+Act: The Hindu Marriage Act, 1955
+Act ID: IND_central_1560
+Section: 21C
+Heading: Documentary evidence
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/526166d6-239d-4b6c-8999-c776179dea69/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Notwithstanding anything in any enactment to the contrary, no document shall be inadmissible in evidence in any proceeding at the trial of a petition under this Act on the ground that it is not duly stamped or registered.

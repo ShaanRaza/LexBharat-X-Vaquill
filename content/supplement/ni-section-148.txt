@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Negotiable Instruments Act, 1881, section 148.
+# Extracted 2026-10-24 from India Code's PDF a1881-26.pdf (the PDF was created 2023-06-26; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 13% of the PDF's words, of which 70% of its own words are in the PDF.
+Act: The Negotiable Instruments Act, 1881
+Act ID: IND_central_2189
+Section: 148
+Heading: Power of Appellate Court to order payment pending appeal against conviction
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/82bf1927-5e52-4aab-a876-50552c5952cd/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Notwithstanding anything contained in the Code of Criminal Procedure, 1973 (2 of 1974), in an appeal by the drawer against conviction under section 138, the Appellate Court may order the appellant to deposit such sum which shall be a minimum of twenty per cent. of the fine or compensation awarded by the trial Court:
+Provided that the amount payable under this sub-section shall be in addition to any interim compensation paid by the appellant under section 143A.
+(2) The amount referred to in sub-section (1) shall be deposited within sixty days from the date of the order, or within such further period not exceeding thirty days as may be directed by the Court on sufficient cause being shown by the appellant.
+(3) The Appellate Court may direct the release of the amount deposited by the appellant to the complainant at any time during the pendency of the appeal:
+Provided that if the appellant is acquitted, the Court shall direct the complainant to repay to the appellant the amount so released, with interest at the bank rate as published by the Reserve Bank of India, prevalent at the beginning of the relevant financial year, within sixty days from the date of the order, or within such further period not exceeding thirty days as may be directed by the Court on sufficient cause being shown by the complainant.] SCHEDULE.—[Enactments repealed].—Rep. by the Repealing and Amending Act, 1891 (12 of 1891), s. 2 and Schedule I.

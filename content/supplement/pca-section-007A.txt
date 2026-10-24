@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Prevention of Corruption Act, 1988, section 7A.
+# Extracted 2026-10-24 from India Code's PDF a1988-49.pdf (the PDF was created 2025-08-12; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 25% of its own words are in the PDF.
+Act: The Prevention of Corruption Act, 1988
+Act ID: IND_central_1558
+Section: 7A
+Heading: Taking undue advantage to influence public servant by corrupt or illegal means or by exercise of personal influence
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/54dfd58e-7946-4041-b25d-5e0c85ba9aca/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Whoever accepts or obtains or attempts to obtain from another person for himself or for any other person any undue advantage as a motive or reward to induce a public servant, by corrupt or illegal means or by exercise of his personal influence to perform or to cause performance of a public duty improperly or dishonestly or to forbear or to cause to forbear such public duty by such public servant or by another public servant, shall be punishable with imprisonment for a term which shall not be less than three years but which may extend to seven years and shall also be liable to fine.

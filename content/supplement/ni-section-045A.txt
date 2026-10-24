@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Negotiable Instruments Act, 1881, section 45A.
+# Extracted 2026-10-24 from India Code's PDF a1881-26.pdf (the PDF was created 2023-06-26; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Negotiable Instruments Act, 1881
+Act ID: IND_central_2189
+Section: 45A
+Heading: Holder's right to duplicate of lost bill
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/82bf1927-5e52-4aab-a876-50552c5952cd/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where a bill of exchange has been lost before it is over-due, the person who was the holder of it may apply to the drawer to give him another bill of the same tenor, giving security to the drawer, if required, to indemnify him against all persons whatever in case the bill alleged to have been lost shall be found again. If the drawer on request as aforesaid refuses to give such duplicate bill, he may be compelled to do so.

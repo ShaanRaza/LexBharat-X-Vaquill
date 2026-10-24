@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 47.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 47
+Heading: Time and place for performance of promise, where time is specified and no application to be made
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+When a promise is to be performed on a certain day, and the promisor has undertaken to perform it without application by the promisee, the promisor may perform it at any time during the usual hours of business on such day and at the place at which the promise ought to be performed.
+
+Illustration
+A promises to deliver goods at B’s warehouse on the first January. On that day A brings the goods to B’s warehouse, but after the usual hour for closing it, and they are not received. A has not performed his promise.

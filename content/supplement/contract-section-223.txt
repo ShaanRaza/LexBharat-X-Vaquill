@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 223.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 223
+Heading: Agent to be indemnified against consequences of acts done in good faith
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where one person employs another to do an act, and the agent does the act in good faith, the employer is liable to indemnify the agent against the consequences of that act, though it cause an injury to the rights of third persons.
+
+Illustrations
+(a) A, a decree-holder and entitled to execution of B’s goods, requires the officer of the Court to seize certain goods, representing them to be the goods of B. The officer seizes the goods, and is sued by C, the true owner of the goods. A is liable to indemnify the officer for the sum which he is compelled to pay to C, in consequence of obeying A’s directions.
+(b) B, at the request of A, sells goods in the possession of A, but which A had no right to dispose of, B does not know this, and hands over the proceeds of the sale to A. Afterwards C, the true owner of the goods, sues B and recovers the value of the goods and costs. A is liable to indemnify B for what he has been compelled to pay to C, and for B’s own expenses.

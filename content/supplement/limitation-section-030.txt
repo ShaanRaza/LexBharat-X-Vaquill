@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Limitation Act, 1963, section 30.
+# Extracted 2026-10-24 from India Code's PDF A1963-36.pdf (the PDF was created 2026-10-12; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 42% of its own words are in the PDF.
+Act: The Limitation Act, 1963
+Act ID: IND_central_1565
+Section: 30
+Heading: Provision for suits, etc., for which the prescribed period is shorter than the period prescribed by the Indian Limitation Act, 1908
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/8c2f3bc0-5daf-4d11-971f-ad5f9b78b74b/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Notwithstanding anything contained in this Act,—
+(a) any suit for which the period of limitation is shorter than the period of limitation prescribed by the Indian Limitation Act, 1908 (9 of 1908), may be instituted within a period of [seven years] next after the commencement of this Act or within the period prescribed for such suit by the Indian Limitation Act, 1908 (9 of 1908), whichever period expires earlier:
+[Provided that if in respect of any such suit, the said period of seven years expires earlier than the period of limitation prescribed therefor under the Indian Limitation Act, 1908 (9 of 1908) and the said period of seven years together with so much of the period of limitation in respect of such suit under the Indian Limitation Act, 1908 (9 of 1908), as has already expired before the commencement of this Act is shorter than the period prescribed for such suit under this Act, then, the suit may be instituted within the period of limitation prescribed therefor under this Act;]
+(b) any appeal or application for which the period of limitation is shorter than the period of limitation prescribed by the Indian Limitation Act, 1908 (9 of 1908), may be preferred or made within a period of ninety days next after the commencement of this Act or within the period prescribed for such appeal or application by the Indian Limitation Act, 1908, whichever period expires earlier.

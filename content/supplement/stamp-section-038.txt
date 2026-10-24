@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 38.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 38
+Heading: Instruments impounded, how dealt with
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) When the person impounding an instrument under section 33 has by law or consent of parties authority to receive evidence and admits such instrument in evidence upon payment of a penalty as provided by section 35 or of duty as provided by section 37, he shall send to the Collector an authenticated copy of such instrument, together with a certificate in writing, stating the amount of duty and penalty levied in respect thereof, and shall send such amount to the Collector, or to such person as he may appoint in this behalf.
+(2) In every other case, the person so impounding an instrument shall send it in original to the Collector.

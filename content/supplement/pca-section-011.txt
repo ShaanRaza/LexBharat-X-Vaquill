@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Prevention of Corruption Act, 1988, section 11.
+# Extracted 2026-10-24 from India Code's PDF a1988-49.pdf (the PDF was created 2025-08-12; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 55% of its own words are in the PDF.
+Act: The Prevention of Corruption Act, 1988
+Act ID: IND_central_1558
+Section: 11
+Heading: Public servant obtaining [undue advantage], without consideration from person concerned in proceeding or business transacted by such public servant
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/54dfd58e-7946-4041-b25d-5e0c85ba9aca/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Whoever, being a public servant, accepts or obtains *** or attempts to obtain for himself, or for any other person, any [undue advantage] without consideration, or for a consideration which he knows to be inadequate, from any person whom he knows to have been, or to be, or to be likely to be concerned in any proceeding or business transacted or about to be transacted by such public servant, or having any connection with the [official functions or public duty] of himself or of any public servant to whom he is subordinate, or from any person whom he knows to be interested in or related to the person so concerned, shall be punishable with imprisonment for a term which shall be not less than six months but which may extend to five years and shall also be liable to fine.

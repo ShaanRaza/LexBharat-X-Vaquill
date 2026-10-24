@@ -1,0 +1,19 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 139.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 100% of the PDF's words, of which 48% of its own words are in the PDF.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 139
+Heading: Discharge of surety by creditor’s act or omission impairing surety’s eventual remedy
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+If the creditor does any act which is inconsistent with the rights of the surety, or omits to do any act which his duty to the surety requires him to do, and the eventual remedy of the surety himself against the principal debtor is thereby impaired, the surety is discharged.
+
+Illustrations
+(a) B contracts to build a ship for C for a given sum, to be paid by instalments as the work reaches certain stages. A becomes surety to C for B’s due performance of the contract. C, without the knowledge of A, prepays to B the last two instalments. A is discharged by this prepayment.
+(b) C lends money to B on the security of a joint and several promissory note made in C’s favour by B, and by A as surety for B, together with a bill of sale of B’s furniture, which gives power to C to sell the furniture, and apply the proceeds in discharge of the note. Subsequently, C sells the furniture, but, owing to his misconduct and wilful negligence, only a small price is realized. A is discharged from liability on the note.
+(c) A puts M as apprentice to B, and gives a guarantee to B for M’s fidelity. B promises on his part that he will, at least once a month, see M make up the cash. B omits to see this done as promised, and M embezzles. A is not liable to B on his guarantee.

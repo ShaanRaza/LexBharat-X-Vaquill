@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 122.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 122
+Heading: Power of certain High Courts to make rules
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+[High Courts [not being the Court of a Judicial Commissioner]] *** may, from time to time after previous publication, make rules regulating their own procedure and the procedure of the Civil Courts subjects to their superintendence, and may by such rules annul, alter or add to all or any of the rules in the First Schedule.

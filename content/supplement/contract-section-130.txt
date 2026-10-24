@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 130.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 130
+Heading: Revocation of continuing guarantee
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+A continuing guarantee may at any time be revoked by the surety, as to future transactions, by notice to the creditor.
+
+Illustrations
+(a) A, in consideration of B’s discounting, at A’s request, bills of exchange for C, guarantees to B, for twelve months, the due payment of all such bills to the extent of 5,000 rupees. B discounts bills for C to the extent of 2,000 rupees. Afterwards, at the end of three months, A revokes the guarantee. This revocation discharges A from all liability to B for any subsequent discount. But A is liable to B for the 2,000 rupees, on default of C.
+(b) A guarantees to B, to the extent of 10,000 rupees, that C shall pay all the bills that B shall draw upon him. B draws upon C. C accepts the bill. A gives notice of revocation. C dishonours the bill at maturity. A is liable upon his guarantee.

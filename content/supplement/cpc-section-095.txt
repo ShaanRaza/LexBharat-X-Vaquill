@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 95.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 29% of the PDF's words, of which 44% of its own words are in the PDF.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 95
+Heading: Compensation for obtaining arrest, attachment or injunction on insufficient grounds
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where, in any suit in which an arrest or attachment has been effected or a temporary injunction granted under the last preceding section,—
+(a) it appears to the Court that such arrest, attachment or injunction was applied for on insufficient grounds, or
+(b) the suit of the plaintiff fails and it appears to the Court that there was no reasonable or probable grounds for instituting the same, the defendant may apply to the Court, and the Court may, upon such application, award against the plaintiff by its order such amount [not exceeding fifty thousand rupees], as it deems a reasonable compensation to the defendant for the [expense or injury (including injury to reputation) caused to him]:
+Provided that a Court shall not award, under this section, an amount exceeding the limits of its pecuniar jurisdiction.
+(2) An order determining any such application shall bar any suit for compensation in respect of such arrest, attachment or injunction.

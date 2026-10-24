@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Indian Contract Act, 1872, section 189.
+# Extracted 2026-10-24 from India Code's PDF a1872-9.pdf (the PDF was created 2021-06-21; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section was MISSING from our data.
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 189
+Heading: Agent’s authority in an emergency
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/e7571d39-11a7-4a2c-86e3-c515ae43e617/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+An agent has authority, in an emergency, to do all such acts for the purpose of protecting his principal from loss as would be done by a person of ordinary prudence, in his own case, under similar circumstances.
+
+Illustrations
+(a) An agent for sale may have goods repaired if it be necessary.
+(b) A consigns provisions to B at Calcutta, with directions to send them immediately to C, at Cuttack. B may sell the provisions at Calcutta, if they will not bear the journey to Cuttack without spoiling.

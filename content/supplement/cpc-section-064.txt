@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 64.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 24% of the PDF's words, of which 37% of its own words are in the PDF.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 64
+Heading: Private alienation of property after attachment to be void
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+[(1)] Where an attachment has been made, any private transfer or delivery of the property attached or of any interest therein and any payment to the judgment-debtor of any debt, dividend or other monies contrary to such attachment, shall be void as against all claims enforceable under the attachment.
+[(2) Nothing in this section shall apply to any private transfer or delivery of the property attached or of any interest therein, made in pursuance of any contract for such transfer or delivery entered into and registered before the attachment.]
+Explanation.—For the purpose of this section, claims enforceable under an attachment include claims for the rateable distribution of assets.

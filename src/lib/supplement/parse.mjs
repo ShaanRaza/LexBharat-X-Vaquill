@@ -2,7 +2,7 @@
 // A file whose text area is empty is "pending" (nothing to load yet). A file with text must have a valid header, or it is "error" and nothing from it is loaded.
 export const DELIMITER = /^={3,}\s*SECTION TEXT\b.*$/i;
 const KEYS = { "act": "act", "act id": "actId", "section": "section", "heading": "heading", "replaces existing text": "replaces", "source": "source", "source url": "sourceUrl", "date copied": "dateCopied" };
-export const MIN_TEXT = 30, MAX_TEXT = 60000;
+export const MIN_TEXT = 8, MAX_TEXT = 60000;
 
 /** The key a section gets in act_sections_v, the same shape as the dataset's own keys ("s016", "s138", "s19A"). */
 export const sectionKeyFor = (number) => `s${String(number).toUpperCase().padStart(3, "0")}`;

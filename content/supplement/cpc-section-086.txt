@@ -1,0 +1,31 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 86.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 77% of the PDF's words, of which 98% of its own words are in the PDF.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 86
+Heading: Suits against foreign Rulers, Ambassadors and Envoys
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) No. *** foreign State may be sued in any Court otherwise competent to try the suit except with the consent of the Central Government certified in writing by a Secretary to that Government:
+Provided that a person may, as a tenant of immovable property, sue without such consent as aforesaid [a foreign State] from whom he holds or claims to hold the property.
+(2) Such consent may be given with respect to a specified suit or to several specified suits or with respect to all suits of any specified class or classes, and may specify, in the case of any suit or class of suits, the Court in which [the foreign State] may be sued, but it shall not be given, unless it appears to the Central Government that [the foreign State]—
+(a) has instituted a suit in the Court against the person desiring to sue [it], or
+(b) by [itself] or another, trades within the local limits of the jurisdiction of the Court, or
+(c) is in possession of immovable property situate within those limits and is to be sued with reference to such property or for money charged thereon, or
+(d) has expressly or impliedly waived the privilege accorded to [it] by this section.
+[(3) Except with the consent of the Central Government, certified in writing by a Secretary to that Government, no decree shall be executed against the property of any foreign State.]
+(4) The preceding provisions of this section shall apply in relation to—
+[(a) any ruler of a foreign State;] [(aa)] any Ambassador or Envoy of a foreign State;
+(b) any High Commissioner of a Commonwealth country; and
+(c) any such member of the staff [of the foreign State or the staff or retinue of the Ambassador] or Envoy of a foreign State or of the High Commissioner of a Commonwealth country as the Central Government may, by general or special order, specify in this behalf, [as they apply in relation to a foreign State].
+[(5) The following persons shall not be arrested under this Code, namely: —
+(a) any Ruler of a foreign State;
+(b) any Ambassador or Envoy of a foreign State;
+(c) any High Commissioner of a Commonwealth country;
+(d) any such member of the staff of the foreign State or the staff or retinue of the Ruler, Ambassador or Envoy of a foreign State or of the High Commissioner of a Commonwealth country, as the Central Government may, by general or special order, specify in this behalf.
+(6) Where a request is made to the Central Government for the grant of any consent referred to in sub-section (1), the Central Government shall, before refusing to accede to the request in whole or in part, give to the person making the request a reasonable opportunity of being heard.]

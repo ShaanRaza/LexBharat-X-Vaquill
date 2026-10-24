@@ -1,0 +1,19 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, section 40.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/fill-all.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# This section REPLACES text already in our data: our data holds text with 99% of the PDF's words, of which 14% of its own words are in the PDF.
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: 40
+Heading: Collectors power to stamp instruments impounded
+Replaces existing text: yes
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) When the Collector impounds any instrument under section 33, or receives any instrument sent to him under section 38, sub-section (2), not being an instrument chargeable [with a duty not exceeding ten naye paise] only or a bill of exchange or promissory note, he shall adopt the following procedure:—
+(a) if he is of opinion that such instrument is duly stamped, or is not chargeable with duty, he shall certify by endorsement thereon that it is duly stamped, or that it is not so chargeable, as the case may be;
+(b) if he is of opinion that such instrument is chargeable with duty and is not duly stamped, he shall require the payment of the proper duty or the amount required to make up the same, together with a penalty of five rupees; or, if he thinks fit, [an amount not exceeding] ten times the amount of the proper duty or of the deficient portion thereof, whether such amount exceeds or falls short of five rupees:
+Provided that, when such instrument has been impounded only because it has been written in contravention of section 13 or section 14, the Collector may, if he thinks fit, remit the whole penalty prescribed by this section.
+(2) Every certificate under clause (a) of sub-section (1) shall, for the purposes of this Act, be conclusive evidence of the matters stated therein.
+(3) Where an instrument has been sent to the Collector under section 38, sub-section (2), the Collector shall, when he has dealt with it as provided by this section, return it to the impounding officer.
