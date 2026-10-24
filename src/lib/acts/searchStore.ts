@@ -96,6 +96,30 @@ async function textSearch(q: string, page: number, pageSize: number): Promise<Se
   }
 }
 
+// ---- Hindi (Devanagari) keyword search: only over sections whose Hindi text the site shows (act_sections_hi, scripts/w10/hindi-index.mjs), 'simple' full-text config (no stemming).
+const HI_SPLIT = /[^\p{L}\p{N}\p{M}]+/u;   // letters, digits and combining marks (vowel signs) make a word
+async function hindiSearch(q: string, page: number, pageSize: number): Promise<SearchOutcome> {
+  const empty = (note: string): SearchOutcome => ({ available: true, results: [], total: 0, totalCapped: false, page, pageSize, hasMore: false, mode: "text", note });
+  const words = [...new Set(q.toLowerCase().split(HI_SPLIT).filter(Boolean))].slice(0, 8);
+  try {
+    const offset = (page - 1) * pageSize;
+    const rows = await query<Omit<SectionHit, "via"> & { total: string | number; body: string | null }>(
+      `WITH m AS MATERIALIZED (SELECT act_id, section_key FROM act_sections_hi WHERE words @> $1::text[]),
+            p AS (SELECT *, (SELECT count(*) FROM m) AS total FROM m ORDER BY act_id, section_key OFFSET $2 LIMIT $3)
+       SELECT ${COLS}, p.total, left(s.body, 20000) AS body FROM p JOIN act_sections_v s USING (act_id, section_key) JOIN acts a ON a.act_id = s.act_id ORDER BY s.act_id, s.ord`, [words, offset, pageSize], 15000);
+    const total = rows.length ? Number(rows[0].total) : 0;
+    if (!rows.length && page === 1) return empty("No section with Hindi text matches. Hindi is searched only in the few hundred sections where we show Hindi text, by exact word forms; for English text, search in English.");
+    const snippet = (body: string) => {
+      const low = body.toLowerCase(), at = Math.max(0, Math.min(...words.map((w) => low.indexOf(w)).filter((i) => i >= 0)));
+      let out = body.slice(Math.max(0, at - 80), at + 200).replace(/\s+/g, " ");
+      for (const w of words) out = out.split(w).join(`${MARK_OPEN}${w}${MARK_CLOSE}`);
+      return out;
+    };
+    return { available: true, results: rows.map(({ total: _t, body, ...r }): SectionHit => ({ ...r, snippet: snippet(body ?? ""), via: "text" })), total, totalCapped: false, page, pageSize, hasMore: offset + rows.length < total, mode: "text",
+      note: "Searches the Hindi text we show (a few hundred sections), by exact word forms as shown (the source Hindi has lost some joined letters, so some words look misspelled). English text is searched in English." };
+  } catch { return { available: false, reason: "unreachable", message: "Section search could not be reached. Please try again in a moment." }; }
+}
+
 // ---- search by meaning (Central + State Acts). Query -> voyage-4 -> nearest chunks from each corpus's vector store (src/lib/acts/vectorStore.ts) -> distinct sections ->
 // metadata and snippets from the section database.
 export const SEM_CHUNKS = 200, SEM_POOL = 300, SEM_MAX = 60;
@@ -163,6 +187,7 @@ export async function searchSections(q: string, page = 1, pageSize = PAGE_SIZE, 
   } catch {
     return { available: false, reason: "unreachable", message: "Section search could not be reached. Please try again in a moment." };
   }
+  if (hasDevanagari(q) && hasSearchableChars(q)) return hindiSearch(q, page, pageSize);
   const chosen = chooseMode(q, { exact: !!opts.exact, hindi: hasDevanagari(q), semanticReady: semanticReady() });
   let reason: string | null = chosen.reason;
   if (chosen.mode === "semantic" && hasSearchableChars(q)) {

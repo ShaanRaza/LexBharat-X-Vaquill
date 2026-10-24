@@ -39,4 +39,6 @@ ok("Regulators", "regulator search by meaning answers (loaded subset: DGFT, CBIC
 if (dgft.results?.[0]) { const h = dgft.results[0]; p = await page(`/workspace/browse/acts/${h.actId}?section=${encodeURIComponent(h.sectionKey)}`); t = text(p.html);
   ok("Regulators", "a regulator section page shows its text", p.status === 200 && t.length > 800 && !/not (available|included)/i.test(t.slice(0, 3000)), `${t.length} chars`); }
 
+const hi = await sr("असाधारण");
+ok("Hindi", "Devanagari query finds sections with shown Hindi text", hi.searchAvailable && hi.results.length > 0, `${hi.total} hits`);
 console.log(`\n${rows.filter((r) => r[2]).length} of ${rows.length} passed`);
