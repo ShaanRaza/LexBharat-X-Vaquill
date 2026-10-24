@@ -1,4 +1,4 @@
-export const FEATURES: string[], VOTES: string[], REASONS: string[], METRICS: string[];
+export const FEATURES: string[], VOTES: string[], REASONS: string[];
 export const MAX_COMMENT: number;
 export type FeedbackInput = { feature: "chat" | "draft" | "review"; vote: "up" | "down"; itemId: string; reasons: string[]; comment: string };
 export function validateFeedback(body: unknown): { ok: true; value: FeedbackInput } | { ok: false; error: string };

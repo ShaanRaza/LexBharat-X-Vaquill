@@ -24,3 +24,8 @@ test("units read in order after the sections", () => {
   assert.ok(unitOrd("A9", 100) < unitOrd("A10", 100));
   assert.equal(unitOrd("12", 100), null);
 });
+
+test("Schedules of the Constitution", () => {
+  assert.equal(unitLabel("S7"), "Seventh Schedule"); assert.equal(unitLabel("S12"), "Twelfth Schedule"); assert.deepEqual(parseUnitNumber("S1"), { kind: "schedule", schedule: "1" });
+  assert.ok(unitOrd("A395", 10) < unitOrd("S1", 10));
+});

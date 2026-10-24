@@ -105,7 +105,6 @@ export function splitParts(text, maxChars = 8000) {
   }
   return out.map((p, i) => ({ i, start: p.start, end: p.end, text: text.slice(p.start, p.end).trim() })).filter((p) => p.text);
 }
-export const _boundary = BOUNDARY;
 
 // ---- checking what the model said against the text
 const norm = (s) => String(s).toLowerCase().replace(/[“”"'‘’]/g, "").replace(/\s+/g, " ").trim();

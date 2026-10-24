@@ -1,7 +1,7 @@
 {
-  "_note": "Which of our Acts a statute mention in a judgment links to. null = not linked (the Act is not in our Central data under that name). Edit here when the data changes.",
+  "_note": "Which of our Acts a statute mention in a judgment links to. null = not linked (the Act is not in our Central data under that name). Edit here when the data changes. crpc: IND_state_6796 is the Central CrPC 1973 copy (its category was corrected to central).",
   "ipc": "IND_REP_659_1860",
-  "crpc": null,
+  "crpc": "IND_state_6796",
   "cpc": "IND_central_2191",
   "ni": "IND_central_2189",
   "bns": "IND_central_20062",

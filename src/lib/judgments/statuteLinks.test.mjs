@@ -30,10 +30,14 @@ test("Orders and Rules, with Roman numerals", () => {
 });
 test("Articles: Limitation and Stamp Act get numbers; the Constitution is recognised", () => {
   assert.deepEqual(found("Article 137 of the Limitation Act, 1963", 1990), ["limitation:A137"]);
-  assert.deepEqual(found("Article 21 of the Constitution of India"), ["constitution:21"]);
-  assert.deepEqual(found("Constitution of India, Arts. 19(1)(g), 31"), ["constitution:19", "constitution:31"]);
+  assert.deepEqual(found("Article 21 of the Constitution of India"), ["constitution:A21"]);
+  assert.deepEqual(found("Constitution of India, Arts. 19(1)(g), 31"), ["constitution:A19", "constitution:A31"]);
 });
 test("a name that meant an older Act is not linked", () => {
+  assert.deepEqual(found("Code of Criminal Procedure, s. 439", 1962), []);
+  assert.deepEqual(found("Code of Criminal Procedure, 1973, s. 439", 1962), ["crpc:439"]);
+  assert.deepEqual(found("Code of Criminal Procedure, s. 439", 1998), ["crpc:439"]);
+  assert.deepEqual(found("Code of Criminal Procedure, 1898, s. 439", 1998), []);
   assert.deepEqual(found("Section 11 of the Arbitration Act", 1955), []);
   assert.deepEqual(found("Section 11 of the Arbitration Act", 2010), ["arbitration:11"]);
   assert.deepEqual(found("Section 11 of the Arbitration and Conciliation Act", 2010), ["arbitration:11"]);

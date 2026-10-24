@@ -1,12 +1,10 @@
 // POST /api/drafting/pick {text} -> the closest template for a sentence describing what the user needs: { templateId, why, fit }.
 import { AiError, aiConfigured, completeAi } from "@/lib/ai";
-import { createRateLimiter } from "@/lib/acts/semantic.mjs";
+import { rateCheck } from "@/lib/limits/counters";
 import { TEMPLATES } from "@/lib/drafting/catalog";
 import { bidOf, json } from "@/lib/drafting/http";
 import { buildPickPrompt, parsePick } from "@/lib/drafting/prompts.mjs";
 
-const g = globalThis as unknown as { __pickLimiter?: ReturnType<typeof createRateLimiter> };
-const limiter = (g.__pickLimiter ??= createRateLimiter({ limit: 15, windowMs: 60_000 }));
 
 export async function POST(req: Request) {
   const bid = bidOf(req);
@@ -16,7 +14,7 @@ export async function POST(req: Request) {
   if (text.length < 8) return json({ error: "Describe what you need in a sentence (at least 8 characters)." }, 422);
   if (text.length > 600) return json({ error: "Please keep it to 600 characters." }, 422);
   if (!aiConfigured("templatePick")) return json({ error: "Drafting is not set up yet (no model key)." }, 503);
-  const rl = limiter.check(bid);
+  const rl = await rateCheck("draft-pick", bid, 15);
   if (!rl.ok) return json({ error: `Too many requests. Wait ${rl.retryAfterSec} seconds.` }, 429, { "Retry-After": String(rl.retryAfterSec) });
   try {
     const p = buildPickPrompt(TEMPLATES, text);

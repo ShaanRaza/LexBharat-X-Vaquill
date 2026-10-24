@@ -1,5 +1,6 @@
 // Saved drafts in the main Neon database (tables in scripts/drafting/drafting-schema.sql), keyed to the anonymous browser id. LOGIC ONLY. Every read and write checks the browser id.
 import { query } from "@/lib/acts/db";
+import { addUsage, countersConfigured, removeUsage, usageCounts } from "@/lib/limits/counters";
 import type { Doc, SectionText } from "./docmodel.mjs";
 
 export type BasisItem = { n: number; actId: string; sectionKey: string; actTitle: string; number: string | null; heading: string | null; status: string; category: string; state: string | null; relied: boolean; used?: boolean; why: string | null; preview?: string };
@@ -50,11 +51,21 @@ export async function setSections(id: string, sections: SectionText[]) { await q
 
 // ---- usage counters for the limits (India time)
 const TODAY = "(now() AT TIME ZONE 'Asia/Kolkata')::date";
+/** Drafts made: this browser today / this week, and all browsers this month. Kept in Supabase (shared by every server instance); the old Neon table is only used when Supabase is not configured. */
 export async function draftUsage(bid: string): Promise<{ day: number; week: number; month: number }> {
+  if (countersConfigured()) return usageCounts(bid, "draft");
   const r = await query<{ day: string; week: string; month: string }>(
     `SELECT coalesce(sum(count) FILTER (WHERE browser_id = $1 AND day = ${TODAY}), 0) AS day, coalesce(sum(count) FILTER (WHERE browser_id = $1 AND day > ${TODAY} - 7), 0) AS week,
             coalesce(sum(count) FILTER (WHERE day >= date_trunc('month', ${TODAY})::date), 0) AS month FROM draft_usage WHERE day > ${TODAY} - 40`, [bid]);
   return { day: Number(r[0].day), week: Number(r[0].week), month: Number(r[0].month) };
 }
-export async function countDraft(bid: string) { await query(`INSERT INTO draft_usage (browser_id, day, count) VALUES ($1, ${TODAY}, 1) ON CONFLICT (browser_id, day) DO UPDATE SET count = draft_usage.count + 1`, [bid]); }
-export async function uncountDraft(bid: string) { await query(`UPDATE draft_usage SET count = greatest(count - 1, 0) WHERE browser_id = $1 AND day = ${TODAY}`, [bid]); }
+/** Counts one draft; returns an id for uncountDraft (null with the old Neon counters). */
+export async function countDraft(bid: string): Promise<number | null> {
+  if (countersConfigured()) return addUsage(bid, "draft");
+  await query(`INSERT INTO draft_usage (browser_id, day, count) VALUES ($1, ${TODAY}, 1) ON CONFLICT (browser_id, day) DO UPDATE SET count = draft_usage.count + 1`, [bid]);
+  return null;
+}
+export async function uncountDraft(bid: string, id?: number | null) {
+  if (id) { await removeUsage(id); return; }
+  await query(`UPDATE draft_usage SET count = greatest(count - 1, 0) WHERE browser_id = $1 AND day = ${TODAY}`, [bid]);
+}

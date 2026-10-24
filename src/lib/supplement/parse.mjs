@@ -3,7 +3,7 @@
 export const DELIMITER = /^={3,}\s*SECTION TEXT\b.*$/i;
 const KEYS = { "act": "act", "act id": "actId", "section": "section", "heading": "heading", "replaces existing text": "replaces", "source": "source", "source url": "sourceUrl", "date copied": "dateCopied" };
 /** A section number (28, 11A) or a unit of a Schedule: O39R1 (Order 39 Rule 1), O39 (the Order itself), A137 (Article 137). */
-export const SECTION_NUMBER = /^(?:\d{1,4}[A-Za-z]{0,3}|O\d{1,3}[A-Za-z]{0,2}(?:R\d{1,3}[A-Za-z]{0,2})?|A\d{1,3}[A-Za-z]{0,2})$/;
+export const SECTION_NUMBER = /^(?:\d{1,4}[A-Za-z]{0,3}|O\d{1,3}[A-Za-z]{0,2}(?:R\d{1,3}[A-Za-z]{0,2})?|A\d{1,3}[A-Za-z]{0,2}|S\d{1,2})$/;
 export const MIN_TEXT = 8, MAX_TEXT = 60000;
 
 /** The key a section gets in act_sections_v, the same shape as the dataset's own keys ("s016", "s138", "s19A"). */

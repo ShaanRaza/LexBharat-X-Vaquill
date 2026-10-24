@@ -4,7 +4,6 @@ export const VOTES = ["up", "down"];
 /** The quick picks shown after a thumbs-down. */
 export const REASONS = ["Wrong law", "Missing law", "Wrong facts", "Too vague", "Other"];
 export const MAX_COMMENT = 1000;
-export const METRICS = ["visit", "chat_asked", "draft", "review", "upload", "scan", "limit_hit", "model_busy", "answer_time"];
 
 /** Checks a feedback request body. Returns { ok: true, value } or { ok: false, error }. The item id is checked against the user's own data by the server, not here. */
 export function validateFeedback(body) {

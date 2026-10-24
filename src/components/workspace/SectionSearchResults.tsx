@@ -2,7 +2,7 @@
 import { sectionWord } from "@/lib/acts/unitLabel.mjs";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Badge, Highlight, Notice, Panel } from "@/components/kit";
+import { Badge, Highlight, Notice, Panel, RepealedNote } from "@/components/kit";
 import { STATUS_INFO, INCOMPLETE_NOTICE, MISSING_NOTICE, officialSourceUrl } from "@/lib/acts/quality";
 
 // Results of the Acts-tab search box over Central and State Acts (GET /api/acts/search): by meaning by default, exact words on request. Presentation and fetching only; the search itself lives in
@@ -49,7 +49,7 @@ export default function SectionSearchResults({ q }: { q: string }) {
                 <Link href={`/workspace/browse/acts/${h.actId}?section=${encodeURIComponent(h.sectionKey)}`} className="text-ui-body font-medium text-primary hover:underline">
                   {h.number ? sectionWord(h.number) : "Text block"}{h.heading ? ` — ${h.heading}` : ""}
                 </Link>
-                <p className="mt-0.5 text-ui-sm text-secondary">{h.actTitle}{h.chapter ? ` · ${h.chapter}` : ""}</p>
+                <p className="mt-0.5 text-ui-sm text-secondary">{h.actTitle}{h.chapter ? ` · ${h.chapter}` : ""} <RepealedNote actId={h.actId} /></p>
                 {h.snippet && <p className="mt-2 text-ui-base leading-relaxed text-foreground"><Highlight snippet={h.snippet} /></p>}
                 {h.status === "possibly_incomplete" && (
                   <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Possibly incomplete.</strong> {INCOMPLETE_NOTICE} <a className="font-medium underline" href={officialSourceUrl(h.sourceUrl)} target="_blank" rel="noopener noreferrer">Open on India Code</a></p></Notice>

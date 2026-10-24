@@ -35,7 +35,7 @@ function isOurAct(act, written, judgmentYear) {
   if (act.key === "arbitration") return y === 1996 || (y === null && /conciliation/i.test(written)) || (y === null && judgmentYear !== null && judgmentYear >= 1996);
   if (act.key === "limitation") return y === 1963 || (y === null && judgmentYear !== null && judgmentYear >= 1964);
   if (act.key === "sra") return y === 1963 || (y === null && judgmentYear !== null && judgmentYear >= 1964);
-  if (act.key === "crpc") return y !== 1898;
+  if (act.key === "crpc") return y === 1973 || (y === null && judgmentYear !== null && judgmentYear >= 1975);   // before 1974 a bare "Code of Criminal Procedure" is the 1898 Code
   return true;
 }
 
@@ -91,7 +91,7 @@ export function findMentions(text, judgmentYear = null) {
     const written = m.groups.act, act = /constitution/i.test(written) ? BY_KEY.constitution : /stamp/i.test(written) ? BY_KEY.stamp : BY_KEY.limitation;
     if (act.key === "limitation" && !isOurAct(act, written, judgmentYear)) continue;
     const listAt = m.index + m[0].toLowerCase().indexOf(m.groups.list.toLowerCase());
-    for (const n of numbersIn(m.groups.list, listAt, t)) add({ actKey: act.key, actName: act.name, kind: "article", number: act.key === "constitution" ? n.number : `A${n.number}`, start: n.start, end: n.end, text: n.shown });
+    for (const n of numbersIn(m.groups.list, listAt, t)) add({ actKey: act.key, actName: act.name, kind: "article", number: `A${n.number}`, start: n.start, end: n.end, text: n.shown });
   }
   for (const re of FORMS) for (const m of t.matchAll(re)) {
     const act = actFromGroups(m.groups); if (!act || act.key === "constitution") continue;

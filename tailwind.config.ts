@@ -28,8 +28,13 @@ const config: Config = {
         "quality-bad": "rgb(var(--quality-bad-rgb) / <alpha-value>)",
         "quality-info": "rgb(var(--quality-info-rgb) / <alpha-value>)",
       },
-      borderRadius: { control: "var(--radius-control)", panel: "var(--radius-panel)", chip: "var(--radius-chip)", card: "var(--radius-card)" },
+      borderRadius: { control: "var(--radius-control)", tight: "var(--radius-tight)", panel: "var(--radius-panel)", chip: "var(--radius-chip)", field: "var(--radius-field)", card: "var(--radius-card)" },
+      letterSpacing: { "caps-wide": "var(--tracking-caps-wide)", caps: "var(--tracking-caps)", tight: "var(--tracking-tight)", brand: "var(--tracking-brand)" },
+      width: { sidebar: "var(--w-sidebar)", "sidebar-narrow": "var(--w-sidebar-narrow)", drawer: "var(--w-drawer)" },
+      maxWidth: { content: "var(--w-content)" },
       fontSize: {
+        // size-only twins (no line height) for pages that already set their own: text-fs-sm is exactly the old text-[13px]
+        "fs-micro": "var(--text-micro)", "fs-nano": "var(--text-nano)", "fs-xs": "var(--text-xs)", "fs-sm": "var(--text-sm)", "fs-ui": "var(--text-ui)", "fs-body": "var(--text-body)", "fs-lead": "var(--text-lead)", "fs-xl": "var(--text-xl)", "fs-display": "var(--text-display)", "fs-title": "var(--text-title)",
         "ui-xs": ["var(--text-xs)", { lineHeight: "1.4" }],
         "ui-sm": ["var(--text-sm)", { lineHeight: "1.45" }],
         "ui-base": ["var(--text-ui)", { lineHeight: "1.5" }],

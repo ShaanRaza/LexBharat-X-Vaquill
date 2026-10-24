@@ -67,15 +67,15 @@ export async function POST(req: Request) {
   const stream = new ReadableStream({
     async start(controller) {
       const send = (o: unknown) => { try { controller.enqueue(enc.encode(JSON.stringify(o) + "\n")); } catch { /* client went away */ } };
-      let chatId = chatIdIn as string | null, createdChat = false, userMsgId: number | null = null, counted = false;
+      let chatId = chatIdIn as string | null, createdChat = false, userMsgId: number | null = null, counted = false, countId: number | null = null;
       const t0 = Date.now();
       /** The answer is saved: tell the browser its id (the thumbs up/down hangs on it) and count the question and how long it took, once. */
       const finish = (messageId: number) => { bump("chat_asked"); bump("answer_time", "chat", Date.now() - t0); send({ type: "done", messageId }); controller.close(); };
       const rollback = async () => {
-        try { if (createdChat && chatId) await deleteChat(bid, chatId); else if (userMsgId !== null) await deleteMessage(userMsgId); if (counted) await uncountQuestion(bid); } catch { /* best effort */ }
+        try { if (createdChat && chatId) await deleteChat(bid, chatId); else if (userMsgId !== null) await deleteMessage(userMsgId); if (counted) await uncountQuestion(bid, countId); } catch { /* best effort */ }
       };
       try {
-        await countQuestion(bid); counted = true;
+        countId = await countQuestion(bid); counted = true;
         const history = chatId ? await recentTurns(chatId) : [];
         if (!chatId) { chatId = await createChat(bid, chatTitle(message)); createdChat = true; }
         userMsgId = await addMessage(chatId, { role: "user", content: message });

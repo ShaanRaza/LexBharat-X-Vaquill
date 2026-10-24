@@ -1,6 +1,7 @@
 // Chat storage in the main Neon database (tables in scripts/chat/chat-schema.sql), keyed to the anonymous browser id. LOGIC ONLY. Every read and write checks the browser id,
 // so one browser cannot open another's chat even with its id.
 import { query } from "@/lib/acts/db";
+import { addUsage, countersConfigured, removeUsage, usageCounts } from "@/lib/limits/counters";
 
 export type Citation = { n: number; actId: string; sectionKey: string; actTitle: string; number: string | null; heading: string | null; status: string; category: string; state: string | null; preview?: string;
   /** "doc": a passage of the user's own document (actId/sectionKey are then empty; actTitle holds the document name); absent: a section of an Act */
@@ -46,7 +47,7 @@ export async function recentTurns(chatId: string, limit = 8): Promise<{ role: "u
 
 // ---- usage counters for the limits (India time)
 const TODAY = "(now() AT TIME ZONE 'Asia/Kolkata')::date";
-export async function usageFor(browserId: string): Promise<{ day: number; week: number; month: number }> {
+async function legacyUsageFor(browserId: string): Promise<{ day: number; week: number; month: number }> {
   const r = await query<{ day: string; week: string; month: string }>(
     `SELECT coalesce(sum(count) FILTER (WHERE browser_id = $1 AND day = ${TODAY}), 0) AS day,
             coalesce(sum(count) FILTER (WHERE browser_id = $1 AND day > ${TODAY} - 7), 0) AS week,
@@ -54,9 +55,15 @@ export async function usageFor(browserId: string): Promise<{ day: number; week: 
      FROM chat_usage WHERE day > ${TODAY} - 40`, [browserId]);
   return { day: Number(r[0].day), week: Number(r[0].week), month: Number(r[0].month) };
 }
-export async function countQuestion(browserId: string) {
+/** Questions asked: this browser today / this week, and all browsers this month. Kept in Supabase (shared by every server instance); the old Neon table is only used when Supabase is not configured. */
+export async function usageFor(browserId: string): Promise<{ day: number; week: number; month: number }> { return countersConfigured() ? usageCounts(browserId, "chat") : legacyUsageFor(browserId); }
+/** Counts one question; returns an id to hand back to uncountQuestion (null with the old Neon counters). */
+export async function countQuestion(browserId: string): Promise<number | null> {
+  if (countersConfigured()) return addUsage(browserId, "chat");
   await query(`INSERT INTO chat_usage (browser_id, day, count) VALUES ($1, ${TODAY}, 1) ON CONFLICT (browser_id, day) DO UPDATE SET count = chat_usage.count + 1`, [browserId]);
+  return null;
 }
-export async function uncountQuestion(browserId: string) {
+export async function uncountQuestion(browserId: string, id?: number | null) {
+  if (id) { await removeUsage(id); return; }
   await query(`UPDATE chat_usage SET count = greatest(count - 1, 0) WHERE browser_id = $1 AND day = ${TODAY}`, [browserId]);
 }

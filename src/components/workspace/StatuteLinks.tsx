@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { RepealedNote } from "@/components/kit";
 import { segments } from "@/lib/judgments/statuteLinks.mjs";
 import type { Resolved } from "@/lib/judgments/statuteResolve";
 
@@ -27,7 +28,7 @@ export function LawsReferred({ laws }: { laws: { actKey: string; actName: string
       <ul className="mt-2 space-y-1.5 text-ui-sm">
         {laws.map((l) => (
           <li key={l.actKey} className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-            <span className="font-medium">{l.actName}</span>
+            <span className="font-medium">{l.actName}</span>{l.items[0]?.actId && <RepealedNote actId={l.items[0].actId} />}
             <span className="flex flex-wrap gap-1.5">
               {l.items.map((m) => m.href
                 ? <Link key={m.label} href={m.href} className={`${linkClass} inline-flex min-h-8 items-center px-1`}>{m.label}{m.state === "missing" ? " (missing from source data)" : ""}</Link>

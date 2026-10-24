@@ -37,3 +37,12 @@ test("splitHighlight turns the database markers into parts and cleans markdown",
   assert.deepEqual(splitHighlight(`broken ${O}open`), [{ text: "broken ", hit: false }, { text: "open", hit: false }]);
   assert.deepEqual(splitHighlight(""), []);
 });
+
+test("Constitution lookups: Articles and Schedules", async () => {
+  const { parseSectionLookup } = await import("./searchQuery.mjs");
+  const want = (q, number) => assert.deepEqual([parseSectionLookup(q)?.number, parseSectionLookup(q)?.actPhrase], [number, "constitution of india"], q);
+  want("Article 21", "A21"); want("Art. 226 Constitution", "A226"); want("Article 32", "A32"); want("Art 14", "A14"); want("Article 21A", "A21A"); want("article 243ZH of the Constitution of India", "A243ZH");
+  want("Constitution Article 19", "A19"); want("Seventh Schedule", "S7"); want("7th Schedule of the Constitution", "S7");
+  assert.equal(parseSectionLookup("Article 137 Limitation Act").number, "A137"); assert.match(parseSectionLookup("Article 137 Limitation Act").actPhrase, /limitation/);
+  assert.equal(parseSectionLookup("Article 21 of the Constitution rights"), null);
+});

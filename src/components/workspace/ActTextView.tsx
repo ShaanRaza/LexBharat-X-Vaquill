@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Badge, Notice, Panel, StatusDot } from "@/components/kit";
+import { Badge, Notice, Panel, RepealedNote, StatusDot } from "@/components/kit";
 import { PROVENANCE, CHAPTER_NOTE, INCOMPLETE_NOTICE, MISSING_NOTICE } from "@/lib/acts/quality";
 import type { ActTextView as View } from "@/lib/acts/viewModel";
 import ScheduleTableView, { STAMP_NOTE } from "./ScheduleTableView";
@@ -43,7 +43,7 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
         <span aria-hidden> / </span><span>Acts &amp; Legislation</span>
       </nav>
       <h1 className="mt-2 text-ui-title font-semibold">{header.title}</h1>
-      <p className="mt-2 flex flex-wrap items-center gap-1.5">{header.meta.map((m) => <Badge key={m}>{m}</Badge>)}</p>
+      <p className="mt-2 flex flex-wrap items-center gap-1.5">{header.meta.map((m) => <Badge key={m}>{m}</Badge>)}<RepealedNote actId={header.actId} /></p>
 
       <div className="mt-5"><ProvenanceNote sectionStatusLabel={sel?.statusInfo.label} /></div>
 
@@ -83,7 +83,7 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
                 {sel.chapter && <p className="mt-1 text-ui-sm text-secondary">{sel.chapter}</p>}
                 {sel.missing && (
                   <Notice tone="warn" role="status" className="mt-4">
-                    <p className="font-medium text-foreground">{MISSING_NOTICE.replace(" Read it on India Code.", "")} <a className="underline" href={view.sourceUrl} target="_blank" rel="noopener noreferrer">Read it on India Code</a>.</p>
+                    <p className="font-medium text-foreground">{sel.note ? sel.note.replace(/ — check India Code\.?$/, "") : MISSING_NOTICE.replace(" Read it on India Code.", "")} <a className="underline" href={view.sourceUrl} target="_blank" rel="noopener noreferrer">{sel.note ? "Check India Code" : "Read it on India Code"}</a>.</p>
                   </Notice>
                 )}
                 {/^Article /.test(sel.label) && /Stamp Act/i.test(header.title) && <Notice tone="warn" role="note" compact className="mt-3"><p>{STAMP_NOTE}</p></Notice>}

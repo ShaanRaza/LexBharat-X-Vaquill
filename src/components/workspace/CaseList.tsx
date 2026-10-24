@@ -20,7 +20,7 @@ const pageList = (cur: number, last: number): number[] => {
 };
 const BENCH_FILTER: Record<string, string> = { single: "Single judge", division: "Division bench", larger: "Larger bench (3+ judges)" };
 
-export default function CaseList({ court, year, courtName, searchable, filterable, initialPage = 1 }: { court: string; year: number; courtName?: string; searchable: boolean; filterable: boolean; initialPage?: number }) {
+export default function CaseList({ court, year, courtName, searchable, filterable, initialPage = 1, years = [] }: { court: string; year: number; courtName?: string; searchable: boolean; filterable: boolean; initialPage?: number; /** the court's years, for the "Jump to year" list on All-years lists */ years?: number[] }) {
   const isHc = court !== SC;
   const [q, setQ] = useState(""); const [disp, setDisp] = useState(""); const [bench, setBench] = useState("");
   // Scope and page live in the URL (?years=all&page=3) so refresh, back and shared links keep them; initialPage is the server-rendered value of the same param.
@@ -61,10 +61,12 @@ export default function CaseList({ court, year, courtName, searchable, filterabl
   return (
     <div className="mt-5">
       {searchable && <SearchField id="case-q" value={q} onChange={setQ} shortPlaceholder={isHc ? "Party name or 933/2024" : "Party name or 5491/2024"} label={`Search ${courtName ?? "cases"}`} placeholder={isHc ? "Try a petitioner or respondent name, a case number like 933/2024, or a year" : "Try a party name, a title word, a citation or a case number like 5491/2024"} />}
-      {(searchable || filterable) && <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] text-[#535151]">
-        <span role="group" aria-label="Where to search" className="inline-flex overflow-hidden rounded-lg ring-1 ring-border">
-          {([["year", `${year} only`], ["all", "All years"]] as const).map(([v, l]) => <button key={v} type="button" aria-pressed={scope === v} onClick={() => setScope(v)} className={`px-3 py-1 ${scope === v ? "bg-primary text-white" : "bg-surface text-[#3f3a35] hover:bg-accent"}`}>{l}</button>)}
+      {(searchable || filterable) && <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-fs-sm text-secondary">
+        <span role="group" aria-label="Where to search" className="inline-flex overflow-hidden rounded-field ring-1 ring-border">
+          {([["year", `${year} only`], ["all", "All years"]] as const).map(([v, l]) => <button key={v} type="button" aria-pressed={scope === v} onClick={() => setScope(v)} className={`px-3 py-1 ${scope === v ? "bg-primary text-on-primary" : "bg-surface text-ink hover:bg-accent"}`}>{l}</button>)}
         </span>
+        {scope === "all" && years.length > 1 && <span className="inline-flex items-center gap-2"><label htmlFor="jump-year" className="text-secondary">Jump to year</label>
+          <select id="jump-year" value="" onChange={(e) => { if (e.target.value) router.push(`${pathname}?year=${e.target.value}`, { scroll: false }); }} className={filterSelect(false)}><option value="">Choose a year</option>{years.map((y) => <option key={y} value={y}>{y}</option>)}</select></span>}
         {searchable && <span>{isHc ? "Searches party names, case numbers and case years as recorded in the dataset, not judgment text." : "Searches the title (both parties), citation and case number from the judgment heading, not judgment text."}</span>}
       </div>}
       {(filterable && !cross && (facets?.disposition.length || facets?.bench?.length)) ? (
@@ -76,27 +78,29 @@ export default function CaseList({ court, year, courtName, searchable, filterabl
           {(disp || bench) && <button type="button" onClick={() => { setDisp(""); setBench(""); }} className={clearFiltersCls}>Clear filters</button>}
         </div>
       ) : null}
-      {!searchable && <p className="mt-3 rounded-lg bg-accent px-4 py-2.5 text-[13px] text-[#535151]">Newest first.{filterable ? " Filters apply one at a time. Bench size is offered only for courts whose judge data is reliable." : " Filters are not available for this court yet."} Searching by party name is not available for High Courts on this site yet: it needs the High Court search index, which is not loaded here. Short text previews are not available yet. High Court records usually have a case number but no reporter citation.</p>}
-      {err && <div role="alert" className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-error/40 bg-error/5 p-3 text-[14px]"><span>{err}</span><button type="button" onClick={() => setRetry((n) => n + 1)} className="h-8 rounded-lg px-3 ring-1 ring-border hover:bg-accent">Try again</button></div>}
-      {!data && !err && <div className="mt-4 space-y-2" aria-busy="true">{[0, 1, 2].map((i) => <div key={i} className="console-skel h-16 rounded-xl bg-accent" />)}</div>}
-      {data && !data.available && <p className="mt-4 rounded-lg bg-accent px-4 py-3 text-[14px] text-[#535151]">{data.note}</p>}
+      {!searchable && <p className="mt-3 rounded-field bg-accent px-4 py-2.5 text-fs-sm text-secondary">Newest first.{filterable ? " Filters apply one at a time. Bench size is offered only for courts whose judge data is reliable." : " Filters are not available for this court yet."} Searching by party name is not available for High Courts on this site yet: it needs the High Court search index, which is not loaded here. Short text previews are not available yet. High Court records usually have a case number but no reporter citation.</p>}
+      {err && <div role="alert" className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-field border border-error/40 bg-error/5 p-3 text-fs-ui"><span>{err}</span><button type="button" onClick={() => setRetry((n) => n + 1)} className="h-8 rounded-field px-3 ring-1 ring-border hover:bg-accent">Try again</button></div>}
+      {!data && !err && <div className="mt-4 space-y-2" aria-busy="true">{[0, 1, 2].map((i) => <div key={i} className="console-skel h-16 rounded-card bg-accent" />)}</div>}
+      {data && !data.available && <p className="mt-4 rounded-field bg-accent px-4 py-3 text-fs-ui text-secondary">{data.note}</p>}
       {data?.available && (
         <>
-          <p className="mt-3 text-[13px] text-muted" role="status">{cross && !browseAll ? `${data.total.toLocaleString("en-IN")} ${data.total === 1 ? "case matches" : "cases match"} “${q.trim()}” ${scope === "year" ? `in ${year}` : `across all years of ${courtName ?? "this court"}`}` : `${data.total.toLocaleString("en-IN")} case records ${browseAll ? "across all years" : `in ${year}`}${searching || disp || bench ? " match" : ""}`}</p>
+          <p className="mt-3 text-fs-sm text-muted" role="status">{cross && !browseAll ? `${data.total.toLocaleString("en-IN")} ${data.total === 1 ? "case matches" : "cases match"} “${q.trim()}” ${scope === "year" ? `in ${year}` : `across all years of ${courtName ?? "this court"}`}` : `${data.total.toLocaleString("en-IN")} case records ${browseAll ? "across all years" : `in ${year}`}${searching || disp || bench ? " match" : ""}`}</p>
           <ul className="mt-2 space-y-2">
             {data.results.map((c, idx) => {
               const y = c.year ?? year, p = c.mainPage ?? Math.floor(((page - 1) * PAGE + idx) / HC_PAGE) + 1;
               return <CaseRow key={`${y}-${c.caseId}`} c={c} court={court} year={scope === "all" ? y : undefined}
                 href={`/workspace/browse/judgments/${court}/${y}/${encodeURIComponent(c.caseId)}?p=${p}&lp=${page}${scope === "all" ? "&ya=1" : ""}`} />;
             })}
-            {!data.results.length && <li className="rounded-xl border border-dashed border-border p-6 text-center text-[14px] text-muted">{searching ? "No case matches. Try a surname, fewer words, or search all years." : "No cases match."}</li>}
+            {!data.results.length && (page > pages && data.total > 0
+              ? <li className="rounded-card border border-dashed border-border p-6 text-center text-fs-ui text-muted">No cases on this page. <button type="button" onClick={() => go({ page: pages })} className="font-medium text-primary underline">Go to the last page ({pages.toLocaleString("en-IN")})</button></li>
+              : <li className="rounded-card border border-dashed border-border p-6 text-center text-fs-ui text-muted">{searching ? "No case matches. Try a surname, fewer words, or search all years." : "No cases match."}</li>)}
           </ul>
-          <nav aria-label="Pagination" className="mt-4 text-[14px]">
+          <nav aria-label="Pagination" className="mt-4 text-fs-ui">
             <div className="flex flex-wrap items-center justify-center gap-1.5">
-              <button type="button" disabled={page <= 1} onClick={() => setPage((p) => p - 1)} className="h-9 rounded-lg px-3 ring-1 ring-border hover:bg-accent disabled:opacity-40">← Previous</button>
+              <button type="button" disabled={page <= 1} onClick={() => setPage((p) => p - 1)} className="h-9 rounded-field px-3 ring-1 ring-border hover:bg-accent disabled:opacity-40">← Previous</button>
               {pageList(page, pages).map((n, i) => n === 0 ? <span key={`g${i}`} aria-hidden className="px-1 text-muted">…</span>
-                : <button key={n} type="button" aria-current={n === page ? "page" : undefined} onClick={() => go({ page: n })} className={`h-9 min-w-9 rounded-lg px-2 ring-1 ring-border ${n === page ? "bg-primary text-white" : "hover:bg-accent"}`}>{n}</button>)}
-              <button type="button" disabled={page >= pages} onClick={() => setPage((p) => p + 1)} className="h-9 rounded-lg px-3 ring-1 ring-border hover:bg-accent disabled:opacity-40">Next →</button>
+                : <button key={n} type="button" aria-current={n === page ? "page" : undefined} onClick={() => go({ page: n })} className={`h-9 min-w-9 rounded-field px-2 ring-1 ring-border ${n === page ? "bg-primary text-on-primary" : "hover:bg-accent"}`}>{n}</button>)}
+              <button type="button" disabled={page >= pages} onClick={() => setPage((p) => p + 1)} className="h-9 rounded-field px-3 ring-1 ring-border hover:bg-accent disabled:opacity-40">Next →</button>
             </div>
             <p className="mt-2 text-center text-muted">Page {Math.min(page, pages).toLocaleString("en-IN")} of {pages.toLocaleString("en-IN")} · {data.total.toLocaleString("en-IN")} {data.total === 1 ? "case" : "cases"} ({scope === "all" ? "all years" : year})</p>
           </nav>

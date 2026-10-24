@@ -53,6 +53,8 @@
   --quality-info-rgb: var(--muted-rgb);
 
   /* radii */
+  --radius-tight: 4px;
+  --radius-field: 8px;
   --radius-control: 2px;
   --radius-panel: 6px;
   --radius-chip: 6px;
@@ -65,6 +67,23 @@
   --text-body: 15px;
   --text-lead: 16px;
   --text-title: 28px;
+  /* the same scale plus the extra sizes the older pages use (used through the text-fs-* classes, which set the size only and leave the line height alone) */
+  --text-micro: 10px;
+  --text-nano: 11px;
+  --text-xl: 18px;
+  --text-display: 24px;
+
+  /* letter spacing */
+  --tracking-caps-wide: 0.12em;
+  --tracking-caps: 0.08em;
+  --tracking-tight: -0.02em;
+  --tracking-brand: -0.03em;
+
+  /* layout widths */
+  --w-sidebar: 236px;
+  --w-sidebar-narrow: 200px;
+  --w-drawer: min(260px, 85vw);
+  --w-content: 880px;
   --leading-reading: 1.7;
 
   /* spacing used by shared components */

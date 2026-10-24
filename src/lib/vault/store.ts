@@ -74,15 +74,7 @@ export async function matchChunks(bid: string, docIds: string[] | null, vector: 
 }
 
 // ---- usage log for the review limits (India time)
-const istStart = (d = new Date()) => { const ms = d.getTime() + 5.5 * 3600e3, day = Math.floor(ms / 86400e3) * 86400e3; return new Date(day - 5.5 * 3600e3); };
-const istMonthStart = () => { const n = new Date(Date.now() + 5.5 * 3600e3); return new Date(Date.UTC(n.getUTCFullYear(), n.getUTCMonth(), 1) - 5.5 * 3600e3); };
-export async function usageCounts(bid: string, kind: string): Promise<{ day: number; week: number; month: number }> {
-  const c = async (since: Date, own: boolean) => { let q = sb().from("vault_usage").select("id", { count: "exact", head: true }).eq("kind", kind).gte("at", since.toISOString()); if (own) q = q.eq("browser_id", bid); const r = await q; if (r.error) throw new Error(r.error.message); return r.count ?? 0; };
-  const [day, week, month] = await Promise.all([c(istStart(), true), c(new Date(Date.now() - 7 * 86400e3), true), c(istMonthStart(), false)]);
-  return { day, week, month };
-}
-export async function addUsage(bid: string, kind: string): Promise<number> { const r = must(await sb().from("vault_usage").insert({ browser_id: bid, kind }).select("id")) as Row[]; return Number(r[0].id); }
-export async function removeUsage(id: number) { await sb().from("vault_usage").delete().eq("id", id); }
+export { usageCounts, addUsage, removeUsage } from "@/lib/limits/counters";
 
 // ---- pages read from images (table vault_scan_pages, scripts/w8/w8-schema.sql): one row per page so a document that had to wait resumes where it stopped
 export async function saveScanPage(bid: string, id: string, page: number, body: string) {

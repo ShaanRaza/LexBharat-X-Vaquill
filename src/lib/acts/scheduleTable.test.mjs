@@ -21,3 +21,10 @@ test("rows are sorted by article and mark where the group changes", () => {
   assert.deepEqual(t.rows.map((r) => r.startsGroup), [true, false, false, true]);
   assert.equal(t.columns.length, 4);
 });
+
+test("Articles the PDF does not print get their own row, in place", () => {
+  const mk = (n) => ({ number: n, body: "Description of instrument: BOND\nProper stamp-duty: Two annas." });
+  const t = buildScheduleTable([mk("A5"), mk("A22")], { numbers: [21, 4], note: "Not printed in the source PDF — check India Code." });
+  assert.deepEqual(t.rows.map((r) => r.article), ["4", "5", "21", "22"]);
+  assert.equal(t.rows[0].notPrinted, true); assert.equal(t.rows[0].cells[0], "Not printed in the source PDF — check India Code."); assert.equal(t.rows[1].notPrinted, undefined);
+});

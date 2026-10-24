@@ -43,10 +43,10 @@ export async function POST(req: Request) {
   const stream = new ReadableStream({
     async start(controller) {
       const send = (o: unknown) => { try { controller.enqueue(enc.encode(JSON.stringify(o) + "\n")); } catch { /* client went away: generation still finishes and is saved */ } };
-      let counted = false;
+      let counted = false, countId: number | null = null;
       const t0 = Date.now();
       try {
-        await countDraft(bid); counted = true;
+        countId = await countDraft(bid); counted = true;
         send({ type: "start" });
         const r = await runDraft({ template, values, extra, send });
         const id = await createDraft(bid, { title: r.title, templateId: template.id, fields: values, extra: extra || null, basis: r.basis, checklist: r.checklist, sections: r.sections, warnings: r.warnings, doc: r.doc, model: r.model });
@@ -59,7 +59,7 @@ export async function POST(req: Request) {
         bump("draft", template.id); bump("answer_time", "draft", Date.now() - t0);
         send({ type: "done" }); controller.close();
       } catch (e) {
-        if (counted) await uncountDraft(bid).catch(() => null);
+        if (counted) await uncountDraft(bid, countId).catch(() => null);
         const busy = e instanceof AiError && ["rate_limit", "unavailable", "timeout"].includes(e.kind);
         if (busy) bump("model_busy", "drafting");
         send({ type: "error", code: busy ? "busy" : "failed", message: busy ? "Busy, try again in a minute. Your draft was not counted." : "Something went wrong and your draft was not counted. Please try again." });

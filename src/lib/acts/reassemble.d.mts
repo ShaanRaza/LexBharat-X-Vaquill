@@ -30,6 +30,4 @@ export function headingNameReliable(name: string): boolean;
 export function embeddedChapter(body: string): string | null;
 export function reassembleAct(rows: { actId: string; chunkId: string; sectionNumber: string | null; text: string }[]): { sections: AssembledSection[]; unparsed: string[] };
 export function validateChapters(sections: AssembledSection[]): void;
-export const STATUS_ORDER: SectionStatus[];
-export const FLAG_KEYS: string[];
 export function countFlags(sections: Pick<AssembledSection, "status" | "flags">[], into?: Record<string, number>): Record<string, number>;

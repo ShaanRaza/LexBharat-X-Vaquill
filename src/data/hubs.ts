@@ -18,4 +18,3 @@ export const playbooks = fill(playbooksItems, (i) => `Recreated placeholder nego
 export const hubs = { blog, engineering, topics, clauses, playbooks };
 export type HubKey = keyof typeof hubs;
 
-export const hubCounts = Object.fromEntries(Object.entries(hubs).map(([k, v]) => [k, v.length])) as Record<HubKey, number>;

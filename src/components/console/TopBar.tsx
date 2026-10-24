@@ -16,7 +16,6 @@ export const COUNTRIES = [
   { id: "gb", name: "United Kingdom", flag: "🇬🇧", current: false, soon: true },
 ];
 export const TOP_LINKS = [{ label: "Data API", href: "/developer?tab=overview" }];
-export const productFor = (path: string) => (path.startsWith("/workspace/chat") ? "workspace" : "data");   // add future links here; none are shown unless they exist
 
 type Item = { id: string; label: string; sub?: string; flag?: string; checked: boolean; soon: boolean; href?: string };
 const Chevron = () => <svg aria-hidden width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-muted"><path d="M6 9l6 6 6-6" /></svg>;

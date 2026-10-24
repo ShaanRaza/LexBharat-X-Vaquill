@@ -231,8 +231,6 @@ export function validateChapters(sections) {
   for (const s of sections.filter((x) => x.kind !== "s")) { s.chapter = null; s.chapterCheck = ["not_a_section"]; }
 }
 
-export const STATUS_ORDER = ["complete", "possibly_incomplete", "garbled"];
-export const FLAG_KEYS = ["complete", "possibly_incomplete", "garbled", "devanagari", "no_section_number"];
 /** Counts per user-facing flag for a list of sections (a section can count under more than one: status + devanagari + no_section_number). */
 export function countFlags(sections, into = {}) {
   const add = (k, n = 1) => { into[k] = (into[k] ?? 0) + n; };

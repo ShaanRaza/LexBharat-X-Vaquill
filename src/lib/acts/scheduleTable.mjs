@@ -25,10 +25,13 @@ export function articleRow(number, body) {
 export const tableInfo = (kind) => ({ ...KINDS[kind], columns: ["Article", ...KINDS[kind].labels.map((l) => l.replace(/^Description of (suit|instrument)$/, "Description of $1"))] });
 
 /** Rows sorted by article number (137 before 137A), each with `startsGroup` set where the division/part label changes. */
-export function buildScheduleTable(units) {
+export function buildScheduleTable(units, gaps) {
   const key = (a) => { const m = /^(\d+)([A-Z]*)$/.exec(a); return Number(m[1]) * 100 + (m[2] ? m[2].charCodeAt(0) - 64 : 0); };
-  const rows = units.map((u) => articleRow(u.number, u.body)).filter(Boolean).sort((a, b) => key(a.article) - key(b.article));
+  const rows = units.map((u) => articleRow(u.number, u.body)).filter(Boolean);
   const kind = rows[0]?.kind ?? null;
+  // Articles the PDF does not print get a row saying so, in their place
+  if (kind && gaps?.numbers?.length) for (const n of gaps.numbers) rows.push({ kind, article: String(n), cells: [gaps.note, ...Array.from({ length: KINDS[kind].labels.length - 1 }, () => "")], group: "", notPrinted: true });
+  rows.sort((a, b) => key(a.article) - key(b.article));
   let last = null;
   return { kind, ...(kind ? tableInfo(kind) : {}), rows: rows.map((r) => { const startsGroup = r.group !== last; last = r.group; return { ...r, startsGroup }; }) };
 }

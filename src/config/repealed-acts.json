@@ -1,0 +1,6 @@
+{
+  "_note": "Acts that were repealed and replaced in 2023, and the Act that replaced each. The note only points to the new Act as a whole; it never guesses which section matches which. Keyed by Act ID in our data.",
+  "IND_REP_659_1860": { "name": "Indian Penal Code, 1860", "newActId": "IND_central_20062", "newName": "Bharatiya Nyaya Sanhita, 2023", "short": "BNS" },
+  "IND_state_6796": { "name": "Code of Criminal Procedure, 1973", "newActId": "IND_central_20099", "newName": "Bharatiya Nagarik Suraksha Sanhita, 2023", "short": "BNSS" },
+  "IND_REP_971_1872": { "name": "Indian Evidence Act, 1872", "newActId": "IND_central_20063", "newName": "Bharatiya Sakshya Adhiniyam, 2023", "short": "BSA" }
+}

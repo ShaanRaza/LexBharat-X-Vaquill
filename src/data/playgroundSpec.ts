@@ -78,8 +78,6 @@ const F = (name: string, where: SpecField["in"], kind: FieldKind, description: s
 export const FEDERAL = "federal" as const;
 export const STATE_FILTER_VALUES = [FEDERAL, ...STATE_CODES] as const;
 export type StateFilterValue = (typeof STATE_FILTER_VALUES)[number];
-/** True when `v` (case-insensitive) is `federal` or a 2-letter jurisdiction code. */
-export const isStateFilterValue = (v: string): v is StateFilterValue => (STATE_FILTER_VALUES as readonly string[]).includes(v.toLowerCase());
 
 const stateField = (where: SpecField["in"], opts: { federal?: boolean; extra?: string } = {}): SpecField =>
   F("state", where, "enum",

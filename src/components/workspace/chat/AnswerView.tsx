@@ -2,7 +2,7 @@
 import { sectionWord } from "@/lib/acts/unitLabel.mjs";
 import { SCAN_LABEL } from "@/lib/vault/scan.mjs";
 import Link from "next/link";
-import { Badge, CitationChip, Notice } from "@/components/kit";
+import { Badge, CitationChip, Notice, RepealedNote } from "@/components/kit";
 import CitedText, { hrefOf, sourceLabel } from "@/components/workspace/CitedText";
 import { citedNumbers } from "@/lib/chat/citations.mjs";
 import { toBlocks } from "@/lib/chat/format.mjs";
@@ -35,7 +35,7 @@ function SourceRow({ c }: { c: Citation }) {
       <span className="shrink-0 self-start"><CitationChip n={c.n} href={hrefOf(c)} label={sourceLabel(c)} /></span>
       <div className="min-w-0">
         <Link href={hrefOf(c)} className="font-medium text-primary hover:underline">{c.actTitle}</Link>
-        <span className="text-muted">{c.state ? ` · ${c.state.replace(/-/g, " ")}` : ""}</span>
+        <span className="text-muted">{c.state ? ` · ${c.state.replace(/-/g, " ")}` : ""}</span> <RepealedNote actId={c.actId} />
         <p className="text-secondary">
           {c.number ? `${sectionWord(c.number)}${c.heading ? ` — ${c.heading}` : ""}` : <>Unnumbered text{c.preview ? <span className="text-muted"> — {c.preview}</span> : null}</>}
           {c.status === "possibly_incomplete" && <Badge tone="warn" className="ml-2" title="Our copy of this section may be missing text">Possibly incomplete</Badge>}

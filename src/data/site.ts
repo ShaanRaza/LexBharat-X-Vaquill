@@ -42,4 +42,3 @@ export const footerGroups: Record<string, { label: string; href: string }[]> = {
   ],
 };
 
-export const alsoListed = ["Marketplace A", "Marketplace B", "Marketplace C"]; // PLACEHOLDER names

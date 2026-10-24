@@ -34,10 +34,10 @@ const SETTINGS_TAB = CONSOLE_TABS.find((t) => t.id === "settings")!;
 
 function NotInClone({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <span role="link" aria-disabled="true" title="Not part of this local clone" className={`flex cursor-not-allowed items-center gap-3 rounded-[6px] px-3 py-2.5 text-[14px] text-muted/60 ${className}`}>{children}</span>
+    <span role="link" aria-disabled="true" title="Not part of this local clone" className={`flex cursor-not-allowed items-center gap-3 rounded-panel px-3 py-2.5 text-fs-ui text-muted/60 ${className}`}>{children}</span>
   );
 }
-const Chip = ({ children }: { children: React.ReactNode }) => <span className="ml-1.5 whitespace-nowrap rounded-full bg-accent px-1.5 py-0.5 align-middle text-[10px] text-muted ring-1 ring-border">{children}</span>;
+const Chip = ({ children }: { children: React.ReactNode }) => <span className="ml-1.5 whitespace-nowrap rounded-full bg-accent px-1.5 py-0.5 align-middle text-fs-micro text-muted ring-1 ring-border">{children}</span>;
 
 const LEARN = [
   { label: "API Docs", href: "/docs" },
@@ -84,11 +84,11 @@ export default function ConsoleShell({ tab, variant = "data", lawTab, children }
 
   const logoRowFor = (home: string) => (
     <div className="flex items-center justify-between px-4 pb-4 pt-5">
-        <Link href={home} className="flex items-baseline gap-0.5 text-[24px] font-medium leading-none tracking-[-0.03em]" aria-label="LexBharat">
-          <svg width="22" height="26" viewBox="0 0 24 28" fill="#6e3730" aria-hidden="true" className="mr-1.5 self-center"><path d="M20 1C9 2 2 9 3 20c0 3 1 6 3 7-1-5 0-10 4-14 3-3 7-4 10-4-5 1-9 4-11 9 5-1 10-5 11-13 .3-1.4.2-3.800 0-4z" /></svg>
+        <Link href={home} className="flex items-baseline gap-0.5 text-fs-display font-medium leading-none tracking-brand" aria-label="LexBharat">
+          <svg width="22" height="26" viewBox="0 0 24 28" fill="rgb(var(--primary-rgb))" aria-hidden="true" className="mr-1.5 self-center"><path d="M20 1C9 2 2 9 3 20c0 3 1 6 3 7-1-5 0-10 4-14 3-3 7-4 10-4-5 1-9 4-11 9 5-1 10-5 11-13 .3-1.4.2-3.800 0-4z" /></svg>
           LexBharat
         </Link>
-        <button type="button" onClick={() => (open ? setOpen(false) : setCollapsed(true))} aria-label="Collapse sidebar" className="rounded-[4px] p-1 text-muted hover:bg-accent">
+        <button type="button" onClick={() => (open ? setOpen(false) : setCollapsed(true))} aria-label="Collapse sidebar" className="rounded-tight p-1 text-muted hover:bg-accent">
           <Icon d="M15 5l-7 7 7 7" size={16} />
         </button>
     </div>
@@ -104,7 +104,7 @@ export default function ConsoleShell({ tab, variant = "data", lawTab, children }
               <NotInClone><Icon d={t.icon} /><span className="leading-tight">{t.label}<Chip>Not in clone</Chip></span></NotInClone>
             ) : (
               <Link href={`/developer?tab=${t.id}`} onClick={() => setOpen(false)} aria-current={tab === t.id ? "page" : undefined}
-                className={`flex items-center gap-3 rounded-[6px] px-3 py-2.5 text-[14px] transition-colors ${tab === t.id ? "bg-accent text-foreground" : "text-muted hover:bg-accent/60 hover:text-foreground"}`}>
+                className={`flex items-center gap-3 rounded-panel px-3 py-2.5 text-fs-ui transition-colors ${tab === t.id ? "bg-accent text-foreground" : "text-muted hover:bg-accent/60 hover:text-foreground"}`}>
                 <Icon d={t.icon} />
                 <span className="leading-tight">{t.label}{"beta" in t && t.beta && <Chip>Beta</Chip>}{t.status === "bridge" && <Chip>Demo</Chip>}</span>
               </Link>
@@ -114,27 +114,27 @@ export default function ConsoleShell({ tab, variant = "data", lawTab, children }
         {/* "Acts & Judgments" sits after MCP Server in the original's sidebar; highlighted on every page under /workspace/browse. */}
         <li>
           <Link href="/workspace/browse" onClick={() => setOpen(false)} aria-current={variant === "workspace" ? "page" : undefined}
-            className={`flex items-center gap-3 rounded-[6px] px-3 py-2.5 text-[14px] transition-colors ${variant === "workspace" ? "bg-accent text-foreground" : "text-muted hover:bg-accent/60 hover:text-foreground"}`}>
+            className={`flex items-center gap-3 rounded-panel px-3 py-2.5 text-fs-ui transition-colors ${variant === "workspace" ? "bg-accent text-foreground" : "text-muted hover:bg-accent/60 hover:text-foreground"}`}>
             <Icon d={BOOKS_ICON} /><span className="leading-tight">Acts &amp; Judgments</span>
           </Link>
         </li>
       </ul>
-      <p className="mt-6 px-5 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">Learn</p>
+      <p className="mt-6 px-5 text-fs-nano font-semibold uppercase tracking-caps-wide text-muted">Learn</p>
       <ul className="mt-2 space-y-0.5 px-2">
         {LEARN.map((l) => (
-          <li key={l.label}><Link href={l.href} className="flex items-center justify-between rounded-[6px] px-3 py-1.5 text-[13px] text-muted hover:bg-accent/60 hover:text-foreground">{l.label}<span aria-hidden className="text-[11px]">↗</span></Link></li>
+          <li key={l.label}><Link href={l.href} className="flex items-center justify-between rounded-panel px-3 py-1.5 text-fs-sm text-muted hover:bg-accent/60 hover:text-foreground">{l.label}<span aria-hidden className="text-fs-nano">↗</span></Link></li>
         ))}
       </ul>
       <div className="mt-auto space-y-1 px-2 pb-4">
         <NotInClone className="!py-2"><Icon d={SETTINGS_TAB.icon} /><span className="leading-tight">Settings<Chip>Not in clone</Chip></span></NotInClone>
         <div className="px-3 py-2">
           <div className="flex items-center gap-3">
-            <span aria-hidden className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-accent text-[11px] font-medium uppercase text-muted ring-1 ring-border">{(session?.email ?? "local").slice(0, 2)}</span>
-            <span className="min-w-0 leading-tight"><span className="block truncate text-[14px] font-medium">{session ? "Signed in" : "Not signed in"}</span><span className="block truncate text-[12px] text-muted" title={session?.email}>{session?.email ?? "Demo console"}</span></span>
+            <span aria-hidden className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-accent text-fs-nano font-medium uppercase text-muted ring-1 ring-border">{(session?.email ?? "local").slice(0, 2)}</span>
+            <span className="min-w-0 leading-tight"><span className="block truncate text-fs-ui font-medium">{session ? "Signed in" : "Not signed in"}</span><span className="block truncate text-fs-xs text-muted" title={session?.email}>{session?.email ?? "Demo console"}</span></span>
           </div>
           {session
-            ? <button type="button" onClick={() => { clearMockSession(); router.push("/auth/login"); }} className="mt-2 inline-flex min-h-8 items-center rounded-[6px] px-2 text-[13px] text-primary hover:bg-accent">Sign out</button>
-            : <Link href="/auth/login" className="mt-2 inline-flex min-h-8 items-center rounded-[6px] px-2 text-[13px] text-primary hover:bg-accent">Sign in (demo)</Link>}
+            ? <button type="button" onClick={() => { clearMockSession(); router.push("/auth/login"); }} className="mt-2 inline-flex min-h-8 items-center rounded-panel px-2 text-fs-sm text-primary hover:bg-accent">Sign out</button>
+            : <Link href="/auth/login" className="mt-2 inline-flex min-h-8 items-center rounded-panel px-2 text-fs-sm text-primary hover:bg-accent">Sign in (demo)</Link>}
           <div className="mt-1 px-2"><LogoutLink /></div>
         </div>
       </div>
@@ -149,20 +149,20 @@ export default function ConsoleShell({ tab, variant = "data", lawTab, children }
     <div className="console min-h-screen">
       <div className="flex">
         {/* desktop sidebar */}
-        {!collapsed && <aside className={`sticky top-0 hidden h-screen shrink-0 border-r border-border md:block ${variant === "lawspace" ? "w-[236px]" : "w-[200px]"}`}>{nav}</aside>}
+        {!collapsed && <aside className={`sticky top-0 hidden h-screen shrink-0 border-r border-border md:block ${variant === "lawspace" ? "w-sidebar" : "w-sidebar-narrow"}`}>{nav}</aside>}
         {/* mobile drawer */}
         {open && (
           <div className="fixed inset-0 z-[110] md:hidden">
             <button type="button" aria-label="Close menu" className="absolute inset-0 bg-foreground/30" onClick={() => setOpen(false)} />
-            <aside ref={drawer} tabIndex={-1} data-lenis-prevent role="dialog" aria-modal="true" aria-label="Console menu" className="relative h-full w-[min(260px,85vw)] overflow-y-auto bg-background shadow-lg outline-none">{nav}</aside>
+            <aside ref={drawer} tabIndex={-1} data-lenis-prevent role="dialog" aria-modal="true" aria-label="Console menu" className="relative h-full w-drawer overflow-y-auto bg-background shadow-lg outline-none">{nav}</aside>
           </div>
         )}
         <div className="min-w-0 flex-1">
           <header className="relative flex flex-wrap items-center gap-x-3 gap-y-2 px-4 py-3 md:px-8">
-            <button ref={menuBtn} type="button" aria-label={collapsed ? "Show sidebar" : "Open menu"} aria-expanded={open} onClick={() => (window.matchMedia("(min-width: 768px)").matches ? setCollapsed((c) => !c) : setOpen(true))} className="rounded-[4px] p-2 text-muted hover:bg-accent"><Icon d="M4 7h16M4 12h16M4 17h16" /></button>
+            <button ref={menuBtn} type="button" aria-label={collapsed ? "Show sidebar" : "Open menu"} aria-expanded={open} onClick={() => (window.matchMedia("(min-width: 768px)").matches ? setCollapsed((c) => !c) : setOpen(true))} className="rounded-tight p-2 text-muted hover:bg-accent"><Icon d="M4 7h16M4 12h16M4 17h16" /></button>
             <TopBar product={variant === "lawspace" ? "workspace" : "data"} />
-            {variant === "data" && <Link href="/docs/api-guide/changelog" className="hidden min-h-8 items-center gap-1.5 rounded-full bg-accent/60 px-3 text-[13px] text-[#535151] hover:text-foreground lg:inline-flex">Coverage is expanding fast. <strong className="font-semibold text-foreground">Changelog</strong><span aria-hidden>↗</span></Link>}
-            {variant === "data" && <span className="rounded-[2px] border border-warning/50 bg-warning/10 px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-warning">Demo</span>}
+            {variant === "data" && <Link href="/docs/api-guide/changelog" className="hidden min-h-8 items-center gap-1.5 rounded-full bg-accent/60 px-3 text-fs-sm text-secondary hover:text-foreground lg:inline-flex">Coverage is expanding fast. <strong className="font-semibold text-foreground">Changelog</strong><span aria-hidden>↗</span></Link>}
+            {variant === "data" && <span className="rounded-control border border-warning/50 bg-warning/10 px-1.5 py-0.5 font-mono text-fs-micro font-medium uppercase tracking-wider text-warning">Demo</span>}
           </header>
           <main id="main" tabIndex={-1} className="outline-none px-4 pb-24 pt-2 md:px-8">{children}</main>
         </div>
