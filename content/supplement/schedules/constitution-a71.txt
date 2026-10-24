@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Constitution of India, Article 71.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A71
+Heading: Matters relating to, or connected with, the election of a President or Vice-President
+Chapter: PART V — THE UNION CHAPTER I.—THE EXECUTIVE · The President and Vice-President
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) All doubts and disputes arising out of or in connection with the election of a President or Vice-President shall be inquired into and decided by the Supreme Court whose decision shall be final.
+(2) If the election of a person as President or Vice-President is declared void by the Supreme Court, acts done by him in the exercise and performance of the powers and duties of the office of President or Vice-President, as the case may be, on or before the date of the decision of the Supreme Court shall not be invalidated by reason of that declaration.
+(3) Subject to the provisions of this Constitution, Parliament may by law regulate any matter relating to or connected with the election of a President or Vice-President.
+(4) The election of a person as President or Vice-President shall not be called in question on the ground of the existence of any vacancy for whatever reason among the members of the electoral college electing him.

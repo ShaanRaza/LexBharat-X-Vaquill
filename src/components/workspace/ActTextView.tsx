@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Fragment } from "react";
 import { Badge, Notice, Panel, RepealedNote, StatusDot } from "@/components/kit";
 import { PROVENANCE, CHAPTER_NOTE, INCOMPLETE_NOTICE, MISSING_NOTICE } from "@/lib/acts/quality";
 import type { ActTextView as View } from "@/lib/acts/viewModel";
@@ -54,21 +55,26 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
           <aside aria-label="Sections of this Act" className="lg:sticky lg:top-4 lg:self-start">
             <Panel className="p-0">
               <p className="border-b border-border/70 px-4 py-3 text-ui-sm text-secondary" role="status">
+                {view.counts.sections > 0 && view.counts.sections === view.counts.supplemented ? `${fmt(view.counts.sections)} Articles and Schedules, all read from India Code's text PDF of this Act.` : <>
                 {fmt(view.counts.sections - view.counts.supplemented)} {view.hasSectionNumbers ? "sections" : "text blocks"}: {fmt(view.counts.complete)} no problems detected, {fmt(view.counts.possibly_incomplete)} possibly incomplete, {fmt(view.counts.garbled)} unreliable{view.counts.supplemented ? `, ${fmt(view.counts.supplemented)} filled in from India Code` : ""}{view.counts.missing ? `, ${fmt(view.counts.missing)} missing from our source data` : ""}.
+                </>}
               </p>
               {view.hasSchedule && (
                 <Link href={href(header.actId, "schedule")} aria-current={view.schedule ? "true" : undefined} className={`flex min-h-11 items-center border-b border-border/70 px-4 py-2 text-ui-base text-primary hover:bg-accent ${view.schedule ? "bg-accent font-medium" : ""}`}>Schedule as a table</Link>
               )}
               <ul className="max-h-[70vh] overflow-y-auto py-1">
-                {view.list.map((it) => {
-                  const active = !view.schedule && it.key === sel?.key;
+                {view.list.map((it, n) => {
+                  const active = !view.schedule && it.key === sel?.key, newGroup = !!it.group && it.group !== view.list[n - 1]?.group;
                   return (
-                    <li key={it.key}>
+                    <Fragment key={it.key}>
+                    {newGroup && <li role="presentation" className="sticky top-0 bg-surface px-4 pb-1 pt-3 text-ui-xs font-semibold uppercase tracking-caps text-secondary">{it.group}</li>}
+                    <li>
                       <Link href={href(header.actId, it.key)} aria-current={active ? "true" : undefined} className={`flex items-start gap-2 px-4 py-2 text-ui-base hover:bg-accent ${active ? "bg-accent font-medium" : ""}`}>
                         <StatusDot tone={it.tone} />
                         <span className="min-w-0"><span className="block truncate">{it.label}{it.heading ? ` · ${it.heading}` : ""}</span><span className="sr-only">{it.supplemented ? "Filled in from India Code" : it.statusLabel}</span></span>
                       </Link>
                     </li>
+                    </Fragment>
                   );
                 })}
               </ul>
@@ -79,7 +85,7 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
             {!view.hasSectionNumbers && <Notice tone="warn" title="Section numbers are not available for this Act" className="mb-4"><p>The dataset has no section numbers for it, so its text is shown as unnumbered blocks in the dataset&apos;s order.</p></Notice>}
             {view.schedule ? <ScheduleTableView table={view.schedule} actTitle={header.title} /> : sel ? (
               <Panel>
-                <h2 id="sec-title" className="text-ui-lead font-semibold">{view.hasSectionNumbers && (sel.key.startsWith("s") || sel.missing) && !/^(Order|Article) /.test(sel.label) ? `Section ${sel.label}` : sel.label}{sel.heading ? ` — ${sel.heading}` : ""}</h2>
+                <h2 id="sec-title" className="text-ui-lead font-semibold">{view.hasSectionNumbers && (sel.key.startsWith("s") || sel.missing) && !/^(Order |Article |[A-Z][a-z]+ Schedule$)/.test(sel.label) ? `Section ${sel.label}` : sel.label}{sel.heading && sel.heading !== sel.label ? ` — ${sel.heading}` : ""}</h2>
                 {sel.chapter && <p className="mt-1 text-ui-sm text-secondary">{sel.chapter}</p>}
                 {sel.missing && (
                   <Notice tone="warn" role="status" className="mt-4">
@@ -89,7 +95,7 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
                 {/^Article /.test(sel.label) && /Stamp Act/i.test(header.title) && <Notice tone="warn" role="note" compact className="mt-3"><p>{STAMP_NOTE}</p></Notice>}
                 {sel.supplement && (
                   <Notice tone="info" role="note" compact className="mt-3">
-                    <p><strong className="font-medium text-foreground">Source: {sel.supplement.source}, copied {fmtDate(sel.supplement.copiedOn)}.</strong> {/^(Order|Article) /.test(sel.label) ? "This part of the Act's Schedule was read from India Code's Act PDF." : "This section was copied by hand to fill a gap in our source data."} <a className="underline" href={sel.supplement.sourceUrl} target="_blank" rel="noopener noreferrer">Open the page it was copied from</a>. The official text prevails; not legal advice.</p>
+                    <p><strong className="font-medium text-foreground">Source: {sel.supplement.source}, copied {fmtDate(sel.supplement.copiedOn)}.</strong> {/^(Order |Article |[A-Z][a-z]+ Schedule$)/.test(sel.label) ? (/Constitution/.test(header.title) ? "This text was read from India Code's text PDF of the Constitution." : "This part of the Act's Schedule was read from India Code's Act PDF.") : "This section was copied by hand to fill a gap in our source data."} <a className="underline" href={sel.supplement.sourceUrl} target="_blank" rel="noopener noreferrer">Open the page it was copied from</a>. The official text prevails; not legal advice.</p>
                   </Notice>
                 )}
                 {!sel.missing && !sel.supplement && <p className="mt-3 flex flex-wrap items-center gap-1.5">

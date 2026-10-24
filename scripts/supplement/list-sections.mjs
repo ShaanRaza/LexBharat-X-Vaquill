@@ -17,6 +17,13 @@ export function startAt(lines, i) {
     m = /[.\]]$/.test(t) ? HEAD_ONLY.exec(t) : ANY.exec(`${t} ${next}`);
     if (m) return { kind: /[.\]]$/.test(t) ? "headOnly" : "wrapped", n: Number(m[1]), suf: m[2] ?? "" };
   }
+  // a long heading wrapped over three or four printed lines ("4. Laws made under articles 2 and 3 to provide for the / amendment of ... / supplemental ... matters.—(1) ..."): the ".—" is on the last of them
+  const lead = /^\[?(\d{1,3})([A-Z]{0,3})\.\s+\S/.exec(t);
+  if (lead && !/[—–]/.test(t)) for (let k = 3; k <= 4; k++) {
+    const parts = lines.slice(i, i + k).map((x) => x.text);
+    if (parts.length < k || parts.slice(1).some((x) => /^[\d(\[]/.test(x)) || /[—–]/.test(parts.slice(0, -1).join(" "))) break;
+    const mm = ANY.exec(parts.join(" ")); if (mm) return { kind: "wrapped", n: Number(mm[1]), suf: mm[2] ?? "", span: k };
+  }
   const rp = REP.exec(t); if (rp) return { kind: "repealed", n: Number(rp[1] ?? rp[3]), suf: rp[2] ?? rp[4] ?? "" };
   m = BRACKETED.exec(t); if (m) return { kind: "repealed", n: Number(m[1]), suf: m[2] ?? "" };
   return null;

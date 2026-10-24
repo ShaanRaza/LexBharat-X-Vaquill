@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Constitution of India, Article 149.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A149
+Heading: Duties and powers of the Comptroller and Auditor-General
+Chapter: PART V — THE UNION CHAPTER I.—THE EXECUTIVE · CHAPTER V.—COMPTROLLER AND AUDITOR-GENERAL OF INDIA
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+The Comptroller and Auditor-General shall perform such duties and exercise such powers in relation to the accounts of the Union and of the States and of any other authority or body as may be prescribed by or under any law made by Parliament and, until provision in that behalf is so made, shall perform such duties and exercise such powers in relation to the accounts of the Union and of the States as were conferred on or exercisable by the Auditor-General of India immediately before the commencement of this Constitution in relation to the accounts of the Dominion of India and of the Provinces respectively.

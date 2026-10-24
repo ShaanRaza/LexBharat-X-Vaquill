@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Constitution of India, Article 6.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A6
+Heading: Rights of citizenship of certain persons who have migrated to India from Pakistan
+Chapter: PART II — CITIZENSHIP
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+Notwithstanding anything in article 5, a person who has migrated to the territory of India from the territory now included in Pakistan shall be deemed to be a citizen of India at the commencement of this Constitution if—
+(a) he or either of his parents or any of his grand-parents was born in India as defined in the Government of India Act, 1935 (as originally enacted); and (b)(i) in the case where such person has so migrated before the nineteenth day of July, 1948, he has been ordinarily resident in the territory of India since the date of his migration, or
+(ii) in the case where such person has so migrated on or after the nineteenth day of July, 1948, he has been registered as a citizen of India by an officer appointed in that behalf by the Government of the Dominion of India on an application made by him therefor to such officer before the commencement of this Constitution in the form and manner prescribed by that Government:
+Provided that no person shall be so registered unless he has been resident in the territory of India for at least six months immediately preceding the date of his application.

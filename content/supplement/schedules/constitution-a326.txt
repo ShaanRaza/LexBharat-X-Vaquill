@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Constitution of India, Article 326.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A326
+Heading: Elections to the House of the People and to the Legislative Assemblies of States to be on the basis of adult suffrage
+Chapter: PART XV — ELECTIONS
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+The elections to the House of the People and to the Legislative Assembly of every State shall be on the basis of adult suffrage; that is to say, every person who is a citizen of India and who is not less than [eighteen years] of age on such date as may be fixed in that behalf by or under any law made by the appropriate Legislature and is not otherwise disqualified under this Constitution or any law made by the appropriate Legislature on the ground of non-residence, unsoundness of mind, crime or corrupt or illegal practice, shall be entitled to be registered as a voter at any such election.

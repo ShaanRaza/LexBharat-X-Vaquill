@@ -29,3 +29,10 @@ test("Schedules of the Constitution", () => {
   assert.equal(unitLabel("S7"), "Seventh Schedule"); assert.equal(unitLabel("S12"), "Twelfth Schedule"); assert.deepEqual(parseUnitNumber("S1"), { kind: "schedule", schedule: "1" });
   assert.ok(unitOrd("A395", 10) < unitOrd("S1", 10));
 });
+
+import { toDisplayBlocks } from "./cleanText.mjs";
+test("hand-filled units keep each clause on its own line; dataset text keeps wrapped lines together", () => {
+  assert.deepEqual(toDisplayBlocks("(1) First clause\n(2) Second clause").map((b) => b.text), ["(1) First clause (2) Second clause"]);
+  assert.deepEqual(toDisplayBlocks("(1) First clause\n(2) Second clause", { lines: true }).map((b) => b.text), ["(1) First clause", "(2) Second clause"]);
+  assert.deepEqual(toDisplayBlocks("One paragraph\nwrapped.\n\nNext.").map((b) => b.text), ["One paragraph wrapped.", "Next."]);
+});

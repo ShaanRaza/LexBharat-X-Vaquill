@@ -19,3 +19,6 @@ Each `.txt` file here is one section that is missing or wrong in our data. Every
 
 ## Orders, Rules and Articles of the Schedules (W8)
 `content/supplement/schedules/` holds one file per Order and Rule of the CPC First Schedule, per Article of the Limitation Act Schedule and per Article of Schedule I of the Indian Stamp Act (955 files, written by `node scripts/supplement/fill-schedules.mjs` from the PDFs, every word checked). The "Section" line is `O39R1` (Order 39 Rule 1), `O39` (the Order) or `A137` (Article 137). `npm run load:supplement` reads this folder as well. See `docs/W8.md`.
+
+## The Constitution of India (W9)
+`content/supplement/schedules/constitution-*.txt` (512 files: 500 Articles `A21`, `A243ZH` ... and 12 Schedules `S1` to `S12`) come from `scripts/supplement/fill-constitution.mjs`. A file may carry a `Chapter:` header line (the Part / Chapter / cross-heading the unit sits under). See `docs/W9.md`.

@@ -12,7 +12,7 @@ export type ListedSection = Omit<SectionRecord, "body"> & { body?: string | null
 
 /** Schedule units the official PDF does not print (src/config/schedule-gaps.json): shown as a placeholder row with its own note. */
 export type ScheduleGaps = { kind: string; numbers: number[]; note: string } | null | undefined;
-export type SectionListItem = { supplemented: boolean; key: string; label: string; heading: string | null; status: SectionRecord["status"] | "missing"; tone: Tone; statusLabel: string; noNumber: boolean; missing: boolean };
+export type SectionListItem = { /** the Part / Chapter heading this item sits under (hand-filled Acts such as the Constitution); the list shows it when it changes */ group?: string | null; supplemented: boolean; key: string; label: string; heading: string | null; status: SectionRecord["status"] | "missing"; tone: Tone; statusLabel: string; noNumber: boolean; missing: boolean };
 export type SectionView = {
   key: string; label: string; heading: string | null;
   /** Only present when the chapter label passed every check. */
@@ -71,7 +71,7 @@ export function buildActTextView(sections: ListedSection[], sourceUrl: string | 
     ? { supplemented: false, key: keyOf(r), label: r.label, heading: null, status: "missing", tone: "info", statusLabel: "Not printed in the source PDF", noNumber: false, missing: true }
     : r.kind === "missing"
     ? { supplemented: false, key: keyOf(r), label: r.label, heading: null, status: "missing", tone: "info", statusLabel: "Missing from our source data", noNumber: false, missing: true }
-    : { supplemented: r.s.flags.includes("supplement"), key: keyOf(r), label: r.label, heading: cleanHeading(r.s.heading), status: r.s.status, tone: STATUS_INFO[r.s.status].tone, statusLabel: STATUS_INFO[r.s.status].label, noNumber: r.s.flags.includes("no_section_number"), missing: false });
+    : { group: r.s.flags.includes("supplement") ? r.s.chapter : null, supplemented: r.s.flags.includes("supplement"), key: keyOf(r), label: r.label, heading: cleanHeading(r.s.heading), status: r.s.status, tone: STATUS_INFO[r.s.status].tone, statusLabel: STATUS_INFO[r.s.status].label, noNumber: r.s.flags.includes("no_section_number"), missing: false });
   const counts = { sections: sections.length, complete: 0, possibly_incomplete: 0, garbled: 0, missing: missing.length, supplemented: 0 };
   for (const s of sections) { if (s.flags.includes("supplement")) counts.supplemented++; else counts[s.status]++; }
   const key = selectedKey(keys, wantedKey), idx = rows.findIndex((r) => keyOf(r) === key);
@@ -82,6 +82,6 @@ export function buildActTextView(sections: ListedSection[], sourceUrl: string | 
     : r.kind === "missing"
     ? { key: keyOf(r), label: r.label, heading: null, chapter: null, status: "missing", statusInfo: MISSING_INFO, flags: [], missing: true, note: null, supplement: null, blocks: null, chunkCount: 0, prev: near(idx - 1), next: near(idx + 1) }
     : { key: keyOf(r), label: r.label, heading: cleanHeading(r.s.heading), chapter: r.s.chapter, status: r.s.status, statusInfo: STATUS_INFO[r.s.status], flags: sectionFlagList(r.s), missing: false, note: null, supplement: r.s.supplement ?? null,
-        blocks: r.s.status === "garbled" || r.s.body == null ? null : toDisplayBlocks(r.s.body), chunkCount: r.s.chunkCount, prev: near(idx - 1), next: near(idx + 1) };
+        blocks: r.s.status === "garbled" || r.s.body == null ? null : toDisplayBlocks(r.s.body, { lines: r.s.flags.includes("supplement") }), chunkCount: r.s.chunkCount, prev: near(idx - 1), next: near(idx + 1) };
   return { hasSectionNumbers: sections.some((x) => x.number), hasSchedule: sections.some((x) => /^A\d/.test(x.number ?? "")), schedule: null, sourceUrl: officialSourceUrl(sourceUrl), list, counts, selected };
 }

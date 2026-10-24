@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Constitution of India, Article 204.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A204
+Heading: Appropriation Bills
+Chapter: PART VI · CHAPTER III.—THE STATE LEGISLATURE · Procedure in Financial Matters
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) As soon as may be after the grants under article 203 have been made by the Assembly, there shall be introduced a Bill to provide for the appropriation out of the Consolidated Fund of the State of all moneys required to meet—
+(a) the grants so made by the Assembly; and
+(b) the expenditure charged on the Consolidated Fund of the State but not exceeding in any case the amount shown in the statement previously laid before the House or Houses.
+(2) No amendment shall be proposed to any such Bill in the House or either House of the Legislature of the State which will have the effect of varying the amount or altering the destination of any grant so made or of varying the amount of any expenditure charged on the Consolidated Fund of the State, and the decision of the person presiding as to whether an amendment is inadmissible under this clause shall be final.
+(3) Subject to the provisions of articles 205 and 206, no money shall be withdrawn from the Consolidated Fund of the State except under appropriation made by law passed in accordance with the provisions of this article.

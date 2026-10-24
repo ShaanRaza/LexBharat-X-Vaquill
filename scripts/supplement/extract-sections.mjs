@@ -31,10 +31,12 @@ function paragraphs(texts) {
   return out.flatMap((x) => tidy(x).split(/(?<=[.\]*;:])\s+(?=\[?(?:Exception|Explanation|Provided that)\b|\[?\s*\(\d{1,2}[A-Z]{0,2}\)\s)/));
 }
 
+export { paragraphs };
 const PART = /^\[?(PART|CHAPTER)\s+[IVXLCDM\d]+[A-Z]?\b|^\[?(THE\s+)?((FIRST|SECOND|THIRD|FOURTH|FIFTH)\s+)?SCHEDULE\s*[IVX\d]*\s*(\(.{0,40}\))?\s*$/;
 
 /** The section that starts at line index `at` (from listSections) or, when `at` is left out, the one numbered `number`. */
-export function cutSection(lines, number, at) {
+export function cutSection(lines, number, at, opts = {}) {
+  const isHeading = opts.isHeading ?? ((l) => l.centered);   // which centred lines are cross-headings printed between sections (dropped); the Constitution passes a stricter test
   VOCAB = vocabFor(lines);
   if (at === undefined) { const hit = listSections(lines).find((x) => x.number === String(number)); if (!hit) return { ok: false, why: `section ${number} is not in the list of sections of this PDF` }; at = hit.line; }
   const st = startAt(lines, at); if (!st) return { ok: false, why: "that line is not a section start" };
@@ -45,7 +47,7 @@ export function cutSection(lines, number, at) {
     const s2 = startAt(lines, i);
     if (s2 && (s2.n > wanted || (s2.n === wanted && s2.suf > suffix))) { end = i; break; }
   }
-  const texts = lines.slice(at, end).filter((l, k) => k === 0 || !l.centered || /^(Illustrations?|Explanations?\b|STATE AMENDMENTS?\b|[*\s]+$)/i.test(l.text)).map((l) => l.text), pages = [lines[at].page, lines[Math.max(at, end - 1)].page], next = lines[end]?.text.slice(0, 70) ?? "(end of file)";
+  const texts = lines.slice(at, end).filter((l, k) => k === 0 || !isHeading(l) || /^(Illustrations?|Explanations?\b|STATE AMENDMENTS?\b|[*\s]+$)/i.test(l.text)).map((l) => l.text), pages = [lines[at].page, lines[Math.max(at, end - 1)].page], next = lines[end]?.text.slice(0, 70) ?? "(end of file)";
   if (st.kind === "repealed") {
     // "N. [Heading ...] Rep. by ..." (the bracket can wrap onto the next line) or "[N. Heading.] Omitted by ..."
     const cutJ = texts.findIndex((t, k) => k >= 1 && /^STATE AMENDMENTS?\b/i.test(t)), j = texts.slice(0, cutJ >= 0 ? Math.min(4, cutJ) : 4).reduce((a, b) => (a ? join2(a, b) : b), ""), m = /^\[?\d{1,3}[A-Z]{0,3}\.\s*\[(.+?)\]\s*(.*)$/.exec(j) ?? /^\[\d{1,3}[A-Z]{0,3}\.\s*(.+?)\]\s*(.*)$/.exec(j);
@@ -53,11 +55,11 @@ export function cutSection(lines, number, at) {
     const used = texts.slice(0, 4).filter((_, k) => k < texts.length).length, cutR = texts.findIndex((t, k) => k >= 1 && /^STATE AMENDMENTS?\b/i.test(t)), tail = texts.slice(used, cutR >= 0 ? cutR : undefined).reduce((a, b) => (a ? join2(a, b) : b), "");
     return { ok: true, repealed: true, heading: tidy(m[1]).replace(/(?<!\b(?:etc|viz|cf))\.$/i, ""), firstLine: texts[0], pages, lineCount: end - at, text: tidy(`${m[2]} ${tail}`), duplicate: null, nextStart: next };
   }
-  const headOnly = st.kind === "headOnly", twoLines = st.kind === "wrapped";
-  const joined = headOnly ? `${texts[0]} —` : twoLines ? `${texts[0]} ${texts[1]}` : texts[0], m0 = /^\[?\d{1,3}[A-Z]{0,3}\.\s*(.*?)\s*[—–]\s*/.exec(joined);
+  const headOnly = st.kind === "headOnly", twoLines = st.kind === "wrapped", span = st.span ?? 2;   // span: how many printed lines the heading takes (2, or 3 to 4 for a long heading)
+  const joined = headOnly ? `${texts[0]} —` : twoLines ? texts.slice(0, span).join(" ") : texts[0], m0 = /^\[?\d{1,3}[A-Z]{0,3}\.\s*(.*?)\s*[—–]\s*/.exec(joined);
   if (!m0) return { ok: false, why: "could not split heading from text" };
   const heading = tidy(m0[1]).replace(/(?<!\b(?:etc|viz|cf))\.$/i, "");
-  const skip = headOnly ? 1 : twoLines ? 2 : 1;
+  const skip = headOnly ? 1 : twoLines ? span : 1;
   const merged = headOnly ? "" : tidy(texts.slice(0, skip).reduce((a, b) => (a ? join2(a, b) : b), ""));
   const rest = merged.slice(merged.search(/[—–]/) + 1).trim();
   // state amendments printed under a section of a Central Act are not part of the Central text

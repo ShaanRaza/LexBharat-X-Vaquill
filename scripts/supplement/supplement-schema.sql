@@ -18,6 +18,9 @@ CREATE TABLE IF NOT EXISTS act_sections_supplement (
   PRIMARY KEY (act_id, number)
 );
 -- @@
+-- the Part / Chapter / cross-heading a unit sits under (the Constitution of India: "PART III — FUNDAMENTAL RIGHTS · Right to Freedom"); shown on the Act page
+ALTER TABLE act_sections_supplement ADD COLUMN IF NOT EXISTS chapter text;
+-- @@
 -- State-filed copies of a Central Act (same title, e.g. the Code of Civil Procedure filed under Chhattisgarh): filled by the loader. A copy's section is hidden wherever the Central Act has a filled section
 -- with the same number, so the copy's (often wrong or garbled) text can never show up next to, or above, the Central filled version.
 CREATE TABLE IF NOT EXISTS act_copy_of (
@@ -31,6 +34,6 @@ FROM act_sections s
 WHERE NOT EXISTS (SELECT 1 FROM act_sections_supplement x WHERE x.act_id = s.act_id AND x.replaces AND upper(x.number) = upper(s.number))
   AND NOT EXISTS (SELECT 1 FROM act_copy_of c JOIN act_sections_supplement x ON x.act_id = c.central_id WHERE c.copy_id = s.act_id AND upper(x.number) = upper(s.number))
 UNION ALL
-SELECT x.act_id, x.section_key, x.ord, x.number, x.heading, NULL::text, 'complete'::text, ARRAY['supplement']::text[], 1, x.body,
+SELECT x.act_id, x.section_key, x.ord, x.number, x.heading, x.chapter, 'complete'::text, ARRAY['supplement']::text[], 1, x.body,
        setweight(to_tsvector('english', coalesce(x.heading, '')), 'A') || setweight(to_tsvector('english', left(x.body, 600000)), 'B')
 FROM act_sections_supplement x

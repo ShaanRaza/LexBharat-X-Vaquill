@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Constitution of India, Article 243W.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A243W
+Heading: Powers, authority and responsibilities of Municipalities, etc.
+Chapter: PART IXA — THE MUNICIPALITIES
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+Subject to the provisions of this Constitution, the Legislature of a State may, by law, endow—
+(a) the Municipalities with such powers and authority as may be necessary to enable them to function as institutions of self-government and such law may contain provisions for the devolution of powers and responsibilities upon Municipalities, subject to such conditions as may be specified therein, with respect to—
+(i) the preparation of plans for economic development and social justice;
+(ii) the performance of functions and the implementation of schemes as may be entrusted to them including those in relation to the matters listed in the Twelfth Schedule;
+(b) the Committees with such powers and authority as may be necessary to enable them to carry out the responsibilities conferred upon them including those in relation to the matters listed in the Twelfth Schedule.

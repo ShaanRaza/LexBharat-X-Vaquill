@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Constitution of India, Article 293.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A293
+Heading: Borrowing by States
+Chapter: PART XII — FINANCE, PROPERTY, CONTRACTS AND SUITS CHAPTER I.—FINANCE · CHAPTER II.—BORROWING
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) Subject to the provisions of this article, the executive power of a State extends to borrowing within the territory of India upon the security of the Consolidated Fund of the State within such limits, if any, as may from time to time be fixed by the Legislature of such State by law and to the giving of guarantees within such limits, if any, as may be so fixed.
+(2) The Government of India may, subject to such conditions as may be laid down by or under any law made by Parliament, make loans to any State or, so long as any limits fixed under article 292 are not exceeded, give guarantees in respect of loans raised by any State, and any sums required for the purpose of making such loans shall be charged on the Consolidated Fund of India.
+(3) A State may not without the consent of the Government of India raise any loan if there is still outstanding any part of a loan which has been made to the State by the Government of India or by its predecessor Government, or in respect of which a guarantee has been given by the Government of India or by its predecessor Government.
+(4) A consent under clause (3) may be granted subject to such conditions, if any, as the Government of India may think fit to impose.

@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Constitution of India, Article 340.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A340
+Heading: Appointment of a Commission to investigate the conditions of backward classes
+Chapter: PART XVI — SPECIAL PROVISIONS RELATING TO CERTAIN CLASSES
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) The President may by order appoint a Commission consisting of such persons as he thinks fit to investigate the conditions of socially and educationally backward classes within the territory of India and the difficulties under which they labour and to make recommendations as to the steps that should be taken by the Union or any State to remove such difficulties and to improve their condition and as to the grants that should be made for the purpose by the Union or any State and the conditions subject to which such grants should be made, and the order appointing such Commission shall define the procedure to be followed by the Commission.
+(2) A Commission so appointed shall investigate the matters referred to them and present to the President a report setting out the facts as found by them and making such recommendations as they think proper.
+(3) The President shall cause a copy of the report so presented together with a memorandum explaining the action taken thereon to be laid before each House of Parliament.

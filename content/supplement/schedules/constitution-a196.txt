@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Constitution of India, Article 196.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A196
+Heading: Provisions as to introduction and passing of Bills
+Chapter: PART VI · CHAPTER III.—THE STATE LEGISLATURE · Legislative Procedure
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) Subject to the provisions of articles 198 and 207 with respect to Money Bills and other financial Bills, a Bill may originate in either House of the Legislature of a State which has a Legislative Council.
+(2) Subject to the provisions of articles 197 and 198, a Bill shall not be deemed to have been passed by the Houses of the Legislature of a State having a Legislative Council unless it has been agreed to by both Houses, either without amendment or with such amendments only as are agreed to by both Houses.
+(3) A Bill pending in the Legislature of a State shall not lapse by reason of the prorogation of the House or Houses thereof.
+(4) A Bill pending in the Legislative Council of a State which has not been passed by the Legislative Assembly shall not lapse on a dissolution of the Assembly.
+(5) A Bill which is pending in the Legislative Assembly of a State, or which having been passed by the Legislative Assembly is pending in the Legislative Council, shall lapse on a dissolution of the Assembly.

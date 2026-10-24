@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Constitution of India, Article 109.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A109
+Heading: Special procedure in respect of Money Bills
+Chapter: PART V — THE UNION CHAPTER I.—THE EXECUTIVE · CHAPTER II.—PARLIAMENT · Legislative Procedure
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) A Money Bill shall not be introduced in the Council of States.
+(2) After a Money Bill has been passed by the House of the People it shall be transmitted to the Council of States for its recommendations and the Council of States shall within a period of fourteen days from the date of its receipt of the Bill return the Bill to the House of the People with its recommendations and the House of the People may thereupon either accept or reject all or any of the recommendations of the Council of States.
+(3) If the House of the People accepts any of the recommendations of the Council of States, the Money Bill shall be deemed to have been passed by both Houses with the amendments recommended by the Council of States and accepted by the House of the People.
+(4) If the House of the People does not accept any of the recommendations of the Council of States, the Money Bill shall be deemed to have been passed by both Houses in the form in which it was passed by the House of the People without any of the amendments recommended by the Council of States.
+(5) If a Money Bill passed by the House of the People and transmitted to the Council of States for its recommendations is not returned to the House of the People within the said period of fourteen days, it shall be deemed to have been passed by both Houses at the expiration of the said period in the form in which it was passed by the House of the People.

@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Constitution of India, Article 180.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A180
+Heading: Power of the Deputy Speaker or other person to perform the duties of the office of, or to act as, Speaker
+Chapter: PART VI · CHAPTER III.—THE STATE LEGISLATURE · Officers of the State Legislature
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) While the office of Speaker is vacant, the duties of the office shall be performed by the Deputy Speaker or, if the office of Deputy Speaker is also vacant, by such member of the Assembly as the Governor may appoint for the purpose.
+(2) During the absence of the Speaker from any sitting of the Assembly the Deputy Speaker or, if he is also absent, such person as may be determined by the rules of procedure of the Assembly, or, if no such person is present, such other person as may be determined by the Assembly, shall act as Speaker.

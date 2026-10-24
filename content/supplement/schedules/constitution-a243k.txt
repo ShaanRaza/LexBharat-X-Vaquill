@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Constitution of India, Article 243K.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A243K
+Heading: Elections to the Panchayats
+Chapter: PART IX — THE PANCHAYATS
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) The superintendence, direction and control of the preparation of electoral rolls for, and the conduct of, all elections to the Panchayats shall be vested in a State Election Commission consisting of a State Election Commissioner to be appointed by the Governor.
+(2) Subject to the provisions of any law made by the Legislature of a State, the conditions of service and tenure of office of the State Election Commissioner shall be such as the Governor may by rule determine:
+Provided that the State Election Commissioner shall not be removed from his office except in like manner and on the like grounds as a Judge of a High Court and the conditions of service of the State Election Commissioner shall not be varied to his disadvantage after his appointment.
+(3) The Governor of a State shall, when so requested by the State Election Commission, make available to the State Election Commission such staff as may be necessary for the discharge of the functions conferred on the State Election Commission by clause (1).
+(4) Subject to the provisions of this Constitution, the Legislature of a State may, by law, make provision with respect to all matters relating to, or in connection with, elections to the Panchayats.

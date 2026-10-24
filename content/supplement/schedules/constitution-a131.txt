@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Constitution of India, Article 131.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A131
+Heading: Original jurisdiction of the Supreme Court
+Chapter: PART V — THE UNION CHAPTER I.—THE EXECUTIVE · CHAPTER IV.—THE UNION JUDICIARY
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+Subject to the provisions of this Constitution, the Supreme Court shall, to the exclusion of any other court, have original jurisdiction in any dispute—
+(a) between the Government of India and one or more States; or
+(b) between the Government of India and any State or States on one side and one or more other States on the other; or
+(c) between two or more States, if and in so far as the dispute involves any question (whether of law or fact) on which the existence or extent of a legal right depends:
+[Provided that the said jurisdiction shall not extend to a dispute arising out of any treaty, agreement, covenant, engagement, sanad or other similar instrument which, having been entered into or executed before the commencement of this Constitution, continues in operation after such commencement, or which provides that the said jurisdiction shall not extend to such a dispute.]

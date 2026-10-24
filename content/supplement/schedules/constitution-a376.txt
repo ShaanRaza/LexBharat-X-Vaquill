@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Constitution of India, Article 376.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A376
+Heading: Provisions as to Judges of High Courts
+Chapter: PART XXI — TEMPORARY, TRANSITIONAL AND SPECIAL PROVISIONS
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) Notwithstanding anything in clause (2) of article 217, the Judges of a High Court in any Province holding office immediately before the commencement of this Constitution shall, unless they have elected otherwise, become on such commencement the Judges of the High Court in the corresponding State, and shall thereupon be entitled to such salaries and allowances and to such rights in respect of leave of absence and pension as are provided for under article 221 in respect of the Judges of such High Court. [Any such Judge shall, notwithstanding that he is not a citizen of India, be eligible for appointment as Chief Justice of such High Court, or as Chief Justice or other Judge of any other High Court.]
+(2) The Judges of a High Court in any Indian State corresponding to any State specified in Part B of the First Schedule holding office immediately before the commencement of this Constitution shall, unless they have elected otherwise, become on such commencement the Judges of the High Court in the State so specified and shall, notwithstanding anything in clauses (1) and (2) of article 217 but subject to the proviso to clause (1) of that article, continue to hold office until the expiration of such period as the President may by order determine.
+(3) In this article, the expression “Judge” does not include an acting Judge or an additional Judge.

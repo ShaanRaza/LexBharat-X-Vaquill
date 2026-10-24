@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Constitution of India, Article 221.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A221
+Heading: Salaries, etc., of Judges
+Chapter: PART VI · CHAPTER V.—THE HIGH COURTS IN THE STATES
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+[(1) There shall be paid to the Judges of each High Court such salaries as may be determined by Parliament by law and, until provision in that behalf is so made, such salaries as are specified in the Second Schedule.]
+(2) Every Judge shall be entitled to such allowances and to such rights in respect of leave of absence and pension as may from time to time be determined by or under law made by Parliament and, until so determined, to such allowances and rights as are specified in the Second Schedule:
+Provided that neither the allowances of a Judge nor his rights in respect to leave of absence or pension shall be varied to his disadvantage after his appointment.

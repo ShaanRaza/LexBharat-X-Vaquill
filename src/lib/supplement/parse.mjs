@@ -1,7 +1,7 @@
 // Reads one fill-in file of content/supplement/ (a short header, then the section text pasted by a person). PURE logic: text in, entry or errors out.
 // A file whose text area is empty is "pending" (nothing to load yet). A file with text must have a valid header, or it is "error" and nothing from it is loaded.
 export const DELIMITER = /^={3,}\s*SECTION TEXT\b.*$/i;
-const KEYS = { "act": "act", "act id": "actId", "section": "section", "heading": "heading", "replaces existing text": "replaces", "source": "source", "source url": "sourceUrl", "date copied": "dateCopied" };
+const KEYS = { "act": "act", "act id": "actId", "section": "section", "heading": "heading", "chapter": "chapter", "replaces existing text": "replaces", "source": "source", "source url": "sourceUrl", "date copied": "dateCopied" };
 /** A section number (28, 11A) or a unit of a Schedule: O39R1 (Order 39 Rule 1), O39 (the Order itself), A137 (Article 137). */
 export const SECTION_NUMBER = /^(?:\d{1,4}[A-Za-z]{0,3}|O\d{1,3}[A-Za-z]{0,2}(?:R\d{1,3}[A-Za-z]{0,2})?|A\d{1,3}[A-Za-z]{0,2}|S\d{1,2})$/;
 export const MIN_TEXT = 8, MAX_TEXT = 60000;
@@ -41,13 +41,13 @@ export function parseSupplementFile(raw, fileName = "", now = new Date()) {
   if (/<\/?(?:p|div|span|br|table|a)\b/i.test(body)) errors.push("The text still contains web-page markup (<p>, <div> ...). Paste it as plain text.");
   if (errors.length) return { status: "error", errors };
   const number = head.section.toUpperCase();
-  return { status: "ok", errors: [], entry: { fileName, actName: head.act ?? "", actId: head.actId, number, sectionKey: sectionKeyFor(number), heading: head.heading || null, replaces: rep === "yes",
+  return { status: "ok", errors: [], entry: { fileName, actName: head.act ?? "", actId: head.actId, number, sectionKey: sectionKeyFor(number), heading: head.heading || null, chapter: head.chapter || null, replaces: rep === "yes",
     source: head.source || "India Code", sourceUrl: head.sourceUrl, copiedOn: head.dateCopied, body } };
 }
 
 /** FNV-1a style hash of what matters (header fields and text), to tell "changed" from "unchanged" without storing the file. */
 export function entryHash(e) {
-  let h = 2166136261; const s = JSON.stringify([e.actId, e.number, e.heading, e.replaces, e.source, e.sourceUrl, e.copiedOn, e.body]);
+  let h = 2166136261; const s = JSON.stringify([e.actId, e.number, e.heading, e.replaces, e.source, e.sourceUrl, e.copiedOn, e.body, ...(e.chapter ? [e.chapter] : [])])   // the chapter is part of the hash only when there is one, so files without it keep their old hash and are not loaded again;
   for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
   return h.toString(16).padStart(8, "0");
 }

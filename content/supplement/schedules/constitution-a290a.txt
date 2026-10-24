@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Constitution of India, Article 290A.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A290A
+Heading: Annual payment to certain Devaswom Funds
+Chapter: PART XII — FINANCE, PROPERTY, CONTRACTS AND SUITS CHAPTER I.—FINANCE · Miscellaneous Financial Provisions
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+A sum of forty-six lakhs and fifty thousand rupees shall be charged on, and paid out of, the Consolidated Fund of the State of [Keralam] every year to the Travancore Devaswom Fund; and a sum of thirteen lakhs and fifty thousand rupees shall be charged on, and paid out of, the Consolidated Fund of the State of [Tamil Nadu] every year to the Devaswom Fund established in that State for the maintenance of Hindu temples and shrines in the territories transferred to that State on the 1st day of November, 1956, from the State of Travancore-Cochin.

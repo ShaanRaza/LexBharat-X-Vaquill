@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Constitution of India, Article 374.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A374
+Heading: Provisions as to Judges of the Federal Court and proceedings pending in the Federal Court or before His Majesty in Council
+Chapter: PART XXI — TEMPORARY, TRANSITIONAL AND SPECIAL PROVISIONS
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) The Judges of the Federal Court holding office immediately before the commencement of this Constitution shall, unless they have elected otherwise, become on such commencement the Judges of the Supreme Court and shall thereupon be entitled to such salaries and allowances and to such rights in respect of leave of absence and pension as are provided for under article 125 in respect of the Judges of the Supreme Court.
+(2) All suits, appeals and proceedings, civil or criminal, pending in the Federal Court at the commencement of this Constitution shall stand removed to the Supreme Court, and the Supreme Court shall have jurisdiction to hear and determine the same, and the judgments and orders of the Federal Court delivered or made before the commencement of this Constitution shall have the same force and effect as if they had been delivered or made by the Supreme Court.
+(3) Nothing in this Constitution shall operate to invalidate the exercise of jurisdiction by His Majesty in Council to dispose of appeals and petitions from, or in respect of, any judgment, decree or order of any court within the territory of India in so far as the exercise of such jurisdiction is authorised by law, and any order of His Majesty in Council made on any such appeal or petition after the commencement of this Constitution shall for all purposes have effect as if it were an order or decree made by the Supreme Court in the exercise of the jurisdiction conferred on such Court by this Constitution.
+(4) On and from the commencement of this Constitution the jurisdiction of the authority functioning as the Privy Council in a State specified in Part B of the First Schedule to entertain and dispose of appeals and petitions from or in respect of any judgment, decree or order of any court within that State shall cease, and all appeals and other proceedings pending before the said authority at such commencement shall be transferred to, and disposed of by, the Supreme Court.
+(5) Further provision may be made by Parliament by law to give effect to the provisions of this article.

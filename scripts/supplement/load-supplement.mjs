@@ -38,6 +38,13 @@ for (const stmt of fs.readFileSync("scripts/supplement/supplement-schema.sql", "
 if (vec) await q(vec, "CREATE TABLE IF NOT EXISTS supplement_emb_256 (chunk_id text PRIMARY KEY, act_id text NOT NULL, section_key text NOT NULL, embedding halfvec(256) NOT NULL)");
 const existing = new Map((await q(main, "select act_id, number, file_hash, file_name from act_sections_supplement")).map((r) => [`${r.act_id}|${r.number}`, r]));
 
+// Acts that are not in the open-india-law data at all and are added here, from the files of this folder: a new row in `acts` (never touching any existing row)
+const NEW_ACTS = { IND_central_COI: { title: "The Constitution of India", year: 1950, url: "https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936" } };
+for (const [id, a] of Object.entries(NEW_ACTS)) {
+  if (!good.some((p) => p.entry.actId === id) || (await q(main, "select 1 from acts where act_id = $1", [id])).length) continue;
+  await q(main, "insert into acts (act_id, title, year, category, state, act_status, source_url, section_count, raw_category, raw_state) values ($1,$2,$3,'central',null,'in_force',$4,$5,'central',null)", [id, a.title, a.year, a.url, good.filter((p) => p.entry.actId === id).length]);
+  say(`  added the Act ${a.title} (${id}) to the Acts list`);
+}
 const actCache = new Map();
 /** One query per Act: its title and its open-india-law rows (number -> first row, and the reading order of the last row before a given number). */
 async function actInfo(actId) {
@@ -61,10 +68,10 @@ for (const p of good) {
   const ord = unitOrd(e.number, A.lastOrd) ?? (base ? Number(base.ord) : A.before(parseInt(e.number, 10)));
   const prev = existing.get(key);
   if (prev && prev.file_hash === hash) { stats.unchanged++; continue; }
-  await q(main, `insert into act_sections_supplement (act_id, number, section_key, ord, heading, body, replaces, source, source_url, copied_on, file_name, file_hash, loaded_at)
-                 values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12, now())
-                 on conflict (act_id, number) do update set section_key=$3, ord=$4, heading=$5, body=$6, replaces=$7, source=$8, source_url=$9, copied_on=$10, file_name=$11, file_hash=$12, loaded_at=now()`,
-    [e.actId, e.number, e.sectionKey, ord, e.heading, e.body, e.replaces, e.source, e.sourceUrl, e.copiedOn, p.f, hash]);
+  await q(main, `insert into act_sections_supplement (act_id, number, section_key, ord, heading, body, replaces, source, source_url, copied_on, file_name, file_hash, chapter, loaded_at)
+                 values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13, now())
+                 on conflict (act_id, number) do update set section_key=$3, ord=$4, heading=$5, body=$6, replaces=$7, source=$8, source_url=$9, copied_on=$10, file_name=$11, file_hash=$12, chapter=$13, loaded_at=now()`,
+    [e.actId, e.number, e.sectionKey, ord, e.heading, e.body, e.replaces, e.source, e.sourceUrl, e.copiedOn, p.f, hash, e.chapter ?? null]);
   prev ? stats.updated++ : stats.added++;
   const label = `${act.title}, ${unitLabel(e.number) ?? `Section ${e.number}`}${e.heading ? `: ${e.heading}` : ""}`;
   const chunks = chunkPages([e.body], { chars: 1100, overlap: 150 }).map((c, i) => ({ id: `${e.actId}|${e.sectionKey}|${i}`, text: `${label}\n${c.body}` }));

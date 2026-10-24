@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Constitution of India, Article 231.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A231
+Heading: Establishment of a common High Court for two or more States
+Chapter: PART VI · CHAPTER V.—THE HIGH COURTS IN THE STATES
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) Notwithstanding anything contained in the preceding provisions of this Chapter, Parliament may by law establish a common High Court for two or more States or for two or more States and a Union territory.
+(2) In relation to any such High Court,— (a)* * * * *
+(b) the reference in article 227 to the Governor shall, in relation to any rules, forms or tables for subordinate courts, be construed as a reference to the Governor of the State in which the subordinate courts are situate; and
+(c) the references in articles 219 and 229 to the State shall be construed as a reference to the State in which the High Court has its principal seat:
+Provided that if such principal seat is in a Union territory, the references in articles 219 and 229 to the Governor, Public Service Commission, Legislature and Consolidated Fund of the State shall be construed respectively as references to the President, Union Public Service Commission, Parliament and Consolidated Fund of India.

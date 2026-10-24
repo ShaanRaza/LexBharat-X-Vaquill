@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Constitution of India, Article 118.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A118
+Heading: Rules of procedure
+Chapter: PART V — THE UNION CHAPTER I.—THE EXECUTIVE · CHAPTER II.—PARLIAMENT · Procedure Generally
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) Each House of Parliament may make  rules for regulating, subject to the provisions of this Constitution, its procedure and the conduct of its business.
+(2) Until rules are made under clause (1), the rules of procedure and standing orders in force immediately before the commencement of this Constitution with respect to the Legislature of the Dominion of India shall have effect in relation to Parliament subject to such modifications and adaptations as may be made therein by the Chairman of the Council of States or the Speaker of the House of the People, as the case may be.
+(3) The President, after consultation with the Chairman of the Council of States and the Speaker of the House of the People, may make rules as to the procedure with respect to joint sittings of, and communications between, the two Houses.
+(4) At a joint sitting of the two Houses the Speaker of the House of the People, or in his absence such person as may be determined by rules of procedure made under clause (3), shall preside.

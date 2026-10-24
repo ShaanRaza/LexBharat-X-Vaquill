@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Constitution of India, Article 296.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A296
+Heading: Property accruing by escheat or lapse or as bona vacantia
+Chapter: PART XII — FINANCE, PROPERTY, CONTRACTS AND SUITS CHAPTER I.—FINANCE · CHAPTER III.—PROPERTY, CONTRACTS, RIGHTS, LIABILITIES, · OBLIGATIONS AND SUITS
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+Subject as hereinafter provided, any property in the territory of India which, if this Constitution had not come into operation, would have accrued to His Majesty or, as the case may be, to the Ruler of an Indian State by escheat or lapse, or as bona vacantia for want of a rightful owner, shall, if it is property situate in a State, vest in such State, and shall, in any other case, vest in the Union:
+Provided that any property which at the date when it would have so accrued to His Majesty or to the Ruler of an Indian State was in the possession or under the control of the Government of India or the Government of a State shall, according as the purposes for which it was then used or held were purposes of the Union or of a State, vest in the Union or in that State.
+Explanation.—In this article, the expressions “Ruler” and “Indian State” have the same meanings as in article 363.

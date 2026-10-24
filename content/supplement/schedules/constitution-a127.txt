@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Constitution of India, Article 127.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A127
+Heading: Appointment of ad hoc Judges
+Chapter: PART V — THE UNION CHAPTER I.—THE EXECUTIVE · CHAPTER IV.—THE UNION JUDICIARY
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) If at any time there should not be a quorum of the Judges of the Supreme Court available to hold or continue any session of the Court, [the National Judicial Appointments Commission on a reference made to it by the Chief Justice of India, may with the previous consent of the President] and after consultation with the Chief Justice of the High Court concerned, request in writing the attendance at the sittings of the Court, as an ad hoc Judge, for such period as may be necessary, of a Judge of a High Court duly qualified for appointment as a Judge of the Supreme Court to be designated by the Chief Justice of India.
+(2) It shall be the duty of the Judge who has been so designated, in priority to other duties of his office, to attend the sittings of the Supreme Court at the time and for the period for which his attendance is required, and while so attending he shall have all the jurisdiction, powers and privileges, and shall discharge the duties, of a Judge of the Supreme Court.

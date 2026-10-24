@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Constitution of India, Article 373.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A373
+Heading: Power of President to make order in respect of persons under preventive detention in certain cases
+Chapter: PART XXI — TEMPORARY, TRANSITIONAL AND SPECIAL PROVISIONS
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+Until provision is made by Parliament under clause (7) of article 22, or until the expiration of one year from the commencement of this Constitution, whichever is earlier, the said article shall have effect as if for any reference to Parliament in clauses (4) and (7) thereof there were substituted a reference to the President and for any reference to any law made by Parliament in those clauses there were substituted a reference to an order made by the President.

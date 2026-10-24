@@ -17,6 +17,9 @@ export type ActTextOutcome =
 
 type Row = Omit<ListedSection, "body"> & { chunkCount: number };
 
+/** The "Schedule as a table" link is offered only for Acts whose Article units are table rows (Limitation Act, Stamp Act), not for the Constitution's Articles. */
+const tableUnits = async (actId: string) => (await query(`SELECT 1 FROM act_sections_supplement WHERE act_id = $1 AND number ~ '^A[0-9]' AND body LIKE 'Description of %' LIMIT 1`, [actId]).catch(() => [])).length > 0;
+
 async function fromDatabase(actId: string, wanted: string | undefined): Promise<ActTextOutcome | "missing"> {
   const [acts, secs, miss] = await Promise.all([
     query<{ sourceUrl: string | null }>(`SELECT source_url AS "sourceUrl" FROM acts WHERE act_id = $1`, [actId]),
@@ -30,7 +33,7 @@ async function fromDatabase(actId: string, wanted: string | undefined): Promise<
     if (table.rows.length) return { available: true, origin: "database", view: { ...buildActTextView(secs, acts[0].sourceUrl, undefined, [], gapsOf(actId)), schedule: table }, officialUrl: officialSourceUrl(acts[0].sourceUrl) };
   }
   const missing = miss.map((m) => Number(m.number));
-  const first = buildActTextView(secs, acts[0].sourceUrl, wanted, missing, gapsOf(actId)); // decides which row is shown; its text is fetched next
+  const hasTable = await tableUnits(actId), first = { ...buildActTextView(secs, acts[0].sourceUrl, wanted, missing, gapsOf(actId)) }; first.hasSchedule &&= hasTable; // decides which row is shown; its text is fetched next
   const sel = first.selected;
   if (!sel || sel.missing) return { available: true, origin: "database", view: first, officialUrl: officialSourceUrl(acts[0].sourceUrl) };
   const body = await query<{ body: string | null }>(`SELECT body FROM act_sections_v WHERE act_id = $1 AND section_key = $2`, [actId, sel.key]);
@@ -39,7 +42,7 @@ async function fromDatabase(actId: string, wanted: string | undefined): Promise<
     ? (await query<{ source: string; sourceUrl: string; copiedOn: string }>(`SELECT source, source_url AS "sourceUrl", copied_on::text AS "copiedOn" FROM act_sections_supplement WHERE act_id = $1 AND section_key = $2`, [actId, sel.key]).catch(() => []))[0]
     : undefined;
   const listed: ListedSection[] = secs.map((s) => (s.sectionKey === sel.key ? { ...s, body: body[0]?.body ?? null, ...(supp ? { supplement: supp } : {}) } : s));
-  return { available: true, origin: "database", view: buildActTextView(listed, acts[0].sourceUrl, sel.key, missing, gapsOf(actId)), officialUrl: officialSourceUrl(acts[0].sourceUrl) };
+  return { available: true, origin: "database", view: { ...buildActTextView(listed, acts[0].sourceUrl, sel.key, missing, gapsOf(actId)), hasSchedule: hasTable }, officialUrl: officialSourceUrl(acts[0].sourceUrl) };
 }
 
 export async function loadActText(actId: string, wanted: string | undefined): Promise<ActTextOutcome> {

@@ -1,0 +1,31 @@
+# FILL-IN FILE: The Constitution of India, Twelfth Schedule.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: S12
+Heading: Twelfth Schedule
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(Article 243W) Powers, authority and responsibilities of Municipalities, etc.
+1. Urban planning including town planning.
+2. Regulation of land-use and construction of buildings.
+3. Planning for economic and social development.
+4. Roads and bridges.
+5. Water supply for domestic, industrial and commercial purposes.
+6. Public health, sanitation conservancy and solidwaste management.
+7. Fire services.
+8. Urban forestry, protection of the environment and promotion of ecological aspects.
+9. Safeguarding the interests of weaker sections of society, including the handicapped and mentally retarded.
+10. Slum improvement and upgradation.
+11. Urban poverty alleviation.
+12. Provision of urban amenities and facilities such as parks, gardens, playgrounds.
+13. Promotion of cultural, educational and aesthetic aspects.
+14. Burials and burial grounds; cremations, cremation grounds; and electric crematoriums.
+15. Cattle pounds; prevention of cruelty to animals.
+16. Vital statistics including registration of births and deaths.
+17. Public amenities including street lighting, parking lots, bus stops and public conveniences.
+18. Regulation of slaughter houses and tanneries.]
+1. Twelfth Schedule added by the Constitution (Seventy-fourth Amendment) Act, 1992, s. 4 (w.e.f. 1-6-1993).

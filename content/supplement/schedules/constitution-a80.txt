@@ -1,0 +1,19 @@
+# FILL-IN FILE: The Constitution of India, Article 80.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A80
+Heading: Composition of the Council of States
+Chapter: PART V — THE UNION CHAPTER I.—THE EXECUTIVE · CHAPTER II.—PARLIAMENT · General
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) [ *** The Council of States] shall consist of—
+(a) twelve members to be nominated by the President in accordance with the provisions of clause (3); and
+(b) not more than two hundred and thirty-eight representatives of the States [and of the Union territories].
+(2) The allocation of seats in the Council of States to be filled by representatives of the States [and of the Union territories] shall be in accordance with the provisions in that behalf contained in the Fourth Schedule.
+(3) The members to be nominated by the President under sub-clause (a) of clause (1) shall consist of persons having special knowledge or practical experience in respect of such matters as the following, namely:— Literature, science, art and social service.
+(4) The representatives of each State *** in the Council of States shall be elected by the elected members of the Legislative Assembly of the State in accordance with the system of proportional representation by means of the single transferable vote.
+(5) The representatives of the [Union territories] in the Council of States shall be chosen in such manner as Parliament may by law prescribe.

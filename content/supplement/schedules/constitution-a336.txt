@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Constitution of India, Article 336.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A336
+Heading: Special provision for Anglo-Indian community in certain services
+Chapter: PART XVI — SPECIAL PROVISIONS RELATING TO CERTAIN CLASSES
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) During the first two years after the commencement of this Constitution, appointments of members of the Anglo-Indian community to posts in the railway, customs, postal and telegraph services of the Union shall be made on the same basis as immediately before the fifteenth day of August, 1947. During every succeeding period of two years, the number of posts reserved for the members of the said community in the said services shall, as nearly as possible, be less by ten per cent. than the numbers so reserved during the immediately preceding period of two years:
+Provided that at the end of ten years from the commencement of this Constitution all such reservations shall cease.
+(2) Nothing in clause (1) shall bar the appointment of members of the Anglo-Indian community to posts other than, or in addition to, those reserved for the community under that clause if such members are found qualified for appointment on merit as compared with the members of other communities.

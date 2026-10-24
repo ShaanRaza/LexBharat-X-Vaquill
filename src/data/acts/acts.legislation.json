@@ -10110,5 +10110,6 @@
 	{"actId":"IND_state_9940","title":"The JHARKHAND ACADEMIC COUNCIL, (AMEDNDMENT) ACT, 2006","year":2006,"category":"state","state":"jharkhand","actNumber":null,"actStatus":"in_force","citation":"The JHARKHAND ACADEMIC COUNCIL, (AMEDNDMENT) ACT, 2006","sectionCount":9},
 	{"actId":"IND_state_9941","title":"The Goa Prohibition of Smoking and Spitting Act, 1997","year":1997,"category":"state","state":"dadra-nagar-haveli","actNumber":null,"actStatus":"in_force","citation":"The Goa Prohibition of Smoking and Spitting Act, 1997","sectionCount":17},
 	{"actId":"IND_state_9942","title":"The Goa University Act, 1984","year":1984,"category":"state","state":"dadra-nagar-haveli","actNumber":null,"actStatus":"in_force","citation":"The Goa University Act, 1984","sectionCount":38},
-	{"actId":"IND_state_9956","title":"The CHILD LABOUR (PROHIBITION AND REGULATION) ACT, 1986","year":1986,"category":"state","state":"jharkhand","actNumber":null,"actStatus":"in_force","citation":"The CHILD LABOUR (PROHIBITION AND REGULATION) ACT, 1986","sectionCount":0}
+	{"actId":"IND_state_9956","title":"The CHILD LABOUR (PROHIBITION AND REGULATION) ACT, 1986","year":1986,"category":"state","state":"jharkhand","actNumber":null,"actStatus":"in_force","citation":"The CHILD LABOUR (PROHIBITION AND REGULATION) ACT, 1986","sectionCount":0},
+	{"actId":"IND_central_COI","title":"The Constitution of India","year":1950,"category":"central","state":null,"actNumber":null,"actStatus":"in_force","citation":"The Constitution of India","sectionCount":512}
 ]

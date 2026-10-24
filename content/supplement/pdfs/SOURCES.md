@@ -13,10 +13,10 @@ Save each downloaded PDF in this folder under the file name in the first column 
 | specific-relief-act-1963.pdf | The Specific Relief Act, 1963 | A1963-47.pdf | https://indiacode.gov.in/act/e0a1c7bb-8bed-47d7-a0b6-9fd3c8a3944c |
 | prevention-of-corruption-act-1988.pdf | The Prevention of Corruption Act, 1988 | a1988-49.pdf | https://indiacode.gov.in/act/5b300920-4878-4e39-8d87-fa87d4953f09 |
 
-## Constitution of India (added 2026-10-25, W9) — NOT USABLE AS SAVED
+## Constitution of India (added 2026-10-25, W9)
 
 | Save as | Act | India Code page |
 |---|---|---|
 | constitution-of-india.pdf | The Constitution of India | https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936 |
 
-The saved file (234 pages, 79 MB, saved with a doubled `.pdf.pdf` name, now renamed) is the **hand-lettered original of 1950**: every page is a picture of the calligraphed, illuminated manuscript, with no text layer, and it contains none of the amendments (no Article 21A, no Part IXA/IXB, no 243ZH). It cannot be extracted word for word and would be out of date. India Code also offers "The Constitution of India" as a normal text PDF (the amended text, "as on <date>"); that is the file needed here. Download that one and save it as `constitution-of-india.pdf`.
+The first file saved here (79 MB) was the picture-only 1950 manuscript and could not be used. The current file is India Code's text PDF: title "Constitution of India_ 20 MAY 2026 (final).pdf", 402 pages, printed "[As on 10th September, 2026]", Legislative Department pocket edition. Its preface says it includes **all amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023**, which is the latest Constitution Amendment Act we know of (nothing newer found, so it is not older than the latest amendments; check India Code if a 107th is ever passed). Text is extracted by `scripts/supplement/fill-constitution.mjs`.

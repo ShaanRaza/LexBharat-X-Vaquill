@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Constitution of India, Article 89.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A89
+Heading: The Chairman and Deputy Chairman of the Council of States
+Chapter: PART V — THE UNION CHAPTER I.—THE EXECUTIVE · CHAPTER II.—PARLIAMENT · Officers of Parliament
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) The Vice- President of India shall be ex officio Chairman of the Council of States.
+(2) The Council of States shall, as soon as may be, choose a member of the Council to be Deputy Chairman thereof and, so often as the office of Deputy Chairman becomes vacant, the Council shall choose another member to be Deputy Chairman thereof.

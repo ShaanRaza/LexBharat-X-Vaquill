@@ -22,9 +22,10 @@ export function stripMarkdown(s) {
 }
 
 /** Blocks for rendering one section's raw text: [{ type: "heading" | "p", text }]. Headings are lines written as markdown "## ..." in the source. */
-export function toDisplayBlocks(raw) {
+export function toDisplayBlocks(raw, { lines = false } = {}) {
   const blocks = [];
-  for (const para of raw.split(/\n{2,}/)) {
+  // the dataset's text breaks paragraphs at a blank line (a single line break is only a wrap); the hand-filled units (content/supplement) put each clause, entry or list item on its own line
+  for (const para of raw.split(lines ? /\n+/ : /\n{2,}/)) {
     const t = para.trim();
     if (!t) continue;
     const isHeading = /^#{1,6}\s/.test(t);

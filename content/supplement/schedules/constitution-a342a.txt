@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Constitution of India, Article 342A.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A342A
+Heading: Socially and educationally backward classes
+Chapter: PART XVI — SPECIAL PROVISIONS RELATING TO CERTAIN CLASSES
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) The President may with respect to any State or Union territory, and where it is a State, after consultation with the Governor thereof, by public notification, specify [the socially and educationally backward classes in the Central List which shall for the purposes of the Central Government] be deemed to be socially and educationally backward classes in relation to that State or Union territory, as the case may be.
+(2) Parliament may by law include in or exclude from the Central List of socially and educationally backward classes specified in a notification issued under clause (1) any socially and educationally backward class, but save as aforesaid a notification issued under the said clause shall not be varied by any subsequent notification.]
+[Explanation.—For the purposes of clauses (1) and (2), the expression “Central List” means the list of socially and educationally backward classes prepared and maintained by and for the Central Government.
+(3) Notwithstanding any contained in clauses (1) and (2), every State or Union territory may, by law, prepare and maintain, for its own purposes, a list of socially and educationally backward classes, entries in which may be different from the Central List.] 1. Art. 342 A ins. by the Constitution (One Hundred and Second Amendment) Act, 2018, s. 4 (w.e.f. 15-8-2018).

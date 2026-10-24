@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Constitution of India, Article 248.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A248
+Heading: Residuary powers of legislation
+Chapter: PART XI — RELATIONS BETWEEN THE UNION AND THE STATES CHAPTER I.—LEGISLATIVE RELATIONS · Distributionof LegislativePowers
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) [Subject to article 246A, Parliament] has exclusive power to make any law with respect to any matter not enumerated in the Concurrent List or State List.
+(2) Such power shall include the power of making any law imposing a tax not mentioned in either of those Lists.

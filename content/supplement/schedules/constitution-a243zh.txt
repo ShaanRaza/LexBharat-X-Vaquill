@@ -1,0 +1,21 @@
+# FILL-IN FILE: The Constitution of India, Article 243ZH.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A243ZH
+Heading: Definitions
+Chapter: PART IXB — THE CO-OPERATIVE SOCIETIES
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+In this Part, unless the context otherwise requires,—
+(a) “authorised person” means a person referred to as such in article 243ZQ;
+(b) “board” means the board of directors or the governing body of a co-operative society, by whatever name called, to which the direction and control of the management of the affairs of a society is entrusted to;
+(c) “co-operative society” means a society registered or deemed to be registered under any law relating to co-operative societies for the time being in force in any State;
+(d) “multi-State co-operative society” means a society with objects not confined to one State and registered or deemed to be registered under any law for the time being in force relating to such co-operatives;
+(e) “office bearer” means a President, Vice-President, Chairperson, Vice-Chairperson, Secretary or Treasurer, of a co-operative society and includes any other person to be elected by the board of any co-operative society;
+(f) “Registrar” means the Central Registrar appointed by the Central Government in relation to the multi-State co-operative societies and the Registrar for co-operative societies appointed by the State Government under the law made by the Legislature of a State in relation to co-operative societies;
+(g) “State Act” means any law made by the Legislature of a State;
+(h) “State level co-operative society” means a co-operative society having its area of operation extending to the whole of a State and defined as such in any law made by the Legislature of a State.

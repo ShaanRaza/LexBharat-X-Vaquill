@@ -36,7 +36,7 @@ const kw = await (await api(A, `/api/acts/search?q=${encodeURIComponent("138 NI 
 const q1 = await (await api(A, `/api/acts/search?q=${encodeURIComponent('"dishonour of cheque" insufficiency of funds')}`)).json(); ok("Search", "keyword phrase search", q1.mode === "text" && q1.total > 0, `${q1.total} hits`);
 const sm = await (await api(A, `/api/acts/search?q=${encodeURIComponent("time limit to file a suit for specific performance")}`)).json(); ok("Search", "smart (meaning) search returns results", sm.mode === "semantic" && sm.results.length > 3, `${sm.results?.[0]?.actTitle} ${sm.results?.[0]?.number}`);
 for (const [q, want] of [["Order 7 Rule 11 CPC", "O7R11"], ["Article 137 Limitation Act", "A137"]]) { const r = await (await api(A, `/api/acts/search?q=${encodeURIComponent(q)}`)).json(); ok("Search", `unit lookup '${q}'`, r.results?.[0]?.number === want); }
-const cl = await (await api(A, `/api/acts/search?q=${encodeURIComponent("Article 21")}`)).json(); ok("Search", "'Article 21' (Constitution not loaded) falls back to ordinary search, no crash", cl.searchAvailable !== false, `${cl.mode}, ${cl.total} results`);
+for (const [q, want] of [["Article 21", "A21"], ["Art. 226 Constitution", "A226"], ["Article 32", "A32"], ["Art 14", "A14"], ["Article 21A", "A21A"], ["Seventh Schedule", "S7"]]) { const r = await (await api(A, `/api/acts/search?q=${encodeURIComponent(q)}`)).json(); ok("Search", `Constitution lookup '${q}'`, r.results?.[0]?.number === want && /Constitution of India/.test(r.results[0].actTitle)); }
 
 // ---- Act pages
 const page = async (id, q = "") => (await api(A, `/workspace/browse/acts/${id}${q}`)).text();
@@ -47,7 +47,9 @@ const stamp21 = await page("IND_central_15510", "?section=g21"); ok("Act pages",
 const ipc = await page("IND_REP_659_1860", "?section=s302"); ok("Act pages", "IPC section 302 shows 'Repealed — see BNS'", /Repealed — see/.test(ipc) && /BNS/.test(ipc));
 const crpc = await page("IND_state_6796", "?section=s438"); ok("Act pages", "CrPC page shows 'Repealed — see BNSS'", /BNSS/.test(crpc));
 const ev = await page("IND_REP_971_1872", "?section=s27"); ok("Act pages", "Evidence Act page shows 'Repealed — see BSA'", /BSA/.test(ev));
-ok("Act pages", "the Constitution of India is not in the data yet", !(await (await api(A, `/api/acts/search?q=${encodeURIComponent("Article 21 Constitution")}`)).json()).results?.some((h) => /Constitution of India$/i.test(h.actTitle) && h.category === "central"), "BLOCKED: no text PDF supplied");
+const coi = await page("IND_central_COI", "?section=sA226"); ok("Act pages", "Constitution Article 226 page with its Part and Chapter heading", /Article 226/.test(coi) && /PART VI/.test(coi) && /CHAPTER V/.test(coi));
+const coiS = await page("IND_central_COI", "?section=s0S7"); ok("Act pages", "Constitution Seventh Schedule page", /Seventh Schedule/.test(coiS) && /Union List/.test(coiS));
+const sm2 = await (await api(A, `/api/acts/search?q=${encodeURIComponent("power of the High Court to issue writs")}`)).json(); ok("Search", "meaning search finds Article 226 for 'power of the High Court to issue writs'", sm2.results?.slice(0, 3).some((h) => h.number === "A226"));
 
 // ---- Vault
 const W6 = "../lexbharat-data/w6-test-files/", W8 = "../lexbharat-data/w8-test-files/";
@@ -63,6 +65,7 @@ const chat = async (message, docIds) => withRetry(async () => { const ev = await
 const c1 = await chat("What does section 138 of the NI Act say?"); ok("Chat", "answer without a document (section 138)", !c1.err && c1.text.length > 100 && c1.src[0]?.number === "138" && !!c1.done?.messageId, `check: ${c1.check?.label}, ${c1.src.length} sources`);
 const c2 = await chat("Can a party assign this agreement without consent?", [mixedId]); const dsrc = c2.src.filter((s) => s.kind === "doc");
 ok("Chat", "answer with a Vault document cites the page (page 2, read from scan)", !c2.err && dsrc.some((s) => s.page === 2 && s.scan), dsrc.map((s) => `p${s.page}${s.scan ? " scan" : ""}`).join(", "));
+const c4 = await chat("What does Article 21 say?"); ok("Chat", "Article 21 answered from the Constitution", !c4.err && c4.src[0]?.number === "A21" && /Constitution of India/.test(c4.src[0].actTitle) && c4.check?.label === "supported", `check ${c4.check?.label}, ${c4.src.length} source(s)`);
 const c3 = await chat("What is Order 7 Rule 11?"); ok("Chat", "exact provision first, noise dropped (Order 7 Rule 11)", !c3.err && c3.src[0]?.number === "O7R11" && c3.src.every((s) => /Civil Procedure/.test(s.actTitle)) && c3.src.length <= 5, `${c3.src.length} sources, check ${c3.check?.label}`);
 
 // ---- Review

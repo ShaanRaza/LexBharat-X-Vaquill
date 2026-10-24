@@ -1,0 +1,19 @@
+# FILL-IN FILE: The Constitution of India, Article 317.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A317
+Heading: Removal and suspension of a member of a Public Service Commission
+Chapter: PART XIV — SERVICES UNDER THE UNION AND THE STATES CHAPTER I.— SERVICES · CHAPTER II.— PUBLIC SERVICE COMMISSIONS
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) Subject to the provisions of clause (3), the Chairman or any other member of a Public Service Commission shall only be removed from his office by order of the President on the ground of misbehaviour after the Supreme Court, on reference being made to it by the President, has, on inquiry held in accordance with the procedure prescribed in that behalf under article 145, reported that the Chairman or such other member, as the case may be, ought on any such ground to be removed.
+(2) The President, in the case of the Union Commission or a Joint Commission, and the Governor *** in the case of a State Commission, may suspend from office the Chairman or any other member of the Commission in respect of whom a reference has been made to the Supreme Court under clause (1) until the President has passed orders on receipt of the report of the Supreme Court on such reference.
+(3) Notwithstanding anything in clause (1), the President may by order remove from office the Chairman or any other member of a Public Service Commission if the Chairman or such other member, as the case may be,—
+(a) is adjudged an insolvent; or
+(b) engages during his term of office in any paid employment outside the duties of his office; or
+(c) is, in the opinion of the President, unfit to continue in office by reason of infirmity of mind or body.
+(4) If the Chairman or any other member of a Public Service Commission is or becomes in any way concerned or interested in any contract or agreement made by or on behalf of the Government of India or the Government of a State or participates in any way in the profit thereof or in any benefit or emolument arising therefrom otherwise than as a member and in common with the other members of an incorporated company, he shall, for the purposes of clause (1), be deemed to be guilty of misbehaviour.

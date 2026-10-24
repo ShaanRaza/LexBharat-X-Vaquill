@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Constitution of India, Article 224.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A224
+Heading: Appointment of additional and acting Judges
+Chapter: PART VI · CHAPTER V.—THE HIGH COURTS IN THE STATES
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) If by reason of any temporary increase in the business of a High Court or by reason of arrears of work therein, it appears to the President that the number of the Judges of that Court should be for the time being increased, [the President may, in consultation with the National Judicial Appointments Commission, appoint] duly qualified persons to be additional Judges of the Court for such period not exceeding two years as he may specify.
+(2) When any Judge of a High Court other than the Chief Justice is by reason of absence or for any other reason unable to perform the duties of his office or is appointed to act temporarily as Chief Justice, [the President may, in consultation with the National Judicial Appointments Commission, appoint] a duly qualified person to act as a Judge of that Court until the permanent Judge has resumed his duties.
+(3) No person appointed as an additional or acting Judge of a High Court shall hold office after attaining the age of [sixty-two years].

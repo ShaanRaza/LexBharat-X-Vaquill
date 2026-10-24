@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Constitution of India, Article 290.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A290
+Heading: Adjustment in respect of certain expenses and pensions
+Chapter: PART XII — FINANCE, PROPERTY, CONTRACTS AND SUITS CHAPTER I.—FINANCE · Miscellaneous Financial Provisions
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+Where under the provisions of this Constitution the expenses of any court or Commission, or the pension payable to or in respect of a person who has served before the commencement of this Constitution under the Crown in India or after such commencement in connection with the affairs of the Union or of a State, are charged on the Consolidated Fund of India or the Consolidated Fund of a State, then, if—
+(a) in the case of a charge on the Consolidated Fund of India, the court or Commission serves any of the separate needs of a State, or the person has served wholly or in part in connection with the affairs of a State; or
+(b) in the case of a charge on the Consolidated Fund of a State, the court or Commission serves any of the separate needs of the Union or another State, or the person has served wholly or in part in connection with the affairs of the Union or another State, there shall be charged on and paid out of the Consolidated Fund of the State or, as the case may be, the Consolidated Fund of India or the Consolidated Fund of the other State, such contribution in respect of the expenses or pension as may be agreed, or as may in default of agreement be determined by an arbitrator to be appointed by the Chief Justice of India.

@@ -1,0 +1,20 @@
+# FILL-IN FILE: The Constitution of India, Article 102.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A102
+Heading: Disqualifications for membership
+Chapter: PART V — THE UNION CHAPTER I.—THE EXECUTIVE · CHAPTER II.—PARLIAMENT · Disqualifications of Members
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) A person shall be disqualified for being chosen as, and for being, a member of either House of Parliament—
+[(a) if he holds any office of profit under the Government of India or the Government of any State, other than an office declared by Parliament by law not to disqualify its holder;]
+(b) if he is of unsound mind and stands so declared by a competent court;
+(c) if he is an undischarged insolvent;
+(d) if he is not a citizen of India, or has voluntarily acquired the citizenship of a foreign State, or is under any acknowledgment of allegiance or adherence to a foreign State;
+(e) if he is so disqualified by or under any law made by Parliament.
+[Explanation.—For the purposes of this clause] a person shall not be deemed to hold an office of profit under the Government of India or the Government of any State by reason only that he is a Minister either for the Union or for such State.
+[(2) A person shall be disqualified for being a member of either House of Parliament if he is so disqualified under the Tenth Schedule.]

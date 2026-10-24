@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Constitution of India, Article 261.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A261
+Heading: Public acts, records and judicial proceedings
+Chapter: PART XI — RELATIONS BETWEEN THE UNION AND THE STATES CHAPTER I.—LEGISLATIVE RELATIONS · CHAPTER II.—ADMINISTRATIVE RELATIONS · General
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) Full faith and credit shall be given throughout the territory of India to public acts, records and judicial proceedings of the Union and of every State.
+(2) The manner in which and the conditions under which the acts, records and proceedings referred to in clause (1) shall be proved and the effect thereof determined shall be as provided by law made by Parliament.
+(3) Final judgments or orders delivered or passed by civil courts in any part of the territory of India shall be capable of execution anywhere within that territory according to law.

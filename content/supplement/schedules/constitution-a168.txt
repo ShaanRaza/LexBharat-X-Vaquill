@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Constitution of India, Article 168.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A168
+Heading: Constitution of Legislatures in States
+Chapter: PART VI · CHAPTER III.—THE STATE LEGISLATURE · General
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) For every State there shall be a Legislature which shall consist of the Governor, and—
+(a) in the States of *** [Andhra Pradesh], Bihar, *** [Madhya 9 Pradesh], *** [Maharashtra], [Karnataka], *** [ [Tamil Nadu, Telangana]] [and Uttar Pradesh], two Houses;
+(b) in other States, one House.
+(2) Where there are two Houses of the Legislature of a State, one shall be known as the Legislative Council and the other as the Legislative Assembly, and where there is only one House, it shall be known as the Legislative Assembly.

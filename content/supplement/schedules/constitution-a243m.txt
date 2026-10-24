@@ -1,0 +1,23 @@
+# FILL-IN FILE: The Constitution of India, Article 243M.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A243M
+Heading: Part not to apply to certain areas
+Chapter: PART IX — THE PANCHAYATS
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) Nothing in this Part shall apply to the Scheduled Areas referred to in clause (1), and the tribal areas referred to in clause (2), of article 244.
+(2) Nothing in this Part shall apply to—
+(a) the States of Nagaland, Meghalaya and Mizoram;
+(b) the hill areas in the State of Manipur for which District Councils exist under any law for the time being in force.
+(3) Nothing in this Part—
+(a) relating to Panchayats at the district level shall apply to the hill areas of the District of Darjeeling in the State of West Bengal for which Darjeeling Gorkha Hill Council exists under any law for the time being in force;
+(b) shall be construed to affect the functions and powers of the Darjeeling Gorkha Hill Council constituted under such law.
+[(3A) Nothing in article 243D, relating to reservation of seats for the Scheduled Castes, shall apply to the State of Arunachal Pradesh.]
+(4) Notwithstanding anything in this Constitution,—
+(a) the Legislature of a State referred to in sub-clause (a) of clause (2) may, by law, extend this Part to that State, except the areas, if any, referred to in clause (1), if the Legislative Assembly of that State passes a resolution to that effect by a majority of the total membership of that House and by a majority of not less than two-thirds of the members of that House present and voting;
+(b) Parliament may, by law, extend the provisions of this Part to the Scheduled Areas and the tribal areas referred to in clause (1) subject to such exceptions and modifications as may be specified in such law, and no such law shall be deemed to be an amendment of this Constitution for the purposes of article 368.

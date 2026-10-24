@@ -33,6 +33,7 @@ for (const c of cases) { const seen = new Set(); for (const m of c.mentions) { c
 console.log("\nTop 20 most-linked sections (number of judgments):"); [...perSec].sort((a, b) => b[1] - a[1]).slice(0, 20).forEach(([k, n], i) => console.log(`  ${String(i + 1).padStart(2)}. ${String(n).padStart(5)}  ${k}`));
 console.log("\nLinks per Act (judgments):"); [...perAct].sort((a, b) => b[1] - a[1]).forEach(([k, n]) => console.log(`  ${String(n).padStart(5)}  ${k}`));
 console.log("\nMentions left unlinked (judgments):"); [...unlinked].sort((a, b) => b[1] - a[1]).slice(0, 12).forEach(([k, n]) => console.log(`  ${String(n).padStart(5)}  ${k}`));
-const links = cases.flatMap((c) => c.mentions.filter((m) => stateOf(m) === "found").map((m) => ({ c, m })));
+const onlyAct = (process.argv.find((a) => a.startsWith("--act=")) ?? "").slice(6);   // --act=constitution: draw the 20 random links from that Act only
+const links = cases.flatMap((c) => c.mentions.filter((m) => stateOf(m) === "found" && (!onlyAct || m.actKey === onlyAct)).map((m) => ({ c, m })));
 console.log(`\n20 random links to check by hand (of ${links.length}):`);
 for (let i = 0; i < 20 && links.length; i++) { const { c, m } = links.splice(Math.floor(rnd() * links.length), 1)[0]; console.log(`\n  [${i + 1}] ${c.year} case ${c.id}\n      -> ${m.actName}, ${mentionLabel(m)}\n      …${c.text.slice(Math.max(0, m.start - 70), m.end + 50).replace(/\s+/g, " ")}…`); }

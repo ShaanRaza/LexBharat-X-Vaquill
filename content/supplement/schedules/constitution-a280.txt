@@ -1,0 +1,20 @@
+# FILL-IN FILE: The Constitution of India, Article 280.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A280
+Heading: Finance Commission
+Chapter: PART XII — FINANCE, PROPERTY, CONTRACTS AND SUITS CHAPTER I.—FINANCE · Distribution of Revenues between the Union and the States
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+(1) The President shall, within two years from the commencement of this Constitution and thereafter at the expiration of every fifth year or at such earlier time as the President considers necessary, by order constitute a Finance Commission which shall consist of a Chairman and four other members to be appointed by the President.
+(2) Parliament may by law determine the qualifications which shall be requisite for appointment as members of the Commission and the manner in which they shall be selected.
+(3) It shall be the duty of the Commission to make recommendations to the President as to—
+(a) the distribution between the Union and the States of the net proceeds of taxes which are to be, or may be, divided between them under this Chapter and the allocation between the States of the respective shares of such proceeds;
+(b) the principles which should govern the grants-in-aid of the revenues of the States out of the Consolidated Fund of India;
+[(bb) the measures needed to augment the Consolidated Fund of a State to supplement the resources of the Panchayats in the State on the basis of the recommendations made by the Finance Commission of the State;]
+[(c) the measures needed to augment the Consolidated Fund of a State to supplement the resources of the Municipalities in the State on the basis of the recommendations made by the Finance Commission of the State;] [(d)] any other matter referred to the Commission by the President in the interests of sound finance.
+(4) The Commission shall determine their procedure and shall have such powers in the performance of their functions as Parliament may by law confer on them.

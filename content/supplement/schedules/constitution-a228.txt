@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Constitution of India, Article 228.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: A228
+Heading: Transfer of certain cases to High Court
+Chapter: PART VI · CHAPTER V.—THE HIGH COURTS IN THE STATES
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+If the High Court is satisfied that a case pending in a court subordinate to it involves a substantial question of law as to the interpretation of this Constitution the determination of which is necessary for the disposal of the case, [it shall withdraw the case and *** may—]
+(a) either dispose of the case itself, or
+(b) determine the said question of law and return the case to the court from which the case has been so withdrawn together with a copy of its judgment on such question, and the said court shall on receipt thereof proceed to dispose of the case in conformity with such judgment.
