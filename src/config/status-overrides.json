@@ -1,0 +1,479 @@
+{
+ "_note": "Corrections to the dataset's act_status (the dataset's own value is kept as rawStatus). Mirror of the Neon table act_status_override; written by scripts/w10/status-overrides.mjs. Each entry cites its reason.",
+ "overrides": {
+  "IND_state_10833": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nagarik Suraksha Sanhita, 2023 (Act 46 of 2023), in force from 1 July 2024. The dataset still lists it as in force.",
+   "basis": "IND_central_20099"
+  },
+  "IND_state_11091": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nyaya Sanhita, 2023 (Act 45 of 2023), in force from 1 July 2024. The dataset already holds the Central Act as repealed (IND_REP_659_1860); this is a State-filed copy of the same Act.",
+   "basis": "IND_REP_659_1860"
+  },
+  "IND_state_11101": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Occupational Safety, Health and Working Conditions Code, 2020 (Act 37 of 2020). The dataset holds this Act twice: as repealed (IND_REP_2501_1948, 'Rep., Act 37 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2501_1948"
+  },
+  "IND_state_11213": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Social Security, 2020 (Act 36 of 2020). The dataset holds this Act twice: as repealed (IND_REP_3081_1961, 'Rep., Act 36 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_3081_1961"
+  },
+  "IND_state_11225": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2130_1936, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2130_1936"
+  },
+  "IND_state_12824": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nagarik Suraksha Sanhita, 2023 (Act 46 of 2023), in force from 1 July 2024. The dataset still lists it as in force.",
+   "basis": "IND_central_20099"
+  },
+  "IND_state_12831": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nagarik Suraksha Sanhita, 2023 (Act 46 of 2023), in force from 1 July 2024. The dataset still lists it as in force.",
+   "basis": "IND_central_20099"
+  },
+  "IND_state_12846": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Sakshya Adhiniyam, 2023 (Act 47 of 2023), in force from 1 July 2024. The dataset already holds the Central Act as repealed (IND_REP_971_1872); this is a State-filed copy of the same Act.",
+   "basis": "IND_REP_971_1872"
+  },
+  "IND_state_12850": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nyaya Sanhita, 2023 (Act 45 of 2023), in force from 1 July 2024. The dataset already holds the Central Act as repealed (IND_REP_659_1860); this is a State-filed copy of the same Act.",
+   "basis": "IND_REP_659_1860"
+  },
+  "IND_state_12868": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Occupational Safety, Health and Working Conditions Code, 2020 (Act 37 of 2020). The dataset holds this Act twice: as repealed (IND_REP_2501_1948, 'Rep., Act 37 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2501_1948"
+  },
+  "IND_state_12874": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Social Security, 2020 (Act 36 of 2020). The dataset holds this Act twice: as repealed (IND_REP_3081_1961, 'Rep., Act 36 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_3081_1961"
+  },
+  "IND_state_12877": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2463_1948, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2463_1948"
+  },
+  "IND_state_12922": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2130_1936, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2130_1936"
+  },
+  "IND_state_13200": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Occupational Safety, Health and Working Conditions Code, 2020 (Act 37 of 2020). The dataset holds this Act twice: as repealed (IND_REP_2501_1948, 'Rep., Act 37 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2501_1948"
+  },
+  "IND_state_13224": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Social Security, 2020 (Act 36 of 2020). The dataset holds this Act twice: as repealed (IND_REP_3081_1961, 'Rep., Act 36 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_3081_1961"
+  },
+  "IND_state_13225": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2130_1936, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2130_1936"
+  },
+  "IND_state_13246": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2463_1948, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2463_1948"
+  },
+  "IND_state_13624": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nagarik Suraksha Sanhita, 2023 (Act 46 of 2023), in force from 1 July 2024. The dataset still lists it as in force.",
+   "basis": "IND_central_20099"
+  },
+  "IND_state_13657": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Occupational Safety, Health and Working Conditions Code, 2020 (Act 37 of 2020). The dataset holds this Act twice: as repealed (IND_REP_2501_1948, 'Rep., Act 37 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2501_1948"
+  },
+  "IND_state_15097": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Occupational Safety, Health and Working Conditions Code, 2020 (Act 37 of 2020). The dataset holds this Act twice: as repealed (IND_REP_2501_1948, 'Rep., Act 37 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2501_1948"
+  },
+  "IND_state_15247": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nagarik Suraksha Sanhita, 2023 (Act 46 of 2023), in force from 1 July 2024. The dataset still lists it as in force.",
+   "basis": "IND_central_20099"
+  },
+  "IND_state_15269": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nagarik Suraksha Sanhita, 2023 (Act 46 of 2023), in force from 1 July 2024. The dataset still lists it as in force.",
+   "basis": "IND_central_20099"
+  },
+  "IND_state_15272": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nagarik Suraksha Sanhita, 2023 (Act 46 of 2023), in force from 1 July 2024. The dataset still lists it as in force.",
+   "basis": "IND_central_20099"
+  },
+  "IND_state_15273": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nagarik Suraksha Sanhita, 2023 (Act 46 of 2023), in force from 1 July 2024. The dataset still lists it as in force.",
+   "basis": "IND_central_20099"
+  },
+  "IND_state_15284": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Occupational Safety, Health and Working Conditions Code, 2020 (Act 37 of 2020). The dataset holds this Act twice: as repealed (IND_REP_2501_1948, 'Rep., Act 37 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2501_1948"
+  },
+  "IND_state_15289": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nyaya Sanhita, 2023 (Act 45 of 2023), in force from 1 July 2024. The dataset already holds the Central Act as repealed (IND_REP_659_1860); this is a State-filed copy of the same Act.",
+   "basis": "IND_REP_659_1860"
+  },
+  "IND_state_15290": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nyaya Sanhita, 2023 (Act 45 of 2023), in force from 1 July 2024. The dataset already holds the Central Act as repealed (IND_REP_659_1860); this is a State-filed copy of the same Act.",
+   "basis": "IND_REP_659_1860"
+  },
+  "IND_state_15291": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Social Security, 2020 (Act 36 of 2020). The dataset holds this Act twice: as repealed (IND_REP_3081_1961, 'Rep., Act 36 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_3081_1961"
+  },
+  "IND_state_15293": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Social Security, 2020 (Act 36 of 2020). The dataset holds this Act twice: as repealed (IND_REP_3081_1961, 'Rep., Act 36 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_3081_1961"
+  },
+  "IND_state_15300": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2130_1936, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2130_1936"
+  },
+  "IND_state_15314": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2463_1948, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2463_1948"
+  },
+  "IND_state_15381": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nagarik Suraksha Sanhita, 2023 (Act 46 of 2023), in force from 1 July 2024. The dataset still lists it as in force.",
+   "basis": "IND_central_20099"
+  },
+  "IND_state_15407": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nyaya Sanhita, 2023 (Act 45 of 2023), in force from 1 July 2024. The dataset already holds the Central Act as repealed (IND_REP_659_1860); this is a State-filed copy of the same Act.",
+   "basis": "IND_REP_659_1860"
+  },
+  "IND_state_15981": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Occupational Safety, Health and Working Conditions Code, 2020 (Act 37 of 2020). The dataset holds this Act twice: as repealed (IND_REP_2501_1948, 'Rep., Act 37 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2501_1948"
+  },
+  "IND_state_15985": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2463_1948, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2463_1948"
+  },
+  "IND_state_15986": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Social Security, 2020 (Act 36 of 2020). The dataset holds this Act twice: as repealed (IND_REP_3081_1961, 'Rep., Act 36 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_3081_1961"
+  },
+  "IND_state_16560": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Occupational Safety, Health and Working Conditions Code, 2020 (Act 37 of 2020). The dataset holds this Act twice: as repealed (IND_REP_2501_1948, 'Rep., Act 37 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2501_1948"
+  },
+  "IND_state_16961": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2463_1948, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2463_1948"
+  },
+  "IND_state_17068": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Occupational Safety, Health and Working Conditions Code, 2020 (Act 37 of 2020). The dataset holds this Act twice: as repealed (IND_REP_2501_1948, 'Rep., Act 37 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2501_1948"
+  },
+  "IND_state_17271": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nagarik Suraksha Sanhita, 2023 (Act 46 of 2023), in force from 1 July 2024. The dataset still lists it as in force.",
+   "basis": "IND_central_20099"
+  },
+  "IND_state_18133": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Occupational Safety, Health and Working Conditions Code, 2020 (Act 37 of 2020). The dataset holds this Act twice: as repealed (IND_REP_2501_1948, 'Rep., Act 37 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2501_1948"
+  },
+  "IND_state_18232": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nagarik Suraksha Sanhita, 2023 (Act 46 of 2023), in force from 1 July 2024. The dataset still lists it as in force.",
+   "basis": "IND_central_20099"
+  },
+  "IND_state_18547": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nagarik Suraksha Sanhita, 2023 (Act 46 of 2023), in force from 1 July 2024. The dataset still lists it as in force.",
+   "basis": "IND_central_20099"
+  },
+  "IND_state_18584": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Sakshya Adhiniyam, 2023 (Act 47 of 2023), in force from 1 July 2024. The dataset already holds the Central Act as repealed (IND_REP_971_1872); this is a State-filed copy of the same Act.",
+   "basis": "IND_REP_971_1872"
+  },
+  "IND_state_18587": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nyaya Sanhita, 2023 (Act 45 of 2023), in force from 1 July 2024. The dataset already holds the Central Act as repealed (IND_REP_659_1860); this is a State-filed copy of the same Act.",
+   "basis": "IND_REP_659_1860"
+  },
+  "IND_state_18603": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Occupational Safety, Health and Working Conditions Code, 2020 (Act 37 of 2020). The dataset holds this Act twice: as repealed (IND_REP_2501_1948, 'Rep., Act 37 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2501_1948"
+  },
+  "IND_state_18624": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Social Security, 2020 (Act 36 of 2020). The dataset holds this Act twice: as repealed (IND_REP_3081_1961, 'Rep., Act 36 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_3081_1961"
+  },
+  "IND_state_18634": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2463_1948, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2463_1948"
+  },
+  "IND_state_18657": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2130_1936, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2130_1936"
+  },
+  "IND_state_18999": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Occupational Safety, Health and Working Conditions Code, 2020 (Act 37 of 2020). The dataset holds this Act twice: as repealed (IND_REP_2501_1948, 'Rep., Act 37 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2501_1948"
+  },
+  "IND_state_19010": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2130_1936, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2130_1936"
+  },
+  "IND_state_19024": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Social Security, 2020 (Act 36 of 2020). The dataset holds this Act twice: as repealed (IND_REP_3081_1961, 'Rep., Act 36 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_3081_1961"
+  },
+  "IND_state_20351": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Occupational Safety, Health and Working Conditions Code, 2020 (Act 37 of 2020). The dataset holds this Act twice: as repealed (IND_REP_2501_1948, 'Rep., Act 37 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2501_1948"
+  },
+  "IND_state_20356": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Social Security, 2020 (Act 36 of 2020). The dataset holds this Act twice: as repealed (IND_REP_3081_1961, 'Rep., Act 36 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_3081_1961"
+  },
+  "IND_state_20357": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2463_1948, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2463_1948"
+  },
+  "IND_state_20359": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2130_1936, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2130_1936"
+  },
+  "IND_state_20951": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Occupational Safety, Health and Working Conditions Code, 2020 (Act 37 of 2020). The dataset holds this Act twice: as repealed (IND_REP_2501_1948, 'Rep., Act 37 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2501_1948"
+  },
+  "IND_state_20954": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Social Security, 2020 (Act 36 of 2020). The dataset holds this Act twice: as repealed (IND_REP_3081_1961, 'Rep., Act 36 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_3081_1961"
+  },
+  "IND_state_20955": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2463_1948, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2463_1948"
+  },
+  "IND_state_20960": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2130_1936, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2130_1936"
+  },
+  "IND_state_21498": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nagarik Suraksha Sanhita, 2023 (Act 46 of 2023), in force from 1 July 2024. The dataset still lists it as in force.",
+   "basis": "IND_central_20099"
+  },
+  "IND_state_21853": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Occupational Safety, Health and Working Conditions Code, 2020 (Act 37 of 2020). The dataset holds this Act twice: as repealed (IND_REP_2501_1948, 'Rep., Act 37 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2501_1948"
+  },
+  "IND_state_21986": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Social Security, 2020 (Act 36 of 2020). The dataset holds this Act twice: as repealed (IND_REP_3081_1961, 'Rep., Act 36 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_3081_1961"
+  },
+  "IND_state_21987": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2463_1948, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2463_1948"
+  },
+  "IND_state_21989": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2130_1936, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2130_1936"
+  },
+  "IND_state_21993": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Occupational Safety, Health and Working Conditions Code, 2020 (Act 37 of 2020). The dataset holds this Act twice: as repealed (IND_REP_2501_1948, 'Rep., Act 37 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2501_1948"
+  },
+  "IND_state_21994": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Occupational Safety, Health and Working Conditions Code, 2020 (Act 37 of 2020). The dataset holds this Act twice: as repealed (IND_REP_2501_1948, 'Rep., Act 37 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2501_1948"
+  },
+  "IND_state_6323": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Occupational Safety, Health and Working Conditions Code, 2020 (Act 37 of 2020). The dataset holds this Act twice: as repealed (IND_REP_2501_1948, 'Rep., Act 37 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2501_1948"
+  },
+  "IND_state_6796": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nagarik Suraksha Sanhita, 2023 (Act 46 of 2023), in force from 1 July 2024. The dataset still lists it as in force.",
+   "basis": "IND_central_20099"
+  },
+  "IND_state_6819": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Sakshya Adhiniyam, 2023 (Act 47 of 2023), in force from 1 July 2024. The dataset already holds the Central Act as repealed (IND_REP_971_1872); this is a State-filed copy of the same Act.",
+   "basis": "IND_REP_971_1872"
+  },
+  "IND_state_7792": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2130_1936, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2130_1936"
+  },
+  "IND_state_8322": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2463_1948, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2463_1948"
+  },
+  "IND_state_8324": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2130_1936, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2130_1936"
+  },
+  "IND_state_8881": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Occupational Safety, Health and Working Conditions Code, 2020 (Act 37 of 2020). The dataset holds this Act twice: as repealed (IND_REP_2501_1948, 'Rep., Act 37 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2501_1948"
+  },
+  "IND_state_9150": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2130_1936, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2130_1936"
+  },
+  "IND_state_9160": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Social Security, 2020 (Act 36 of 2020). The dataset holds this Act twice: as repealed (IND_REP_3081_1961, 'Rep., Act 36 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_3081_1961"
+  },
+  "IND_state_9166": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Wages, 2019 (Act 29 of 2019). The dataset holds this Act twice: as repealed (IND_REP_2463_1948, 'Rep., Act 29 of 2019') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_2463_1948"
+  },
+  "IND_state_9180": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Bharatiya Nagarik Suraksha Sanhita, 2023 (Act 46 of 2023), in force from 1 July 2024. The dataset still lists it as in force.",
+   "basis": "IND_central_20099"
+  },
+  "IND_state_9324": {
+   "status": "repealed",
+   "rawStatus": "in_force",
+   "reason": "Repealed by the Code on Social Security, 2020 (Act 36 of 2020). The dataset holds this Act twice: as repealed (IND_REP_3081_1961, 'Rep., Act 36 of 2020') and as in force; the repealed record is India Code's.",
+   "basis": "IND_REP_3081_1961"
+  }
+ }
+}

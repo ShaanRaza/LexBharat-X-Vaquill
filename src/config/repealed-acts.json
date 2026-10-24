@@ -1,6 +1,489 @@
 {
   "_note": "Acts that were repealed and replaced in 2023, and the Act that replaced each. The note only points to the new Act as a whole; it never guesses which section matches which. Keyed by Act ID in our data.",
-  "IND_REP_659_1860": { "name": "Indian Penal Code, 1860", "newActId": "IND_central_20062", "newName": "Bharatiya Nyaya Sanhita, 2023", "short": "BNS" },
-  "IND_state_6796": { "name": "Code of Criminal Procedure, 1973", "newActId": "IND_central_20099", "newName": "Bharatiya Nagarik Suraksha Sanhita, 2023", "short": "BNSS" },
-  "IND_REP_971_1872": { "name": "Indian Evidence Act, 1872", "newActId": "IND_central_20063", "newName": "Bharatiya Sakshya Adhiniyam, 2023", "short": "BSA" }
+  "IND_REP_659_1860": {
+    "name": "Indian Penal Code, 1860",
+    "newActId": "IND_central_20062",
+    "newName": "Bharatiya Nyaya Sanhita, 2023",
+    "short": "BNS"
+  },
+  "IND_state_6796": {
+    "name": "Code of Criminal Procedure, 1973",
+    "newActId": "IND_central_20099",
+    "newName": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "short": "BNSS"
+  },
+  "IND_REP_971_1872": {
+    "name": "Indian Evidence Act, 1872",
+    "newActId": "IND_central_20063",
+    "newName": "Bharatiya Sakshya Adhiniyam, 2023",
+    "short": "BSA"
+  },
+  "IND_state_20357": {
+    "name": "Minimum Wages Act, 1948",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_10833": {
+    "name": "Code of Criminal Procedure, 1973",
+    "newActId": "IND_central_20099",
+    "newName": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "short": "BNSS"
+  },
+  "IND_state_11091": {
+    "name": "Indian Penal Code, 1860",
+    "newActId": "IND_central_20062",
+    "newName": "Bharatiya Nyaya Sanhita, 2023",
+    "short": "BNS"
+  },
+  "IND_state_11101": {
+    "name": "Factories Act, 1948",
+    "newActId": "IND_central_22041",
+    "newName": "The Occupational Safety, Health and Working Conditions Code, 2020",
+    "short": "OSH Code"
+  },
+  "IND_state_11213": {
+    "name": "Maternity Benefit Act, 1961",
+    "newActId": "IND_central_16823",
+    "newName": "The Code on Social Security, 2020",
+    "short": "Code on Social Security"
+  },
+  "IND_state_11225": {
+    "name": "Payment of Wages Act, 1936",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_12922": {
+    "name": "Payment of Wages Act, 1936",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_20359": {
+    "name": "Payment of Wages Act, 1936",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_15985": {
+    "name": "Minimum Wages Act, 1948",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_20951": {
+    "name": "Factories Act, 1948",
+    "newActId": "IND_central_22041",
+    "newName": "The Occupational Safety, Health and Working Conditions Code, 2020",
+    "short": "OSH Code"
+  },
+  "IND_state_21853": {
+    "name": "Factories Act, 1948",
+    "newActId": "IND_central_22041",
+    "newName": "The Occupational Safety, Health and Working Conditions Code, 2020",
+    "short": "OSH Code"
+  },
+  "IND_state_12824": {
+    "name": "Code of Criminal Procedure, 1973",
+    "newActId": "IND_central_20099",
+    "newName": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "short": "BNSS"
+  },
+  "IND_state_12831": {
+    "name": "Code of Criminal Procedure, 1973",
+    "newActId": "IND_central_20099",
+    "newName": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "short": "BNSS"
+  },
+  "IND_state_12846": {
+    "name": "Indian Evidence Act, 1872",
+    "newActId": "IND_central_20063",
+    "newName": "Bharatiya Sakshya Adhiniyam, 2023",
+    "short": "BSA"
+  },
+  "IND_state_12850": {
+    "name": "Indian Penal Code, 1860",
+    "newActId": "IND_central_20062",
+    "newName": "Bharatiya Nyaya Sanhita, 2023",
+    "short": "BNS"
+  },
+  "IND_state_12868": {
+    "name": "Factories Act, 1948",
+    "newActId": "IND_central_22041",
+    "newName": "The Occupational Safety, Health and Working Conditions Code, 2020",
+    "short": "OSH Code"
+  },
+  "IND_state_12874": {
+    "name": "Maternity Benefit Act, 1961",
+    "newActId": "IND_central_16823",
+    "newName": "The Code on Social Security, 2020",
+    "short": "Code on Social Security"
+  },
+  "IND_state_12877": {
+    "name": "Minimum Wages Act, 1948",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_13200": {
+    "name": "Factories Act, 1948",
+    "newActId": "IND_central_22041",
+    "newName": "The Occupational Safety, Health and Working Conditions Code, 2020",
+    "short": "OSH Code"
+  },
+  "IND_state_13224": {
+    "name": "Maternity Benefit Act, 1961",
+    "newActId": "IND_central_16823",
+    "newName": "The Code on Social Security, 2020",
+    "short": "Code on Social Security"
+  },
+  "IND_state_13225": {
+    "name": "Payment of Wages Act, 1936",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_13246": {
+    "name": "Minimum Wages Act, 1948",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_15986": {
+    "name": "Maternity Benefit Act, 1961",
+    "newActId": "IND_central_16823",
+    "newName": "The Code on Social Security, 2020",
+    "short": "Code on Social Security"
+  },
+  "IND_state_13624": {
+    "name": "Code of Criminal Procedure, 1973",
+    "newActId": "IND_central_20099",
+    "newName": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "short": "BNSS"
+  },
+  "IND_state_13657": {
+    "name": "Factories Act, 1948",
+    "newActId": "IND_central_22041",
+    "newName": "The Occupational Safety, Health and Working Conditions Code, 2020",
+    "short": "OSH Code"
+  },
+  "IND_state_15097": {
+    "name": "Factories Act, 1948",
+    "newActId": "IND_central_22041",
+    "newName": "The Occupational Safety, Health and Working Conditions Code, 2020",
+    "short": "OSH Code"
+  },
+  "IND_state_15247": {
+    "name": "Code of Criminal Procedure, 1973",
+    "newActId": "IND_central_20099",
+    "newName": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "short": "BNSS"
+  },
+  "IND_state_15269": {
+    "name": "Code of Criminal Procedure, 1973",
+    "newActId": "IND_central_20099",
+    "newName": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "short": "BNSS"
+  },
+  "IND_state_15272": {
+    "name": "Code of Criminal Procedure, 1973",
+    "newActId": "IND_central_20099",
+    "newName": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "short": "BNSS"
+  },
+  "IND_state_15273": {
+    "name": "Code of Criminal Procedure, 1973",
+    "newActId": "IND_central_20099",
+    "newName": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "short": "BNSS"
+  },
+  "IND_state_15284": {
+    "name": "Factories Act, 1948",
+    "newActId": "IND_central_22041",
+    "newName": "The Occupational Safety, Health and Working Conditions Code, 2020",
+    "short": "OSH Code"
+  },
+  "IND_state_15289": {
+    "name": "Indian Penal Code, 1860",
+    "newActId": "IND_central_20062",
+    "newName": "Bharatiya Nyaya Sanhita, 2023",
+    "short": "BNS"
+  },
+  "IND_state_15290": {
+    "name": "Indian Penal Code, 1860",
+    "newActId": "IND_central_20062",
+    "newName": "Bharatiya Nyaya Sanhita, 2023",
+    "short": "BNS"
+  },
+  "IND_state_15291": {
+    "name": "Maternity Benefit Act, 1961",
+    "newActId": "IND_central_16823",
+    "newName": "The Code on Social Security, 2020",
+    "short": "Code on Social Security"
+  },
+  "IND_state_15293": {
+    "name": "Maternity Benefit Act, 1961",
+    "newActId": "IND_central_16823",
+    "newName": "The Code on Social Security, 2020",
+    "short": "Code on Social Security"
+  },
+  "IND_state_15300": {
+    "name": "Payment of Wages Act, 1936",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_15314": {
+    "name": "Minimum Wages Act, 1948",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_15381": {
+    "name": "Code of Criminal Procedure, 1973",
+    "newActId": "IND_central_20099",
+    "newName": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "short": "BNSS"
+  },
+  "IND_state_15407": {
+    "name": "Indian Penal Code, 1860",
+    "newActId": "IND_central_20062",
+    "newName": "Bharatiya Nyaya Sanhita, 2023",
+    "short": "BNS"
+  },
+  "IND_state_15981": {
+    "name": "Factories Act, 1948",
+    "newActId": "IND_central_22041",
+    "newName": "The Occupational Safety, Health and Working Conditions Code, 2020",
+    "short": "OSH Code"
+  },
+  "IND_state_16560": {
+    "name": "Factories Act, 1948",
+    "newActId": "IND_central_22041",
+    "newName": "The Occupational Safety, Health and Working Conditions Code, 2020",
+    "short": "OSH Code"
+  },
+  "IND_state_18232": {
+    "name": "Code of Criminal Procedure, 1973",
+    "newActId": "IND_central_20099",
+    "newName": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "short": "BNSS"
+  },
+  "IND_state_16961": {
+    "name": "Minimum Wages Act, 1948",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_17068": {
+    "name": "Factories Act, 1948",
+    "newActId": "IND_central_22041",
+    "newName": "The Occupational Safety, Health and Working Conditions Code, 2020",
+    "short": "OSH Code"
+  },
+  "IND_state_17271": {
+    "name": "Code of Criminal Procedure, 1973",
+    "newActId": "IND_central_20099",
+    "newName": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "short": "BNSS"
+  },
+  "IND_state_18133": {
+    "name": "Factories Act, 1948",
+    "newActId": "IND_central_22041",
+    "newName": "The Occupational Safety, Health and Working Conditions Code, 2020",
+    "short": "OSH Code"
+  },
+  "IND_state_18547": {
+    "name": "Code of Criminal Procedure, 1973",
+    "newActId": "IND_central_20099",
+    "newName": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "short": "BNSS"
+  },
+  "IND_state_18584": {
+    "name": "Indian Evidence Act, 1872",
+    "newActId": "IND_central_20063",
+    "newName": "Bharatiya Sakshya Adhiniyam, 2023",
+    "short": "BSA"
+  },
+  "IND_state_18587": {
+    "name": "Indian Penal Code, 1860",
+    "newActId": "IND_central_20062",
+    "newName": "Bharatiya Nyaya Sanhita, 2023",
+    "short": "BNS"
+  },
+  "IND_state_18603": {
+    "name": "Factories Act, 1948",
+    "newActId": "IND_central_22041",
+    "newName": "The Occupational Safety, Health and Working Conditions Code, 2020",
+    "short": "OSH Code"
+  },
+  "IND_state_18624": {
+    "name": "Maternity Benefit Act, 1961",
+    "newActId": "IND_central_16823",
+    "newName": "The Code on Social Security, 2020",
+    "short": "Code on Social Security"
+  },
+  "IND_state_18634": {
+    "name": "Minimum Wages Act, 1948",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_18657": {
+    "name": "Payment of Wages Act, 1936",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_18999": {
+    "name": "Factories Act, 1948",
+    "newActId": "IND_central_22041",
+    "newName": "The Occupational Safety, Health and Working Conditions Code, 2020",
+    "short": "OSH Code"
+  },
+  "IND_state_19010": {
+    "name": "Payment of Wages Act, 1936",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_19024": {
+    "name": "Maternity Benefit Act, 1961",
+    "newActId": "IND_central_16823",
+    "newName": "The Code on Social Security, 2020",
+    "short": "Code on Social Security"
+  },
+  "IND_state_20351": {
+    "name": "Factories Act, 1948",
+    "newActId": "IND_central_22041",
+    "newName": "The Occupational Safety, Health and Working Conditions Code, 2020",
+    "short": "OSH Code"
+  },
+  "IND_state_20356": {
+    "name": "Maternity Benefit Act, 1961",
+    "newActId": "IND_central_16823",
+    "newName": "The Code on Social Security, 2020",
+    "short": "Code on Social Security"
+  },
+  "IND_state_20954": {
+    "name": "Maternity Benefit Act, 1961",
+    "newActId": "IND_central_16823",
+    "newName": "The Code on Social Security, 2020",
+    "short": "Code on Social Security"
+  },
+  "IND_state_20955": {
+    "name": "Minimum Wages Act, 1948",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_20960": {
+    "name": "Payment of Wages Act, 1936",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_21498": {
+    "name": "Code of Criminal Procedure, 1973",
+    "newActId": "IND_central_20099",
+    "newName": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "short": "BNSS"
+  },
+  "IND_state_21986": {
+    "name": "Maternity Benefit Act, 1961",
+    "newActId": "IND_central_16823",
+    "newName": "The Code on Social Security, 2020",
+    "short": "Code on Social Security"
+  },
+  "IND_state_21987": {
+    "name": "Minimum Wages Act, 1948",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_21989": {
+    "name": "Payment of Wages Act, 1936",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_21993": {
+    "name": "Factories Act, 1948",
+    "newActId": "IND_central_22041",
+    "newName": "The Occupational Safety, Health and Working Conditions Code, 2020",
+    "short": "OSH Code"
+  },
+  "IND_state_21994": {
+    "name": "Factories Act, 1948",
+    "newActId": "IND_central_22041",
+    "newName": "The Occupational Safety, Health and Working Conditions Code, 2020",
+    "short": "OSH Code"
+  },
+  "IND_state_6819": {
+    "name": "Indian Evidence Act, 1872",
+    "newActId": "IND_central_20063",
+    "newName": "Bharatiya Sakshya Adhiniyam, 2023",
+    "short": "BSA"
+  },
+  "IND_state_7792": {
+    "name": "Payment of Wages Act, 1936",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_8324": {
+    "name": "Payment of Wages Act, 1936",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_8881": {
+    "name": "Factories Act, 1948",
+    "newActId": "IND_central_22041",
+    "newName": "The Occupational Safety, Health and Working Conditions Code, 2020",
+    "short": "OSH Code"
+  },
+  "IND_state_9150": {
+    "name": "Payment of Wages Act, 1936",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_9166": {
+    "name": "Minimum Wages Act, 1948",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_9180": {
+    "name": "Code of Criminal Procedure, 1973",
+    "newActId": "IND_central_20099",
+    "newName": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "short": "BNSS"
+  },
+  "IND_state_9324": {
+    "name": "Maternity Benefit Act, 1961",
+    "newActId": "IND_central_16823",
+    "newName": "The Code on Social Security, 2020",
+    "short": "Code on Social Security"
+  },
+  "IND_state_8322": {
+    "name": "Minimum Wages Act, 1948",
+    "newActId": "IND_central_15793",
+    "newName": "The Code on Wages, 2019",
+    "short": "Code on Wages"
+  },
+  "IND_state_6323": {
+    "name": "Factories Act, 1948",
+    "newActId": "IND_central_22041",
+    "newName": "The Occupational Safety, Health and Working Conditions Code, 2020",
+    "short": "OSH Code"
+  },
+  "IND_state_9160": {
+    "name": "Maternity Benefit Act, 1961",
+    "newActId": "IND_central_16823",
+    "newName": "The Code on Social Security, 2020",
+    "short": "Code on Social Security"
+  }
 }

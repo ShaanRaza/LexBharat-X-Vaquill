@@ -5,6 +5,7 @@
 import meta from "@/data/acts/acts.legislation.meta.json";
 import regMeta from "@/data/acts/acts.regulations.meta.json";
 import type { ActItem } from "@/data/workspaceBrowse";
+import statusOverrides from "@/config/status-overrides.json";
 import { staticJson } from "@/lib/staticData";
 import { runActsQuery } from "./query";
 import type { ActsStats, ActsStore } from "./types";
@@ -31,6 +32,9 @@ function load(): Promise<Loaded> {
   if (!loaded) {
     loaded = Promise.all([staticJson<unknown>("acts/acts.legislation.json"), staticJson<unknown>("acts/acts.regulations.json")]).then(([rows, regRows]) => {
       const ACTS: ActItem[] = [...toActs(rows), ...toActs(regRows)];
+      // Status corrections (src/config/status-overrides.json, each with its reason); the dataset's own value is kept in the file as rawStatus.
+      const ov = statusOverrides.overrides as Record<string, { status: string }>;
+      for (const a of ACTS) { const o = ov[a.actId]; if (o) (a as { actStatus: string }).actStatus = o.status; }
       const stats: ActsStats = {
         source: "real", acts: total, sections: meta.sections + regMeta.sections, central: meta.central, state: meta.state, regulatory: regMeta.acts,
         scope: "central and state/UT acts and regulator instruments",
