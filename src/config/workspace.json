@@ -8,13 +8,13 @@
       "action": "Draft a document"
     },
     "review": {
-      "enabled": false,
+      "enabled": true,
       "label": "Review",
       "href": "/workspace/review",
       "action": "Review a contract"
     },
     "vault": {
-      "enabled": false,
+      "enabled": true,
       "label": "Vault",
       "href": "/workspace/vault",
       "action": "Open the vault"

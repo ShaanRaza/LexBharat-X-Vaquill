@@ -1,0 +1,10 @@
+export type ContractType = "nda" | "service" | "rent" | "employment" | "other";
+export const CONTRACT_TYPES: Record<ContractType, { label: string; sides: string[] }>;
+export function isContractType(t: unknown): t is ContractType;
+export function sideOk(type: string, side: string): boolean;
+export const TOPICS: { id: string; label: string; re: RegExp; lookups: string[]; queries: string[] }[];
+export function detectState(text: string): "maharashtra" | "karnataka" | null;
+export function lawPlan(text: string, type: string, topicIds?: string[]): { topics: { id: string; label: string }[]; lookups: string[]; queries: string[]; state: string | null };
+export function missingClauses(type: string, text: string): { clause: string; why: string; source: "check" }[];
+export function splitParts(text: string, maxChars?: number): { i: number; start: number; end: number; text: string }[];
+export function quoteInText(quote: string, text: string): boolean;

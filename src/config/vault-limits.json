@@ -1,0 +1,16 @@
+{
+  "about": "Vault limits (per browser) and processing settings. Env overrides: VAULT_MAX_DOCS, VAULT_MAX_TOTAL_MB, VAULT_MAX_FILE_MB, VAULT_BUCKET, VAULT_SIGNED_URL_SECONDS, VAULT_EMBED_MIN_GAP_MS, VAULT_EMBED_BATCH. embedMinGapMs spaces Voyage calls for the free account (3 requests a minute); embedBatch and embedMaxChars keep one request under the free token allowance. maxChunks stops a huge file from taking hours on the free plan. Paid Voyage: set the gap to about 1000 and raise the batch and maxChunks.",
+  "maxFileMb": 10,
+  "maxDocs": 30,
+  "maxTotalMb": 100,
+  "bucket": "Vault",
+  "signedUrlSeconds": 60,
+  "uploadWaitMinutes": 15,
+  "chunkChars": 1100,
+  "chunkOverlap": 150,
+  "maxChunks": 1200,
+  "embedBatch": 16,
+  "embedMaxChars": 18000,
+  "embedMinGapMs": 21000,
+  "scannedMinCharsPerPage": 25
+}

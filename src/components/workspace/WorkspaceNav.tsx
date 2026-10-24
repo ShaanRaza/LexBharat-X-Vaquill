@@ -9,7 +9,7 @@ import workspace from "@/config/workspace.json";
 
 // Sidebar of the Legal Workspace product (also the contents of the phone menu): New chat, Dashboard, Chat with its past chats, Acts & Judgments, then Drafting / Review / Vault, which stay
 // greyed with "Coming soon" until their flag in src/config/workspace.json is switched on. Presentation only; colours, sizes and radii come from the tokens.
-export type LawTab = "dashboard" | "chat" | "browse" | "drafting";
+export type LawTab = "dashboard" | "chat" | "browse" | "drafting" | "review" | "vault";
 const PATHS = {
   dashboard: "M3 3h7v9H3zM14 3h7v5h-7zM14 12h7v9h-7zM3 16h7v5H3z",
   chat: "M4 5h16v11H9l-5 4z",
@@ -38,7 +38,7 @@ export default function WorkspaceNav({ active, logo, onNavigate }: { active?: La
     <nav aria-label="Legal Workspace" className="flex h-full flex-col">
       {logo}
       <div className="px-3 pb-3">
-        <Link href="/workspace/chat" onClick={onNavigate} className="flex min-h-10 items-center justify-center gap-2 rounded-panel bg-primary px-3 text-ui-base font-medium text-white hover:bg-primary-hover"><Icon name="plus" />New chat</Link>
+        <Link href="/workspace/chat" onClick={onNavigate} className="flex min-h-10 items-center justify-center gap-2 rounded-panel bg-primary px-3 text-ui-base font-medium text-on-primary hover:bg-primary-hover"><Icon name="plus" />New chat</Link>
       </div>
       <ul className="min-h-0 flex-1 space-y-0.5 overflow-y-auto px-2" data-lenis-prevent>
         <li><Item href="/workspace" icon="dashboard" label="Dashboard" active={active === "dashboard"} onNavigate={onNavigate} /></li>

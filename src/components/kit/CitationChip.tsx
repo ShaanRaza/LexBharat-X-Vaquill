@@ -1,9 +1,14 @@
 import Link from "next/link";
 
 // Numbered citation chip ([1], [2]...) that links to the cited source. Shared: any page that cites a source uses this one. Colours and sizes come from the tokens.
-export default function CitationChip({ n, href, label }: { n: number; href: string; label: string }) {
+// kind="act" (default) is a section of an Act; kind="doc" is a passage of the user's own document, drawn differently (info colour, dashed outline) so the two are never confused.
+const KIND = {
+  act: "bg-primary/10 text-primary ring-1 ring-primary/25 hover:bg-primary/20",
+  doc: "bg-quality-info/10 text-quality-info outline outline-1 outline-dashed outline-quality-info/60 hover:bg-quality-info/20",
+} as const;
+export default function CitationChip({ n, href, label, kind = "act" }: { n: number; href: string; label: string; kind?: keyof typeof KIND }) {
   return (
-    <Link href={href} title={label} aria-label={`Source ${n}: ${label}`}
-      className="mx-0.5 inline-flex min-w-5 items-center justify-center rounded-chip bg-primary/10 px-1.5 align-baseline text-ui-xs font-medium text-primary ring-1 ring-primary/25 hover:bg-primary/20">{n}</Link>
+    <Link href={href} title={label} aria-label={`${kind === "doc" ? "Your document" : "Source"} ${n}: ${label}`}
+      className={`mx-0.5 inline-flex min-w-5 items-center justify-center rounded-chip px-1.5 align-baseline text-ui-xs font-medium ${KIND[kind]}`}>{n}</Link>
   );
 }

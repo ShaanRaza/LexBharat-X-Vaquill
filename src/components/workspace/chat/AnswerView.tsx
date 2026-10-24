@@ -1,14 +1,12 @@
 "use client";
 import Link from "next/link";
-import { Fragment } from "react";
 import { Badge, CitationChip, Notice } from "@/components/kit";
-import { citedNumbers, linkSegments } from "@/lib/chat/citations.mjs";
+import CitedText, { hrefOf, sourceLabel } from "@/components/workspace/CitedText";
+import { citedNumbers } from "@/lib/chat/citations.mjs";
 import { toBlocks } from "@/lib/chat/format.mjs";
 import type { Citation, CheckResult } from "@/lib/chat/store";
 
 // One assistant answer: text with numbered citation chips and linked statute names, the answer-check label, and the list of sources used. Presentation only; the logic is in src/lib/chat.
-export const sectionHref = (c: { actId: string; sectionKey: string }) => `/workspace/browse/acts/${c.actId}?section=${encodeURIComponent(c.sectionKey)}`;
-const sourceLabel = (c: Citation) => `${c.actTitle}, ${c.number ? `Section ${c.number}` : "unnumbered text"}`;
 // The four honest labels (src/lib/chat/prompt.mjs CHECK_LABELS): complete and backed / some claims unbacked / incomplete or only partly covered / nothing found.
 const CHECK = {
   supported: { tone: "complete", text: "Supported", explain: "The answer is complete and the sections cited back up every statement." },
@@ -17,22 +15,24 @@ const CHECK = {
   not_found: { tone: "neutral", text: "Not found in the Acts", explain: "The Acts searched do not answer this question." },
 } as const;
 
-function Inline({ text, sources }: { text: string; sources: Citation[] }) {
-  return <>{linkSegments(text, sources).map((p, i) => {
-    if (p.type === "text") return <Fragment key={i}>{p.text}</Fragment>;
-    const c = sources.find((s) => s.n === p.n)!;
-    if (p.type === "cite") return <CitationChip key={i} n={p.n} href={sectionHref(c)} label={sourceLabel(c)} />;
-    return <Link key={i} href={sectionHref(c)} title={sourceLabel(c)} className="font-medium text-primary underline decoration-primary/40 hover:decoration-primary">{p.text}</Link>;
-  })}</>;
-}
+const Inline = CitedText;
 
-/** One source: its chip, then the Act name FIRST (every source shows it), then the section (or "Unnumbered text" with a short preview). */
+/** One source: its chip, then the Act name FIRST (every source shows it), then the section (or "Unnumbered text" with a short preview). A passage of the user's own document shows the document name and page instead. */
 function SourceRow({ c }: { c: Citation }) {
+  if (c.kind === "doc") return (
+    <li className="flex gap-2">
+      <span className="shrink-0 self-start"><CitationChip n={c.n} href={hrefOf(c)} label={sourceLabel(c)} kind="doc" /></span>
+      <div className="min-w-0">
+        <Link href={hrefOf(c)} className="font-medium text-quality-info hover:underline">{c.docName ?? c.actTitle}</Link>
+        <p className="text-secondary">{c.page ? `Page ${c.page}` : "Document text"}{c.label ? ` · ${c.label}` : ""}{c.preview ? <span className="text-muted"> — {c.preview}</span> : null}</p>
+      </div>
+    </li>
+  );
   return (
     <li className="flex gap-2">
-      <CitationChip n={c.n} href={sectionHref(c)} label={sourceLabel(c)} />
+      <span className="shrink-0 self-start"><CitationChip n={c.n} href={hrefOf(c)} label={sourceLabel(c)} /></span>
       <div className="min-w-0">
-        <Link href={sectionHref(c)} className="font-medium text-primary hover:underline">{c.actTitle}</Link>
+        <Link href={hrefOf(c)} className="font-medium text-primary hover:underline">{c.actTitle}</Link>
         <span className="text-muted">{c.state ? ` · ${c.state.replace(/-/g, " ")}` : ""}</span>
         <p className="text-secondary">
           {c.number ? `Section ${c.number}${c.heading ? ` — ${c.heading}` : ""}` : <>Unnumbered text{c.preview ? <span className="text-muted"> — {c.preview}</span> : null}</>}
@@ -44,7 +44,7 @@ function SourceRow({ c }: { c: Citation }) {
 }
 
 export default function AnswerView({ text, sources, check, pending, queries, note }: { text: string; sources: Citation[]; check?: CheckResult | null; pending?: boolean; queries?: string[]; note?: string }) {
-  const blocks = toBlocks(text), nums = new Set(citedNumbers(text)), cited = sources.filter((x) => nums.has(x.n)), others = sources.filter((x) => !nums.has(x.n));
+  const blocks = toBlocks(text), nums = new Set(citedNumbers(text)), cited = sources.filter((x) => nums.has(x.n) && x.kind !== "doc"), citedDocs = sources.filter((x) => nums.has(x.n) && x.kind === "doc"), others = sources.filter((x) => !nums.has(x.n));
   return (
     <div>
       {note && <Notice tone="info" role="note" compact className="mb-3"><p>{note}</p></Notice>}
@@ -75,6 +75,12 @@ export default function AnswerView({ text, sources, check, pending, queries, not
       )}
       {sources.length > 0 && !pending && (
         <div className="mt-4 space-y-2">
+          {citedDocs.length > 0 && (
+            <section aria-label="Passages of your documents cited">
+              <h3 className="text-ui-sm font-semibold uppercase tracking-[0.08em] text-muted">Your documents cited</h3>
+              <ol className="mt-1.5 space-y-2">{citedDocs.map((c) => <SourceRow key={c.n} c={c} />)}</ol>
+            </section>
+          )}
           {cited.length > 0 && (
             <section aria-label="Sources cited">
               <h3 className="text-ui-sm font-semibold uppercase tracking-[0.08em] text-muted">Sources cited</h3>

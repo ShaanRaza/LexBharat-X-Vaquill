@@ -12,6 +12,8 @@ import { previewOf } from "./format.mjs";
 export type ChatSource = {
   n: number; actId: string; sectionKey: string; actTitle: string; year: number | null; category: string; state: string | null; inForce: boolean; sourceUrl: string | null;
   number: string | null; heading: string | null; status: string; text: string; via: string;
+  /** a passage of the user's own attached document (see src/lib/vault/search.ts) */
+  kind?: "doc"; docId?: string; docName?: string; page?: number | null; label?: string | null;
 };
 export type Retrieval = { sources: ChatSource[]; searchMode: "semantic" | "text" | "lookup" | "none"; note: string; queries: string[]; /** keys ("actId|sectionKey") found by exact lookup: sections the question or the caller named */ exactKeys: string[] };
 
@@ -25,7 +27,7 @@ export async function retrieveSources(question: string, history: { role: string;
   // what gets cited is the section text that comes back)
   const wanted = [...forced.map((l) => [l, 1] as const), ...extractLookups(question).map((l) => [l, 2] as const), ...extraQueries.flatMap((q) => extractLookups(q)).map((l) => [l, 1] as const)];
   const seenLookup = new Set<string>();
-  for (const [l, take] of wanted.filter(([l]) => !seenLookup.has(l.toLowerCase()) && !!seenLookup.add(l.toLowerCase())).slice(0, 5)) {
+  for (const [l, take] of wanted.filter(([l]) => !seenLookup.has(l.toLowerCase()) && !!seenLookup.add(l.toLowerCase())).slice(0, Math.max(5, forced.length))) {
     const r = await searchSections(l, 1, 3);
     if (r.available && r.mode === "lookup") { mode = "lookup"; for (const h of r.results.filter(usable).slice(0, take)) { hits.set(keyOf(h), h); if (!first.includes(keyOf(h))) first.push(keyOf(h)); } }
   }
@@ -55,5 +57,7 @@ export async function retrieveSources(question: string, history: { role: string;
 }
 
 /** What is stored and sent to the browser for a source: no section text. */
-export const citationOf = (s: ChatSource) => ({ n: s.n, actId: s.actId, sectionKey: s.sectionKey, actTitle: s.actTitle, number: s.number, heading: s.heading, status: s.status, category: s.category, state: s.state,
-  ...(s.number ? {} : { preview: previewOf(s.text) }) });   // unnumbered text has no section number to show, so it carries a short preview
+export const citationOf = (s: ChatSource) => s.kind === "doc"
+  ? { n: s.n, kind: "doc" as const, docId: s.docId, docName: s.docName, page: s.page ?? null, label: s.label ?? null, actId: "", sectionKey: "", actTitle: s.docName ?? "Your document", number: null, heading: null, status: "ok", category: "document", state: null, preview: previewOf(s.text) }
+  : { n: s.n, actId: s.actId, sectionKey: s.sectionKey, actTitle: s.actTitle, number: s.number, heading: s.heading, status: s.status, category: s.category, state: s.state,
+      ...(s.number ? {} : { preview: previewOf(s.text) }) };   // unnumbered text has no section number to show, so it carries a short preview

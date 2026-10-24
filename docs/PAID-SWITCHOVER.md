@@ -16,7 +16,7 @@ Budget rule until the purchase day: **₹0**. Free plans only; no cards, no tria
 | Piece | Rule when it is built |
 |---|---|
 | AI calls (chat, drafting, review, "re-run stronger") | Go through LiteLLM; the model per task lives in one config file; a free model for development, Claude by changing that file. Nothing calls an LLM yet. |
-| File storage (Vault, uploads) | Go through one small storage interface (`put`, `get`, `list`, `delete`); local files now, R2 later. Nothing stores user files yet. |
+| File storage (Vault, uploads) | Built in W6: one `FileStore` interface (`src/lib/vault/storage.ts`); the Supabase bucket now, R2 later by config (section 4d). |
 
 ## 1. Voyage (card)
 
@@ -46,7 +46,7 @@ Budget rule until the purchase day: **₹0**. Free plans only; no cards, no tria
 - Static data today: `public/data/**` is copied from `src/data` at build, served from the same Vercel deployment. This is what filled Vercel's Function Storage before (each deployment kept ~500 MB until fixed); it is now ~5 MB of unique files per deploy.
 - Switch: upload `public/data/**` to an R2 bucket with a public domain and set `STATIC_DATA_BASE_URL=https://<r2 public domain>` on Vercel (`src/lib/staticData.ts` already reads it first). Then the copy step can be dropped from `prebuild`.
 - High Court case lists (counts only today): upload under `data/judgments/hc/` the same way.
-- Vault files (not built): storage interface, then env `STORAGE_BACKEND=r2`, `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET` (names planned, not in code yet).
+- Vault files (W6): they are in a private Supabase Storage bucket behind the `FileStore` interface in `src/lib/vault/storage.ts`. Moving them to R2 means writing an R2 implementation of that interface (about 60 lines with the S3 API: signed upload, get, delete, size, signed download, usage) and setting `VAULT_STORAGE=r2`; the document records stay in Supabase. See section 4d.
 
 ## 4. Claude API (and LiteLLM later) for chat, drafting and review
 
@@ -74,7 +74,7 @@ Built in W4: one provider-agnostic layer, `src/lib/ai` (`streamAi`, `completeAi`
 
 ## 4b. Legal Workspace pages (W4b, W5)
 
-Drafting is ON (W5). Review and Vault show in the sidebar and dashboard as greyed "Coming soon"; each is switched on by one flag in `src/config/workspace.json` (`"enabled": true`); the page at its `href` (`/workspace/review`, `/workspace/vault`) must exist first. Vault needs the storage interface and R2 (section 3); review uses the `review` task (planned Claude Sonnet 5.5, with `rerun` on Opus 5.5).
+Drafting, Review and Vault are all ON (W5, W6). Each page is switched by one flag in `src/config/workspace.json` (`"enabled"`); set it to false and the sidebar shows "Coming soon" and the page answers 404.
 
 ## 4c. Drafting (W5): what changes when we buy
 
@@ -93,6 +93,18 @@ Drafting is ON (W5). Review and Vault show in the sidebar and dashboard as greye
   6. Send one real draft with your own address to test; check the spam folder the first time.
   The address typed by the user is held in memory only long enough to send the message and is never stored or logged. Until a domain is verified Resend only lets you send to your own account address, so test with that.
 - **Not tested here:** actual sending through Resend (no account was created); the message building, the off-switch, address checks and error handling are unit-tested with a fake `fetch`.
+
+## 4d. Vault, Review and documents in Chat (W6): what changes when we buy
+
+- **Supabase (free project, in use).** Files: private bucket `Vault` (the bucket name is `VAULT_BUCKET`, default "Vault"; the bucket itself refuses files over 10 MB and anything but PDF, Word and text). Records: tables `vault_documents`, `vault_texts`, `vault_chunks` (with `vector(256)` embeddings), `review_runs`, `vault_usage` plus the functions `match_vault_chunks` and `vault_sizes`, created by running `scripts/vault/vault-schema.sql` once in Supabase's SQL Editor (the secret key cannot run SQL). Every table has Row Level Security on and no policies, and the public roles have no rights; only the server (secret key) reads or writes.
+- **Env (server only, never `NEXT_PUBLIC_`):** `SUPABASE_URL`, `SUPABASE_SECRET_KEY` (the new `sb_secret_` key). Set both on Vercel before pushing W6; the Vault and Review answer "not set up" without them. Optional: `VAULT_BUCKET`, `VAULT_SIGNED_URL_SECONDS` (default 60), `VAULT_MAX_DOCS`, `VAULT_MAX_TOTAL_MB`, `VAULT_MAX_FILE_MB`, `VAULT_EMBED_MIN_GAP_MS`, `VAULT_EMBED_BATCH`; for Review `REVIEW_LIMIT_DAILY`, `REVIEW_LIMIT_WEEKLY`, `REVIEW_LIMIT_MONTHLY_GLOBAL`, `REVIEW_PART_CHARS`, `AI_MODEL_REVIEW`, `AI_FALLBACK_REVIEW`.
+- **Supabase free limits (checked 2026-10-24):** 500 MB database, 1 GB file storage, projects pause after a week without use. Each text-heavy contract uses about 100 KB of database (text, passages, vectors). Nothing here touches Neon.
+- **Move the files to R2:** write an R2 class implementing `FileStore` in `src/lib/vault/storage.ts` (signed upload URL, get, remove, size, signed download, usage; the S3 API supports all of them), add it to `getFileStore()`, set `VAULT_STORAGE=r2` plus the R2 keys. Existing files would need a one-off copy (list the keys in `vault_documents.storage_key`). Records and vectors stay in Supabase.
+- **Embedding speed (Voyage):** the free account allows 3 requests a minute and a small token allowance, so a document is prepared in batches of 16 passages, one batch every 21 seconds (`embedMinGapMs`), with a visible "Processing… n/total" status that resumes by itself. A short contract takes under a minute; a long one a few minutes. `maxChunks` (1,200, about 600 pages) stops a huge file from taking hours. With a card on file: set `VAULT_EMBED_MIN_GAP_MS=1000`, raise `VAULT_EMBED_BATCH` to 64, raise `maxChunks` in `src/config/vault-limits.json`.
+- **Review model:** the `review` task in `src/config/ai-models.json` (free Gemini now; Claude Sonnet 5.5 later: set `AI_MODEL_REVIEW=anthropic:claude-sonnet-5-5` and `AI_FALLBACK_REVIEW=`). A review is 1 call per 8,000 characters of contract plus 2 (summary, law points); on the free tier the 5-calls-a-minute limit sometimes answers "busy", which the page retries twice by itself before showing "Not reviewed, retry". Per browser 5 reviews a day and 20 a week, 300 a month in total (`src/config/review-limits.json`); the monthly cap is the spending brake.
+- **Function time on Vercel:** every Vault and Review call is one short step (under 60 seconds); nothing streams for minutes, so Hobby limits are fine. Uploads go straight from the browser to Supabase with a short-lived signed URL, so Vercel's 4.5 MB request limit does not apply to 10 MB files.
+- **Wording to remove after the switch:** the "Testing phase: don't upload confidential client documents" notes (Vault, Review, Chat) once documents are on paid, agreed terms; and "may be used to improve Google's products" if no free Gemini model is left.
+- **Not tested here:** the `anthropic` provider for `review` (no key); the R2 store (not written); pausing of the free Supabase project after a week of no use.
 
 ## 5. Vercel
 

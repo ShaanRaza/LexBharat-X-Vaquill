@@ -9,9 +9,9 @@ export const REWRITE_SYSTEM = `You turn a question about Indian law into search 
 - If the question names a State or Union Territory, keep its name in the queries.
 - Do not answer the question. Indian law only.`;
 
-export function buildRewritePrompt({ question, history = [] }) {
+export function buildRewritePrompt({ question, history = [], docContext = "" }) {
   const prev = [...history].reverse().find((m) => m.role === "user");
-  return { system: REWRITE_SYSTEM, messages: [{ role: "user", content: `${prev ? `Previous question in this chat: ${prev.content.slice(0, 300)}\n` : ""}Question: ${question}` }] };
+  return { system: REWRITE_SYSTEM, messages: [{ role: "user", content: `${prev ? `Previous question in this chat: ${prev.content.slice(0, 300)}\n` : ""}${docContext ? `The user attached their own document; a relevant passage reads: ${docContext.slice(0, 400)}\nWrite the queries for the law that bears on that passage and the question.\n` : ""}Question: ${question}` }] };
 }
 
 /** The model's JSON -> up to 3 clean queries (trimmed, at most 120 characters, no duplicates, none equal to the question itself). Unreadable output gives []. */

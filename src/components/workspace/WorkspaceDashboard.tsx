@@ -15,8 +15,10 @@ function Action({ title, text, href }: { title: string; text: string; href?: str
     : <div role="link" aria-disabled="true" className="block cursor-not-allowed rounded-card bg-surface/60 p-card text-muted ring-1 ring-border/40">{body}</div>;
 }
 
-const LIVE = ["Acts search: by words, by “exact phrase”, or a section lookup like “138 NI Act”", "Smart search (by meaning) over Central and State Acts", "Chat: plain-English answers from Act sections, with a link to each section used", "Drafting: five templates (cheque-bounce notice, legal notice, NDA, rent agreement, service agreement) grounded in the Acts"];
-const SOON = ["Smart search over judgments", "Review", "Vault"];
+const LIVE = ["Acts search: by words, by “exact phrase”, or a section lookup like “138 NI Act”", "Smart search (by meaning) over Central and State Acts", "Chat: plain-English answers from Act sections, with a link to each section used", "Drafting: five templates (cheque-bounce notice, legal notice, NDA, rent agreement, service agreement) grounded in the Acts",
+  "Vault: keep PDF, Word and text files on this browser, and attach them to a chat question (answers cite the document page and the Act section)",
+  "Review: upload a contract for a summary, clause risks, suggested wording, missing clauses and Indian-law points tied to Act sections"];
+const SOON = ["Smart search over judgments", "Reading scanned documents (OCR)", "Judgments in chat and review answers"];
 
 export default function WorkspaceDashboard() {
   const [chats, setChats] = useState<Chat[] | null>(null);
@@ -35,6 +37,7 @@ export default function WorkspaceDashboard() {
           <Action href="/workspace/browse" title="Search Acts & Judgments" text="Look up an Act or a section, or browse Supreme Court and High Court cases." />
           <Action href={f.drafting.enabled ? f.drafting.href : undefined} title={f.drafting.action} text="Prepare a first draft from a template, with the Acts it relies on." />
           <Action href={f.review.enabled ? f.review.href : undefined} title={f.review.action} text="Check a contract against the law and flag problems." />
+          <Action href={f.vault.enabled ? f.vault.href : undefined} title={f.vault.action} text="Keep your own documents here and use them in chat and review." />
         </div>
       </section>
 
@@ -45,7 +48,7 @@ export default function WorkspaceDashboard() {
           {chats?.length === 0 && (
             <div className="py-3 text-center">
               <p className="text-ui-base text-secondary">No chats on this browser yet.</p>
-              <Link href="/workspace/chat" className="mt-3 inline-flex min-h-10 items-center rounded-panel bg-primary px-4 text-ui-base font-medium text-white hover:bg-primary-hover">Start a chat</Link>
+              <Link href="/workspace/chat" className="mt-3 inline-flex min-h-10 items-center rounded-panel bg-primary px-4 text-ui-base font-medium text-on-primary hover:bg-primary-hover">Start a chat</Link>
             </div>
           )}
           {!!chats?.length && (

@@ -1,4 +1,5 @@
 // POST /api/chat {chatId?, message} -> streamed answer as newline-delimited JSON events:
+// A question may carry docIds (up to 3 documents of this browser's Vault, for this question only): their passages are searched together with the Acts and cited as a separate kind of source.
 //   {type:"start", chatId} {type:"note", text} {type:"sources", sources:[...], queries:[...]} {type:"delta", text} {type:"replace", text} {type:"cutoff"} {type:"check", label, unsupported, missing} {type:"done"} | {type:"error", code, message}
 // GET  /api/chat -> this browser's chats (newest first), usage and the limits.
 // Needs the access cookie (middleware) and the anonymous browser id (x-lb-bid, set by the middleware). Answers use ONLY the retrieved Act sections; the answer check labels the result.
@@ -10,12 +11,15 @@ import { evaluateLimits, readLimits } from "@/lib/chat/limits.mjs";
 import { citedNumbers, ensureCitations, sanitizeCitations } from "@/lib/chat/citations.mjs";
 import { buildChatPrompt, buildCheckPrompt, detectNotFound, parseCheck } from "@/lib/chat/prompt.mjs";
 import { buildRewritePrompt, parseRewrite } from "@/lib/chat/rewrite.mjs";
-import { citationOf, retrieveSources } from "@/lib/chat/retrieve";
+import { citationOf, retrieveSources, type ChatSource } from "@/lib/chat/retrieve";
+import { docChatSources, searchAttached } from "@/lib/vault/search";
+import { getDocs } from "@/lib/vault/store";
+import { vaultConfigured } from "@/lib/vault/supabase";
 import { addMessage, chatTitle, countQuestion, createChat, deleteChat, deleteMessage, isChatId, listChats, ownsChat, recentTurns, uncountQuestion, usageFor, type CheckResult } from "@/lib/chat/store";
 
 export const maxDuration = 60;
 const noStore = { "Cache-Control": "no-store" };
-const MAX_MESSAGE = 1000;
+const MAX_MESSAGE = 1000, MAX_ATTACH = 3;
 const limits = () => readLimits(limitConfig, process.env as Record<string, string | undefined>);
 const bidOf = (req: Request) => { const b = req.headers.get("x-lb-bid"); return isBrowserId(b) ? b : null; };
 const json = (body: unknown, status = 200, extra: Record<string, string> = {}) => Response.json(body, { status, headers: { ...noStore, ...extra } });
@@ -34,7 +38,8 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   const bid = bidOf(req);
   if (!bid) return json({ error: "No browser id." }, 400);
-  const body = (await req.json().catch(() => null)) as { chatId?: unknown; message?: unknown } | null;
+  const body = (await req.json().catch(() => null)) as { chatId?: unknown; message?: unknown; docIds?: unknown } | null;
+  const docIds = Array.isArray(body?.docIds) ? [...new Set(body.docIds.filter((x): x is string => typeof x === "string"))].slice(0, MAX_ATTACH) : [];
   const message = typeof body?.message === "string" ? body.message.replace(/\s+/g, " ").trim() : "";
   if (message.length < 3) return json({ error: "Type a question (at least 3 characters)." }, 422);
   if (message.length > MAX_MESSAGE) return json({ error: `Questions can be at most ${MAX_MESSAGE} characters (yours is ${message.length}).` }, 422);
@@ -43,6 +48,14 @@ export async function POST(req: Request) {
   const chatIdIn = body?.chatId === undefined || body?.chatId === null || body?.chatId === "" ? null : body.chatId;
   if (chatIdIn !== null && !isChatId(chatIdIn)) return json({ error: "That chat was not found." }, 404);
 
+  // attached documents: only this browser's, and only ones that have been read
+  if (docIds.length) {
+    if (!vaultConfigured()) return json({ error: "The Vault is not set up on this server yet." }, 503);
+    const found = await getDocs(bid, docIds).catch(() => null);
+    if (!found || found.length !== docIds.length) return json({ error: "One of the attached documents was not found on this browser." }, 404);
+    if (found.some((d) => d.status === "unreadable")) return json({ error: "One of the attached documents can't be read, so it can't be used." }, 422);
+    if (found.some((d) => d.chunkCount === 0)) return json({ error: "One of the attached documents is still being read. Try again in a moment." }, 422);
+  }
   // limits (per browser per day and week, all browsers per month)
   let verdict;
   try { verdict = evaluateLimits(await usageFor(bid), limits()); } catch { return json({ error: "Chat could not check its limits. Please try again." }, 503); }
@@ -64,12 +77,22 @@ export async function POST(req: Request) {
         userMsgId = await addMessage(chatId, { role: "user", content: message });
         send({ type: "start", chatId });
 
+        // 0. the attached documents (if any): their best passages for this question
+        let docSrc: ChatSource[] = [];
+        if (docIds.length) {
+          const dr = await searchAttached(bid, docIds, message);
+          docSrc = docChatSources(dr.passages);
+          if (dr.docs.some((d) => d.embeddedCount < d.chunkCount) && dr.mode === "keywords") send({ type: "note", text: "Your document is still being prepared for meaning search, so it was searched by keywords only." });
+          else if (dr.mode === "keywords") send({ type: "note", text: "Your document was searched by keywords because the meaning search was busy." });
+        }
         // 1. query rewrite: one cheap call -> 2-3 search queries. Skipped, with a note, if the model is busy (it is also in the per-minute budget).
         let extra: string[] = [];
-        try { const rp = buildRewritePrompt({ question: message, history }); extra = parseRewrite((await completeAi("queryRewrite", { system: rp.system, messages: rp.messages, json: true })).text, message); }
+        try { const rp = buildRewritePrompt({ question: message, history, docContext: docSrc[0]?.text }); extra = parseRewrite((await completeAi("queryRewrite", { system: rp.system, messages: rp.messages, json: true })).text, message); }
         catch { send({ type: "note", text: "Search help was skipped because the model is busy, so the sections found may be less complete." }); }
         // 2. retrieve for the question and each rewritten query, merged
-        const ret = await retrieveSources(message, history, extra);
+        const ret0 = await retrieveSources(message, history, extra);
+        // one numbering for everything the model may cite: the user's document passages first, then the Act sections
+        const ret = { ...ret0, sources: [...docSrc, ...ret0.sources.map((x) => ({ ...x, n: x.n + docSrc.length }))] };
         const cites = ret.sources.map(citationOf);
         send({ type: "sources", sources: cites, searchMode: ret.searchMode, queries: [message, ...extra].slice(0, 4) });
         if (!ret.sources.length) {

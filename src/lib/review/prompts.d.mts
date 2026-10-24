@@ -1,0 +1,16 @@
+export const RISKS: Record<"acceptable" | "negotiate" | "escalate", string>;
+export type Risk = "acceptable" | "negotiate" | "escalate";
+export type ReviewClause = { ref: string; quote: string; quoteMatched: boolean; risk: Risk; reason: string; change: { wording: string; why: string } | null; topics: string[] };
+export type ReviewSummary = { what: string; parties: string[]; term: string; money: string; governingLaw: string; overallRisk: "low" | "medium" | "high" | null; overallWhy: string; missing: { clause: string; why: string; source: "model" | "check" }[] };
+export type LawFinding = { topic: string; clause: string; severity: "issue" | "check"; text: string; cites: number[] };
+export const NOT_LEGAL_ADVICE: string;
+export function parseJson(raw: string): Record<string, unknown> | null;
+export function partPrompt(o: { type: string; side: string; partText: string; n: number; of: number }): { system: string; messages: { role: "user"; content: string }[] };
+export function parseClauses(raw: string, partText: string): ReviewClause[] | null;
+export function summaryPrompt(o: { type: string; side: string; headText: string; clauses: ReviewClause[] }): { system: string; messages: { role: "user"; content: string }[] };
+export function parseSummary(raw: string): ReviewSummary | null;
+export function overallRisk(modelRisk: "low" | "medium" | "high" | null, clauses: { risk: Risk }[]): "low" | "medium" | "high";
+export function mergeMissing<T extends { clause: string }>(model: T[], rules: T[]): T[];
+export function lawPrompt(o: { type: string; side: string; issues: ReviewClause[]; sources: { n: number; actTitle: string; state: string | null; number: string | null; heading: string | null; text: string }[]; notes?: string }): { system: string; messages: { role: "user"; content: string }[] };
+export function parseLaw(raw: string, sources: { n: number; number: string | null; actTitle: string }[]): { findings: LawFinding[]; dropped: number; reasons: string[] } | null;
+export function lawPlanNotes(plan: { state: string | null }, type: string, missing: { clause: string }[]): string;

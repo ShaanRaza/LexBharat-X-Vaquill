@@ -1,4 +1,5 @@
-export type PromptSource = { n: number; actTitle: string; year?: number | null; state?: string | null; inForce?: boolean; number: string | null; heading?: string | null; text: string };
+export type PromptSource = { n: number; actTitle: string; year?: number | null; state?: string | null; inForce?: boolean; number: string | null; heading?: string | null; text: string; kind?: "doc"; docName?: string; page?: number | null; label?: string | null };
+export const DOC_ADDENDUM: string;
 export const SOURCE_CHARS: number, MAX_SOURCES: number, HISTORY_TURNS: number, SYSTEM_PROMPT: string, CHECK_SYSTEM: string;
 export function sourceBlock(s: PromptSource): string;
 export function buildChatPrompt(o: { question: string; history?: { role: "user" | "assistant"; content: string }[]; sources: PromptSource[] }): { system: string; messages: { role: "user" | "assistant"; content: string }[] };
