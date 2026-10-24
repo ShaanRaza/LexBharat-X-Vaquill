@@ -164,3 +164,28 @@ Rank = number of Supreme Court judgments (distinct case ids in open-india-law v2
 | The Foreign Exchange Management Act, 1999 | in force | 45 | 31 / 52 | 3, 4, 8, 9, 21, 24, 25, 26, 29, 30, 31, 33, 34, 35, 39, 41, 43, 44, 50, 51, 52 | none |
 | The Cinematograph Act, 1952 | in force | 45 | 17 / 29 | 15, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 | none |
 | The All-India Services Act, 1951 | in force | 44 | 1 / 3 | **most sections absent**; 1, 2 | none |
+
+## W7 (2026-10-24): India Code terms and access re-checked. Fill NOT started
+**India Code reuse allowed: Unclear. Automated access: blocked.** Per the W7 rule (stop if reuse or automated access is not allowed), no section was fetched and nothing was stored.
+
+What was tried (one request each, clear user agent `LexBharatResearchBot/0.1 (contact, educational non-commercial legal research, respects robots.txt)`, 4 seconds apart, stopped at the first refusal):
+| Request | Result |
+|---|---|
+| `https://www.indiacode.nic.in/robots.txt` | HTTP 403 "Access Denied" (Akamai edge page) |
+| `https://www.indiacode.nic.in/disclaimer.jsp?locale=en` (terms) | HTTP 403 |
+| `https://www.indiacode.nic.in/` | HTTP 403 |
+| The same disclaimer page in the built-in browser pane | "An error occurred while processing your request" (Akamai reference page), no content |
+| `https://www.indiacode.nic.in/indiacode/disclaimer.jsp?abv=null` through a page-fetch tool | HTTP 403 |
+| `https://igod.gov.in/website_policies` | redirect, then a certificate error in the fetch tool |
+
+What this means:
+- **robots.txt could not be read**, because even it is refused, so what the site allows robots to do is unknown. The refusal of every automated and browser-pane request is itself an access control; working around it (other tools, rotating addresses, mimicking a person) is exactly what the rule forbids, so it was not tried.
+- **The terms could not be read here.** Search results describe the India Code disclaimer as covering accuracy ("as is, as available") and authenticity (the English text prevails over the PDF reproduction), and show no reuse or copyright clause for India Code itself. Similar NIC-hosted sites say material may be reproduced free of charge after permission, with the source acknowledged, and not as a statement of law: those are other sites' terms, not India Code's. Links: [India Code disclaimer](https://www.indiacode.nic.in/disclaimer.jsp?locale=en), [alternate path](https://www.indiacode.nic.in/indiacode/disclaimer.jsp?abv=null), [Government of India website policies](https://igod.gov.in/website_policies).
+- Earlier finding (above) still stands: no written permission or licence found; the open-india-law CC BY 4.0 licence is the compiler's, not India Code's.
+
+Not done because of this (and still the plan if permission arrives): the `act_sections_supplement` table (separate from the open-india-law rows, with source "India Code", URL and date fetched), the polite fetch of the missing and wrong sections (Contract Act s.16, s.28, s.73, s.124; CPC s.11, s.20; Limitation Act; NI Act gaps), showing "Source: India Code, fetched <date>" on Act pages, indexing them for keyword search, smart search (voyage-4, 256-d), Chat, Drafting and Review, and the before/after tests. Nothing in the app depends on them. The two Review misses (Contract Act s.28 foreign courts, s.73 damages) therefore remain, and the review still drops any point about a section it did not retrieve.
+
+Ways forward that need a decision from you:
+1. **Ask for permission.** Write to the Legislative Department (India Code's owner, legislative.gov.in) or NIC asking for written permission to use the text of specific sections for a non-commercial research tool, and for an allowed way to fetch them (an export or an agreed rate). With a yes in writing, the fill can be built in a day.
+2. **A different, permitted source** for just the roughly 20 to 100 missing sections (for example the official Act PDFs published by the Legislative Department, or a source with an explicit open licence) after its terms are read. Each source needs the same terms check first.
+3. **Hand-supplied text**: if you or a lawyer paste the sections from an authorised copy, the supplement table, Act-page label and search/chat/review indexing can be built and tested now, with "Source" set to whatever you name.
