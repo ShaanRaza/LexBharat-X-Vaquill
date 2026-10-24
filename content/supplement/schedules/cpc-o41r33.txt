@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O41R33.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O41R33
+Heading: Power of Court of Appeal
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The Appellate Court shall have power to pass any decree and make any order which ought to have been passed or made and to pass or make such further or other decree or order as the case may require, and this power may be exercised by the Court notwithstanding that the appeal is as to part only of the decree and may be exercised in favour of all or any of the respondents or parties, although such respondents or parties may not have filed any appeal or objection [and may, where there have been decrees in cross-suits or where two or more decrees are passed in one suit, be exercised in respect of all or any of the decrees, although an appeal may not have been filed against such decrees]:
+[Provided that the Appellate Court shall not make any order under section 35A in pursuance of any objection on which the Court from whose decree the appeal is preferred has omitted or refused to make such order.]
+
+Illustration
+A claims a sum of money as due to him from X or Y, and in a suit against both obtains a decree against X. X, appeals and A and Y are respondents. The Appellate Court decides in favour of X. It has power to pass a decree against Y.

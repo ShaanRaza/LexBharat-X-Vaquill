@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O20R17.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O20R17
+Heading: Special directions as to accounts
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The Court may either by the decree directing an account to be taken or by any subsequent order give special direction with regard to the mode in which the account is to be taken or vouched and in particular may direct that in taking the account the books of account in which the accounts in question have been kept shall be taken as prima facie evidence of the truth of the matters therein contained with liberty to the parties interested to take such objection thereto as they may be advised.

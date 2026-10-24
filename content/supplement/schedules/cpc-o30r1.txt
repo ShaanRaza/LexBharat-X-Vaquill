@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O30R1.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O30R1
+Heading: Suing of partners in name of firm
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Any two or more persons claiming or being liable as partners and carrying on business in, [India] may sue or be sued in the name of the firm (if any) of which such persons were partners at the time of the accruing of the cause of action, and any party to a suit may in such case apply to the Court for a statement of the names and addresses of the persons who were, at the time of the accruing of the cause of action, partners in such firm, to be furnished and verified in such manner as the Court may direct.
+(2) Where persons sue or are sued partners in the name of their firm under sub-rule (1), it shall, in the case of any pleading or other document required by or under this Code to be signed, verified or certified by the plaintiff of the defendant, suffice such pleading or other document is signed, verified or certified by any one of such persons.

@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R25.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R25
+Heading: Endorsement on process
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) The officer entrusted with the execution of the process shall endorse thereon the day on, and the manner in, which it was executed, and, if the latest day specified in the process for the return thereof has been exceeded, the reason of the delay, or, if it was not executed, the reason why it was not executed, and shall return the process with such endorsement to the Court.
+(2) Where the endorsement is to the effect that such officer is unable to execute the process, the Court shall examine him touching his alleged inability, and may, if it thinks fit, summon and examine witnesses as to such inability, and shall record the result.

@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O8R5.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O8R5
+Heading: Specific denial
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+[(1)] Every allegation of fact in the plaint, if not denied specifically or by necessary implication, or stated to be not admitted in the pleading of the defendant, shall be taken to be admitted except as against a person under disability:
+Provided that the Court may in its discretion require any fact so admitted to be proved otherwise than by such admission: *[Provided further that every allegation of fact in the plaint, if not denied in the manner provided under Rule 3A of this Order, shall be taken to be admitted except as against a person under disability.]
+[(2) Where the defendant has not filed a pleading, it shall be lawful for the court to pronounce judgment on the basis of the facts contained in the plaint, except as against a person under a disability, but the Court may, in its discretion, require any such fact to be proved.
+(3) In exercising its discretion under the proviso to sub-rule (1) or under sub-rule (2), the Court shall have due regard to the fact whether the defendant could have, or has, engaged a pleader.
+(4) Whenever a judgment is pronounced under this rule, a decree shall be drawn up in accordance with such judgment and such decree shall bear the date on which the judgment was pronounced.]

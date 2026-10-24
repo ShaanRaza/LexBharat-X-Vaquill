@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O5R14.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O5R14
+Heading: Service on agent in charge in suits for immovable property
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where in a suit to obtain relief respecting, or compensation for wrong to, immovable property, service cannot be made on the defendant 1. Certain words omitted by Act 37 of 2025, s. 3 and Sch. II (w.e.f. 20-12-2025). in person, and the defendant has no agent empowered to accept the service, it may be made on any agent of the defendant in charge of the property.

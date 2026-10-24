@@ -11,6 +11,7 @@ import { emailConfigured, sendReadyEmail, validEmail } from "@/lib/drafting/emai
 import { runDraft } from "@/lib/drafting/generate";
 import { bidOf, envOf, json } from "@/lib/drafting/http";
 import { validateInput } from "@/lib/drafting/templates.mjs";
+import { bump } from "@/lib/insights/server";
 import { countDraft, countDrafts, createDraft, draftUsage, uncountDraft } from "@/lib/drafting/store";
 
 export const maxDuration = 300;
@@ -34,7 +35,7 @@ export async function POST(req: Request) {
   const lim = readLimits(limitConfig, envOf(), "DRAFT_LIMIT");
   try {
     const verdict = evaluateLimits(await draftUsage(bid), lim, "drafts");
-    if (!verdict.allowed) return json({ error: verdict.message, reason: verdict.reason }, 429);
+    if (!verdict.allowed) { bump("limit_hit", `draft_${verdict.reason}`); return json({ error: verdict.message, reason: verdict.reason }, 429); }
     if ((await countDrafts(bid)) >= limitConfig.maxSaved) return json({ error: `You have ${limitConfig.maxSaved} saved drafts, the most this browser can keep. Delete one to make room.`, reason: "saved" }, 409);
   } catch { return json({ error: "Drafting could not check its limits. Please try again." }, 503); }
 
@@ -43,6 +44,7 @@ export async function POST(req: Request) {
     async start(controller) {
       const send = (o: unknown) => { try { controller.enqueue(enc.encode(JSON.stringify(o) + "\n")); } catch { /* client went away: generation still finishes and is saved */ } };
       let counted = false;
+      const t0 = Date.now();
       try {
         await countDraft(bid); counted = true;
         send({ type: "start" });
@@ -54,10 +56,12 @@ export async function POST(req: Request) {
           const sent = await sendReadyEmail({ env: envOf(), to: email, title: r.title, link });
           send({ type: "email", status: sent.ok ? "sent" : "failed" });
         }
+        bump("draft", template.id); bump("answer_time", "draft", Date.now() - t0);
         send({ type: "done" }); controller.close();
       } catch (e) {
         if (counted) await uncountDraft(bid).catch(() => null);
         const busy = e instanceof AiError && ["rate_limit", "unavailable", "timeout"].includes(e.kind);
+        if (busy) bump("model_busy", "drafting");
         send({ type: "error", code: busy ? "busy" : "failed", message: busy ? "Busy, try again in a minute. Your draft was not counted." : "Something went wrong and your draft was not counted. Please try again." });
         try { controller.close(); } catch { /* already closed */ }
       }

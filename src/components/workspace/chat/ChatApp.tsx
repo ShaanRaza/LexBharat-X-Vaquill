@@ -2,12 +2,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Notice, Panel } from "@/components/kit";
 import AnswerView from "./AnswerView";
+import FeedbackBar from "../FeedbackBar";
 import AttachPicker, { type Attached } from "./AttachPicker";
 import type { Citation, CheckResult } from "@/lib/chat/store";
 
 // The chat page: question box, streamed answers with citations, the honest-limits notes. Presentation and fetching only; retrieval, prompts, citations and limits are in src/lib/chat
 // and src/app/api/chat. Colours, sizes and radii come from the tokens through Tailwind names and the shared kit.
-type Msg = { role: "user" | "assistant"; content: string; attached?: string[]; citations?: Citation[]; check?: CheckResult | null; pending?: boolean; error?: string; queries?: string[]; note?: string };
+type Msg = { id?: number; role: "user" | "assistant"; content: string; attached?: string[]; citations?: Citation[]; check?: CheckResult | null; pending?: boolean; error?: string; queries?: string[]; note?: string };
 type Usage = { day: number; daily: number } | null;
 const EXAMPLES = ["What is the punishment for cheque bounce?", "Can a minor enter into a contract?", "Maharashtra rent control: grounds for eviction"];
 const MAX = 1000;
@@ -29,7 +30,7 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
     fetch(`/api/chat/${initialId}`, { cache: "no-store" }).then(async (r) => {
       if (!r.ok) throw new Error("This chat was not found on this browser.");
       const j = await r.json();
-      setMsgs(j.messages.map((m: { role: "user" | "assistant"; content: string; citations: Citation[] | null; check: CheckResult | null }) => ({ role: m.role, content: m.content, citations: m.citations ?? [], check: m.check })));
+      setMsgs(j.messages.map((m: { id: number; role: "user" | "assistant"; content: string; citations: Citation[] | null; check: CheckResult | null }) => ({ id: m.id, role: m.role, content: m.content, citations: m.citations ?? [], check: m.check })));
     }).catch((e) => setLoadErr(e.message)).finally(() => setLoading(false));
   }, [initialId]);
   useEffect(() => { end.current?.scrollIntoView({ block: "end" }); }, [msgs]);
@@ -63,6 +64,7 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
           else if (e.type === "delta") patch((a) => ({ ...a, content: a.content + e.text }));
           else if (e.type === "replace") patch((a) => ({ ...a, content: e.text }));
           else if (e.type === "check") patch((a) => ({ ...a, check: { label: e.label, unsupported: e.unsupported, missing: e.missing, unavailable: e.unavailable } }));
+          else if (e.type === "done") patch((a) => ({ ...a, id: e.messageId }));
           else if (e.type === "error") { failed = true; throw new Error(e.message); }
         }
         if (done) break;
@@ -91,7 +93,7 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
         )}
         {msgs.map((m, i) => m.role === "user"
           ? <div key={i} className="flex justify-end"><div className="max-w-[85%] rounded-card bg-primary/10 px-4 py-2.5 text-ui-body text-foreground"><p className="whitespace-pre-wrap">{m.content}</p>{!!m.attached?.length && <p className="mt-1 text-ui-sm text-secondary">Attached: {m.attached.join(", ")}</p>}</div></div>
-          : <Panel as="article" key={i} className="px-card py-4">{m.pending && !m.content ? <p className="text-ui-base text-muted">Searching the Acts…</p> : <AnswerView text={m.content} sources={m.citations ?? []} check={m.check} pending={m.pending} queries={m.queries} note={m.note} />}</Panel>)}
+          : <Panel as="article" key={i} className="px-card py-4">{m.pending && !m.content ? <p className="text-ui-base text-muted">Searching the Acts…</p> : <><AnswerView text={m.content} sources={m.citations ?? []} check={m.check} pending={m.pending} queries={m.queries} note={m.note} />{!m.pending && m.id && m.content ? <FeedbackBar feature="chat" itemId={String(m.id)} className="mt-4 border-t border-border/60 pt-3" /> : null}</>}</Panel>)}
         <div ref={end} />
       </div>
       <div className="sticky bottom-0 bg-background pb-4 pt-2">

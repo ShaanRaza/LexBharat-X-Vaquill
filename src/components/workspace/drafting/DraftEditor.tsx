@@ -7,6 +7,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Badge, Notice, Panel } from "@/components/kit";
 import { NOT_GENERATED, docToText, type Doc } from "@/lib/drafting/docmodel.mjs";
 import type { DraftRow, VersionRow } from "@/lib/drafting/store";
+import FeedbackBar from "../FeedbackBar";
 import { Checklist, LegalBasis, WarningsPanel } from "./DraftPanels";
 import { PlaceholderHighlight } from "./placeholderHighlight";
 
@@ -134,6 +135,7 @@ export default function DraftEditor({ draftId }: { draftId: string }) {
       <div className="mt-4 grid gap-5 lg:grid-cols-[1fr_21rem]">
         <div>
           <div className="draft-doc rounded-card bg-surface shadow-sm ring-1 ring-border/60"><Toolbar editor={editor} /><div className="px-5 py-4 sm:px-8 sm:py-6"><EditorContent editor={editor} /></div></div>
+          <FeedbackBar feature="draft" itemId={draftId} className="mt-3" />
           <p className="mt-2 text-ui-sm text-muted">Highlighted text in <span className="draft-placeholder">[CAPITALS]</span> is information that was missing: replace it before you use the draft.</p>
         </div>
         <aside className="space-y-4" aria-label="Draft information">

@@ -1,0 +1,132 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21
+Heading: Execution of Decrees and Orders
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Execution of Decrees and Orders
+Rules in this Order:
+1. Modes of paying money under decree
+2. Payment out of Court to decree-holder
+3. Lands situate in more than one jurisdiction
+4. Transfer to Court of Small Causes
+5. Mode of transfer
+6. Procedure where Court desires that its own decree shall be executed by another Court
+7. Court receiving copies of decree, etc., to file same without proof
+8. Execution of decree or order by Court to which it is sent
+9. Execution by High Court of decree transferred by other Court
+10. Application for execution
+11. Oral application
+11A. Application for arrest to state grounds
+12. Application for attachment of movable property not in judgment-debtor’s possession
+13. Application for attachment of immovable property to contain certain particulars
+14. Power to require certified extract from Collector’s register in certain cases
+15. Application for execution by Joint decree-holders
+16. Application for execution by transferee of decree
+17. Procedure on receiving application for execution of decree
+18. Execution in case of cross-decrees
+19. Execution in case of cross-claims under same decree
+20. Cross-decrees and cross-claims in mortgage suits
+21. Simultaneous execution
+22. Notice to show cause against execution in certain cases
+22A. Sale not be set aside on the death of the judgment-debtor before the sale but after the service of the proclamation of sale
+23. Procedure after issue of notice
+24. Process for execution
+25. Endorsement on process
+26. When Court may stay execution
+27. Liability of judgment-debtor discharged
+28. Order of Court which passed decree or of Appellate Court to be binding upon Court applied to
+29. Stay of execution pending suit between decree-holder and judgment-debtors
+30. Decree for payment of money
+31. Decree for specific movable property
+32. Decree for specific performance for restitution of conjugal rights, or for an injunction
+33. Discretion of Court in executing decrees for restitution of conjugal rights
+34. Decree for execution of document, or endorsement of negotiable instrument
+35. Decree for immovable property
+36. Decree for delivery of immovable property when in occupancy of tenant
+37. Discretionary power to permit judgment-debtor to show cause against detention in prison
+38. Warrant for arrest to direct judgment-debtor to be brought up
+39. Subsistence allowance
+40. Proceedings on appearance of judgment-debtor in obedience to notice or after arrest
+41. Examination of judgment-debtor as to his property
+42. Attachment in case of decree for rent or mesne profits or other matter, amount of which to be subsequently determined
+43. Attachment of movable property, other than agricultural produce, in possession of judgment-debtor
+43A. Custody of movable property
+44. Attachment of agricultural produce
+45. Provisions as to agricultural produce under attachment
+46. Attachment of debt, share and other property not in possession of judgment-debtor
+46A. Notice to garnishee
+46B. Order against garnishee
+46C. Trial of disputed questions
+46D. Procedure where debt belongs to third person
+46E. Order as regards third person
+46F. Payment by garnishee to be valid discharge
+46G. Costs
+46H. Appeals
+47. Attachment of share in movables
+48. Attachment of salary or allowances of servant of the Government or railway company or local authority
+48A. Attachment of salary or allowances of private employees
+49. Attachment of partnership property
+50. Execution of decree against firm
+51. Attachment of negotiable instruments
+52. Attachment of property in custody of Court or public officer
+53. Attachment of decrees
+54. Attachment of immovable property
+55. Removal of attachment after satisfaction of decree
+56. Order for payment of coin or currency notes to party entitled under decree
+57. Determination of attachment
+58. Adjudication of claims to or objections to attachment of property
+59. Stay of sale
+60. Release of property from attachment
+61. Disallowance of claim to property attached
+62. Continuance of attachment subject to claim of incumbrancer
+63. Saving of suits to establish right to attached property
+64. Power to order property attached to be sold and proceeds to be paid to person entitled
+65. Sales by whom conducted and how made
+66. Proclamation of sales by public auction
+67. Mode of making proclamation
+68. Time of sale
+69. Adjournment or stoppage of sale
+70. Saving of certain sales
+71. Defaulting purchaser answerable for loss on re-sale
+72. Decree-holder not to bid for or buy property without permission
+72A. Mortgagee not to bid at sale without the leave of the Court
+73. Restriction on bidding or purchase by officers
+74. Sale of agricultural produce
+75. Special provisions relating to growing crops
+76. Negotiable instruments and shares in corporations
+77. Sale by public auction
+78. Irregularity not to vitiate sale, but any person injured may sue
+79. Delivery of movable property, debts and shares
+80. Transfer of negotiable instruments and shares
+81. Vesting order in case of other property
+82. What Court may order sales
+83. Postponement of sale to enable judgment-debtor to raise amount of decree
+84. Deposit by purchaser and re-sale on default
+85. Time for payment in full of purchase money
+86. Procedure in default of payment
+87. Notification on re-sale
+88. Bid of co-sharer to have preference
+89. Application to set aside sale on deposit
+90. Application to set aside sale on ground of irregularity or fraud
+91. Application by purchaser to set aside sale on ground of judgment-debtor having no saleable interest
+92. Sale when to become absolute or be set aside
+93. Return of purchaser-money in certain cases
+94. Certificate to purchaser
+95. Delivery of property in occupancy of judgment-debtor
+96. Delivery of property in occupancy of tenant
+97. Resistance or obstruction to possession of immovable property
+98. Orders after adjudication
+99. Dispossession by decree-holder or purchaser
+100. Order to be passed upon application complaining of dispossession
+101. Question to be determined
+102. Rules not applicable to transferee pendente lite
+103. Orders to be treated as decrees
+104. Orders under rule 101 or rule 103 to be subject to the result or pending suit
+105. Hearing of application
+106. Setting aside orders passed ex parte, etc.

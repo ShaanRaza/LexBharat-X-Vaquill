@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R43.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R43
+Heading: Attachment of movable property, other than agricultural produce, in possession of judgment-debtor
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where the property to be attached is movable property other than agricultural produce, in the possession of the judgement-debtor, the attachment shall be made by actual seizure, and the attaching officer shall keep the property in his own custody or in the custody of one of his subordinates, and shall be responsible for the due custody thereof:
+Provided that, when the property seized is subject to speedy and natural decay, or when the expense of keeping it in custody is likely to exceed its value, the attaching officer may sell it at once.

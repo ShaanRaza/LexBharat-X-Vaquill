@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O13R5.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O13R5
+Heading: Endorsements on copies of admitted entries in books, accounts and records
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Save in so far as is otherwise provided by the Bankers’ Books Evidence Act, 1891 (XVIII of 1891) where a document admitted in evidence in the suit is an entry in a letter-book or a shop-book or other account in current use, the party on whose behalf the book or account is produced may furnish a copy of the entry.
+(2) Where such a document is an entry in a public record produced from a public office or by a public officer, or an entry in a book or account belonging to a person other than a party on whose behalf the book or account is produced, the Court may require a copy of the entry to be furnished—
+(a) where the record, book or account is produced on behalf of a party, then by that party, or
+(b) where the record, book or account is produced in obedience to an order of the Court acting of its own motion, then by either or any party.
+(3) Where a copy of an entry is furnished under the foregoing provisions of this rule, the Court shall, after causing the copy to be examined, compared and certified in manner mentioned in rule 17 of Order VII, mark the entry and cause the book, account or record in which it occurs to be returned to the person producing it.

@@ -1,0 +1,26 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O11R6.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O11R6
+Heading: Electronic records
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) In case of disclosures and inspection of Electronic Records (as defined in the Information Technology Act, 2000 (21 of 2000), furnishing of printouts shall be sufficient compliance of the above provisions.
+(2) At the discretion of the parties or where required (when parties wish to rely on audio or video content), copies of electronic records may be furnished in electronic form either in addition to or in lieu of printouts.
+(3) Where Electronic Records form part of documents disclosed, the declaration on oath to be filed by a party shall specify––
+(a) the parties to such Electronic Record;
+(b) the manner in which such electronic record was produced and by whom;
+(c) the dates and time of preparation or storage or issuance or receipt of each such electronic record;
+(d) the source of such electronic record and date and time when the electronic record was printed;
+(e) in case of e-mail ids, details of ownership, custody and access to such e-mail ids;
+(f) in case of documents stored on a computer or computer resource (including on external servers or cloud), details of ownership, custody and access to such data on the computer or computer resource;
+(g) deponent’s knowledge of contents and correctness of contents;
+(h) whether the computer or computer resource used for preparing or receiving or storing such document or data was functioning properly or in case of malfunction that such malfunction did not affect the contents of the document stored;
+(i) that the printout or copy furnished was taken from the original computer or computer resource.
+(4) The parties relying on printouts or copy in electronic form, of any electronic records, shall not be required to give inspection of electronic records, provided a declaration is made by such party that each such copy, which has been produced, has been made from the original electronic record.
+(5) The Court may give directions for admissibility of Electronic Records at any stage of the proceedings.
+(6) Any party may seek directions from the Court and the Court may of its motion issue directions for submission of further proof of any electronic record including metadata or logs before admission of such electronic record.

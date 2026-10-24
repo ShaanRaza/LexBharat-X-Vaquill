@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O15R3.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O15R3
+Heading: Parties at issue
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where the parties are at issue on some question of law or of fact, and issues have been framed by the Court as hereinbefore provided, if the Court is satisfied that no further argument or evidence that the parties can at once adduce is required upon such of the issues as may be sufficient for the decision of the suit, and that no injustice will result from proceeding with the suit forthwith, the Court may proceed to determine such issues, and, if the finding thereon is sufficient for the decision, may pronounce judgment accordingly, whether the summons has been issued for the settlement of issues only or for the final disposal of the suit:
+Provided that, where the summons has been issued for the settlement of issues only, the parties or their pleaders are present and none of them objects.
+(2) Where the finding is not sufficient for the decision, the Court shall postpone the further hearing of the suit, and shall fix a day for the production of such further evidence, or for such further argument as the case requires.

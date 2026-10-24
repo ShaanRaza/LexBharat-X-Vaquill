@@ -1,0 +1,35 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O33.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O33
+Heading: [Suits by indigent persons]
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+[Suits by indigent persons]
+Rules in this Order:
+1. Suits may be instituted by [indigent persons.]
+1A. Inquiry into the means of an indigent person
+2. Contents of application
+3. Presentation of application
+4. Examination of applicant
+5. Rejection of application
+6. Notice of day for receiving evidence of applicant’s indigency
+7. Procedure at hearing
+8. Procedure if application admitted
+9. Withdrawal of permission to sue as an [indigent person]
+9A. Court to assign a pleader to an unrepresented indigent person
+10. Costs where [indigent person] succeeds
+11. Procedure where [indigent person] fails
+11A. Procedure where [indigent person] suit abates
+12. State Government may apply for payment of court-fees
+13. State Government to be deemed a party
+14. Recovery of amount of court-fees
+15. Refusal to allow applicant to sue as [an indigent person] to bar subsequent application of like nature
+15A. Grant of time for payment of court-fee
+16. Costs
+17. Defence by an indigent person
+18. Power of Government to provide for free legal services to indigent persons

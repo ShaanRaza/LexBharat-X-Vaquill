@@ -1,0 +1,23 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O49R3.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O49R3
+Heading: Application of rules
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The following rules shall not apply to any Chartered High Court in the exercise of its ordinary or extraordinary original civil jurisdiction, namely:—
+(1) rule 10 and rule 11, clauses (b) and (c), of Order VII;
+(2) rule 3 of Order X;
+(3) rule 2 of Order XVI;
+(4) rules 5, 6, 8, 9, 10, 11, 13, 14, 15 and 16 (so far as relates to the manner of taking evidence) of Order XVIII;
+(5) rule 1 to 8 of Order XX; and
+(6) rule 7 of Order XXXIII (so far as relates to the making of a memorandum), and rule 35 of Order XLI shall not apply to any such High Court in the exercise of its appellate jurisdiction. 1. Provincial Small Cause Courts.—The provisions hereinafter specified shall not extend to Court constituted under the Provincial Small Cause Courts Act 1887 (9 of 1887) [or under the Berar Small Cause Courts Law, 1905] or to Courts exercising the jurisdiction of a Court of Small Causes [under the said Act or Law] [or to Courts in [any part of India to which the said Act does not extend] exercising a corresponding jurisdiction that is to say—
+(a) so much of this Schedule as relates to—
+(i) suits excepted from the cognizance of a Court of Small Causes or the execution of decrees in such suits;
+(ii) the execution of decrees against immovable property or the interest of a partner in partnership property;
+(iii) the settlement of issues; and
+(b) the following rules and orders:— Order II, rule 1 (frame of suit); Order X, rule 3 (record of examination of parties); Order XV, except so much of rule 4 as provides for the pronouncement at once of judgment; Order XVIII, rule 5 to 12 (evidence); Order XLI, to XLV (appeals); Order XLVII, rules 2, 3, 5, 6, 7 (review); Order LI.

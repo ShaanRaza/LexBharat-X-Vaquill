@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O18R18.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O18R18
+Heading: Power of Court to inspect
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The Court may at any stage of a suit inspect any property or thing concerning which any question may arise [and where the Court inspects any property or thing it shall, as soon as may be practicable, make a memorandum of any relevant facts observed at such inspection and such memorandum shall form a part of the record of the suit].

@@ -2,6 +2,8 @@
 // A file whose text area is empty is "pending" (nothing to load yet). A file with text must have a valid header, or it is "error" and nothing from it is loaded.
 export const DELIMITER = /^={3,}\s*SECTION TEXT\b.*$/i;
 const KEYS = { "act": "act", "act id": "actId", "section": "section", "heading": "heading", "replaces existing text": "replaces", "source": "source", "source url": "sourceUrl", "date copied": "dateCopied" };
+/** A section number (28, 11A) or a unit of a Schedule: O39R1 (Order 39 Rule 1), O39 (the Order itself), A137 (Article 137). */
+export const SECTION_NUMBER = /^(?:\d{1,4}[A-Za-z]{0,3}|O\d{1,3}[A-Za-z]{0,2}(?:R\d{1,3}[A-Za-z]{0,2})?|A\d{1,3}[A-Za-z]{0,2})$/;
 export const MIN_TEXT = 8, MAX_TEXT = 60000;
 
 /** The key a section gets in act_sections_v, the same shape as the dataset's own keys ("s016", "s138", "s19A"). */
@@ -27,7 +29,7 @@ export function parseSupplementFile(raw, fileName = "", now = new Date()) {
   const body = lines.slice(i).join("\n").replace(/\n{3,}/g, "\n\n").trim();
   if (!body) return { status: "pending", errors: [] };
   if (!/^[A-Za-z0-9_-]{1,80}$/.test(head.actId ?? "")) errors.push('"Act ID" is missing or not valid (keep the one that was filled in).');
-  if (!/^\d{1,4}[A-Za-z]{0,3}$/.test(head.section ?? "")) errors.push('"Section" must be a number such as 28 or 11A.');
+  if (!SECTION_NUMBER.test(head.section ?? "")) errors.push('"Section" must be a number such as 28 or 11A (or O39R1 / O7 / A137 for an Order, Rule or Article of a Schedule).');
   if (head.sourceUrl === undefined || !/^https?:\/\/\S+$/i.test(head.sourceUrl)) errors.push('"Source URL" is missing: paste the web address you copied the text from.');
   if (!head.dateCopied || !validDate(head.dateCopied)) errors.push('"Date copied" must look like 2026-10-24.');
   else if (new Date(`${head.dateCopied}T00:00:00Z`) > new Date(now.getTime() + 86400000)) errors.push('"Date copied" is in the future.');

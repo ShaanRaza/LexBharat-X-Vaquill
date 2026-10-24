@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O5R26.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O5R26
+Heading: Service in foreign territory through Political Agent or Court
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where—
+(a) in the exercise of any foreign jurisdiction vested in the Central Government, a Political Agent has been appointed, or a Court has been established or continued, with power to serve a summons, issued by a Court under this Code, in any foreign territory in which the defendant actually and voluntarily resides, carries on business or personally works for gain, or
+(b) the Central Government has, by notification in the Official Gazette, declared in respect of any Court situate in any such territory and not established or continued in the exercise of any such jurisdiction as aforesaid, that service by such Court of any summons issued by a Court under this Code shall be deemed to be valid service, the summons may be sent to such Political Agent or Court, by post, or otherwise, or if so directed by the Central Government, through the Ministry of that Government dealing with foreign affairs, or in such other manner as may be specified by the Central Government for the purpose of being served upon the defendant; and, if the Political Agent or Court returns the summons with an endorsement purporting to have been made by such Political Agent or by the Judge or other officer of the Court to the effect that the summons has been served on the defendant in the manner hereinbefore directed, such endorsement shall be deemed to be evidence of service.

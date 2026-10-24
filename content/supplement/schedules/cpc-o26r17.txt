@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O26R17.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O26R17
+Heading: Attendance and examination of witnesses before Commissioner
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) The provisions of this Code relating to the summoning, attendance and examination of witnesses, and to the remuneration of, and penalties to be imposed upon, witnesses, shall apply to persons required to give evidence or to produce documents under this Order whether the commission in execution of which they are so required has been issued by a Court situate within or by a Court situate beyond the limits of [India], and for the purposes of this rule the Commissioner shall be deemed to be a Civil Court:
+[Provided that when the Commissioner is not a Judge of a Civil Court, he shall not be competent to impose penalties; but such penalties may be imposed on the application of such Commissioner by the Court by which the commission was issued.]
+(2) A Commissioner may apply to any Court (not being a High Court) within the local limits or whose jurisdiction a witness resides for the issue of any process which he may find it necessary to issue to or against such witness, and such Court may, in its discretion, issue such process as it considers reasonable and proper.

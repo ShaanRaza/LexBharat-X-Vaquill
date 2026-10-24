@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R59.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R59
+Heading: Stay of sale
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where before the claim was preferred or the objection was made, the property attached had already been advertised for sale, the Court may—
+(a) if the property is movable, make an order postponing the sale pending the adjudication of the claim or objection, or
+(b) if the property is immovable, make an order that, pending the adjudication of the claim or objection, the property shall not be sold, or that pending such adjudication, the property may be sold but the sale shall not be confirmed, and any such order may be made subject to such terms and conditions as to security or otherwise as the Court thinks fit.

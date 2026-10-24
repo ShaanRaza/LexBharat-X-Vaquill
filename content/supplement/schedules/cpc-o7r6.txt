@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O7R6.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O7R6
+Heading: Grounds of exemption from limitation law
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where the suit is instituted after the expiration of the period prescribed by the law of limitation, the plaint shall show the ground upon which exemption from such law is claimed:
+[Provided that the Court may permit the plaintiff to claim exemption from the law of limitation on any ground not set out in the plaint, if such ground is not inconsistent with the grounds set out in the plaint.]

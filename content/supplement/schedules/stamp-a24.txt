@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A24.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A24
+Heading: COPY OR EXTRACT certified to be a true copy or extract
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: COPY OR EXTRACT certified to be a true copy or extract, by or by order of any public officer and not chargeable under the law for the time being in force relating to court-fees— (i) if the original was not chargeable with duty or if the duty with which it was chargeable does not exceed one rupee; (ii) in any other case………………… Exemptions (a) Copy of any paper which a public officer is expressly required by law to make or furnish for record in any public office or for any public purpose. [(b) Copy of, or extract from, any register relating to births, baptisms, namings, dedications, marriages, [divorces,] deaths or burials].
+Proper stamp-duty: Eight annas. One rupee.

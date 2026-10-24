@@ -1,0 +1,24 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O11R4.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O11R4
+Heading: Admission and denial of documents
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Each party shall submit a statement of admissions or denials of all documents disclosed and of which inspection has been completed, within fifteen days of the completion of inspection or any later date as fixed by the Court.
+(2) The statement of admissions and denials shall set out explicitly, whether such party was admitting or denying:—
+(a) correctness of contents of a document;
+(b) existence of a document;
+(c) execution of a document;
+(d) issuance or receipt of a document;
+(e) custody of a document.
+Explanation.––A statement of admission or denial of the existence of a document made in accordance with sub-rule (2)(b) shall include the admission or denial of the contents of a document.
+(3) Each party shall set out reasons for denying a document under any of the above grounds and bare and unsupported denials shall not be deemed to be denials of a document and proof of such documents may then be dispensed with at the discretion of the Court.
+(4) Any party may however submit bare denials for third party documents of which the party denying does not have any personal knowledge of, and to which the party denying is not a party to in any manner whatsoever.
+(5) An Affidavit in support of the statement of admissions and denials shall be filed confirming the correctness of the contents of the statement.
+(6) In the event that the Court holds that any party has unduly refused to admit a document under any of the above criteria, – costs (including exemplary costs) for deciding on admissibility of a document may be imposed by the Court on such party.
+(7) The Court may pass orders with respect to admitted documents including for waiver of further proof thereon or rejection of any documents.

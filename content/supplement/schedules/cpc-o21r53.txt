@@ -1,0 +1,21 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R53.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R53
+Heading: Attachment of decrees
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where the property to be attached is a decree, either for the payment of money or for sale in enforcement of a mortgage or charge, the attachment shall be made,—
+(a) if the decrees were passed by the same Court, then by order of such Court, and
+(b) if the decree sought to be attached was passed by another Court, then by the issue to such other Court of a notice by the Court which passed the decree sought to be executed, requesting such other Court to stay the execution of its decree unless and until—
+[(ii) (a) the holder of the decree sought to be executed, or
+(b) his judgment-debtor with the previous consent in writing of such decree-holder, or with the permission of the attaching Court, applies to the Court receiving such notice to execute the attached decree.]
+(2) Where a Court makes an order under clause (a) of sub-rule (1), or receives an application under sub-head (ii) of clause (b) of the said sub-rule, it shall, on the application of the creditor who has attached the decree or his judgment-debtor, proceeds to execute the attached decree and apply the net proceeds in satisfaction of the decree sought to be executed.
+(3) The holder of a decree sought to be executed by the attachment of another of decree the nature specified in sub-rule (1) shall be deemed to be the representative of the holder of the attached decree and to be entitled to execute such attached decree in any manner lawful for the holder thereof.
+(4) Where the property to be attached in the execution of a decree is a decree other than a decree of the nature referred to in sub-rule (1), the attachment shall be made, by a notice by the Court which passed the decree sought to be executed, to the holder of the decree sought to be attached, prohibiting him from transferring or charging the same in any way; and, where such decree has been passed by any other Court, also by sending to such other Court a notice to abstain from executing the decree sought to be attached until such notice is cancelled by the Court from which it was sent.
+(5) The holder of a decree attached under this rule shall give the Court executing the decree such information and aid as may reasonably be required.
+(6) On the application of the holder of a decree sought to be executed by the attachment of another decree, the Court making an order of attachment under this rule shall give notice of such order to the judgment-debtor bound by the decree attached; and no payment or adjustment of the attached decree made by the judgment-debtor in contravention of such order [with knowledge thereof or] after receipt of notice thereof, either through the Court or otherwise, shall be recognized by any Court so long as the attachment remains in force.

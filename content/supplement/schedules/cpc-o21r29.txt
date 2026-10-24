@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R29.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R29
+Heading: Stay of execution pending suit between decree-holder and judgment-debtors
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where a suit is pending in any Court against the holder of a decree of such Court [or of a decree which is being executed by such Court,] on the part of the person against whom the decree was passed, the Court may, on such terms as to security or otherwise, as it thinks fit, stay execution of the decree until the pending suit has been decided:
+[Provided that if the decree is one for payment of money, the Court shall, if it grants stay without requiring security, record its reasons for so doing.]

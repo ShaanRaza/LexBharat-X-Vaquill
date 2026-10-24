@@ -1,0 +1,21 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O6R14A.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O6R14A
+Heading: Address for service of notice
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Every pleading, when filed by a party, shall be accompanied by a statement in the prescribed form, signed as provided in rule 14, regarding the address of the party.
+(2) Such address may, from time to time, be changed by lodging in Court a form duly filled up and stating the new address of the party and accompanied by a verified petition.
+(3) The address furnished in the statement made under sub-rule (1) shall be called the “registered address” of the party, and shall, until duly changed as aforesaid, be deemed to be the address of the party for the purpose of service of all processes in the suit or in any appeal from any decree or order therein made and for the purpose of execution, and shall hold good, subject as aforesaid, for a period of two years after the final determination of the cause or matter.
+(4) Service of any process may be effected upon a party at his registered address in all respects as though such party resided thereat.
+(5) Where the registered address of a party is discovered by the Court to be incomplete, false or fictitious, the Court may, either on its own motion, or on the application of any party, order—
+(a) in the case where such registered address was furnished by a plaintiff, stay of the suit, or
+(b) in the case where such registered address was furnished by a defendant, his defence be struck out and he be placed in the same position as if he had not put up any defence.
+(6) Where a suit is stayed or a defence is struck out under sub-rule (5), the plaintiff or, as the case may be, the defendant may, after furnishing his true address, apply to the Court for an order to set aside the order of stay or, as the case may be, the order striking out the defence.
+(7) The Court, if satisfied that the party was prevented by any sufficient cause from filing the true address at the proper time, shall set aside the order of stay or order striking out the defence, on such terms as to costs or otherwise as it thinks fit and shall appoint a day for proceeding with the suit or defence, as the case may be.
+(8) Nothing in this rule shall prevent the Court from directing the service of a process at any other address, if, for any reason, it thinks fit to do so.

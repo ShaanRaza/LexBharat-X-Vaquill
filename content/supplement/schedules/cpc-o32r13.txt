@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O32R13.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O32R13
+Heading: Where minor co-plaintiff attaining majority desires to repudiate suit
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where a minor co-plaintiff on attaining majority desires to repudiate the suit, he shall apply to have his name struck out as co-plaintiff; and the Court, if it finds that he is not a necessary party, shall dismiss him from the suit on such terms as to costs or otherwise as it thinks fit.
+(2) Notice of the application shall be served on the next friend, on any co-plaintiff and on the defendant.
+(3) The costs of all parties of such application, and of all or any proceedings theretofore had in the suit, shall be paid by such persons as the Court directs.
+(4) Where the applicant is a necessary party to the suit, the Court may direct him to be made a defendant.

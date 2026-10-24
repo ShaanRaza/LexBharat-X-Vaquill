@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O14R7.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O14R7
+Heading: Court, if satisfied that agreement was executed in good faith, may pronounce judgment
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where the Court is satisfied, after making such inquiry as it deems proper,—
+(a) that the agreement was duly executed by the parties, (b) that they have a substantial interest in the decision of such question as aforesaid, and
+(c) that the same is fit to be tried and decided, it shall proceed to record and try the issue and state its finding or decision thereon in the same manner as if the issue had been framed by the Court; and shall, upon the finding or decision on such issue, pronounce judgment according to the terms of the agreement; and, upon the judgment so pronounced, a decree shall follow. 1. Parties not at issue.—(1) Where at the first hearing of a suit it appears that the parties are not at issue on any question of law or of fact, the Court may at once pronounce judgment. 2. One of several defendants not at issue.— [(1) Where there are more defendants than one, and any one of the defendants is not at issue with the plaintiff on any question of law or of fact, the Court may at once pronounce judgment for or against such defendant and the suit shall proceed only against the other defendants.]
+[(2) Whenever a judgment is pronounced under this rule, decree shall be drawn up in accordance with such judgment and the decree shall bear the date on which the judgment was pronounced.] 3. Parties at issue.—(1) Where the parties are at issue on some question of law or of fact, and issues have been framed by the Court as hereinbefore provided, if the Court is satisfied that no further argument or evidence that the parties can at once adduce is required upon such of the issues as may be sufficient for the decision of the suit, and that no injustice will result from proceeding with the suit forthwith, the Court may proceed to determine such issues, and, if the finding thereon is sufficient for the decision, may pronounce judgment accordingly, whether the summons has been issued for the settlement of issues only or for the final disposal of the suit:
+Provided that, where the summons has been issued for the settlement of issues only, the parties or their pleaders are present and none of them objects.
+(2) Where the finding is not sufficient for the decision, the Court shall postpone the further hearing of the suit, and shall fix a day for the production of such further evidence, or for such further argument as the case requires. 4. Failure to produce evidence.—Where the summons has been issued for the final disposal of the suit and either party fails without sufficient cause to produce the evidence on which he relies, the Court may at once pronounce judgment, or may, if it thinks fit, after framing and recording issues, adjourn the suit for the production of such evidence as may be necessary for its decision upon such issues.

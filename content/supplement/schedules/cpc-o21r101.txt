@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R101.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R101
+Heading: Question to be determined
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+All questions (including questions relating to right, title or interest in the property) arising between the parties to a proceeding on an application under rule 97 or rule 99 or their representatives, and relevant to the adjudication of the application, shall be determined by the Court dealing with the application and not by a separate suit and for this purpose, the Court shall, notwithstanding anything to the contrary contained in any other law for the time being in force, be deemed to have jurisdiction to decide such questions.

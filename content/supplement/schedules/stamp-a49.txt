@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A49.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A49
+Heading: Promissory note [as defined by section 2(22)] (a) when payable on demand
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: Promissory note [as defined by section 2(22)] (a) when payable on demand— (i) when the amount or value does not [Ten naye paise] exceed Rs. 250; (ii) when the amount or value exceeds Rs. 250 but does not exceed Rs. 1,000; (iii) in any other case (b) when payable otherwise than on demand—
+Proper stamp-duty: [Fifteen naye paise] [Twenty-five naye paise] The same duty as a Bill of Exchange (No. 13) for the same amount payable otherwise than on demand.]

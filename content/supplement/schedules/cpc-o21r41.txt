@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R41.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R41
+Heading: Examination of judgment-debtor as to his property
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+[(1)] Where a decree is for the payment of money the decree-holder may apply to the Court for an order that—
+(a) the judgment-debtor, or
+(b) [where the judgment-debtor is a corporation], any officer thereof, or
+(c) any other person, be orally examined as to whether any or what debts are owing to the judgment-debtor and whether the judgment-debtor has any and what other property or means of satisfying the decree; and the Court may make an order for the attendance and examination of such judgment-debtor, or officer or other person, and for the production of any books or documents.
+[(2) Where a decree for the payment of money has remained unsatisfied for a period of thirty days, the Court may, on the application of the decree-holder and without prejudice to its power under sub-rule (1), by order require the judgment-debtor or where the judgment-debtor is a corporation, any officer thereof, to make an affidavit stating the particulars of the assets of the judgment-debtor.
+(3) In case of disobedience of any order made under sub-rule (2), the Court making the order, or any Court to which the proceeding is transferred, may direct that the person disobeying the order be detained in the civil prison for a term not exceeding three months unless before the expiry of such term the Court directs his release.]

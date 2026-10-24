@@ -1,0 +1,30 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O43R1.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O43R1
+Heading: Appeal from orders
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+An appeal shall lie from the following orders under the provisions of section 104, namely:—
+(a) an order under rule 10 of Order VII returning a plaint to be presented to the proper Court [except where the procedure specified in rule 10A of Order VII has been followed]; * * * * *.
+(c) an order under rule 9 of order IX rejecting an application (in a case open to appeal) for an order to set aside the dismissal of a suit;
+(d) an order under rule 13 of Order IX rejecting an application (in a case open to appeal) for an order to set aside a decree passed ex parte; * * * * *
+(f) an order under rule 21 of Order XI; * * * * *
+(i) an order under rule 34 of Order XXI on an objection to the draft of a document or of an endorsement;
+(j) an order under rule 72 or rule 92 of Order XXI setting aside or refusing to set aside a sale;
+[(ja) an order rejecting an application made under sub-rule (1) of rule 106 of Order XXI, provided that an order on the original application, that is to say, the application referred to in sub-rule (1) of rule 105 of that Order is appealable;]
+(k) an order under rule 9 of Order XXII refusing to set aside the abatement or dismissal of a suit;
+(l) an order under rule 10 of Order XXII giving or refusing to give leave; * * * * *
+(n) an order under rule 2 of Order XXV rejecting an application (in a case open to appeal) for an order to set aside the dismissal of a suit;
+[(na) an order under rule 5 or rule 7 of Order XXXIII rejecting an application for permission to sue as an indigent person;] * * * * *
+(p) orders in interpleader-suits under rule 3, rule 4 or rule 6 of Order XXXV;
+(q) an order under rule 2, rule 3 or rule 6 of Order (XXVIII);
+(r) an order under rule 1, rule 2 [rule 2A], rule 4 or rule 10 of Order XXXIX;
+(s) an order under rule 1, or rule 4 of Order XL;
+(t) an order of refusal under rule 19 of Order XLI to re-admit, or under rule 21 of Order XLI to re-hear, an appeal;
+(u) an order under rule 23 [or rule 23A] of Order XLI remanding a case, where an appeal would lie from the decree of the Appellate Court; * * * * *
+(w) an order under rule 4 of Order XLVII granting an application for review.

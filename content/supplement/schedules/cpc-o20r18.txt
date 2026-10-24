@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O20R18.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O20R18
+Heading: Decree in suit for partition of property or separate possession of a share therein
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where the Court passes a decree for the partition of property or for the separate possession of a share therein, then,—
+(1) if and in so far as the decree relates to an estate assessed to the payment of revenue to the Government, the decree shall declare the rights of the several parties interested in the property, but shall direct such partition or separation to be made by the Collector, or any gazetted subordinate of the Collector deputed by him in this behalf, in accordance with such declaration and with the provisions of section 54;
+(2) if and in so far as such decree relates to any other immovable property or to movable property, the Court may, if the partition or separation cannot be conveniently made without further inquiry, pass a preliminary decree declaring the rights of the several parties interested in the property and giving such further directions as may be required.

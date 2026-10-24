@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R106.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R106
+Heading: Setting aside orders passed ex parte, etc.
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) The applicant, against whom an order is made under sub-rule (2) of rule 105 or the opposite party against whom an order is passed ex parte under sub-rule (3) of that rule or under sub-rule (1) of rule 23, may apply to the Court to set aside the order, and if he satisfies the Court that there was sufficient cause for his non-appearance whom the application was called on for hearing, the Court shall set aside the order or such terms as to costs or otherwise as it thinks fit, and shall appoint a day for the further hearing of the application.
+(2) No order shall be made on an application under sub-rule (1) unless notice of the application has been served on the other party.
+(3) An application under sub-rule (1) shall be made within thirty days from the date of the order, or where, in the case of an ex parte order, the notice was not duly served, within thirty days from the date when applicant had knowledge of the order.

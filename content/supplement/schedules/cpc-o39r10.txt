@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O39R10.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O39R10
+Heading: Deposit of money, etc., in Court
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where the subject-matter of a suit is money or some other thing capable of delivery and any party thereto admits that he holds such money or other thing as a trustee for another party, or that it belongs or is due to another party, the Court may order the same to be deposited in Court or delivered to such last-named party, with or without security, subject to the further direction of the Court.

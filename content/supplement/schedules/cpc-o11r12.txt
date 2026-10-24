@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O11R12.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O11R12
+Heading: Application for discovery of documents
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Any party may, without filing any affidavit, apply to the Court for an order directing any other party to any suit to make discovery on oaths of the documents which are or have been in his possession or power, relating to any matter in question therein. On the hearing of such application the Court may either refuse or adjourn the same, if satisfied that such discovery is not necessary, or not necessary at that stage of the suit, or make such order, either generally or limited to certain classes of documents, as may, in its discretion be thought fit:
+Provided that discovery shall not be ordered when and so far as the Court shall be of opinion that it is not necessary either for disposing fairly of the suit or for saving costs.

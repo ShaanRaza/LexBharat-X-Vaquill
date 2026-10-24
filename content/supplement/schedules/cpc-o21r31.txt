@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R31.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R31
+Heading: Decree for specific movable property
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where the decree is for any specific movable, or for any share in a specific movable, it may be executed by the seizure, if practicable, of the movable or share, and by the delivery thereof to the party to whom it has been adjudged, or to such person as he appoints to receive delivery on his behalf, or by the detention in the civil prison of the judgment-debtor, or by the attachment of his property, or by both.
+(2) Where any attachment under sub-rule (1) has remained in force for [three months,] if the judgment-debtor has not obeyed the decree and the decree-holder has applied to have the attached property sold, such property may be sold, and out of the proceeds the Court may award to the decree-holder, in cases where any amount has been fixed by the decree to be paid as an alternative to delivery of movable property, such amount, and in other cases, such compensation as it thinks fit, and shall pay the balance (if any) to the judgment-debtor on his application.
+(3) Where the judgment-debtor has obeyed the decree and paid all costs of executing the same which he is bound to pay, or where, at the end of [three months] from the date of the attachment, no application to have the property sold has been made, or, if made, has been refused, the attachment shall cease.

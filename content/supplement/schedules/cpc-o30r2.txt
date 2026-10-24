@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O30R2.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O30R2
+Heading: Disclosure of partners’ names
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where a suit is instituted by partners in the name of their firm, the plaintiffs or their pleader shall, on demand in writing by or on behalf of any defendant, forthwith declare in writing the names and places of residence of all the persons constituting the firm on whose behalf the suit is instituted.
+(2) Where the plaintiffs or their pleader fail to comply with any demand made under sub-rule (1) all proceedings in the suit may, upon an application for that purpose, be stayed upon such terms as the Court may direct.
+(3) Where the names of the partners are declared in the manner referred to in sub-rule (1) the suit shall proceed in the same manner, and the same consequences in all respects shall follow, as if they had been named as plaintiffs in the plaint:
+[Provided that all proceedings shall nevertheless continue in the name of the firm, but the name of the partners disclosed in the manner specified in sub-rule (1) shall be entered in the decree.]

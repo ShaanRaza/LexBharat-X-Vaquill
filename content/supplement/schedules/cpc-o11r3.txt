@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O11R3.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O11R3
+Heading: Inspection
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) All parties shall complete inspection of all documents disclosed within thirty days of the date of filing of the written statement or written statement to the counter-claim, whichever is later. The Court may extend this time limit upon application at its discretion, but not beyond thirty days in any event.
+(2) Any party to the proceedings may seek directions from the Court, at any stage of the proceedings, for inspection or production of documents by the other party, of which inspection has been refused by such party or documents have not been produced despite issuance of a notice to produce.
+(3) Order in such application shall be disposed of within thirty days of filing such application, including filing replies and rejoinders (if permitted by Court) and hearing.
+(4) If the above application is allowed, inspection and copies thereof shall be furnished to the party seeking it, within five days of such order.
+(5) No party shall be permitted to rely on a document, which it had failed to disclose or of which inspection has not been given, save and except with leave of Court.
+(6) The Court may impose exemplary costs against a defaulting party, who wilfully or negligently failed to disclose all documents pertaining to a suit or essential for a decision therein and which are in their power, possession, control or custody or where a Court holds that inspection or copies of any documents had been wrongfully or unreasonably withheld or refused.

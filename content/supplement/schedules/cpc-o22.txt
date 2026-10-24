@@ -1,0 +1,27 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O22.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O22
+Heading: Death, Marriage and Insolvency or Parties
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Death, Marriage and Insolvency or Parties
+Rules in this Order:
+1. No abatement by party’s death if right to sue survives
+2. Procedure where one of several plaintiffs or defendants dies and right to sue survives
+3. Procedure in case of death of one of several plaintiffs or of sole plaintiff
+4. Procedure in case of death of one of several defendants or of sole defendant
+4A. Procedure where there is no legal representative
+5. Determination of question as to legal representative
+6. No abatement by reason of death after hearing
+7. Suit not abated by marriage of female party
+8. When plaintiff's insolvency bars suit
+9. Effect of abatement or dismissal
+10. Procedure in case of assignment before final order in suit
+10A. Duty of pleader to communicate to Court death of a party
+11. Application of Order to appeals
+12. Application of Order to proceedings

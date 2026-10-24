@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O14R6.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O14R6
+Heading: Questions of fact or law may by agreement be stated in form of issues
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where the parties to a suit are agreed as to the question of fact or of law to be decided between them, they may state the same in the form of an issue, and enter into an agreement in writing that, upon the finding of the Court in the affirmative or the negative or such issue,—
+(a) a sum of money specified in the agreement or to be ascertained by the Court, or in such manner as the Court may direct, shall be paid by one of the parties to the other of them, or that one of them be declared entitled to some right or subject some liability specified in the agreement;
+(b) some property specified in the agreement and in dispute in the suit shall be delivered by one of the parties to the other of them, or as that other may direct; or
+(c) one or more of the parties shall do or abstain from doing some particular act specified in the agreement and relating to the matter in dispute.

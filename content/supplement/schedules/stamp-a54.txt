@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A54.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A54
+Heading: RECONVEYANCE OF MORTGAGED PROPERTY
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: RECONVEYANCE OF MORTGAGED PROPERTY— (a) if the consideration for which the property was mortgaged The same duty as a conveyance (No. 23) for the amount of does not exceed Rs. 1,000; such consideration as set forth in the Reconveyance. Ten Rupees. (b) in any other case............................
+Proper stamp-duty: —

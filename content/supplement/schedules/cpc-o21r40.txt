@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R40.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R40
+Heading: Proceedings on appearance of judgment-debtor in obedience to notice or after arrest
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) When a judgment-debtor appears before the Court in obedience to a notice issued under rule 37, or is brought before the Court after being arrested in execution of a decree for the payment of money, the Court shall proceed to hear the decree-holder and take all such evidence as may be produced by him in support of his application for execution and shall then give the judgment-debtor an opportunity of showing cause why he should not be committed to the civil prison.
+(2) Pending the conclusion of the inquiry under sub-rule (1) the Court may, in its discretion, order the judgment-debtor to be detained in the custody of an officer of the Court or release him on his furnishing security to the satisfaction of the Court for his appearance when required.
+(3) Upon the conclusion of the inquiry under sub-rule (1) the Court may, subject to the provisions of section 51 and to the other provisions of this Code, make an order for the detention of the judgment-debtor in the civil prison and shall in that event cause him to be arrested if he is not already under arrest:
+Provided that in order to give the judgment-debtor an opportunity of satisfying the decree, the Court may, before making the order of detention, leave the judgment-debtor in the custody of an officer of the Court for a specified period not exceeding fifteen days or release him on his furnishing security to the satisfaction of the Court for his appearance at the expiration of the specified period if the decree be not sooner satisfied.
+(4) A judgment-debtor released under this rule may be re-arrested.
+(5) When the Court does not make an order of detention under sub-rule (3) it shall disallow the application and, if the judgment-debtor is under arrest, direct his release.

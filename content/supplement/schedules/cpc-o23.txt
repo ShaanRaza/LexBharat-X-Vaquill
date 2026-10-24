@@ -1,0 +1,20 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O23.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O23
+Heading: Withdrawal and Adjustment of Suits
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Withdrawal and Adjustment of Suits
+Rules in this Order:
+1. Withdrawal of suit or abandonment of part of claim
+1A. When transposition of defendants as plaintiffs may be permitted
+2. Limitation law not affected by first suit
+3. Compromise of suit
+3A. Bar to suit
+3B. No agreement or compromise to be entered in a representative suit without leave of Court
+4. Proceedings in execution of decrees not affected

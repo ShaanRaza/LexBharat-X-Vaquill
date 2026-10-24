@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O7R18.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O7R18
+Heading: Inadmissibility of document not produced when plaint filed
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+omitted by Act 22 of 2002, s. 8 (w. e. f. 1-7-2002). [1. Written Statement.—The Defendant shall, within thirty days from the date of service of summons on him, present a written statement of his defence: Provided that where the defendant fails to file the written statement within the said period of thirty days, he shall be allowed to file the same on such other day, as may be specified by the Court, for reasons to be recorded in writing, but which shall not be later than ninety days from the date of service of summons.] *[Provided that where the defendant fails to file the written statement within the said period of thirty days, he shall be allowed to file the written statement on such other day, as may be specified by the Court, for reasons to be recorded in writing and on payment of such costs as the Court deems fit, but which shall not be later than one hundred twenty days from the date of service of summons and on expiry of one hundred twenty days from the date of service of summons, the defendant shall forfeit the right to file the written statement and the Court shall not allow the written statement to be taken on record.]

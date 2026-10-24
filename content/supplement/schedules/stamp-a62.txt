@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A62.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A62
+Heading: TRANSFER (whether with or without consideration)
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: TRANSFER (whether with or without consideration)— * * * * (c) of any interest secured by a bond, mortgage-deed or policy of insurance,— (i) if the duty on such bond, mortgage-deed or The duty with which such bond, mortgage-deed policy does not exceed five rupees; or policy of insurance is chargeable. (ii) in any other case……………….. Five rupees. (d) of any property under the Administrator General’s Act, Five rupees. 1874 (2 of 1874), section 31; (e) of any trust-property without consideration from one Five rupees or such smaller amount as may be trustee to another trustee or from a trustee to a beneficiary. chargeable under clauses (a) to (c) of this Article. Exemptions Transfers by endorsement— (a) of a bill of exchange, cheque or promissory note; (b) of a bill of lading, delivery order, warrant for goods, or other mercantile document of title to goods; (c) of a policy of insurance; (d) of securities of the Central Government. See also section 8.
+Proper stamp-duty: * * * *

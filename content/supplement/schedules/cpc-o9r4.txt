@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O9R4.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O9R4
+Heading: Plaintiff may bring fresh suit or Court may restore suit to file
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where a suit is dismissed under rule 2 or rule 3, the plaintiff may (subject to the law of limitation) bring a fresh suit; or he may apply for an order to set the dismissal aside, and if he satisfies the Court that there was sufficient cause for [such failure as is referred to in rule 2], or for his non-appearance, as the case may be, the Court shall make an order setting aside the dismissal and shall appoint a day for proceeding with the suit.

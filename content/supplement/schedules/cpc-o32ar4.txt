@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O32AR4.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O32AR4
+Heading: Assistance of welfare expert
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+In every suit or proceeding to which this Order applies, it shall be open to the Court to secure the services of such person (preferably a woman where available), whether related to the parties or not, including a person professionally engaged in promoting the welfare of the family as the Court may think fit, for the purpose of assisting the Court in discharging the functions imposed by rule 3 of this Order.

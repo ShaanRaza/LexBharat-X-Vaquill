@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O41R11.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O41R11
+Heading: Power to dismiss appeal without sending notice to Lower Court
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+[(1) The Appellate Court after fixing a day for hearing the appellant or his pleader and hearing him accordingly if he appears on that day may dismiss the appeal].
+(2) If on the day fixed or any other day to which the hearing may be adjourned the appellant does not appear when the appeal is called on for hearing, the Court may make an order that the appeal be dismissed.
+(3) The dismissal of an appeal under this rule shall be notified to the Court from whose decree the appeal is preferred.
+[(4) Where an Appellate Court, not being the High Court, dismisses an appeal under sub-rule (1), it shall deliver a judgment, recording in brief its grounds for doing so, and a decree shall be drawn up in accordance with the judgment.]

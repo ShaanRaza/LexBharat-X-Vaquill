@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R83.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R83
+Heading: Postponement of sale to enable judgment-debtor to raise amount of decree
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where an order for the sale of immovable property has been made, if the judgment-debtor can satisfy the Court that there is reason to believe that the amount of the decree may be raised by the mortgage or lease or private sale of such property, or some part thereof, or of any other immovable property of the judgment-debtor, the Court may, on his application, postpone the sale of the property comprised in the order for sale on such terms and for such period as it thinks proper, to enable him to raise the amount.
+(2) In such case the Court shall grant a certificate to the judgment-debtor authorizing him within a period to be mentioned therein, and notwithstanding anything contained in section 64, to make the proposed mortgage, lease or sale:
+Provided that all moneys payable under such mortgage, lease or sale shall be paid, not to the judgment-debtor, but, save in so far as a decree-holder is entitled to set-off such money under the provisions of rule 72, into Court:
+Provided also that not mortgage, lease or sale under this rule shall become absolute until it has been confirmed by the Court.
+(3) Nothing in this rule shall be deemed to apply to a sale of property directed to be sole in execution of a decree for sale in enforcement of a mortgage of, or charge on, such property.

@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R35.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R35
+Heading: Decree for immovable property
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where a decree is for the delivery of any immovable property, possession thereof shall be delivered to the party to whom it has been adjudged, or to such person as he may appoint to receive delivery on his behalf, and, if necessary, by removing any person bound by the decree who refuses to vacate the property.
+(2) Where a decree is for the joint possession of immovable property, such possession shall be delivered by affixing a copy of the warrant in some conspicuous place on the property and proclaiming by beat of drum, or other customary mode, at some convenient place, the substance of the decree.
+(3) Where possession of any building on enclosure is to be delivered and the person in possession, being bound by the decree, does not afford free access, the Court, through its officers, may, after giving reasonable warning and facility to any woman not appearing in public according to the customs of the country to withdraw, remove or open any lock or bolt or break open any door or do any other act necessary for putting the decree-holder in possession.

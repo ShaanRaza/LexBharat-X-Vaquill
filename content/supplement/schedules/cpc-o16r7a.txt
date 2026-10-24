@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O16R7A.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O16R7A
+Heading: Summons given to the party for service
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) The Court may, on the application of any party for the issue of a summons for the attendance of any person, permit such party to effect service of such summons on such person and shall, in such a case, deliver the summons to such party for service.
+(2) The service of such summons shall be effected by or on behalf of such party by delivering or tendering to the witness personally a copy thereof signed by the Judge or such officer of the Court as he may appoint in this behalf and sealed with the seal of the Court.
+(3) The provisions of rules 16 and 18 of Order V shall apply to a summons personally served under this rule as if the person effecting service were a serving officer.
+(4) If such summons, when tendered, is refused or if the person served refuses to sign and acknowledgement of service or for any reason such summons cannot be served personally, the Court shall, on the application of the party, re-issue such summons to be served by the Court in the same manner as a summons to a defendant.
+(5) Where a summons is served by a party under this rule, the party shall not be required to pay the fees otherwise chargeable for the service of summons.

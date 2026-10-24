@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O16R2.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O16R2
+Heading: Expenses of witness to be paid into Court on applying for summons
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) The party applying for a summons shall, before the summons is granted and within a period to be fixed [which shall not be later than seven days from the date of making applications under sub-rule (4) of rule 1] pay into Court such a sum of money as appears to the Court to be sufficient to defray the travelling and other expenses of the person summoned in passing to and from the Court in which he is required to attend, and for one day’s attendance.
+(2) Experts.—In determining the amount payable under this rule, the Court may, in the case of any person summoned to give evidence as an expert, allow reasonable remuneration for the time occupied both in giving evidence and in performing any work of an expert character necessary for the case.
+(3) Scale of expenses.—Where the Court is subordinate to a High Court, regard shall be had, in fixing the scale of such expenses, to any rules made in that behalf.
+[(4) Expenses to be directly paid to witnesses.—Where the summons is served directly by the party on a witness, the expenses referred to in sub-rule (1) shall be paid to the witness by the party or his agent.]

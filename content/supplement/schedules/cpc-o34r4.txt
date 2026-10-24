@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O34R4.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O34R4
+Heading: Preliminary decree in suit for sale
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) In a suit for sale, if the plaintiff succeeds, the Court shall pass a preliminary decree to the effect mentioned in clauses (a), (b) and (c) (i) of sub-rule (1) of rule 2, and further directing that, in default of the defendant paying as therein mentioned, the plaintiff shall be entitled to apply for a final decree directing that the mortgaged property or a sufficient part thereof be sold, and the proceeds of the sale (after deduction therefrom of the expenses of the sale) be paid into Court and applied in payment of what has been found or declared under or by the preliminary decree due to the plaintiff, together with such amount as may have been adjudged due in respect of subsequent costs, charges, expenses and interest, and the balance, if any, be paid to the defendant or other persons entitled to receive the same.
+(2) The Court may, on good cause shown and upon terms to be fixed by the Court, from time to time, at any time before a final decree for sale is passed, extend the time fixed for the payment of the amount found or declared due under sub-rule (1) or of the amount adjudged due in respect of subsequent costs, charges, expenses and interest.
+(3) Power to decree sale in foreclosure suit.—In a suit for foreclosure in the case of an anomalous mortgage, if the plaintiff succeeds, the Court may, at the instance of any party to the suit or of any other person interested in the mortgage-security or the right of redemption, pass a like decree (in lieu of a decree for foreclosure) on such terms as it thinks fit, including the deposit in Court of a reasonable sum fixed by the Court to meet the expenses of the sale and to secure the performance of the terms.
+(4) Where, in a suit for sale or a suit foreclosure in which sale is ordered, subsequent mortgages or persons deriving title from, or subrogated to the rights of, any such mortgagees are joined as parties, the preliminary decree referred to in sub-rule (1) shall provide for the adjudication of the respective rights and liabilities of the parties to the suit in the manner and form set forth in Form No. 9, Form No. 10 or Form No. 11 as the case may be, of Appendix D with such variations as the circumstances of the case may require.

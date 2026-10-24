@@ -115,3 +115,16 @@ test("the first-token deadline is not applied to the last model in the chain", a
   const late = { ok: true, status: 200, text: async () => "", body: new ReadableStream({ async start(c) { await new Promise((x) => setTimeout(x, 120)); c.enqueue(new TextEncoder().encode(gem({ candidates: [{ content: { parts: [{ text: "late but fine" }] } }] }))); c.close(); } }) };
   assert.equal((await completeTask("chat", { messages: [{ role: "user", content: "q" }] }, { config: cfg, env, fetchImpl: fakeFetch(late) })).text, "late but fine");
 });
+
+test("files are sent to Gemini as inline data, to Anthropic as document/image blocks, and the message text still goes along", async () => {
+  const bodies = [];
+  const fetchImpl = async (url, init) => { bodies.push({ url: String(url), body: JSON.parse(init.body) }); return new Response('data: {"candidates":[{"content":{"parts":[{"text":"ok"}]},"finishReason":"STOP"}]}\n\ndata: {"type":"message_stop"}\n\n', { status: 200, headers: { "content-type": "text/event-stream" } }); };
+  const config = { tasks: { ocr: { model: "gemini:gemini-3.5-flash-lite" }, ocrA: { model: "anthropic:claude-haiku-5-5" } } };
+  const files = [{ mime: "application/pdf", data: "QUJD" }, { mime: "image/png", data: "REVG" }];
+  await completeTask("ocr", { messages: [{ role: "user", content: "read", files }] }, { config, env: { GEMINI_API_KEY: "k" }, fetchImpl });
+  const g = bodies[0].body.contents[0].parts;
+  assert.deepEqual(g.slice(0, 2), [{ inlineData: { mimeType: "application/pdf", data: "QUJD" } }, { inlineData: { mimeType: "image/png", data: "REVG" } }]); assert.deepEqual(g[2], { text: "read" });
+  try { await completeTask("ocrA", { messages: [{ role: "user", content: "read", files }] }, { config, env: { ANTHROPIC_API_KEY: "k" }, fetchImpl }); } catch { /* the fake reply is Gemini-shaped; only the request matters */ }
+  const a = bodies[1].body.messages[0].content;
+  assert.equal(a[0].type, "document"); assert.equal(a[0].source.media_type, "application/pdf"); assert.equal(a[1].type, "image"); assert.deepEqual(a[2], { type: "text", text: "read" });
+});

@@ -31,7 +31,7 @@ export async function* streamGemini(o) {
   if (/^gemini-3/.test(o.spec.model)) gen.thinkingConfig = { thinkingLevel: o.thinking === "off" || o.thinking === "minimal" ? (/^gemini-3\.8/.test(o.spec.model) ? "low" : "minimal") : o.thinking };
   else if (/^gemini-2\.5-(flash|flash-lite)$/.test(o.spec.model)) gen.thinkingConfig = { thinkingBudget: ({ off: 0, minimal: 0, low: 512, medium: 2048, high: 8192 })[o.thinking] ?? 0 };
   const res = await post(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(o.spec.model)}:streamGenerateContent?alt=sse`, { "x-goog-api-key": key },
-    { systemInstruction: o.system ? { parts: [{ text: o.system }] } : undefined, contents: o.messages.map((m) => ({ role: m.role === "assistant" ? "model" : "user", parts: [{ text: m.content }] })), generationConfig: gen }, o);
+    { systemInstruction: o.system ? { parts: [{ text: o.system }] } : undefined, contents: o.messages.map((m) => ({ role: m.role === "assistant" ? "model" : "user", parts: [...(m.files ?? []).map((f) => ({ inlineData: { mimeType: f.mime, data: f.data } })), { text: m.content }] })), generationConfig: gen }, o);
   let usage = { inputTokens: 0, outputTokens: 0 }, finish = null;
   for await (const ev of sseEvents(res.body)) {
     let j; try { j = JSON.parse(ev.data); } catch { continue; }
@@ -50,7 +50,7 @@ export async function* streamAnthropic(o) {
   const key = o.env.ANTHROPIC_API_KEY?.trim();
   if (!key) throw new AiError("not_configured", "ANTHROPIC_API_KEY is not set.");
   const res = await post("https://api.anthropic.com/v1/messages", { "x-api-key": key, "anthropic-version": "2023-06-01" },
-    { model: o.spec.model, max_tokens: o.maxOutputTokens, temperature: o.temperature, system: o.system || undefined, messages: o.messages.map((m) => ({ role: m.role, content: m.content })), stream: true }, o);
+    { model: o.spec.model, max_tokens: o.maxOutputTokens, temperature: o.temperature, system: o.system || undefined, messages: o.messages.map((m) => ({ role: m.role, content: m.files?.length ? [...m.files.map((f) => (f.mime === "application/pdf" ? { type: "document", source: { type: "base64", media_type: f.mime, data: f.data } } : { type: "image", source: { type: "base64", media_type: f.mime, data: f.data } })), { type: "text", text: m.content }] : m.content })), stream: true }, o);
   let usage = { inputTokens: 0, outputTokens: 0 }, finish = null;
   for await (const ev of sseEvents(res.body)) {
     let j; try { j = JSON.parse(ev.data); } catch { continue; }
@@ -68,7 +68,7 @@ export async function* streamOpenAiCompat(o) {
   if (!key || !base) throw new AiError("not_configured", "LITELLM_BASE_URL and LITELLM_API_KEY are not set.");
   const res = await post(`${base}/chat/completions`, { Authorization: `Bearer ${key}` },
     { model: o.spec.model, temperature: o.temperature, max_tokens: o.maxOutputTokens, stream: true, stream_options: { include_usage: true }, ...(o.json ? { response_format: { type: "json_object" } } : {}),
-      messages: [...(o.system ? [{ role: "system", content: o.system }] : []), ...o.messages.map((m) => ({ role: m.role, content: m.content }))] }, o);
+      messages: [...(o.system ? [{ role: "system", content: o.system }] : []), ...o.messages.map((m) => ({ role: m.role, content: m.files?.length ? [...m.files.map((f) => ({ type: "image_url", image_url: { url: `data:${f.mime};base64,${f.data}` } })), { type: "text", text: m.content }] : m.content }))] }, o);
   let usage = { inputTokens: 0, outputTokens: 0 }, finish = null;
   for await (const ev of sseEvents(res.body)) {
     if (ev.data === "[DONE]") break;

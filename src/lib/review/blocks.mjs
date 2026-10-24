@@ -1,13 +1,14 @@
 // The saved review as simple blocks for the .docx and PDF export (same block shapes as src/lib/drafting/docmodel.mjs: heading, p, list). PURE logic.
 import { NOT_LEGAL_ADVICE, RISKS } from "./prompts.mjs";
 import { CONTRACT_TYPES } from "./rules.mjs";
+import { sectionWord } from "../acts/unitLabel.mjs";
 
 const r = (text, o = {}) => ({ text, ...o });
 const H = (t, level = 2) => ({ type: "heading", level, runs: [r(t, { bold: true })] });
 const P = (...runs) => ({ type: "p", runs: runs.map((x) => (typeof x === "string" ? r(x) : x)) });
 const L = (items) => ({ type: "list", ordered: false, start: 1, items });
 const RISK = { low: "Low", medium: "Medium", high: "High" };
-const sec = (c) => `${c.actTitle.replace(/^the\s+/i, "")}${c.number ? `, Section ${c.number}` : ""}`;
+const sec = (c) => `${c.actTitle.replace(/^the\s+/i, "")}${c.number ? `, ${sectionWord(c.number)}` : ""}`;
 
 export function reviewToBlocks(run) {
   const res = run.result ?? {}, sum = res.summary?.value, blocks = [];

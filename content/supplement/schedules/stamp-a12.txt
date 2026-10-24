@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A12.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A12
+Heading: AWARD
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: AWARD, that is to say, any decision in writing by an arbitrator or umpire, not being an award directing a partition, on a reference made otherwise than by an order of the Court in the course of a suit— (a) where the amount or value of the property to The same duty as a Bond (No. 15) for such which the award relates as set forth in such award does not exceed Rs. 1,000; amount. (b) in any other case………………………… Exemption Five rupees. Award under the Bombay District Municipal Act, 1873 (Bom. Act 6 of 1873), section 81, or the Bombay Hereditary Offices Act, 1874 (Bom. Act (3of 1874), section 18.
+Proper stamp-duty: —

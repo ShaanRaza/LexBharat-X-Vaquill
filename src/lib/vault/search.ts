@@ -3,9 +3,9 @@
 import { embedQuery } from "@/lib/acts/embed";
 import type { ChatSource } from "@/lib/chat/retrieve";
 import { lexicalRank } from "./lexical.mjs";
-import { chunksOf, getDocs, matchChunks, type Passage, type VaultDoc } from "./store";
+import { chunksOf, getDocs, matchChunks, scanPageNumbers, type Passage, type VaultDoc } from "./store";
 
-export type DocPassage = Passage & { docName: string; via: "meaning" | "keywords" };
+export type DocPassage = Passage & { docName: string; via: "meaning" | "keywords"; /** the page was read from a scan */ scan?: boolean };
 
 export async function searchAttached(bid: string, docIds: string[], question: string, k = 8): Promise<{ passages: DocPassage[]; docs: VaultDoc[]; mode: "meaning+keywords" | "keywords" }> {
   const docs = await getDocs(bid, docIds), ids = docs.map((d) => d.id);
@@ -20,11 +20,14 @@ export async function searchAttached(bid: string, docIds: string[], question: st
   const all = await chunksOf(bid, ids);
   for (const p of lexicalRank(question, all, mode === "meaning+keywords" && allEmbedded ? 3 : 6)) put(p, "keywords");
   const passages = [...picked.values()].slice(0, k).sort((a, b) => a.docId.localeCompare(b.docId) || a.idx - b.idx);
+  const scanned = new Map<string, Set<number>>();
+  for (const d of docs.filter((x) => x.scanned)) scanned.set(d.id, new Set(await scanPageNumbers(bid, d.id)));
+  for (const p of passages) if (p.page && scanned.get(p.docId)?.has(p.page)) p.scan = true;
   return { passages, docs, mode };
 }
 
 /** The passages as chat sources numbered from 1, in the shape the chat prompt, citations and answer check already use. */
 export function docChatSources(passages: DocPassage[]): ChatSource[] {
-  return passages.map((p, i) => ({ n: i + 1, kind: "doc" as const, docId: p.docId, docName: p.docName, page: p.page, label: p.label, actId: "", sectionKey: "", actTitle: p.docName, year: null, category: "document", state: null, inForce: true, sourceUrl: null,
+  return passages.map((p, i) => ({ n: i + 1, kind: "doc" as const, docId: p.docId, docName: p.docName, page: p.page, label: p.label, scan: !!p.scan, actId: "", sectionKey: "", actTitle: p.docName, year: null, category: "document", state: null, inForce: true, sourceUrl: null,
     number: null, heading: p.label, status: "ok", text: p.body, via: p.via }));
 }

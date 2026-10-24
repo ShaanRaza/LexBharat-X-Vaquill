@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O27R8B.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O27R8B
+Heading: Definitions of “Government” and “Government pleader”
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+In this Order [unless otherwise expressly provided] “Government” and [“Government pleader”] mean respectively—
+(a) in relation to any suit by or against *** the Central Government, or against a public officer in the service of that Government, the Central Government and such pleader as that Government may appoint whether generally or specially for the purposes of this order; * * * * *
+(c) in relation to any suit by or against State Government or against a public officer in the service of a State, the State Government and the Government pleader [as defined in clause (7) of section 2], or such other pleader as the State Government may appoint, whether generally or specially, for the purposes of this Order.

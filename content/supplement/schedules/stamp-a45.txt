@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A45.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A45
+Heading: PARTITION
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: PARTITION— Instrument of [as defined by s. 2 (15)]
+Proper stamp-duty: The same duty as a Bond (No. 15) for the amount of the value of the separated share or shares of the property. N.B.—The largest share remaining after the property is partitioned (or, if there are two or more shares of equal value and not smaller than any of the other shares, then one of such equal shares) shall be deemed to be that from which the other shares are separated: Provided always that— (a) when an instrument of partition containing an agreement to divide property in severalty is executed and a partition is effected in pursuance of such agreement, the duty chargeable upon the instrument effecting such partition shall be reduced by the amount of duty paid in respect of the first instrument, but shall not be less than eight annas; (b) where land is held on revenue settlement for a period not exceeding thirty years and paying the full assessment, the value for the purpose of duty shall be calculated at not more than five times the annual revenue; (c) where a final order for effecting a partition passed by any Revenue-authority or any Civil-Court, or an award by an arbitrator directing a partition, is for an instrument of partition, and an instrument of partition in pursuance of such order or award is subsequently executed, the duty on such instrument shall not exceed eight annas.

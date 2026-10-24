@@ -30,7 +30,7 @@ export async function pdfLines(file) {
       const its = r.items.sort((a, b) => a.transform[4] - b.transform[4]); let text = "", end = null;
       for (const it of its) { const x = it.transform[4]; if (end !== null && x - end > 1.2 && !text.endsWith(" ") && !it.str.startsWith(" ")) text += " "; text += it.str; end = x + it.width; }
       text = text.replace(/\s+/g, " ").trim().replace(/\s+([,.;:])/g, "$1").replace(/(\((?:[a-z]{1,3}|[ivx]+|\d{1,3}[A-Z]?)\))(?=[A-Za-z“‘])/g, "$1 ");   // a gap left by a removed marker; a missing space after "(a)"
-      return { page: p, y: r.y, size: Math.max(...its.map((i) => i.height)), text, x: its[0].transform[4], xEnd: Math.max(...its.map((i) => i.transform[4] + i.width)) };
+      return { page: p, y: r.y, size: Math.max(...its.map((i) => i.height)), text, x: its[0].transform[4], xEnd: Math.max(...its.map((i) => i.transform[4] + i.width)), items: its.map((i) => ({ x: i.transform[4], xEnd: i.transform[4] + i.width, str: i.str })) };
     }).filter((l) => l.text);
     // centred lines (cross-headings between sections, "Illustration" labels): equal space left and right, clearly inside the text block
     const left = Math.min(...lines.map((l) => l.x)), right = Math.max(...lines.map((l) => l.xEnd));

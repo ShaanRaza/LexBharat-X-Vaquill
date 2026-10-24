@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O13R10.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O13R10
+Heading: Court may send for papers from its own records or from other Courts
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) The Court may of its own motion, and may in its discretion upon the application of any of the parties to a suit, send for, either from its own records or from any other Court, the record of any other suit or proceeding, and inspect the same.
+(2) Every application made under this rule shall (unless the Court otherwise directs) be supported by an affidavit showing how the record is material to the suit in which the application is made, and that the applicant cannot without unreasonable delay or expense obtain a duly authenticated copy of the record or of such portion thereof as the applicant requires, or that the production of the original is necessary for the purposes of justice.
+(3) Nothing contained in this rule shall be deemed to enable the Court to use in evidence any document which under the law of evidence would be inadmissible in the suit.

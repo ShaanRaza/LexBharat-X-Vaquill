@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O46R1.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O46R1
+Heading: Reference of question to High Court
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where, before or on the hearing of a suit or an appeal in which the decree is not subject to appeal, or where, in the execution of any such decree, any question of law or usage having the force of law arises, on which the Court trying the suit or appeal, or executing the decree, entertains reasonable doubt, the Court may, either of its own motion or on the application of any of the parties, draw up a statement of the facts of the case and the point on which doubt is entertained, and refer such statement with its own opinion on the point for the decision of the High Court.

@@ -1,0 +1,21 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O15A.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O15A
+Heading: Case Management Hearing
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Case Management Hearing
+Rules in this Order:
+1. First Case Management Hearing
+2. Orders to be passed in a Case Management Hearing
+3. Time limit for the completion of a trial
+4. Recording of oral evidence on a day-to-day basis
+5. Case Management Hearings during a trial
+6. Powers of the Court in a Case Management Hearing
+7. Adjournment of Case Management Hearing
+8. Consequences of non-compliance with orders

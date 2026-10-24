@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O40R3.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O40R3
+Heading: Duties
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Every receiver so appointed shall—
+(a) furnish such security (if any) as the Court thinks fit, duly to account for what he shall receive in respect of the property;
+(b) submit his accounts at such periods and in such form as the Court directs;
+(c) pay the amount due from him as the Court directs; and
+(d) be responsible for any loss occasioned to the property by his wilful default or gross negligence.

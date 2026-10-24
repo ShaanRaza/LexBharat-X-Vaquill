@@ -1,0 +1,20 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O33R5.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O33R5
+Heading: Rejection of application
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The Court shall reject an application for permission to use as [an indigent person]—
+(a) where it is not framed and presented in the manner prescribed by rules 2 and 3, or
+(b) where the applicant is not [an indigent person], or
+(c) where he has, within two months next before the presentation of the application, disposed of any property fraudulently or in order to be able to apply for permission to use as [an indigent person]:
+[Provided that no application shall be rejected if, even after the value of the property disposed of by the applicant is taken into account, the applicant would be entitled to sue as an indigent person.] or
+(d) where his allegations do not show a cause of action, or
+(e) where he has entered into any agreement with reference to the subject-matter of the proposed suit under which any other person has obtained an interest in such subject-matter; [or]
+[(f) where the allegations, made by the applicant in the application show that the suit would be barred by any law for the time being in force, or
+(g) where any other person has entered into an agreement with him to finance the litigation.]

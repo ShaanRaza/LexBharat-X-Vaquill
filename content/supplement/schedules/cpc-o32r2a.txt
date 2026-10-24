@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O32R2A.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O32R2A
+Heading: Security to be furnished by next friend when so ordered
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where a suit has been instituted on behalf of the minor by his next friend, the Court may, at any stage of the suit, either of its own motion or on the application of any defendant, and for reasons to be recorded, order the next friend to give security for the payment of all costs incurred or likely to be incurred by the defendant.
+(2) Where such a suit is instituted by an indigent person, the security shall include the court-fees payable to the Government.
+(3) The provisions of rule 2 of Order XXV shall, so far as may be, apply to a suit where the Court makes an order under this rule directing security to be furnished.

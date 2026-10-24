@@ -7,6 +7,8 @@ import { ALL_COURTS } from "@/data/workspaceBrowse";
 import { getJudgmentsStore } from "@/lib/judgments";
 import { JUDGE_COURTS, SC_SLUG, provenanceRows } from "@/lib/judgments/provenance";
 import { WORKSPACE_SUFFIX } from "@/lib/release";
+import StatuteText, { LawsReferred } from "@/components/workspace/StatuteLinks";
+import { lawsReferred, resolveMentions } from "@/lib/judgments/statuteResolve";
 
 // Case detail. Route scheme (stable): /workspace/browse/judgments/<court-slug>/<year>/<caseId>?p=<100-case page>&lp=<list page>
 // `p` locates a High Court case inside the exported pages (the Supreme Court ignores it); `lp` only restores the list page on "back".
@@ -23,6 +25,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
   const c = await store.get(slug, year, caseId, p ? Math.floor(Number(p)) || undefined : undefined);
   if (!c) notFound(); // a real 404: the link does not match a case in the exported list (see the route scheme above)
   const [stats, preview] = await Promise.all([store.stats(), sc ? store.preview(slug, year, caseId) : Promise.resolve(null)]);
+  const mentions = preview ? await resolveMentions(preview, Number.isInteger(year) ? year : null) : [];   // Act sections named in the opening text, linked where our data has them
   const back = `/workspace/browse/judgments/${slug}?year=${year}${ya === "1" ? "&years=all" : ""}${lp && Number(lp) > 1 ? `&page=${Math.floor(Number(lp))}` : ""}`;
   const parties = c.petitioner && c.respondent ? `${c.petitioner} v. ${c.respondent}` : null;
   const heading = parties ?? c.title ?? (c.caseNumber ? `Case ${c.caseNumber}` : `Case record ${c.caseId}`);
@@ -31,14 +34,14 @@ export default async function CasePage({ params, searchParams }: { params: Promi
   const benchWord = (n: number) => (n === 1 ? "Single judge" : n === 2 ? "Division bench" : `${n}-judge bench`);
   // Best identifier to copy: the Supreme Court citation; otherwise the case number with court and date. Never an invented citation.
   const ref = c.citation ?? `${c.caseNumber ? `Case no. ${c.caseNumber}` : `Record ${c.caseId}`}, ${court.name}${date ? ` (decided ${date})` : `, ${year}`}`;
-  const chip = "rounded-md bg-accent px-2 py-0.5";
+  const chip = "rounded-chip bg-accent px-2 py-0.5";
   const rows: [string, React.ReactNode][] = [
     ["Court", court.name],
     ["Decision date", date ?? `Not recorded (listed under ${year} from the record's year)`],
     ...(sc ? ([["Citation", c.citation ? <span key="c" className="inline-flex items-center gap-2"><code className="font-mono">{c.citation}</code><CopyButton text={c.citation} label="Copy citation" /></span> : "No citation recorded for this case"]] as [string, React.ReactNode][])
            : ([["Reporter citation", "None in this dataset for High Courts. Cite by case number."], ["Case number", c.caseNumber ?? "Not recorded"]] as [string, React.ReactNode][])),
-    ...(sc ? ([["Case number", c.caseNumberExtracted ? <span key="cn">{c.caseNumberExtracted} <span className="text-[12px] text-muted">◐ from the judgment text; the dataset has no Supreme Court case numbers</span></span> : "Not in the dataset, and not found in a clean form in the report heading"]] as [string, React.ReactNode][]) : []),
-    ...(c.benchExtracted?.length ? ([["Bench (from judgment text)", <span key="fb" className="flex flex-wrap items-center gap-1.5">{c.benchExtracted.map((j) => <span key={j} className="rounded-md bg-accent px-2 py-0.5 text-[13px]">{j}</span>)}<span className="text-[12px] text-muted">◐ {c.benchExtracted.length} {c.benchExtracted.length === 1 ? "judge" : "judges"}, read from the judgment heading</span></span>]] as [string, React.ReactNode][]) : []),
+    ...(sc ? ([["Case number", c.caseNumberExtracted ? <span key="cn">{c.caseNumberExtracted} <span className="text-ui-xs text-muted">◐ from the judgment text; the dataset has no Supreme Court case numbers</span></span> : "Not in the dataset, and not found in a clean form in the report heading"]] as [string, React.ReactNode][]) : []),
+    ...(c.benchExtracted?.length ? ([["Bench (from judgment text)", <span key="fb" className="flex flex-wrap items-center gap-1.5">{c.benchExtracted.map((j) => <span key={j} className="rounded-chip bg-accent px-2 py-0.5 text-ui-sm">{j}</span>)}<span className="text-ui-xs text-muted">◐ {c.benchExtracted.length} {c.benchExtracted.length === 1 ? "judge" : "judges"}, read from the judgment heading</span></span>]] as [string, React.ReactNode][]) : []),
     ["Disposition", c.dispositionLabel && c.disposition && c.dispositionLabel.toLowerCase() !== c.disposition.toLowerCase() ? `${c.dispositionLabel} (as recorded: ${c.disposition})` : (c.dispositionLabel ?? c.disposition ?? "Not recorded")],
     ...(c.title && c.title !== heading ? ([["Case reference (as titled)", c.title]] as [string, React.ReactNode][]) : []),
     ...(c.judges?.length ? ([[sc ? "Authoring judge (as listed in the source)" : "Judges", c.judges.join(", ")]] as [string, React.ReactNode][]) : []),
@@ -52,45 +55,46 @@ export default async function CasePage({ params, searchParams }: { params: Promi
   return (
     <BrowseShell>
       <div className="mx-auto max-w-[880px] pt-2">
-        <nav aria-label="Breadcrumb" className="text-[14px] text-[#535151]">
+        <nav aria-label="Breadcrumb" className="text-ui-base text-secondary">
           <Link href="/workspace/browse" className="inline-flex min-h-8 items-center hover:text-primary hover:underline">Browse Laws &amp; Judgments</Link><span aria-hidden> / </span>
           <Link href={`/workspace/browse/judgments/${slug}`} className="hover:text-primary hover:underline">{court.name}</Link><span aria-hidden> / </span>
           <Link href={back} className="hover:text-primary hover:underline">{year}</Link>
         </nav>
-        <h1 className="mt-2 text-[24px] font-semibold leading-snug tracking-[-0.02em]">{heading}</h1>
-        <p className="mt-1.5 flex flex-wrap items-center gap-2 text-[14px] text-[#535151]">
+        <h1 className="mt-2 text-ui-title font-semibold leading-snug tracking-[-0.02em]">{heading}</h1>
+        <p className="mt-1.5 flex flex-wrap items-center gap-2 text-ui-base text-secondary">
           <span>{court.name}</span>
           {c.citation ? <><span aria-hidden>·</span><code className="font-mono text-foreground">{c.citation}</code></> : c.caseNumber ? <><span aria-hidden>·</span><span>Case no. {c.caseNumber}</span></> : null}
           {sc && c.caseNumberExtracted ? <><span aria-hidden>·</span><span title="From the judgment text">{c.caseNumberExtracted} ◐</span></> : null}
           <span aria-hidden>·</span><span>{date ?? year}</span>
         </p>
-        <p className="mt-3 flex flex-wrap items-center gap-1.5 text-[12px] text-[#535151]">
+        <p className="mt-3 flex flex-wrap items-center gap-1.5 text-ui-xs text-secondary">
           {(c.dispositionLabel ?? (sc ? c.disposition : undefined)) && <span className={chip}>{c.dispositionLabel ?? c.disposition}</span>}
           {benchN ? <span className={chip} title={c.benchExtracted?.length ? "Counted from the bench read from the judgment text" : undefined}>{benchWord(benchN)}{c.benchExtracted?.length ? " ◐" : ""}</span> : null}
           {c.pages ? <span className={chip}>{c.pages} {c.pages === 1 ? "page" : "pages"}</span> : null}
-          <CopyButton text={ref} label={c.citation ? "Copy citation" : "Copy case reference"} className="!text-[12px] !px-2 !py-0.5" />
-          <span className="text-[12px] text-muted">{c.citation ? "Copies the citation" : "Copies the case number with court and date"}</span>
+          <CopyButton text={ref} label={c.citation ? "Copy citation" : "Copy case reference"} className="!text-ui-xs !px-2 !py-0.5" />
+          <span className="text-ui-xs text-muted">{c.citation ? "Copies the citation" : "Copies the case number with court and date"}</span>
         </p>
-        <dl className="mt-5 divide-y divide-border/60 rounded-xl bg-surface shadow-sm ring-1 ring-border/60">
-          {rows.map(([k, v]) => (<div key={k} className="grid gap-1 px-5 py-3 sm:grid-cols-[210px_1fr]"><dt className="text-[13px] text-[#535151]">{k}</dt><dd className="text-[15px]">{v}</dd></div>))}
+        <dl className="mt-5 divide-y divide-border/60 rounded-card bg-surface shadow-sm ring-1 ring-border/60">
+          {rows.map(([k, v]) => (<div key={k} className="grid gap-1 px-5 py-3 sm:grid-cols-[210px_1fr]"><dt className="text-ui-sm text-secondary">{k}</dt><dd className="text-ui-body">{v}</dd></div>))}
         </dl>
         {preview && (
-          <section aria-labelledby="preview" className="mt-5 rounded-xl bg-surface p-5 shadow-sm ring-1 ring-border/60">
-            <h2 id="preview" className="text-[12px] font-semibold uppercase tracking-[0.08em] text-[#535151]">Opening text (as extracted)</h2>
-            <p className="mt-2 text-[15px] leading-relaxed">{preview}…</p>
-            <p className="mt-2 text-[12px] text-muted">The first part of the English report, usually the headnote. OCR errors are possible. The full judgment text is not available in LexBharat.</p>
+          <section aria-labelledby="preview" className="mt-5 rounded-card bg-surface p-5 shadow-sm ring-1 ring-border/60">
+            <h2 id="preview" className="text-ui-xs font-semibold uppercase tracking-[0.08em] text-secondary">Opening text (as extracted)</h2>
+            <p className="mt-2 text-ui-body leading-relaxed"><StatuteText text={preview} mentions={mentions} />…</p>
+            <LawsReferred laws={lawsReferred(mentions)} />
+            <p className="mt-2 text-ui-xs text-muted">The first part of the English report, usually the headnote. OCR errors are possible. The full judgment text is not available in LexBharat.</p>
           </section>
         )}
-        <section aria-labelledby="prov" className="mt-5 rounded-xl bg-accent/50 p-5 ring-1 ring-border/50">
-          <h2 id="prov" className="text-[12px] font-semibold uppercase tracking-[0.08em] text-[#535151]">Where each field comes from</h2>
-          <p className="mt-1 text-[13px] text-[#535151]">All data is from the open-india-law dataset ({stats.attribution?.licence}, snapshot {stats.attribution?.snapshot}). ✓ as recorded, ◐ present but imperfect, – absent, with the reason.</p>
-          <ul className="mt-3 space-y-1.5 text-[13px]">
-            {prov.map((r) => (<li key={r.field} className="grid grid-cols-[18px_130px_1fr] gap-x-2"><span aria-hidden className="text-muted">{mark[r.state]}</span><span className="font-medium">{r.field}</span><span className="text-[#535151]">{r.note}</span></li>))}
+        <section aria-labelledby="prov" className="mt-5 rounded-card bg-accent/50 p-5 ring-1 ring-border/50">
+          <h2 id="prov" className="text-ui-xs font-semibold uppercase tracking-[0.08em] text-secondary">Where each field comes from</h2>
+          <p className="mt-1 text-ui-sm text-secondary">All data is from the open-india-law dataset ({stats.attribution?.licence}, snapshot {stats.attribution?.snapshot}). ✓ as recorded, ◐ present but imperfect, – absent, with the reason.</p>
+          <ul className="mt-3 space-y-1.5 text-ui-sm">
+            {prov.map((r) => (<li key={r.field} className="grid grid-cols-[18px_130px_1fr] gap-x-2"><span aria-hidden className="text-muted">{mark[r.state]}</span><span className="font-medium">{r.field}</span><span className="text-secondary">{r.note}</span></li>))}
           </ul>
-          {JUDGE_COURTS.includes(slug) && <p className="mt-2 text-[12px] text-muted">Judges and bench are exported only for Bombay, Gujarat and Orissa.</p>}
+          {JUDGE_COURTS.includes(slug) && <p className="mt-2 text-ui-xs text-muted">Judges and bench are exported only for Bombay, Gujarat and Orissa.</p>}
         </section>
-        <Link href={back} className="mt-4 inline-flex h-9 items-center rounded-lg px-3 text-[14px] ring-1 ring-border hover:bg-accent">← Back to {year} cases</Link>
-        {stats.attribution && <p className="mt-6 text-[12px] text-muted">{stats.attribution.text} Licence: {stats.attribution.licence}, snapshot {stats.attribution.snapshot}. <a href={stats.attribution.url} className="underline" rel="noopener noreferrer" target="_blank">Dataset</a> Verify against the official source before relying on it; this is not legal advice.</p>}
+        <Link href={back} className="mt-4 inline-flex h-9 items-center rounded-panel px-3 text-ui-base ring-1 ring-border hover:bg-accent">← Back to {year} cases</Link>
+        {stats.attribution && <p className="mt-6 text-ui-xs text-muted">{stats.attribution.text} Licence: {stats.attribution.licence}, snapshot {stats.attribution.snapshot}. <a href={stats.attribution.url} className="underline" rel="noopener noreferrer" target="_blank">Dataset</a> Verify against the official source before relying on it; this is not legal advice.</p>}
       </div>
     </BrowseShell>
   );

@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R6.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R6
+Heading: Procedure where Court desires that its own decree shall be executed by another Court
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The Court sending a decree for execution shall send—
+(a) a copy of the decree;
+(b) a certificate setting forth that satisfaction of the decree has not been obtained by execution within the jurisdiction of the Court by which it was passed, or, where the decree has been executed in part, the extent to which satisfaction has been obtained and what part of the decree remains unsatisfied; and
+(c) a copy of any order for the execution of the decree, or, if no such order has been made, a certificate to that effect.

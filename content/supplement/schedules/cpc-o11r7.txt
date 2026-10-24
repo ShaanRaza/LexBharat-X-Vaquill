@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O11R7.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O11R7
+Heading: Certain provisions of the Code of Civil Procedure, 1908 not to apply
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+For avoidance of doubt, it is hereby clarified that Order XIII Rule 1, Order VII Rule 14 and Order VIII Rule 1A of the Code of Civil Procedure, 1908 (5 of 1908) shall not apply to suits or applications before the Commercial Divisions of High Court or Commercial Courts.

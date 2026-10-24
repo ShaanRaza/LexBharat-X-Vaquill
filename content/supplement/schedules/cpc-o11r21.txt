@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O11R21.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O11R21
+Heading: Non-compliance with order for discovery
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+[(1)] Where any party fails to comply with any order to answer interrogatories, or for discovery or inspection of documents, he shall, if a plaintiff, be liable to have his suit dismissed for want of prosecution, and, if a defendant, to have his defence, if any struck out, and to be placed in the same position as if he had not defended, and the party interrogating or seeking discovery or inspection may apply to the Court for an order to that effect and [an order may be made on such application accordingly, after notice to the parties and after giving them a reasonable opportunity of being heard.]
+[(2) Where an order is made under sub-rule (1) dismissing any suit, the plaintiff shall be precluded from bringing a fresh suit on the same cause of action.]

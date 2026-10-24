@@ -16,3 +16,6 @@ Each `.txt` file here is one section that is missing or wrong in our data. Every
 - Files marked "Replaces existing text: yes" (CPC sections 11 and 20) are sections where our data holds the wrong text under that number. Your text replaces it on screen and in search; the original rows are never changed or deleted.
 - If you change `Source URL` or `Date copied`, the file counts as changed and is loaded again.
 - Not sure about a file? Run with `--dry-run` first.
+
+## Orders, Rules and Articles of the Schedules (W8)
+`content/supplement/schedules/` holds one file per Order and Rule of the CPC First Schedule, per Article of the Limitation Act Schedule and per Article of Schedule I of the Indian Stamp Act (955 files, written by `node scripts/supplement/fill-schedules.mjs` from the PDFs, every word checked). The "Section" line is `O39R1` (Order 39 Rule 1), `O39` (the Order) or `A137` (Article 137). `npm run load:supplement` reads this folder as well. See `docs/W8.md`.

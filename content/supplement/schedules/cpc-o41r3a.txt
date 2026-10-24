@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O41R3A.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O41R3A
+Heading: Application for condonation of delay
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) When an appeal is presented after the expiry of the period of limitation specified therefore, it shall be accompanied by an application supported by affidavit setting forth the facts on which the appellant relies to satisfy the Court that he had sufficient cause for not preferring the appeal within such period.
+(2) If the Court sees no reason to reject the application without the issue of a notice to the respondent, notice hereof shall be issued to the respondent and the matter shall be finally decided by the Court before it proceeds to deal with the appeal under rule 11 or rule 13, as the case may be.
+(3) Where an application has been made under sub-rule (1), the Court shall not make an order fact the stay of execution of the decree against which the appeal is proposed to be filed so long as the Court does not, after hearing under rule 11, decide to hear the appeal.

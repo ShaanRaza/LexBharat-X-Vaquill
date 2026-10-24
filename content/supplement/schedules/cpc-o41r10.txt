@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O41R10.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O41R10
+Heading: Appellate Court may require appellant to furnish security for costs
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) The Appellate Court may in its discretion, either before the respondent is called upon to appear and answer or afterwards on the application of the respondent, demand from the appellant security for the costs of the appeal, or of the original suit, or of both:
+Where appellant resides out of India.—Provided that the Court shall demand such security in all cases in which the appellant is residing out of [India], and is not possessed of any sufficient immovable property within [India] other than the property (if any) to which the appeal relates.
+(2) Where such security is not furnished within such time as the Court orders, the Court shall reject the appeal.

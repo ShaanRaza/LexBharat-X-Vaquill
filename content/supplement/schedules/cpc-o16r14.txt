@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O16R14.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O16R14
+Heading: Court may of its own accord summon as witnesses strangers to suit
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Subject to the provisions of this Code as to attendance and appearance and to any law for the time being in force, where the Court at any time thinks it necessary [to examine any person, including a party to the suit] and not called as a witness by a party to the suit, the Court may, of its own motion, cause such person to be summoned as a witness to give evidence, or to produce any document in his possession, on a day to be appointed, and may examine him as a witness or require him to produce such document.

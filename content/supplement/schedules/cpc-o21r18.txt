@@ -1,0 +1,23 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R18.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R18
+Heading: Execution in case of cross-decrees
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where applications are made to a Court for the execution of cross-decrees in separate suits for the payment of two sums of money passed between the same parties and capable of execution at the same time by such Court, then—
+(a) if the two sums are, equal, satisfaction shall be entered upon both decrees; and
+(b) if the two sums are unequal execution may be taken out only by the holder of the decree for the larger sum and for so much only as remains after deducting the smaller sum, and satisfaction for the smaller sum shall be entered on the decree for the larger sum as well as satisfaction on the decree for the smaller sum.
+(2) This rule shall be deemed to apply where either party is an assignee of one of the decrees and as well in respect of judgment-debts due by the original assignor as in respect of judgment-debts due by the assignee himself.
+(3) This rule shall not be deemed to apply unless—
+(a) the decree-holder in one of the suits in which the decrees have been made is the judgment-debtor in the other and each party files the same character in both suits; and
+(b) the sums due under the decrees are definite.
+(4) The holder of a decree passed against several persons jointly and severally may treat it as a cross-decree in relation to a decree passed against him singly in favour of one or more of such persons.
+
+Illustrations
+(a) A holds a decree against B for Rs. 1,000. B holds a decree against A for payment of Rs. 1,000 in case A fails to deliver certain goods at a future day. B cannot treat his decree as a cross-decree under this rule.
+(b) A and B, co-plaintiffs, obtain a decree for Rs. 1,000. against C, and C obtains a decree for Rs. 1,000 against B. C cannot treat his decree as a cross-decree under this rule. A obtains a decree against B for Rs. 1,000. C, who is a trustee for B, obtains a decree on behalf of B against A for Rs. 1,000. B cannot treat C's decree as a cross-decree under this rule. A, B, C, D and E are jointly and severally liable for Rs. 1,000 under a decree obtained by F. A obtains a decree for Rs. 1,000 against F singly and applies for execution to the Court in which the joint-decree is being executed. F may treat his joint-decree as cross-decree under this rule.

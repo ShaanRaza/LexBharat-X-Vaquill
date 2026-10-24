@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { SCAN_LABEL } from "@/lib/vault/scan.mjs";
 import { useMemo, useState } from "react";
 import { Notice, Panel } from "@/components/kit";
 import { MB } from "@/lib/vault/files.mjs";
@@ -13,7 +14,7 @@ const SORTS = { newest: "Newest first", oldest: "Oldest first", name: "Name (A t
 type Sort = keyof typeof SORTS;
 const size = (b: number) => (b >= MB ? `${(b / MB).toFixed(1)} MB` : `${Math.max(1, Math.round(b / 1024))} KB`);
 const when = (iso: string) => new Date(iso).toLocaleString("en-IN", { day: "numeric", month: "short", year: "numeric" });
-const TYPE = { pdf: "PDF", docx: "Word", txt: "Text" } as const;
+const TYPE = { pdf: "PDF", docx: "Word", txt: "Text", jpg: "Picture", png: "Picture" } as const;
 const BTN = "rounded-chip px-2.5 py-2 text-ui-sm text-secondary hover:bg-accent focus-visible:outline-2";
 const backToRename = (id: string) => requestAnimationFrame(() => setTimeout(() => document.getElementById(`rb-${id}`)?.focus(), 0));   // keep keyboard focus on the row after the edit box closes
 
@@ -30,7 +31,7 @@ export default function VaultApp() {
     <div className="mx-auto max-w-4xl pb-10">
       <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Saved on this browser only.</strong> Testing phase: don&apos;t upload confidential client documents.</p></Notice>
       <h1 className="mt-6 text-ui-title font-semibold">Vault</h1>
-      <p className="mt-2 text-ui-body text-secondary">Keep your own documents here, then attach them to a chat question or review them as contracts. PDF, Word and text files, up to {lim?.maxFileMb ?? 10} MB each.</p>
+      <p className="mt-2 text-ui-body text-secondary">Keep your own documents here, then attach them to a chat question or review them as contracts. PDF, Word, text and picture (JPG, PNG) files, up to {lim?.maxFileMb ?? 10} MB each. Scanned pages are read by a model (at most 20 scanned pages per document and 5 scanned documents a day) and marked &quot;Read from scan — check the original&quot;.</p>
       {v.state && !v.state.ready && <Notice tone="warn" role="status" className="mt-4"><p>The Vault is not set up on this server yet (no storage configured).</p></Notice>}
       {v.failed && <Notice tone="bad" role="alert" className="mt-4"><p>Could not load the Vault. Reload the page.</p></Notice>}
 
@@ -52,7 +53,7 @@ export default function VaultApp() {
         </div>
         {err && <Notice tone="bad" role="alert" compact className="mt-3"><p>{err}</p></Notice>}
         <Panel as="div" className="mt-3 px-card py-2">
-          {v.state && v.state.docs.length === 0 && <p className="py-4 text-center text-ui-base text-secondary">No documents yet. Add a PDF, Word or text file to start.</p>}
+          {v.state && v.state.docs.length === 0 && <p className="py-4 text-center text-ui-base text-secondary">No documents yet. Add a PDF, Word, text, JPG or PNG file to start.</p>}
           {v.state && v.state.docs.length > 0 && docs.length === 0 && <p className="py-4 text-center text-ui-base text-secondary">No document matches “{q}”.</p>}
           {!v.state && !v.failed && <p className="py-4 text-ui-base text-muted">Loading…</p>}
           <ul className="divide-y divide-border/60">
@@ -78,7 +79,9 @@ export default function VaultApp() {
                 )}
                 <p className="mt-1 text-ui-sm text-muted">{TYPE[d.kind]} · {size(d.sizeBytes)} · {d.pages ? `${d.pages} page${d.pages === 1 ? "" : "s"}` : d.kind === "pdf" ? "pages: not known yet" : "no page numbers"} · added {when(d.createdAt)}</p>
                 {d.status === "unreadable" && d.statusDetail && <p className="mt-1 text-ui-sm text-quality-bad">{d.statusDetail}</p>}
-                {d.status === "processing" && <p className="mt-1 text-ui-sm text-muted">{v.wait[d.id] || (d.chunkCount ? "Preparing it for search. You can leave this page; it carries on when you come back." : "Reading the file…")}</p>}
+                {d.scanned && d.status === "ready" && <p className="mt-1 text-ui-sm text-quality-warn">{SCAN_LABEL}{d.scanSkipped > 0 ? `. ${d.scanSkipped} scanned page${d.scanSkipped === 1 ? " was" : "s were"} not read (limit per document).` : "."}</p>}
+                {d.status === "waiting" && <p className="mt-1 text-ui-sm text-quality-warn">{d.statusDetail || "Waiting to read. It will carry on by itself."} You can leave this page; it carries on when you come back.</p>}
+                {d.status === "processing" && <p className="mt-1 text-ui-sm text-muted">{v.wait[d.id] || d.statusDetail || (d.chunkCount ? "Preparing it for search. You can leave this page; it carries on when you come back." : "Reading the file…")}</p>}
               </li>
             ))}
           </ul>

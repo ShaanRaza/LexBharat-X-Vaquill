@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R46.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R46
+Heading: Attachment of debt, share and other property not in possession of judgment-debtor
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) In the case of—
+(a) a debt not secured by a negotiable instrument, (b) a share in the capital of a corporation, (c) other movable property not in the possession of the judgment-debtor, except property deposited in, or in the custody of, any Court, the attachment shall be made by a written order prohibiting,—
+(i) in the case of the debt, the credit or from recovering the debt and the debtor from making payment thereof until the further order of the Court;
+(ii) in the case of the share, the person in whose name the share may be standing from transferring the same or receiving any dividend thereon;
+(iii) in the case of the other movable property except as aforesaid, the person in possession of the same from giving it over to the judgment-debtor.
+(2) A copy of such order shall be affixed on some conspicuous part of the court-house, and another copy shall be sent in the case of the debt, to the debtor; in the case of the share, to the proper officer of the corporation, and, in the case of the other movable property (except as aforesaid), to the person in possession of the same.
+(3) A debtor prohibited under clause (i) of sub-rule (1) may pay the amount of his debt into Court, and such payment shall discharge him as effectually as payment to the party entitled to receive the same.

@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A8.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A8
+Heading: APPRAISEMENT OR VALUATION made otherwise than under an order of the Court in the course of
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: APPRAISEMENT OR VALUATION made otherwise than under an order of the Court in the course of a suit— (a) where the amount does not exceed Rs. 1,000; (b) in an other case……………………………. Exemptions (a) Appraisement or valuation made for the information of one party only, and not being in any manner obligatory between parties either by agreement or operation of law. (b) Appraisement of crops for the purpose of ascertaining the amount to be given to a landlord as rent.
+Proper stamp-duty: The same duty as a Bond (No. 15) for such amount. Five rupees.

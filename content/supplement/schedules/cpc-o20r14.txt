@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O20R14.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O20R14
+Heading: Decree in pre-emption suit
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where the Court decrees a claim to pre-emption in respect of a particular sale of property and the purchase-money has not been paid into Court, the decree shall—
+(a) specify a day on or before which the purchase-money shall be so paid, and
+(b) direct that on payment into Court of such purchase-money, together with the costs (if any) decrees against the plaintiff, on or before the day referred to in clause (a), the defendant shall deliver possession of the property to the plaintiff, whose title thereto shall be deemed to have accrued from the date of such payment, but that, if the purchase-money and the costs (if any) are not so paid, the suit shall be dismissed with costs.
+(2) Where the Court has adjudicated upon rival claims to pre-emption, the decree shall direct,—
+(a) if and in so far as the claims decreed are equal in decree, that the claim of each pre-emptor complying with the provisions of sub-rule (1) shall take effect in respect of a proportionate share of the property including any proportionate share in respect of which the claim of any pre-emptor failing to comply with the said provisions would, but for such default, have taken effect; and
+(b) if and in so far as the claims decreed are different in degree, that the claim of the inferior preemptor shall not take effect unless and until the superior pre-emptor has failed to comply with the said provisions.

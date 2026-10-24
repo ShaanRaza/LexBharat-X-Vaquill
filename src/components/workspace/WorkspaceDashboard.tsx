@@ -16,9 +16,9 @@ function Action({ title, text, href }: { title: string; text: string; href?: str
 }
 
 const LIVE = ["Acts search: by words, by “exact phrase”, or a section lookup like “138 NI Act”", "Smart search (by meaning) over Central and State Acts", "Chat: plain-English answers from Act sections, with a link to each section used", "Drafting: five templates (cheque-bounce notice, legal notice, NDA, rent agreement, service agreement) grounded in the Acts",
-  "Vault: keep PDF, Word and text files on this browser, and attach them to a chat question (answers cite the document page and the Act section)",
+  "Vault: keep PDF, Word and text files, and scanned pages or photos, on this browser, and attach them to a chat question (answers cite the document page and the Act section)",
   "Review: upload a contract for a summary, clause risks, suggested wording, missing clauses and Indian-law points tied to Act sections"];
-const SOON = ["Smart search over judgments", "Reading scanned documents (OCR)", "Judgments in chat and review answers"];
+const SOON = ["Smart search over judgments", "Judgments in chat and review answers"];
 
 export default function WorkspaceDashboard() {
   const [chats, setChats] = useState<Chat[] | null>(null);

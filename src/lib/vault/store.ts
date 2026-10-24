@@ -2,16 +2,19 @@
 import { sb } from "./supabase";
 import { getFileStore } from "./storage";
 
-export type VaultStatus = "processing" | "ready" | "unreadable";
-export type VaultDoc = { id: string; name: string; kind: "pdf" | "docx" | "txt"; sizeBytes: number; pages: number | null; status: VaultStatus; statusDetail: string | null; chunkCount: number; embeddedCount: number; createdAt: string; updatedAt: string };
+export type VaultStatus = "processing" | "ready" | "unreadable" | "waiting";
+export type VaultDoc = { id: string; name: string; kind: "pdf" | "docx" | "txt" | "jpg" | "png"; sizeBytes: number; pages: number | null; status: VaultStatus; statusDetail: string | null; chunkCount: number; embeddedCount: number; createdAt: string; updatedAt: string;
+  /** some pages were read from images (see scan.mjs); scanPages = how many were read, scanSkipped = image-only pages beyond the limit that were not */
+  scanned: boolean; scanPages: number; scanTotal: number; scanSkipped: number };
 export type Passage = { id: string; docId: string; idx: number; page: number | null; label: string | null; body: string };
 
 import { isUuid } from "./ids";
 export { isUuid };
 type Row = Record<string, unknown>;
 const doc = (r: Row): VaultDoc => ({ id: r.id as string, name: r.name as string, kind: r.kind as VaultDoc["kind"], sizeBytes: Number(r.size_bytes), pages: (r.pages as number | null) ?? null, status: r.status as VaultStatus,
-  statusDetail: (r.status_detail as string | null) ?? null, chunkCount: Number(r.chunk_count), embeddedCount: Number(r.embedded_count), createdAt: r.created_at as string, updatedAt: r.updated_at as string });
-const COLS = "id,name,kind,size_bytes,pages,status,status_detail,chunk_count,embedded_count,created_at,updated_at";
+  statusDetail: (r.status_detail as string | null) ?? null, chunkCount: Number(r.chunk_count), embeddedCount: Number(r.embedded_count), createdAt: r.created_at as string, updatedAt: r.updated_at as string,
+  scanned: !!r.scanned, scanPages: Number(r.scan_pages ?? 0), scanTotal: Number(r.scan_total ?? 0), scanSkipped: Number(r.scan_skipped ?? 0) });
+const COLS = "id,name,kind,size_bytes,pages,status,status_detail,chunk_count,embedded_count,created_at,updated_at,scanned,scan_pages,scan_total,scan_skipped";
 const must = <T>(r: { data: T | null; error: { message: string } | null }): T => { if (r.error) throw new Error(r.error.message); return r.data as T; };
 
 export async function listDocs(bid: string): Promise<VaultDoc[]> { return must(await sb().from("vault_documents").select(COLS).eq("browser_id", bid).order("created_at", { ascending: false })).map(doc); }
@@ -28,7 +31,7 @@ export async function getDocs(bid: string, ids: string[]): Promise<VaultDoc[]> {
 export async function createDoc(bid: string, d: { id: string; name: string; kind: string; sizeBytes: number; storageKey: string }) {
   must(await sb().from("vault_documents").insert({ id: d.id, browser_id: bid, name: d.name, kind: d.kind, size_bytes: d.sizeBytes, storage_key: d.storageKey }));
 }
-export async function patchDoc(bid: string, id: string, p: Partial<{ name: string; pages: number | null; status: VaultStatus; status_detail: string | null; chunk_count: number; embedded_count: number; size_bytes: number }>) {
+export async function patchDoc(bid: string, id: string, p: Partial<{ name: string; pages: number | null; status: VaultStatus; status_detail: string | null; chunk_count: number; embedded_count: number; size_bytes: number; scanned: boolean; scan_pages: number; scan_total: number; scan_skipped: number }>) {
   const r = must(await sb().from("vault_documents").update({ ...p, updated_at: new Date().toISOString() }).eq("id", id).eq("browser_id", bid).select("id"));
   return r.length > 0;
 }
@@ -80,3 +83,17 @@ export async function usageCounts(bid: string, kind: string): Promise<{ day: num
 }
 export async function addUsage(bid: string, kind: string): Promise<number> { const r = must(await sb().from("vault_usage").insert({ browser_id: bid, kind }).select("id")) as Row[]; return Number(r[0].id); }
 export async function removeUsage(id: number) { await sb().from("vault_usage").delete().eq("id", id); }
+
+// ---- pages read from images (table vault_scan_pages, scripts/w8/w8-schema.sql): one row per page so a document that had to wait resumes where it stopped
+export async function saveScanPage(bid: string, id: string, page: number, body: string) {
+  must(await sb().from("vault_scan_pages").upsert({ doc_id: id, page, browser_id: bid, body }, { onConflict: "doc_id,page" }));
+}
+export async function getScanPages(bid: string, id: string): Promise<Map<number, string>> {
+  const rows = must(await sb().from("vault_scan_pages").select("page,body").eq("doc_id", id).eq("browser_id", bid).order("page")) as Row[];
+  return new Map(rows.map((r) => [Number(r.page), r.body as string]));
+}
+/** The page numbers of one document that were read from images (empty when none, or when the scan table does not exist yet). */
+export async function scanPageNumbers(bid: string, id: string): Promise<number[]> {
+  const r = await sb().from("vault_scan_pages").select("page").eq("doc_id", id).eq("browser_id", bid).order("page");
+  return r.error ? [] : (r.data as Row[]).map((x) => Number(x.page));
+}

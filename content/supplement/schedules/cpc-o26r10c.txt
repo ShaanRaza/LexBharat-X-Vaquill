@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O26R10C.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O26R10C
+Heading: Commission for the sale of movable property
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where, in any suit, it becomes necessary to sell any movable property which is in the custody of the Court pending the determination of the suit and which cannot be conveniently preserved, the Court may, if, for reasons to be recorded, it is of opinion that it is necessary or expedient in the interests of justice so to do, issue a commission to such person as it thinks fit, directing him to conduct such sale and report thereon to the Court.
+(2) The provisions of rule 10 of this Order shall apply in relation to a Commissioner appointed under this rule as they apply in relation to a Commissioner appointed under rule 9.
+(3) Every such sale shall be held, as far as may be, in accordance with the procedure prescribed for the sale of movable property in execution of a decree.

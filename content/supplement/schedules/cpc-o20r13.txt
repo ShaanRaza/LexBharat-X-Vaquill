@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O20R13.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O20R13
+Heading: Decree in administration suit
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where a suit is for an account of any property and for its due administration under the decree of the Court, the Court shall, before passing the final decree, pass a preliminary decree ordering such accounts and inquiries to be taken and made, and giving such other directions as it thinks fit.
+(2) In the administration by the Court of the property of any deceased person, if such property proves to be insufficient for the payment in full of his debts and liabilities, the same rules shall be observed as to the respective rights of secured and unsecured creditors and as to debts and liabilities provable, and as to the valuation of annuities and future and contingent liabilities respectively, as may be in force for the time being, within the local limits of the Court in which the administration suit is pending with respect to the estates of persons adjudged or declared insolvent; and all persons who in any such case would be entitled to be paid out of such property, may come in under the preliminary decree, and make such claims against the same as they may respectively be entitled to by virtue of this Code.

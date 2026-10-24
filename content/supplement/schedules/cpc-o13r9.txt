@@ -1,0 +1,21 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O13R9.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O13R9
+Heading: Return of admitted documents
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Any person, whether a party to the suit or not, desirous of receiving back any documents produced by him in the suit and placed on the record shall, unless the document is impounded under rule 8, be entitled to receive back the same,—
+(a) where the suit is one in which an appeal is not allowed, when the suit has been disposed of, and
+(b) where the suit is one in which an appeal is allowed, when the Court is satisfied that the time for preferring an appeal has elapsed and that no appeal has been preferred or, if an appeal has been preferred, when the appeal has been disposed of:
+[Provided that a document may be returned at any time earlier then that prescribed by this rule if the person applying therefor—
+(a) delivers to the proper officer for being substituted for the original,—
+(i) in the case of a party to the suit, a certified copy, and
+(ii) in the case of any other person, an ordinary copy which has been examined, compared and certified in the manner mentioned in sub-rule (2) of rule 17 of Order VII, and
+(b) undertakes to produce the original, if required to do so:]
+Provided also that no document shall be returned which, by force of the decree, has become wholly void or useless.
+(2) On the return of a document admitted in evidence, a receipt shall be given by the person receiving it.

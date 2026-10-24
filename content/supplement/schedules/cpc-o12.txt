@@ -1,0 +1,24 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O12.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O12
+Heading: Admissions
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Admissions
+Rules in this Order:
+1. Notice of admission of case
+2. Notice to admit documents
+2A. Document to be deemed to be admitted if not denied after service of notice to admit documents
+3. Form of notice
+3A. Power of Court to record admission
+4. Notice to admit acts
+5. Form of admissions
+6. Judgment on admissions
+7. Affidavit of signature
+8. Notice to produce documents
+9. Costs

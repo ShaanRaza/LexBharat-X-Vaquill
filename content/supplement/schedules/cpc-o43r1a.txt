@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O43R1A.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O43R1A
+Heading: Right to challenge non-appealable orders in appeal against decrees
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where any order is made under this Code against a party and thereupon any judgment is pronounced against such party and a decree is drawn up, such party may, in an appeal against the decree, contend that such order should not have been made and the judgment should not have been pronounced.
+(2) In an appeal against a decree passed in a suit after recording a compromise or refusing to record a compromise, it shall be open to the appellant to contest the decree on the ground that the compromise should, or should not, have been recorded.

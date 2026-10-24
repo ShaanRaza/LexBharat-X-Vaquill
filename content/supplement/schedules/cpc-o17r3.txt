@@ -1,0 +1,24 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O17R3.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O17R3
+Heading: Court may proceed notwithstanding either party fails to produce evidence, etc.
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where any party to a suit to whom time has been granted fails to produce his evidence, or to cause the attendance of his witnesses, or to perform any other act necessary to the further progress of the suit, for which time has been allowed [the Court may, notwithstanding such default, (a) if the parties are present, proceed to decide the suit forthwith; or
+(b) if the parties are, or any of them is, absent, proceed under rule 2.] 1. Right to begin.—The plaintiff has the right to begin unless the defendant admits the facts alleged by the plaintiff and contents that either in point of law or on some additional facts alleged by the defendant the plaintiff is not entitled to any part of the relief which he seeks, in which case the defendant has the right to begin. 2. Statement and production of evidence.—(1) On the day fixed for the hearing of the suit or on any other day to which the hearing is adjourned, the party having the right to begin shall state his case and produce his evidence in support of the issues which he is bound to prove.
+(2) The other party shall then state his case and produce his evidence (if any) and may then address the Court generally on the whole case.
+(3) The party beginning may then reply generally on the whole case.
+[(3A) Any party may address oral arguments in a case, and shall, before he concludes the oral arguments, if any, submit if the Court so permits concisely and under distinct headings written arguments in support of his case to the Court and such written arguments shall form part of the record.
+(3B) A copy of such written arguments shall be simultaneously furnished to the opposite party.
+(3C) No adjournment shall be granted for the purpose of filing the written arguments unless the Court, for reasons to be recorded in writing, considers it necessary to grant such adjourment.
+(3D) The Court shall fix such time-limits for the oral arguments by either of the parties in a case, as it thinks fit.] *[(3A) A party shall, within four weeks prior to commencing the oral arguments, submit concisely and under distinct headings written arguments in support of his case to the Court and such written arguments shall form part of the record.
+(3B) The written arguments shall clearly indicate the provisions of the laws being cited in support of the arguments and the citations of judgments being relied upon by the party and include copies of such judgments being relied upon by the party.
+(3C) A copy of such written arguments shall be furnished simultaneously to the opposite party.
+(3D) The Court may, if it deems fit, after the conclusion of arguments, permit the parties to file revised written arguments within a period of not more than one week after the date of conclusion of arguments.
+(3E) No adjournment shall be granted for the purpose of filing the written arguments unless the Court, for reasons to be recorded in writing, considers it necessary to grant such adjournment.
+(3F) It shall be open for the Court to limit the time for oral submissions having regard to the nature and complexity of the matter.] [* * * * *]

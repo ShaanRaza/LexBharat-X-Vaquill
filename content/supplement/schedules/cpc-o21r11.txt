@@ -1,0 +1,29 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R11.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R11
+Heading: Oral application
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where a decree is for the payment of money the Court may, on the oral application of the decree-holder at the time of the passing of the decree, order immediate execution thereof by the arrest of the judgment-debtor, prior to the preparation of a warrant if he is within the precincts of the Court.
+(2) Written application.—Save as otherwise provided by sub-rule (1), every application for the execution of a decree shall be in writing, signed and verified by the applicant or by some other person proved to the satisfaction of the Court to be acquainted with the facts of the case, and shall contain in a tabular form the following particulars, namely:—
+(a) the number of the suit;
+(b) the names of the parties;
+(c) the date of the decree;
+(d) whether any appeal has been preferred from the decree;
+(e) whether any, and (if any) what, payment or other adjustment of the matter in controversy has been made between the parties subsequently to the decree;
+(f) whether any, and (if any) what, previous applications have been made for the execution of the decree, the dates of such applications and their results;
+(g) the amount with interest (if any) due upon the decree, or other relief granted thereby, together with particulars of any cross-decree, whether passed before or after the date of the decree sought to be executed;
+(h) the amount of the costs (if any) awarded;
+(i) the name of the person against whom execution of the decree is sought; and
+(j) the mode in which the assistance of the Court is required whether,—
+(i) by the delivery of any property specifically decreed;
+[(ii) by the attachment, or by the attachment and sale, or by the sale without attachment, of any property;]
+(iii) by the arrest and detention in prison of any person;
+(iv) by the appointment of a receiver;
+(v) otherwise, as the nature of the relief granted may require.
+(3) The Court to which an application is made under sub-rule (2) may require the applicant to produce a certified copy of the decree.

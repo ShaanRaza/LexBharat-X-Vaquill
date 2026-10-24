@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O18R12.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O18R12
+Heading: Remarks on demeanour of witnesses
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The Court may record such remarks as it thinks material respecting the demeanour of any witness while under examination. [ 13. Memorandum of evidence in unappealable cases.—In cases in which an appeal is not allowed, it shall not be necessary to take down or dictate or record the evidence of the witnesses at length; but the Judge, as the examination of each witness proceeds shall make in writing, or dictate directly on the typewriter, or cause to be mechanically recorded, a memorandum of the substance of what the witness deposes, and such memorandum shall be signed by the Judge or otherwise authenticated, and shall form part of the record.]

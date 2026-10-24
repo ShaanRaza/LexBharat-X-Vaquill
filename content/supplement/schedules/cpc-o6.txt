@@ -1,0 +1,32 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O6.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O6
+Heading: Pleadings generally
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Pleadings generally
+Rules in this Order:
+1. Pleading
+2. Pleading to state material facts and not evidence
+3. Forms of pleading
+4. Particulars to be given where necessary
+5. Further and better statement, or particulars
+6. Condition precedent
+7. Departure
+8. Denial of contract
+9. Effect of document to be stated
+10. Malice, knowledge, etc.
+11. Notice
+12. Implied contract, or relation
+13. Presumptions of law
+14. Pleading to be signed
+14A. Address for service of notice
+15. Verification of pleadings
+16. Striking out pleadings
+17. Amendment of pleadings
+18. Failure to amend after Order

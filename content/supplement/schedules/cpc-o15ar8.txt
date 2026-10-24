@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O15AR8.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O15AR8
+Heading: Consequences of non-compliance with orders
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where any party fails to comply with the order of the Court passed in a Case Management Hearing, the Court shall have the power to—
+(a) condone such non-compliance by payment of costs to the Court;
+(b) foreclose the non-compliant party’s right to file affidavits, conduct cross-examination of witnesses, file written submissions, address oral arguments or make further arguments in the trial, as the case may be, or
+(c) dismiss the plaint or allow the suit where such non-compliance is wilful, repeated and the imposition of costs is not adequate to ensure compliance.

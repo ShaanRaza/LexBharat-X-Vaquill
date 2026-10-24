@@ -1,0 +1,36 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O42R3.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O42R3
+Heading: Application of rule 14 of Order XLI
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Reference in sub-rule (4) of rule 14 of Order XLI to the Court of first instance shall, in the case of an appeal from an appellate decree or order, be construed as a reference to the Court to which the appeal was preferred from the original decree or order.] 1. Appeal from orders.—An appeal shall lie from the following orders under the provisions of section 104, namely:—
+(a) an order under rule 10 of Order VII returning a plaint to be presented to the proper Court [except where the procedure specified in rule 10A of Order VII has been followed]; * * * * *.
+(c) an order under rule 9 of order IX rejecting an application (in a case open to appeal) for an order to set aside the dismissal of a suit;
+(d) an order under rule 13 of Order IX rejecting an application (in a case open to appeal) for an order to set aside a decree passed ex parte; * * * * *
+(f) an order under rule 21 of Order XI; * * * * *
+(i) an order under rule 34 of Order XXI on an objection to the draft of a document or of an endorsement;
+(j) an order under rule 72 or rule 92 of Order XXI setting aside or refusing to set aside a sale;
+[(ja) an order rejecting an application made under sub-rule (1) of rule 106 of Order XXI, provided that an order on the original application, that is to say, the application referred to in sub-rule (1) of rule 105 of that Order is appealable;]
+(k) an order under rule 9 of Order XXII refusing to set aside the abatement or dismissal of a suit;
+(l) an order under rule 10 of Order XXII giving or refusing to give leave; * * * * *
+(n) an order under rule 2 of Order XXV rejecting an application (in a case open to appeal) for an order to set aside the dismissal of a suit;
+[(na) an order under rule 5 or rule 7 of Order XXXIII rejecting an application for permission to sue as an indigent person;] * * * * *
+(p) orders in interpleader-suits under rule 3, rule 4 or rule 6 of Order XXXV;
+(q) an order under rule 2, rule 3 or rule 6 of Order (XXVIII);
+(r) an order under rule 1, rule 2 [rule 2A], rule 4 or rule 10 of Order XXXIX;
+(s) an order under rule 1, or rule 4 of Order XL;
+(t) an order of refusal under rule 19 of Order XLI to re-admit, or under rule 21 of Order XLI to re-hear, an appeal;
+(u) an order under rule 23 [or rule 23A] of Order XLI remanding a case, where an appeal would lie from the decree of the Appellate Court; * * * * *
+(w) an order under rule 4 of Order XLVII granting an application for review. [1A. Right to challenge non-appealable orders in appeal against decrees.—(1) Where any order is made under this Code against a party and thereupon any judgment is pronounced against such party and a decree is drawn up, such party may, in an appeal against the decree, contend that such order should not have been made and the judgment should not have been pronounced.
+(2) In an appeal against a decree passed in a suit after recording a compromise or refusing to record a compromise, it shall be open to the appellant to contest the decree on the ground that the compromise should, or should not, have been recorded.] 2. Procedure.—The rules of Order XLI shall apply, so far as may be, to appeals from orders. 1. Who may appeal [as an indigent person]. — [(1)] Any person entitled to prefer an appeal, who is unable to pay the fee required for the memorandum of appeal, may present an application accompanied by a memorandum of appeal, and may be allowed to appeal as an [indigent person], subject, in all matters, including the presentation of such application, to the provisions relating to suits by [indigent persons], in so far as those provisions are applicable. * * * * * * * * * * [2. Grant of time for payment of court-fee.—Where an application is rejected under rule 1, the Court may, while rejecting the application, allow the applicant to pay the requisite Court-fee, within such time as may be fixed by the Court or extended by it from time to time; and upon such payment, the memorandum of appeal in respect of which such fee is payable shall have the same force and effect as if such fee had been paid in the first instance. 3. Inquiry as to whether applicant is an indigent person.—(1) Where an applicant, referred to in rule 1, was allowed to sue or appeal as an indigent person in the Court from whose decree the appeal is preferred, no further inquiry in respect of the question whether or not he is an indigent person shall be necessary if the applicant has made an affidavit stating that he has not ceased to be an indigent person since the date of the decree appealed from; but if the Government Pleader or the respondent disputes the truth of the statement made in such affidavit, an inquiry into the question aforesaid shall be held by the Appellate Court, or, under the orders of the Appellate Court, by an officer of that Court.
+(2) Where the applicant, referred to in rule 11, is alleged to have become an indigent person since the date of the decree appealed from, the inquiry into the question whether or not he is an indigent person shall be made by the Appellate Court or, under the orders of the Appellate Court, by an officer of that Court unless the Appellate Court considers it necessary in the circumstances of the case that the inquiry should be held by the Court from whose decision the appeal is preferred.] 1. “Decree” defined.—In this Order, unless there is something repugnant in the subject or context, the expression “decree” shall include a final order. 2. Application to Court whose decree complained of.— [(1)] Whoever desires to appeal [the Supreme Court] shall apply by petition to the Court whose decree is complained of.
+[(2) Every petition under sub-rule (1) shall be heard as expeditiously as possible and endeavour shall be made to conclude the disposal of the petition within sixty days from the date on which the petition is presented to the Court under sub-rule (1).] 3. Certificate as to value or fitness. — [(1) Every petition shall state the grounds of appeal and pray for a certificate—
+(i) that the case involves a substantial question of law of general importance, and
+(ii) that in the opinion of the Court the said question needs to be decided by the Supreme Court.]
+(2) Upon receipt of such petition, the Court shall direct notice to be served on the opposite party to show cause why the said certificate should not be granted.

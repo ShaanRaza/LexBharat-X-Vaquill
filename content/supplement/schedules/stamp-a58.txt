@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A58.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A58
+Heading: SETTLEMENT
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: SETTLEMENT— instrument of settlement, and an instrument of A.—INSTRUMENT OF, (including a deed of dower)..... settlement in pursuance of such agreement is Exemptions subsequently executed, the duty on such instrument shall not exceed eight annas. (a) Deed of dower executed on the occasion of a marriage between Muhammadans. * * * * * B.— REVOCATION OF—................ The same duty as a Bond (No. 15) for a sum equal to the amount or value of the property concerned as set forth in the Instrument of Revocation but not exceeding ten rupees. See also TRUST (No. 64).
+Proper stamp-duty: —

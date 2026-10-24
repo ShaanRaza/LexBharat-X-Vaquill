@@ -1,0 +1,21 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O31R3.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O31R3
+Heading: Husband of married executrix not to join
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Unless the Court directs otherwise, the husband of a married trustee, administratrix or executrix shall not as such be a party to a suit by or against her. 1. Minor to sue by next friend.—Every suit by a minor shall be instituted in his name by a person who in such suit shall be called the next friend of the minor.
+[Explanation.—In this Order, “minor” means a person who has not attained his majority within the meaning of section 3 of the Indian Majority Act, 1875 (9 of 1875) where the suit relates to any of the matters mentioned in clauses (a) and (b) of section 2 of that Act or to any other matter.] 2. Where suit is instituted without next friend, plaint to be taken off the file.—(1) Where a suit is instituted by or on behalf of a minor without a next friend, the defendant may apply to have the plaint taken off the file, with costs to be paid by the pleader or other person by whom it was presented.
+(2) Notice of such application shall be given to such person, and the Court, after hearing his objections (if any) may make such order in the matter as it thinks fit. [2A. Security to be furnished by next friend when so ordered.—(1) Where a suit has been instituted on behalf of the minor by his next friend, the Court may, at any stage of the suit, either of its own motion or on the application of any defendant, and for reasons to be recorded, order the next friend to give security for the payment of all costs incurred or likely to be incurred by the defendant.
+(2) Where such a suit is instituted by an indigent person, the security shall include the court-fees payable to the Government.
+(3) The provisions of rule 2 of Order XXV shall, so far as may be, apply to a suit where the Court makes an order under this rule directing security to be furnished.] 3. Guardian for the suit to be appointed by Court for minor defendants.—(1) Where the defendant is a minor the Court, on being satisfied of the fact of his minority, shall appoint a proper person to be guardian for the suit for such minor.
+(2) An order for the appointment of a guardian for the suit may be obtained upon application in the name and on behalf of the minor or by the plaintiff.
+(3) Such application shall be supported by an affidavit verifying the fact that the proposed guardian has no interest in the matters in controversy in the suit adverse to that of the minor and that he is a fit person to be so appointed.
+(4) Order shall be made on any application under this rule except upon notice *** to any guardian of the minor appointed or declared by an authority competent in that behalf, or, where there is no such guardian [upon notice to the father or where there is no father, to the mother, or where there is no father or mother, to other natural guardian] of the minor, or, where there is [no father, mother or other natural guardian], to the person in whose care the minor is, and after hearing any objection which may be urged on behalf of any person served with notice under this sub-rule.
+[(4A) The Court may, in any case, if it thinks fit, issue notice under sub-rule (4) to the minor also.]
+[(5) A person appointed under sub-rule (1) to be guardian for the suit for a minor shall, unless his appointment is terminated by retirement, removal or death, continue as such throughout all proceedings arising out of the suit including proceedings in any Appellate or Revisional Court and any proceedings in the execution of a decree.]

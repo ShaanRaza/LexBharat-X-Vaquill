@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O18R8.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O18R8
+Heading: Memorandum when evidence not taken down by Judge
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where the evidence is not taken down in writing by the Judge, [or from his dictation in the open Court, or recorded mechanically in his presence,] he shall be bound, as the examination of each witness proceeds, to make a memorandum of the substance of what each witness deposes, and such memorandum shall be written and signed by the Judge and shall form part of the record. [ 9. When evidence may be taken in English.—(1) Where English is not the language of the Court, but all the parties to the suit who appear in person, and the pleaders of such of the parties as appear by pleaders, do not object to having such evidence as is given in English, being taken down in English, the judge may so take it down or cause it to be taken down.
+(2) Where evidence is not given in English but all the parties who appear in person, and the pleaders of such of the parties as appear by pleaders, do not object to having such evidence being taken down in English, the Judge may take down, or cause to be taken down, such evidence in English.]

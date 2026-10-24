@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O19R3.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O19R3
+Heading: Matters to which affidavits shall be confined
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Affidavits shall be confined to such facts as the deponent is able of his own knowledge to prove, except on interlocutory applications, on which statements of his belief may be admitted: provided that the grounds thereof are stated.
+(2) The costs of every affidavit which shall unnecessarily set forth matters of hearsay or argumentative matter, or copies of or extracts from documents, shall (unless the Court otherwise directs) be paid by the party filing the same.

@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O11R15.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O11R15
+Heading: Inspection of documents referred to in pleadings or affidavits
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Every party to a suit shall be entitled [at or before the settlement of issues] to give notice to any other party, in whose pleadings or affidavits reference is made to any document, [or who has entered any document in any list annexed to his pleadings,] to produce such document for the inspection of the party giving such notice, or of his pleader, and to permit him or them to take copies thereof; and any party not complying with such notice shall not afterwards be at liberty to put any such document in evidence on his behalf in such suit unless he shall satisfy the Court that such document relates only to his own title, he being a defendant to the suit, or that he had some other cause or excuse which the Court shall deem sufficient for not complying with such notice, in which case the Court may allow the same to be put in evidence on such terms as to costs and otherwise as the Court shall think fit.

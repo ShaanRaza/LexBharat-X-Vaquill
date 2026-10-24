@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O14R4.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O14R4
+Heading: Court may examine witnesses or documents before framing issues
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where the Court is of opinion that the issues cannot be correctly framed without the examination of some person not before the Court or without the inspection of some document not produced in the suit, it [may adjourn the framing of issues to a day not later than seven days] and may (subject to any law for the time being in force) compel the attendance of any person or the production of any document by the person in whose possession or power it is by summons or other process.

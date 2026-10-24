@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O9R13.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O9R13
+Heading: Setting aside decree ex parte against defendant
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+In any case in which a decree is passed ex parte against a defendant, he may apply to the Court by which the decree was passed for an order to set it aside; and if he satisfies the Court that the summons was not duly served, or that he was prevented by any sufficient cause from appearing when the suit was called on for hearing, the Court shall make an order setting aside the decree as against him upon such terms as to costs, payment into Court or otherwise as it thinks fit, and shall appoint a day for proceeding with the suit:
+Provided that where the decree is of such a nature that it cannot be set aside as against such defendant only it may be set aside as against all or any of the other defendants also: [Provided further that no Court shall set aside a decree passed ex parte merely on the ground that there has been an irregularity in the service of summons, if it is satisfied that the defendant had notice of the date of hearing and had sufficient time to appear and answer the plaintiff’s claim.]
+[Explanation.—Where there has been an appeal against a decree passed ex parte under this rule, and the appeal has been disposed of an any ground other than the ground that the appellant has withdrawn the appeal, no application shall lie under this rule for setting aside that ex parte decree.]

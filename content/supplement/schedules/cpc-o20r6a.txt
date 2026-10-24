@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O20R6A.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O20R6A
+Heading: Preparation of decree
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Every endeavour shall be made to ensure that the decree is drawn up as expeditiously as possible and, in any case, within fifteen days from the date on which the judgment is pronounced.
+(2) An appeal may be preferred against the decree without filing a copy of the decree and in such a case the copy made available to the party by the court shall for the purposes of rule 1 of Order XLI be treated as the decree. But as soon as the decree is drawn, the judgment shall cease to have the effect of a decree for the purposes of execution or for any other purpose.

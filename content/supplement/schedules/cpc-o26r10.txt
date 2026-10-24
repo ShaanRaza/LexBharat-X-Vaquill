@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O26R10.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O26R10
+Heading: Procedure of Commissioner
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) The Commissioner, after such local inspection as he deems necessary and after reducing to writing the evidence taken by him, shall return such evidence, together with his report in writing signed by him, to the Court.
+(2) Report and depositions to be evidence in suit.—The report of the Commissioner and the evidence taken by him (but not the evidence without the report) shall be evidence in the suit and shall form part of the record; but the Court or, with the permission of the Court, any of the parties to the suit may examine the Commissioner personally in open Court touching any of the matters referred to him or mentioned in his report, or as to his report, or as to the manner in which he has made the investigation.
+(3) Commissioner may be examined in person.—Where the Court is for any reason dissatisfied with the proceedings of the Commissioner, it may direct such further inquiry to be made as it shall think fit. [Commissions for scientific investigation, performance of ministerial act and sale of movable property

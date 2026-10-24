@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A64.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A64
+Heading: TRUST
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: TRUST— A. — DECLARATION OF—of, or concerning, any property when made by any writing not The same duty as a Bond (No. 15) for a sum equal to the amount or value of the being a WILL. property concerned as set forth in the instrument but not exceeding fifteen rupees. B.—REVOCATION OF—of, or concerning, any The same duty as a Bond (No. 15) for a sum equal property when made by any instrument other than a WILL. to the amount or value of the property concerned as set forth in the instrument but not exceeding ten rupees. Four annas. See also SETTLEMENT (No. 58). VALUATION, See APPRAISEMENT (No. 8). VAKIL, See ENTRY AS A VAKIL (No. 30).
+Proper stamp-duty: —

@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O39R2A.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O39R2A
+Heading: Consequence of disobedience or breach of injunction
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) In the case of disobedience of any injunction granted or other order made under rule 1 or rule 2 or breach of any of the terms on which the injunction was granted or the order made, the Court granting the injunction or making the order, or any Court to which the suit or proceeding is transferred, may order the property of the person guilty of such disobedience or breach to be attached, and may also order such person to be detained in the civil prison for a term not exceeding three months, unless in the meantime the Court directs his release.
+(2) No attachment made under this rule shall remain in force for more than one year, at the end of which time, if the disobedience or breach continues, the property attached may be sold and out of the proceeds, the Court may award such compensation as it thinks fit to the injured party and shall pay the balance, if any, to the party entitled thereto.

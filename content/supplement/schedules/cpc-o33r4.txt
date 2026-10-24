@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O33R4.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O33R4
+Heading: Examination of applicant
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where the application is in proper form and duly presented, the Court may, if it thinks fit, examine the applicant, or his agent when the applicant is allowed to appear by agent regarding the merits of the claim and the property of the applicant.
+(2) If presented by agent, Court may order applicant to be examined by commission.—Where the application is presented by an agent, the Court may, if it thinks fit, order that the applicant be examined by a commission in the manner in which the examination of an absent witness may be taken.

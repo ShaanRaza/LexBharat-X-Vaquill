@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Limitation Act, 1963, Schedule (Articles), unit A114.
+# Extracted 2026-10-24 from India Code's PDF A1963-36.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Limitation Act, 1963
+Act ID: IND_central_1565
+Section: A114
+Heading: Appeal from an order of acquittal,— (a) under sub-section (1) or sub-section (2) of section 417 of the Code of Criminal Procedure, 1898 (5 of 1898); (b) under sub-section (3) of section 417 
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/8c2f3bc0-5daf-4d11-971f-ad5f9b78b74b/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of suit: Appeal from an order of acquittal,— (a) under sub-section (1) or sub-section (2) of section 417 of the Code of Criminal Procedure, 1898 (5 of 1898); (b) under sub-section (3) of section 417 of that Code.
+Period of limitation: Ninety days. Thirty days.
+Time from which period begins to run: The date of the order appealed from. The date of the grant of special leave.
+SECOND DIVISION—APPEALS

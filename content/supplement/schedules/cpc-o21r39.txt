@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R39.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R39
+Heading: Subsistence allowance
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) No judgment-debtor shall be arrested in execution of a decree unless and until the decree-holder pays into Court such sum as the Judge thinks sufficient for the subsistence of the judgment-debtor from the time of his arrest until he can be brought before the Court.
+(2) Where a judgment-debtor is committed to the civil prison in execution of a decree, the Court shall fix for his subsistence such monthly allowance as he may be entitled to according to the scales fixed under section 57, or, where no such scales have been fixed, as it considers sufficient with reference to the class to which he belongs.
+(3) The monthly allowance fixed by the Court shall be supplied by the party on whose application the judgement-debtor has been arrested by monthly payments in advance before the first day of each month.
+(4) The first payment shall be made to the proper officer of the Court for such portion of the current month as remains unexpired before the judgment-debtor is committed to the civil prison, and the subsequent payments (if any) shall be made to the officer in charge of the civil prison.
+(5) Sums disbursed by the decree-holder for the subsistence of the judgment-debtor in the civil prison shall be deemed to be costs in the suit:
+Provided that the judgment-debtor shall not be detained in the civil prison or arrested on account of any sum so disbursed.

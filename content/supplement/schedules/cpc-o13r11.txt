@@ -1,0 +1,84 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O13R11.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O13R11
+Heading: Provisions as to documents applied to material objects
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The provisions therein contained as to documents shall, so far as may be, apply to all other material objects producible as evidence. Summary Judgment 1. Scope of and classes of suits to which this Order applies.—(1) This Order sets out the procedure by which Courts may decide a claim pertaining to any Commercial Dispute without recording oral evidence.
+(2) For the purposes of this Order, the word “claim” shall include—
+(a) part of a claim;
+(b) any particular question on which the claim (whether in whole or in part) depends; or
+(c) a counter-claim, as the case may be.
+(3) Notwithstanding anything to the contrary, an application for summary judgment under this Order shall not be made in a suit in respect of any Commercial Dispute that is originally filed as a summary suit under Order XXXVII. 2. Stage for application for summary judgment.—An applicant may apply for summary judgment at any time after summons has been served on the defendant:
+Provided that, no application for summary judgment may be made by such applicant after the Court has framed the issues in respect of the suit. 3. Grounds for summary judgment.—The Court may give a summary judgment against a plaintiff or defendant on a claim if it considers that––
+(a) the plaintiff has no real prospect of succeeding on the claim or the defendant has no real prospect of successfully defending the claim, as the case may be; and
+(b) there is no other compelling reason why the claim should not be disposed of before recording of oral evidence. 4. Procedure.—(1) An application for summary judgment to a Court shall, in addition to any other matters the applicant may deem relevant, include the matters set forth in sub-rules (a) to (f) mentioned hereunder:—
+(a) the application must contain a statement that it is an application for summary judgment made under this Order;
+(b) the application must precisely disclose all material facts and identify the point of law, if any;
+(c) in the event the applicant seeks to rely upon any documentary evidence, the applicant must,––
+(i) include such documentary evidence in its application, and
+(ii) identify the relevant content of such documentary evidence on which the applicant relies;
+(d) the application must state the reason why there are no real prospects of succeeding on the claim or defending the claim, as the case may be;
+(e) the application must state what relief the applicant is seeking and briefly state the grounds for seeking such relief.
+(2) Where a hearing for summary judgment is fixed, the respondent must be given at least thirty days’ notice of:—
+(a) the date fixed for the hearing; and
+(b) the claim that is proposed to be decided by the Court at such hearing.
+(3) The respondent may, within thirty days of the receipt of notice of application of summary judgment or notice of hearing (whichever is earlier), file a reply addressing the matters set forth in clauses (a) to (f) mentioned hereunder in addition to any other matters that the respondent may deem relevant:—
+(a) the reply must precisely––
+(i) disclose all material facts;
+(ii) identify the point of law, if any; and * Ins. by Act 4 of 2016, s. 16 and Sch., Shall be applicable to commercial disputes of a specified value (w.e.f. 23-10-2015).
+(b) in the event the respondent seeks to rely upon any documentary evidence in its reply, the respondent must—
+(i) include such documentary evidence in its reply; and
+(ii) identify the relevant content of such documentary evidence on which the respondent relies;
+(c) the reply must state the reason why there are real prospects of succeeding on the claim or defending the claim, as the case may be;
+(d) the reply must concisely state the issues that should be framed for trial;
+(e) the reply must identify what further evidence shall be brought on record at trial that could not be brought on record at the stage of summary judgment; and
+(f) the reply must state why, in light of the evidence or material on record if any, the Court should not proceed to summary judgment. 5. Evidence for hearing of summary judgment.—(1) Notwithstanding anything in this Order, if the respondent in an application for summary judgment wishes to rely on additional documentary evidence during the hearing, the respondent must:—
+(a) file such documentary evidence; and
+(b) serve copies of such documentary evidence on every other party to the application at least fifteen days prior to the date of the hearing.
+(2) Notwithstanding anything in this Order, if the applicant for summary judgment wishes to rely on documentary evidence in reply to the defendant’s documentary evidence, the applicant must:—
+(a) file such documentary evidence in reply; and
+(b) serve a copy of such documentary evidence on the respondent at least five days prior to the date of the hearing.
+(3) Notwithstanding anything to the contrary, sub-rules (1) and (2) shall not require documentary evidence to be:—
+(a) filed if such documentary evidence has already been filed; or
+(b) served on a party on whom it has already been served. 6. Orders that may be made by Court.—(1) On an application made under this Order, the Court may make such orders that it may deem fit in its discretion including the following:—
+(a) judgment on the claim;
+(b) conditional order in accordance with Rule 7 mentioned hereunder;
+(c) dismissing the application;
+(d) dismissing part of the claim and a judgment on part of the claim that is not dismissed;
+(e) striking out the pleadings (whether in whole or in part); or
+(f) further directions to proceed for case management under Order XV-A.
+(2) Where the Court makes any of the orders as set forth in sub-rule (1)(a) to (f), the Court shall record its reasons for making such order. 7. Conditional order.—(1) Where it appears to the Court that it is possible that a claim or defence may succeed but it is improbable that it shall do so, the Court may make a conditional order as set forth in Rule 6 (1)(b).
+(2) Where the Court makes a conditional order, it may:—
+(a) make it subject to all or any of the following conditions:—
+(i) require a party to deposit a sum of money in the Court;
+(ii) require a party to take a specified step in relation to the claim or defence, as the case may be;
+(iii) require a party, as the case may be, to give such security or provide such surety for restitution of costs as the Court deems fit and proper;
+(iv) impose such other conditions, including providing security for restitution of losses that any party is likely to suffer during the pendency of the suit, as the Court may deem fit in its discretion; and
+(b) specify the consequences of the failure to comply with the conditional order, including passing a judgment against the party that have not complied with the conditional order. 8. Power to impose costs.—The Court may make an order for payment of costs in an application for summary judgment in accordance with the provisions of sections 35 and 35A of the Code.] 1. Framing of issues.—(1) Issues arise when a material proposition of fact or law is affirmed by the one party and denied by the other.
+(2) Material propositions arc those propositions of law or fact which a plaintiff must allege in order to show a right to sue or a defendant must allege in order to constitute his defence.
+(3) Each material proposition affirmed by one party and denied by the other shall form the subject of distinct issue.
+(4) Issues are of two kinds:
+(a) issues of fact, (b) issues of law.
+(5) At the first hearing of the suit the Court shall, after reading the plaint and the written statements if any, and [after examination under rule 2 of Order X and after hearing the parties or their pleaders], ascertain upon what material propositions of fact or of law the parties are at variance, and shall thereupon proceed to frame and record the issues on which the right decision of the case appears to depend.
+(6) Nothing is this rule requires the Court to frame and record issued where the defendant at the first hearing of the suit makes no defence. [2. Court to pronounce judgment on all issues.—(1) Notwithstanding that a case may be disposed of on a preliminary issue, the Court shall, subject to the provisions of sub-rule (2), pronounce judgment on all issues.
+(2) Where issues both of law and of fact arise in the same suit, and the Court is of opinion that the case or any part thereof may be disposed of on an issue of law only, it may try that issue first if the issue relates to—
+(a) the jurisdiction of the Court, or
+(b) a bar to the suit created by any law for the time being in force, and for that purpose may, if it thinks fit, postpone the settlement of the other issues until after that issue has been determined, and may deal with the suit in accordance with the decision on that issue.] 3. Materials from which issues may be framed.—The Court may frame the issues from all or any of the following materials:—
+(a) allegations made on oath by the parties, or by any persons present on their behalf, or made by the pleaders of such parties;
+(b) allegations made in the pleadings or in answers to interrogatories delivered in the suit;
+(c) the contents of documents produced by either party. 4. Court may examine witnesses or documents before framing issues.—Where the Court is of opinion that the issues cannot be correctly framed without the examination of some person not before the Court or without the inspection of some document not produced in the suit, it [may adjourn the framing of issues to a day not later than seven days] and may (subject to any law for the time being in force) compel the attendance of any person or the production of any document by the person in whose possession or power it is by summons or other process. [5. Power to amend and strike out, issues.—(1) The Court may at any time before passing a decree amend the issues or frame additional issues on such terms as it thinks fit, and all such amendments or additional issues as may be necessary for determining the matters in controversy between the parties shall be so made or framed.
+(2) The Court may also, at any time before passing a decree, strike out any issues that appear to it to be wrongly framed or introduced.] 6. Questions of fact or law may by agreement be stated in form of issues.—(1) Where the parties to a suit are agreed as to the question of fact or of law to be decided between them, they may state the same in the form of an issue, and enter into an agreement in writing that, upon the finding of the Court in the affirmative or the negative or such issue,—
+(a) a sum of money specified in the agreement or to be ascertained by the Court, or in such manner as the Court may direct, shall be paid by one of the parties to the other of them, or that one of them be declared entitled to some right or subject some liability specified in the agreement;
+(b) some property specified in the agreement and in dispute in the suit shall be delivered by one of the parties to the other of them, or as that other may direct; or
+(c) one or more of the parties shall do or abstain from doing some particular act specified in the agreement and relating to the matter in dispute. 7. Court, if satisfied that agreement was executed in good faith, may pronounce judgment.— Where the Court is satisfied, after making such inquiry as it deems proper,—
+(a) that the agreement was duly executed by the parties, (b) that they have a substantial interest in the decision of such question as aforesaid, and
+(c) that the same is fit to be tried and decided, it shall proceed to record and try the issue and state its finding or decision thereon in the same manner as if the issue had been framed by the Court; and shall, upon the finding or decision on such issue, pronounce judgment according to the terms of the agreement; and, upon the judgment so pronounced, a decree shall follow. 1. Parties not at issue.—(1) Where at the first hearing of a suit it appears that the parties are not at issue on any question of law or of fact, the Court may at once pronounce judgment. 2. One of several defendants not at issue.— [(1) Where there are more defendants than one, and any one of the defendants is not at issue with the plaintiff on any question of law or of fact, the Court may at once pronounce judgment for or against such defendant and the suit shall proceed only against the other defendants.]
+[(2) Whenever a judgment is pronounced under this rule, decree shall be drawn up in accordance with such judgment and the decree shall bear the date on which the judgment was pronounced.] 3. Parties at issue.—(1) Where the parties are at issue on some question of law or of fact, and issues have been framed by the Court as hereinbefore provided, if the Court is satisfied that no further argument or evidence that the parties can at once adduce is required upon such of the issues as may be sufficient for the decision of the suit, and that no injustice will result from proceeding with the suit forthwith, the Court may proceed to determine such issues, and, if the finding thereon is sufficient for the decision, may pronounce judgment accordingly, whether the summons has been issued for the settlement of issues only or for the final disposal of the suit:
+Provided that, where the summons has been issued for the settlement of issues only, the parties or their pleaders are present and none of them objects.
+(2) Where the finding is not sufficient for the decision, the Court shall postpone the further hearing of the suit, and shall fix a day for the production of such further evidence, or for such further argument as the case requires. 4. Failure to produce evidence.—Where the summons has been issued for the final disposal of the suit and either party fails without sufficient cause to produce the evidence on which he relies, the Court may at once pronounce judgment, or may, if it thinks fit, after framing and recording issues, adjourn the suit for the production of such evidence as may be necessary for its decision upon such issues.

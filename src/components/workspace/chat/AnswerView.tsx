@@ -1,4 +1,6 @@
 "use client";
+import { sectionWord } from "@/lib/acts/unitLabel.mjs";
+import { SCAN_LABEL } from "@/lib/vault/scan.mjs";
 import Link from "next/link";
 import { Badge, CitationChip, Notice } from "@/components/kit";
 import CitedText, { hrefOf, sourceLabel } from "@/components/workspace/CitedText";
@@ -24,7 +26,7 @@ function SourceRow({ c }: { c: Citation }) {
       <span className="shrink-0 self-start"><CitationChip n={c.n} href={hrefOf(c)} label={sourceLabel(c)} kind="doc" /></span>
       <div className="min-w-0">
         <Link href={hrefOf(c)} className="font-medium text-quality-info hover:underline">{c.docName ?? c.actTitle}</Link>
-        <p className="text-secondary">{c.page ? `Page ${c.page}` : "Document text"}{c.label ? ` · ${c.label}` : ""}{c.preview ? <span className="text-muted"> — {c.preview}</span> : null}</p>
+        <p className="text-secondary">{c.page ? `Page ${c.page}` : "Document text"}{c.label ? ` · ${c.label}` : ""}{c.scan ? <span className="text-quality-warn"> · {SCAN_LABEL}</span> : null}{c.preview ? <span className="text-muted"> — {c.preview}</span> : null}</p>
       </div>
     </li>
   );
@@ -35,7 +37,7 @@ function SourceRow({ c }: { c: Citation }) {
         <Link href={hrefOf(c)} className="font-medium text-primary hover:underline">{c.actTitle}</Link>
         <span className="text-muted">{c.state ? ` · ${c.state.replace(/-/g, " ")}` : ""}</span>
         <p className="text-secondary">
-          {c.number ? `Section ${c.number}${c.heading ? ` — ${c.heading}` : ""}` : <>Unnumbered text{c.preview ? <span className="text-muted"> — {c.preview}</span> : null}</>}
+          {c.number ? `${sectionWord(c.number)}${c.heading ? ` — ${c.heading}` : ""}` : <>Unnumbered text{c.preview ? <span className="text-muted"> — {c.preview}</span> : null}</>}
           {c.status === "possibly_incomplete" && <Badge tone="warn" className="ml-2" title="Our copy of this section may be missing text">Possibly incomplete</Badge>}
         </p>
       </div>

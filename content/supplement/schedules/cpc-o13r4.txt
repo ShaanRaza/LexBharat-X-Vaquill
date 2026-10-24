@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O13R4.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O13R4
+Heading: Endorsements on documents admitted in evidence
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Subject to the provisions of the next following sub-rule, there shall be endorsed on every document which has been admitted in evidence in the suit the following particulars, namely:—
+(a) the number and title of the suit, (b) the name of the person producing the document, (c) the date on which it was produced, and
+(d) a statement of its having been so admitted, and the endorsement shall be signed or initialled by the Judge.
+(2) Where a document so admitted is an entry in a book, account or record, and a copy thereof has been substituted for the original under the next following rule, the particulars aforesaid shall be endorsed on the copy and the endorsement thereon shall be signed or initialled by the Judge.

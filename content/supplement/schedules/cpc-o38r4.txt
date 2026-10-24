@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O38R4.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O38R4
+Heading: Procedure where defendant fails to furnish security or find fresh security
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where the defendant fails to comply with any order under rule 2 or rule 3, the Court may commit him to the civil prison until the decision of the suit or, where a decree is passed against the defendant, until the decree has been satisfied:
+Provided that no person shall be detained in prison under this rule in any case for a longer period than six months, nor for a longer period than six weeks when the amount or value of the subject-matter of the suit does not exceed fifty rupees:
+Provided also that no person shall be detained in prison under this rule after he has complied with such order.

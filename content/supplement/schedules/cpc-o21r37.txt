@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R37.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R37
+Heading: Discretionary power to permit judgment-debtor to show cause against detention in prison
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Notwithstanding anything in these rules, where an application is for the execution of a decree for the payment of money by the arrest and detention in the civil prison of a judgment-debtor who is liable to be arrested in pursuance of the application, the Court [shall], instead of issuing a warrant for his arrest, issue a notice calling upon him to appear before the Court on a day to be specified in the notice and show cause why he should not be committed to the civil prison:
+[Provided that such notice shall not be necessary if the Court is satisfied, by affidavit, or otherwise, that, with the object or effect of delaying the execution of the decree, the judgment-debtor is likely to abscond or leave the local limits of the jurisdiction of the Court.]
+(2) Where appearance is not made in obedience to the notice, the Court shall, if the decree-holder so requires, issue a warrant for the arrest of the judgment-debtor.

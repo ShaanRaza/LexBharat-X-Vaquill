@@ -1,0 +1,30 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O34.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O34
+Heading: Suits relating to mortgages of immovable property
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Suits relating to mortgages of immovable property
+Rules in this Order:
+1. Parties to suits for foreclosure sale and redemption
+2. Preliminary decree in foreclosure suit
+3. Final decree in foreclosure suit
+4. Preliminary decree in suit for sale
+5. Final decree in suit for sale
+6. Recovery of balance due on mortgage in suit for sale
+7. Preliminary decree in redemption suit
+8. Final decree in redemption suit
+8A. Recovery of balance due on mortgage in suit for redemption
+9. Decree where nothing is found due or where mortgagee has been overpaid
+10. Costs of mortgagee subsequent to decree
+10A. Power of Court to direct mortgagee to pay mesne profits
+11. Payment of interest
+12. Sale of property subject to prior mortgage
+13. Application of proceeds
+14. Suit for sale necessary for bringing mortgaged property to sale
+15. Mortgages by the deposit of title deeds and charges

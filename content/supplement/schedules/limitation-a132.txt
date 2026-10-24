@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Limitation Act, 1963, Schedule (Articles), unit A132.
+# Extracted 2026-10-24 from India Code's PDF A1963-36.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Limitation Act, 1963
+Act ID: IND_central_1565
+Section: A132
+Heading: To the High Court for a certificate of fitness to appeal to the Supreme Court under clause (1) of article 132, article 133 or sub-clause (c) of clause (1) of article 134 of the Constitution 
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/8c2f3bc0-5daf-4d11-971f-ad5f9b78b74b/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of suit: To the High Court for a certificate of fitness to appeal to the Supreme Court under clause (1) of article 132, article 133 or sub-clause (c) of clause (1) of article 134 of the Constitution or under any other law for the time being in force.
+Period of limitation: Sixty days.
+Time from which period begins to run: The date of the decree, order or sentence.
+THIRD DIVISION—APPLICATIONS
+PART I.—APPLICATIONS IN SPECIFIED CASES

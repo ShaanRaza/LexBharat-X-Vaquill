@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A25.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A25
+Heading: COUNTERPART OR DUPLICATE of any instrument chargeable with duty and in respect of which th
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: COUNTERPART OR DUPLICATE of any instrument chargeable with duty and in respect of which the proper duty has been The same duty as is payable on the paid,— (a) if the duty with which the original instrument is chargeable does not exceed one rupee; (b) in any other case.................. Exemption Counterpart of any lease granted to a cultivator, when such lease is exempted from duty.
+Proper stamp-duty: original. One rupee. The same duty as a Bond (No. 15) for such amount. Five rupees.

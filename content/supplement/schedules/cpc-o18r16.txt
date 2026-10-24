@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O18R16.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O18R16
+Heading: Power to examine witness immediately
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where a witness is about to leave the jurisdiction of the Court, or other sufficient cause is shown to the satisfaction of the Court why his evidence should be taken immediately, the Court may, upon the application of any party or of the witness, at any time after the institution of the suit, take the evidence of such witness in manner hereinbefore provided.
+(2) Where such evidence is not taken forthwith and in the presence of the parties, such notice as the Court thinks sufficient, of the day fixed for the examination, shall be given to the parties.
+(3) The evidence so taken shall be read over to the witness, and, if he admits it to be correct, shall be signed by him, and the Judge shall, if necessary, correct the same, and shall sign it, and it may then be read at any hearing of the suit.

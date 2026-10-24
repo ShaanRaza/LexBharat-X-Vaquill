@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O35R3.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O35R3
+Heading: Procedure where defendant is suing plaintiff
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where any of the defendants in an interpleader-suit is actually suing the plaintiff in respect the subject-matter of such suit, the Court in which the suit against the plaintiff is pending shall, on being informed by the Court in which the interpleader-suit has been instituted, stay the proceedings as against him; and his costs in the suit so stayed may be provided for in such suit; but if and in so far as, they are not provided for in that suit, they may be added to his costs incurred in the interpleader-suit.

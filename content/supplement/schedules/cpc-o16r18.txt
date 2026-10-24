@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O16R18.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O16R18
+Heading: Procedure where witness apprehended cannot give evidence or produce document
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where any person arrested under a warrant is brought before the Court in custody and cannot, owing to the absence of the parties or any of them, give the evidence or produce the document which he has been summoned to give or produce, the court may require him to give reasonable bail or other security for his appearance at such time and place as it thinks fit, and, on such bail or security being given, may release him, and, in default of his giving such bail or security, may order him to be detained in the civil prison.

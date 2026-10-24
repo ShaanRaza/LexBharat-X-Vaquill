@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Limitation Act, 1963, Schedule (Articles), unit A65.
+# Extracted 2026-10-24 from India Code's PDF A1963-36.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Limitation Act, 1963
+Act ID: IND_central_1565
+Section: A65
+Heading: For possession of immovable property or any interest therein based on title. Explanation.—For the purposes of this article— (a) where the suit is by remainderman, a reversioner (other than a
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/8c2f3bc0-5daf-4d11-971f-ad5f9b78b74b/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of suit: For possession of immovable property or any interest therein based on title. Explanation.—For the purposes of this article— (a) where the suit is by remainderman, a reversioner (other than a landlord) or devisee, the possession of the defendant shall be deemed to become adverse only when the estate of the remainderman, reversioner or devisee, as the case may be, falls into possession; (b) where the suit is by a Hindu or Muslim entitled to the possession of immovable property on the death of Hindu or Muslim female, the possession of the defendant shall be deemed to become adverse only when the female dies; (c) where the suit is by purchaser at a sale in execution of a decree when the judgment-debtor was out of possession at the date of the sale, the purchaser shall be deemed to be a representative of the judgment-debtor who was out of possession.
+Period of limitation: Twelve years. a a a a
+Time from which period begins to run: When the possession of the defendant becomes adverse to the plaintiff.
+FIRST DIVISION—SUITS
+PART V.—SUITS RELATING TO IMMOVABLE PROPERTY

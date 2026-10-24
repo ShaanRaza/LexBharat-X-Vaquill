@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O23R3.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O23R3
+Heading: Compromise of suit
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where it is proved to the satisfaction of the Court that a suit has been adjusted wholly or in part by any lawful agreement or compromise [in writing and signed by the parties], or where the defendant satisfied the plaintiff in respect to the whole or any part of the subject-matter of the suit, the Court shall order such agreement, compromise or satisfaction to be recorded, and shall pass a decree in accordance therewith [so far as it relates to the parties to the suit, whether or not the subject-matter of the agreement, compromise or satisfaction is the same as the subject-matter of the suit:]
+[Provided that where it is alleged by one party and denied by the other that an adjustment or satisfaction has been arrived at, the Court shall decide the question; but not adjournment shall be granted for the purpose of deciding the question, unless the Court, for reasons to be recorded, thinks fit to grant such adjournment.]
+[Explanation.— An agreement or compromise which is void or voidable under the Indian Contract Act, 1872 (9 of 1872), shall not he deemed to be lawful within the meaning of this rule.]

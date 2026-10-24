@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O39R3.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O39R3
+Heading: Before granting injunction, Court to direct notice to opposite party
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The Court shall in all cases, except where it appears that the object of granting the injunction would be defeated by the delay, before granting an injunction, direct notice of the application for the same to be given to the opposite party:
+[Provided that, where it is proposed to grant an injunction without giving notice of the application to the opposite party, the Court shall record the reasons for its opinion that the object of granting the injunction would be defeated by delay, and require the applicant—
+(a) to deliver to the opposite party, or to send to him by [speed post with registration], immediately after the order granting the injunction has been made, a copy of the application for injunction together with—
+(i) a copy of the affidavit filed in support of the application;
+(ii) a copy of the plaint; and
+(iii) copies of documents on which the applicant, relies, and
+(b) to file, on the day on which such injunction is granted or on the day immediately following that day, an affidavit stating that the copies aforesaid have been so delivered or sent.]

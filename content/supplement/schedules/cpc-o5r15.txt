@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O5R15.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O5R15
+Heading: Where service may be on an adult member of defendant’s family
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where in any suit the defendant is absent from his residence at the time when the service of summons is sought to be effected on his at his residence and there is no likelihood of his being found at the residence within a reasonable time and he has no agent empowered to accept service of the summons on his behalf, service may be made on any adult member of the family, whether male or female, who is residing with him.
+Explanation.—A servant is not a member of the family within the meaning of this rule.

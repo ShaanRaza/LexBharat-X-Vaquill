@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O5R21.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O5R21
+Heading: Service of summons where defendant resides within jurisdiction of another Court
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+A summons may be sent by the Court by which it is issued, whether within or without the State, either by one of its officers [or by post or by such courier service as may be approved by the High Court, by fax message or by Electronic Mail service or by any other means as may be provided by the rules made by the High Court] to any Court (not being the High Court) having jurisdiction in the place where the defendant resides.

@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O41R27.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O41R27
+Heading: Production of additional evidence in Appellate Court
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) The parties to an appeal shall not be entitled to produce additional evidence, whether oral or documentary, in the Appellate Court. But if —
+(a) the Court from whose decree the appeal is preferred has refused to admit evidence which ought to have been admitted, or
+[(aa) the party seeking to produce additional evidence, establishes that notwithstanding the exercise of due diligence, such evidence was not within his knowledge or could not, after the exercise of due diligence, be produced by him at the time when the decree appealed against was passed, or]
+(b) the Appellate Court requires any document to be produced or any witness to be examined to enable it to pronounce judgment, or for any other substantial cause, the Appellate Court may allow such evidence or document to be produced, or witness to be examined.
+(2) Wherever additional evidence is allowed to be produced by an Appellate Court, the Court shall record the reason for its admission.

@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A11.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A11
+Heading: ARTICLES OF CLERKSHIP or contract whereby any person first becomes bound to serve as a cle
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: ARTICLES OF CLERKSHIP or contract whereby any person first becomes bound to serve as a clerk in order to his admission as an attorney in any High Court. ASSIGNMENT. See CONVEYANCE (No. 23), TRANSFER (No. 62), and TRANSFEROF LEASE (No. 63), as the case may be. ATTORNEY. See ENTRYAS AN ATTORNEY (No. 30) and POWEROF ATTORNEY (No. 48). AUTHORITY TO ADOPT. See ADOPTION-DEED (No. 3).
+Proper stamp-duty: Two hundred and fifty rupees.

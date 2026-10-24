@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O41R14.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O41R14
+Heading: Publication and service of notice of day for hearing appeal
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Notice of the day fixed under rule 12 shall be affixed in the Appellate Court-house, and a like notice shall be sent by the Appellate Court to the Court from whose decree the appeal is preferred, and shall be served on the respondent or on his pleader in the Appellate Court in the manner provided for the service on a defendant of a summons to appear and answer, and all the provisions applicable to such summons, and to proceedings with reference to the service thereof, shall apply to the service of such notice.
+(2) Appellate Court may itself cause notice to be served.—Instead of sending the notice to the Court from whose decree the appeal is preferred, the Appellate Court may itself cause the notice to be served on the respondent or his pleader under the provisions above referred to.
+[(3) The notice to be served on the respondent shall be accompanied by a copy of the memorandum of appeal.
+(4) Notwithstanding anything to the contrary contained in sub-rule (1), it shall not be necessary to serve notice of any proceeding incidental to an appeal on any respondent other than a person impleaded for the first time in the Appellate Court, unless he has appeared and filed an address for the service in the Court of first instance or has appeared in the appeal.
+(5) Nothing in sub-rule (4) shall bar the respondent referred to in the appeal from defending it.]

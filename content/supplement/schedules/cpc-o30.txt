@@ -1,0 +1,23 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O30.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O30
+Heading: Suits by or against firms and persons carrying on business in names other than their own
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Suits by or against firms and persons carrying on business in names other than their own
+Rules in this Order:
+1. Suing of partners in name of firm
+2. Disclosure of partners’ names
+3. Service
+4. Rights of suit on death of partner
+5. Notice in what capacity served
+6. Appearance of partners
+7. No appearance except by partners
+8. Appearance under protest
+9. Suits between co-partners
+10. Suit against person carrying on business in name other than his own

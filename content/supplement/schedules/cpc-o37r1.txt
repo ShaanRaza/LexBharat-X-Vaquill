@@ -1,0 +1,21 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O37R1.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O37R1
+Heading: Courts and classes of suits to which the Order is to apply
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) This Order shall apply to the following Courts, namely:—
+(a) High Courts, City Civil Courts and Courts of Small Causes; and
+(b) other Courts:
+Provided that in respect of the Courts referred to in clause (b), the High Court may, by notification in the Official Gazette, restrict the operation of this Order only to such categories of suits as it deems proper, and may also, from time to time, as the circumstances of the case may require, by subsequent notification in the Official Gazette, further restrict, enlarge or vary, the categories of suits to be brought under the operation of this Order as it deems proper.
+(2) Subject to the provisions of sub-rule (1), the Order applies to the following classes of suits, namely:—
+(a) suits upon bills of exchange, hundies and promissory notes;
+(b) suits in which the plaintiff seeks only to recover a debt or liquidated demand in money payable by the defendant, with or without interest, arising,—
+(i) on a written contract, or
+(ii) on an enactment, where the sum sought to be recovered is a fixed sum of money or in the nature of a debt other than a penalty; or
+(iii) on a guarantee, where the claim against the principal is in respect of a debt or liquidated demand only.

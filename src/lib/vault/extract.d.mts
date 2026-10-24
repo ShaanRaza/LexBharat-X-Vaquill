@@ -1,2 +1,2 @@
-export type Extracted = { pages: string[] | null; text: string; pageCount: number | null; scanned: boolean; reason: string; noPages?: boolean };
-export function extractText(kind: "pdf" | "docx" | "txt", bytes: Uint8Array | ArrayBuffer, opts?: { scannedMinCharsPerPage?: number }): Promise<Extracted>;
+export type Extracted = { pages: string[] | null; text: string; pageCount: number | null; scanned: boolean; /** image-only pages (1-based) that need the model-based reader */ scanPages: number[]; reason: string; noPages?: boolean };
+export function extractText(kind: "pdf" | "docx" | "txt" | "jpg" | "png", bytes: Uint8Array | ArrayBuffer, opts?: { scannedMinCharsPerPage?: number }): Promise<Extracted>;

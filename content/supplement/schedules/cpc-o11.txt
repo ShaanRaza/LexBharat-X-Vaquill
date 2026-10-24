@@ -1,0 +1,43 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O11.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O11
+Heading: Discovery and Inspection
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Discovery and Inspection
+Rules in this Order:
+1. Discovery by interrogatories
+2. Particular interrogatories to be submitted
+3. Costs of interrogatories
+4. Form of interrogatories
+5. Corporations
+6. Objections to interrogatories by answer
+7. Setting aside and striking out interrogatories
+8. Affidavit in answer, filing
+9. Form of affidavit in answer
+10. No exception to be taken
+11. Order to answer or answer further
+12. Application for discovery of documents
+13. Affidavit of documents
+14. Production of documents
+15. Inspection of documents referred to in pleadings or affidavits
+16. Notice to produce
+17. Time for inspection when notice given
+18. Order for inspection
+19. Verified copies
+20. Premature discovery
+21. Non-compliance with order for discovery
+22. Using answer to interrogatories at trial
+23. Order to apply to minors
+1. Disclosure and discovery of documents
+2. Discovery by interrogatories
+3. Inspection
+4. Admission and denial of documents
+5. Production of documents
+6. Electronic records
+7. Certain provisions of the Code of Civil Procedure, 1908 not to apply

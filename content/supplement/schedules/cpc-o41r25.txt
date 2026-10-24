@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O41R25.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O41R25
+Heading: Where Appellate Court may frame issues and refer them for trial to Court whose decree appealed from
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where the Court from whose decree the appeal is preferred has omitted to frame or try any issue, or to determine any question of fact, which appears to the Appellate Court essential to the right decision of the suit upon the merits, the Appellate Court may, if necessary, frame issues, and refer the same for trial to the Court from whose decree the appeal is preferred, and in such case shall direct such Court to take the additional evidence required; and such Court shall proceed to try such issues, and shall return the evidence to the Appellate Court together with its findings thereon and the reasons therefor [within such time as may be fixed by the Appellate Court or extended by it from time to time].

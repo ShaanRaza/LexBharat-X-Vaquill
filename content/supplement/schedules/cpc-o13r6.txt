@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O13R6.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O13R6
+Heading: Endorsements on documents rejected an inadmissible in evidence
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where a document relied on as evidence by either party is considered by the Court to be inadmissible in evidence, there shall be endorsed thereon the particulars mentioned in clauses (a), (b) and (c) of rule 4, sub-rule (1) together with a statement of its having been rejected, and the endorsement shall be signed or initialled by the Judge.

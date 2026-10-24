@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O14R2.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O14R2
+Heading: Court to pronounce judgment on all issues
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Notwithstanding that a case may be disposed of on a preliminary issue, the Court shall, subject to the provisions of sub-rule (2), pronounce judgment on all issues.
+(2) Where issues both of law and of fact arise in the same suit, and the Court is of opinion that the case or any part thereof may be disposed of on an issue of law only, it may try that issue first if the issue relates to—
+(a) the jurisdiction of the Court, or
+(b) a bar to the suit created by any law for the time being in force, and for that purpose may, if it thinks fit, postpone the settlement of the other issues until after that issue has been determined, and may deal with the suit in accordance with the decision on that issue.

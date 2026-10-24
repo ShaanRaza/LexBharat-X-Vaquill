@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O16R5.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O16R5
+Heading: Time, place and purpose of attendance to be specified in summons
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Every summons for the attendance of a person to give evidence or to produce a document shall specify the time and place at which he is required to attend, and also whether his attendance is required for the purpose of giving evidence or to produce a document, or for both purposes; and any particular document, which the person summoned is called on to produce, shall be described in the summons with reasonable accuracy.

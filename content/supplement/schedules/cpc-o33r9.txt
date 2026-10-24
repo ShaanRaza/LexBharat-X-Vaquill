@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O33R9.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O33R9
+Heading: Withdrawal of permission to sue as an [indigent person]
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The Court may, on the application of the defendant, or of the Government pleader, of which seven days, clear notice in writing has been given to the plaintiff, order that the permission granted to the plaintiff to sue as an indigent person be withdrawn—
+(a) if he is guilty of vexatious or improper conduct in the course of the suit;
+(b) if it appears that his means are such that he ought not to continue to sue as [an indigent person]; or
+(c) if he has entered into any agreement with reference to the subject-matter of the suit under which any other person has obtained an interest in such subject-matter.

@@ -1,0 +1,20 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O45R7.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O45R7
+Heading: Security and deposit required on grant of certificate
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where the certificate is granted, the applicant shall, within [ninety days or such further period, not exceeding sixty days, as the Court may upon cause shown allow;] from the date of the decree complained of, or within six weeks from the date of the grant of the certificate whichever is the later date,—
+(a) furnish security [in cash or in Government securities] for the costs of the respondent; and
+(b) deposit the amount required to defray the expense of translating, transcribing indexing [, printing,] and transmitting to [the Supreme Court] a correct copy of the whole record of the suit, except—
+(1) formal documents directed to be excluded by any [Rule of the Supreme Court] in force for the time being;
+(2) papers which the parties agree to exclude;
+(3) accounts, or portions of accounts, which the officer empowered by the Court for that purpose considers unnecessary, and which the parties have not specifically asked to be included; and
+(4) such other documents as the High Court may direct to be excluded:
+[Provided that the Court at the time of granting the certificate may, after hearing any opposite party who appears, order on the ground of special hardship that some other form of security may be furnished:
+Provided further, that no adjournment shall be granted to an opposite party to contest the nature of such security.]

@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O32R9.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O32R9
+Heading: Removal of next friend
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where the interest of the next friend of a minor is adverse to that of the minor or where he is so connected with a defendant whose interest is adverse to that of the minor as to make it unlikely that the minor’s interest will be properly protected by him, or where he does not do his duty, or, during the pendency of the suit, ceases to reside within [India], or for any other sufficient cause, application, may be made on behalf of the minor or by a defendant for his removal; and the Court, if satisfied of the sufficiency of the cause assigned, may order the next friend to be removed accordingly, and make such other order as to costs as it thinks fit.
+(2) Where the next friend is not a guardian appointed or declared by an authority competent in this behalf, and an application is made by a guardian so appointed or declared, who desires to be himself appointed in the place of the next friend, the Court shall remove the next friend unless it considers, for reasons to be recorded by it, that the guardian ought not to be appointed the next friend of the minor, and shall thereupon appoint the applicant to be next friend in his place upon such terms as to the costs already incurred in the suit as it thinks fit.

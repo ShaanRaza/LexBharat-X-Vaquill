@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O7R10B.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O7R10B
+Heading: Power of appellate Court to transfer suit to the proper Court
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where, on an appeal against an order for the return of plaint, the Court hearing the appeal confirms such order, the Court of appeal may, if the plaintiff by an application so desires, while returning the plaint, direct plaintiff to file the plaint, subject to the provisions of the Limitation Act, 1963 (36 of 1963), in the Court in which the suit should have been instituted, (whether such Court is within or without the State in which the Court hearing the appeal is situated), and fix a date for the appearance of the parties in the Court in which the plaint is directed to be filed and when the date is so fixed it shall not be necessary for the Court in which the plaint is filed to serve the defendant with the summons for appearance in the suit, unless that Court in which the plaint is filed, for reasons to be recorded, otherwise directs.
+(2) The direction made by the Court under sub-rule (1) shall be without any prejudice to the rights of the parties to question the jurisdiction of the Court, in which the plaint is filed, to try the suit.

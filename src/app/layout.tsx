@@ -5,6 +5,8 @@ import SmoothScroll from "@/components/SmoothScroll";
 import DataAttribution from "@/components/DataAttribution";
 import { RELEASE } from "@/lib/release";
 import AccessDevBanner from "@/components/AccessDevBanner";
+import VisitPing from "@/components/VisitPing";
+import { Analytics } from "@vercel/analytics/next";
 
 const sans = Schibsted_Grotesk({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 const mono = Source_Code_Pro({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
@@ -27,6 +29,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SmoothScroll />
         {children}
         <DataAttribution />
+        <VisitPing />
+        <Analytics />   {/* Vercel Web Analytics (free): collects nothing until it is switched on in the Vercel dashboard */}
       </body>
     </html>
   );

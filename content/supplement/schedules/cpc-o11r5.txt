@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O11R5.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O11R5
+Heading: Production of documents
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Any party to a proceeding may seek or the Court may order, at any time during the pendency of any suit, production by any party or person, of such documents in the possession or power of such party or person, relating to any matter in question in such suit.
+(2) Notice to produce such document shall be issued in the Form provided in Form No. 7 in Appendix C to the Code of Civil Procedure, 1908 (5 of 1908).
+(3) Any party or person to whom such notice to produce is issued shall be given not less than seven days and not more than fifteen days to produce such document or to answer to their inability to produce such document.
+(4) The Court may draw an adverse inference against a party refusing to produce such document after issuance of a notice to produce and where sufficient reasons for such non-production are not given and order costs.

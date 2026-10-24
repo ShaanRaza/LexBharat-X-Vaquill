@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O5R26A.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O5R26A
+Heading: Summonses to be sent to officers to foreign countries
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where the Central Government has, by notification in the Official Gazette, declared in respect of any foreign territory that summonses to be served on defendants actually and voluntarily residing or carrying on business or personally working for gain in that foreign territory may be sent to an officer of the Government of the foreign territory specified by the Central Government, the summonses may be sent to such officer, through the Ministry of the Government of India dealing with foreign affairs or in such other manner as may be specified by the Central Government; and if such officer returns any such summons with an endorsement purporting to have been made by him that the summons has been served on the defendant, such endorsement shall be deemed to be evidence of service.

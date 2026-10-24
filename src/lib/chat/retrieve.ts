@@ -13,7 +13,7 @@ export type ChatSource = {
   n: number; actId: string; sectionKey: string; actTitle: string; year: number | null; category: string; state: string | null; inForce: boolean; sourceUrl: string | null;
   number: string | null; heading: string | null; status: string; text: string; via: string;
   /** a passage of the user's own attached document (see src/lib/vault/search.ts) */
-  kind?: "doc"; docId?: string; docName?: string; page?: number | null; label?: string | null;
+  kind?: "doc"; docId?: string; docName?: string; page?: number | null; label?: string | null; /** the page was read from a scan */ scan?: boolean;
 };
 export type Retrieval = { sources: ChatSource[]; searchMode: "semantic" | "text" | "lookup" | "none"; note: string; queries: string[]; /** keys ("actId|sectionKey") found by exact lookup: sections the question or the caller named */ exactKeys: string[] };
 
@@ -58,6 +58,6 @@ export async function retrieveSources(question: string, history: { role: string;
 
 /** What is stored and sent to the browser for a source: no section text. */
 export const citationOf = (s: ChatSource) => s.kind === "doc"
-  ? { n: s.n, kind: "doc" as const, docId: s.docId, docName: s.docName, page: s.page ?? null, label: s.label ?? null, actId: "", sectionKey: "", actTitle: s.docName ?? "Your document", number: null, heading: null, status: "ok", category: "document", state: null, preview: previewOf(s.text) }
+  ? { n: s.n, kind: "doc" as const, docId: s.docId, docName: s.docName, page: s.page ?? null, label: s.label ?? null, ...(s.scan ? { scan: true } : {}), actId: "", sectionKey: "", actTitle: s.docName ?? "Your document", number: null, heading: null, status: "ok", category: "document", state: null, preview: previewOf(s.text) }
   : { n: s.n, actId: s.actId, sectionKey: s.sectionKey, actTitle: s.actTitle, number: s.number, heading: s.heading, status: s.status, category: s.category, state: s.state,
       ...(s.number ? {} : { preview: previewOf(s.text) }) };   // unnumbered text has no section number to show, so it carries a short preview

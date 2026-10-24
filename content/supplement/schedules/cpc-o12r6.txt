@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O12R6.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O12R6
+Heading: Judgment on admissions
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where admissions of fact have been made either in the pleading or otherwise, whether orally or in writing, the Court may at any stage of the suit, either on the application - of any party or of its own motion and without waiting for the determination of any other question between the parties, make such order or give such judgment as it may think fit, having regard to such admissions.
+(2) Whenever a judgment is pronounced under sub-rule (1) a decree shall be drawn up in accordance with the judgment and the decree shall bear the date on which the judgment was pronounced.

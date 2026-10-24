@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O26R16A.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O26R16A
+Heading: Questions objected to before the Commissioner
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where any question put to a witness is objected to by a party or his pleader in proceedings before a Commissioner appointed under this Order, the Commissioner shall take down the question, the answer, the objections and the name of the party or, as the case may be, the pleader so objecting:
+Provided that the Commissioner shall not take down the answer to a question which is objected to on the ground of privilege but may continue with the examination of the witness, leaving the party to get the question of privilege decided by the Court, and, where the Court decides that there is no question of privilege, the witness may be recalled by the Commissioner and examined by him or the witness may be examined by the Court with regard to the question which was objected to on the ground of privilege.
+(2) No answer taken down under sub-rule (1) shall be read as evidence in the suit except by the order of the Court.

@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A48.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A48
+Heading: POWER-OF-ATTORNEY [as defined by section 2(21)]
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: POWER-OF-ATTORNEY [as defined by section 2(21)],not being a PROXY (No. 52),— (a) when executed for the sole purpose of Eight annas. procuring the registration of one or more documents in relation to a single transaction or for admitting execution of one or more such documents; (b) when required in suits or proceedings Eight annas. under the Presidency Small Cause Courts Act, 1882 (15 of 1882); (c) when authorizing one person or more One rupee. to act in a single transaction other than the case mentioned in clause (a); (d) when authorizing not more than five Five rupees. persons to act jointly and severally in more than one transaction or generally; (e) when authorizing more than five but Ten rupees. not more than ten persons to act jointly and severally in more than one transaction or generally; (f) when given for consideration and The same duty as a Conveyance (No. 23) for authorizing the attorney to sell any immovable the amount of the consideration. property; (g) in any other case…………………… One rupee for each person authorized. N.B.—The term “registration” includes every operation incidental to registration under the Indian Registeration Act, 1877 (III of 1877). Explanation.—For the purposes of this article more persons than one when belonging to the same firm shall be deemed to be one person.
+Proper stamp-duty: —

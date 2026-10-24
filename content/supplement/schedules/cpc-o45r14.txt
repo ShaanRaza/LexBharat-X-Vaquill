@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O45R14.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O45R14
+Heading: Increase of security found inadequate
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where at any time during the pendency of the appeal the security furnished by either party appears inadequate, the Court may, on the application of the other party, require further security.
+(2) In default of such further security being furnished as required by the Court,—
+(a) if the original security was furnished by the appellant, the Court may, on the application of the respondent, execute the decree, appealed from as if the appellant had furnished no such security;
+(b) if the original security was furnished by the respondent, the Court shall so far as may be practicable, stay the further execution of the decree, and restore the parties to the position in which they respectively were when the security which appears inadequate was furnished, or give such direction respecting the subject-matter of the appeal as it thinks fit.

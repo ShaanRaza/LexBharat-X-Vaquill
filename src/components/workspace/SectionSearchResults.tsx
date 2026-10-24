@@ -1,4 +1,5 @@
 "use client";
+import { sectionWord } from "@/lib/acts/unitLabel.mjs";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Badge, Highlight, Notice, Panel } from "@/components/kit";
@@ -46,7 +47,7 @@ export default function SectionSearchResults({ q }: { q: string }) {
             {data.results.map((h) => (
               <Panel as="li" key={`${h.actId}-${h.sectionKey}`} className="px-card py-4">
                 <Link href={`/workspace/browse/acts/${h.actId}?section=${encodeURIComponent(h.sectionKey)}`} className="text-ui-body font-medium text-primary hover:underline">
-                  {h.number ? `Section ${h.number}` : "Text block"}{h.heading ? ` — ${h.heading}` : ""}
+                  {h.number ? sectionWord(h.number) : "Text block"}{h.heading ? ` — ${h.heading}` : ""}
                 </Link>
                 <p className="mt-0.5 text-ui-sm text-secondary">{h.actTitle}{h.chapter ? ` · ${h.chapter}` : ""}</p>
                 {h.snippet && <p className="mt-2 text-ui-base leading-relaxed text-foreground"><Highlight snippet={h.snippet} /></p>}

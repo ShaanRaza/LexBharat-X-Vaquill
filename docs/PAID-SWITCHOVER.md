@@ -108,6 +108,16 @@ Drafting, Review and Vault are all ON (W5, W6). Each page is switched by one fla
 - **Wording to remove after the switch:** the "Testing phase: don't upload confidential client documents" notes (Vault, Review, Chat) once documents are on paid, agreed terms; and "may be used to improve Google's products" if no free Gemini model is left.
 - **Not tested here:** the `anthropic` provider for `review` (no key); the R2 store (not written); pausing of the free Supabase project after a week of no use.
 
+## 4e. W8 (Orders/Schedules, scans, statute links, feedback): what changes when we buy
+
+- **Scanned pages (`ocr` task).** Reading image-only pages uses the new `ocr` task in `src/config/ai-models.json` (Gemini document reading today: `gemini:gemini-3.5-flash-lite`, fallback `gemini:gemini-3.6-flash`). To read scans with Claude instead, set `AI_MODEL_OCR=anthropic:claude-haiku-5-5` (or edit the config): the AI layer already sends PDFs and pictures to Claude as document/image blocks. No code change. Free-tier Gemini has a small daily request quota and 3.6-flash runs out first; a 20-page scan is 4 requests (5 pages each), so the free quota is shared with Chat, Drafting and Review.
+- **Limits (free-plan guards, in `src/config/vault-limits.json`):** `maxScanPagesPerDoc` 20, `maxScanDocsPerDay` 5 per browser, `scanGroupPages` 5, `scanRetryMs` 30000. Env overrides `VAULT_MAX_SCAN_PAGES`, `VAULT_MAX_SCAN_DOCS_PER_DAY`. When paid: raise the numbers (or set a large number to remove the guard).
+- **Voyage embeddings of the 955 Order/Rule/Article units** went in at the free 3 requests a minute (about 100 batches, ~45 minutes). On a paid Voyage account the same load takes minutes: lower `GAP_MS` (21000) in `scripts/supplement/load-supplement.mjs` to about 1000.
+- **Supabase (free 500 MB):** new tables `vault_scan_pages`, `feedback`, `usage_daily`, `usage_visitors` (a few KB each; text only). Run `scripts/w8/w8-schema.sql` once in the SQL Editor. The Vault bucket now also accepts JPG/PNG (`node scripts/vault/setup-bucket.mjs`, already run).
+- **Main Neon database:** 693 MB before W8 Part 0, 694 MB after (stop line 900 MB). The vector database holds the extra passages in `supplement_emb_256`.
+- **Vercel Web Analytics (free, Hobby: 50,000 events a month):** the `@vercel/analytics` package is installed and `<Analytics />` is in `src/app/layout.tsx`. It collects nothing until you switch it on: Vercel dashboard > the project > **Analytics** tab > **Enable**. Nothing else to set.
+- **`ADMIN_PASSWORD`** (for `/admin/insights`) must be set in `.env.local` locally and as a Vercel environment variable on the live site, and must differ from `ACCESS_PASSWORD` (the page refuses to open if they are equal). Not set on Vercel by us.
+
 ## 5. Vercel
 
 - Env vars to set on the Vercel project (none are set for W2b/W2c/W4 yet; production runs keyword search with a note and, once W4 is pushed, **closed behind the password page until `ACCESS_PASSWORD` and `ACCESS_COOKIE_SECRET` are set**): `DATABASE_URL`, `VECTOR_DATABASE_URL`, `VOYAGE_API_KEY`, `GEMINI_API_KEY`, `ACCESS_PASSWORD`, `ACCESS_COOKIE_SECRET`. Optional: `CHAT_LIMIT_DAILY`, `CHAT_LIMIT_WEEKLY`, `CHAT_LIMIT_MONTHLY_GLOBAL`, `AI_MODEL_*`. Never print or commit them.

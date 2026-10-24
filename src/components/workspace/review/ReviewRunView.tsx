@@ -3,7 +3,9 @@ import Link from "next/link";
 import { useState } from "react";
 import { Badge, Notice, Panel } from "@/components/kit";
 import CitedText from "@/components/workspace/CitedText";
+import FeedbackBar from "../FeedbackBar";
 import { NOT_LEGAL_ADVICE } from "@/lib/review/prompts.mjs";
+import { SCAN_LABEL } from "@/lib/vault/scan.mjs";
 import { CONTRACT_TYPES } from "@/lib/review/rules.mjs";
 import type { CitationLite, ReviewRun } from "@/lib/review/store";
 import { CLAUSE_BADGE, RISK_BADGE } from "./labels";
@@ -47,6 +49,7 @@ export default function ReviewRunView({ id }: { id: string }) {
       <h1 className="mt-4 break-words text-ui-title font-semibold">{run.docName}</h1>
       <p className="mt-2 text-ui-sm text-muted">{CONTRACT_TYPES[run.contractType as keyof typeof CONTRACT_TYPES]?.label ?? run.contractType} · reviewed for: {run.side}</p>
       <Notice tone="warn" role="note" compact className="mt-4"><p><strong className="font-medium text-foreground">{NOT_LEGAL_ADVICE}</strong></p></Notice>
+      {!!res.scanPages?.length && <Notice tone="warn" role="note" compact className="mt-3"><p><strong className="font-medium text-foreground">{SCAN_LABEL}.</strong> Pages {res.scanPages.join(", ")} of this document were read from images by a model, so quotes and page numbers on those pages can contain mistakes.</p></Notice>}
       {err && <Notice tone="bad" role="alert" compact className="mt-3"><p>{err}</p></Notice>}
 
       <Panel as="section" className="mt-5" aria-label="Review progress">
@@ -92,7 +95,7 @@ export default function ReviewRunView({ id }: { id: string }) {
           <ul className="mt-3 space-y-3">
             {shown.map((c, i) => (
               <Panel as="li" key={i}>
-                <p className="flex flex-wrap items-center gap-2"><strong className="text-ui-body font-semibold">{c.ref}</strong><Badge tone={CLAUSE_BADGE[c.risk].tone}>{CLAUSE_BADGE[c.risk].text}</Badge></p>
+                <p className="flex flex-wrap items-center gap-2"><strong className="text-ui-body font-semibold">{c.ref}</strong><Badge tone={CLAUSE_BADGE[c.risk].tone}>{CLAUSE_BADGE[c.risk].text}</Badge>{c.page ? <span className="text-ui-sm text-muted">Page {c.page}</span> : null}{c.scan ? <Badge tone="warn" title={SCAN_LABEL}>Read from scan</Badge> : null}</p>
                 {c.quote && <blockquote className="mt-2 border-l-2 border-border pl-3 text-ui-base italic text-secondary">“{c.quote}”</blockquote>}
                 <p className="mt-2 text-ui-base">{c.reason}</p>
               </Panel>
@@ -140,7 +143,8 @@ export default function ReviewRunView({ id }: { id: string }) {
           )}
         </section>
       )}
-      {done && <p className="mt-8 text-ui-sm text-muted">{NOT_LEGAL_ADVICE} Models used: {res.models.length ? res.models.join(", ") : "none"}.</p>}
+      {done && run.status !== "failed" && <FeedbackBar feature="review" itemId={run.id} className="mt-8" />}
+      {done && <p className="mt-4 text-ui-sm text-muted">{NOT_LEGAL_ADVICE} Models used: {res.models.length ? res.models.join(", ") : "none"}.</p>}
     </div>
   );
 }

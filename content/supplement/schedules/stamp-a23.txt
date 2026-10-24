@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A23.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A23
+Heading: CONVEYANCE [as defined by section 2 (10)] not being a Transfer charged or exempted under N
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: CONVEYANCE [as defined by section 2 (10)] not being a Transfer charged or exempted under No. 62,— where the amount or value of the consideration conveyance as set forth therein does not exceed Rs. 50: where it exceeds Rs. 50 but does not exceed Rs. 100. Ditto 100 ditto 200 Two rupees. Ditto 200 ditto 300 Three rupees. Ditto 300 ditto 400 Four rupees. Ditto 400 ditto 500 Five rupees. Ditto 500 ditto 600 Six rupees. Ditto 600 ditto 700 Seven rupees. Ditto 700 ditto 800 Eight rupees. Ditto 800 ditto 900 Nine rupees. Ditto 900 ditto 1,000 Ten rupees. and for every Rs. 500 or part thereof in excess of Rs. 1,000 Exemption [(a) Assignment of copyright by entry made under the Indian Copyright Act, 1847 (20 of 1847) section 5.] [(b) for the purpose of this article, the portion of duty paid in respect of a document falling under article No. 23A shall be excluded while computing the duty payable in respect of a corresponding document relating to the completion of the transaction in any Union territory under this article.] CO-PARTNERSHIP-DEED. See Partnership (No. 46.)
+Proper stamp-duty: for such Eight annas. One rupees. Five rupees.

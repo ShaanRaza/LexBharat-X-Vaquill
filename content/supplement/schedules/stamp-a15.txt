@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A15.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A15
+Heading: BOND [as defined by section 2(5)] not being a DEBENTURE (No
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: BOND [as defined by section 2(5)] not being a DEBENTURE (No. 27) and not being otherwise provided for by this Act, or by the Court-fees Act, 1870 (7 of 1870),— where the amount or value secured does not exceed Rs. 10; Two annas. where it exceeds Rs. 10 and does not exceed Rs. 50; where it exceeds Rs. 50 and does not exceed Rs. 100 where it exceeds Rs. 100 and does not exceed Rs. 200 where it exceeds Rs. 200 and does not exceed Rs. 300 where it exceeds Rs. 300 and does not exceed Rs. 400 where it exceeds Rs. 400 and does not exceed Rs. 500 where it exceeds Rs. 500 and does not exceed Rs. 600 where it exceeds Rs. 600 and does not exceed Rs. 700 where it exceeds Rs. 700 and does not exceed Rs. 800 where it exceeds Rs. 800 and does not exceed Rs. 900 where it exceeds Rs. 900 and does not exceed Rs. 1,100 and for every Rs. 500 or part thereof in excess of Rs. 1,000 See ADMINISTRATION BOND (No. 2), BOTTOMRY BOND (No. 16), CUSTOMS BOND (No. 26), INDEMNITY BOND (No. 34), RESPONDENTIA BOND (No. 56), SECURITY BOND (No. 57). Exemptions Bond, when executed by— (a) headmen nominated under rules framed in accordance with the Bengal Irrigation Act, 1876 (Ben. Act 3 of 1876), section 99, for the due performance of their duties under that Act; (b) any person for the purpose of guaranteeing that the local income derived from private subscriptions to a charitable dispensary or hospital or any other object of public utility shall not be less than a specifed sum per mensem.
+Proper stamp-duty: Four annas. Eight annas. One rupee. One rupee eight annas. Two rupees. Two rupees eight annas. Three rupees. Three rupees eight annas. Four rupees. Four rupees eight annas. Five rupees. Two rupees eight annas.

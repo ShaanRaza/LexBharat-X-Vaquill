@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O20R19.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O20R19
+Heading: Decree when set-off or counter-claim is allowed
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where the defendant has been allowed a set-off [or counter-claim] against the claim of the plaintiff, the decree shall state what amount is due to the plaintiff and what amount is due to the defendant, and shall be for the recovery of any sum which appears to be due to either party.
+(2) Appeal from decree relating to set-off or counter-claim.—Any decree passed in a suit in which a set-off [or counter-claim] is claimed shall be subject to the same provisions in respect of appeal to which it would have been subject if no set-off [or counter-claim] had been claimed.
+(3) The provisions of this rule shall apply whether the set-off is admissible under rule 6 of Order VIII or otherwise.

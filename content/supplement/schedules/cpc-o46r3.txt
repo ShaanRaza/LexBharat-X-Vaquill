@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O46R3.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O46R3
+Heading: Judgment of High Court to be transmitted and case disposed of accordingly
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The High Court, after hearing the parties if they appear and desire to be heard, shall decide the point so referred, and shall transmit a copy of its judgment, under the signature of the Registrar, to the Court by which the reference was made; and such Court shall, on the receipt thereof, proceed to dispose of the case in conformity with the decision of the High Court.

@@ -1,0 +1,27 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O9.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O9
+Heading: Appearance of parties and consequence of non-appearance
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Appearance of parties and consequence of non-appearance
+Rules in this Order:
+1. Parties to appear on day fixed in summons for defendant to appear and answer
+2. Dismissal of suit where summons not served in consequence of plaintiff's failure to pay costs
+3. Where neither party appears suit to be dismissed
+4. Plaintiff may bring fresh suit or Court may restore suit to file
+5. Dismissal of suit where plaintiff after summons returned unserved, fails for [seven days] to apply for fresh summons
+6. Procedure when only plaintiff appears
+7. Procedure where defendant appears on day of adjourned hearing and assigns good cause for previous non-appearance
+8. Procedure where defendant only appears
+9. Decree against plaintiff by default bars fresh suit
+10. Procedure in case of non-attendance of one or more of several plaintiff’s
+11. Procedure in case of non-attendance of one or more of several defendants
+12. Consequence of non-attendance, without sufficient cause shown, of party ordered to appear in person
+13. Setting aside decree ex parte against defendant
+14. No decree to be set aside without notice to opposite party

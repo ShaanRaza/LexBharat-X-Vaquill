@@ -1,0 +1,20 @@
+{
+  "_note": "Which of our Acts a statute mention in a judgment links to. null = not linked (the Act is not in our Central data under that name). Edit here when the data changes.",
+  "ipc": "IND_REP_659_1860",
+  "crpc": null,
+  "cpc": "IND_central_2191",
+  "ni": "IND_central_2189",
+  "bns": "IND_central_20062",
+  "bnss": "IND_central_20099",
+  "bsa": "IND_central_20063",
+  "evidence": "IND_REP_971_1872",
+  "contract": "IND_central_2187",
+  "arbitration": "IND_central_1978",
+  "limitation": "IND_central_1565",
+  "stamp": "IND_central_15510",
+  "sra": "IND_central_1583",
+  "tpa": "IND_central_2338",
+  "hma": "IND_central_1560",
+  "ndps": "IND_central_1791",
+  "constitution": null
+}

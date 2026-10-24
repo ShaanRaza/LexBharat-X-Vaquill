@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O26R14.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O26R14
+Heading: Procedure of Commissioner
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) The Commissioner shall, after such inquiry as may be necessary, divide the property into as many shares as may be directly by the order under which the commission was issued, and shall allot such shares to the parties, and may, if authorised thereto by the said order, award sums to be paid for the purpose of equalizing the value of the shares.
+(2) The commissioner shall then prepare and sign a report or the Commissioners (where the commission was issued to more than one person and they cannot agree) shall prepare and sign separate reports appointing the share of each party and distinguishing each share (if so directed by the said order) by metes and bounds. Such report or reports shall be annexed to the commission and transmitted to the Court; and the Court, after hearing any objections which the parties may make to the report or reports, shall confirm, vary or set aside the same.
+(3) Where the Court confirms or varies the report or reports it shall pass a decree in accordance with the same as confirmed or varied; but where the Court sets aside the report or reports it shall either issue a new commission or make such other order as it shall think fit.

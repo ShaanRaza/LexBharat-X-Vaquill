@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O10R2.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O10R2
+Heading: Oral examination of party, or companion of party
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) At the first hearing of the suit, the Court—
+(a) shall, with a view to elucidating matters in controversy in the suit examine orally such of the parties to the suit appearing in person or present in Court, as it deems fit; and
+(b) may orally examine any person, able to answer any material question relating to the suit, by whom any party appearing in person or present in Court or his pleader is accompanied.
+(2) At any subsequent hearing, the Court may orally examine any party appearing in person or present in Court, or any person, able to answer any material question relating to the suit, by whom such party or his pleader is accompanied.
+(3) The Court may, if it thinks fit, put in the course of an examination under this rule questions suggested by either party.

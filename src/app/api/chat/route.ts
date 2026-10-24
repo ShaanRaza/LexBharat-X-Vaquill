@@ -15,6 +15,7 @@ import { citationOf, retrieveSources, type ChatSource } from "@/lib/chat/retriev
 import { docChatSources, searchAttached } from "@/lib/vault/search";
 import { getDocs } from "@/lib/vault/store";
 import { vaultConfigured } from "@/lib/vault/supabase";
+import { bump } from "@/lib/insights/server";
 import { addMessage, chatTitle, countQuestion, createChat, deleteChat, deleteMessage, isChatId, listChats, ownsChat, recentTurns, uncountQuestion, usageFor, type CheckResult } from "@/lib/chat/store";
 
 export const maxDuration = 60;
@@ -59,7 +60,7 @@ export async function POST(req: Request) {
   // limits (per browser per day and week, all browsers per month)
   let verdict;
   try { verdict = evaluateLimits(await usageFor(bid), limits()); } catch { return json({ error: "Chat could not check its limits. Please try again." }, 503); }
-  if (!verdict.allowed) return json({ error: verdict.message, reason: verdict.reason }, 429);
+  if (!verdict.allowed) { bump("limit_hit", `chat_${verdict.reason}`); return json({ error: verdict.message, reason: verdict.reason }, 429); }
   if (chatIdIn && !(await ownsChat(bid, chatIdIn).catch(() => false))) return json({ error: "That chat was not found." }, 404);
 
   const enc = new TextEncoder();
@@ -67,6 +68,9 @@ export async function POST(req: Request) {
     async start(controller) {
       const send = (o: unknown) => { try { controller.enqueue(enc.encode(JSON.stringify(o) + "\n")); } catch { /* client went away */ } };
       let chatId = chatIdIn as string | null, createdChat = false, userMsgId: number | null = null, counted = false;
+      const t0 = Date.now();
+      /** The answer is saved: tell the browser its id (the thumbs up/down hangs on it) and count the question and how long it took, once. */
+      const finish = (messageId: number) => { bump("chat_asked"); bump("answer_time", "chat", Date.now() - t0); send({ type: "done", messageId }); controller.close(); };
       const rollback = async () => {
         try { if (createdChat && chatId) await deleteChat(bid, chatId); else if (userMsgId !== null) await deleteMessage(userMsgId); if (counted) await uncountQuestion(bid); } catch { /* best effort */ }
       };
@@ -100,8 +104,7 @@ export async function POST(req: Request) {
           send({ type: "delta", text });
           const check: CheckResult = { label: "not_found", unsupported: [] };
           send({ type: "check", ...check });
-          await addMessage(chatId, { role: "assistant", content: text, citations: [], check, model: null });
-          send({ type: "done" }); controller.close(); return;
+          finish(await addMessage(chatId, { role: "assistant", content: text, citations: [], check, model: null })); return;
         }
 
         // 3. the answer, streamed. If the model fails AFTER some text, the partial answer is kept and marked as cut off.
@@ -118,8 +121,7 @@ export async function POST(req: Request) {
         if (cutOff) {
           const check: CheckResult = { label: "check", unsupported: [], cutOff: true };
           send({ type: "cutoff" });
-          await addMessage(chatId, { role: "assistant", content: clean.text, citations: cites, check, model });
-          send({ type: "done" }); controller.close(); return;
+          finish(await addMessage(chatId, { role: "assistant", content: clean.text, citations: cites, check, model })); return;
         }
 
         // 4. answer check: a second, cheap call. "Not found" answers need no call. If the check fails the answer is labelled "Check sources", never left unlabelled.
@@ -136,12 +138,12 @@ export async function POST(req: Request) {
         // an answer that states law but cites no source cannot be "Supported"
         if ((check.label === "supported" || check.label === "partial") && citedNumbers(clean.text).length === 0) check = { label: "check", unsupported: check.unsupported, missing: [...(check.missing ?? []), "The answer does not cite any source."] };
         send({ type: "check", ...check });
-        await addMessage(chatId, { role: "assistant", content: clean.text, citations: cites, check, model });
-        send({ type: "done" }); controller.close();
+        finish(await addMessage(chatId, { role: "assistant", content: clean.text, citations: cites, check, model }));
       } catch (e) {
         await rollback();
         const ai = e instanceof AiError ? e : null;
         const busy = ai && (ai.kind === "rate_limit" || ai.kind === "unavailable" || ai.kind === "timeout");
+        if (busy) bump("model_busy", "chat");
         send({ type: "error", code: busy ? "busy" : ai?.kind === "blocked" ? "blocked" : "failed",
           message: busy ? "Busy, try again in a minute." : ai?.kind === "blocked" ? "The model declined to answer this question. Try rewording it." : "Something went wrong and your question was not counted. Please try again." });
         try { controller.close(); } catch { /* already closed */ }

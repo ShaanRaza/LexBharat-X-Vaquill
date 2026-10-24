@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R2.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R2
+Heading: Payment out of Court to decree-holder
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where any money payable under a decree of any kind is paid out of Court, [or decree of any kind is otherwise adjusted] in whole or in part to the satisfaction of the decree-holder, the decree-holder shall certify such payment or adjustment to the Court whose duty it is to execute the decree, and the Court shall record the same accordingly.
+(2) The judgment-debtor [or any person who has become surety for the judgment-debtor] also may inform the Court of such payment or adjustment, and apply to the Court to issue a notice to the decree-holder to show cause, on a day to be fixed by the Court, why such payment or adjustment should not be recorded as certified; and if, after service of such notice, the decree-holder fails to show cause why the payment or adjustment should not be recorded as certified, the Court shall record the same accordingly.
+[(2A) No payment or adjustment shall be recorded at the instance of the judgment-debtor unless—
+(a) the payment is made in the manner provided in rule 1; or
+(b) the payment or adjustment is proved by documentary evidence; or
+(c) the payment or adjustment is admitted by, or on behalf of, the decree-holder in his reply to the notice given under sub-rule (2) of rule 1, or before the Court.]
+(3) A payment or adjustment, which has not been certified or recorded as aforesaid, shall not be recognized by any Court executing the decree.

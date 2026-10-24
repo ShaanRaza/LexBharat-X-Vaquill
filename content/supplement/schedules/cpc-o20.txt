@@ -1,0 +1,36 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O20.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O20
+Heading: Judgment and decree
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Judgment and decree
+Rules in this Order:
+2. Power to pronounce judgment written by judge’s predecessor
+3. Judgment to be signed
+4. Judgments of Small Cause Courts
+5. Court to state its decision on each issue
+5A. Court to inform parties as to where an appeal lies in cases where parties are not represented by pleaders
+6. Contents of decree
+6A. Preparation of decree
+6B. Copies of judgments when to be made available
+7. Date of decree
+8. Procedure where Judge has vacated office before signing decree
+9. Decree for recovery of immovable property
+10. Decree for delivery of movable property
+11. Decree may direct payment by instalments
+12. Decree for possession and mesne profits
+12A. Decree for specific performance of contract for the sale or lease of immovable property
+13. Decree in administration suit
+14. Decree in pre-emption suit
+15. Decree in suit for dissolution of partnership
+16. Decree in suit for account between principal and agent
+17. Special directions as to accounts
+18. Decree in suit for partition of property or separate possession of a share therein
+19. Decree when set-off or counter-claim is allowed
+20. Certified copies of judgment and decree to be furnished

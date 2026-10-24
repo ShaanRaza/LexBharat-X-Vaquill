@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O19R1.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O19R1
+Heading: Power to order any point to be proved by affidavit
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Any Court may at any time for sufficient reason order that any particular fact or facts may be proved by affidavit, or that the affidavit of any witness may be read at the hearing, on such conditions as the Court thinks reasonable:
+Provided that where it appears to the Court that either party bona fide desires the production of a witness for cross-examination, and that such witness can be produced, an order shall not be made authorising the evidence of such witness to be given by affidavit.

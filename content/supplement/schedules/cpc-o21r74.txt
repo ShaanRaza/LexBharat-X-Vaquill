@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R74.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R74
+Heading: Sale of agricultural produce
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where the property to be sold is agricultural produce, the sale shall be held,—
+(a) if such produce is a growing crop, on or near the land on which such crop has grown, or
+(b) if such produce has been cut or gathered, at or near-the threshing floor or place for trading out grain or the like or fodder-stack on or in which it is deposited:
+Provided that the Court may direct the sale to be held at the nearest place of public resort, if it is of opinion that the produce is thereby likely to sell to greater advantage.
+(2) Where, on the produce being put up for sale,—
+(a) a fair price, in the estimation of the person holding the sale, is not offered for it, and
+(b) the owner of the produce or a person authorized to act in his behalf applies to have the sale postponed till next day or, if a market is held at the place of sale, the next market-day, the sale shall be postponed accordingly and shall be then completed, whatever price may be offered for the produce.

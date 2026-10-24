@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A27.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A27
+Heading: DEBENTURE
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: DEBENTURE—[as defined by section 2(10A)] (see section 9A and 9B) (a) in case of issue of debenture; (b) in case of transfer and re-issue of debenture. Explanation.—The term “Debenture” includes any interest coupons attached thereto but the amount of such coupons shall not be included in estimating the duty. Exemption A debenture issued by an incorporated company corporate in terms of a registered mortgage-deed, duly stamped in respect of the full amount of debentures to be issued thereunder, whereby the company or body borrowing makes over, in whole or in part, their property to trustees for the benefit of the debenture holders: Provided that the debentures so issued are expressed to be issued in terms of the said mortgage-deed. See also BOND (NO. 15): and sections 8 and 55.
+Proper stamp-duty: 0.0001%] or other body

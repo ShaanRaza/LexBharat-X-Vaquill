@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R46F.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R46F
+Heading: Payment by garnishee to be valid discharge
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Payment made by the garnishee on notice under rule 46A or under any such order as aforesaid shall be a valid discharge to him as against the judgment-debtor and any other person ordered to appear as aforesaid for the amount paid or levied, although the decree in execution of which the application under rule 46A was made, or the order passed in the proceedings on such application may be set aside or reversed.

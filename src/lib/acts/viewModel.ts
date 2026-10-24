@@ -2,6 +2,8 @@
 // LOGIC ONLY: no JSX, no classes, no colours (tones are meanings the UI kit maps to a look).
 import { toDisplayBlocks, cleanHeading, type DisplayBlock } from "./cleanText.mjs";
 import type { SectionRecord } from "./sectionRecord.mjs";
+import { unitLabel, parseUnitNumber } from "./unitLabel.mjs";
+import type { ScheduleTable } from "./scheduleTable.mjs";
 import { STATUS_INFO, MISSING_INFO, sectionFlagList, officialSourceUrl, type FlagInfo, type Tone } from "./quality";
 
 /** A stored section; `body` may be left out for sections that are only listed (the page needs the text of the selected one). */
@@ -24,6 +26,8 @@ export type SectionView = {
 };
 export type ActTextView = {
   hasSectionNumbers: boolean; sourceUrl: string;
+  /** the Act has Schedule Articles stored as units (Limitation Act, Stamp Act): the page offers them as a table. `schedule` is set when the table is the page being shown. */
+  hasSchedule: boolean; schedule: ScheduleTable | null;
   list: SectionListItem[]; counts: { sections: number; complete: number; possibly_incomplete: number; garbled: number; missing: number; supplemented: number };
   selected: SectionView | null;
 };
@@ -37,8 +41,9 @@ function rowsFor(sections: ListedSection[], missing: number[]): Row[] {
   let blocks = 0;
   for (const s of sections) {
     const b = baseNumber(s.number);
+    if (parseUnitNumber(s.number)) while (todo.length) { const n = todo.shift() as number; rows.push({ kind: "missing", n, label: String(n) }); }   // placeholders for sections still missing come before the Schedule units
     if (b !== null) while (todo.length && todo[0] < b) { const n = todo.shift() as number; rows.push({ kind: "missing", n, label: String(n) }); }
-    rows.push({ kind: "section", s, label: s.number ? s.number : `Text block ${++blocks}` });
+    rows.push({ kind: "section", s, label: s.number ? (unitLabel(s.number) ?? s.number) : `Text block ${++blocks}` });
   }
   for (const n of todo) rows.push({ kind: "missing", n, label: String(n) });
   return rows;
@@ -67,5 +72,5 @@ export function buildActTextView(sections: ListedSection[], sourceUrl: string | 
     ? { key: keyOf(r), label: r.label, heading: null, chapter: null, status: "missing", statusInfo: MISSING_INFO, flags: [], missing: true, supplement: null, blocks: null, chunkCount: 0, prev: near(idx - 1), next: near(idx + 1) }
     : { key: keyOf(r), label: r.label, heading: cleanHeading(r.s.heading), chapter: r.s.chapter, status: r.s.status, statusInfo: STATUS_INFO[r.s.status], flags: sectionFlagList(r.s), missing: false, supplement: r.s.supplement ?? null,
         blocks: r.s.status === "garbled" || r.s.body == null ? null : toDisplayBlocks(r.s.body), chunkCount: r.s.chunkCount, prev: near(idx - 1), next: near(idx + 1) };
-  return { hasSectionNumbers: sections.some((x) => x.number), sourceUrl: officialSourceUrl(sourceUrl), list, counts, selected };
+  return { hasSectionNumbers: sections.some((x) => x.number), hasSchedule: sections.some((x) => /^A\d/.test(x.number ?? "")), schedule: null, sourceUrl: officialSourceUrl(sourceUrl), list, counts, selected };
 }

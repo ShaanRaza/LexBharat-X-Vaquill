@@ -6,6 +6,7 @@ import { toSectionRecord } from "./sectionRecord.mjs";
 import { confidentMissing } from "./missing.mjs";
 import { buildActTextView, type ActTextView, type ListedSection } from "./viewModel";
 import { officialSourceUrl } from "./quality";
+import { buildScheduleTable } from "./scheduleTable.mjs";
 
 export type ActTextOutcome =
   | { available: true; origin: "database" | "files"; view: ActTextView; officialUrl: string }
@@ -20,6 +21,11 @@ async function fromDatabase(actId: string, wanted: string | undefined): Promise<
     query<{ number: number }>(`SELECT m.number FROM act_missing_sections m WHERE m.act_id = $1 AND NOT EXISTS (SELECT 1 FROM act_sections_supplement x WHERE x.act_id = m.act_id AND x.number = m.number::text) ORDER BY m.number`, [actId]).catch(() => []), // table absent in an older load: no placeholders
   ]);
   if (!acts.length || !secs.length) return "missing";
+  if (wanted === "schedule") {   // the Schedule Articles as one table (Limitation Act, Stamp Act)
+    const units = await query<{ number: string; body: string }>(`SELECT number, body FROM act_sections_supplement WHERE act_id = $1 AND number ~ '^A[0-9]'`, [actId]);
+    const table = buildScheduleTable(units);
+    if (table.rows.length) return { available: true, origin: "database", view: { ...buildActTextView(secs, acts[0].sourceUrl, undefined, []), schedule: table }, officialUrl: officialSourceUrl(acts[0].sourceUrl) };
+  }
   const missing = miss.map((m) => Number(m.number));
   const first = buildActTextView(secs, acts[0].sourceUrl, wanted, missing); // decides which row is shown; its text is fetched next
   const sel = first.selected;

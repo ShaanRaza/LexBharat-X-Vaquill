@@ -1,0 +1,20 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O13AR5.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O13AR5
+Heading: Evidence for hearing of summary judgment
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Notwithstanding anything in this Order, if the respondent in an application for summary judgment wishes to rely on additional documentary evidence during the hearing, the respondent must:—
+(a) file such documentary evidence; and
+(b) serve copies of such documentary evidence on every other party to the application at least fifteen days prior to the date of the hearing.
+(2) Notwithstanding anything in this Order, if the applicant for summary judgment wishes to rely on documentary evidence in reply to the defendant’s documentary evidence, the applicant must:—
+(a) file such documentary evidence in reply; and
+(b) serve a copy of such documentary evidence on the respondent at least five days prior to the date of the hearing.
+(3) Notwithstanding anything to the contrary, sub-rules (1) and (2) shall not require documentary evidence to be:—
+(a) filed if such documentary evidence has already been filed; or
+(b) served on a party on whom it has already been served.

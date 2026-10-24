@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O39R1.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O39R1
+Heading: Cases in which temporary injunction may be granted
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where in any suit it is proved by affidavit or otherwise—
+(a) that any property in dispute in a suit is in danger of being wasted, damaged or alienated by any party to the suit, or wrongfully sold in execution of a decree, or
+(b) that the defendant threatens, or intends, to remove or dispose of his property with a view to [defrauding] his creditors, [(c) that the defendant threatens to dispossess, the plaintiff or otherwise cause injury to the plaintiff in relation to any property in dispute in the suit,] the Court may by order grant a temporary injunction to restrain such act, or make such other order for the purpose of staying and preventing the wasting, damaging, alienation, sale, removal or disposition of the property [or dispossession of the plaintiff, or otherwise causing injury to the plaintiff in relation to any property in dispute in the suit] as the Court thinks fit, until the disposal of the suit or until further orders.

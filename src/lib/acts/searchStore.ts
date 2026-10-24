@@ -1,6 +1,7 @@
 // Keyword search over Act section text in Neon (Postgres full-text search, 'english' config). LOGIC ONLY: no styling. The caller (route handler) validates input.
 import { query, dbConfigured } from "./db";
 import { actMatcher, hasDevanagari, hasSearchableChars, parseSectionLookup } from "./searchQuery.mjs";
+import { unitLabel } from "./unitLabel.mjs";
 import { chooseMode, distinctSections, highlightQuery, rankSections, statesIn } from "./semantic.mjs";
 import { embedMany, embedQuery, voyageConfigured } from "./embed";
 import { vectorStores, vectorConfigured } from "./vectorStore";
@@ -44,8 +45,8 @@ async function lookupHits(q: string, page: number, pageSize: number): Promise<Se
   if (!params.length) return null;
   const rows = await query<Omit<SectionHit, "snippet" | "via"> & { body: string | null }>(
     `SELECT ${COLS}, left(s.body, 400) AS body FROM acts a JOIN act_sections_v s ON s.act_id = a.act_id
-     WHERE ${where} AND upper(s.number) = upper($${params.length + 1})
-     ORDER BY (a.category = 'central') DESC, (a.act_status = 'in_force') DESC, length(a.title), s.ord LIMIT 24`, [...params, lk.number]);
+     WHERE ${where} AND upper(s.number) = ANY($${params.length + 1}::text[])
+     ORDER BY (a.category = 'central') DESC, (a.act_status = 'in_force') DESC, length(a.title), s.ord LIMIT 24`, [...params, (lk.numbers ?? [lk.number]).map((n: string) => n.toUpperCase())]);
   if (!rows.length) {
     const num = /^\d{1,4}$/.test(lk.number) ? Number(lk.number) : null;
     if (num === null) return null;
@@ -57,7 +58,7 @@ async function lookupHits(q: string, page: number, pageSize: number): Promise<Se
   }
   const all = rows.map(({ body, ...r }): SectionHit => ({ ...r, snippet: leadSnippet(body ?? ""), via: "lookup" }));
   const slice = all.slice((page - 1) * pageSize, page * pageSize);
-  return { available: true, results: slice, total: all.length, totalCapped: false, page, pageSize, hasMore: page * pageSize < all.length, mode: "lookup", note: `Section lookup: section ${lk.number} of the Act matching "${lk.actPhrase}".` };
+  return { available: true, results: slice, total: all.length, totalCapped: false, page, pageSize, hasMore: page * pageSize < all.length, mode: "lookup", note: `Lookup: ${unitLabel(lk.number)?.toLowerCase() ?? `section ${lk.number}`} of the Act matching "${lk.actPhrase}".` };
 }
 
 async function textSearch(q: string, page: number, pageSize: number): Promise<SearchOutcome> {

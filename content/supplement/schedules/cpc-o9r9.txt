@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O9R9.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O9R9
+Heading: Decree against plaintiff by default bars fresh suit
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where a suit is wholly or partly dismissed under rule 8, the plaintiff shall be precluded from bringing a fresh suit in respect of the same cause of action. But he may apply for an order to set the dismissal aside, and if he satisfies the Court that there was sufficient cause for his non-appearance when the suit was called on for hearing, the Court shall make an order setting aside the dismissal upon such terms as to costs or otherwise as it thinks fit, and shall appoint a day for proceeding with the suit.
+(2) No order shall be made under this rule unless notice of the application has been served on the opposite party.

@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O33R9A.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O33R9A
+Heading: Court to assign a pleader to an unrepresented indigent person
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where a person, who is - permitted to sue as an indigent person, is not represented by a pleader, the Court may, if the circumstances of the case so require, assign a pleader to him.
+(2) The High Court may, with the previous approval of the State Government, make rules providing for—
+(a) the mode of selecting pleaders to be assigned under sub-rule (1);
+(b) the facilities to be provided to such pleaders by the Court;
+(c) any other matter which is required to be or may be provided by the rules for giving effect to the provisions of sub-rule (1).

@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O30R3.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O30R3
+Heading: Service
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where persons are sued as partners in the name of their firm, the summons shall be served either—
+(a) upon any one or more of the partners, or
+(b) at the principal place at which the partnership business is carried on within [India] upon any person having, at the time of service, the control or management of the partnership business, there, as the Court may direct; and such service shall be deemed good service upon the firm so sued, whether all or any of the partners are within or without [India]:
+Provided that, in the case of a partnership which has been dissolved to the knowledge of the plaintiff before the institution of the suit, the summons shall be served upon every person within [India] whom it is sought to make liable.

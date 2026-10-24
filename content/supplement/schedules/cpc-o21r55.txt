@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R55.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R55
+Heading: Removal of attachment after satisfaction of decree
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where—
+(a) the amount decreed with costs and all charges and expenses resulting from the attachment of any property are paid into Court, or
+(b) satisfaction of the decree is otherwise made through the Court or certified to the Court, or
+(c) the decree is set aside or reversed, the attachment shall be deemed to be withdrawn, and, in the case of immovable property, the withdrawal shall, if the judgment-debtor so desires, be proclaimed at his expense, and a copy of the proclamation shall be affixed in the manner prescribed by the last preceding rule.

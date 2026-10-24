@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O27R5B.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O27R5B
+Heading: Duty of Court in suits against the Government or a public officer to assist in arriving at a settlement
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) In every suit or proceeding to which the Government, or a public officer acting in his official capacity, is a party, it shall be the duty of the Court to make, in the first instance, every endeavour, where it is possible to do so consistently with the nature and circumstances of the case, to assist the parties in arriving at a settlement in respect of the subject-matter of the suit.
+(2) If, in any such suit or proceeding, at any stage, it appears to the court that there is a reasonable possibility of a settlement between the parties, the Court may adjourn the proceeding for such period as it thinks fit, to enable attempts to be made to effect such a settlement.
+(3) The power conferred under sub-rule (2) is in addition to any other power of the Court to adjourn proceedings.

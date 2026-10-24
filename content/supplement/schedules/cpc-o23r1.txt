@@ -1,0 +1,21 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O23R1.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O23R1
+Heading: Withdrawal of suit or abandonment of part of claim
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) At any time after the institution of a suit, the plaintiff may as against all or any of the defendants abandon his suit or abandon a part of his claim:
+Provided that where the plaintiff is a minor or other person to whom the provisions contained in rules 1 to 14 of Order XXXII extend, neither the suit nor any part of the claim shall be abandoned without the leave of the Court.
+(2) An application for leave under the proviso to sub-rule (1) shall be accompanied by an affidavit of the next friend and also, if the minor or such other person is represented by a pleader, by a certificate of the pleader to the effect that the abandonment proposed is, in his opinion, for the benefit of the minor or such other person.
+(3) Where the Court is satisfied,—
+(a) that a suit must fail by reason of some formal defect, or
+(b) that there are sufficient grounds for allowing the plaintiff to institute a fresh suit for the subject matter of suit or part of a claim, it may, on such terms as it thinks fit grant the plaintiff permission to withdraw from such suit or such part of the claim with liberty to institute a fresh suit in respect of the subject-matter of such suit or such part of the claim.
+(4) Where the plaintiff—
+(a) abandons any suit or part of claim under sub-rule (1), or
+(b) withdraws from a suit or part of a claim without the permission referred to in sub-rule (3), he shall be liable for such costs as the Court may award and shall be precluded from instituting any fresh suit in respect of such subject-matter or such part of the claim.
+(5) Nothing in this rule shall be deemed to authorise the Court to permit one of several plaintiffs to abandon a suit or part of a claim under sub-rule (1), or to withdraw, under sub-rule (3), any suit or part of a claim, without the consent of the other plaintiff.

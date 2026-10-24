@@ -8,7 +8,7 @@ export type UnitState = "pending" | "ok" | "failed";
 export type PartState = { i: number; start: number; end: number; status: UnitState; error?: string; clauses?: ReviewClause[] };
 export type ReviewResult = {
   parts: PartState[]; summary: { status: UnitState; value?: ReviewSummary; error?: string }; law: { status: UnitState; findings?: LawFinding[]; sources?: CitationLite[]; dropped?: number; reasons?: string[]; mode?: string; error?: string };
-  missing: { clause: string; why: string; source: "model" | "check" }[]; risk: "low" | "medium" | "high" | null; state: string | null; usageId?: number | null; pageStarts?: number[] | null; models: string[];
+  missing: { clause: string; why: string; source: "model" | "check" }[]; risk: "low" | "medium" | "high" | null; state: string | null; usageId?: number | null; pageStarts?: number[] | null; scanPages?: number[]; models: string[];
 };
 export type ReviewRun = { id: string; docId: string | null; docName: string; contractType: string; side: string; status: "running" | "done" | "partial" | "failed"; result: ReviewResult | null; createdAt: string; updatedAt: string };
 export type ReviewSummaryRow = Pick<ReviewRun, "id" | "docName" | "contractType" | "side" | "status" | "createdAt"> & { risk: ReviewResult["risk"] };

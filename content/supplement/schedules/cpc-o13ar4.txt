@@ -1,0 +1,33 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O13AR4.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O13AR4
+Heading: Procedure
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) An application for summary judgment to a Court shall, in addition to any other matters the applicant may deem relevant, include the matters set forth in sub-rules (a) to (f) mentioned hereunder:—
+(a) the application must contain a statement that it is an application for summary judgment made under this Order;
+(b) the application must precisely disclose all material facts and identify the point of law, if any;
+(c) in the event the applicant seeks to rely upon any documentary evidence, the applicant must,––
+(i) include such documentary evidence in its application, and
+(ii) identify the relevant content of such documentary evidence on which the applicant relies;
+(d) the application must state the reason why there are no real prospects of succeeding on the claim or defending the claim, as the case may be;
+(e) the application must state what relief the applicant is seeking and briefly state the grounds for seeking such relief.
+(2) Where a hearing for summary judgment is fixed, the respondent must be given at least thirty days’ notice of:—
+(a) the date fixed for the hearing; and
+(b) the claim that is proposed to be decided by the Court at such hearing.
+(3) The respondent may, within thirty days of the receipt of notice of application of summary judgment or notice of hearing (whichever is earlier), file a reply addressing the matters set forth in clauses (a) to (f) mentioned hereunder in addition to any other matters that the respondent may deem relevant:—
+(a) the reply must precisely––
+(i) disclose all material facts;
+(ii) identify the point of law, if any; and * Ins. by Act 4 of 2016, s. 16 and Sch., Shall be applicable to commercial disputes of a specified value (w.e.f. 23-10-2015).
+(b) in the event the respondent seeks to rely upon any documentary evidence in its reply, the respondent must—
+(i) include such documentary evidence in its reply; and
+(ii) identify the relevant content of such documentary evidence on which the respondent relies;
+(c) the reply must state the reason why there are real prospects of succeeding on the claim or defending the claim, as the case may be;
+(d) the reply must concisely state the issues that should be framed for trial;
+(e) the reply must identify what further evidence shall be brought on record at trial that could not be brought on record at the stage of summary judgment; and
+(f) the reply must state why, in light of the evidence or material on record if any, the Court should not proceed to summary judgment.

@@ -1,0 +1,19 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O32A.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O32A
+Heading: Suits relating to matters concerning the family
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Suits relating to matters concerning the family
+Rules in this Order:
+1. Application of the Order
+2. Proceedings to be held in camera
+3. Duty of Court to make efforts for settlement
+4. Assistance of welfare expert
+5. Duty to enquire into facts
+6. “Family”

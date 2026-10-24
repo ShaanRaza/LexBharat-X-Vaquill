@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O3R2.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O3R2
+Heading: Recognized agents
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The recognized agents of parties by whom such appearances, applications and acts may be made or done are—
+(a) persons holding powers-of-attorney, authorising them to make and do such appearances, applications and acts on behalf of such parties;
+(b) persons carrying on trade or business for and in the names of parties not resident within the local limits of the jurisdiction of the Court within which limits the appearance, application or act is made or done, in matters connected with such trade or business only, where no other agent is expressly authorised to make and do such appearances, applications and acts.

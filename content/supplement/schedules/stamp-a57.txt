@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A57.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A57
+Heading: SECURITY BOND OR MORTGAGE-DEED
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: SECURITY BOND OR MORTGAGE-DEED, executed by way of security for the due execution of an office, or to account for money or other property received by virtue thereof or executed by a surety to secure the due performance of a contract,— (a) when the amount secured does not exceed Rs. 1,000; (b) in any other case…………………………….. Exemptions Bond or other instrument, when executed— (a) by headmen nominated under rules framed in accordance with the Bengal Irrigation Act, 1876 (Ben. Act 3 of 1876), section 99, for the due performance of their duties under that Act; (b) by any person for the purpose of guaranteeing that the local income derived from private subscriptions to a charitable dispensary or hospital or any other object of public utility shall not be less than a specified sum per mensem; (c) under No. 3A of the rules made by the [State Government] under section 70 of the Bombay Irrigation Act, 1879) (Bom. Act V of 1879); (d) executed by persons taking advances under the Land Improvement Loans Act, 1883 (19 of 1883), or the Agriculturists’ Loan Act, 1884 (12 of 1884), or by their sureties, as security for the repayment of such advances; The same duty as a Bond (No. 15) for a sum equal (e) executed by officers of [the [Government]] or to the amount or value of the property settled as set forth in such settlement: their sureties to secure the due execution of an office or the due accounting for money or other property received by virtue thereof. Provided that, where an agreement to settle is
+Proper stamp-duty: —

@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O33R7.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O33R7
+Heading: Procedure at hearing
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) On the day so fixed or as soon thereafter as may be convenient the Court shall examine the witnesses (if any) produced by either party, and may examine the applicant or his agent, and shall may [a full record of their evidence].
+[(1A) The examination of the witnesses under sub-rule (1) shall be confined to the matters specified in clause (b), clause (c) and clause (e) of rule 5 but the examination of the applicant or his agent may relate to any of the matters specified in rule 5.]
+(2) The Court shall also hear any argument which the parties may desire to offer on the question whether, on the face of the application and of the evidence (if any) taken by the Court [under rule 6 or under this rule], the applicant is or is not subject to any of the prohibitions specified in rule 5.
+(3) The Court shall then either allow or refuse to allow the applicant to sue as [an indigent person].

@@ -1,0 +1,31 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O32.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O32
+Heading: Suits by or against minors and persons of unsound mind
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Suits by or against minors and persons of unsound mind
+Rules in this Order:
+1. Minor to sue by next friend
+2. Where suit is instituted without next friend, plaint to be taken off the file
+2A. Security to be furnished by next friend when so ordered
+3. Guardian for the suit to be appointed by Court for minor defendants
+3A. Decree against minor not to be set aside unless prejudice has been caused to his interest
+4. Who may act as next friend or he appointed guardian for the suit
+5. Representation of minor by next friend or guardian for the suit
+6. Receipt by next friend or guardian for the suit of property under decree for minor
+7. Agreement or compromise by next friend or guardian for the suit
+8. Retirement of next friend
+9. Removal of next friend
+10. Stay of proceedings on removal, etc., of next friend
+11. Retirement, removal or death of guardian for the suit
+12. Course to be followed by minor plaintiff or applicant on attaining majority
+13. Where minor co-plaintiff attaining majority desires to repudiate suit
+14. Unreasonable or improper suit
+15. Rules 1 to 14 (Except rule 2A) to apply to persons of unsound mind
+16. Savings

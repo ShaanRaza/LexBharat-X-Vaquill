@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R67.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R67
+Heading: Mode of making proclamation
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Every proclamation shall be made and published, as nearly as may be, in the manner prescribed by rule 54, sub-rule (2).
+(2) Where the Court so directs, such proclamation shall also be published in the Official Gazette or in a local newspaper, or in both, and the costs of such publication shall be deemed to be costs of the sale.
+(3) Where property is divided into lots for the purpose of being sold separately, it shall not be necessary to make a separate proclamation for each lot, unless proper notice of the sale cannot, in the opinion of the Court, otherwise be given.

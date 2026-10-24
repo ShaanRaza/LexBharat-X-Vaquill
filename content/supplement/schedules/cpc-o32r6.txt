@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O32R6.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O32R6
+Heading: Receipt by next friend or guardian for the suit of property under decree for minor
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) A next friend or guardian for the suit shall not, without the leave of the Court, receive any money or other movable property on behalf of a minor either—
+(a) by way of compromise before decree or order, or
+(b) under a decree or order in favour of the minor.
+(2) Where the next friend or guardian for the suit has not been appointed or declared by competent authority to be guardian of the property of the minor, or, having been so appointed or declared, is under any disability known to the Court to receive the money or other movable property, the Court shall, if it grants him leave to receive the property, require such security and give such directions as will, in its opinion, sufficiently protect the property from waste and ensure its proper application:
+[Provided that the Court may, for reasons to be recorded, dispense with such security while granting leave to the next friend or guardian for the suit to receive money or other movable property under a decree or order, where such next friend or guardian—
+(a) is the manager of a Hindu undivided family and the decree or order relates to the property or business of the family; or
+(b) is the parent of the minor.]

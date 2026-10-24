@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A18.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A18
+Heading: CERTIFICATE OF SALE (in respect of each property put up as a separate lot and sold) grante
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: CERTIFICATE OF SALE (in respect of each property put up as a separate lot and sold) granted to the purchaser of any property sold by public auction by a Civil or Revenue Court, or Collector or other Revenue-officer— (a) where the purchase-money does not exceed Rs. 10; (b) where the purchase-money exceeds Rs. 10 but does not Four annas. exceed Rs. 25; any other case.......................
+Proper stamp-duty: Two annas. The same duty as a conveyance (No. 23) for a consideration equal to the amount of the purchase-money only.

@@ -1,0 +1,27 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O38.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O38
+Heading: ARREST AND ATTACHMENT BEFORE JUDGMENT
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+ARREST AND ATTACHMENT BEFORE JUDGMENT
+Rules in this Order:
+1. Where defendant may be called upon to furnish security for appearance
+2. Security
+3. Procedure on application by surety to be discharged
+4. Procedure where defendant fails to furnish security or find fresh security
+5. Where defendant may be called upon to furnish security for production of property
+6. Attachment where cause not shown or security not furnished
+7. Mode of making attachment
+8. Adjudication of claim to property attached before judgment
+9. Removal of attachment when security furnished or suit dismissed
+10. Attachment before judgment not to affect rights of strangers, nor bar decree-holder from applying for sale
+11. Property attached before judgment not to be re-attached in execution of decree
+11A. Provisions applicable to attachment
+12. Agricultural produce not attachable before judgment
+13. Small Cause Court not to attach immovable property

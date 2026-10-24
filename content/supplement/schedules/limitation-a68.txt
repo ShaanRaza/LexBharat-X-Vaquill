@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Limitation Act, 1963, Schedule (Articles), unit A68.
+# Extracted 2026-10-24 from India Code's PDF A1963-36.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Limitation Act, 1963
+Act ID: IND_central_1565
+Section: A68
+Heading: For specific movable property lost, or acquired by theft, or dishonest misappropriation or conversion.
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/8c2f3bc0-5daf-4d11-971f-ad5f9b78b74b/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of suit: For specific movable property lost, or acquired by theft, or dishonest misappropriation or conversion.
+Period of limitation: Three years.
+Time from which period begins to run: When the person having the right to the possession of the property first learns in whose possession it is.
+FIRST DIVISION—SUITS
+PART VI.—SUITS RELATING TO MOVABLE PROPERTY

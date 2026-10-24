@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O40R4.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O40R4
+Heading: Enforcement of receiver’s duties
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where a receiver—
+(a) fails to submit his accounts at such periods and in such form as the Court directs, or
+(b) fails to pay amount due from him as the Court directs, or
+(c) occasions loss to the property by his wilful default or gross negligence, the Court may direct his property to be attached and may sell such property, and may apply the proceeds to make good any amount found to be due from him or any loss occasioned by him, and shall pay the balance (if any) to the receiver.

@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O27R7.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O27R7
+Heading: Extension of time to enable public officer to make reference to Government
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where the defendant is a public officer and, on receiving the summons, considers it proper to make a reference to the Government before answering the plaint, he may apply to the Court to grant such extension of the time fixed in the summons as may be necessary to enable him to make such reference and to receive orders thereon through the proper channel.
+(2) Upon such application the Court shall extend the time for so long as appears to it to be necessary.

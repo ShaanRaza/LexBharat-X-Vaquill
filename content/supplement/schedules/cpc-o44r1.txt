@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O44R1.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O44R1
+Heading: Who may appeal [as an indigent person]
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+[(1)] Any person entitled to prefer an appeal, who is unable to pay the fee required for the memorandum of appeal, may present an application accompanied by a memorandum of appeal, and may be allowed to appeal as an [indigent person], subject, in all matters, including the presentation of such application, to the provisions relating to suits by [indigent persons], in so far as those provisions are applicable.

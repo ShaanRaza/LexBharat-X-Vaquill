@@ -7,13 +7,16 @@ import { extractText } from "./extract.mjs";
 import { MB, readVaultLimits, sniffKind } from "./files.mjs";
 import { EmbedWait, embedDocuments } from "./embedDocs";
 import { getFileStore } from "./storage";
-import { countEmbedded, deleteDoc, getDoc, patchDoc, pendingChunks, replaceChunks, saveText, setVectors, type VaultDoc } from "./store";
+import { readScanPages } from "./ocr";
+import { mergePages, planScan } from "./scan.mjs";
+import { bump } from "@/lib/insights/server";
+import { addUsage, countEmbedded, deleteDoc, getDoc, getScanPages, patchDoc, pendingChunks, replaceChunks, saveScanPage, saveText, setVectors, usageCounts, type VaultDoc } from "./store";
 
-export type StepResult = { state: "extracted" | "embedding" | "ready" | "unreadable" | "waiting" | "gone" | "busy"; doc?: VaultDoc; waitMs?: number; message?: string };
+export type StepResult = { state: "extracted" | "reading" | "embedding" | "ready" | "unreadable" | "waiting" | "gone" | "busy"; doc?: VaultDoc; waitMs?: number; message?: string };
 const limits = () => readVaultLimits(limitConfig, process.env as Record<string, string | undefined>);
 const g = globalThis as unknown as { __vaultLocks?: Set<string> };
 const locks = (g.__vaultLocks ??= new Set<string>());
-const NO_TYPE = (k: string) => `This doesn't look like a real ${k === "pdf" ? "PDF" : k === "docx" ? "Word" : "text"} file, so it can't be read.`;
+const NO_TYPE = (k: string) => `This doesn't look like a real ${k === "pdf" ? "PDF" : k === "docx" ? "Word" : k === "txt" ? "text" : "picture"} file, so it can't be read.`;
 
 async function fail(bid: string, id: string, detail: string): Promise<StepResult> {
   await patchDoc(bid, id, { status: "unreadable", status_detail: detail });
@@ -41,8 +44,35 @@ export async function processStep(bid: string, id: string): Promise<StepResult> 
       if (sniffKind(bytes) !== d0.kind) return fail(bid, id, NO_TYPE(d0.kind));
       const ex = await extractText(d0.kind, bytes, { scannedMinCharsPerPage: lim.scannedMinCharsPerPage });
       if (!ex.pages) return fail(bid, id, ex.reason || "This file can't be read.");
+      // ---- image-only pages (scans, photos): read by the "ocr" model, a few pages per step, each page saved as it is read
+      if (ex.scanPages.length) {
+        const plan = planScan(ex.scanPages, lim.maxScanPagesPerDoc);
+        if (!d0.scanned) {   // first time this document needs reading: it counts once against the browser's daily number of scanned documents
+          const used = await usageCounts(bid, "scan");
+          if (used.day >= lim.maxScanDocsPerDay) { bump("limit_hit", "scan_day"); return fail(bid, id, `This document has scanned pages, and you have already read ${lim.maxScanDocsPerDay} scanned documents today (the daily limit). Try again tomorrow.`); }
+          await addUsage(bid, "scan");
+          await patchDoc(bid, id, { scanned: true, scan_total: plan.take.length, scan_skipped: plan.skipped, pages: ex.pageCount });
+        }
+        const done = await getScanPages(bid, id), left = plan.take.filter((p) => !done.has(p));
+        if (left.length) {
+          const group = left.slice(0, lim.scanGroupPages);
+          await patchDoc(bid, id, { status: "processing", status_detail: `Reading scanned pages… (${done.size} of ${plan.take.length} done)` });
+          const r = await readScanPages(d0.kind, bytes, group);
+          if (!r.ok) {
+            if (r.busy) { bump("model_busy", "ocr"); await patchDoc(bid, id, { status: "waiting", status_detail: `Waiting to read: the reading model is busy. ${done.size} of ${plan.take.length} scanned pages are done; the rest will be read shortly.` }); return { state: "waiting", waitMs: lim.scanRetryMs, doc: (await getDoc(bid, id)) ?? undefined, message: "Waiting to read" }; }
+            return fail(bid, id, r.message);
+          }
+          for (const [p, body] of r.pages) await saveScanPage(bid, id, p, body);
+          const n = done.size + group.length;
+          await patchDoc(bid, id, { scan_pages: n, status_detail: `Reading scanned pages… (${n} of ${plan.take.length} done)` });
+          return { state: "reading", waitMs: 0, doc: (await getDoc(bid, id)) ?? undefined };
+        }
+        ex.pages = mergePages(ex.pages, done);   // all pages read: carry on with the finished text
+        ex.text = ex.pages.join("\n\n");
+        bump("scan");
+      }
       const chunks = chunkPages(ex.pages, { chars: lim.chunkChars, overlap: lim.chunkOverlap }).map((c) => (ex.noPages ? { ...c, page: null } : c));   // Word and text files have no page numbers; never show "page 1" for them
-      if (!chunks.length) return fail(bid, id, "No text was found in this file.");
+      if (!chunks.length) return fail(bid, id, ex.scanPages.length ? "No text could be read from the scanned pages." : "No text was found in this file.");
       if (chunks.length > lim.maxChunks) return fail(bid, id, `This file is too long to index on the free plan (${chunks.length} passages; the most is ${lim.maxChunks}). Try a shorter document.`);
       const starts: number[] = []; let off = 0;
       for (const p of ex.pages) { starts.push(off); off += p.length + 2; }

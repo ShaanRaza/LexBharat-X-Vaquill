@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O44R3.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O44R3
+Heading: Inquiry as to whether applicant is an indigent person
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where an applicant, referred to in rule 1, was allowed to sue or appeal as an indigent person in the Court from whose decree the appeal is preferred, no further inquiry in respect of the question whether or not he is an indigent person shall be necessary if the applicant has made an affidavit stating that he has not ceased to be an indigent person since the date of the decree appealed from; but if the Government Pleader or the respondent disputes the truth of the statement made in such affidavit, an inquiry into the question aforesaid shall be held by the Appellate Court, or, under the orders of the Appellate Court, by an officer of that Court.
+(2) Where the applicant, referred to in rule 11, is alleged to have become an indigent person since the date of the decree appealed from, the inquiry into the question whether or not he is an indigent person shall be made by the Appellate Court or, under the orders of the Appellate Court, by an officer of that Court unless the Appellate Court considers it necessary in the circumstances of the case that the inquiry should be held by the Court from whose decision the appeal is preferred.] 1. “Decree” defined.—In this Order, unless there is something repugnant in the subject or context, the expression “decree” shall include a final order. 2. Application to Court whose decree complained of.— [(1)] Whoever desires to appeal [the Supreme Court] shall apply by petition to the Court whose decree is complained of.
+[(2) Every petition under sub-rule (1) shall be heard as expeditiously as possible and endeavour shall be made to conclude the disposal of the petition within sixty days from the date on which the petition is presented to the Court under sub-rule (1).] 3. Certificate as to value or fitness. — [(1) Every petition shall state the grounds of appeal and pray for a certificate—
+(i) that the case involves a substantial question of law of general importance, and
+(ii) that in the opinion of the Court the said question needs to be decided by the Supreme Court.]
+(2) Upon receipt of such petition, the Court shall direct notice to be served on the opposite party to show cause why the said certificate should not be granted.

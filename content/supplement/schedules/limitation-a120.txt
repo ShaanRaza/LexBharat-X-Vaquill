@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Limitation Act, 1963, Schedule (Articles), unit A120.
+# Extracted 2026-10-24 from India Code's PDF A1963-36.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Limitation Act, 1963
+Act ID: IND_central_1565
+Section: A120
+Heading: Under the Code of Civil Procedure, 1908 (5 of 1908), to have the legalrepresentative of a deceased plaintiff or appellant or of a deceased defendant or respondent, made a party.
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/8c2f3bc0-5daf-4d11-971f-ad5f9b78b74b/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of suit: Under the Code of Civil Procedure, 1908 (5 of 1908), to have the legalrepresentative of a deceased plaintiff or appellant or of a deceased defendant or respondent, made a party.
+Period of limitation: Ninety days.
+Time from which period begins to run: The date of death of the plaintiff, appellant, defendant or respondent, as the case may be.
+THIRD DIVISION—APPLICATIONS
+PART I.—APPLICATIONS IN SPECIFIED CASES

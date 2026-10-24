@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O23R3B.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O23R3B
+Heading: No agreement or compromise to be entered in a representative suit without leave of Court
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) No agreement or compromise in a representative suit shall be entered into without the leave of the Court expressly recorded in the proceedings; and any such agreement or compromise entered into without the leave of the Court so recorded shall be void.
+(2) Below granting such leave, the Court shall give notice in such manner as it may think fit to such persons is as may appear to it to be interested in the suit.
+Explanation.—In this rule, “representative suit” means,—
+(a) a suit under Section 91 or Section 92, (b) a suit under rule 8 of Order I, (c) a suit in which the manager of an undivided Hindu family sues or is sued as representing the other members of the family, (d) any other suit in which the decree passed may, by virtue of the provisions of this Code or of any other law for the time being in force, bind any person who is not named as party to the suit.

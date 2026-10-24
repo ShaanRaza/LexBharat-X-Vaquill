@@ -1,18 +1,20 @@
 // Running a contract review, one resumable step at a time. LOGIC ONLY. Steps: each part of the contract (clauses + risks), then the summary, then the Indian-law points. A part or step that fails is kept as
 // failed ("Not reviewed, retry") and the rest is untouched. The law points rest only on sections retrieved from our Acts; anything uncited is dropped (src/lib/review/prompts.mjs parseLaw).
 import { dbConfigured } from "@/lib/acts/db";
+import { bump } from "@/lib/insights/server";
 import { AiError, completeAi } from "@/lib/ai";
 import { citationOf, retrieveSources } from "@/lib/chat/retrieve";
 import limitConfig from "@/config/review-limits.json";
 import { lawPrompt, lawPlanNotes, mergeMissing, overallRisk, parseClauses, parseLaw, parseSummary, partPrompt, summaryPrompt, type ReviewClause } from "./prompts.mjs";
 import { lawPlan, missingClauses, splitParts } from "./rules.mjs";
+import { annotateClauses } from "./pages.mjs";
 import { getRun, saveRun, type ReviewResult, type ReviewRun } from "./store";
 import { getText } from "@/lib/vault/store";
 
 export const partChars = () => { const n = Number(process.env.REVIEW_PART_CHARS); return Number.isFinite(n) && n > 1000 ? n : limitConfig.partChars; };
 const g = globalThis as unknown as { __reviewLocks?: Set<string> };
 const locks = (g.__reviewLocks ??= new Set<string>());
-const kindOf = (e: unknown) => (e instanceof AiError && (e.kind === "rate_limit" || e.kind === "unavailable" || e.kind === "timeout") ? "The model is busy." : e instanceof AiError && e.kind === "blocked" ? "The model declined this part." : "This part could not be reviewed.");
+const kindOf = (e: unknown) => (e instanceof AiError && (e.kind === "rate_limit" || e.kind === "unavailable" || e.kind === "timeout") ? (bump("model_busy", "review"), "The model is busy.") : e instanceof AiError && e.kind === "blocked" ? "The model declined this part." : "This part could not be reviewed.");
 
 export function newResult(text: string, type: string, pageStarts: number[] | null): ReviewResult {
   const parts = splitParts(text, partChars()).map((p) => ({ i: p.i, start: p.start, end: p.end, status: "pending" as const }));
@@ -40,7 +42,7 @@ export async function stepReview(bid: string, id: string, retry?: number | "summ
         const out = await completeAi("review", { ...partPrompt({ type: run.contractType, side: run.side, partText: piece, n: part.i + 1, of: res.parts.length }), json: true });
         const clauses = parseClauses(out.text, piece);
         if (!clauses || !clauses.length) throw new Error("unreadable model reply");
-        part.clauses = clauses; part.status = "ok"; if (out.model && !res.models.includes(out.model)) res.models.push(out.model);
+        part.clauses = annotateClauses(clauses, text, part, tx.pageStarts, res.scanPages); part.status = "ok"; if (out.model && !res.models.includes(out.model)) res.models.push(out.model);
       } catch (e) { part.status = "failed"; part.error = kindOf(e); }
     } else if (res.summary.status === "pending") {
       const clauses = allClauses(res);

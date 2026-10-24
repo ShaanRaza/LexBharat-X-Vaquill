@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R92.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R92
+Heading: Sale when to become absolute or be set aside
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where no application is made under rule 89, rule 90 or rule 91, or where such application is made and disallowed, the Court shall make an order confirming the sale, and thereupon the sale shall become absolute:
+[Provided that, where any property is sold in execution of a decree pending the final disposal of any claim to, or any objection to the attachment of, such property, the Court shall not confirm such sale until the final disposal of such claim or objection.]
+(2) Where such application is made and allowed, and where, in the case of an application-under rule 89, the deposit required by that rule is made within [sixty days] from the date of sale, [or in cases where the amount deposited under rule 89 is found to be deficient owing to any clerical or arithmetical mistake on the part of the depositor and such deficiency has been made good within such time as may be fixed by the Court, the Court shall make an order setting aside the sale]:
+Provided that no order shall be made unless notice of the application has been given to all persons affected thereby: [Provided further that the deposit under this sub-rule may be made within sixty days in all such cases where the period of thirty days, within which the deposit had to be made, has not expired before the commencement of the Code of Civil Procedure (Amendment) Act, 2002 (22 of 2002).]
+(3) No suit to set aside an order made under this rule shall be brought by any person against whom such order is made.
+[(4) Where a third party challenges the judgment-debtor’s title by filing a suit against the auction-purchaser, the decree-holder and the judgment-debtor shall be necessary parties to the suit.
+(5) If the suit referred to in sub-rule (4) is decreed, the Court shall direct the decree-holder to refund the money to the auction-purchaser, and where such an order is passed the execution proceeding in which the sale had been held shall, unless the Court otherwise directs, be revived at the stage at which the sale was ordered.]

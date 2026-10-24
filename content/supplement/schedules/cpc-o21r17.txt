@@ -1,0 +1,17 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R17.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R17
+Heading: Procedure on receiving application for execution of decree
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) On receiving an application for the execution of a decree as provided by rule 11, sub-rule (2), the Court shall ascertain whether such of the requirements of rules 11 to 14 as may be applicable to the case have been complied with; and, if they have not been complied with, [the Court shall allow] the defect to be remedied then and there or within a time to be fixed by it. [1A. If the defect is not so remedied, the Court shall reject the application:
+Provided that where, in the opinion of the Court, there is some inaccuracy as to the amount referred to in clauses (g) and (h) of sub-rule (2) of rule 11, the Court shall, instead of rejecting the application, decide provisionally (without prejudice to the right of the parties to have the amount finally decided in the course of the proceedings) the amount and make an order for the execution of the decree for the amount so provisionally decided.]
+(2) Where an application is amended under the provisions of sub-rule (1), it shall be deemed to have been an application in accordance with law and presented on the date when it was first presented.
+(3) Every amendment made under this rule shall be signed or initialled by the Judge.
+(4) When the application is admitted, the Court shall enter in the proper register a note of the application and the date on which it was made, and shall, subject to the provisions hereinafter contained, order execution of the decree according to the nature of the application:
+Provided that, in the case of a decree for the payment of money, the value of the property attached shall, as nearly as may be, correspond with the amount due under the decree.

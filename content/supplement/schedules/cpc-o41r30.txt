@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O41R30.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O41R30
+Heading: Judgment when and where pronounced
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+[(1)] The Appellate Court, after hearing the parties or their pleaders and referring to any part of the proceedings, whether on appeal or in the Court from whose decree the appeal is preferred, to which reference may be considered necessary, shall pronounce judgment in open Court, either at once or on some future day of which notice shall be given to the parties or their pleaders.
+[(2) Where a written judgment is to be pronounced, it shall be sufficient if the points for determination, the decision thereon and the final order passed in the appeal are read out and it shall not be necessary for the Court to read out the whole judgment, but a copy of the whole judgment shall be made available for the perusal of the parties or their pleaders immediately after the judgment is pronounced.]

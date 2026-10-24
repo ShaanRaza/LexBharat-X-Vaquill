@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R96.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R96
+Heading: Delivery of property in occupancy of tenant
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where the property sold is in the occupancy of a tenant or other person entitled to occupy the same and a certificate in respect thereof has been granted under rule 94, the Court shall, on the application of the purchaser, order delivery to be made by affixing a copy of the certificate of sale in some conspicuous place on the property, and proclaiming to the occupant by beat of drum or other customary mode, at some convenient place, that the interest of the judgment-debtor has been transferred to the purchaser.

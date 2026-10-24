@@ -1,0 +1,33 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O7.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O7
+Heading: Plaint
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Plaint
+Rules in this Order:
+1. Particulars to be contained in plaint
+2. In money suits
+3. Where the subject-matter of the suit is immovable property
+4. When plaintiff sues as representative
+5. Defendant’s interest and liability to be shown
+6. Grounds of exemption from limitation law
+7. Relief to be specifically stated
+8. Relief founded on separate grounds
+9. Procedure on admitting plaint
+10. Return of plaint
+10A. Power of Court to fix a date of appearance in the Court where plaint is to be filed after its return
+10B. Power of appellate Court to transfer suit to the proper Court
+11. Rejection of plaint
+12. Procedure on rejecting plaint
+13. Where rejection of plaint does not preclude presentation of fresh plaint
+14. Production of document on which plaintiff sues or relies
+15. Statement in case of documents not in plaintiff’s possession or powers
+16. Suits on lost negotiable instruments
+17. Production of shop-book
+18. Inadmissibility of document not produced when plaint filed

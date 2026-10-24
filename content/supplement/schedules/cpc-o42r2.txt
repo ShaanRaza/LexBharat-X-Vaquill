@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O42R2.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O42R2
+Heading: Power of Court to direct that the appeal be heard on the question formulated by it
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+At the time of making an order under rule 11 of Order XLI for the hearing of a second appeal, the Court shall formulate the substantial question of law as required by section 100, and in doing so, the Court may direct that the second appeal be heard on the question so formulated and it shall not be open to the appellant to urge any other ground in the appeal without the leave of the Court, given in accordance with the provision of section 100.

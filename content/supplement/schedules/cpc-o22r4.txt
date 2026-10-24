@@ -1,0 +1,18 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O22R4.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O22R4
+Heading: Procedure in case of death of one of several defendants or of sole defendant
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where one of two or more defendants dies and the right to sue does not survive against the surviving defendant or defendants alone or a sole defendant or sole surviving defendant dies and the right to sue survives, the Court, on an application made in that behalf, shall cause the legal representative of the deceased defendants to be made a party and shall proceed with the suit.
+(2) Any person so made a party may make any defence appropriate to his character as legal representative of the deceased defendant.
+(3) Where within the time limited by law no application is made under sub-rule (1), the suit shall abate as against the deceased defendant.
+[(4) The Court whenever it thinks fit, may exempt the plaintiff from the necessity of substituting the legal representatives of any such defendant who has failed to file a written statement or who, having filed it, has failed to appear and contest the suit at the hearing; and judgment may, in such case, be pronounced against the said defendant notwithstanding the death of such defendant and shall have the same force and effect as if it has been pronounced before death took place.
+(5) Where—
+(a) the plaintiff was ignorant of the death of a defendant, and could not, for that reason, make an application for the substitution of the legal representative of the defendant under this rule within the period specified in the Limitation Act, 1963 (36 of 1963), and the suit has, in consequence, abated, and
+(b) the plaintiff applies after the expiry of the period specified therefore in the Limitation Act, 1963 (36 of 1963), for setting aside the abatement and also for the admission of that application under section 5 of that Act on the ground that he had, by reason of such ignorance, sufficient cause for not making the application with the period specified in the said Act, the Court shall, in considering the application under the said section 5 have due regard to the fact of such ignorance, if proved.]

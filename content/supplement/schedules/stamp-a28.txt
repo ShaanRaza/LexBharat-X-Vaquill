@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A28.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A28
+Heading: DELIVERY ORDER IN RESPECT OF GOODS
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: DELIVERY ORDER IN RESPECT OF GOODS, [(excluding delivery order in respect of settlement of transactions in securities in stock exchange)] that is to say, any instrument entitling any person therein named, or his assigns, or the holder thereof, to the delivery of any goods lying in any dock or port, or in any warehouse in which goods are stored or deposited on rent or hire, or upon any wharf, such instrument being signed by or on behalf of the owner of such goods, upon the sale or transfer of the property therein, when such goods exceed in value twenty rupees. DEPOSITOFTITLE-DEEDS [SEE AGREEMENT RELATINGTO DEPOSITOFTITLE- DEEDS PAWN OR PLEDGE (NO. 6)]. DISSOLUTION OF PARTNERSHIP See PARTNERSHIP
+Proper stamp-duty: (No. 46).

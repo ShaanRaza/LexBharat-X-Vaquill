@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O1R10.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O1R10
+Heading: Suit in name of wrong plaintiff
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where a suit has been instituted in the name of the wrong person as plaintiff or where it is doubtful whether it has been instituted in the name of the right plaintiff, the Court may at any stage of the suit, if satisfied that the suit has been instituted through a bona fide mistake, and that it is necessary for the determination of the real matter in dispute so to do, order any other person to be substituted or added as plaintiff upon such terms as the Court thinks just.
+(2) Court may strike out or add parties.—The Court may at any stage of the proceedings, either upon or without the application of either party, and on such terms as may appear to the Court to be just, order that the name of any party improperly joined, whether as plaintiff or defendant, be struck out, and that the name of any person who ought to have been joined, whether as plaintiff or defendant, or whose presence before the Court may be necessary in order to enable the Court effectually and completely to adjudicate upon and settle all the questions involved in the suit, be added.
+(3) No person shall be added as a plaintiff suing without a next friend or as the next friend of a plaintiff under any disability without his consent.
+(4) Where defendant added, plaint to be amended.—Where a defendant is added, the plaint shall, unless the Court otherwise directs, be amended in such manner as may be necessary, and amended copies of the summons and of the plaint shall be served on the new defendant and, if the Court thinks fit, on the original defendant.
+(5) Subject to the provisions of the [Indian Limitation Act, 1877 (XV of 1877)], section 22, the proceedings as against any person added as defendant shall be deemed to have begun only on the service of the summons.

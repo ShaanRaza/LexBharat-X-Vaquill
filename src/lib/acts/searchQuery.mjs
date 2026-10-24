@@ -12,6 +12,7 @@ export const ACT_ALIASES = {
   "evidence act": "the indian evidence act, 1872", "limitation act": "the limitation act, 1963",
   "arbitration act": "the arbitration and conciliation act, 1996", "companies act": "the companies act, 2013",
   "it act": "the information technology act, 2000", "transfer of property act": "the transfer of property act, 1882",
+  "limitation": "the limitation act, 1963", "stamp act": "the indian stamp act, 1899", "indian stamp act": "the indian stamp act, 1899", "c p c": "the code of civil procedure, 1908",
   "sale of goods act": "the sale of goods act, 1930", "partnership act": "the indian partnership act, 1932",
 };
 
@@ -29,8 +30,31 @@ export function normalizeQuery(raw) {
   return { q };
 }
 
+// Orders, Rules and Articles of the Schedules: "Order 39 Rule 1 CPC", "O.7 R.11", "O 37 CPC", "CPC Order 39 Rule 1-2", "Article 137 Limitation Act", "Art. 113 Limitation".
+const CPC = String.raw`(?:c\.?\s?p\.?\s?c\.?|civil procedure code|code of civil procedure(?:,?\s*1908)?)`;
+const ORD = String.raw`(?:orders?|o\.?)\s*(\d{1,3}[A-Za-z]?)`, RULE = String.raw`(?:rules?|rr?\.?)\s*(\d{1,3}[A-Za-z]?)(?:\s*(?:-|–|to|and|&)\s*(\d{1,3}[A-Za-z]?))?`;
+const LIM = String.raw`(?:the\s+)?(limitation(?:\s+act)?(?:,?\s*1963)?|(?:the\s+)?(?:indian\s+)?stamp\s+act(?:,?\s*1899)?)`;
+const ART = String.raw`(?:articles?|art\.?)\s*(\d{1,3}[A-Za-z]?)`;
+const upTo = (a, b) => { const n1 = /^(\d+)([A-Za-z]?)$/.exec(a), n2 = b && /^(\d+)([A-Za-z]?)$/.exec(b); if (!n2 || n1[2] || n2[2] || +n2[1] <= +n1[1] || +n2[1] - +n1[1] > 20) return [a.toUpperCase()]; return Array.from({ length: +n2[1] - +n1[1] + 1 }, (_, i) => String(+n1[1] + i)); };
+export function parseScheduleLookup(q) {
+  const s = q.trim().replace(/\s+/g, " ").replace(/[.,]+$/, "");
+  const cpcWord = String.raw`(?:of\s+(?:the\s+)?)?(${CPC})`;
+  let m = new RegExp(String.raw`^(?:${CPC}\s+)?${ORD}\s*[,]?\s*${RULE}(?:\s+${cpcWord})?$`, "i").exec(s);
+  if (m) { const o = m[1].toUpperCase(), rs = upTo(m[2], m[3]); return { number: `O${o}R${rs[0]}`, numbers: rs.map((r) => `O${o}R${r}`), actPhrase: "cpc" }; }
+  m = new RegExp(String.raw`^${RULE}\s+(?:of\s+)?${ORD}(?:\s+${cpcWord})?$`, "i").exec(s);
+  if (m) { const o = m[3].toUpperCase(), rs = upTo(m[1], m[2]); return { number: `O${o}R${rs[0]}`, numbers: rs.map((r) => `O${o}R${r}`), actPhrase: "cpc" }; }
+  m = new RegExp(String.raw`^(?:${CPC}\s+)?(?:orders?\s*(\d{1,3}[A-Za-z]?)(?:\s+${cpcWord})?|o\.?\s*(\d{1,3}[A-Za-z]?)\s+${cpcWord}|${CPC}\s+o\.?\s*(\d{1,3}[A-Za-z]?))$`, "i").exec(s);
+  if (m) { const o = (m[1] ?? m[2] ?? m[3]).toUpperCase(); if (m[1] || m[2] || m[3]) return { number: `O${o}`, actPhrase: "cpc" }; }
+  m = new RegExp(String.raw`^${ART}\s*(?:of\s+)?${LIM}$`, "i").exec(s);
+  const m2 = m ? null : new RegExp(String.raw`^${LIM}\s*,?\s*${ART}$`, "i").exec(s);
+  if (m || m2) { const art = m ? m[1] : m2[2], lim = m ? m[2] : m2[1]; return { number: `A${art.toUpperCase()}`, actPhrase: /stamp/i.test(lim) ? "indian stamp act" : "limitation act" }; }
+  return null;
+}
+
 /** "138 NI Act", "section 10 contract act", "NI Act s. 138", "contract act section 10" -> { number, actPhrase } or null. */
 export function parseSectionLookup(q) {
+  const sched = parseScheduleLookup(q);
+  if (sched) return sched;
   const s = q.trim().replace(/\s+/g, " ");
   let m = new RegExp(String.raw`^(?:${SEC}\s*)?${NUM}\s+(?:of\s+(?:the\s+)?)?(.+)$`, "i").exec(s);
   if (m && looksLikeAct(m[2]) && !/^\d/.test(m[2])) return { number: m[1].toUpperCase(), actPhrase: m[2] };

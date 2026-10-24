@@ -1,4 +1,5 @@
 "use client";
+import { sectionWord } from "@/lib/acts/unitLabel.mjs";
 import Link from "next/link";
 import { Fragment } from "react";
 import { CitationChip } from "@/components/kit";
@@ -11,7 +12,7 @@ export const sectionHref = (c: { actId: string; sectionKey: string }) => `/works
 export const docHref = (c: Citation) => `/workspace/vault/${c.docId}${c.page ? `?page=${c.page}` : ""}`;
 export const hrefOf = (c: Citation) => (c.kind === "doc" ? docHref(c) : sectionHref(c));
 /** "NDA.pdf, page 3, 4. Non-compete" or "Indian Contract Act, 1872, Section 27" */
-export const sourceLabel = (c: Citation) => c.kind === "doc" ? `${c.docName ?? c.actTitle}${c.page ? `, page ${c.page}` : ""}${c.label ? `, ${c.label}` : ""}` : `${c.actTitle}, ${c.number ? `Section ${c.number}` : "unnumbered text"}`;
+export const sourceLabel = (c: Citation) => c.kind === "doc" ? `${c.docName ?? c.actTitle}${c.page ? `, page ${c.page}` : ""}${c.label ? `, ${c.label}` : ""}${c.scan ? ", read from scan" : ""}` : `${c.actTitle}, ${c.number ? sectionWord(c.number) : "unnumbered text"}`;
 
 export default function CitedText({ text, sources }: { text: string; sources: Citation[] }) {
   return <>{linkSegments(text, sources).map((p, i) => {

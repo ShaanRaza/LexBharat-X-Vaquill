@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O27R8.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O27R8
+Heading: Procedure in suits against public officer
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where the Government undertakes the defence of a suit against a public officer, the [Government pleader] upon being furnished with authority to appear and answer the plaint, shall apply to the court, and upon such application the Court shall cause a note of his authority to be entered in the register of civil suits.
+(2) Where no application under sub-rule (1) is made by the [Government pleader] on or before the day fixed in the notice for the defendant to appear and answer, the case shall proceed as in a suit between private parties:
+Provided that the defendant shall not be liable to arrest, nor his property to attachment, otherwise than in execution of a decree.

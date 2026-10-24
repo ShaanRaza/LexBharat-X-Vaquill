@@ -20,24 +20,24 @@ export function useVault() {
   useEffect(() => { alive.current = true; reload(); return () => { alive.current = false; }; }, [reload]);
 
   // keep working on documents that are still processing (one at a time, so the free embedding limit is respected)
-  const docsKey = (state?.docs ?? []).filter((d) => d.status === "processing").map((d) => d.id).join(",");
+  const docsKey = (state?.docs ?? []).filter((d) => d.status === "processing" || d.status === "waiting").map((d) => d.id).join(",");
   useEffect(() => {
     if (!docsKey || running.current) return;
     running.current = true;
     (async () => {
       try {
         for (;;) {
-          const next = (stateRef.current?.docs ?? []).find((d) => d.status === "processing"); if (!next || !alive.current) break;
+          const next = (stateRef.current?.docs ?? []).find((d) => d.status === "processing" || d.status === "waiting"); if (!next || !alive.current) break;
           let r: Response | null = null;
           try { r = await fetch(`/api/vault/${next.id}/process`, { method: "POST" }); } catch { await sleep(5000); continue; }
           if (r.status === 404) { await reload(); continue; }
           const j = await r.json().catch(() => ({}));
           if (j.doc) setState((s) => s && { ...s, docs: s.docs.map((d) => (d.id === j.doc.id ? j.doc : d)) });
-          setWait((w) => ({ ...w, [next.id]: j.state === "embedding" || j.state === "waiting" ? j.message ?? "" : "" }));
+          setWait((w) => ({ ...w, [next.id]: j.state === "embedding" || j.state === "waiting" || j.state === "reading" ? (j.state === "embedding" ? j.message : j.doc?.statusDetail) ?? j.message ?? "" : "" }));
           if (j.state === "gone" || j.state === "ready" || j.state === "unreadable") { await reload(); window.dispatchEvent(new Event("lb-vault-changed")); }
           if (j.waitMs) await sleep(Math.min(j.waitMs, 40000));
         }
-      } finally { running.current = false; if (alive.current && (stateRef.current?.docs ?? []).some((d) => d.status === "processing")) setTimeout(() => alive.current && setTick((t) => t + 1), 2000); }   // never stay stuck on a document that is still processing
+      } finally { running.current = false; if (alive.current && (stateRef.current?.docs ?? []).some((d) => d.status === "processing" || d.status === "waiting")) setTimeout(() => alive.current && setTick((t) => t + 1), 2000); }   // never stay stuck on a document that is still processing
     })();
   }, [docsKey, reload, tick]);
 
@@ -45,7 +45,7 @@ export function useVault() {
     const out: UploadNote[] = [];
     for (const f of files) {
       const cur = stateRef.current, lim = cur?.limits;
-      const pre = lim ? checkUpload({ name: f.name, size: f.size }, cur!.docs, { maxDocs: lim.maxDocs, maxTotalMb: lim.maxTotalMb, maxFileMb: lim.maxFileMb }) : { ok: !!kindFromName(f.name), message: "Only PDF, Word (.docx) and text (.txt) files can be added." };
+      const pre = lim ? checkUpload({ name: f.name, size: f.size }, cur!.docs, { maxDocs: lim.maxDocs, maxTotalMb: lim.maxTotalMb, maxFileMb: lim.maxFileMb }) : { ok: !!kindFromName(f.name), message: "Only PDF, Word (.docx), text (.txt) and picture (.jpg, .png) files can be added." };
       if (!pre.ok) { out.push({ name: f.name, ok: false, message: pre.message }); continue; }
       try {
         const r = await fetch("/api/vault", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ name: f.name, size: f.size }) }), j = await r.json();

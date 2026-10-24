@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O2R3.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O2R3
+Heading: Joinder of causes of action
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Save as otherwise provided, a plaintiff may unite in the same suit several causes of action against the same defendant, or the same defendants jointly; and any plaintiffs having causes of action in which they are jointly interested against the same defendant or the same defendants jointly may unite such causes of action in the same suit.
+(2) Where causes of action are united, the jurisdiction of the Court as regards the suit shall depend on the amount or value of the aggregate subject-matters at the date of instituting the suit.

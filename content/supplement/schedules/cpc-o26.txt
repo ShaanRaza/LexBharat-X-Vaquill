@@ -1,0 +1,42 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O26.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O26
+Heading: COMMISSIONS
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+COMMISSIONS
+Rules in this Order:
+1. Cases in which Court may issue commission to examine witness
+2. Order for commission
+3. Where witness resides within Court’s jurisdiction
+4. Persons for whose examination commission may issue
+4A. Commission for examination of any person resident within the local limits of the jurisdiction of the Court
+5. Commission or request to examine witness not within India
+6. Court to examine witness pursuant to Commission
+7. Return of commission with depositions of witnesses
+8. When depositions may be read in evidence
+9. Commissions to make local investigations
+10. Procedure of Commissioner
+10A. Commission for scientific investigation
+10B. Commission for performance of a ministerial act
+10C. Commission for the sale of movable property
+11. Commission to examine or adjust accounts
+12. Court to give Commissioner necessary instructions
+13. Commission to make partition of immovable property
+14. Procedure of Commissioner
+15. Expenses of commission to be paid into court
+16. Powers of commissioners
+16A. Questions objected to before the Commissioner
+17. Attendance and examination of witnesses before Commissioner
+18. Parties to appear before Commissioner
+18A. Application of order to execution proceedings
+18B. Court to fix a time for return of commission
+19. Cases in which High Court may issue commission to examine witness
+20. Application for issue of commission
+21. To whom commission may be issued
+22. Issue, execution and return of commissions, and transmission of evidence to foreign Court

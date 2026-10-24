@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R80.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R80
+Heading: Transfer of negotiable instruments and shares
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where the execution of a document or the endorsement of the party in whose name a negotiable instrument or a share in a corporation is standing is required to transfer such negotiable instrument or, share the Judge or such officer as he may appoint in this behalf may execute such document or make such endorsement as may be necessary, and such execution or endorsement shall have the same effect as an execution or endorsement by the party.
+(2) Such execution or endorsement may be in the following form, namely:— A. B. by C.D. Judge of the Court of (or as the case may be), in a suit by E. F. against A.B.
+(3) Until the transfer of such negotiable instrument or share, the Court may, by order, appoint some person to receive any interest or dividend due thereon and to sign a receipt for the same; and any receipt so signed shall be as valid and effectual for all purposes as if the same had been signed by the party himself.

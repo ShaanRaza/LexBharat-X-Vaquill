@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O32R3A.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O32R3A
+Heading: Decree against minor not to be set aside unless prejudice has been caused to his interest
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) No decree passed against a minor shall be set aside merely on the ground that the next friend or guardian for the suit of the minor had an interest in the subject-matter of the suit adverse to that of the minor, but the fact that by reasons of such adverse interest of the next friend or guardian for the suit, prejudice has been caused to the interests of the minor, shall be a ground for setting aside the decree.
+(2) Nothing in this rule shall preclude the minor from obtaining any relief available under any law by reason of the misconduct or gross negligence on the part of the next friend or guardian for the suit resulting in prejudice to the interests of the minor.

@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O32R4.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O32R4
+Heading: Who may act as next friend or he appointed guardian for the suit
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Any person who is of sound mind and has attained majority may act as next friend of a minor or as his guardian for the suit:
+Provided that the interest of such person is not adverse to that of the minor and that he is not, in the case of a next friend, a defendant, or, in the case of a guardian for the suit, a plaintiff.
+(2) Where a minor has a guardian appointed or declared by competent authority, no person other than such guardian shall act as the next friend of the minor or be appointed his guardian for the suit unless the Court considers, for reasons to be recorded, that it is for the minor’s welfare that another person be permitted to act or be appointed, as the case may be.
+(3) No person shall without his consent [in writing] be appointed guardian for the suit.
+(4) Where there is no other person fit and willing to act as guardian for the suit, the Court may appoint any of its officers to be such guardian, and may direct that the costs to be incurred by such officer in the performance of his duties as such guardian shall be borne either by the parties or by any one or more of the parties to the suit, or out of any fund in Court in which the minor is interested [or out of the property of the minor], and may give directions for the repayment or allowance of such costs as justice and the circumstances of the case may require.

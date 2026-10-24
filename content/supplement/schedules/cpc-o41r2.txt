@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O41R2.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O41R2
+Heading: Grounds which may be taken in appeal
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The appellant shall not, except by leave of the Court, urge or be heard in support of any ground of objection not set forth in the memorandum of appeal; but the Appellate Court, in deciding the appeal, shall not be confined to the grounds of objections set forth in the memorandum of appeal or taken by leave of the Court under this rule:
+Provided that the Court shall not rest its decision on any other ground unless the party who may be affected thereby has had a sufficient opportunity of contesting the case on that ground.

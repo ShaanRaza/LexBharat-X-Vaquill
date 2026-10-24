@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Limitation Act, 1963, Schedule (Articles), unit A100.
+# Extracted 2026-10-24 from India Code's PDF A1963-36.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Limitation Act, 1963
+Act ID: IND_central_1565
+Section: A100
+Heading: To alter or set aside any decision or order of a civil court in any proceeding other than a suit or any act or order of an officer of Government in his official capacity.
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/8c2f3bc0-5daf-4d11-971f-ad5f9b78b74b/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of suit: To alter or set aside any decision or order of a civil court in any proceeding other than a suit or any act or order of an officer of Government in his official capacity.
+Period of limitation: One year. The date of the final decision or order by the
+Time from which period begins to run: court or the date of the act or order of the officer, as the case may be.
+FIRST DIVISION—SUITS
+PART IX.—SUITS RELATING TO MISCELLANEOUS MATTERS

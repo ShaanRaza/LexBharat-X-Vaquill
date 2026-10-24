@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O27R5.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O27R5
+Heading: Fixing of day for appearance on behalf of Government
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+The Court, in fixing the day for [the Government] to answer to the plaint, shall allow a reasonable time for the necessary communication with the Government through the proper channel, and for the issue of instructions to the [Government pleader] to appear and answer on behalf of [the Government] ***, and may extend the time at its discretion [but the time so extended shall not exceed two months in the aggregate].

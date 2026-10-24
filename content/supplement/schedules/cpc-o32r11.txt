@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O32R11.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O32R11
+Heading: Retirement, removal or death of guardian for the suit
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where the guardian for the suit desires to retire or does not do his duty, or where other sufficient ground is made to appear, the Court may permit such guardian to retire or may remove him, and may make such order as to costs as it thinks fit.
+(2) Where the guardian for the suit, retires, dies or is removed by the Court during the pendency of the suit, the Court shall appoint a new guardian in his place.

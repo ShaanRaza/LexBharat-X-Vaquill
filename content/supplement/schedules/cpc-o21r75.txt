@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R75.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R75
+Heading: Special provisions relating to growing crops
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where the property to be sold is a growing crop and the crop from its nature admits of being stored but has not yet been stored, the day of the sale shall be so fixed as to admit of its being made ready for storing before the arrival of such day, and the sale shall not be held until the crop has been cut or gathered and is ready for storing.
+(2) Where the crop from its nature does not admit of being stored, it may be sold before it is cut and gathered, and the purchaser shall be entitled to enter on the land, and to do all that is necessary for the purpose of tending and cutting or gathering it.

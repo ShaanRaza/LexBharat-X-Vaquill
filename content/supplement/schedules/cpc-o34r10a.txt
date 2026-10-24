@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O34R10A.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O34R10A
+Heading: Power of Court to direct mortgagee to pay mesne profits
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where in a suit for foreclosure, the mortgagor has, before or at the time of the institution of the suit, tendered or deposited the sum due on the mortgage, or such sum as is not substantially deficient in the opinion of the Court, the Court shall direct the mortgagee to pay to the mortgagor mesne profits for the period beginning with the institution of the suit].

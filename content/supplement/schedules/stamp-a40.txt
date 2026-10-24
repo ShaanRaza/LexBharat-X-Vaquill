@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A40.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A40
+Heading: MORTGAGE-DEED
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: MORTGAGE-DEED, not being [an AGREEMENT RELATING-TO DEPOSITOF TITLE-DEEDS, PAWN OR PLEDGE (NO. 6)], BOTTOMRY BOND (NO. 16), MORTGAGE OF A CROP (NO. 41), RESPONDENTIA BOND (No. 56), OR SECURITY BOND (NO. 57)— (a) when possession of the property or any part of the property comprised in such deed is given by the mortgagor or agreed to be given; (b) when ***possession is not given or agreed to be given as aforesaid; Explanation.—A mortgagor who gives to the mortgagee a power-of-attorney to collect rents or a lease of the property mortgaged or part thereof, is deemed to give possession within the meaning of this Article. (c) when a collateral or auxiliary or additional or substituted security, or by way of further assurance for the abovementioned purpose where the principal or primary security is duly stamped— for every sum secured not exceeding Rs. 1,000 and for every Rs. 1,000 or part thereof secured in excess of Rs. 1,000. Exemptions (1) Instruments, executed by person taking advances under the Land Improvement Loans Act, 1883 (19 of 1883), or the Agriculturists' Loan Act, 1884 (12 of 1884), or by their sureties as security for the repayment of such advances. (2) Letter of hypothecation accompanying a bill of exchange. * * *
+Proper stamp-duty: The same duty as a Conveyance (No. 23) for a consideration equal to the amount secured by such deed. The same duty as a Bond (No. 15) for the amount secured by such deed. Eight annas. Eight annas.

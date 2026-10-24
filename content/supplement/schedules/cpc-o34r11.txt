@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O34R11.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O34R11
+Heading: Payment of interest
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+In any decree passed in a suit for foreclosure, sale or redemption, where interest is legally recoverable, the Court may order payment of interest to the mortgagee as follows, namely:—
+(a) interest up to the date on or before which payment of the amount found or declared due is under the preliminary decree to be made by the mortgagor or other person redeeming the mortgage—
+(i) on the principal amount found or declared due on the mortgage,—at the rate payable on the principal, or, where no such rate is fixed, at such rate as the Court Deems reasonable, * * * * *and
+(iii) on the amount adjudged due to the mortgagee for costs, charges and expenses properly incurred by the mortgagee in respect of the mortgage-security up to the date of the preliminary decree and added to the mortgage-money,—at the rate agreed between the parties or, failing such rate, [at such rate not exceeding six per cent per annum as the Court deems reasonable]; and
+[(b) subsequent interest up to the date of realisation or actual payment on the aggregate of the principal sums specified in clause (a) as calculated in accordance with that clause at such rate as the Court deems reasonable.]

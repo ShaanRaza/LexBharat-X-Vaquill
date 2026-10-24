@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Limitation Act, 1963, Schedule (Articles), unit A91.
+# Extracted 2026-10-24 from India Code's PDF A1963-36.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Limitation Act, 1963
+Act ID: IND_central_1565
+Section: A91
+Heading: For compensation,— (a) for wrongfully taking or detaining any specific movable property lost, oracquired by theft, or dishonest misappropriation, or conversion; (b) for wrongfully taking or 
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/8c2f3bc0-5daf-4d11-971f-ad5f9b78b74b/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of suit: For compensation,— (a) for wrongfully taking or detaining any specific movable property lost, oracquired by theft, or dishonest misappropriation, or conversion; (b) for wrongfully taking or injuring or wrongfully detaining any other specific movable property.
+Period of limitation: Three years. Three years.
+Time from which period begins to run: When the person having the right to the possession of the property first learns in whose possession it is. When the property is wrongfully taken or injured, or when the detainer’s possession becomes unlawful.
+FIRST DIVISION—SUITS
+PART VII.—SUITS RELATING TO TORT

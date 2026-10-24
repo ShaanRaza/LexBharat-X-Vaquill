@@ -76,16 +76,17 @@ export function cutSection(lines, number, at) {
 }
 
 /** Every alphanumeric word of the section is found, in order, in the PDF's own text (pdftotext) between the pages it spans. Returns the first word that is not. */
-export function checkAgainstPdf(file, sec) {
-  const raw = execFileSync("pdftotext", ["-f", String(sec.pages[0]), "-l", String(sec.pages[1] + 1), file, "-"], { maxBuffer: 1 << 28 }).toString().normalize("NFKC");
+export function checkAgainstPdf(file, sec, { loose = false } = {}) {
+  const raw = execFileSync("pdftotext", ["-f", String(sec.pages[0]), "-l", String(sec.pages[1] + 1), file, "-"], { maxBuffer: 1 << 28 }).toString().normalize("NFKC").replace(/-[ \t]*\n[ \t]*/g, "");   // a hyphen at the end of a printed line joins the two halves ("sub-" + "section"); a plain "-" inside a line is dropped below
   const words = (s) => s.toLowerCase().normalize("NFKC").replace(/-/g, "").match(/\p{L}+|\p{N}+/gu) ?? [];   // letters and digits are separate words ("3notified" has a footnote number glued on); "pre-emption" and "pre-\nemption" and "preemption" count as the same word
   const hay = words(raw); let j = 0, bad = null;
   for (const w of words(sec.heading + " " + sec.text)) { while (j < hay.length && hay[j] !== w) j++; if (j >= hay.length) { bad = w; break; } j++; }
   if (!bad) return null;
   // the PDF's own text can list the pieces of a page in a different order (an inserted clause before its neighbour): then every word must at least be there as often as we use it
   const count = (arr) => arr.reduce((m, w) => m.set(w, (m.get(w) ?? 0) + 1), new Map()), have = count(hay), need = count(words(sec.heading + " " + sec.text));
-  const composite = (w) => { for (let k = 3; k <= w.length - 3; k++) if (have.has(w.slice(0, k)) && have.has(w.slice(k))) return true; return false; };   // a word the PDF breaks across lines in an odd place ("sub-" ... "ordinate")
-  for (const [w, n] of need) if ((have.get(w) ?? 0) < n && !composite(w)) return w;
+  const composite = (w) => { for (let k = loose ? 1 : 2; k <= w.length - (loose ? 1 : 2); k++) if (have.has(w.slice(0, k)) && have.has(w.slice(k))) return true; return false; };   // a word the PDF breaks across lines in an odd place ("sub-" ... "ordinate")
+  const glued = (w) => loose && w.length >= 3 && [...have.keys()].some((t) => t.includes(w));   // the PDF's own text layer glues some neighbouring words together ("subNinety", "question-between")
+  for (const [w, n] of need) if ((have.get(w) ?? 0) < n && !composite(w) && !glued(w)) return w;
   return null;
 }
 

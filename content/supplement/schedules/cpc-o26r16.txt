@@ -1,0 +1,15 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O26R16.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O26R16
+Heading: Powers of commissioners
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Any commissioner appointed under this Order may, unless otherwise directed by the order of appointment,—
+(a) examine the parties themselves and any witness whom they or any of them may produce, and any other person whom the Commissioner thinks proper to call upon to give evidence in the matter referred to him;
+(b) call for and examine documents and other things relevant to the subject of inquiry;
+(c) at any reasonable time enter upon or into any land or building mentioned in the order.

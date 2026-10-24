@@ -1,0 +1,31 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O45.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O45
+Heading: APPEALS TO THE [SUPREME COURT]
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+APPEALS TO THE [SUPREME COURT]
+Rules in this Order:
+1. “Decree” defined
+2. Application to Court whose decree complained of
+3. Certificate as to value or fitness
+4. Consolidation of suits
+5. Remission of dispute to Court of first instance
+6. Effect of refusal of certificate
+7. Security and deposit required on grant of certificate
+8. Admission of appeal and procedure thereon
+9. Revocation of acceptance of security
+9A. Power to dispense with notices in case of deceased parties
+10. Power to order further security or payment
+11. Effect of failure to comply with order
+12. Refund of balance deposit
+13. Powers of Court pending appeal
+14. Increase of security found inadequate
+15. Procedure to enforce orders of the Supreme Court
+16. Appeal from order relating to execution
+17. Appeals to Federal Court

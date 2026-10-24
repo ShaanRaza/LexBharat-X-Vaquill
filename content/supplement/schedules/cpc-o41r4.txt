@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O41R4.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O41R4
+Heading: One of several plaintiffs or defendants may obtain reversal of whole decree where it proceeds on ground common to all
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where there are more plaintiffs or more defendants than one in a suit, and the decree appealed from proceeds on any ground common to all the plaintiffs or to all the defendants, any one of the plaintiffs or of the defendants may appeal from the whole decree, and thereupon the Appellate Court may reverse or vary the decree in favour of all the plaintiffs or defendants, as the case may be.

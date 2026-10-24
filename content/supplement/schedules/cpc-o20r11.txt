@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O20R11.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O20R11
+Heading: Decree may direct payment by instalments
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where and in so far as a decree is for the payment of money, the Court may for any sufficient reason [incorporate in the decree, after hearing such of the parties who had appeared personally or by pleader at the last hearing, before judgment, an order that] payment of the amount decreed shall be postponed or shall be made by instalments, with or without interest, notwithstanding anything contained in the contract under which the money is payable.
+(2) Order, after decree, for payment by instalments.—After the passing of any such decree the Court may, on the application of the judgment-debtor and with the consent of the decree-holder, order that payment of the amount decreed shall be postponed or shall be made by instalments on such terms as to the payment of interest, the attachment of the property of the judgment-debtor, or the taking of security from him, or otherwise, as it thinks fit.

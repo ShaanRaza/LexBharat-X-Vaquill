@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R44.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R44
+Heading: Attachment of agricultural produce
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where the property to be attached is agricultural produce, the attachment shall be made by affixing a copy of the warrant of attachment,—
+(a) where such produce is a growing crop, on the land on which such crop has grown, or
+(b) where such produce has been cut or gathered, on the threshing floor or place for treading out grain or the like or fodder-stack on or in which it is deposited, and another copy on the outer door or on some other conspicuous part of the house in which the judgment-debtor ordinarily resides or, with the leave of the Court, on the outer door or on some other conspicuous part of the house in which he carries on business or personally works for gain or in which he is known to have last resided or carried on business or personally worked for gain; and the produce shall thereupon be deemed to have passed into the possession of the Court.

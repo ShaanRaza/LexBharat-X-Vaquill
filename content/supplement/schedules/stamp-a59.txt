@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A59.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A59
+Heading: SHARE WARRANTS to bearer issued under the [One and a half times] the duty payable on a Ind
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: SHARE WARRANTS to bearer issued under the [One and a half times] the duty payable on a Indian Companies Act, 1882 (6 of 1882). Conveyance (No. 23) for a consideration equal to the nominal amount of the shares specified in the warrant. Exemptions Share warrant when issued by a company in pursuance of the Indian Companies Act, 1882 (6 of 1882), section 30, to have effect only upon payment, as composition for that duty, to the Collector or Stamp-revenue, of— (a) [one and a half] per centum of the whole subscribed capital of the company, or (b) if any company which has paid the said duty or composition in full, subsequently issues an Addition to its subscribed capital— [one and a half] per centum of the additional capital so issued. SCRIP, See CERTIFICATE(No.19).
+Proper stamp-duty: —

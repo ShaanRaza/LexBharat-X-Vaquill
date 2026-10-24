@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R102.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R102
+Heading: Rules not applicable to transferee pendente lite
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Nothing in rules 98 and 100 shall apply to resistance or obstruction in execution of a decree for the possession of immovable property by a person to whom the judgment-debtor has transferred the property after the institution of the suit in which the decree was passed or to the dispossession of any such person.
+Explanation.—In this rule, “transfer” includes a transfer by operation of law.

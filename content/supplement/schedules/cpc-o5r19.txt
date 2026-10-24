@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O5R19.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O5R19
+Heading: Examination of serving officer
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where a summons is returned under rule 17, the Court shall, if the return under that rule has not been verified by the affidavit of the serving officer, and may, if it has been so verified, examine the serving officer on oath, or cause him to be so examined by another Court, touching his proceedings, and may make such further enquiry in the matter as it thinks fit; and shall either declare that the summons has been duly served or order such service as it thinks fit.

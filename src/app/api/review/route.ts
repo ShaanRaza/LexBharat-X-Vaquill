@@ -4,9 +4,10 @@ import { aiConfigured } from "@/lib/ai";
 import limitConfig from "@/config/review-limits.json";
 import { evaluateLimits, readLimits } from "@/lib/chat/limits.mjs";
 import { bidOf, envOf, json, NOT_SET_UP, vaultReady } from "@/lib/vault/http";
-import { addUsage, getDoc, getText, usageCounts } from "@/lib/vault/store";
+import { addUsage, getDoc, getText, scanPageNumbers, usageCounts } from "@/lib/vault/store";
 import { isContractType, sideOk } from "@/lib/review/rules.mjs";
 import { newResult } from "@/lib/review/run";
+import { bump } from "@/lib/insights/server";
 import { countRuns, createRun, listRuns } from "@/lib/review/store";
 
 const limits = () => readLimits(limitConfig, envOf(), "REVIEW_LIMIT");
@@ -33,11 +34,13 @@ export async function POST(req: Request) {
     if (doc.status !== "ready") return json({ error: doc.status === "processing" ? "That document is still being prepared. Try again in a moment." : "That document can't be read, so it can't be reviewed." }, 422);
     if ((await countRuns(bid)) >= limitConfig.maxSaved) return json({ error: `You have ${limitConfig.maxSaved} saved reviews, the most this browser can keep. Delete one first.` }, 422);
     const verdict = evaluateLimits(await usageCounts(bid, "review"), limits(), "reviews");
-    if (!verdict.allowed) return json({ error: verdict.message, reason: verdict.reason }, 429);
+    if (!verdict.allowed) { bump("limit_hit", `review_${verdict.reason}`); return json({ error: verdict.message, reason: verdict.reason }, 429); }
     const text = await getText(bid, doc.id); if (!text) return json({ error: "That document has no readable text." }, 422);
     const usageId = await addUsage(bid, "review"), result = newResult(text.body, type, text.pageStarts);
     result.usageId = usageId;
+    if (doc.scanned) result.scanPages = await scanPageNumbers(bid, doc.id);
     const id = await createRun(bid, { docId: doc.id, docName: doc.name, contractType: type, side, result });
+    bump("review", type);
     return json({ id });
   } catch { return json({ error: "Could not start the review. Please try again." }, 503); }
 }

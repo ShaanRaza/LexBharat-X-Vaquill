@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O41R22.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O41R22
+Heading: Upon hearing respondent may object to decree as if he had preferred separate appeal
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Any respondent, though he may not have appealed from any part of the decree, may not only support the decree [but may also state that the finding against him in the Court below in respect of any issue ought to have been in his favour; and may also take any cross-objection] to the decree which he could have taken by way of appeal provided he has filed such objection in the Appellate Court within one month from the date of service on him or his pleader of notice of the day fixed for hearing the appeal, or within such further time as the Appellate Court may see fit to allow.
+Explanation.—A respondent aggrieved by a finding of the Court in the judgment on which the decree appealed against is based may, under this rule, file cross-objection in respect of the decree in so far as it is based on that finding, notwithstanding that by reason of the decision of the Court on any other finding which is sufficient for the decision of the suit, the decree, is, wholly or in part, in favour of that respondent.]
+(2) Form of objection and provisions applicable thereto.—Such cross-objection shall be in the form of a memorandum, and the provisions of rule 1, so far as they relate to the form and contents of the memorandum of appeal, shall apply thereto. * * * * *
+(4) Where, in any case in which any respondent has under this rule filed a memorandum of objection, the original appeal is withdrawn or is dismissed for default, the objection so filed may nevertheless be heard and determined after such notice to the other parties as the Court thinks fit.
+(5) The provisions relating to appeals by indigent persons shall, so far as they can be made applicable, apply to an objection under this rule.

@@ -1,4 +1,5 @@
 // The chat prompt. PURE logic. The model sees numbered sources and must answer only from them.
+import { sectionWord } from "../acts/unitLabel.mjs";
 export const SOURCE_CHARS = 3500, MAX_SOURCES = 10, HISTORY_TURNS = 4;
 
 export const SYSTEM_PROMPT = `You are LexBharat's research assistant for Indian law. You answer ONLY from the numbered sources given with the question. The sources are sections of Indian Acts (Central and State). You have no other information: no judgments, no case law, no news.
@@ -22,7 +23,7 @@ const clip = (s, n) => (s.length > n ? s.slice(0, n).replace(/\s+\S*$/, "") + " 
 /** One source block: "[2] The Negotiable Instruments Act, 1881 — Section 138 (Dishonour of cheque…)\n<text>". `sources`: [{ n, actTitle, year, state, inForce, number, heading, text }] */
 export function sourceBlock(s) {
   if (s.kind === "doc") return `[${s.n}] YOUR DOCUMENT "${s.docName ?? s.actTitle}" — ${s.page ? `page ${s.page}` : "document text"}${s.label ? `, ${s.label}` : ""}\n${clip(s.text, SOURCE_CHARS)}`;
-  const head = `[${s.n}] ${s.actTitle}${s.state ? ` (${s.state.replace(/-/g, " ")})` : ""}${s.inForce === false ? " [not in force]" : ""} — ${s.number ? `Section ${s.number}` : "Unnumbered text"}${s.heading ? ` (${s.heading})` : ""}`;
+  const head = `[${s.n}] ${s.actTitle}${s.state ? ` (${s.state.replace(/-/g, " ")})` : ""}${s.inForce === false ? " [not in force]" : ""} — ${s.number ? sectionWord(s.number) : "Unnumbered text"}${s.heading ? ` (${s.heading})` : ""}`;
   return `${head}\n${clip(s.text, SOURCE_CHARS)}`;
 }
 

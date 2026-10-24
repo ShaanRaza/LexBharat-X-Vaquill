@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O28.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O28
+Heading: Suits by or against military [or naval] men [or airmen]
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Suits by or against military [or naval] men [or airmen]
+Rules in this Order:
+1. Officers, soldiers, sailors or airmen who cannot obtain leave may authorise any person to sue or defend for them
+2. Person so authorised may act personally or appoint pleader
+3. Service on person so authorised, or on his pleader, to be good service

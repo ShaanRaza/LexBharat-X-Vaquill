@@ -1,6 +1,6 @@
 export const RISKS: Record<"acceptable" | "negotiate" | "escalate", string>;
 export type Risk = "acceptable" | "negotiate" | "escalate";
-export type ReviewClause = { ref: string; quote: string; quoteMatched: boolean; risk: Risk; reason: string; change: { wording: string; why: string } | null; topics: string[] };
+export type ReviewClause = { ref: string; quote: string; quoteMatched: boolean; risk: Risk; reason: string; change: { wording: string; why: string } | null; topics: string[]; page?: number | null; scan?: boolean };
 export type ReviewSummary = { what: string; parties: string[]; term: string; money: string; governingLaw: string; overallRisk: "low" | "medium" | "high" | null; overallWhy: string; missing: { clause: string; why: string; source: "model" | "check" }[] };
 export type LawFinding = { topic: string; clause: string; severity: "issue" | "check"; text: string; cites: number[] };
 export const NOT_LEGAL_ADVICE: string;

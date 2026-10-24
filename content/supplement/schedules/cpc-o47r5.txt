@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O47R5.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O47R5
+Heading: Application for review in Court consisting of two or more Judges
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where the Judge or Judges, or any one of the Judges, who passed the decree or made the order a review of which is applied for, continues or continued attached to the Court at the time when the application for a review is presented, and is not or are not precluded by absence or other cause for a period of six months next after the application from considering the decree or order to which the application refers, such Judge or Judges or any of them shall hear the application, and no other Judge or Judges of the Court shall hear the same.

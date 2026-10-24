@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O25R1.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O25R1
+Heading: When security for costs may be required from plaintiff
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) At any stage of a suit, the Court may, either of its own motion or on the application of any defendant, order the plaintiff, for reasons to be recorded, to give within the time fixed by it security for the payment of all costs incurred and likely to be incurred by any defendant:
+Provided that such an order shall be made in all cases in which it appears to the Court that a sole plaintiff is, or (when there are more plaintiffs than one) that all the plaintiffs are, residing out of India and that such plaintiff does not possess or that no one of such plaintiffs possesses any sufficient immovable property within India other than the property in suit.
+(2) Whoever leaves India under such circumstances as to afford reasonable probability that he will not be forthcoming whenever he may be called upon to pay costs shall be deemed to be residing out of India within the meaning of the proviso to sub-rule (1).

@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O41R35.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O41R35
+Heading: Date and contents of decree
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) The decree of the Appellate Court shall bear date the day on which the judgment was pronounced.
+(2) The decree shall contain the number of the appeal, the names and descriptions of the appellant and respondent, and a clear specification of the relief granted or other adjudication made.
+(3) The decree shall also state the amount of costs incurred in the appeal, and by whom, or out of what property, and in what proportions such costs and the costs in the suit are to be paid.
+(4) The decree shall be signed and dated by the Judge or Judges who passed it:
+Judge dissenting from judgment need not sign decree.—Provided that where there are more Judges than one and there is a difference of opinion among them, it shall not be necessary for any Judge dissenting from the judgment of the Court to sign the decree.

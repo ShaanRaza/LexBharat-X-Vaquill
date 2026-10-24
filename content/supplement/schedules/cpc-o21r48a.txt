@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R48A.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R48A
+Heading: Attachment of salary or allowances of private employees
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where the property to be attached is the salary or allowances of an employee other than an employee to whom rule 48 applies, the Court, where the disbursing officer of the employee is within the local limits of the Court’s jurisdiction, may order that the amount shall, subject to the provision of section 60, be withheld from such salary or allowances either in one payment or by monthly instalments as the Court may direct; and upon notice of the order to such disbursing officer, such disbursing officer shall remit to the Court the amount due under the order, or the monthly instalments, as the case may be.
+(2) Where the attachable portion of such salary or allowances is already being withheld or remitted to the Court in pursuance of a previous and unsatisfied order of attachment, the disbursing officer shall forthwith return the subsequent order to the Court issuing it with a full statement of all the particulars of the existing attachment.
+(3) Every order made under this rule, unless it is returned in accordance with the provisions of sub-rule (2), shall, without further notice or other process, bind the employer while the judgment-debtors, is within the local limits to which this Code for the time being extends and while he is beyond those limits, if he is in receipt of salary or allowances payable out of the funds of an employer in any part of India, and the employer shall be liable for any sum paid in contravention of this rule.

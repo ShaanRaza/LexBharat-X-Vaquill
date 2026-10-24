@@ -1,0 +1,24 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O13.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O13
+Heading: Production, Impounding and Return of Documents
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Production, Impounding and Return of Documents
+Rules in this Order:
+1. Original documents to be produced at or before the settlement of issues
+2. Effect of non-production of documents
+3. Rejection of irrelevant or inadmissible documents
+4. Endorsements on documents admitted in evidence
+5. Endorsements on copies of admitted entries in books, accounts and records
+6. Endorsements on documents rejected an inadmissible in evidence
+7. Recording of admitted and return of rejected documents
+8. Court may order any document to be impounded
+9. Return of admitted documents
+10. Court may send for papers from its own records or from other Courts
+11. Provisions as to documents applied to material objects

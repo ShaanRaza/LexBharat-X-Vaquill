@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O38R6.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O38R6
+Heading: Attachment where cause not shown or security not furnished
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) Where the defendant fails to show cause why he should not furnish security, or fails to furnish the security required, within the time fixed by the Court, the Court may order that the property specified, or such portion thereof as appears sufficient to satisfy any decree which may be passed in the suit, be attached.
+(2) Where the defendant shows such cause or furnishes the required security, and the property specified or any portion of it has been attached, the Court shall order the attachment to be withdrawn, or make such other order as it thinks fit.

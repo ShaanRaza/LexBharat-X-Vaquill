@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Indian Stamp Act, 1899, Schedule I (Articles; Central text, most States have their own rates), unit A13.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+# Central Government rates as printed in this PDF. Most States have their own rates (and the printed rates are old).
+Act: The Indian Stamp Act, 1899
+Act ID: IND_central_15510
+Section: A13
+Heading: BILL OF EXCHANGE as defined by s
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Description of instrument: BILL OF EXCHANGE as defined by s.2(2), not being a Bond, bank-note or currency-note— (b) where payable otherwise than on demand— (i) where payable not more than three months after date or sight— if the amount of the bill or note does not Thirty paise. exceed Rs. 500; if it exceeds Rs. 500 but does not exceed Sixty paise. Rs. 1,000; and for every additional Rs. 1,000 or part thereof Sixty paise. in excess of Rs. 1,000; (ii) where payable more than three months but not more than six months after date or sight— if the amount of the bill or note does not Sixty paise. exceed Rs. 500; if it exceeds Rs. 500 but does not exceed One rupee twenty paise. Rs. 1,000; and for every additional Rs. 1,000 or part One rupee twenty paise. thereof in excess of Rs. 1,000; (iii) where payable more than six months but not more than nine months after date or sight— if the amount of the bill or note does not Ninety paise. exceed Rs. 500; if it exceeds Rs. 500 but does not exceed Rs. 1,000; One rupee eighty paise. and for every additional Rs. 1,000 or part thereof in One rupee eighty paise. excess of Rs. 1,000; (iv) where payable more than nine months but not more than one year after date or sight— if the amount of the bill or note does not exceed Rs. 500; if it exceeds Rs. 500 but does not exceed Rs. Two rupees fifty paise. 1,000; and for every additional Rs. 1,000 or part thereof in Two rupees fifty paise. excess of Rs. 1,000; (c) where payable at more than one year after date or sight— if the amount of the bill or note does not exceed Rs. 500; Two rupees fifty paise. if it exceeds Rs. 500 but does not exceed Rs. 1,000; and for every additional Rs. 1,000 or part thereof in excess of Rs. 1,000;
+Proper stamp-duty: One rupee twenty five paise. Five rupees. Five rupees.

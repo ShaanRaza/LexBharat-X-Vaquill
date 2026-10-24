@@ -1,0 +1,20 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O2.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O2
+Heading: Frame of suit
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Frame of suit
+Rules in this Order:
+1. Frame of suit
+2. Suit to include the whole claim
+3. Joinder of causes of action
+4. Only certain claims to be joined for recovery of immovable property
+5. Claims by or against executor, administrator or heir
+6. Power of Court to order separate trials
+7. Objections as to misjoinder

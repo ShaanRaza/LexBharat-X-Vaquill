@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O7R16.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O7R16
+Heading: Suits on lost negotiable instruments
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where the suit is founded upon a negotiable instrument, and it is proved that the instrument is lost, and an indemnity is given by the plaintiff, to the satisfaction of the Court, against the claims of any other person upon such instrument, the Court may pass such decree as it would have passed if the plaintiff had produced the instrument in Court when the plaint was presented, and had at the same time delivered a copy of the instrument to be filed with the plaint.

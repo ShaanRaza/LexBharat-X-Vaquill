@@ -1,0 +1,20 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O14.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O14
+Heading: Settlement of Issues and Determination of Suit on
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Settlement of Issues and Determination of Suit on
+Rules in this Order:
+1. Framing of issues
+2. Court to pronounce judgment on all issues
+3. Materials from which issues may be framed
+4. Court may examine witnesses or documents before framing issues
+5. Power to amend and strike out, issues
+6. Questions of fact or law may by agreement be stated in form of issues
+7. Court, if satisfied that agreement was executed in good faith, may pronounce judgment

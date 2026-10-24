@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Badge, Notice, Panel, StatusDot } from "@/components/kit";
 import { PROVENANCE, CHAPTER_NOTE, INCOMPLETE_NOTICE, MISSING_NOTICE } from "@/lib/acts/quality";
 import type { ActTextView as View } from "@/lib/acts/viewModel";
+import ScheduleTableView, { STAMP_NOTE } from "./ScheduleTableView";
 
 // Presentation only: every value arrives ready-made from src/lib/acts/viewModel.ts. Colours, sizes and radii come from the shared tokens (Tailwind names + kit components).
 export type ActHeader = { actId: string; title: string; meta: string[]; officialUrl: string };
@@ -49,15 +50,18 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
       {!state.available && <Unavailable s={state} officialUrl={header.officialUrl} />}
 
       {view && (
-        <div className="mt-6 grid gap-6 lg:grid-cols-[300px_minmax(0,1fr)]">
+        <div className="mt-6 grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[300px_minmax(0,1fr)]">
           <aside aria-label="Sections of this Act" className="lg:sticky lg:top-4 lg:self-start">
             <Panel className="p-0">
               <p className="border-b border-border/70 px-4 py-3 text-ui-sm text-secondary" role="status">
                 {fmt(view.counts.sections - view.counts.supplemented)} {view.hasSectionNumbers ? "sections" : "text blocks"}: {fmt(view.counts.complete)} no problems detected, {fmt(view.counts.possibly_incomplete)} possibly incomplete, {fmt(view.counts.garbled)} unreliable{view.counts.supplemented ? `, ${fmt(view.counts.supplemented)} filled in from India Code` : ""}{view.counts.missing ? `, ${fmt(view.counts.missing)} missing from our source data` : ""}.
               </p>
+              {view.hasSchedule && (
+                <Link href={href(header.actId, "schedule")} aria-current={view.schedule ? "true" : undefined} className={`flex min-h-11 items-center border-b border-border/70 px-4 py-2 text-ui-base text-primary hover:bg-accent ${view.schedule ? "bg-accent font-medium" : ""}`}>Schedule as a table</Link>
+              )}
               <ul className="max-h-[70vh] overflow-y-auto py-1">
                 {view.list.map((it) => {
-                  const active = it.key === sel?.key;
+                  const active = !view.schedule && it.key === sel?.key;
                   return (
                     <li key={it.key}>
                       <Link href={href(header.actId, it.key)} aria-current={active ? "true" : undefined} className={`flex items-start gap-2 px-4 py-2 text-ui-base hover:bg-accent ${active ? "bg-accent font-medium" : ""}`}>
@@ -73,18 +77,19 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
 
           <article aria-labelledby="sec-title">
             {!view.hasSectionNumbers && <Notice tone="warn" title="Section numbers are not available for this Act" className="mb-4"><p>The dataset has no section numbers for it, so its text is shown as unnumbered blocks in the dataset&apos;s order.</p></Notice>}
-            {sel ? (
+            {view.schedule ? <ScheduleTableView table={view.schedule} actTitle={header.title} /> : sel ? (
               <Panel>
-                <h2 id="sec-title" className="text-ui-lead font-semibold">{view.hasSectionNumbers && (sel.key.startsWith("s") || sel.missing) ? `Section ${sel.label}` : sel.label}{sel.heading ? ` — ${sel.heading}` : ""}</h2>
+                <h2 id="sec-title" className="text-ui-lead font-semibold">{view.hasSectionNumbers && (sel.key.startsWith("s") || sel.missing) && !/^(Order|Article) /.test(sel.label) ? `Section ${sel.label}` : sel.label}{sel.heading ? ` — ${sel.heading}` : ""}</h2>
                 {sel.chapter && <p className="mt-1 text-ui-sm text-secondary">{sel.chapter}</p>}
                 {sel.missing && (
                   <Notice tone="warn" role="status" className="mt-4">
                     <p className="font-medium text-foreground">{MISSING_NOTICE.replace(" Read it on India Code.", "")} <a className="underline" href={view.sourceUrl} target="_blank" rel="noopener noreferrer">Read it on India Code</a>.</p>
                   </Notice>
                 )}
+                {/^Article /.test(sel.label) && /Stamp Act/i.test(header.title) && <Notice tone="warn" role="note" compact className="mt-3"><p>{STAMP_NOTE}</p></Notice>}
                 {sel.supplement && (
                   <Notice tone="info" role="note" compact className="mt-3">
-                    <p><strong className="font-medium text-foreground">Source: {sel.supplement.source}, copied {fmtDate(sel.supplement.copiedOn)}.</strong> This section was copied by hand to fill a gap in our source data. <a className="underline" href={sel.supplement.sourceUrl} target="_blank" rel="noopener noreferrer">Open the page it was copied from</a>. The official text prevails; not legal advice.</p>
+                    <p><strong className="font-medium text-foreground">Source: {sel.supplement.source}, copied {fmtDate(sel.supplement.copiedOn)}.</strong> {/^(Order|Article) /.test(sel.label) ? "This part of the Act's Schedule was read from India Code's Act PDF." : "This section was copied by hand to fill a gap in our source data."} <a className="underline" href={sel.supplement.sourceUrl} target="_blank" rel="noopener noreferrer">Open the page it was copied from</a>. The official text prevails; not legal advice.</p>
                   </Notice>
                 )}
                 {!sel.missing && !sel.supplement && <p className="mt-3 flex flex-wrap items-center gap-1.5">

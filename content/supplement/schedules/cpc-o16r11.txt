@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O16R11.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O16R11
+Heading: If witness appears, attachment may be withdrawn
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where, at any time after the attachment of his property, such person appears and satisfies the Court,—
+(a) that he did not, without lawful excuse, fail to comply with the summons or intentionally avoid service, and
+(b) where he has failed to attend at the time and place named in a proclamation issued under the last preceding rule, that he had no notice of such proclamation in time to attend, the Court shall direct that the property be released from attachment, and shall make such order as to the costs of the attachment as it thinks fit.

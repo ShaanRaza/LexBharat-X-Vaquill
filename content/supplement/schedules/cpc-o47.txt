@@ -1,0 +1,22 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O47.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O47
+Heading: REVIEW
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+REVIEW
+Rules in this Order:
+1. Application for review of judgment
+2. [To whom applications for review may be made.]
+3. Form of applications for review
+4. Application where rejected
+5. Application for review in Court consisting of two or more Judges
+6. Application where rejected
+7. Order of rejection not appealable. Objections to order granting application
+8. Registry of application granted, and order for re-hearings
+9. Bar of certain application

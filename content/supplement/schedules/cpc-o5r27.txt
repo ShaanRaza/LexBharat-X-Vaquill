@@ -1,0 +1,12 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O5R27.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O5R27
+Heading: Service on civil public officer or on servant of railway company or local authority
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+Where the defendant is a public officer (not belonging to the [the Indians] military [naval or air] forces ***), or is the servant of a railway company or local authority, the Court may, if it appears to it that the summons may be most conveniently so served, send it for service on the defendant to the head of the office in which he is employed, together with a copy to be retained by the defendant.

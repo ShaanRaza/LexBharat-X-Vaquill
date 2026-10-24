@@ -8,6 +8,7 @@ import path from "node:path";
 import { neon } from "@neondatabase/serverless";
 import { chunkPages } from "../../src/lib/vault/chunk.mjs";
 import { entryHash, parseSupplementFile } from "../../src/lib/supplement/parse.mjs";
+import { unitLabel, unitOrd } from "../../src/lib/acts/unitLabel.mjs";
 
 for (const l of fs.existsSync(".env.local") ? fs.readFileSync(".env.local", "utf8").split("\n") : []) { const m = l.match(/^([A-Z_]+)=(.*)$/); if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, ""); }
 const DIR = "content/supplement", DRY = process.argv.includes("--dry-run"), MAIN_LIMIT_MB = 900, GAP_MS = 21000;
@@ -15,7 +16,8 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const say = (s = "") => console.log(s);
 
 // ---- 1. read and check the files
-const files = fs.readdirSync(DIR).filter((f) => f.toLowerCase().endsWith(".txt")).sort();
+// the section files are in DIR itself; the Orders, Rules and Articles of the Schedules are in DIR/schedules/
+const files = [...fs.readdirSync(DIR).filter((f) => f.toLowerCase().endsWith(".txt")).sort(), ...(fs.existsSync(path.join(DIR, "schedules")) ? fs.readdirSync(path.join(DIR, "schedules")).filter((f) => f.toLowerCase().endsWith(".txt")).sort().map((f) => `schedules/${f}`) : [])];
 const parsed = files.map((f) => ({ f, ...parseSupplementFile(fs.readFileSync(path.join(DIR, f), "utf8"), f) }));
 const ok = parsed.filter((p) => p.status === "ok"), pending = parsed.filter((p) => p.status === "pending"), bad = parsed.filter((p) => p.status === "error");
 const seen = new Map();
@@ -44,7 +46,8 @@ async function actInfo(actId) {
   const rows = title ? await q(main, "select number, ord from act_sections where act_id = $1 and number is not null order by ord", [actId]) : [];
   const byNumber = new Map(); for (const r of rows) { const k = r.number.toUpperCase(); if (!byNumber.has(k)) byNumber.set(k, r); }
   const nums = rows.filter((r) => /^[0-9]+$/.test(r.number)).map((r) => [Number(r.number), Number(r.ord)]);
-  const info = { title, byNumber, before: (n) => nums.filter(([k]) => k < n).reduce((m, [, o]) => Math.max(m, o), 0) };
+  const lastOrd = rows.reduce((m, r) => Math.max(m, Number(r.ord)), 0);
+  const info = { title, byNumber, lastOrd, before: (n) => nums.filter(([k]) => k < n).reduce((m, [, o]) => Math.max(m, o), 0) };
   actCache.set(actId, info); return info;
 }
 const stats = { added: 0, updated: 0, unchanged: 0, removed: 0, failed: 0, chunks: 0 };
@@ -55,7 +58,7 @@ for (const p of good) {
   if (!A.title) { say(`  PROBLEM ${p.f}: no Act with the Act ID ${e.actId}.`); stats.failed++; continue; }
   const act = { title: A.title }, base = A.byNumber.get(e.number);
   if (base && !e.replaces) { say(`  PROBLEM ${p.f}: section ${e.number} of ${act.title} is already in the data. If that text is wrong, set "Replaces existing text: yes".`); stats.failed++; continue; }
-  const ord = base ? Number(base.ord) : A.before(parseInt(e.number, 10));
+  const ord = unitOrd(e.number, A.lastOrd) ?? (base ? Number(base.ord) : A.before(parseInt(e.number, 10)));
   const prev = existing.get(key);
   if (prev && prev.file_hash === hash) { stats.unchanged++; continue; }
   await q(main, `insert into act_sections_supplement (act_id, number, section_key, ord, heading, body, replaces, source, source_url, copied_on, file_name, file_hash, loaded_at)
@@ -63,9 +66,9 @@ for (const p of good) {
                  on conflict (act_id, number) do update set section_key=$3, ord=$4, heading=$5, body=$6, replaces=$7, source=$8, source_url=$9, copied_on=$10, file_name=$11, file_hash=$12, loaded_at=now()`,
     [e.actId, e.number, e.sectionKey, ord, e.heading, e.body, e.replaces, e.source, e.sourceUrl, e.copiedOn, p.f, hash]);
   prev ? stats.updated++ : stats.added++;
-  const label = `${act.title}, Section ${e.number}${e.heading ? `: ${e.heading}` : ""}`;
+  const label = `${act.title}, ${unitLabel(e.number) ?? `Section ${e.number}`}${e.heading ? `: ${e.heading}` : ""}`;
   const chunks = chunkPages([e.body], { chars: 1100, overlap: 150 }).map((c, i) => ({ id: `${e.actId}|${e.sectionKey}|${i}`, text: `${label}\n${c.body}` }));
-  toEmbed.push({ e, chunks }); say(`  ${prev ? "updated " : "added   "} ${p.f} -> ${act.title}, section ${e.number} (${e.body.length} characters, ${chunks.length} passage${chunks.length === 1 ? "" : "s"}${base ? ", replaces the existing text" : ""})`);
+  toEmbed.push({ e, chunks }); say(`  ${prev ? "updated " : "added   "} ${p.f} -> ${act.title}, ${unitLabel(e.number) ?? `section ${e.number}`} (${e.body.length} characters, ${chunks.length} passage${chunks.length === 1 ? "" : "s"}${base ? ", replaces the existing text" : ""})`);
 }
 // rows whose file is now empty, deleted or no longer valid-and-present are removed (a file with a PROBLEM keeps its old row until it is fixed)
 const keep = new Set(good.map((p) => `${p.entry.actId}|${p.entry.number}`)), problemFiles = new Set(errors.map((p) => p.f));

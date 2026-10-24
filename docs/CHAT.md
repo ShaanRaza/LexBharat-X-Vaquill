@@ -132,3 +132,6 @@ Result: 9 Supported, 1 Check sources, 2 Not found. Every source line now begins 
 
 ### W6: the 12 questions again with nothing attached (2026-10-24)
 Result: 9 Supported, 1 Check sources, 2 Not found, the same split as W5 (the Check moved from question 4 to question 8). Gemini 3.6 flash was over its daily quota, so the fallback model answered. Table in `docs/VAULT.md`.
+
+## Orders, Rules and Articles (W8)
+Questions that name an Order, Rule or Article ("What is Order 7 Rule 11?", "Article 137 of the Limitation Act") run an exact lookup first (`src/lib/chat/lookups.mjs`), then the usual meaning search; the units are stored like sections and cited as "Order 7 Rule 11" / "Article 137". Chat answers carry a 👍/👎 bar; its votes and the question/answer snapshot are described in `docs/W8.md`.

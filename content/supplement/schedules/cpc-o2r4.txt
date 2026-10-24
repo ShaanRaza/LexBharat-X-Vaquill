@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O2R4.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O2R4
+Heading: Only certain claims to be joined for recovery of immovable property
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+No cause of action shall, unless with the leave of the Court, be joined with a suit for the recovery of immovable property, except—
+(a) claims for mesne profits or arrears of rent in respect of the property claimed or any part thereof;
+(b) claims for damages for breach of any contract under which the property or any part thereof is held; and
+(c) claims in which the relief sought is based on the same cause of action:
+Provided that nothing in this rule shall be deemed to prevent any party in a suit for foreclosure or redemption from asking to be put into possession of the mortgaged property.

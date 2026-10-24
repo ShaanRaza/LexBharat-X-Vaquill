@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O21R46A.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O21R46A
+Heading: Notice to garnishee
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) The Court may in the case of a debt (other than a debt secured by a mortgage or a charge) which has been attached under rule 46, upon the application of the attaching creditor, issue notice to the garnishee liable to pay such debt, calling upon him either to pay into Court the debt due from him to the judgment-debtor or so much thereof as may be sufficient to satisfy the decree and costs of execution, or to appear and show cause why he should not do so.
+(2) An application under sub-rule (1) shall be made on affidavit verifying the facts alleged and stating that in the belief of the deponent, the garnishee is indebted to the judgment-debtor.
+(3) Where the garnishee pays in the Court the amount due from him to the judgment-debtor or so much thereof as is sufficient to satisfy the decree and the costs of the execution, the Court may direct that the amount may be paid to the decree-holder towards satisfaction of the decree and costs of the execution.

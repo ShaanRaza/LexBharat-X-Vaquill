@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O39R7.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O39R7
+Heading: Detention, preservation, inspection, etc., of subject-matter of suit
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+(1) The Court may, on the application of any party to a suit, and on such terms as it thinks fit,—
+(a) make an order for the detention, preservation or inspection of any property which is the subject-matter of such suit, or as to which any question may arise therein;
+(b) for all or any of the purposes aforesaid authorise any person to enter upon or into any land or building in the possession of any other party to such suit; and
+(c) for all or any of the purposes aforesaid authorise any samples to be taken, or any observation to be made or experiment to be tried, which may seem necessary or expendient for the purpose of obtaining full information or evidence.
+(2) The provisions as to execution of process shall apply, mutatis mutandis, to persons authorised to enter under this rule.

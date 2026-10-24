@@ -47,6 +47,7 @@ test("text and pdf are extracted; a text-less pdf is reported as scanned", async
   for (let i = 1; i <= 2; i++) pdf.addPage([400, 400]).drawText(`Clause ${i}: the notice period is thirty days. Confidential information stays secret.`, { x: 20, y: 300, size: 10, font: f });
   const r = await extractText("pdf", await pdf.save()); assert.equal(r.pageCount, 2); assert.match(r.pages[1], /Clause 2/); assert.equal(r.scanned, false);
   const blank = await PDFDocument.create(); blank.addPage([400, 400]);
-  const s = await extractText("pdf", await blank.save()); assert.equal(s.scanned, true); assert.match(s.reason, /scanned document/);
+  const s = await extractText("pdf", await blank.save()); assert.equal(s.scanned, true); assert.deepEqual(s.scanPages, [1]);
+  const img = await extractText("jpg", new Uint8Array([0xff, 0xd8, 0xff, 0xe0])); assert.deepEqual(img.scanPages, [1]); assert.equal(img.pageCount, 1);
   const bad = await extractText("pdf", enc("not a pdf")); assert.equal(bad.pages, null); assert.match(bad.reason, /can't be read/);
 });

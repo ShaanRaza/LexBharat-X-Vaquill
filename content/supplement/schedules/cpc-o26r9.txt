@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, First Schedule (Orders and Rules), unit O26R9.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf by scripts/supplement/fill-schedules.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and state amendments are left out.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: O26R9
+Heading: Commissions to make local investigations
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+In any suit in which the Court deems a local investigation to be requisite or proper for the purpose of elucidating any matter in dispute, or of ascertaining the market-value of any property, or the amount of any mesne profits or damages or annual net profits, the Court may issue a commission to such person as it thinks fit directing him to make such investigation and to report thereon to the Court:
+Provided that, where the State Government has made rules as to the persons to whom such commission shall be issued, the Court shall be bound by such rules.
