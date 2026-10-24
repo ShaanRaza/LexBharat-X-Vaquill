@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import BrowseShell from "@/components/console/BrowseShell";
+import { Notice } from "@/components/kit";
+import scDuplicates from "@/config/sc-duplicates.json";
 import CopyButton from "@/components/workspace/CopyButton";
 import { ALL_COURTS } from "@/data/workspaceBrowse";
 import { getJudgmentsStore } from "@/lib/judgments";
@@ -27,6 +29,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
   const [stats, preview] = await Promise.all([store.stats(), sc ? store.preview(slug, year, caseId) : Promise.resolve(null)]);
   const mentions = preview ? await resolveMentions(preview, Number.isInteger(year) ? year : null) : [];   // Act sections named in the opening text, linked where our data has them
   const back = `/workspace/browse/judgments/${slug}?year=${year}${ya === "1" ? "&years=all" : ""}${lp && Number(lp) > 1 ? `&page=${Math.floor(Number(lp))}` : ""}`;
+  const dup = sc ? (scDuplicates.duplicates as Record<string, { of: string; year: number }>)[caseId] : undefined;
   const parties = c.petitioner && c.respondent ? `${c.petitioner} v. ${c.respondent}` : null;
   const heading = parties ?? c.title ?? (c.caseNumber ? `Case ${c.caseNumber}` : `Case record ${c.caseId}`);
   const date = longDate(c.decisionDate);
@@ -60,6 +63,11 @@ export default async function CasePage({ params, searchParams }: { params: Promi
           <Link href={`/workspace/browse/judgments/${slug}`} className="hover:text-primary hover:underline">{court.name}</Link><span aria-hidden> / </span>
           <Link href={back} className="hover:text-primary hover:underline">{year}</Link>
         </nav>
+        {dup && (
+          <Notice tone="warn" compact className="mt-3" title="Probably the same judgment as another record">
+            <p>The text of this record matches <Link className="underline" href={`/workspace/browse/judgments/${slug}/${dup.year}/${dup.of}`}>{dup.of}</Link> word for word (only the printed report page differs): the source lists it twice.</p>
+          </Notice>
+        )}
         <h1 className="mt-2 text-ui-title font-semibold leading-snug tracking-[-0.02em]">{heading}</h1>
         <p className="mt-1.5 flex flex-wrap items-center gap-2 text-ui-base text-secondary">
           <span>{court.name}</span>

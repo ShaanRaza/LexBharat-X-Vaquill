@@ -1,0 +1,25 @@
+{
+ "_note": "Supreme Court case records whose English text is the same as another record's (identical once the printed citation and digits are removed; checked in W10). Both stay in the list; the later one carries a notice. Key = the later record, value = the first.",
+ "duplicates": {
+  "1979_INSC_254": {
+   "of": "1979_INSC_253",
+   "year": 1979
+  },
+  "2013_INSC_123": {
+   "of": "2013_INSC_121",
+   "year": 2013
+  },
+  "2007_INSC_258": {
+   "of": "2007_INSC_257",
+   "year": 2007
+  },
+  "2008_INSC_221": {
+   "of": "2008_INSC_216",
+   "year": 2008
+  },
+  "1997_INSC_348": {
+   "of": "1997_INSC_347",
+   "year": 1997
+  }
+ }
+}
