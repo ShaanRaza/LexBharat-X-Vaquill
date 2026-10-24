@@ -1,13 +1,17 @@
 # FILL-IN FILE: The Limitation Act, 1963, section 7. Fill in the lines below, paste the section text under the last line, save.
 # Topic hint (our own words, from memory, not checked): when one of several plaintiffs or applicants is under a disability.
 # Leave the text area EMPTY to skip this file for now.
+# Extracted 2026-10-24 from India Code's PDF A1963-36.pdf (the PDF was created 2026-10-12; amendments made after that date are not in it) by scripts/supplement/extract-sections.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
 Act: The Limitation Act, 1963
 Act ID: IND_central_1565
 Section: 7
-Heading:
+Heading: Disability of one of several persons
 Replaces existing text: no
 Source: India Code
-Source URL:
-Date copied:
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/8c2f3bc0-5daf-4d11-971f-ad5f9b78b74b/content
+Date copied: 2026-10-24
 === SECTION TEXT (paste below this line) ===
-
+Where one of several persons jointly entitled to institute a suit or make an application for the execution of a decree is under any such disability, and a discharge can be given without the concurrence of such person, time will run against them all; but, where no such discharge can be given, time will not run as against any of them until one of them becomes capable of giving such discharge without the concurrence of the others or until the disability has ceased.
+Explanation I.—This section applies to a discharge from every kind of liability, including a liability in respect of any immovable property.
+Explanation II.—For the purposes of this section, the Manager of a Hindu undivided family governed by the Mitakshara law shall be deemed to be capable of giving a discharge without the concurrence of the other members of the family only if he is in management of the joint family property.

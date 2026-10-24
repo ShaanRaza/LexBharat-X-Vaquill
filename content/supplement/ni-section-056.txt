@@ -1,13 +1,15 @@
 # FILL-IN FILE: The Negotiable Instruments Act, 1881, section 56. Fill in the lines below, paste the section text under the last line, save.
 # Topic hint (our own words, from memory, not checked): endorsement of part of the amount.
 # Leave the text area EMPTY to skip this file for now.
+# Extracted 2026-10-24 from India Code's PDF a1881-26.pdf (the PDF was created 2023-06-26; amendments made after that date are not in it) by scripts/supplement/extract-sections.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
 Act: The Negotiable Instruments Act, 1881
 Act ID: IND_central_2189
 Section: 56
-Heading:
+Heading: Indorsement for part of sum due
 Replaces existing text: no
 Source: India Code
-Source URL:
-Date copied:
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/82bf1927-5e52-4aab-a876-50552c5952cd/content
+Date copied: 2026-10-24
 === SECTION TEXT (paste below this line) ===
-
+No writing on a negotiable instrument is valid for the purpose of negotiation if such writing purports to transfer only a part of the amount appearing to be due on the instrument; but where such amount has been partly paid, a note to that effect may be indorsed on the instrument, which may then be negotiated for the balance.

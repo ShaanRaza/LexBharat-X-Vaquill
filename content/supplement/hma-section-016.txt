@@ -1,13 +1,17 @@
 # FILL-IN FILE: The Hindu Marriage Act, 1955, section 16. Fill in the lines below, paste the section text under the last line, save.
 # Topic hint (our own words, from memory, not checked): legitimacy of children of void and voidable marriages.
 # Leave the text area EMPTY to skip this file for now.
+# Extracted 2026-10-24 from India Code's PDF a1955-25.pdf (the PDF was created 2026-05-06; amendments made after that date are not in it) by scripts/supplement/extract-sections.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
 Act: The Hindu Marriage Act, 1955
 Act ID: IND_central_1560
 Section: 16
-Heading:
+Heading: Legitimacy of children of void and voidable marriages
 Replaces existing text: no
 Source: India Code
-Source URL:
-Date copied:
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/526166d6-239d-4b6c-8999-c776179dea69/content
+Date copied: 2026-10-24
 === SECTION TEXT (paste below this line) ===
-
+(1) Notwithstanding that a marriage is null and void under section 11, any child of such marriage who would have been legitimate if the marriage had been valid, shall be legitimate, whether such child is born before or after the commencement of the Marriage Laws (Amendment) Act, 1976 (68 of 1976), and whether or not a decree of nullity is granted in respect of that marriage under this Act and whether or not the marriage is held to be void otherwise than on a petition under this Act.
+(2) Where a decree of nullity is granted in respect of a voidable marriage under section 12, any child begotten or conceived before the decree is made, who would have been the legitimate child of the parties to the marriage if at the date of the decree it had been dissolved instead of being annulled, shall be deemed to be their legitimate child notwithstanding the decree of nullity.
+(3) Nothing contained in sub-section (1) or sub-section (2) shall be construed as conferring upon any child of a marriage which is null and void or which is annulled by a decree of nullity under section 12, any rights in or to the property of any person, other than the parents, in any case where, but for the passing of this Act, such child would have been incapable of possessing or acquiring any such rights by reason of his not being the legitimate child of his parents.

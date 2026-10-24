@@ -1,13 +1,15 @@
 # FILL-IN FILE: The Code of Civil Procedure, 1908, section 152. Fill in the lines below, paste the section text under the last line, save.
 # Topic hint (our own words, from memory, not checked): correcting clerical or arithmetical mistakes in judgments and decrees.
 # Leave the text area EMPTY to skip this file for now.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/extract-sections.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
 Act: The Code of Civil Procedure, 1908
 Act ID: IND_central_2191
 Section: 152
-Heading:
+Heading: Amendment of judgments, decrees or orders
 Replaces existing text: no
 Source: India Code
-Source URL:
-Date copied:
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
 === SECTION TEXT (paste below this line) ===
-
+Clerical or arithmetical mistakes in judgments, decrees or orders or errors arising therein from any accidental slip or omission may at any time be corrected by the Court either of its own motion or on the application of any of the parties.

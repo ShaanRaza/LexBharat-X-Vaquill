@@ -1,13 +1,16 @@
 # FILL-IN FILE: The Limitation Act, 1963, section 10. Fill in the lines below, paste the section text under the last line, save.
 # Topic hint (our own words, from memory, not checked): suits against trustees and their representatives.
 # Leave the text area EMPTY to skip this file for now.
+# Extracted 2026-10-24 from India Code's PDF A1963-36.pdf (the PDF was created 2026-10-12; amendments made after that date are not in it) by scripts/supplement/extract-sections.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
 Act: The Limitation Act, 1963
 Act ID: IND_central_1565
 Section: 10
-Heading:
+Heading: Suits against trustees and their representatives
 Replaces existing text: no
 Source: India Code
-Source URL:
-Date copied:
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/8c2f3bc0-5daf-4d11-971f-ad5f9b78b74b/content
+Date copied: 2026-10-24
 === SECTION TEXT (paste below this line) ===
-
+Notwithstanding anything contained in the foregoing provisions of this Act, no suit against a person in whom property has become vested in trust for any specific purpose, or against his legal representatives or assigns (not being assigns for valuable consideration), for the purpose of following in his or their hands such property, or the proceeds thereof, or for an account of such property or proceeds, shall be barred by any length of time.
+Explanation.—For the purposes of this section any property comprised in a Hindu, Muslim or Buddhist religious or charitable endowment shall be deemed to be property vested in trust for a specific purpose and the manager of the property shall be deemed to be the trustee thereof.

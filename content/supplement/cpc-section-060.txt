@@ -1,13 +1,50 @@
 # FILL-IN FILE: The Code of Civil Procedure, 1908, section 60. Fill in the lines below, paste the section text under the last line, save.
 # Topic hint (our own words, from memory, not checked): what property can be attached in execution of a decree.
 # Leave the text area EMPTY to skip this file for now.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/extract-sections.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# NOTE: India Code's PDF prints clause (l) as "(1)" in three places (the clause itself and Explanations II and III) and has the typos "deecree" and "from.sale"; they are kept exactly as printed. This is a long section with many amendment brackets: worth a second look against India Code.
 Act: The Code of Civil Procedure, 1908
 Act ID: IND_central_2191
 Section: 60
-Heading:
+Heading: Property liable to attachment and sale in execution of decree
 Replaces existing text: no
 Source: India Code
-Source URL:
-Date copied:
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
 === SECTION TEXT (paste below this line) ===
-
+(1) The following property is liable to attachment and sale in execution of a decree, namely, lands, houses or other buildings, goods, money, bank-notes, cheques, bills of exchange, hundis, promissory notes, Government securities, bonds or other securities for money, debts, shares in a corporation and, save as hereinafter mentioned, all other saleable property, movable or immovable, belonging to the judgment-debtor, or over which, or the profits of which, he has a disposing power which he may exercise for his own benefit, whether the same be held in the name of the judgment-debtor or by another person in trust for him or on his behalf:
+Provided that the following particulars shall not be liable to such attachment or sale, namely:—
+(a) the necessary wearing-apparel, cooking vessels, beds and bedding of the judgment-debtor, his wife and children, and such personal ornaments as, in accordance with religious usage, cannot be parted with by any woman;
+(b) tools of artisans, and, where the judgment-debtor is an agriculturist, his implements of husbandry and such cattle and seed-grain as may, in the opinion of the Court, be necessary to enable him to earn his livelihood as such, and such portion of agricultural produce or of any class of agricultural produce as may have been declared to be free from liability under the provisions of the next following section;
+(c) houses and other buildings (with the materials and the sites thereof and the land immediately appurtenant thereto and necessary for their enjoyment) belonging to [an agriculturist or a labourer or a domestic servant] and occupied by him;
+(d) books of account;
+(e) a mere right to sue for damages;
+(f) any right of personal service;
+(g) stipends and gratuities allowed to pensioners of the Government [or of a local authority or of any other employer], or payable out of any service family pension fund notified in the Official Gazette by [the Central Government or the State Government] in this behalf, and political pensions;
+[(h) the wages of labourers and domestic servants, whether payable in money or in kind; ***]
+[(i) salary to the extent of [the first [ [one thousand rupees]] and two third of the remainder] [in execution of any decree other than a decree for maintenance]:
+[Provided that where any part of such portion of the salary as is liable to attachment has been under attachment, whether continuously or intermittently, for a total period of twenty-four months, such portion shall be exempt from attachment until the expiry of a further period of twelve months, and, where such attachment has been made in execution of one and the same decree, shall, after the attachment has continued for a total period of twenty-four months, be finally exempt from attachment in execution of that deecree.]]
+[(ia) one-third of the salary in execution of any decree for maintenance;]
+[(j) the pay and allowances of persons to whom the Air Force Act, 1950 (45 of 1950) or the Army Act, 1950 (46 of 1950), or the Navy Act, 1957 (62 of 1957), applies;]
+(k) all compulsory deposits and other sums in or derived from any fund to which the Provident Funds Act, [1925], (19 of 1925), for the time being applies in so far as they are declared by the said Act not to be liable to attachment;
+[(ka) all deposits and other sums in or derived from any fund to which the Public Provident Fund Act, 1968 (23 of 1968), for the time being applies, in so far as they are declared by the said Act as not to be liable to attachment;
+(kb) all moneys payable under a policy of insurance on the life of the judgment-debtor;
+(kc) the interest of a lessee of a residential building to which the provisions of law for the time being in force relating to control of rents and accommodation apply;]
+[(1) any allowance forming part of the emoluments of any [servant of the [Government]] or of any servant of a railway company or local authority which the [appropriate Government] may by notification in the Official Gazette declare to be exempt from attachment, and any subsistence grant or allowance made to [any such servant] while under suspension;]
+(m) an expectancy of succession by survivorship or other merely contingent or possible right or interest;
+(n) a right to future maintenance;
+(o) any allowance declared by [any Indian law] to be exempt from liability to attachment or sale in execution of a decree; and
+(p) where the judgment-debtor is a person liable for the payment of land-revenue; any movable property which, under any law for the time being applicable to him, is exempt from.sale for the recovery of an arrear of such revenue.
+[Explanation I.—The moneys payable in relation to the matters mentioned in clauses (g), (h), (i), (ia), (j), (l) and (o) are exempt from attachment or sale, whether before or after they are actually payable, and, in the case of salary, the attachable portion thereof is liable to attachment, whether before or after it is actually payable.] [ [Explanation II.—In clauses (i) and (ia)], “salary” means the total monthly emoluments, excluding any allowance declared exempt from attachment under the provisions of clause (1), derived by a person from his employment whether on duty or on leave.]
+[Explanation [III]—In clause (1) “appropriate Government” means—
+(i) as respects any [person] in the service of the Central Government, or any servant of [a Railway Administration] or of a cantonment authority or of the port authority of a major port, the Central Government; * * * * *
+(iii) as respects any other [servant of the [Government]] or a servant of any other *** local authority, the State Government.]
+[Explanation IV—For the purposes of this proviso, “wages” includes bonus, and “labourer” includes a skilled unskilled or semi-skilled labourer.
+Explanation V—For the purposes of this proviso, the expression “agriculturist” means a person who cultivates land personally and who depends for his livelihood mainly on the income from agricultural land, whether as owner, tenant, partner or agricultural labourer.
+Explanation VI—For the purposes of Explanation V, an agriculturist shall be deemed to cultivate land personally, if he cultivates land—
+(a) by his own labour, or
+(b) by the labour of any member of his family, or
+(c) by servants or labourers on wages payable in cash or in kind (not being as a share of the produce), or both.]
+[ (1A) Notwithstanding anything contained in any other law for the time being in force, an agreement by which a person agrees to waive the benefit of any exemption under this section shall be void.]
+(2) Nothing in this section shall be deemed *** to exempt houses and other buildings (with the materials and the sites thereof and the lands immediately appurtenant thereto and necessary for their enjoyment) from attachment or sale in execution of decrees for rent of any such house, building, site or land ***

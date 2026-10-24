@@ -1,13 +1,16 @@
 # FILL-IN FILE: The Limitation Act, 1963, section 27. Fill in the lines below, paste the section text under the last line, save.
 # Topic hint (our own words, from memory, not checked): when the right to property is extinguished.
 # Leave the text area EMPTY to skip this file for now.
+# Extracted 2026-10-24 from India Code's PDF A1963-36.pdf (the PDF was created 2026-10-12; amendments made after that date are not in it) by scripts/supplement/extract-sections.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
+# NOTE: Section 28 follows in the PDF but is repealed (see limitation-section-028.txt).
 Act: The Limitation Act, 1963
 Act ID: IND_central_1565
 Section: 27
-Heading:
+Heading: Extinguishment of right to property
 Replaces existing text: no
 Source: India Code
-Source URL:
-Date copied:
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/8c2f3bc0-5daf-4d11-971f-ad5f9b78b74b/content
+Date copied: 2026-10-24
 === SECTION TEXT (paste below this line) ===
-
+At the determination of the period hereby limited to any person for instituting a suit for possession of any property, his right to such property shall be extinguished.

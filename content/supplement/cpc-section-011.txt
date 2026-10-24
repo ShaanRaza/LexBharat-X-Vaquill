@@ -2,13 +2,23 @@
 # Topic hint (our own words, from memory, not checked): res judicata: a matter already decided cannot be tried again.
 # Leave the text area EMPTY to skip this file for now.
 # The data already holds WRONG text under this number, so this file replaces it.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/extract-sections.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
 Act: The Code of Civil Procedure, 1908
 Act ID: IND_central_2191
 Section: 11
-Heading:
+Heading: Res judicata
 Replaces existing text: yes
 Source: India Code
-Source URL:
-Date copied:
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
 === SECTION TEXT (paste below this line) ===
-
+No Court shall try any suit or issue in which the matter directly and substantially in issue has been directly and substantially in issue in a former suit between the same parties, or between parties under whom they or any of them claim, litigating under the same title, in a Court competent to try such subsequent suit or the suit in which such issue has been subsequently raised, and has been heard and finally decided by such Court.
+Explanation I.—The expression “former suit” shall denote a suit which has been decided prior to a suit in question whether or not it was instituted prior thereto.
+Explanation II.—For the purposes of this section, the competence of a Court shall be determined irrespective of any provisions as to a right of appeal from the decision of such Court.
+Explanation III.—The matter above referred to must in the former suit have been alleged by one party and either denied or admitted, expressly or impliedly, by the other.
+Explanation IV.—Any matter which might and ought to have been made ground of defence or attack in such former suit shall be deemed to have been a matter directly and substantially in issue in such suit.
+Explanation V.—Any relief claimed in the plaint, which is not expressly granted by the decree, shall for the purposes of this section, be deemed to have been refused.
+Explanation VI.—Where persons litigate bona fide in respect of a public right or of a private right claimed in common for themselves and others, all persons interested in such right shall, for the purposes of this section, be deemed to claim under the persons so litigating.
+[Explanation VII.—The provisions of this section shall apply to a proceeding for the execution of a decree and references in this section to any suit, issue or former suit shall be construed as references, respectively, to a proceeding for the execution of the decree, question arising in such proceeding and a former proceeding for the execution of that decree.
+Explanation VIII.—An issue heard and finally decided by a Court of limited jurisdiction, competent to decide such issue, shall operate as res judicata in a subsequent suit, notwithstanding that such Court of limited jurisdiction was not competent to try such subsequent suit or the suit in which such issue has been subsequently raised.]

@@ -1,13 +1,15 @@
 # FILL-IN FILE: The Specific Relief Act, 1963, section 10. Fill in the lines below, paste the section text under the last line, save.
 # Topic hint (our own words, from memory, not checked): when specific performance of a contract can be ordered.
 # Leave the text area EMPTY to skip this file for now.
+# Extracted 2026-10-24 from India Code's PDF A1963-47.pdf (the PDF was created 2026-10-12; amendments made after that date are not in it) by scripts/supplement/extract-sections.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
 Act: The Specific Relief Act, 1963
 Act ID: IND_central_1583
 Section: 10
-Heading:
+Heading: Specific performance in respect of contracts
 Replaces existing text: no
 Source: India Code
-Source URL:
-Date copied:
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/aba411f8-4c8d-4c8e-af29-64d442ae80f0/content
+Date copied: 2026-10-24
 === SECTION TEXT (paste below this line) ===
-
+The specific performance of a contract shall be enforced by the court subject to the provisions contained in sub-section (2) of section 11, section 14 and section 16.

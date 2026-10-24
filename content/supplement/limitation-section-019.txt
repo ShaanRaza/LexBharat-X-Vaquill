@@ -1,13 +1,19 @@
 # FILL-IN FILE: The Limitation Act, 1963, section 19. Fill in the lines below, paste the section text under the last line, save.
 # Topic hint (our own words, from memory, not checked): effect of a part-payment of a debt on the period.
 # Leave the text area EMPTY to skip this file for now.
+# Extracted 2026-10-24 from India Code's PDF A1963-36.pdf (the PDF was created 2026-10-12; amendments made after that date are not in it) by scripts/supplement/extract-sections.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
 Act: The Limitation Act, 1963
 Act ID: IND_central_1565
 Section: 19
-Heading:
+Heading: Effect of payment on account of debt or of interest on legacy
 Replaces existing text: no
 Source: India Code
-Source URL:
-Date copied:
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/8c2f3bc0-5daf-4d11-971f-ad5f9b78b74b/content
+Date copied: 2026-10-24
 === SECTION TEXT (paste below this line) ===
-
+Where payment on account of a debt or of interest on a legacy is made before the expiration of the prescribed period by the person liable to pay the debt or legacy or by his agent duly authorised in this behalf, a fresh period of limitation shall be computed from the time when the payment was made:
+Provided that, save in the case of payment of interest made before the 1st day of January, 1928, an acknowledgment of the payment appears in the handwriting of, or in a writing signed by, the person making the payment.
+Explanation.—For the purposes of this section,—
+(a) where mortgaged land is in the possession of the mortgagee, the receipt of the rent or produce of such land shall be deemed to be a payment;
+(b) “debt” does not include money payable under a decree or order of a court.

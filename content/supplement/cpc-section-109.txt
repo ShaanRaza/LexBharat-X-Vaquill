@@ -1,13 +1,17 @@
 # FILL-IN FILE: The Code of Civil Procedure, 1908, section 109. Fill in the lines below, paste the section text under the last line, save.
 # Topic hint (our own words, from memory, not checked): appeals to the Supreme Court.
 # Leave the text area EMPTY to skip this file for now.
+# Extracted 2026-10-24 from India Code's PDF a1908-05.pdf (the PDF was created 2026-01-09; amendments made after that date are not in it) by scripts/supplement/extract-sections.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
 Act: The Code of Civil Procedure, 1908
 Act ID: IND_central_2191
 Section: 109
-Heading:
+Heading: When appeals lie to the Supreme Court
 Replaces existing text: no
 Source: India Code
-Source URL:
-Date copied:
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/fc9dad3f-97a9-4216-843b-934665693468/content
+Date copied: 2026-10-24
 === SECTION TEXT (paste below this line) ===
-
+Subject to the provisions in Chapter IV of Part V of the Constitution and such rules as may, from time to time, be made by the Supreme Court regarding appeals from the Courts of India, and to the provisions hereinafter contained, an appeal shall lie to the Supreme Court from any judgment, decree or final order in a civil proceeding of a High Court, if the High Court certifies—
+(i) that the case involves a substantial question of law of general importance; and
+(ii) that in the opinion of the High Court the said question needs to be decided by the Supreme Court.

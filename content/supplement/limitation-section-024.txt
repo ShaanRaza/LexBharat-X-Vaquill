@@ -1,13 +1,15 @@
 # FILL-IN FILE: The Limitation Act, 1963, section 24. Fill in the lines below, paste the section text under the last line, save.
 # Topic hint (our own words, from memory, not checked): computing time for compensation for acts that are not actionable without special loss.
 # Leave the text area EMPTY to skip this file for now.
+# Extracted 2026-10-24 from India Code's PDF A1963-36.pdf (the PDF was created 2026-10-12; amendments made after that date are not in it) by scripts/supplement/extract-sections.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
 Act: The Limitation Act, 1963
 Act ID: IND_central_1565
 Section: 24
-Heading:
+Heading: Computation of time mentioned in instruments
 Replaces existing text: no
 Source: India Code
-Source URL:
-Date copied:
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/8c2f3bc0-5daf-4d11-971f-ad5f9b78b74b/content
+Date copied: 2026-10-24
 === SECTION TEXT (paste below this line) ===
-
+All instruments shall for the purposes of this Act be deemed to be made with reference to the Gregorian calendar.

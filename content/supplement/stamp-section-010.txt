@@ -1,13 +1,21 @@
 # FILL-IN FILE: The Indian Stamp Act, 1899, section 10. Fill in the lines below, paste the section text under the last line, save.
 # Topic hint (our own words, from memory, not checked): who pays stamp duty.
 # Leave the text area EMPTY to skip this file for now.
+# Extracted 2026-10-24 from India Code's PDF a1899-2_.pdf (the PDF was created 2025-06-23; amendments made after that date are not in it) by scripts/supplement/extract-sections.mjs.
+# Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnote numbers, footnotes and state amendments are left out.
 Act: The Indian Stamp Act, 1899
 Act ID: IND_central_15510
 Section: 10
-Heading:
+Heading: Duties how to be paid
 Replaces existing text: no
 Source: India Code
-Source URL:
-Date copied:
+Source URL: https://indiacode.gov.in/server/api/core/bitstreams/dc504bf4-89fc-4298-8ce6-edc6da5731d0/content
+Date copied: 2026-10-24
 === SECTION TEXT (paste below this line) ===
-
+(1) Except as otherwise expressly provided in this Act, all duties with which any instruments are chargeable shall be paid, and such payment shall be indicated on such instruments, by means of stamps —
+(a) according to the provisions herein contained; or
+(b) when no such provision is applicable thereto—as the [State Government] may be rule direct.
+(2) The rules made under sub-section (1) may, among other matters, regulate,—
+(a) in the case of each kind of instrument—the description of stamps which may be used;
+(b) in the case of instruments stamped with impressed stamps—the number of stamps which may be used;
+(c) in the case of bills of exchange or promissory notes *** the size of the paper on which they are written.

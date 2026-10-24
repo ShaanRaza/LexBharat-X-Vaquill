@@ -220,3 +220,48 @@ Ways forward that need a decision from you:
 Two related fixes made while testing: small models sometimes number a source off by one (the answer names "Section 28" but cites the chip of section 27). `alignCitations` now corrects a sentence's chip when it names exactly one retrieved section and cites only other numbers (Chat and Review); unit-tested. The earlier Review "miss" on s.28 turned into a hit once the section was retrievable, with that fix.
 
 **Still missing, and why.** Everything in the 30 files is missing until you paste text. Beyond them, the lists above remain (about 3,189 missing numbers across the 100 Acts; the largest are whole Acts that are almost empty such as the Customs Act, Arms Act and old Companies Acts) because there is no permitted source yet: see the India Code section above. Add files by copying one of the existing ones and changing the Act, Act ID and Section lines (the loader accepts any `.txt` file in the folder); `scripts/supplement/make-templates.mjs` shows the list and never overwrites a file you have already filled. If you reload the Acts with `scripts/acts/load-neon.sh`, run `npm run load:supplement` afterwards (it recreates the view; the filled sections are kept).
+
+## W7: the 30 sections are filled (2026-10-24), from India Code's own Act PDFs
+**How:** option 2. India Code and legislative.gov.in refuse automated requests, so the 8 Act PDFs were opened and downloaded **by you in the browser pane** (one Act at a time, no block or login appeared; the file list and Act page addresses are in `content/supplement/pdfs/SOURCES.md`). Nothing was fetched by script. The PDFs themselves are not committed (`.gitignore`): they are India Code's files, and their reuse terms are still not confirmed.
+
+**Extraction** (`scripts/supplement/pdf-text.mjs`, `extract-sections.mjs`, `extract-all.mjs`, `fill-files.mjs`): reads each PDF by text position, removes only the diagonal "IndiaCode" watermark, the raised footnote numbers, the footnotes at the foot of each page, page numbers and the state amendments printed under a Central section; finds the line where section N starts and the line where the next one starts; splits paragraphs by sentence endings. Nothing is written from memory: every word of every section was checked to be in the PDF's own text (30 of 30 pass; for two long sections the PDF lists a page's pieces in a different order, so the check there is "every word is present as often as used"). Printed amendment marks (`[ ]`, `* * *`) are kept as printed. Section number and heading were matched from the PDF line (`N. Heading.—`), and the next section's number was checked to be N or higher.
+
+**Filled: 30 of 30, loaded into the database** (60 passages embedded): Contract Act 16, 20, 24, 28, 73, 124; CPC 11 and 20 (replacing the wrong Order text), 60, 92, 109, 152; Limitation Act, 1963: 4, 5, 7, 8, 9, 10, 19, 22, 24, 27, 28; NI Act 13, 56, 145; Specific Relief Act 10; Prevention of Corruption Act 20; Hindu Marriage Act 16; Indian Stamp Act 10. Each file records the PDF it came from, the date the PDF was created (a note about amendments after that date), Source URL (the PDF's address on India Code) and Date copied 2026-10-24.
+
+| PDF | India Code file | PDF created | Note |
+|---|---|---|---|
+| Indian Contract Act, 1872 | a1872-9.pdf | 2021-06-21 | oldest of the eight: check recent amendments |
+| NI Act, 1881 | a1881-26.pdf | 2023-06-26 | |
+| Stamp Act, 1899 | a1899-2_.pdf | 2025-06-23 | |
+| CPC, 1908 | a1908-05.pdf | 2026-01-09 | |
+| Hindu Marriage Act, 1955 | a1955-25.pdf | 2026-05-06 | |
+| Limitation Act, 1963 | A1963-36.pdf | 2026-10-12 | |
+| Specific Relief Act, 1963 | A1963-47.pdf | 2026-10-12 | |
+| Prevention of Corruption Act, 1988 | a1988-49.pdf | 2025-08-12 | |
+
+**Flagged (filled, but worth a second look; each has a NOTE line in its file):**
+- CPC s.60 and s.92: long, with many bracketed insertions. India Code's PDF prints clause (l) of s.60 as "(1)" in three places and has the typos "deecree" and "from.sale"; kept exactly as printed.
+- NI s.13: the PDF has the typos "payble" and "serveral"; kept as printed.
+- Limitation s.28: **repealed**; the file holds only the repeal note ("Rep. by Repealing and Amending Act, 1974 ...").
+- Contract s.28: three Exceptions and an Explanation about banks, printed with `* * * * *` where an Exception was omitted.
+- Not left empty: nothing was too uncertain to fill. If a PDF's text is later found to be wrong, correct the file and run `npm run load:supplement`.
+
+**Before and after** (before = the section was absent, or for CPC 11 and 20 held the wrong text; Gemini 3.5 flash-lite answered because 3.6 flash was over its daily quota):
+| Test | Before | After |
+|---|---|---|
+| Review, service agreement (foreign courts, damages), PDF and DOCX | Both law points missed: the sections were not in the data, so nothing could be cited | Hit in both: s.73 and s.28 retrieved and cited. The s.28 reading is the model's: it ties the section to the foreign-courts clause, which a lawyer should confirm. |
+| Chat: "What is undue influence under the Indian Contract Act?" | Section 16 could not be retrieved | Supported: cites s.16, sub-sections and (a)/(b) exactly |
+| Chat: damages for breach | Section 73 could not be retrieved | Supported: s.73 retrieved first, quoted compensation rule and illustrations |
+| Chat: "What is res judicata under the CPC?" | CPC s.11 held unrelated Order text | Supported: new s.11 retrieved first and quoted |
+| Chat: where to file a suit against someone in another city | CPC s.20 held unrelated Order text | Partly supported: new s.20 retrieved and quoted; the question needs the rest of Chapter II |
+| Lookups "73 Indian Contract Act", "11 CPC", "19 Limitation Act", "145 NI Act", "20 Prevention of Corruption Act" | "missing" notice, or the wrong text | Found, labelled "Filled in from India Code" |
+Neon: main database 692 MB before and after (limit used 900 MB).
+
+**5 sections to check against India Code yourself** (open the Act, then the section; compare against what the Act page here shows):
+1. Indian Contract Act s.73 (longest; 18 illustrations (a) to (r); heading "Compensation for loss or damage caused by breach of contract").
+2. CPC s.60 (most bracketed text; look at clause (l)/(1), the provisos and Explanations I to VI, and sub-section (1A)).
+3. Indian Contract Act s.28 (Exceptions 1 to 3, the Explanation about "bank" and "financial institution").
+4. CPC s.20 (replaced the wrong text; "[Explanation]", the two Illustrations).
+5. NI Act s.13 (explanations (i) to (iii) and sub-section (2), and whether India Code shows the same two typos).
+
+**Still missing.** Everything else in the lists above, because there is no permitted source for it yet; the process is now cheap to repeat: download the Act's PDF on India Code, add a fill-in file per section (copy one, change the Act, Act ID and Section lines), run `node scripts/supplement/extract-all.mjs` and `fill-files.mjs` (add the Act to the maps in those scripts), then `npm run load:supplement`. One more gap you will see: about 15 copies of the CPC and other Acts are filed under individual States in the dataset (see "What the data itself shows"); they keep their old wrong text, because the filled sections belong to the Central Act only.

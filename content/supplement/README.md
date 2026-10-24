@@ -1,5 +1,7 @@
 # Filling in missing Act sections (30 files, one per section)
 
+**Status 2026-10-24: all 30 are filled from India Code's Act PDFs and loaded.** The steps below are for adding more (copy a file, change the Act, Act ID and Section lines). See `docs/MISSING-SECTIONS.md` (W7) for how the text was extracted and checked.
+
 Each `.txt` file here is one section that is missing or wrong in our data. Everything else is built: when a file is filled and loaded, the section appears on its Act page with "Source: India Code, copied <date>", and Search, smart search, Chat, Drafting and Review all find and use it.
 
 **Only copy text you are allowed to use** (see `docs/INDIA-CODE-PERMISSION-EMAIL.md`). Until you have permission, leave the text areas empty: nothing is loaded from an empty file.
