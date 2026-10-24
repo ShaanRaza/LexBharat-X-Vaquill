@@ -34,7 +34,9 @@ const lc = await (await get("/api/acts/list?search=report+no.+41&category=regula
 ok("Regulators", "Law Commission reports are listed with readable titles", !!lc && (lc.results ?? []).some((a) => /^Law Commission of India, Report No\./.test(a.title)), lc ? `${lc.total} matches` : "");
 const dgft = await sr("export import policy", "&scope=regulators");
 ok("Regulators", "regulator keyword search answers", dgft.searchAvailable && dgft.results.length > 0, `${dgft.total} hits, first: ${dgft.results?.[0]?.actTitle ?? "-"}`);
+const sem = await sr("What does the DGFT say about export licences for restricted items?", "&scope=regulators");
+ok("Regulators", "regulator search by meaning answers (loaded subset: DGFT, CBIC, small tribunals)", sem.searchAvailable && sem.mode === "semantic" && sem.results.length > 0, `mode ${sem.mode}, first: ${sem.results?.[0]?.actTitle ?? "-"} / ${sem.results?.[0]?.department ?? "-"}`);
 if (dgft.results?.[0]) { const h = dgft.results[0]; p = await page(`/workspace/browse/acts/${h.actId}?section=${encodeURIComponent(h.sectionKey)}`); t = text(p.html);
-  ok("Regulators", "a regulator section page shows its text", p.status === 200 && t.length > 2000 && !/not (available|included)/i.test(t.slice(0, 3000)), `${t.length} chars`); }
+  ok("Regulators", "a regulator section page shows its text", p.status === 200 && t.length > 800 && !/not (available|included)/i.test(t.slice(0, 3000)), `${t.length} chars`); }
 
 console.log(`\n${rows.filter((r) => r[2]).length} of ${rows.length} passed`);

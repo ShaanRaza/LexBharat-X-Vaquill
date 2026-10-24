@@ -12,7 +12,7 @@ import { neon } from "@neondatabase/serverless";
 import { parseChunkId } from "./reassemble.mjs";
 import { vectorLiteral } from "./semantic.mjs";
 
-export type Corpus = "central" | "state" | "supplement";
+export type Corpus = "central" | "state" | "supplement" | "regulatory";
 export type VectorHit = { actId: string; sectionKey: string; distance: number };
 export interface VectorStore {
   readonly corpus: Corpus;
@@ -24,7 +24,7 @@ export interface VectorStore {
 }
 
 // "supplement" = the sections filled in by hand (content/supplement, `npm run load:supplement`): a tiny extra table, supplement_emb_256, searched alongside the two corpora.
-export const CORPORA: Corpus[] = ["central", "state", "supplement"];
+export const CORPORA: Corpus[] = ["central", "state", "supplement"];   // searched together for Acts; "regulatory" (regulator instruments, W10) has its own scope and its own table regulatory_emb_256 / project VECTOR_DATABASE_URL_REGULATORY
 const upper = (c: Corpus) => c.toUpperCase();
 const env = (name: string) => process.env[name]?.trim() || "";
 
@@ -94,3 +94,5 @@ export function vectorStores(): VectorStore[] {
   return out;
 }
 export const vectorConfigured = () => vectorStores().length > 0;
+/** The regulator-instrument vector store (VECTOR_DATABASE_URL_REGULATORY, or the shared VECTOR_DATABASE_URL), or null when it is not set up. */
+export const regulatoryStore = (): VectorStore | null => neonStore("regulatory");

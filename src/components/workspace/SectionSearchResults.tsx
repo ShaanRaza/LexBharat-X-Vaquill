@@ -42,8 +42,8 @@ export default function SectionSearchResults({ q }: { q: string }) {
       {data?.searchAvailable && (
         <>
           {data.note && <p className="mt-1 text-ui-sm text-muted">{data.note}</p>}
-          {scope === "acts" && data.mode === "semantic" && <button type="button" onClick={() => { setExact(true); setPage(1); }} className="mt-1 text-ui-sm font-medium text-primary underline">Search exact words instead</button>}
-          {scope === "acts" && exact && data.mode === "text" && <button type="button" onClick={() => { setExact(false); setPage(1); }} className="mt-1 text-ui-sm font-medium text-primary underline">Search by meaning instead</button>}
+          {data.mode === "semantic" && <button type="button" onClick={() => { setExact(true); setPage(1); }} className="mt-1 text-ui-sm font-medium text-primary underline">Search exact words instead</button>}
+          {exact && data.mode === "text" && <button type="button" onClick={() => { setExact(false); setPage(1); }} className="mt-1 text-ui-sm font-medium text-primary underline">Search by meaning instead</button>}
           {data.missing && (
             <Notice tone="warn" role="status" className="mt-3">
               <p><strong className="font-medium text-foreground">Section {data.missing.number} of {data.missing.actTitle}.</strong> {MISSING_NOTICE.replace(" Read it on India Code.", "")} <a className="font-medium underline" href={officialSourceUrl(data.missing.sourceUrl)} target="_blank" rel="noopener noreferrer">Read it on India Code</a>.</p>

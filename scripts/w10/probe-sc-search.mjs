@@ -1,0 +1,5 @@
+import { env } from "../acts/bakeoff-lib.mjs";
+const q = process.argv[2] ?? "When does the limitation period for filing a complaint under section 138 of the Negotiable Instruments Act begin?";
+const v = await (await fetch("https://api.voyageai.com/v1/embeddings", { method: "POST", headers: { Authorization: `Bearer ${env.VOYAGE_API_KEY.trim()}`, "content-type": "application/json" }, body: JSON.stringify({ input: [q], model: "voyage-4", input_type: "query", output_dimension: 1024 }) })).json();
+const r = await (await fetch("http://localhost:6333/collections/legal_corpus_v2/points/query", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ query: v.data[0].embedding, using: "dense", limit: 8, with_payload: ["title", "chunk_id", "citation", "text"], filter: { must: [{ key: "court_type", match: { value: "supreme_court" } }] } }) })).json();
+for (const p of r.result.points) console.log(p.score.toFixed(3), p.payload.chunk_id, "|", p.payload.title.slice(0, 60), "|", p.payload.text.replace(/\s+/g, " ").slice(120, 260));

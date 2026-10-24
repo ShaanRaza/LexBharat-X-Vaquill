@@ -23,9 +23,9 @@ export async function GET(req: Request) {
   const rl = await rateCheck("search", clientKey(req.headers), SEARCHES_PER_MINUTE);
   if (!rl.ok) return Response.json({ error: `Too many searches. Please wait ${rl.retryAfterSec} seconds and try again.` }, { status: 429, headers: { "Retry-After": String(rl.retryAfterSec), "Cache-Control": "no-store" } });
   const regulators = p.get("scope") === "regulators";
-  const r = regulators ? await searchRegulators(q, page, PAGE_SIZE) : await searchSections(q, page, PAGE_SIZE, { exact: p.get("exact") === "1" });
+  const r = regulators ? await searchRegulators(q, page, PAGE_SIZE, { exact: p.get("exact") === "1" }) : await searchSections(q, page, PAGE_SIZE, { exact: p.get("exact") === "1" });
   if (!r.available) return Response.json({ searchAvailable: false, reason: r.reason, message: r.message, results: [], total: 0, page, pageSize: PAGE_SIZE, hasMore: false }, { headers: { "Cache-Control": "no-store" } });
-  const scope = regulators ? "text of regulator instruments (English)" : r.mode === "semantic" ? "meaning of Central and State Acts (English)" : "text of Central and State Acts (English)";
+  const scope = regulators ? (r.mode === "semantic" ? "meaning of regulator instruments (English)" : "text of regulator instruments (English)") : r.mode === "semantic" ? "meaning of Central and State Acts (English)" : "text of Central and State Acts (English)";
   return Response.json({ searchAvailable: true, scope, hindiNotSearchable: hasDevanagari(q), ...r },
     { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=3600" } });
 }
