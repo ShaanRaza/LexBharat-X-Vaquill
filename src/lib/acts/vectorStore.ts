@@ -12,7 +12,7 @@ import { neon } from "@neondatabase/serverless";
 import { parseChunkId } from "./reassemble.mjs";
 import { vectorLiteral } from "./semantic.mjs";
 
-export type Corpus = "central" | "state";
+export type Corpus = "central" | "state" | "supplement";
 export type VectorHit = { actId: string; sectionKey: string; distance: number };
 export interface VectorStore {
   readonly corpus: Corpus;
@@ -23,7 +23,8 @@ export interface VectorStore {
   nearest(vector: number[], limit: number): Promise<VectorHit[]>;
 }
 
-export const CORPORA: Corpus[] = ["central", "state"];
+// "supplement" = the sections filled in by hand (content/supplement, `npm run load:supplement`): a tiny extra table, supplement_emb_256, searched alongside the two corpora.
+export const CORPORA: Corpus[] = ["central", "state", "supplement"];
 const upper = (c: Corpus) => c.toUpperCase();
 const env = (name: string) => process.env[name]?.trim() || "";
 

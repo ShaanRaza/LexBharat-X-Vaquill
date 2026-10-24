@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Negotiable Instruments Act, 1881, section 145. Fill in the lines below, paste the section text under the last line, save.
+# Topic hint (our own words, from memory, not checked): evidence on affidavit in cheque cases.
+# Leave the text area EMPTY to skip this file for now.
+Act: The Negotiable Instruments Act, 1881
+Act ID: IND_central_2189
+Section: 145
+Heading:
+Replaces existing text: no
+Source: India Code
+Source URL:
+Date copied:
+=== SECTION TEXT (paste below this line) ===
+

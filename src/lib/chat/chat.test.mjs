@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { citedNumbers, sanitizeCitations, linkSegments, ensureCitations } from "./citations.mjs";
+import { citedNumbers, sanitizeCitations, linkSegments, ensureCitations, alignCitations } from "./citations.mjs";
 import { extractLookups } from "./lookups.mjs";
 import { buildChatPrompt, retrievalQuery, parseCheck, buildCheckPrompt, sourceBlock, SOURCE_CHARS, detectNotFound, CHECK_LABELS } from "./prompt.mjs";
 import { buildRewritePrompt, parseRewrite, mergeRanked } from "./rewrite.mjs";
@@ -125,4 +125,14 @@ test("the chat prompt asks for conditions, time limits, steps and related provis
 test("ensureCitations adds the chip to a line that names a retrieved section but has none; leaves cited lines and unknown mentions alone", () => {
   const t = "Under Section 138 of the Negotiable Instruments Act, 1881 the drawer is punished.\nThe drawer pays within fifteen days.\nSection 138 of the Negotiable Instruments Act, 1881 also applies [1].\nSection 420 of the Indian Penal Code is unrelated.\nSection 438 of the CrPC allows bail.";
   assert.equal(ensureCitations(t, sources), "Under Section 138 of the Negotiable Instruments Act, 1881 the drawer is punished. [1]\nThe drawer pays within fifteen days.\nSection 138 of the Negotiable Instruments Act, 1881 also applies [1].\nSection 420 of the Indian Penal Code is unrelated.\nSection 438 of the CrPC allows bail. [3]");
+});
+
+test("alignCitations corrects a chip that points at another source than the named section, and leaves everything else alone", () => {
+  const src = [{ n: 1, number: "28", actTitle: ICA }, { n: 2, number: "27", actTitle: ICA }];
+  assert.equal(alignCitations("Section 28 of the Indian Contract Act, 1872 makes such terms void [2].", src), "Section 28 of the Indian Contract Act, 1872 makes such terms void [1].");
+  assert.equal(alignCitations("Section 28 of the Indian Contract Act, 1872 makes it void [1][2].", src), "Section 28 of the Indian Contract Act, 1872 makes it void [1][2].");   // already cites it
+  assert.equal(alignCitations("The document says five years [2]. Section 27 of the Indian Contract Act, 1872 voids it [2].", src), "The document says five years [2]. Section 27 of the Indian Contract Act, 1872 voids it [2].");
+  assert.equal(alignCitations("Section 27 and Section 28 of the Indian Contract Act, 1872 apply [2].", src).includes("[2]"), true);   // two sections named in one sentence: untouched
+  assert.equal(alignCitations("Section 99 of the Indian Contract Act, 1872 is odd [2].", src), "Section 99 of the Indian Contract Act, 1872 is odd [2].");   // not a retrieved section
+  assert.equal(alignCitations("Section 28 of the Indian Contract Act, 1872 has no chip.", src), "Section 28 of the Indian Contract Act, 1872 has no chip.");
 });

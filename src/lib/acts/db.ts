@@ -21,3 +21,6 @@ export async function query<T = Record<string, unknown>>(text: string, params: u
   const res = await sql.transaction((tx) => [tx.query(`SET LOCAL statement_timeout = ${Math.floor(timeoutMs)}`), tx.query(text, params)]);
   return res[1] as T[];
 }
+
+/** Act sections are read from the view act_sections_v: every open-india-law row plus the sections filled in by hand (content/supplement, `npm run load:supplement`). It is created by that command; see scripts/supplement/supplement-schema.sql. */
+export const SECTIONS_VIEW = "act_sections_v";

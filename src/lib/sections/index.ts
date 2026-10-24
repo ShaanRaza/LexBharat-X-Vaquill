@@ -12,7 +12,7 @@ const store: SectionsStore = {
   async get(actId) {
     if (dbConfigured()) {
       try {
-        const rows = await query<{ number: string | null; heading: string | null; body: string | null; status: string; flags: string[] }>(`SELECT number, heading, body, status, flags FROM act_sections WHERE act_id = $1 ORDER BY ord`, [actId]);
+        const rows = await query<{ number: string | null; heading: string | null; body: string | null; status: string; flags: string[] }>(`SELECT number, heading, body, status, flags FROM act_sections_v WHERE act_id = $1 ORDER BY ord, (flags @> ARRAY['supplement']), length(number), number`, [actId]);
         if (rows.length) return { available: true, sections: rows.map((r) => ({ sectionNumber: r.number, title: r.heading ?? undefined, text: r.status === "garbled" ? "" : r.body ?? "", status: r.status, flags: r.flags })) };
       } catch { /* fall through to files */ }
     }

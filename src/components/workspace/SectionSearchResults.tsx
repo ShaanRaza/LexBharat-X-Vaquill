@@ -6,7 +6,7 @@ import { STATUS_INFO, INCOMPLETE_NOTICE, MISSING_NOTICE, officialSourceUrl } fro
 
 // Results of the Acts-tab search box over Central and State Acts (GET /api/acts/search): by meaning by default, exact words on request. Presentation and fetching only; the search itself lives in
 // src/lib/acts/searchStore.ts. Colours, sizes and radii come from the tokens through Tailwind names and the shared kit.
-type Hit = { actId: string; actTitle: string; year: number | null; category: string; state: string | null; sourceUrl: string | null; sectionKey: string; number: string | null; heading: string | null; chapter: string | null; status: keyof typeof STATUS_INFO; snippet: string; via: "text" | "lookup" | "semantic"; copies?: number };
+type Hit = { flags: string[]; actId: string; actTitle: string; year: number | null; category: string; state: string | null; sourceUrl: string | null; sectionKey: string; number: string | null; heading: string | null; chapter: string | null; status: keyof typeof STATUS_INFO; snippet: string; via: "text" | "lookup" | "semantic"; copies?: number };
 type Resp = { searchAvailable: boolean; message?: string; results: Hit[]; total: number; totalCapped?: boolean; page: number; pageSize: number; hasMore: boolean; mode?: "text" | "lookup" | "semantic"; note?: string; missing?: { actTitle: string; number: string; sourceUrl: string | null } };
 const label = (v: string) => v.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 
@@ -58,7 +58,9 @@ export default function SectionSearchResults({ q }: { q: string }) {
                   {h.via === "lookup" && <Badge tone="info">Section lookup</Badge>}
                   {h.via === "semantic" && <Badge tone="info" title="Found by meaning, not by matching your exact words">By meaning</Badge>}
                   {(h.copies ?? 0) > 0 && <Badge title="The same Act text is filed this many more times in the dataset (for example under other states); only one is shown">{h.copies} other {h.copies === 1 ? "copy" : "copies"}</Badge>}
-                  <Badge tone={STATUS_INFO[h.status].tone} title={STATUS_INFO[h.status].explain}>{STATUS_INFO[h.status].label}</Badge>
+                  {h.flags.includes("supplement")
+                    ? <Badge tone="info" title="Copied by hand from India Code to fill a gap in our source data">Filled in from India Code</Badge>
+                    : <Badge tone={STATUS_INFO[h.status].tone} title={STATUS_INFO[h.status].explain}>{STATUS_INFO[h.status].label}</Badge>}
                 </p>
               </Panel>
             ))}

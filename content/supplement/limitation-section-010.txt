@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Limitation Act, 1963, section 10. Fill in the lines below, paste the section text under the last line, save.
+# Topic hint (our own words, from memory, not checked): suits against trustees and their representatives.
+# Leave the text area EMPTY to skip this file for now.
+Act: The Limitation Act, 1963
+Act ID: IND_central_1565
+Section: 10
+Heading:
+Replaces existing text: no
+Source: India Code
+Source URL:
+Date copied:
+=== SECTION TEXT (paste below this line) ===
+

@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 152. Fill in the lines below, paste the section text under the last line, save.
+# Topic hint (our own words, from memory, not checked): correcting clerical or arithmetical mistakes in judgments and decrees.
+# Leave the text area EMPTY to skip this file for now.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 152
+Heading:
+Replaces existing text: no
+Source: India Code
+Source URL:
+Date copied:
+=== SECTION TEXT (paste below this line) ===
+

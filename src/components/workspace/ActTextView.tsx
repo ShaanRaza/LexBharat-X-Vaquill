@@ -8,6 +8,7 @@ export type ActHeader = { actId: string; title: string; meta: string[]; official
 export type TextState = { available: true; view: View } | { available: false; reason: "not_configured" | "not_in_export" | "unreadable"; message: string };
 
 const fmt = (n: number) => n.toLocaleString("en-IN");
+const fmtDate = (iso: string) => new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 const href = (actId: string, key: string) => `/workspace/browse/acts/${actId}?section=${encodeURIComponent(key)}`;
 
 /** Shown on every Acts text page, whether or not text is available. */
@@ -52,7 +53,7 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
           <aside aria-label="Sections of this Act" className="lg:sticky lg:top-4 lg:self-start">
             <Panel className="p-0">
               <p className="border-b border-border/70 px-4 py-3 text-ui-sm text-secondary" role="status">
-                {fmt(view.counts.sections)} {view.hasSectionNumbers ? "sections" : "text blocks"}: {fmt(view.counts.complete)} no problems detected, {fmt(view.counts.possibly_incomplete)} possibly incomplete, {fmt(view.counts.garbled)} unreliable{view.counts.missing ? `, ${fmt(view.counts.missing)} missing from our source data` : ""}.
+                {fmt(view.counts.sections - view.counts.supplemented)} {view.hasSectionNumbers ? "sections" : "text blocks"}: {fmt(view.counts.complete)} no problems detected, {fmt(view.counts.possibly_incomplete)} possibly incomplete, {fmt(view.counts.garbled)} unreliable{view.counts.supplemented ? `, ${fmt(view.counts.supplemented)} filled in from India Code` : ""}{view.counts.missing ? `, ${fmt(view.counts.missing)} missing from our source data` : ""}.
               </p>
               <ul className="max-h-[70vh] overflow-y-auto py-1">
                 {view.list.map((it) => {
@@ -61,7 +62,7 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
                     <li key={it.key}>
                       <Link href={href(header.actId, it.key)} aria-current={active ? "true" : undefined} className={`flex items-start gap-2 px-4 py-2 text-ui-base hover:bg-accent ${active ? "bg-accent font-medium" : ""}`}>
                         <StatusDot tone={it.tone} />
-                        <span className="min-w-0"><span className="block truncate">{it.label}{it.heading ? ` · ${it.heading}` : ""}</span><span className="sr-only">{it.statusLabel}</span></span>
+                        <span className="min-w-0"><span className="block truncate">{it.label}{it.heading ? ` · ${it.heading}` : ""}</span><span className="sr-only">{it.supplemented ? "Filled in from India Code" : it.statusLabel}</span></span>
                       </Link>
                     </li>
                   );
@@ -81,11 +82,16 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
                     <p className="font-medium text-foreground">{MISSING_NOTICE.replace(" Read it on India Code.", "")} <a className="underline" href={view.sourceUrl} target="_blank" rel="noopener noreferrer">Read it on India Code</a>.</p>
                   </Notice>
                 )}
-                {!sel.missing && <p className="mt-3 flex flex-wrap items-center gap-1.5">
+                {sel.supplement && (
+                  <Notice tone="info" role="note" compact className="mt-3">
+                    <p><strong className="font-medium text-foreground">Source: {sel.supplement.source}, copied {fmtDate(sel.supplement.copiedOn)}.</strong> This section was copied by hand to fill a gap in our source data. <a className="underline" href={sel.supplement.sourceUrl} target="_blank" rel="noopener noreferrer">Open the page it was copied from</a>. The official text prevails; not legal advice.</p>
+                  </Notice>
+                )}
+                {!sel.missing && !sel.supplement && <p className="mt-3 flex flex-wrap items-center gap-1.5">
                   <Badge tone={sel.statusInfo.tone} title={sel.statusInfo.explain}>{sel.statusInfo.label}</Badge>
                   {sel.flags.map((f) => <Badge key={f.key} tone={f.info.tone} title={f.info.explain}>{f.info.label}</Badge>)}
                 </p>}
-                {sel.status === "possibly_incomplete" && (
+                {sel.status === "possibly_incomplete" && !sel.supplement && (
                   <Notice tone="warn" role="status" title="This section may be incomplete" className="mt-3">
                     <p>{INCOMPLETE_NOTICE} <a className="font-medium underline" href={view.sourceUrl} target="_blank" rel="noopener noreferrer">Open this Act on India Code</a></p>
                     <p className="text-ui-sm">Built from {sel.chunkCount} piece{sel.chunkCount === 1 ? "" : "s"} of the dataset.</p>

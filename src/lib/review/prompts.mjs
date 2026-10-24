@@ -1,6 +1,6 @@
 // Prompts and parsers for the contract review. PURE logic: text in, text/objects out. The model's JSON is never trusted as it comes: every field is clamped, quotes are checked against the contract text,
 // and legal points are kept only when they cite a retrieved section (checked in code).
-import { citedNumbers, findStatuteMentions, sanitizeCitations } from "../chat/citations.mjs";
+import { alignCitations, citedNumbers, findStatuteMentions, sanitizeCitations } from "../chat/citations.mjs";
 import { CONTRACT_TYPES, TOPICS, quoteInText } from "./rules.mjs";
 
 export const RISKS = { acceptable: "Acceptable", negotiate: "Negotiate", escalate: "Escalate" };
@@ -101,7 +101,7 @@ export function parseLaw(raw, sources) {
   const out = [], reasons = []; let dropped = 0;
   for (const f of list.slice(0, 12)) {
     const text0 = str(f?.text, 900), topic = str(f?.topic, 120); if (!text0 || !topic) { dropped++; reasons.push("empty"); continue; }
-    const { text } = sanitizeCitations(text0, sources.length), cites = citedNumbers(text);
+    const { text } = sanitizeCitations(alignCitations(text0, sources), sources.length), cites = citedNumbers(text);
     const strays = findStatuteMentions(text, sources).filter((m) => !m.source);
     if (!cites.length || strays.length) { dropped++; reasons.push(!cites.length ? `${topic}: no citation` : `${topic}: names ${strays.map((m) => m.text).join("; ")}, which was not retrieved`); continue; }
     const key = `${str(f?.clause, 40)}|${[...cites].sort().join(",")}`;

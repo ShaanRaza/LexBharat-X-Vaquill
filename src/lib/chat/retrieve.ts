@@ -44,7 +44,7 @@ export async function retrieveSources(question: string, history: { role: string;
   const picked = mergeRanked(lists, k, first).map((key) => hits.get(key)!).filter(Boolean);
   if (!picked.length) return { sources: [], searchMode: mode, note, queries, exactKeys: [] };
   const rows = await query<{ act_id: string; section_key: string; body: string | null }>(
-    `SELECT s.act_id, s.section_key, left(s.body, 4000) AS body FROM act_sections s JOIN unnest($1::text[], $2::text[]) AS k(a, sk) ON s.act_id = k.a AND s.section_key = k.sk`, [picked.map((h) => h.actId), picked.map((h) => h.sectionKey)]);
+    `SELECT s.act_id, s.section_key, left(s.body, 4000) AS body FROM act_sections_v s JOIN unnest($1::text[], $2::text[]) AS k(a, sk) ON s.act_id = k.a AND s.section_key = k.sk`, [picked.map((h) => h.actId), picked.map((h) => h.sectionKey)]);
   const body = new Map(rows.map((x) => [`${x.act_id}|${x.section_key}`, x.body ?? ""]));
   const sources: ChatSource[] = [];
   for (const h of picked) {

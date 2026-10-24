@@ -5,6 +5,8 @@ import { chooseMode, distinctSections, highlightQuery, rankSections, statesIn } 
 import { embedMany, embedQuery, voyageConfigured } from "./embed";
 import { vectorStores, vectorConfigured } from "./vectorStore";
 
+/** The same weighted text-search vector the view act_sections_v builds for a hand-filled section (heading weighs more than the body). */
+const SUPP_TSV = `(setweight(to_tsvector('english', coalesce(x.heading, '')), 'A') || setweight(to_tsvector('english', left(x.body, 600000)), 'B'))`;
 export const MARK_OPEN = "", MARK_CLOSE = ""; // private-use markers around matched words in snippets; the UI turns them into highlights
 export const PAGE_SIZE = 12, MAX_RESULTS = 1000;
 /** Re-ranking of the best 1,000 text matches for broad queries: a match whose whole query is in the heading counts 1.6x, a Central Act 1.3x, an Act no longer in force 0.75x. Exact section lookups never go through this. */
@@ -41,7 +43,7 @@ async function lookupHits(q: string, page: number, pageSize: number): Promise<Se
   const params: unknown[] = m.titlePrefix ? [m.titlePrefix] : m.words;
   if (!params.length) return null;
   const rows = await query<Omit<SectionHit, "snippet" | "via"> & { body: string | null }>(
-    `SELECT ${COLS}, left(s.body, 400) AS body FROM acts a JOIN act_sections s ON s.act_id = a.act_id
+    `SELECT ${COLS}, left(s.body, 400) AS body FROM acts a JOIN act_sections_v s ON s.act_id = a.act_id
      WHERE ${where} AND upper(s.number) = upper($${params.length + 1})
      ORDER BY (a.category = 'central') DESC, (a.act_status = 'in_force') DESC, length(a.title), s.ord LIMIT 24`, [...params, lk.number]);
   if (!rows.length) {
@@ -66,12 +68,18 @@ async function textSearch(q: string, page: number, pageSize: number): Promise<Se
     if (offset >= MAX_RESULTS) return empty(`Only the first ${MAX_RESULTS} matches can be paged through. Narrow the search.`);
     const rows = await query<Omit<SectionHit, "via"> & { total: string | number }>(
       `WITH q AS (SELECT websearch_to_tsquery('english', $1) AS tq),
-            c AS MATERIALIZED (SELECT s.act_id, s.section_key, ts_rank_cd(s.tsv, q.tq, 32) AS base FROM act_sections s, q WHERE s.tsv @@ q.tq ORDER BY base DESC, s.act_id, s.ord LIMIT ${MAX_RESULTS + 1}),
-            m AS MATERIALIZED (SELECT c.act_id, c.section_key, c.base * ${RANK_BOOST} AS rank FROM c JOIN act_sections s USING (act_id, section_key) JOIN acts a ON a.act_id = s.act_id, q),
+            c AS MATERIALIZED (SELECT u.act_id, u.section_key, u.base FROM (
+                -- the open-india-law rows use their GIN index directly (not through the view, which would lose it); the few hand-filled sections are searched on the fly
+                SELECT s.act_id, s.section_key, ts_rank_cd(s.tsv, q.tq, 32) AS base FROM act_sections s, q WHERE s.tsv @@ q.tq
+                  AND NOT EXISTS (SELECT 1 FROM act_sections_supplement r WHERE r.act_id = s.act_id AND r.replaces AND upper(r.number) = upper(s.number))
+                UNION ALL
+                SELECT x.act_id, x.section_key, ts_rank_cd(${SUPP_TSV}, q.tq, 32) FROM act_sections_supplement x, q WHERE ${SUPP_TSV} @@ q.tq
+              ) u ORDER BY u.base DESC, u.act_id, u.section_key LIMIT ${MAX_RESULTS + 1}),
+            m AS MATERIALIZED (SELECT c.act_id, c.section_key, c.base * ${RANK_BOOST} AS rank FROM c JOIN act_sections_v s USING (act_id, section_key) JOIN acts a ON a.act_id = s.act_id, q),
             p AS (SELECT *, (SELECT count(*) FROM m) AS total FROM m ORDER BY rank DESC, act_id, section_key OFFSET $2 LIMIT $3)
        SELECT ${COLS}, p.total,
               ts_headline('english', left(s.body, 20000), q.tq, 'MaxFragments=2, MaxWords=26, MinWords=10, ShortWord=2, FragmentDelimiter=" … ", StartSel=${MARK_OPEN}, StopSel=${MARK_CLOSE}') AS snippet
-       FROM p JOIN act_sections s USING (act_id, section_key) JOIN acts a ON a.act_id = s.act_id, q ORDER BY p.rank DESC, s.act_id, s.ord`, [q, offset, pageSize], 15000);
+       FROM p JOIN act_sections_v s USING (act_id, section_key) JOIN acts a ON a.act_id = s.act_id, q ORDER BY p.rank DESC, s.act_id, s.ord`, [q, offset, pageSize], 15000);
     const total = rows.length ? Number(rows[0].total) : 0, capped = total > MAX_RESULTS;
     const results = rows.map(({ total: _t, ...r }): SectionHit => ({ ...r, snippet: r.snippet ?? "", via: "text" }));
     if (!rows.length && page === 1) {
@@ -96,13 +104,15 @@ async function semanticSearch(q: string, page: number, pageSize: number): Promis
   const vectors = new Map<number, Promise<number[]>>();
   const vec = (dim: number) => (vectors.has(dim) ? vectors.get(dim)! : vectors.set(dim, embedQuery(q, dim)).get(dim)!);
   const settled = await Promise.allSettled(stores.map(async (st) => st.nearest(await vec(st.dim), SEM_CHUNKS)));
-  const ok = settled.filter((r): r is PromiseFulfilledResult<Awaited<ReturnType<(typeof stores)[number]["nearest"]>>> => r.status === "fulfilled");
-  if (!ok.length) throw new Error("no vector store answered");
-  const near = ok.flatMap((r) => r.value).sort((a, b) => a.distance - b.distance);
+  if (!settled.some((r) => r.status === "fulfilled")) throw new Error("no vector store answered");
+  // sections whose text was replaced by a hand-filled one: their old vectors describe the wrong text, so only the supplement store's vectors count for them
+  const replaced = new Set((await query<{ k: string }>(`SELECT act_id || '|' || section_key AS k FROM act_sections_supplement WHERE replaces`).catch(() => [])).map((r) => r.k));
+  const near = settled.flatMap((r, i) => (r.status === "fulfilled" ? r.value.filter((h) => stores[i].corpus === "supplement" || !replaced.has(`${h.actId}|${h.sectionKey}`)) : []))
+    .sort((a, b) => a.distance - b.distance);
   const cands = distinctSections(near, SEM_POOL);
   const info = new Map((await query<{ actId: string; sectionKey: string; actStatus: string; status: string; central: boolean; title: string; number: string | null; state: string | null }>(
     `SELECT s.act_id AS "actId", s.section_key AS "sectionKey", a.act_status AS "actStatus", s.status, (a.category = 'central') AS central, a.title, s.number, a.state
-     FROM act_sections s JOIN acts a ON a.act_id = s.act_id JOIN unnest($1::text[], $2::text[]) AS k(a, sk) ON s.act_id = k.a AND s.section_key = k.sk`, [cands.map((c) => c.actId), cands.map((c) => c.sectionKey)]))
+     FROM act_sections_v s JOIN acts a ON a.act_id = s.act_id JOIN unnest($1::text[], $2::text[]) AS k(a, sk) ON s.act_id = k.a AND s.section_key = k.sk`, [cands.map((c) => c.actId), cands.map((c) => c.sectionKey)]))
     .map((m) => [`${m.actId}|${m.sectionKey}`, m]));
   // similarity x 0.9 for Acts not in force; Central Acts x1.3, or, when the question names a State, that State's Acts x1.2; garbled sections dropped;
   // the same section filed several times collapses into one result (the Central filing wins)
@@ -115,7 +125,7 @@ async function semanticSearch(q: string, page: number, pageSize: number): Promis
           q AS (SELECT CASE WHEN $3 = '' THEN NULL ELSE websearch_to_tsquery('english', $3) END AS tq)
      SELECT ${COLS}, left(s.body, 400) AS body,
             CASE WHEN q.tq IS NULL THEN NULL ELSE ts_headline('english', left(s.body, 20000), q.tq, 'MaxFragments=2, MaxWords=26, MinWords=10, ShortWord=2, FragmentDelimiter=" … ", StartSel=${MARK_OPEN}, StopSel=${MARK_CLOSE}') END AS snippet
-     FROM k JOIN act_sections s ON s.act_id = k.act_id AND s.section_key = k.section_key JOIN acts a ON a.act_id = s.act_id, q ORDER BY k.n`,
+     FROM k JOIN act_sections_v s ON s.act_id = k.act_id AND s.section_key = k.section_key JOIN acts a ON a.act_id = s.act_id, q ORDER BY k.n`,
     [slice.map((c) => c.actId), slice.map((c) => c.sectionKey), highlightQuery(q)], 15000);
   const copies = new Map(slice.map((c) => [`${c.actId}|${c.sectionKey}`, c.copies]));
   // a snippet with highlighted words when the question's own words occur; otherwise the first readable words of the section

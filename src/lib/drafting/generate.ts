@@ -97,7 +97,7 @@ export { docToText };
 export async function loadSources(basis: BasisItem[]): Promise<ChatSource[]> {
   if (!basis.length) return [];
   const rows = await query<{ act_id: string; section_key: string; body: string | null; act_status: string; year: number | null; source_url: string | null }>(
-    `SELECT s.act_id, s.section_key, left(s.body, 4000) AS body, a.act_status, a.year, a.source_url FROM act_sections s JOIN acts a ON a.act_id = s.act_id JOIN unnest($1::text[], $2::text[]) AS k(a, sk) ON s.act_id = k.a AND s.section_key = k.sk`,
+    `SELECT s.act_id, s.section_key, left(s.body, 4000) AS body, a.act_status, a.year, a.source_url FROM act_sections_v s JOIN acts a ON a.act_id = s.act_id JOIN unnest($1::text[], $2::text[]) AS k(a, sk) ON s.act_id = k.a AND s.section_key = k.sk`,
     [basis.map((b) => b.actId), basis.map((b) => b.sectionKey)]);
   const by = new Map(rows.map((r) => [`${r.act_id}|${r.section_key}`, r]));
   return basis.flatMap((b) => { const r = by.get(`${b.actId}|${b.sectionKey}`); return r?.body?.trim() ? [{ n: b.n, actId: b.actId, sectionKey: b.sectionKey, actTitle: b.actTitle, year: r.year, category: b.category, state: b.state, inForce: r.act_status === "in_force", sourceUrl: r.source_url, number: b.number, heading: b.heading, status: b.status, text: r.body, via: "draft" }] : []; });

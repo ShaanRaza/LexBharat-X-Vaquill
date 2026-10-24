@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Prevention of Corruption Act, 1988, section 20. Fill in the lines below, paste the section text under the last line, save.
+# Topic hint (our own words, from memory, not checked): presumption when a public servant accepts a gratification.
+# Leave the text area EMPTY to skip this file for now.
+Act: The Prevention of Corruption Act, 1988
+Act ID: IND_central_1558
+Section: 20
+Heading:
+Replaces existing text: no
+Source: India Code
+Source URL:
+Date copied:
+=== SECTION TEXT (paste below this line) ===
+

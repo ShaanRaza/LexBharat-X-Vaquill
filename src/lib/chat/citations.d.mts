@@ -5,3 +5,4 @@ export function linkSegments(text: string, sources: { n: number; number: string 
 export function resolveMention<T extends { n: number; number: string | null; actTitle: string }>(number: string, named: string | undefined, sources: T[]): T | null;
 export function findStatuteMentions<T extends { n: number; number: string | null; actTitle: string }>(text: string, sources: T[]): { text: string; number: string; act: string; source: T | null }[];
 export function ensureCitations<T extends { n: number; number: string | null; actTitle: string }>(text: string, sources: T[]): string;
+export function alignCitations(text: string, sources: { n: number; number: string | null; actTitle: string }[]): string;

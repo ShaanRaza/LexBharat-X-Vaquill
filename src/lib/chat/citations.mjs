@@ -83,3 +83,19 @@ export function ensureCitations(text, sources) {
     return m ? `${line.replace(/\s+$/, "")} [${m.source.n}]` : line;
   }).join("\n");
 }
+
+/** Safety net for a sentence that names "Section N of <Act>" (matching a retrieved source k) but cites only OTHER numbers: the chip is corrected to [k]. A sentence that already cites k, names no
+ *  retrieved section, names two different ones, or carries no chip is left alone. Small models sometimes number the sources off by one; the named section is the better witness. */
+export function alignCitations(text, sources) {
+  return text.split("\n").map((line) => line.split(/(?<=[.;:])\s+/).map((seg) => {
+    if ((seg.match(/\b(?:Sections?|Sec\.|s\.)\s+\d/gi) ?? []).length !== 1) return seg;   // only a sentence about exactly one section
+    const picks = [...new Set(findStatuteMentions(seg, sources).filter((m) => m.source).map((m) => m.source.n))];
+    if (picks.length !== 1) return seg;
+    const marks = [...seg.matchAll(CITE_RE)]; CITE_RE.lastIndex = 0;
+    if (!marks.length) return seg;
+    const cited = marks.flatMap((m) => m[1].split(/[,;]/).map((x) => Number(x.trim())));
+    if (cited.includes(picks[0])) return seg;
+    let first = true;
+    return seg.replace(CITE_RE, () => (first ? ((first = false), `[${picks[0]}]`) : ""));
+  }).join(" ")).join("\n");
+}

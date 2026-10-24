@@ -1,0 +1,13 @@
+# FILL-IN FILE: The Hindu Marriage Act, 1955, section 16. Fill in the lines below, paste the section text under the last line, save.
+# Topic hint (our own words, from memory, not checked): legitimacy of children of void and voidable marriages.
+# Leave the text area EMPTY to skip this file for now.
+Act: The Hindu Marriage Act, 1955
+Act ID: IND_central_1560
+Section: 16
+Heading:
+Replaces existing text: no
+Source: India Code
+Source URL:
+Date copied:
+=== SECTION TEXT (paste below this line) ===
+

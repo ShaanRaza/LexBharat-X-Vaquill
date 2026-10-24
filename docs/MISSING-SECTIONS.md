@@ -189,3 +189,34 @@ Ways forward that need a decision from you:
 1. **Ask for permission.** Write to the Legislative Department (India Code's owner, legislative.gov.in) or NIC asking for written permission to use the text of specific sections for a non-commercial research tool, and for an allowed way to fetch them (an export or an agreed rate). With a yes in writing, the fill can be built in a day.
 2. **A different, permitted source** for just the roughly 20 to 100 missing sections (for example the official Act PDFs published by the Legislative Department, or a source with an explicit open licence) after its terms are read. Each source needs the same terms check first.
 3. **Hand-supplied text**: if you or a lawyer paste the sections from an authorised copy, the supplement table, Act-page label and search/chat/review indexing can be built and tested now, with "Source" set to whatever you name.
+
+## W7, option 3: hand-filled sections (built, waiting for your text)
+**Decision (2026-10-24): no fetching from India Code. Sections are filled by a person pasting text they are allowed to use.** The machinery is built and tested; the 30 fill-in files are empty ("pending"), so today nothing is supplemented and nothing on the site changes.
+
+**The 30 files** (`content/supplement/`, one per section, steps in its README): Indian Contract Act 16, 20, 24, 28, 73, 124; Code of Civil Procedure 11 and 20 (our data holds the wrong text under these two numbers, so these files replace it) and 60, 92, 109, 152; Limitation Act, 1963: 4, 5, 7, 8, 9, 10, 19, 22, 24, 27, 28 (all 11 missing); Negotiable Instruments Act 13, 56, 145; Specific Relief Act 10; Prevention of Corruption Act 20; Hindu Marriage Act 16; Indian Stamp Act 10. Chosen from the lists above: the sections the earlier brief named first, then the missing numbers in the most-cited Acts that matter to Chat, Drafting and Review (contracts, suing, limitation, cheques, stamp duty). Each file has the Act name and Act ID filled in; you add Source URL, Date copied, optionally Heading, and paste the text. The "topic hint" in each file is from memory and unchecked.
+
+**What happens when you load a file** (`npm run load:supplement`; `-- --dry-run` only checks):
+| Where | What |
+|---|---|
+| Database | A separate table `act_sections_supplement` (text, source, URL, date copied, file name, hash). The open-india-law rows in `act_sections` are never changed or deleted. A read-only view `act_sections_v` = those rows (minus any a supplement says it replaces) plus the supplement rows; the app reads the view. |
+| Act page | The section sits in its place in the list, marked "Filled in from India Code", with "Source: India Code, copied <date>" and a link to the page you copied it from, instead of the machine-extraction quality badges. The "missing from our source data" placeholder for that number disappears. |
+| Search | Keyword search and section lookups (e.g. "28 Indian Contract Act") find it; results carry a "Filled in from India Code" label. |
+| Smart search | The section is embedded with voyage-4 at 256 dimensions (normal API, one request every 21 seconds for the free account) into a tiny extra table `supplement_emb_256` in the vector database and searched alongside the Central and State vectors; old vectors of a replaced section are ignored. |
+| Chat, Drafting, Review | They use the same retrieval, so they see it: it can be found by search or by an exact lookup (Review fetches "28 Indian Contract Act" when a contract names foreign courts). |
+| Re-running | Unchanged files are skipped; a changed file is re-embedded; a file you empty or delete removes its section and vectors. A file with a problem keeps its old version and is reported in plain words. The command stops if the main database is over 900 MB. |
+
+**Test with two sample files (made-up text, labelled "TEST SAMPLE", loaded and then removed):** Contract Act s.28 (added) and CPC s.20 (replacing the wrong text).
+| Check | Result |
+|---|---|
+| Loader: 2 added, 2 passages embedded; run again: 2 unchanged, nothing embedded; files emptied: 2 removed, vectors gone, no rows left | Pass |
+| Act page /acts/IND_central_2187?section=s028: between 27 and 29, "Source: India Code ..., copied 24 October 2026", sidebar "118 sections ... 1 filled in from India Code" | Pass |
+| Lookup "28 Indian Contract Act", "20 CPC": found, labelled | Pass |
+| Keyword search for a test word: found both, 0.7 s (a first version through the view took 15 s and timed out; the search now uses the Act table's index directly and checks the few supplement rows separately) | Pass |
+| Smart search "which court can I file a suit against the defendant": the replaced CPC s.20 found by meaning | Pass |
+| Chat "is an agreement that stops a party going to court valid?": section 28 retrieved first and cited | Pass |
+| Review of the service agreement (foreign courts): the forced lookup "28 Indian Contract Act" retrieved it and the law point cited it | Pass (the real contract text will matter; the sample text is made up) |
+| Drafting (general notice about such a clause): section 28 first in the draft's legal basis | Pass |
+
+Two related fixes made while testing: small models sometimes number a source off by one (the answer names "Section 28" but cites the chip of section 27). `alignCitations` now corrects a sentence's chip when it names exactly one retrieved section and cites only other numbers (Chat and Review); unit-tested. The earlier Review "miss" on s.28 turned into a hit once the section was retrievable, with that fix.
+
+**Still missing, and why.** Everything in the 30 files is missing until you paste text. Beyond them, the lists above remain (about 3,189 missing numbers across the 100 Acts; the largest are whole Acts that are almost empty such as the Customs Act, Arms Act and old Companies Acts) because there is no permitted source yet: see the India Code section above. Add files by copying one of the existing ones and changing the Act, Act ID and Section lines (the loader accepts any `.txt` file in the folder); `scripts/supplement/make-templates.mjs` shows the list and never overwrites a file you have already filled. If you reload the Acts with `scripts/acts/load-neon.sh`, run `npm run load:supplement` afterwards (it recreates the view; the filled sections are kept).

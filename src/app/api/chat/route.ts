@@ -8,7 +8,7 @@ import { AiError, aiConfigured, aiModelFor, completeAi, streamAi } from "@/lib/a
 import { isBrowserId } from "@/lib/access/token.mjs";
 import limitConfig from "@/config/chat-limits.json";
 import { evaluateLimits, readLimits } from "@/lib/chat/limits.mjs";
-import { citedNumbers, ensureCitations, sanitizeCitations } from "@/lib/chat/citations.mjs";
+import { alignCitations, citedNumbers, ensureCitations, sanitizeCitations } from "@/lib/chat/citations.mjs";
 import { buildChatPrompt, buildCheckPrompt, detectNotFound, parseCheck } from "@/lib/chat/prompt.mjs";
 import { buildRewritePrompt, parseRewrite } from "@/lib/chat/rewrite.mjs";
 import { citationOf, retrieveSources, type ChatSource } from "@/lib/chat/retrieve";
@@ -113,7 +113,7 @@ export async function POST(req: Request) {
           }
         } catch (e) { if (!answer.trim()) throw e; cutOff = true; }
         if (!answer.trim()) throw new AiError("unavailable", "The model returned no answer.");
-        const clean = sanitizeCitations(ensureCitations(answer.trim(), ret.sources), ret.sources.length);
+        const clean = sanitizeCitations(alignCitations(ensureCitations(answer.trim(), ret.sources), ret.sources), ret.sources.length);
         if (clean.text !== answer) send({ type: "replace", text: clean.text });
         if (cutOff) {
           const check: CheckResult = { label: "check", unsupported: [], cutOff: true };

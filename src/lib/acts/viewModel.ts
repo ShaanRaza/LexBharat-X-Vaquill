@@ -5,9 +5,10 @@ import type { SectionRecord } from "./sectionRecord.mjs";
 import { STATUS_INFO, MISSING_INFO, sectionFlagList, officialSourceUrl, type FlagInfo, type Tone } from "./quality";
 
 /** A stored section; `body` may be left out for sections that are only listed (the page needs the text of the selected one). */
-export type ListedSection = Omit<SectionRecord, "body"> & { body?: string | null };
+export type SupplementSource = { source: string; sourceUrl: string; copiedOn: string };
+export type ListedSection = Omit<SectionRecord, "body"> & { body?: string | null; /** set for a section filled in by hand (content/supplement): where and when it was copied */ supplement?: SupplementSource };
 
-export type SectionListItem = { key: string; label: string; heading: string | null; status: SectionRecord["status"] | "missing"; tone: Tone; statusLabel: string; noNumber: boolean; missing: boolean };
+export type SectionListItem = { supplemented: boolean; key: string; label: string; heading: string | null; status: SectionRecord["status"] | "missing"; tone: Tone; statusLabel: string; noNumber: boolean; missing: boolean };
 export type SectionView = {
   key: string; label: string; heading: string | null;
   /** Only present when the chapter label passed every check. */
@@ -15,13 +16,15 @@ export type SectionView = {
   status: SectionRecord["status"] | "missing"; statusInfo: FlagInfo; flags: { key: string; info: FlagInfo }[];
   /** True for a section number we are confident is missing from the source data: there is no text, only the notice. */
   missing: boolean;
+  /** Set for a section filled in by hand: shown as "Source: India Code, copied <date>" instead of the machine-extraction quality badges. */
+  supplement: SupplementSource | null;
   /** null for garbled or missing sections: the text is never handed to the UI. */
   blocks: DisplayBlock[] | null; chunkCount: number;
   prev: { key: string; label: string } | null; next: { key: string; label: string } | null;
 };
 export type ActTextView = {
   hasSectionNumbers: boolean; sourceUrl: string;
-  list: SectionListItem[]; counts: { sections: number; complete: number; possibly_incomplete: number; garbled: number; missing: number };
+  list: SectionListItem[]; counts: { sections: number; complete: number; possibly_incomplete: number; garbled: number; missing: number; supplemented: number };
   selected: SectionView | null;
 };
 
@@ -53,16 +56,16 @@ export function selectedKey(rows: { key: string }[], wanted: string | undefined)
 export function buildActTextView(sections: ListedSection[], sourceUrl: string | null | undefined, wantedKey: string | undefined, missing: number[] = []): ActTextView {
   const rows = rowsFor(sections, missing), keys = rows.map((r) => ({ key: keyOf(r) }));
   const list: SectionListItem[] = rows.map((r) => r.kind === "missing"
-    ? { key: keyOf(r), label: r.label, heading: null, status: "missing", tone: "info", statusLabel: "Missing from our source data", noNumber: false, missing: true }
-    : { key: keyOf(r), label: r.label, heading: cleanHeading(r.s.heading), status: r.s.status, tone: STATUS_INFO[r.s.status].tone, statusLabel: STATUS_INFO[r.s.status].label, noNumber: r.s.flags.includes("no_section_number"), missing: false });
-  const counts = { sections: sections.length, complete: 0, possibly_incomplete: 0, garbled: 0, missing: missing.length };
-  for (const s of sections) counts[s.status]++;
+    ? { supplemented: false, key: keyOf(r), label: r.label, heading: null, status: "missing", tone: "info", statusLabel: "Missing from our source data", noNumber: false, missing: true }
+    : { supplemented: r.s.flags.includes("supplement"), key: keyOf(r), label: r.label, heading: cleanHeading(r.s.heading), status: r.s.status, tone: STATUS_INFO[r.s.status].tone, statusLabel: STATUS_INFO[r.s.status].label, noNumber: r.s.flags.includes("no_section_number"), missing: false });
+  const counts = { sections: sections.length, complete: 0, possibly_incomplete: 0, garbled: 0, missing: missing.length, supplemented: 0 };
+  for (const s of sections) { if (s.flags.includes("supplement")) counts.supplemented++; else counts[s.status]++; }
   const key = selectedKey(keys, wantedKey), idx = rows.findIndex((r) => keyOf(r) === key);
   const r = idx >= 0 ? rows[idx] : undefined;
   const near = (i: number) => (i >= 0 && i < rows.length ? { key: keyOf(rows[i]), label: rows[i].label } : null);
   const selected: SectionView | null = !r ? null : r.kind === "missing"
-    ? { key: keyOf(r), label: r.label, heading: null, chapter: null, status: "missing", statusInfo: MISSING_INFO, flags: [], missing: true, blocks: null, chunkCount: 0, prev: near(idx - 1), next: near(idx + 1) }
-    : { key: keyOf(r), label: r.label, heading: cleanHeading(r.s.heading), chapter: r.s.chapter, status: r.s.status, statusInfo: STATUS_INFO[r.s.status], flags: sectionFlagList(r.s), missing: false,
+    ? { key: keyOf(r), label: r.label, heading: null, chapter: null, status: "missing", statusInfo: MISSING_INFO, flags: [], missing: true, supplement: null, blocks: null, chunkCount: 0, prev: near(idx - 1), next: near(idx + 1) }
+    : { key: keyOf(r), label: r.label, heading: cleanHeading(r.s.heading), chapter: r.s.chapter, status: r.s.status, statusInfo: STATUS_INFO[r.s.status], flags: sectionFlagList(r.s), missing: false, supplement: r.s.supplement ?? null,
         blocks: r.s.status === "garbled" || r.s.body == null ? null : toDisplayBlocks(r.s.body), chunkCount: r.s.chunkCount, prev: near(idx - 1), next: near(idx + 1) };
   return { hasSectionNumbers: sections.some((x) => x.number), sourceUrl: officialSourceUrl(sourceUrl), list, counts, selected };
 }

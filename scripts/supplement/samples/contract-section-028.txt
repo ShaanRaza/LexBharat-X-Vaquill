@@ -1,0 +1,10 @@
+Act: The Indian Contract Act, 1872
+Act ID: IND_central_2187
+Section: 28
+Heading: Test sample about agreements restricting legal proceedings
+Replaces existing text: no
+Source: India Code (TEST SAMPLE, fictional text)
+Source URL: https://www.indiacode.nic.in/
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+TEST SAMPLE. NOT THE LAW. This is made-up wording used only to test the loader, the Act page, search, chat and review. A made-up rule says that an agreement by which a party is absolutely restricted from enforcing his rights in the ordinary courts, or which limits the time within which he may sue, is treated in this test as void to that extent. Test word: quokkawombat.

@@ -16,16 +16,20 @@ type Row = Omit<ListedSection, "body"> & { chunkCount: number };
 async function fromDatabase(actId: string, wanted: string | undefined): Promise<ActTextOutcome | "missing"> {
   const [acts, secs, miss] = await Promise.all([
     query<{ sourceUrl: string | null }>(`SELECT source_url AS "sourceUrl" FROM acts WHERE act_id = $1`, [actId]),
-    query<Row & { sectionKey: string }>(`SELECT section_key AS "sectionKey", ord, number, heading, chapter, status, flags, chunk_count AS "chunkCount" FROM act_sections WHERE act_id = $1 ORDER BY ord`, [actId]),
-    query<{ number: number }>(`SELECT number FROM act_missing_sections WHERE act_id = $1 ORDER BY number`, [actId]).catch(() => []), // table absent in an older load: no placeholders
+    query<Row & { sectionKey: string }>(`SELECT section_key AS "sectionKey", ord, number, heading, chapter, status, flags, chunk_count AS "chunkCount" FROM act_sections_v WHERE act_id = $1 ORDER BY ord, (flags @> ARRAY['supplement']), length(number), number`, [actId]),
+    query<{ number: number }>(`SELECT m.number FROM act_missing_sections m WHERE m.act_id = $1 AND NOT EXISTS (SELECT 1 FROM act_sections_supplement x WHERE x.act_id = m.act_id AND x.number = m.number::text) ORDER BY m.number`, [actId]).catch(() => []), // table absent in an older load: no placeholders
   ]);
   if (!acts.length || !secs.length) return "missing";
   const missing = miss.map((m) => Number(m.number));
   const first = buildActTextView(secs, acts[0].sourceUrl, wanted, missing); // decides which row is shown; its text is fetched next
   const sel = first.selected;
   if (!sel || sel.missing) return { available: true, origin: "database", view: first, officialUrl: officialSourceUrl(acts[0].sourceUrl) };
-  const body = await query<{ body: string | null }>(`SELECT body FROM act_sections WHERE act_id = $1 AND section_key = $2`, [actId, sel.key]);
-  const listed: ListedSection[] = secs.map((s) => (s.sectionKey === sel.key ? { ...s, body: body[0]?.body ?? null } : s));
+  const body = await query<{ body: string | null }>(`SELECT body FROM act_sections_v WHERE act_id = $1 AND section_key = $2`, [actId, sel.key]);
+  // a hand-filled section carries where it was copied from, for the "Source: India Code, copied <date>" line
+  const supp = secs.find((s) => s.sectionKey === sel.key)?.flags.includes("supplement")
+    ? (await query<{ source: string; sourceUrl: string; copiedOn: string }>(`SELECT source, source_url AS "sourceUrl", copied_on::text AS "copiedOn" FROM act_sections_supplement WHERE act_id = $1 AND section_key = $2`, [actId, sel.key]).catch(() => []))[0]
+    : undefined;
+  const listed: ListedSection[] = secs.map((s) => (s.sectionKey === sel.key ? { ...s, body: body[0]?.body ?? null, ...(supp ? { supplement: supp } : {}) } : s));
   return { available: true, origin: "database", view: buildActTextView(listed, acts[0].sourceUrl, sel.key, missing), officialUrl: officialSourceUrl(acts[0].sourceUrl) };
 }
 

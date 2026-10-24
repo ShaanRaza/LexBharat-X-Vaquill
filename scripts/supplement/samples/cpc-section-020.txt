@@ -1,0 +1,10 @@
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 20
+Heading: Test sample about the place of suing
+Replaces existing text: yes
+Source: India Code (TEST SAMPLE, fictional text)
+Source URL: https://www.indiacode.nic.in/
+Date copied: 2026-10-24
+=== SECTION TEXT (paste below this line) ===
+TEST SAMPLE. NOT THE LAW. This is made-up wording used only to test the loader. A made-up rule says that every suit is to be brought in the court within whose local limits the defendant lives or carries on business, or where the cause of action arose, for the purposes of this test. Test word: quokkawombat.

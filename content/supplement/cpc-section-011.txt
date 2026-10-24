@@ -1,0 +1,14 @@
+# FILL-IN FILE: The Code of Civil Procedure, 1908, section 11. Fill in the lines below, paste the section text under the last line, save.
+# Topic hint (our own words, from memory, not checked): res judicata: a matter already decided cannot be tried again.
+# Leave the text area EMPTY to skip this file for now.
+# The data already holds WRONG text under this number, so this file replaces it.
+Act: The Code of Civil Procedure, 1908
+Act ID: IND_central_2191
+Section: 11
+Heading:
+Replaces existing text: yes
+Source: India Code
+Source URL:
+Date copied:
+=== SECTION TEXT (paste below this line) ===
+
