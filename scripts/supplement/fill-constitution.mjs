@@ -4,7 +4,7 @@
 import fs from "node:fs";
 import { execFileSync } from "node:child_process";
 import { checkAgainstPdf } from "./extract-sections.mjs";
-import { articleUnits, constitutionLines, isCrossHeading, preambleUnit, scheduleUnits } from "./constitution.mjs";
+import { appendixUnits, articleUnits, constitutionLines, isCrossHeading, preambleUnit, scheduleUnits } from "./constitution.mjs";
 const args = process.argv.slice(2), DRY = args.includes("--dry-run"), date = (args.find((a) => a.startsWith("--date=")) ?? "").slice(7) || new Date().toISOString().slice(0, 10);
 const FILE = "content/supplement/pdfs/constitution-of-india.pdf", OUT = "content/supplement/schedules", ACT_ID = "IND_central_COI", NAME = "The Constitution of India";
 const URL_ = "https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936";
@@ -40,7 +40,13 @@ for (const u of sch) {
   if (bad) { stat.failed.push(`${u.id} (word "${bad}" not found in the PDF)`); continue; }
   write(u, "schedule"); stat.schedules++;
 }
+for (const u of appendixUnits(lines, arts.at(-1).line)) {
+  u.id = u.number;
+  const bad = checkAgainstPdf(FILE, { heading: u.heading.split(" — ")[0], text: u.text,  /* the title is already the first line of the text */ pages: u.pages }, { loose: true });
+  if (bad) { stat.failed.push(`${u.id} (word "${bad}" not found in the PDF)`); continue; }
+  write(u, "appendix"); stat.appendices = (stat.appendices ?? 0) + 1;
+}
 const pre = preambleUnit(lines);
 if (pre) { pre.id = "PREAMBLE"; const bad = checkAgainstPdf(FILE, { heading: pre.heading, text: pre.text, pages: pre.pages }, { loose: true }); if (bad) stat.failed.push(`PREAMBLE (word "${bad}" not found in the PDF)`); else { write(pre, "preamble"); stat.preamble = 1; } } else stat.failed.push("PREAMBLE (not found)");
-console.log(JSON.stringify({ preamble: stat.preamble ?? 0, articles: stat.articles, of: arts.length, schedules: stat.schedules, of_schedules: sch.length, failed: stat.failed.length, thin: stat.thin.length }));
+console.log(JSON.stringify({ preamble: stat.preamble ?? 0, appendices: stat.appendices ?? 0, articles: stat.articles, of: arts.length, schedules: stat.schedules, of_schedules: sch.length, failed: stat.failed.length, thin: stat.thin.length }));
 console.log("FAILED:", stat.failed.join("; ") || "none"); console.log("THIN (more than 3% of the PDF's words missing):", stat.thin.join("; ") || "none");

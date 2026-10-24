@@ -47,3 +47,10 @@ test("Constitution lookups: Articles and Schedules", async () => {
   assert.equal(parseSectionLookup("Article 137 Limitation Act").number, "A137"); assert.match(parseSectionLookup("Article 137 Limitation Act").actPhrase, /limitation/);
   assert.equal(parseSectionLookup("Article 21 of the Constitution rights"), null);
 });
+
+test("'Appendix I Constitution of India' finds the Constitution's Appendix; a bare 'Appendix I' does not", async () => {
+  const { parseScheduleLookup } = await import("./searchQuery.mjs");
+  assert.deepEqual(parseScheduleLookup("Appendix III of the Constitution"), { number: "APP3", actPhrase: "constitution of india" });
+  assert.equal(parseScheduleLookup("Constitution appendix II").number, "APP2");
+  assert.equal(parseScheduleLookup("Appendix I"), null);
+});

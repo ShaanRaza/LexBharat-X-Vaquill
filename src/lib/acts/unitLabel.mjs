@@ -1,11 +1,12 @@
 // Orders, Rules and Articles of an Act's Schedules are stored with a short number: O39R1 (Order 39 Rule 1), O39 (the Order itself), A137 (Article 137). PURE logic: number in, words out.
-const UNIT = /^(?:O(\d{1,3})([A-Z]{0,2})(?:R(\d{1,3})([A-Z]{0,2}))?|A(\d{1,3})([A-Z]{0,2})|S(\d{1,2})|(PREAMBLE))$/;
+const UNIT = /^(?:O(\d{1,3})([A-Z]{0,2})(?:R(\d{1,3})([A-Z]{0,2}))?|A(\d{1,3})([A-Z]{0,2})|S(\d{1,2})|(PREAMBLE)|APP([1-3]))$/;
 const ORDINAL = ["", "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth", "Ninth", "Tenth", "Eleventh", "Twelfth"];
 
 /** { kind: "order" | "rule" | "article", order?, rule?, article? } for a unit number, or null for an ordinary section number. */
 export function parseUnitNumber(number) {
   const m = UNIT.exec(String(number ?? "").toUpperCase());
   if (!m) return null;
+  if (m[9]) return { kind: "appendix", appendix: m[9] };
   if (m[8]) return { kind: "preamble" };
   if (m[7]) return { kind: "schedule", schedule: m[7] };
   if (m[5]) return { kind: "article", article: `${m[5]}${m[6]}` };
@@ -17,6 +18,7 @@ export function unitLabel(number) {
   const u = parseUnitNumber(number);
   if (!u) return null;
   if (u.kind === "preamble") return "Preamble";
+  if (u.kind === "appendix") return `Appendix ${["", "I", "II", "III"][Number(u.appendix)]}`;
   if (u.kind === "schedule") return `${ORDINAL[Number(u.schedule)] ?? u.schedule} Schedule`;
   return u.kind === "article" ? `Article ${u.article}` : u.kind === "rule" ? `Order ${u.order} Rule ${u.rule}` : `Order ${u.order}`;
 }
@@ -27,6 +29,7 @@ export function unitOrd(number, afterOrd) {
   if (!u) return null;
   const idx = (s) => { const m = /^(\d+)([A-Z]*)$/.exec(s); return m ? Number(m[1]) * 30 + (m[2] ? m[2].charCodeAt(0) - 64 : 0) : 0; };
   if (u.kind === "preamble") return afterOrd + 1;   // before Article 1
+  if (u.kind === "appendix") return afterOrd + 1 + 6_000_000 + Number(u.appendix);   // the Appendices come last
   if (u.kind === "schedule") return afterOrd + 1 + 5_000_000 + Number(u.schedule);   // Schedules come after all the Articles
   return afterOrd + 1 + (u.kind === "article" ? idx(u.article) : idx(u.order) * 1000 + (u.rule ? idx(u.rule) + 1 : 0));
 }

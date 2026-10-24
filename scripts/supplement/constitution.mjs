@@ -79,3 +79,22 @@ export function scheduleUnits(lines, afterLine) {
     return { number: `S${h.n}`, n: h.n, ok: true, heading: `${ORD[h.n - 1][0]}${ORD[h.n - 1].slice(1).toLowerCase()} Schedule`, title: titleLines.join(" "), text, pages: [lines[h.i].page, lines[to - 1].page], line: h.i };
   });
 }
+
+const ROMAN = ["", "I", "II", "III"];
+const APPENDIX_TITLE = ["", "The Constitution (One Hundredth Amendment) Act, 2015", "The Constitution (Application to Jammu and Kashmir) Order, 2019", "Declaration under article 370(3) of the Constitution"];   // as listed on the contents page of the PDF
+/** A footnote line of an Appendix page: printed small (8 pt) or in the odd 15.5 pt footnote face, or in 12.5 pt low on the page. */
+const isAppendixFootnote = (l) => { const z = Math.round(l.size * 10) / 10; return z === 8 || (z === 15.5 && l.y < 70) || (z === 12.5 && l.y < 145); };
+/** The three Appendices after the last Schedule: [{ number: "APP1", n, heading, title, text, pages, line }] (I: the Constitution (One Hundredth Amendment) Act, 2015; II: the 2019 Order C.O. 272; III: the declaration under article 370(3), C.O. 273).
+ *  Page footnotes are taken out of the text and put at the end as a last paragraph. Tables are kept as printed lines, as for the Schedules. */
+export function appendixUnits(lines, afterLine) {
+  const heads = []; lines.forEach((l, i) => { const m = /^APPENDIX\s+(III|II|I)\s*$/.exec(l.text.trim()); if (m && i > afterLine) heads.push({ n: ROMAN.indexOf(m[1]), i }); });
+  return heads.map((h, k) => {
+    const to = k + 1 < heads.length ? heads[k + 1].i : lines.length, all = lines.slice(h.i + 1, to), notes = all.filter(isAppendixFootnote).map((l) => l.text.replace(/\s+/g, " ").trim()).filter(Boolean), body = all.filter((l) => !isAppendixFootnote(l));
+    const NEW = /^(\[?\s*\d{1,3}[A-Z]?\.\s+\S|\(\w{1,4}\)\s|THE\s+(FIRST|SECOND|THIRD|FOURTH)\s+SCHEDULE|PART\s+[IVX]+\b|An Act\b|BE it enacted|In exercise of|Brig\.|Md\.|\d\.Published)/, paras = [];
+    for (const t of body.map((l) => l.text.replace(/^\d\s+(?=[A-Z(])/, "")).filter(Boolean)) { const prev = paras.at(-1); if (prev === undefined || (NEW.test(t) && /[.;:—\]”)]$/.test(prev))) paras.push(t); else paras[paras.length - 1] = /[a-z]-$/.test(prev) && /^[a-z]/.test(t) ? prev + t : `${prev} ${t}`; }
+    // the PDF prints the superscript "th" of "6th" on a line of its own, above the line it belongs to ("on the th recommendation ... the 6 August"): put it back
+    const text0 = paras.map((x) => x.replace(/\s{2,}/g, " ").trim()).join("\n").replace("on the th recommendation of Parliament", "on the recommendation of Parliament").replace("as from the 6 August, 2019", "as from the 6th August, 2019");   // (and the "st" of "31st" in the first footnote of Appendix I, below)
+    const foot = notes.length ? `\n${notes.join(" ").replace(/\bst st\s+/, "").replace(/\b31 day of July/, "31st day of July")}` : "";
+    return { number: `APP${h.n}`, n: h.n, ok: true, heading: `Appendix ${ROMAN[h.n]} — ${APPENDIX_TITLE[h.n]}`, title: APPENDIX_TITLE[h.n], text: text0 + foot, pages: [lines[h.i].page, lines[to - 1].page], line: h.i };
+  });
+}

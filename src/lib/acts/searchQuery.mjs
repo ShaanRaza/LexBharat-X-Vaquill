@@ -54,6 +54,8 @@ export function parseScheduleLookup(q) {
   m = new RegExp(String.raw`^${ART}\s*(?:of\s+)?(?:${CONST})?$`, "i").exec(s) ?? new RegExp(String.raw`^${CONST}\s*,?\s*${ART}$`, "i").exec(s);
   if (m) return { number: `A${m[1].toUpperCase()}`, actPhrase: "constitution of india" };
   if (new RegExp(String.raw`^(?:the\s+)?preamble(?:\s+(?:to|of)\s+${CONST})?$`, "i").test(s)) return { number: "PREAMBLE", actPhrase: "constitution of india" };
+  m = new RegExp(String.raw`^appendix\s+(III|II|I|1|2|3)\s+(?:of\s+)?${CONST}$`, "i").exec(s) ?? new RegExp(String.raw`^${CONST}\s*,?\s*appendix\s+(III|II|I|1|2|3)$`, "i").exec(s);
+  if (m) return { number: `APP${{ I: 1, II: 2, III: 3 }[m[1].toUpperCase()] ?? m[1]}`, actPhrase: "constitution of india" };
   m = new RegExp(String.raw`^(first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|\d{1,2}(?:st|nd|rd|th))\s+schedule(?:\s+(?:of\s+)?${CONST})?$`, "i").exec(s);
   if (m) { const n = SCHEDULE_NUMBERS[m[1].toLowerCase()] ?? parseInt(m[1], 10); if (n >= 1 && n <= 12) return { number: `S${n}`, actPhrase: "constitution of india" }; }
   return null;

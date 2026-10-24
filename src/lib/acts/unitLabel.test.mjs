@@ -40,3 +40,13 @@ test("hand-filled units keep each clause on its own line; dataset text keeps wra
 test("the Preamble is a unit that comes before Article 1", () => {
   assert.equal(unitLabel("PREAMBLE"), "Preamble"); assert.equal(unitLabel("Preamble"), "Preamble"); assert.ok(unitOrd("PREAMBLE", 0) < unitOrd("A1", 0));
 });
+
+test("Appendices of the Constitution: APP1 to APP3", async () => {
+  const { parseUnitNumber, unitLabel, unitOrd } = await import("./unitLabel.mjs");
+  assert.deepEqual(parseUnitNumber("APP2"), { kind: "appendix", appendix: "2" });
+  assert.equal(unitLabel("APP1"), "Appendix I");
+  assert.equal(unitLabel("APP3"), "Appendix III");
+  assert.equal(parseUnitNumber("APP4"), null);
+  assert.ok(unitOrd("APP1", 10) > unitOrd("S12", 10));
+  assert.ok(unitOrd("APP2", 10) > unitOrd("APP1", 10));
+});
