@@ -36,3 +36,7 @@ test("hand-filled units keep each clause on its own line; dataset text keeps wra
   assert.deepEqual(toDisplayBlocks("(1) First clause\n(2) Second clause", { lines: true }).map((b) => b.text), ["(1) First clause", "(2) Second clause"]);
   assert.deepEqual(toDisplayBlocks("One paragraph\nwrapped.\n\nNext.").map((b) => b.text), ["One paragraph wrapped.", "Next."]);
 });
+
+test("the Preamble is a unit that comes before Article 1", () => {
+  assert.equal(unitLabel("PREAMBLE"), "Preamble"); assert.equal(unitLabel("Preamble"), "Preamble"); assert.ok(unitOrd("PREAMBLE", 0) < unitOrd("A1", 0));
+});

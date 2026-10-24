@@ -13,6 +13,8 @@ const ARTICLE = /\bArt(?:icle|\.)?\s*(\d{1,3}[A-Za-z]?)\s+(?:of\s+)?(?:the\s+)?(
 // Constitution Articles: "Article 21", "Art. 226 of the Constitution" (an Article followed by the Limitation or Stamp Act is handled above)
 const ARTICLE_CONST = /\bArt(?:icle|\.)s?\s*(\d{1,3}[A-Za-z]{0,2})\b(?!\s*(?:,?\s*(?:of\s+)?(?:the\s+)?)?(?:Limitation|(?:Indian\s+)?Stamp))/gi;
 
+const PREAMBLE = /\bPreamble\s+(?:to|of)\s+(?:the\s+)?Constitution|\bConstitution(?:'s|\s+of\s+India(?:'s)?)?\s+Preamble/i;
+
 export function extractLookups(question) {
   const out = [];
   const add = (num, act) => { const s = `${num.toUpperCase()} ${act.replace(/\s+/g, " ").trim()}`; if (!out.includes(s)) out.push(s); };
@@ -22,5 +24,6 @@ export function extractLookups(question) {
   for (const m of question.matchAll(OO)) { const s = `Order ${m[1].toUpperCase()} CPC`; if (!out.includes(s)) out.push(s); }
   for (const m of question.matchAll(ARTICLE)) { const s = `Article ${m[1].toUpperCase()} ${/stamp/i.test(m[2]) ? "Indian Stamp Act" : "Limitation Act"}`; if (!out.includes(s)) out.push(s); }
   for (const m of question.matchAll(ARTICLE_CONST)) { const s = `Article ${m[1].toUpperCase()} Constitution`; if (!out.includes(s)) out.push(s); }
+  if (PREAMBLE.test(question)) out.unshift("Preamble to the Constitution");
   return out.slice(0, 3);
 }

@@ -1,0 +1,16 @@
+# FILL-IN FILE: The Constitution of India, Preamble.
+# Extracted 2026-10-25 from India Code's PDF "Constitution of India_ 20 MAY 2026 (final).pdf" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.
+Act: The Constitution of India
+Act ID: IND_central_COI
+Section: PREAMBLE
+Heading: Preamble
+Replaces existing text: no
+Source: India Code
+Source URL: https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936
+Date copied: 2026-10-25
+=== SECTION TEXT (paste below this line) ===
+WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a [SOVEREIGN SOCIALIST SECULAR DEMOCRATIC REPUBLIC] and to secure to all its citizens:
+JUSTICE, social, economic and political;
+LIBERTY of thought, expression, belief, faith and worship;
+EQUALITY of status and of opportunity; and to promote among them all FRATERNITY assuring the dignity of the individual and the [unity and integrity of the Nation];
+IN OUR CONSTITUENT ASSEMBLY this twenty-sixth day of November, 1949, do HEREBY ADOPT, ENACT AND GIVE TO OURSELVES THIS CONSTITUTION.

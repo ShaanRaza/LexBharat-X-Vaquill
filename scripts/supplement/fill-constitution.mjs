@@ -4,7 +4,7 @@
 import fs from "node:fs";
 import { execFileSync } from "node:child_process";
 import { checkAgainstPdf } from "./extract-sections.mjs";
-import { articleUnits, constitutionLines, isCrossHeading, scheduleUnits } from "./constitution.mjs";
+import { articleUnits, constitutionLines, isCrossHeading, preambleUnit, scheduleUnits } from "./constitution.mjs";
 const args = process.argv.slice(2), DRY = args.includes("--dry-run"), date = (args.find((a) => a.startsWith("--date=")) ?? "").slice(7) || new Date().toISOString().slice(0, 10);
 const FILE = "content/supplement/pdfs/constitution-of-india.pdf", OUT = "content/supplement/schedules", ACT_ID = "IND_central_COI", NAME = "The Constitution of India";
 const URL_ = "https://indiacode.gov.in/pdf-viewer/6d37d94f-edcd-4aae-9947-b55246a882a0/89650f12-c019-46ff-b1f1-6779e59d3936";
@@ -15,7 +15,7 @@ fs.mkdirSync(OUT, { recursive: true });
 const stat = { articles: 0, schedules: 0, failed: [], thin: [] };
 const write = (u, kind) => {
   const heading = (u.heading ?? "").replace(/\s+/g, " ").replace(/\s*\*+$/, "").slice(0, 190), text = u.text;
-  const label = kind === "article" ? `Article ${u.number.replace(/^A/, "")}` : u.heading;
+  const label = kind === "article" ? `Article ${u.number.replace(/^A/, "")}` : u.heading;   // the Preamble and the Schedules are named by their heading
   const body = [
     `# FILL-IN FILE: ${NAME}, ${label}.`,
     `# Extracted ${date} from India Code's PDF "${title}" (Legislative Department pocket edition, "As on 10th September, 2026", amendments up to the Constitution (One Hundred and Sixth Amendment) Act, 2023, the latest Constitution Amendment Act we know of: check India Code for any newer one) by scripts/supplement/fill-constitution.mjs. Every word was checked to be in the PDF. Printed amendment marks ([ ], * * *) are kept as printed; footnotes and page headings are left out.`,
@@ -40,5 +40,7 @@ for (const u of sch) {
   if (bad) { stat.failed.push(`${u.id} (word "${bad}" not found in the PDF)`); continue; }
   write(u, "schedule"); stat.schedules++;
 }
-console.log(JSON.stringify({ articles: stat.articles, of: arts.length, schedules: stat.schedules, of_schedules: sch.length, failed: stat.failed.length, thin: stat.thin.length }));
+const pre = preambleUnit(lines);
+if (pre) { pre.id = "PREAMBLE"; const bad = checkAgainstPdf(FILE, { heading: pre.heading, text: pre.text, pages: pre.pages }, { loose: true }); if (bad) stat.failed.push(`PREAMBLE (word "${bad}" not found in the PDF)`); else { write(pre, "preamble"); stat.preamble = 1; } } else stat.failed.push("PREAMBLE (not found)");
+console.log(JSON.stringify({ preamble: stat.preamble ?? 0, articles: stat.articles, of: arts.length, schedules: stat.schedules, of_schedules: sch.length, failed: stat.failed.length, thin: stat.thin.length }));
 console.log("FAILED:", stat.failed.join("; ") || "none"); console.log("THIN (more than 3% of the PDF's words missing):", stat.thin.join("; ") || "none");

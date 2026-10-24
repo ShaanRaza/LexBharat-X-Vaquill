@@ -54,6 +54,14 @@ export function articleUnits(lines) {
   return units;
 }
 
+/** The Preamble: the lines between the "PREAMBLE" heading (after the Appendices list) and "PART I". */
+export function preambleUnit(lines) {
+  const i = lines.findIndex((x, k) => /^PREAMBLE$/.test(x.text) && k > 500), e = lines.findIndex((x, k) => k > i && /^PART I$/.test(x.text));
+  if (i < 0 || e < 0) return null;
+  const body = lines.slice(i + 1, e);   // text: one line per clause (JUSTICE ...; LIBERTY ...;)
+  return { number: "PREAMBLE", ok: true, heading: "Preamble", text: body.map((l) => l.text).join(" ").replace(/\s+/g, " ").trim().split(/(?<=[;:])\s+(?=[A-Z])/).join("\n"), pages: [lines[i].page, lines[e - 1].page], line: i, lineCount: e - i };
+}
+
 const ORD = ["FIRST", "SECOND", "THIRD", "FOURTH", "FIFTH", "SIXTH", "SEVENTH", "EIGHTH", "NINTH", "TENTH", "ELEVENTH", "TWELFTH"];
 /** The twelve Schedules after the last Article: [{ number: "S7", n, title, text, pages, line }]. The text is the printed lines in order (tables are kept as lines, not as grids). */
 export function scheduleUnits(lines, afterLine) {
