@@ -118,11 +118,19 @@ Drafting, Review and Vault are all ON (W5, W6). Each page is switched by one fla
 - **Vercel Web Analytics (free, Hobby: 50,000 events a month):** the `@vercel/analytics` package is installed and `<Analytics />` is in `src/app/layout.tsx`. It collects nothing until you switch it on: Vercel dashboard > the project > **Analytics** tab > **Enable**. Nothing else to set.
 - **`ADMIN_PASSWORD`** (for `/admin/insights`) must be set in `.env.local` locally and as a Vercel environment variable on the live site, and must differ from `ACCESS_PASSWORD` (the page refuses to open if they are equal). Not set on Vercel by us.
 
+## 4f. W9: shared limits (Supabase) and what stays per instance
+
+- **All limits and the monthly AI cap are counted in Supabase now** (run `scripts/w9/w9-schema.sql` once in the SQL Editor): chat questions, drafts, reviews and scans are rows in `vault_usage` (kinds `chat`, `draft`, `review`, `scan`; per browser per India day and rolling week, and **all browsers together per calendar month** for the monthly cap); per-minute limits (searches 30, drafting retries 12, template picks 15) use `rate_hits` through `hit_rate`. Config numbers are unchanged in `src/config/{chat,drafting,review,vault}-limits.json`.
+- When Supabase is not configured (a bare local setup) chat and drafting fall back to the old Neon counters and the per-minute limits to a per-process limiter, so nothing breaks; production must have Supabase set.
+- **Going paid:** raise or remove the numbers in the config files; the monthly cap (`monthlyGlobal`) is the guard against surprise AI bills, so set it from the AI budget (questions x average cost) before switching.
+- Still per instance (not limits, only caches): the query-embedding cache (500 entries) and the model-busy retry timing.
+- The old Neon tables `chat_usage` and `draft_usage` are no longer written when Supabase is set; they can be dropped later.
+
 ## 5. Vercel
 
 - Env vars to set on the Vercel project (none are set for W2b/W2c/W4 yet; production runs keyword search with a note and, once W4 is pushed, **closed behind the password page until `ACCESS_PASSWORD` and `ACCESS_COOKIE_SECRET` are set**): `DATABASE_URL`, `VECTOR_DATABASE_URL`, `VOYAGE_API_KEY`, `GEMINI_API_KEY`, `ACCESS_PASSWORD`, `ACCESS_COOKIE_SECRET`. Optional: `CHAT_LIMIT_DAILY`, `CHAT_LIMIT_WEEKLY`, `CHAT_LIMIT_MONTHLY_GLOBAL`, `AI_MODEL_*`. Never print or commit them.
 - Run `node scripts/chat/apply-schema.mjs` once against the production database before the first chat (the tables already exist in the Neon project used locally).
-- Rate limit: 30 searches a minute per address is **in memory per server instance**, so on Vercel it is per instance and approximate. Before charging users, move it to a shared store (a small KV or Redis) and keep the same `createRateLimiter` interface.
+- Rate limit: 30 searches a minute per address is counted in Supabase (`rate_hits`, `hit_rate`), so it holds across Vercel instances (W9). If Supabase is unreachable it falls back to a per-process limiter. Behind Vercel's proxy the address comes from `x-forwarded-for`; keep that header trusted only at the edge.
 - Query-embedding cache is also per instance (500 entries).
 - Vercel Pro only if we start charging: higher function and storage limits. Until then keep old deployments deleted (Function Storage hit 100% once).
 

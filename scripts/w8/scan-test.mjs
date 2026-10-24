@@ -6,7 +6,7 @@ for (const l of fs.readFileSync(".env.local", "utf8").split("\n")) { const m = l
 const B = process.env.BASE ?? "http://localhost:3100", PW = process.env.TEST_PW, DIR = "../lexbharat-data/w8-test-files/";
 const sb = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SECRET_KEY, { auth: { persistSession: false } });
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const MIME = { pdf: "application/pdf", jpg: "image/jpeg", png: "image/png" };
+const MIME = { pdf: "application/pdf", jpg: "image/jpeg", png: "image/png", docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document", txt: "text/plain" };
 export const login = async () => (await fetch(B + "/api/access/login", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ password: PW }) })).headers.getSetCookie().map((c) => c.split(";")[0]).join("; ");
 export const api = (cookie, path, init = {}) => fetch(B + path, { ...init, headers: { cookie, "content-type": "application/json", ...(init.headers ?? {}) } });
 export async function upload(cookie, file, dir = DIR) {
