@@ -4,6 +4,7 @@ import BrowseShell from "@/components/console/BrowseShell";
 import ActTextView, { type TextState } from "@/components/workspace/ActTextView";
 import { getActsStore } from "@/lib/acts";
 import { loadActText } from "@/lib/acts/actText";
+import { departmentLabel } from "@/lib/acts/departments.mjs";
 import { officialSourceUrl } from "@/lib/acts/quality";
 import { WORKSPACE_SUFFIX } from "@/lib/release";
 
@@ -22,7 +23,7 @@ export default async function ActPage({ params, searchParams }: { params: Promis
   if (!act) notFound();
   const text = await loadActText(actId, section);
   const state: TextState = text.available ? { available: true, view: text.view } : { available: false, reason: text.reason, message: text.message };
-  const meta = [label(act.category), act.state ? label(act.state) : null, act.department ? label(act.department) : null, label(act.actStatus), act.year !== null ? String(act.year) : null].filter((x): x is string => !!x);
+  const meta = [label(act.category), act.state ? label(act.state) : null, act.department ? (departmentLabel(act.department) ?? label(act.department)) : null, label(act.actStatus), act.year !== null ? String(act.year) : null].filter((x): x is string => !!x);
   return (
     <BrowseShell>
       <ActTextView header={{ actId, title: act.title, meta, officialUrl: text.available ? text.officialUrl : officialSourceUrl(null) }} state={state} />

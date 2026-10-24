@@ -20,6 +20,8 @@ export type SectionHit = {
   snippet: string; via: "text" | "lookup" | "semantic";
   /** Semantic results only: how many other filings of this same section (the same Act filed under other states) were folded into this one. */
   copies?: number;
+  /** Regulator, Law Commission and tribunal-filed instruments only: the body's slug (sebi, rbi, law-commission ...). */
+  department?: string | null;
 };
 export type SearchOutcome =
   | { available: false; reason: "not_configured" | "unreachable"; message: string }

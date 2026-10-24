@@ -5,8 +5,14 @@
 	{"department":"dgft","acts":1233},
 	{"department":"sebi","acts":1144},
 	{"department":"trai","acts":834},
+	{"department":"law-commission","acts":558},
 	{"department":"cpcb","acts":558},
 	{"department":"irdai","acts":314},
 	{"department":"dfs","acts":283},
-	{"department":"cbic","acts":169}
+	{"department":"trib-ibbi","acts":238},
+	{"department":"cbic","acts":169},
+	{"department":"trib-gst-aar","acts":75},
+	{"department":"trib-cat","acts":22},
+	{"department":"trib-tdsat","acts":12},
+	{"department":"trib-aptel","acts":7}
 ]

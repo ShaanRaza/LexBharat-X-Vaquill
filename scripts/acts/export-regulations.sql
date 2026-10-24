@@ -11,14 +11,18 @@ WITH per_act AS (
     count(DISTINCT department) AS n_dept, count(DISTINCT act_status) AS n_status, count(DISTINCT title) AS n_title,
     count(DISTINCT nullif(trim(section_number), '')) AS section_count
   FROM read_parquet('__DIR__/in_*_regulations.parquet')
-  -- Excluded: tribunal orders (department trib-*, titles are file hashes) and Law Commission reports (titles like '001 Accessible (Pdf 2.3Mb)'). Not regulator instruments.
-  WHERE coalesce(department, '') NOT LIKE 'trib-%' AND coalesce(department, '') <> 'law-commission'
+  -- W10: the Law Commission reports (558) and the tribunal-filed instruments (354: IBBI, GST AAR, CAT, TDSAT, APTEL) are listed too, as title-only entries with the title made readable (below); the original title stays in `citation`.
   GROUP BY act_id
 ), derived AS (
   SELECT *, try_cast(nullif(regexp_extract(title, '(1[6-9][0-9]{2}|20[0-9]{2})', 1), '') AS INTEGER) AS year_from_title FROM per_act
 )
 -- Year is NOT derived from the title for regulators: titles cite other years ("Government Stock, 2082", "Act IX of 1872"), which made 87 entries wrong.
-SELECT act_id AS "actId", title, year_raw AS year, 'regulatory' AS category, department,
+SELECT act_id AS "actId",
+  CASE
+    WHEN department = 'law-commission' AND regexp_matches(title, '^[0-9]{3} ') THEN 'Law Commission of India, Report No. ' || CAST(CAST(substr(title, 1, 3) AS INTEGER) AS VARCHAR) || ' — ' || trim(substr(title, 5))
+    WHEN department = 'law-commission' THEN 'Law Commission of India — ' || title
+    WHEN regexp_matches(title, '^[0-9A-Fa-f]{32}$') THEN 'Document ' || lower(substr(title, 1, 8)) || ' (title not given in the source)'
+    ELSE title END AS title, year_raw AS year, 'regulatory' AS category, department,
   act_status AS "actStatus", title AS citation, CAST(section_count AS INTEGER) AS "sectionCount",
   false AS year_derived, n_dept, n_status, n_title
 FROM derived;

@@ -1,6 +1,8 @@
 // Where an Act page gets its section text: Neon when DATABASE_URL is set (works in production without any file storage), otherwise the local files in
 // ACTS_TEXT_DATA_DIR, otherwise the honest "not available yet" state. Never throws. LOGIC ONLY.
 import { query, dbConfigured } from "./db";
+import { regConfigured, regQuery } from "./regDb";
+import { isRegulatorId } from "./departments.mjs";
 import { getActText } from "./sectionText";
 import { toSectionRecord } from "./sectionRecord.mjs";
 import { confidentMissing } from "./missing.mjs";
@@ -45,7 +47,27 @@ async function fromDatabase(actId: string, wanted: string | undefined): Promise<
   return { available: true, origin: "database", view: { ...buildActTextView(listed, acts[0].sourceUrl, sel.key, missing, gapsOf(actId)), hasSchedule: hasTable }, officialUrl: officialSourceUrl(acts[0].sourceUrl) };
 }
 
+/** Regulator, Law Commission and tribunal-filed instruments: text from reg_sections (REG_DATABASE_URL, or the main database), no hand-filled sections or missing-number notices. */
+async function fromRegDatabase(actId: string, wanted: string | undefined): Promise<ActTextOutcome | "missing"> {
+  const [acts, secs] = await Promise.all([
+    regQuery<{ sourceUrl: string | null }>(`SELECT source_url AS "sourceUrl" FROM reg_acts WHERE act_id = $1`, [actId]),
+    regQuery<Row & { sectionKey: string }>(`SELECT section_key AS "sectionKey", ord, number, heading, chapter, status, flags, chunk_count AS "chunkCount" FROM reg_sections WHERE act_id = $1 ORDER BY ord`, [actId]),
+  ]);
+  if (!acts.length || !secs.length) return "missing";
+  const first = buildActTextView(secs, acts[0].sourceUrl, wanted, [], undefined), sel = first.selected;
+  if (!sel || sel.missing) return { available: true, origin: "database", view: first, officialUrl: officialSourceUrl(acts[0].sourceUrl) };
+  const body = await regQuery<{ body: string | null }>(`SELECT body FROM reg_sections WHERE act_id = $1 AND section_key = $2`, [actId, sel.key]);
+  const listed: ListedSection[] = secs.map((s) => (s.sectionKey === sel.key ? { ...s, body: body[0]?.body ?? null } : s));
+  return { available: true, origin: "database", view: buildActTextView(listed, acts[0].sourceUrl, sel.key, [], undefined), officialUrl: officialSourceUrl(acts[0].sourceUrl) };
+}
+
 export async function loadActText(actId: string, wanted: string | undefined): Promise<ActTextOutcome> {
+  if (isRegulatorId(actId)) {
+    if (regConfigured()) {
+      try { const r = await fromRegDatabase(actId, wanted); if (r !== "missing") return r; } catch { /* tables not there yet: the honest state below */ }
+    }
+    return { available: false, reason: "not_in_export", message: "The text of this instrument is not available on this site yet. Only its title and details are listed." };
+  }
   if (dbConfigured()) {
     try {
       const r = await fromDatabase(actId, wanted);

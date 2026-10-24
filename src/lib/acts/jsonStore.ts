@@ -20,7 +20,7 @@ const toActs = (rs: unknown): ActItem[] => (rs as Record<string, unknown>[]).map
 });
 const zero = meta.zero_section_count + regMeta.zero_section_count, total = meta.acts + regMeta.acts;
 const caveats = [
-  "Central and state/UT legislation plus instruments from ten regulators (RBI, SEBI, MCA, DGFT, TRAI, MoEFCC, CPCB, IRDAI, DFS, CBIC). Tribunal orders and Law Commission reports are not included.",
+  "Central and state/UT legislation plus instruments from ten regulators (RBI, SEBI, MCA, DGFT, TRAI, MoEFCC, CPCB, IRDAI, DFS, CBIC), Law Commission reports and instruments the dataset filed under five tribunals (IBBI, GST AAR, CAT, TDSAT, APTEL). Tribunal decisions are not included. Law Commission and tribunal-filed entries are titles only (a few titles are file names or hashes in the source).",
   `Section counts are distinct section numbers found in the data. ${zero.toLocaleString("en-IN")} entries (${Math.round((100 * zero) / total)}%) show 0 because their text has no section numbers, so the count is unknown, not zero. Regulator entries are often circulars or notifications, not sectioned Acts.`,
   `${(meta.year_missing + regMeta.year_missing).toLocaleString("en-IN")} entries have no year in the data. Citations are the title, not an official citation. Not legal advice; verify against the official source.`,
 ];

@@ -4,6 +4,7 @@ import CaseSearchResults from "./CaseSearchResults";
 import SectionSearchResults from "./SectionSearchResults";
 import SearchField, { clearFiltersCls, filterLabel, filterSelect } from "./SearchField";
 import { useEffect, useMemo, useState } from "react";
+import { departmentLabel } from "@/lib/acts/departments.mjs";
 import { ACT_CATEGORIES, ACT_STATUSES, ALL_COURTS, BROWSE_STATS, HIGH_COURTS, SUPREME_COURT, type ActItem, type Court } from "@/data/workspaceBrowse";
 
 // "Browse Laws & Judgments" (layout recreated from a screenshot of the original app). Judgments tab: court cards from display data (not live).
@@ -31,8 +32,7 @@ type CourtsResp = { source: "real" | "mock"; stats: { totalCases: number | null;
 type ActsStats = { sectionText?: boolean; scope?: string; source: "real" | "mock"; acts: number; sections: number; categories: string[]; statuses: string[]; states?: string[]; departments?: string[]; caveats: string[]; attribution?: { text: string; url: string; licence: string; snapshot: string } };
 const fmt = (n: number) => n.toLocaleString("en-IN");
 // Display labels only: query values stay the raw slugs (state=west-bengal, department=sebi, status=in_force).
-const ACRONYMS: Record<string, string> = { sebi: "SEBI", rbi: "RBI", mca: "MCA", dgft: "DGFT", trai: "TRAI", moefcc: "MoEFCC", cpcb: "CPCB", irdai: "IRDAI", dfs: "DFS", cbic: "CBIC" };
-const label = (v: string) => ACRONYMS[v] ?? (v.includes("_") ? v.replace(/_/g, " ") : v.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" "));
+const label = (v: string) => departmentLabel(v) ?? (v.includes("_") ? v.replace(/_/g, " ") : v.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" "));
 /** Reads an error message from a failed response without throwing on non-JSON bodies (gateway pages, empty bodies). */
 async function readJson(r: Response): Promise<Record<string, unknown>> {
   const j = await r.json().catch(() => null);
