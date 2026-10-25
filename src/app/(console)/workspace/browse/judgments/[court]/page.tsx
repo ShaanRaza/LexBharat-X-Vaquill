@@ -1,3 +1,4 @@
+import awsYears from "@/config/hc-aws-years.json";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -31,6 +32,7 @@ export default async function CourtPage({ params, searchParams }: { params: Prom
   const fmt = (n: number) => n.toLocaleString("en-IN");
   // case records the dataset holds but cannot place in a year (no decision date and no year): counted in the court total, listed under no year
   const noYear = real && summary?.cases != null && years.length ? Math.max(0, summary.cases - years.reduce((a, y) => a + (y.cases ?? 0), 0)) : 0;
+  const restored = Object.entries(((awsYears.years as Record<string, Record<string, { added: number }>>)[slug]) ?? {}).sort((a, b) => Number(b[0]) - Number(a[0]));
   return (
     <BrowseShell>
       <div className="mx-auto max-w-content pt-2">
@@ -46,6 +48,7 @@ export default async function CourtPage({ params, searchParams }: { params: Prom
           </>
         )}
         {noYear > 0 && <p className="mt-3 rounded-field bg-accent px-4 py-2.5 text-fs-sm text-secondary" role="note">{fmt(noYear)} {noYear === 1 ? "case" : "cases"} without a year {noYear === 1 ? "is" : "are"} not listed.</p>}
+        {restored.length > 0 && <p className="mt-3 rounded-field bg-accent px-4 py-2.5 text-fs-sm text-secondary" role="note">{restored.map(([y, r]) => `${y}: ${fmt(r.added)} added`).join("; ")}. The dataset holds far fewer cases for {restored.length === 1 ? "this year" : "these years"} than the court's records on the AWS Open Data registry, so cases listed there (by case id, date and outcome only) were added to the list. They carry no case number, parties or judgment text.</p>}
         {real && !summary?.listable && <p className="mt-3 rounded-field bg-accent px-4 py-2.5 text-fs-sm text-secondary">Counts by year only. Case lists for this court are not available yet.</p>}
         {picked ? <CaseList court={slug} year={picked} courtName={court.name} searchable={!!summary?.searchable} filterable={!!summary?.filterable} years={years.map((y) => y.year)} initialPage={Math.max(1, Math.floor(Number(pageParam)) || 1)} /> : (
           <>

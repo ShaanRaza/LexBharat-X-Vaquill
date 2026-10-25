@@ -130,7 +130,7 @@ export default function ReviewRunView({ id }: { id: string }) {
       {res.law.status === "ok" && (
         <section className="mt-6" aria-labelledby="rv-law">
           <h2 id="rv-law" className={H2}>Indian law points</h2>
-          <p className="mt-1 text-ui-sm text-muted">Only points backed by an Act section we retrieved are shown; each links to that section.{(res.law.dropped ?? 0) > 0 ? ` ${res.law.dropped} possible point${res.law.dropped === 1 ? " was" : "s were"} left out because no retrieved section supported ${res.law.dropped === 1 ? "it" : "them"}.` : ""}</p>
+          <p className="mt-1 text-ui-sm text-muted">Only points backed by an Act section or a judgment excerpt we retrieved are shown; each links to its source.{(res.law.dropped ?? 0) > 0 ? ` ${res.law.dropped} possible point${res.law.dropped === 1 ? " was" : "s were"} left out because no retrieved section supported ${res.law.dropped === 1 ? "it" : "them"}.` : ""}</p>
           {(res.law.findings ?? []).length === 0 ? <Notice tone="info" compact className="mt-3"><p>No law points were supported by the sections found.</p></Notice> : (
             <ul className="mt-3 space-y-3">
               {res.law.findings!.map((f, i) => (

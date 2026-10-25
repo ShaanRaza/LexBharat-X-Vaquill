@@ -1,0 +1,64 @@
+{
+ "_note": "High Court years whose case list was extended in W10 with cases from the AWS Open Data metadata (CNR not already listed). Metadata only; no judgment text. Written by scripts/w10/hc-merge-aws.mjs.",
+ "years": {
+  "punjab-and-haryana-high-court": {
+   "2012": {
+    "added": 85260,
+    "awsCases": 85301,
+    "listedBefore": 52
+   },
+   "2023": {
+    "added": 143094,
+    "awsCases": 149388,
+    "listedBefore": 6305
+   }
+  },
+  "allahabad-high-court": {
+   "2024": {
+    "added": 61294,
+    "awsCases": 150973,
+    "listedBefore": 89832
+   }
+  },
+  "madhya-pradesh-high-court": {
+   "2024": {
+    "added": 15951,
+    "awsCases": 28093,
+    "listedBefore": 12153
+   }
+  },
+  "gujarat-high-court": {
+   "2009": {
+    "added": 2,
+    "awsCases": 4,
+    "listedBefore": 2
+   },
+   "2016": {
+    "added": 289,
+    "awsCases": 289,
+    "listedBefore": 1
+   }
+  },
+  "madras-high-court": {
+   "2012": {
+    "added": 8073,
+    "awsCases": 8080,
+    "listedBefore": 38
+   }
+  },
+  "delhi-high-court": {
+   "2009": {
+    "added": 4588,
+    "awsCases": 4594,
+    "listedBefore": 33
+   }
+  },
+  "karnataka-high-court": {
+   "2013": {
+    "added": 49400,
+    "awsCases": 58227,
+    "listedBefore": 8927
+   }
+  }
+ }
+}
