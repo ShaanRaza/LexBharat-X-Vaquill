@@ -8,12 +8,27 @@ import { extractLookups } from "./lookups.mjs";
 import { retrievalQuery, MAX_SOURCES } from "./prompt.mjs";
 import { mergeRanked } from "./rewrite.mjs";
 import { previewOf } from "./format.mjs";
+import { scSemanticConfigured, searchJudgmentsByMeaning } from "@/lib/judgments/scText";
+import { scCase } from "@/lib/judgments/scMeta";
+
+/** Supreme Court judgment passages close in meaning to the question (at most 3, only clearly relevant ones), as sources of kind "judgment". Empty when the SC projects are not set up or anything fails. */
+export async function judgmentSources(question: string, startN: number): Promise<ChatSource[]> {
+  if (!scSemanticConfigured()) return [];
+  try {
+    const hits = (await searchJudgmentsByMeaning(question, 6)).filter((h) => h.score >= 0.4).slice(0, 3), out: ChatSource[] = [];
+    for (const h of hits) {
+      const m = await scCase(h.caseId); if (!m) continue;
+      out.push({ n: startN + out.length, kind: "judgment", caseId: h.caseId, caseYear: m.year, passage: h.chunk, page: h.page, actId: "", sectionKey: "", actTitle: m.c.title, label: m.c.citation ?? null, year: m.year, category: "judgment", state: null, inForce: true, sourceUrl: null, number: null, heading: null, status: "ok", text: h.text, via: "judgment" });
+    }
+    return out;
+  } catch { return []; }
+}
 
 export type ChatSource = {
   n: number; actId: string; sectionKey: string; actTitle: string; year: number | null; category: string; state: string | null; inForce: boolean; sourceUrl: string | null;
   number: string | null; heading: string | null; status: string; text: string; via: string;
   /** a passage of the user's own attached document (see src/lib/vault/search.ts) */
-  kind?: "doc"; docId?: string; docName?: string; page?: number | null; label?: string | null; /** the page was read from a scan */ scan?: boolean;
+  kind?: "doc" | "judgment"; docId?: string; caseId?: string; caseYear?: number; passage?: number; docName?: string; page?: number | null; label?: string | null; /** the page was read from a scan */ scan?: boolean;
 };
 export type Retrieval = { sources: ChatSource[]; searchMode: "semantic" | "text" | "lookup" | "none"; note: string; queries: string[]; /** keys ("actId|sectionKey") found by exact lookup: sections the question or the caller named */ exactKeys: string[] };
 
@@ -57,11 +72,14 @@ export async function retrieveSources(question: string, history: { role: string;
     sources.push({ n: sources.length + 1, actId: h.actId, sectionKey: h.sectionKey, actTitle: h.actTitle, year: h.year, category: h.category, state: h.state, inForce: h.actStatus === "in_force", sourceUrl: h.sourceUrl,
       number: h.number, heading: h.heading, status: h.status, text, via: h.via });
   }
+  sources.push(...(await judgmentSources(retrievalQuery(question, history), sources.length + 1)));
   return { sources, searchMode: mode, note, queries, exactKeys: first };
 }
 
 /** What is stored and sent to the browser for a source: no section text. */
-export const citationOf = (s: ChatSource) => s.kind === "doc"
+export const citationOf = (s: ChatSource) => s.kind === "judgment"
+  ? { n: s.n, kind: "judgment" as const, caseId: s.caseId, caseYear: s.caseYear, passage: s.passage, page: s.page ?? null, label: s.label ?? null, actId: "", sectionKey: "", actTitle: s.actTitle, number: null, heading: null, status: "ok", category: "judgment", state: null }
+  : s.kind === "doc"
   ? { n: s.n, kind: "doc" as const, docId: s.docId, docName: s.docName, page: s.page ?? null, label: s.label ?? null, ...(s.scan ? { scan: true } : {}), actId: "", sectionKey: "", actTitle: s.docName ?? "Your document", number: null, heading: null, status: "ok", category: "document", state: null, preview: previewOf(s.text) }
   : { n: s.n, actId: s.actId, sectionKey: s.sectionKey, actTitle: s.actTitle, number: s.number, heading: s.heading, status: s.status, category: s.category, state: s.state,
       ...(s.number ? {} : { preview: previewOf(s.text) }) };   // unnumbered text has no section number to show, so it carries a short preview

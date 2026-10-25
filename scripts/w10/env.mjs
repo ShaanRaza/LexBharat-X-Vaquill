@@ -6,3 +6,5 @@ export const sql = neon(process.env.DATABASE_URL);
 export const q = (t, p = []) => sql.query(t, p);
 export const vsql = process.env.VECTOR_DATABASE_URL ? neon(process.env.VECTOR_DATABASE_URL) : null;
 export const vq = (t, p = []) => vsql.query(t, p);
+export const rsql = neon(process.env.REG_DATABASE_URL || process.env.DATABASE_URL);
+export const rq = (t, p = []) => rsql.query(t, p);

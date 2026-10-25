@@ -136,3 +136,12 @@ test("alignCitations corrects a chip that points at another source than the name
   assert.equal(alignCitations("Section 99 of the Indian Contract Act, 1872 is odd [2].", src), "Section 99 of the Indian Contract Act, 1872 is odd [2].");   // not a retrieved section
   assert.equal(alignCitations("Section 28 of the Indian Contract Act, 1872 has no chip.", src), "Section 28 of the Indian Contract Act, 1872 has no chip.");
 });
+
+test("a Supreme Court judgment source is labelled as an excerpt and adds its rules to the prompt", async () => {
+  const { sourceBlock, buildChatPrompt } = await import("./prompt.mjs");
+  const j = { n: 3, kind: "judgment", actTitle: "ECON ANTRI LTD. versus ROM INDUSTRIES LTD.", label: "[2013] 14 S.C.R. 1", page: 4, text: "cognizance may be taken after the prescribed period" };
+  assert.match(sourceBlock(j), /^\[3\] SUPREME COURT JUDGMENT "ECON ANTRI LTD\. versus ROM INDUSTRIES LTD\." \[2013\] 14 S\.C\.R\. 1, page 4 \(an excerpt\)/);
+  const p = buildChatPrompt({ question: "limitation under section 138?", sources: [j] });
+  assert.match(p.system, /SUPREME COURT JUDGMENT/);
+  assert.doesNotMatch(buildChatPrompt({ question: "q", sources: [{ n: 1, actTitle: "A Act", number: "1", text: "t" }] }).system, /SUPREME COURT JUDGMENT/);
+});

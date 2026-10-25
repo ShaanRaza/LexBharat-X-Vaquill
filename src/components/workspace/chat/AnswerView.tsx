@@ -21,6 +21,15 @@ const Inline = CitedText;
 
 /** One source: its chip, then the Act name FIRST (every source shows it), then the section (or "Unnumbered text" with a short preview). A passage of the user's own document shows the document name and page instead. */
 function SourceRow({ c }: { c: Citation }) {
+  if (c.kind === "judgment") return (
+    <li className="flex gap-2">
+      <span className="shrink-0 self-start"><CitationChip n={c.n} href={hrefOf(c)} label={sourceLabel(c)} kind="judgment" /></span>
+      <div className="min-w-0">
+        <Link href={hrefOf(c)} className="font-medium text-foreground hover:underline">{c.actTitle}</Link>
+        <p className="text-secondary">Supreme Court judgment{c.label ? ` · ${c.label}` : ""}{c.page ? ` · page ${c.page}` : ""} <Badge title="An excerpt of the judgment, not the whole">Excerpt</Badge></p>
+      </div>
+    </li>
+  );
   if (c.kind === "doc") return (
     <li className="flex gap-2">
       <span className="shrink-0 self-start"><CitationChip n={c.n} href={hrefOf(c)} label={sourceLabel(c)} kind="doc" /></span>

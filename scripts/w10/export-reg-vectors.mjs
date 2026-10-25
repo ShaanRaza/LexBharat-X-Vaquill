@@ -4,7 +4,7 @@
 // "matched" = the (act_id, section_key) exists in reg_sections with shown text. Load them with: VECTOR_URL_VAR=VECTOR_DATABASE_URL_REGULATORY node scripts/acts/load-qdrant-vectors.mjs regulatory 256
 // usage: QDRANT_URL=http://localhost:6333 node scripts/w10/export-reg-vectors.mjs [--departments=dgft,cbic]
 import fs from "node:fs";
-import { q } from "./env.mjs";
+import { rq as q } from "./env.mjs";
 import { parseChunkId } from "../../src/lib/acts/reassemble.mjs";
 import { truncateNormalize } from "../../src/lib/acts/fusion.mjs";
 

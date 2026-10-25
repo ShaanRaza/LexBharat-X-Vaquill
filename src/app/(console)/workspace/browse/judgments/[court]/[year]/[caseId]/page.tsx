@@ -9,6 +9,8 @@ import { ALL_COURTS } from "@/data/workspaceBrowse";
 import { getJudgmentsStore } from "@/lib/judgments";
 import { JUDGE_COURTS, SC_SLUG, provenanceRows } from "@/lib/judgments/provenance";
 import { WORKSPACE_SUFFIX } from "@/lib/release";
+import JudgmentFullText from "@/components/workspace/JudgmentFullText";
+import { getCaseText } from "@/lib/judgments/scText";
 import StatuteText, { LawsReferred } from "@/components/workspace/StatuteLinks";
 import { lawsReferred, resolveMentions } from "@/lib/judgments/statuteResolve";
 
@@ -27,7 +29,9 @@ export default async function CasePage({ params, searchParams }: { params: Promi
   const c = await store.get(slug, year, caseId, p ? Math.floor(Number(p)) || undefined : undefined);
   if (!c) notFound(); // a real 404: the link does not match a case in the exported list (see the route scheme above)
   const [stats, preview] = await Promise.all([store.stats(), sc ? store.preview(slug, year, caseId) : Promise.resolve(null)]);
-  const mentions = preview ? await resolveMentions(preview, Number.isInteger(year) ? year : null) : [];   // Act sections named in the opening text, linked where our data has them
+  const full = sc ? await getCaseText(caseId) : null;   // the whole English text, when the Supreme Court text projects are set up
+  const joined = full ? full.chunks.map((x) => x.t).join("\n\n") : null;
+  const mentions = joined || preview ? await resolveMentions(joined ?? preview ?? "", Number.isInteger(year) ? year : null) : [];   // Act sections named in the opening text, linked where our data has them
   const back = `/workspace/browse/judgments/${slug}?year=${year}${ya === "1" ? "&years=all" : ""}${lp && Number(lp) > 1 ? `&page=${Math.floor(Number(lp))}` : ""}`;
   const dup = sc ? (scDuplicates.duplicates as Record<string, { of: string; year: number }>)[caseId] : undefined;
   const parties = c.petitioner && c.respondent ? `${c.petitioner} v. ${c.respondent}` : null;
@@ -85,7 +89,13 @@ export default async function CasePage({ params, searchParams }: { params: Promi
         <dl className="mt-5 divide-y divide-border/60 rounded-card bg-surface shadow-sm ring-1 ring-border/60">
           {rows.map(([k, v]) => (<div key={k} className="grid gap-1 px-5 py-3 sm:grid-cols-[210px_1fr]"><dt className="text-ui-sm text-secondary">{k}</dt><dd className="text-ui-body">{v}</dd></div>))}
         </dl>
-        {preview && (
+        {full && joined && (
+          <>
+            <JudgmentFullText chunks={full.chunks} mentions={mentions} />
+            <section aria-label="Laws referred to" className="mt-3 rounded-card bg-surface p-5 shadow-sm ring-1 ring-border/60"><LawsReferred laws={lawsReferred(mentions)} /></section>
+          </>
+        )}
+        {!full && preview && (
           <section aria-labelledby="preview" className="mt-5 rounded-card bg-surface p-5 shadow-sm ring-1 ring-border/60">
             <h2 id="preview" className="text-ui-xs font-semibold uppercase tracking-[0.08em] text-secondary">Opening text (as extracted)</h2>
             <p className="mt-2 text-ui-body leading-relaxed"><StatuteText text={preview} mentions={mentions} />…</p>

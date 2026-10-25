@@ -37,7 +37,7 @@ export function LawsReferred({ laws }: { laws: { actKey: string; actName: string
           </li>
         ))}
       </ul>
-      <p className="mt-2 text-ui-xs text-muted">Found by reading the opening text; a section is linked only when the Act and number are both clear and the text is in our data.</p>
+      <p className="mt-2 text-ui-xs text-muted">Found by reading the judgment text shown on this page; a section is linked only when the Act and number are both clear and the text is in our data.</p>
     </div>
   );
 }

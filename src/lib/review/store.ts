@@ -3,7 +3,7 @@ import { sb } from "@/lib/vault/supabase";
 import { isUuid } from "@/lib/vault/ids";
 import type { LawFinding, ReviewClause, ReviewSummary } from "./prompts.mjs";
 
-export type CitationLite = { n: number; actId: string; sectionKey: string; actTitle: string; number: string | null; heading: string | null; status: string; category: string; state: string | null; preview?: string };
+export type CitationLite = { n: number; actId: string; sectionKey: string; actTitle: string; number: string | null; heading: string | null; status: string; category: string; state: string | null; preview?: string; kind?: "doc" | "judgment"; caseId?: string; caseYear?: number; passage?: number; page?: number | null; label?: string | null };
 export type UnitState = "pending" | "ok" | "failed";
 export type PartState = { i: number; start: number; end: number; status: UnitState; error?: string; clauses?: ReviewClause[] };
 export type ReviewResult = {

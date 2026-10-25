@@ -5,7 +5,7 @@ import { addUsage, countersConfigured, removeUsage, usageCounts } from "@/lib/li
 
 export type Citation = { n: number; actId: string; sectionKey: string; actTitle: string; number: string | null; heading: string | null; status: string; category: string; state: string | null; preview?: string;
   /** "doc": a passage of the user's own document (actId/sectionKey are then empty; actTitle holds the document name); absent: a section of an Act */
-  kind?: "doc"; docId?: string; docName?: string; page?: number | null; label?: string | null; /** the page was read from a scan: shown as "Read from scan — check the original" */ scan?: boolean };
+  kind?: "doc" | "judgment"; docId?: string; /** "judgment": a passage of a Supreme Court judgment (actTitle holds the case title, label its citation) */ caseId?: string; caseYear?: number; passage?: number; docName?: string; page?: number | null; label?: string | null; /** the page was read from a scan: shown as "Read from scan — check the original" */ scan?: boolean };
 export type CheckResult = { label: "supported" | "partial" | "check" | "not_found"; unsupported: string[]; missing?: string[]; unavailable?: boolean; cutOff?: boolean };
 export type StoredMessage = { id: number; role: "user" | "assistant"; content: string; citations: Citation[] | null; check: CheckResult | null; model: string | null; createdAt: string };
 export type ChatSummary = { id: string; title: string; updatedAt: string };

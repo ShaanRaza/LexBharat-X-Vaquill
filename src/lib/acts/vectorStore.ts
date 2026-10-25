@@ -12,7 +12,7 @@ import { neon } from "@neondatabase/serverless";
 import { parseChunkId } from "./reassemble.mjs";
 import { vectorLiteral } from "./semantic.mjs";
 
-export type Corpus = "central" | "state" | "supplement" | "regulatory";
+export type Corpus = "central" | "state" | "supplement" | "regulatory" | "sc";
 export type VectorHit = { actId: string; sectionKey: string; distance: number };
 export interface VectorStore {
   readonly corpus: Corpus;
@@ -96,3 +96,5 @@ export function vectorStores(): VectorStore[] {
 export const vectorConfigured = () => vectorStores().length > 0;
 /** The regulator-instrument vector store (VECTOR_DATABASE_URL_REGULATORY, or the shared VECTOR_DATABASE_URL), or null when it is not set up. */
 export const regulatoryStore = (): VectorStore | null => neonStore("regulatory");
+/** Supreme Court judgment chunks (sc_emb_256 in the project named by VECTOR_DATABASE_URL_SC); null unless that variable is set (never falls back to the Acts project). */
+export const scVectorStore = (): VectorStore | null => (env("VECTOR_DATABASE_URL_SC") ? neonStore("sc") : null);
