@@ -5,7 +5,7 @@ import { gunzipSync } from "node:zlib";
 import { embedQuery, voyageConfigured } from "@/lib/acts/embed";
 import { scVectorStore } from "@/lib/acts/vectorStore";
 import { distinctSections } from "@/lib/acts/semantic.mjs";
-import { phraseIn, snippetAround, termCounts } from "./scSearch.mjs";
+import { phraseIn, snippetAround, termCounts } from "./scTextSearch.mjs";
 
 export type ScChunk = { i: number; cs: number; ps: number | null; t: string };
 type Sql = ReturnType<typeof neon>;
@@ -62,7 +62,7 @@ export async function searchJudgmentsByWords(q: string, limit = 60): Promise<{ t
   const cap = 150;
   const cand = await run<{ case_id: string; n: string | number }>("SC_KEYWORD_DATABASE_URL",
     `WITH q AS (SELECT websearch_to_tsquery('english', $1) AS tq), m AS (SELECT k.case_id, ts_rank(k.tsv, q.tq) AS r FROM sc_kw k, q WHERE k.tsv @@ q.tq)
-     SELECT case_id, (SELECT count(*) FROM m) AS n FROM m ORDER BY r DESC, case_id DESC LIMIT ${cap}`, [q], 20000);
+     SELECT case_id, (SELECT count(*) FROM m) AS n FROM m ORDER BY r DESC, case_id DESC LIMIT ${cap}`, [q.replace(/["“”]/g, " ")], 20000);   // the index has no word positions, so a quoted phrase is first searched as its words and then verified in the text
   const total = cand.length ? Number(cand[0].n) : 0;
   const blobs = await blobsFor(cand.map((c) => c.case_id));
   const words = [...new Set(q.replace(/["“”]/g, " ").toLowerCase().split(/[^\p{L}\p{N}]+/u).filter((w) => w.length > 2))];

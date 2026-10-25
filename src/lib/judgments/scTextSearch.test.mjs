@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { phraseIn, termCounts, snippetAround } from "./scSearch.mjs";
+import { phraseIn, termCounts, snippetAround } from "./scTextSearch.mjs";
 
 test("phrases are matched ignoring case and spacing", () => {
   assert.ok(phraseIn("The doctrine of  Res\nJudicata applies.", "res judicata"));

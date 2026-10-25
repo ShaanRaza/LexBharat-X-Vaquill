@@ -39,6 +39,19 @@ ok("Regulators", "regulator search by meaning answers (loaded subset: DGFT, CBIC
 if (dgft.results?.[0]) { const h = dgft.results[0]; p = await page(`/workspace/browse/acts/${h.actId}?section=${encodeURIComponent(h.sectionKey)}`); t = text(p.html);
   ok("Regulators", "a regulator section page shows its text", p.status === 200 && t.length > 800 && !/not (available|included)/i.test(t.slice(0, 3000)), `${t.length} chars`); }
 
+// full regulator load
+const rb = await sr("penal charges on loans", "&scope=regulators");
+ok("Regulators", "full load: RBI text found by meaning", rb.searchAvailable && rb.mode === "semantic" && rb.results.some((h) => h.department === "rbi"), `${rb.results?.[0]?.actTitle ?? "-"}`);
+const rk = await sr("\"penal charges\"", "&scope=regulators&exact=1");
+ok("Regulators", "full load: keyword phrase search", rk.searchAvailable && rk.total > 20, `${rk.total} hits`);
+// SC full text
+const jm = await (await get("/api/judgments/search-text?q=" + encodeURIComponent("limitation for filing a complaint after dishonour of cheque") + "&mode=meaning")).json();
+ok("SC text", "search inside judgments by meaning", jm.available && jm.results.length > 0, `${jm.results?.[0]?.title ?? "-"}`);
+const jw = await (await get("/api/judgments/search-text?q=" + encodeURIComponent("\"res judicata\" constructive") + "&mode=words")).json();
+ok("SC text", "search inside judgments by words (phrase)", jw.available && jw.results.length > 0, `${jw.total} judgments; first ${jw.results?.[0]?.title ?? "-"}`);
+if (jm.results?.[0]) { const h = jm.results[0]; const cp = await page(`/workspace/browse/judgments/supreme-court-of-india/${h.year}/${encodeURIComponent(h.caseId)}`); const ct = text(cp.html);
+  ok("SC text", "case page shows the full judgment text with passages", cp.status === 200 && /Judgment text \(English/.test(ct) && ct.length > 20000, `${ct.length} chars`);
+  ok("SC text", "case page links Act sections found in the full text", /Laws referred to/.test(ct)); }
 const hi = await sr("असाधारण");
 ok("Hindi", "Devanagari query finds sections with shown Hindi text", hi.searchAvailable && hi.results.length > 0, `${hi.total} hits`);
 console.log(`\n${rows.filter((r) => r[2]).length} of ${rows.length} passed`);
