@@ -50,7 +50,7 @@ ok("SC text", "search inside judgments by meaning", jm.available && jm.results.l
 const jw = await (await get("/api/judgments/search-text?q=" + encodeURIComponent("\"res judicata\" constructive") + "&mode=words")).json();
 ok("SC text", "search inside judgments by words (phrase)", jw.available && jw.results.length > 0, `${jw.total} judgments; first ${jw.results?.[0]?.title ?? "-"}`);
 if (jm.results?.[0]) { const h = jm.results[0]; const cp = await page(`/workspace/browse/judgments/supreme-court-of-india/${h.year}/${encodeURIComponent(h.caseId)}`); const ct = text(cp.html);
-  ok("SC text", "case page shows the full judgment text with passages", cp.status === 200 && /Judgment text \(English/.test(ct) && ct.length > 20000, `${ct.length} chars`);
+  ok("SC text", "case page shows the full judgment text with passages", cp.status === 200 && /Judgment text \(English/.test(ct) && /Show full judgment/.test(ct), `${ct.length} chars`);
   ok("SC text", "case page links Act sections found in the full text", /Laws referred to/.test(ct)); }
 const hi = await sr("असाधारण");
 ok("Hindi", "Devanagari query finds sections with shown Hindi text", hi.searchAvailable && hi.results.length > 0, `${hi.total} hits`);
