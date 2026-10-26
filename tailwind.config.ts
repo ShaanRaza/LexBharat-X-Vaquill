@@ -73,6 +73,7 @@ const config: Config = {
         sans: ["var(--font-sans)", "var(--font-deva)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
         serif: ["var(--font-serif)", "Georgia", "serif"],
+        "serif-strong": ["var(--font-serif-strong)", "var(--font-serif)", "Georgia", "serif"],
         reading: ["var(--font-reading)"],
       },
       boxShadow: { pop: "var(--shadow-pop)" },

@@ -10,3 +10,4 @@ export { default as Toggle } from "./Toggle";
 export { default as Eyebrow } from "./Eyebrow";
 export { default as MarkedPage, MarkedScope } from "./MarkedPage";
 export { buttonClass, fieldClass, selectClass, toggleClass } from "./controls";
+export { default as Logo, LogoMark } from "./Logo";

@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import TopBar from "./TopBar";
 import LogoutLink from "@/components/LogoutLink";
+import { Badge, Logo } from "@/components/kit";
+import { buttonClass } from "@/components/kit/controls";
 import WorkspaceNav, { type LawTab } from "@/components/workspace/WorkspaceNav";
 import { clearMockSession, useMockSession } from "@/lib/mockSession";
 
@@ -34,10 +36,10 @@ const SETTINGS_TAB = CONSOLE_TABS.find((t) => t.id === "settings")!;
 
 function NotInClone({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <span role="link" aria-disabled="true" title="Not part of this local clone" className={`flex cursor-not-allowed items-center gap-3 rounded-panel px-3 py-2.5 text-fs-ui text-muted/60 ${className}`}>{children}</span>
+    <span role="link" aria-disabled="true" title="Not part of this local clone" className={`flex cursor-not-allowed items-center gap-3 rounded-button px-3 py-2.5 text-fs-ui text-muted/60 ${className}`}>{children}</span>
   );
 }
-const Chip = ({ children }: { children: React.ReactNode }) => <span className="ml-1.5 whitespace-nowrap rounded-full bg-accent px-1.5 py-0.5 align-middle text-fs-micro text-muted ring-1 ring-border">{children}</span>;
+const Chip = ({ children }: { children: React.ReactNode }) => <Badge className="ml-1.5 whitespace-nowrap align-middle !px-1.5 text-fs-micro">{children}</Badge>;
 
 const LEARN = [
   { label: "API Docs", href: "/docs" },
@@ -84,13 +86,10 @@ export default function ConsoleShell({ tab, variant = "data", lawTab, children }
 
   const logoRowFor = (home: string) => (
     <div className="flex items-center justify-between px-4 pb-4 pt-5">
-        <Link href={home} className="flex items-baseline gap-0.5 text-fs-display font-medium leading-none tracking-brand" aria-label="LexBharat">
-          <svg width="22" height="26" viewBox="0 0 24 28" fill="rgb(var(--primary-rgb))" aria-hidden="true" className="mr-1.5 self-center"><path d="M20 1C9 2 2 9 3 20c0 3 1 6 3 7-1-5 0-10 4-14 3-3 7-4 10-4-5 1-9 4-11 9 5-1 10-5 11-13 .3-1.4.2-3.800 0-4z" /></svg>
-          LexBharat
-        </Link>
-        <button type="button" onClick={() => (open ? setOpen(false) : setCollapsed(true))} aria-label="Collapse sidebar" className="rounded-tight p-1 text-muted hover:bg-accent">
-          <Icon d="M15 5l-7 7 7 7" size={16} />
-        </button>
+      <Logo href={home} compact={variant !== "lawspace"} className="min-w-0" />
+      <button type="button" onClick={() => (open ? setOpen(false) : setCollapsed(true))} aria-label={open ? "Close menu" : "Collapse sidebar"} className="grid size-9 shrink-0 place-items-center rounded-button text-secondary hover:bg-accent hover:text-foreground focus-visible:outline-2 focus-visible:outline-primary">
+        <Icon d={open ? "M6 6l12 12M18 6L6 18" : "M15 5l-7 7 7 7"} size={16} />
+      </button>
     </div>
   );
   const logoRow = logoRowFor("/developer?tab=overview");
@@ -104,7 +103,7 @@ export default function ConsoleShell({ tab, variant = "data", lawTab, children }
               <NotInClone><Icon d={t.icon} /><span className="leading-tight">{t.label}<Chip>Not in clone</Chip></span></NotInClone>
             ) : (
               <Link href={`/developer?tab=${t.id}`} onClick={() => setOpen(false)} aria-current={tab === t.id ? "page" : undefined}
-                className={`flex items-center gap-3 rounded-panel px-3 py-2.5 text-fs-ui transition-colors ${tab === t.id ? "bg-accent text-foreground" : "text-muted hover:bg-accent/60 hover:text-foreground"}`}>
+                className={`flex items-center gap-3 rounded-button px-3 py-2.5 text-fs-ui transition-colors ${tab === t.id ? "bg-primary/10 font-medium text-primary" : "text-secondary hover:bg-accent hover:text-foreground"}`}>
                 <Icon d={t.icon} />
                 <span className="leading-tight">{t.label}{"beta" in t && t.beta && <Chip>Beta</Chip>}{t.status === "bridge" && <Chip>Demo</Chip>}</span>
               </Link>
@@ -114,15 +113,15 @@ export default function ConsoleShell({ tab, variant = "data", lawTab, children }
         {/* "Acts & Judgments" sits after MCP Server in the original's sidebar; highlighted on every page under /workspace/browse. */}
         <li>
           <Link href="/workspace/browse" onClick={() => setOpen(false)} aria-current={variant === "workspace" ? "page" : undefined}
-            className={`flex items-center gap-3 rounded-panel px-3 py-2.5 text-fs-ui transition-colors ${variant === "workspace" ? "bg-accent text-foreground" : "text-muted hover:bg-accent/60 hover:text-foreground"}`}>
+            className={`flex items-center gap-3 rounded-button px-3 py-2.5 text-fs-ui transition-colors ${variant === "workspace" ? "bg-primary/10 font-medium text-primary" : "text-secondary hover:bg-accent hover:text-foreground"}`}>
             <Icon d={BOOKS_ICON} /><span className="leading-tight">Acts &amp; Judgments</span>
           </Link>
         </li>
       </ul>
-      <p className="mt-6 px-5 text-fs-nano font-semibold uppercase tracking-caps-wide text-muted">Learn</p>
+      <p className="mt-6 px-5 font-mono text-fs-nano font-medium uppercase tracking-caps-wide text-muted"><span aria-hidden className="mr-1">¶</span>Learn</p>
       <ul className="mt-2 space-y-0.5 px-2">
         {LEARN.map((l) => (
-          <li key={l.label}><Link href={l.href} className="flex items-center justify-between rounded-panel px-3 py-1.5 text-fs-sm text-muted hover:bg-accent/60 hover:text-foreground">{l.label}<span aria-hidden className="text-fs-nano">↗</span></Link></li>
+          <li key={l.label}><Link href={l.href} className="flex items-center justify-between rounded-button px-3 py-1.5 text-fs-sm text-secondary hover:bg-accent hover:text-foreground">{l.label}<span aria-hidden className="text-fs-nano">↗</span></Link></li>
         ))}
       </ul>
       <div className="mt-auto space-y-1 px-2 pb-4">
@@ -153,8 +152,8 @@ export default function ConsoleShell({ tab, variant = "data", lawTab, children }
         {/* mobile drawer */}
         {open && (
           <div className="fixed inset-0 z-[110] md:hidden">
-            <button type="button" aria-label="Close menu" className="absolute inset-0 bg-foreground/30" onClick={() => setOpen(false)} />
-            <aside ref={drawer} tabIndex={-1} data-lenis-prevent role="dialog" aria-modal="true" aria-label="Console menu" className="relative h-full w-drawer overflow-y-auto bg-background shadow-lg outline-none">{nav}</aside>
+            <button type="button" aria-label="Close menu" className="absolute inset-0 bg-foreground/40" onClick={() => setOpen(false)} />
+            <aside ref={drawer} tabIndex={-1} data-lenis-prevent role="dialog" aria-modal="true" aria-label="Console menu" className="relative h-full w-drawer overflow-y-auto rounded-r-card bg-surface shadow-lg outline-none">{nav}</aside>
           </div>
         )}
         <div className="min-w-0 flex-1">

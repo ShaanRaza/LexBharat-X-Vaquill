@@ -109,7 +109,7 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
             className="min-h-[3.25rem] flex-1 resize-none rounded-input bg-surface px-3 py-2.5 text-ui-body text-foreground ring-1 ring-control-border focus-visible:outline-2 disabled:opacity-60" />
           <button type="submit" disabled={busy || input.trim().length < 3} className="h-11 rounded-button bg-primary px-5 text-ui-base font-medium text-on-primary disabled:opacity-50">{busy ? "Working…" : "Ask"}</button>
         </form>
-        <p className="mt-2 text-ui-xs text-muted">Searches Indian Acts (and any Vault documents you attach). Judgments are not included yet. Not legal advice.{usage ? ` ${Math.max(0, usage.daily - usage.day)} of ${usage.daily} questions left today.` : ""}</p>
+        <p className="mt-2 text-ui-xs text-muted">Searches Indian Acts and Supreme Court judgment excerpts (and any Vault documents you attach). Not legal advice.{usage ? ` ${Math.max(0, usage.daily - usage.day)} of ${usage.daily} questions left today.` : ""}</p>
       </div>
     </div>
   );

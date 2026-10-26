@@ -186,4 +186,11 @@
   /* primary colour with transparency, for the soft radial glows on dark bands */
   --primary-glow-strong: #1f4d3a66;
   --primary-glow-soft: #1f4d3a55;
+  /* the glow: the grainy olive / ochre / forest ground used behind the password page and, later, the public page headers */
+  --glow-base-rgb: 31 74 58;
+  --glow-gold-rgb: 192 160 90;
+  --glow-olive-rgb: 100 98 52;
+  --glow-sage-rgb: 61 106 82;
+  --glow-deep-rgb: 23 61 46;
+  --glow-shade-rgb: 8 26 19;
 }

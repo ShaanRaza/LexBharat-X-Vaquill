@@ -226,3 +226,33 @@ Both failures are the free Voyage limit (3 requests a minute): the checks fire s
 Shell (top bar, sidebar, drawer, banner, password page) is only re-coloured and re-fonted, not restructured (Phase 3). The feedback thumbs, the chat composer and some ad-hoc controls still carry their old structure with the new colours. Public marketing pages keep their layout, not the design's (Phase 5). Layout dimensions (`w-[...]`, `h-[...]`) and the brand palette listing remain as noted in Phase 1.
 
 **Stopped before Phase 3.**
+
+
+---
+# Update: Phase 3 (shell), branch `reskin`
+
+Phase 2 feedback: the notes line in the message was still the template placeholder, so no Phase 2 changes were made on that basis. (If you meant specific changes, send them and I will do them before Phase 4.)
+
+## What changed
+- **Logo ("LB" for now):** `kit/Logo.tsx` = an LB tile (forest, serif) + wordmark ("Lex" regular, "Bharat" bold; the bold is Source Serif 4 weight 600 loaded as its own font so no bold is synthesised). Used in the sidebar, the drawer and the password page. A compact size is used in the narrower Data API sidebar.
+- **Sidebar** (`ConsoleShell`, `WorkspaceNav`): pill items, active item tinted forest with forest text, secondary text colour for the rest, mono pilcrow label for "Learn", "New chat" is the shared primary `Button`, "Not in clone" / "Beta" / "Demo" chips are shared `Badge`s.
+- **Top bar** (`TopBar`): "PRODUCT" mono pill, rounded menu items; the menus keep their keyboard behaviour (Enter/Space opens, arrows move, Home/End, Esc closes and returns focus, Tab closes).
+- **Mobile drawer:** rounded right edge, white surface, stronger backdrop, and a visible **Close menu (X)** button (before it showed the same "collapse" chevron as the desktop sidebar). Behaviour unchanged: Esc closes, focus moves in and returns to the menu button, Tab stays inside, page scroll locked.
+- **Banner:** the local-development strip (`AccessDevBanner`) now has a "LOCAL DEVELOPMENT" pill and tinted strip; the wording is unchanged. The "Testing phase" notices on the app pages are the shared `Notice` (restyled in Phase 2; wording unchanged).
+- **Password page:** the glow (forest ground with olive, ochre and sage lights, vignette and film grain, tokens `--glow-*`, `public/grain.webp` copied from the design) behind a white card with the logo, a serif title, the shared field and primary button. Wording and behaviour unchanged (wrong password message, no hint, `next` redirect).
+- Copy made true after W10 (found while checking the dashboard): "Judgments are not included in chat yet" and "Smart search over judgments" under Not yet were wrong; the dashboard and the chat footnote now say that Chat and Review use Supreme Court judgment excerpts, and "Not yet" lists High Court judgment text and tribunal decisions.
+
+## Checks
+| Gate | Result |
+|---|---|
+| `git diff main -- src/lib src/app/api scripts` | empty |
+| `npm run test:extract` / `qa:sweep` / `build` | 194 of 194 / pass / pass |
+| Contrast of tokens (`qa/reskin/contrast.mjs`) | PASS |
+| axe-core, 13 screens (now including the password page) x 1280 and 375 px | **0 violations** (it found one target-size problem: the collapse button was squeezed to 21 px in the narrow sidebar; fixed) |
+| Keyboard (`qa/reskin/keyboard.mjs`, 13 checks) | **13 of 13**: skip link first; Enter opens the drawer and focus moves in; Tab stays inside for 14 presses; focus visible; Esc closes and focus returns to the menu button; product menu: Enter, arrows, Esc and focus return; password page: autofocus, visible focus ring, Tab to Continue, Enter submits and a wrong password shows an error |
+| Feature pass | `final-check` 56/57 and `w10-check` 16/17; the two failures are the same two "by meaning" searches that fall back when the free Voyage limit (3 a minute) is hit by consecutive checks (both pass when run alone) |
+
+## Screenshots
+`docs/screenshots/reskin-phase3/`: `01-dashboard-shell`, `01b-data-api-shell` (desktop only), `02-product-menu` (desktop), `03-mobile-drawer-open` (phone), `04-password-page`, `05-password-focus`, `06-dev-banner` (after only), each as `<name>-<1280|375>-<before|after>.png`. "Before" is the Phase 2 state. The dev banner only shows on a development server with an empty ACCESS_PASSWORD, which cannot run next to the production build (they share `.next`), so there is no "before" image for it; before Phase 3 it was a thin tinted strip of plain text.
+
+**Stopped before Phase 4.**

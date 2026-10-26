@@ -2,6 +2,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Badge } from "@/components/kit";
+import { buttonClass } from "@/components/kit/controls";
 import LogoutLink from "@/components/LogoutLink";
 import ChatHistory from "@/components/workspace/chat/ChatHistory";
 import DraftHistory from "@/components/workspace/drafting/DraftHistory";
@@ -22,8 +23,8 @@ const PATHS = {
 function Icon({ name }: { name: keyof typeof PATHS }) {
   return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={PATHS[name]} /></svg>;
 }
-const ROW = "flex items-center gap-3 rounded-chip px-3 py-2.5 text-ui-base transition-colors";
-const on = "bg-accent text-foreground", off = "text-muted hover:bg-accent/60 hover:text-foreground";
+const ROW = "flex items-center gap-3 rounded-button px-3 py-2.5 text-ui-base transition-colors";
+const on = "bg-primary/10 font-medium text-primary", off = "text-secondary hover:bg-accent hover:text-foreground";
 
 function Item({ href, icon, label, active, onNavigate }: { href: string; icon: keyof typeof PATHS; label: string; active: boolean; onNavigate?: () => void }) {
   return <Link href={href} onClick={onNavigate} aria-current={active ? "page" : undefined} className={`${ROW} ${active ? on : off}`}><Icon name={icon} /><span className="leading-tight">{label}</span></Link>;
@@ -38,7 +39,7 @@ export default function WorkspaceNav({ active, logo, onNavigate }: { active?: La
     <nav aria-label="Legal Workspace" className="flex h-full flex-col">
       {logo}
       <div className="px-3 pb-3">
-        <Link href="/workspace/chat" onClick={onNavigate} className="flex min-h-10 items-center justify-center gap-2 rounded-button bg-primary px-3 text-ui-base font-medium text-on-primary hover:bg-primary-hover"><Icon name="plus" />New chat</Link>
+        <Link href="/workspace/chat" onClick={onNavigate} className={buttonClass("primary", "md", "w-full")}><Icon name="plus" />New chat</Link>
       </div>
       <ul className="min-h-0 flex-1 space-y-0.5 overflow-y-auto px-2" data-lenis-prevent>
         <li><Item href="/workspace" icon="dashboard" label="Dashboard" active={active === "dashboard"} onNavigate={onNavigate} /></li>

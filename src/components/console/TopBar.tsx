@@ -49,7 +49,7 @@ function TopMenu({ title, ariaLabel, items, open, setOpen, testid, trigger, trig
         <div id={uid} role="menu" aria-label={title} className="console-pop absolute left-4 right-4 top-full z-[105] mt-1 rounded-card bg-surface p-1.5 text-fs-ui text-foreground shadow-lg ring-1 ring-border sm:left-0 sm:right-auto sm:w-[320px]">
           <p aria-hidden className="px-3 pb-1 pt-2 text-fs-nano font-semibold uppercase tracking-caps-mid text-muted">{title}</p>
           {items.map((it, i) => {
-            const cls = `flex w-full items-start gap-3 rounded-lg px-3 py-2.5 text-left outline-none focus-visible:bg-accent ${it.soon ? "cursor-not-allowed text-muted" : "cursor-pointer hover:bg-accent"}`;
+            const cls = `flex w-full items-start gap-3 rounded-field px-3 py-2.5 text-left outline-none focus-visible:bg-accent ${it.soon ? "cursor-not-allowed text-muted" : "cursor-pointer hover:bg-accent"}`;
             const body = <>
               {it.flag && <span aria-hidden className="text-fs-xl leading-5">{it.flag}</span>}
               <span className="min-w-0 flex-1"><span className="flex flex-wrap items-center gap-2 font-medium">{it.label}{it.soon && <span className="rounded-full bg-accent px-2 py-0.5 text-fs-nano font-medium text-muted ring-1 ring-border">Coming soon</span>}</span>{it.sub && <span className="mt-0.5 block text-fs-sm font-normal text-muted">{it.sub}</span>}</span>
@@ -74,7 +74,7 @@ export default function TopBar({ product: current }: { product: "data" | "worksp
     <>
       <TopMenu title="Switch product" ariaLabel={`Switch product, current: ${product.name}`} testid="product-switcher" open={open === "product"} setOpen={(o) => setOpen(o ? "product" : null)}
         items={PRODUCTS.map((p) => ({ id: p.id, label: p.name, sub: p.sub, checked: p.id === current, soon: p.soon, href: p.href }))}
-        triggerClass={pill} trigger={<><span className="rounded-full bg-primary px-2.5 py-1 text-fs-nano font-semibold uppercase tracking-wide text-white">Product</span><span className="font-medium">{product.name}</span><Chevron /></>} />
+        triggerClass={pill} trigger={<><span className="rounded-chip bg-primary px-2.5 py-1 font-mono text-fs-nano font-medium uppercase tracking-caps text-on-primary">Product</span><span className="font-medium">{product.name}</span><Chevron /></>} />
       <TopMenu title="Country" ariaLabel={`Country, current: ${country.name}`} testid="country-switcher" open={open === "country"} setOpen={(o) => setOpen(o ? "country" : null)}
         items={COUNTRIES.map((c) => ({ id: c.id, label: c.name, flag: c.flag, checked: c.current, soon: c.soon }))}
         triggerClass="flex items-center gap-1.5 rounded-full bg-surface px-3 py-1.5 text-fs-ui ring-1 ring-control-border hover:bg-accent focus-visible:outline-2" trigger={<><span aria-hidden className="text-fs-lead leading-none">{country.flag}</span><Chevron /></>} />

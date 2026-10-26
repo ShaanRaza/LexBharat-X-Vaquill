@@ -17,8 +17,10 @@ function Action({ title, text, href }: { title: string; text: string; href?: str
 
 const LIVE = ["Acts search: by words, by “exact phrase”, or a section lookup like “138 NI Act”", "Smart search (by meaning) over Central and State Acts", "Chat: plain-English answers from Act sections, with a link to each section used", "Drafting: five templates (cheque-bounce notice, legal notice, NDA, rent agreement, service agreement) grounded in the Acts",
   "Vault: keep PDF, Word and text files, and scanned pages or photos, on this browser, and attach them to a chat question (answers cite the document page and the Act section)",
-  "Review: upload a contract for a summary, clause risks, suggested wording, missing clauses and Indian-law points tied to Act sections"];
-const SOON = ["Smart search over judgments", "Judgments in chat and review answers"];
+  "Review: upload a contract for a summary, clause risks, suggested wording, missing clauses and Indian-law points tied to Act sections",
+  "Supreme Court judgments: the full text on each case page, search inside it (by meaning or by words), and short excerpts cited in Chat and Review",
+  "Regulator instruments (RBI, SEBI, MCA and others), Law Commission reports: text and search"];
+const SOON = ["High Court judgment text (case lists only today)", "Tribunal decisions"];
 
 export default function WorkspaceDashboard() {
   const [chats, setChats] = useState<Chat[] | null>(null);
@@ -68,7 +70,7 @@ export default function WorkspaceDashboard() {
           <Panel as="div"><h3 className="flex items-center gap-2 text-ui-base font-semibold"><Badge>Not yet</Badge></h3>
             <ul className="mt-2 list-disc space-y-1.5 pl-5 text-ui-base text-secondary">{SOON.map((x) => <li key={x}>{x}</li>)}</ul></Panel>
         </div>
-        <p className="mt-3 text-ui-sm text-muted">Searches Indian Acts only. Judgments are not included in chat yet. Not legal advice.</p>
+        <p className="mt-3 text-ui-sm text-muted">Chat and Review search Indian Acts and Supreme Court judgment excerpts. Not legal advice.</p>
       </section>
     </div>
   );

@@ -98,3 +98,13 @@ body {
 
 /* Page titles in the workspace use the serif of the reskin (headings only; reading text and UI stay Geist). */
 .console h1 { font-family: var(--font-serif), Georgia, serif; font-weight: 400; }
+
+/* The glow (reskin): forest ground with olive / ochre / sage lights, a soft vignette and a film-grain tile (public/grain.webp). Colours come from the --glow-* tokens. Text on it must be white. */
+.surface-glow { position: relative; isolation: isolate; overflow: hidden; color: rgb(var(--white-rgb)); background-color: rgb(var(--glow-base-rgb));
+  background-image: linear-gradient(rgb(var(--glow-shade-rgb) / 0.32), rgb(var(--glow-shade-rgb) / 0.32)),
+    radial-gradient(130% 110% at 50% 45%, rgb(var(--glow-shade-rgb) / 0) 55%, rgb(var(--glow-shade-rgb) / 0.34) 100%),
+    radial-gradient(54% 82% at 74% 4%, rgb(var(--glow-gold-rgb) / 0.96), rgb(var(--glow-gold-rgb) / 0) 74%),
+    radial-gradient(58% 70% at 18% 0%, rgb(var(--glow-olive-rgb) / 0.92), rgb(var(--glow-olive-rgb) / 0) 74%),
+    radial-gradient(50% 70% at 100% 70%, rgb(var(--glow-sage-rgb) / 0.95), rgb(var(--glow-sage-rgb) / 0) 74%),
+    radial-gradient(60% 84% at 2% 106%, rgb(var(--glow-deep-rgb) / 0.95), rgb(var(--glow-deep-rgb) / 0) 74%); }
+.surface-glow::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url("/grain.webp") 0 0 / 120px 120px; opacity: 0.2; }
