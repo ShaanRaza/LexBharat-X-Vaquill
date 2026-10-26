@@ -91,10 +91,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
           {rows.map(([k, v]) => (<div key={k} className="grid gap-1 px-5 py-3 sm:grid-cols-[210px_1fr]"><dt className="text-ui-sm text-secondary">{k}</dt><dd className="text-ui-body">{v}</dd></div>))}
         </dl>
         {full && joined && (
-          <>
-            <JudgmentFullText chunks={full.chunks} mentions={mentions} />
-            <section aria-label="Laws referred to" className="mt-3 rounded-card bg-surface p-5 shadow-sm ring-1 ring-border/60"><LawsReferred laws={lawsReferred(mentions)} /></section>
-          </>
+          <JudgmentFullText chunks={full.chunks} mentions={mentions} />
         )}
         {!full && preview && (
           <section aria-labelledby="preview" className="mt-5 rounded-card bg-surface p-5 shadow-sm ring-1 ring-border/60">
