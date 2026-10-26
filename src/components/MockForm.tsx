@@ -42,13 +42,13 @@ export default function MockForm({ kind, fields, submitLabel = "Send", compact =
     } finally { setBusy(false); }
   }
 
-  const input = "w-full rounded-control border border-[var(--control-border)] bg-surface px-3 py-2 text-[15px]";
+  const input = "w-full rounded-control border border-[var(--control-border)] bg-surface px-3 py-2 text-fs-body";
   return (
     <form onSubmit={submit} className={`mock-form space-y-4 rounded-panel border border-border bg-surface ${compact ? "p-5" : "p-6 sm:p-8"}`}>
-      <DevOnly><p className="text-[12px] text-muted"><MockBadge>mock form</MockBadge> Submitting stores nothing and sends nothing.</p></DevOnly>
+      <DevOnly><p className="text-fs-xs text-muted"><MockBadge>mock form</MockBadge> Submitting stores nothing and sends nothing.</p></DevOnly>
       {fields.map((f) => (
         <div key={`${f.name}-${round}`}>
-          <label htmlFor={`${kind}-${f.name}`} className="mb-1 block text-[14px] font-medium">{f.label}{f.required && " *"}</label>
+          <label htmlFor={`${kind}-${f.name}`} className="mb-1 block text-fs-ui font-medium">{f.label}{f.required && " *"}</label>
           {f.type === "textarea" ? (
             <textarea id={`${kind}-${f.name}`} name={f.name} aria-required={f.required || undefined} rows={4} className={input} placeholder={f.placeholder} value={vals[f.name] ?? ""} onChange={(e) => setVal(f.name, e.target.value)} />
           ) : f.type === "select" ? (
@@ -62,7 +62,7 @@ export default function MockForm({ kind, fields, submitLabel = "Send", compact =
         </div>
       ))}
       <button disabled={busy} className="btn btn-primary disabled:opacity-60">{busy ? "Sending…" : submitLabel}</button>
-      <p aria-live="polite" className={`min-h-5 text-[14px] ${msg?.ok ? "text-success" : "text-error"}`}>{msg?.text}</p>
+      <p aria-live="polite" className={`min-h-5 text-fs-ui ${msg?.ok ? "text-success" : "text-error"}`}>{msg?.text}</p>
     </form>
   );
 }

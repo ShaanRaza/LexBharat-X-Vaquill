@@ -38,7 +38,7 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
   const view = state.available ? state.view : null;
   const sel = view?.selected ?? null;
   return (
-    <div className="mx-auto max-w-[1040px] pt-2">
+    <div className="mx-auto max-w-w1040 pt-2">
       <nav aria-label="Breadcrumb" className="text-ui-base text-secondary">
         <Link href="/workspace/browse?tab=acts" className="inline-flex min-h-8 items-center hover:text-primary hover:underline">Browse Laws &amp; Judgments</Link>
         <span aria-hidden> / </span><span>Acts &amp; Legislation</span>

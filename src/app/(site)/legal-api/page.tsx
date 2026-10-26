@@ -18,25 +18,25 @@ export default function LegalApi() {
       <Section tone="accent" title="Build the pipeline yourself, or make one call.">
         <div className="grid gap-4 md:grid-cols-2">
           <div className="rounded-panel border border-border bg-surface p-6">
-            <p className="font-mono text-[11px] uppercase tracking-wider text-error">The hard way</p>
-            <h3 className="mt-1 text-[20px] font-semibold">Build the pipeline yourself</h3>
+            <p className="font-mono text-fs-nano uppercase tracking-wider text-error">The hard way</p>
+            <h3 className="mt-1 text-fs-20 font-semibold">Build the pipeline yourself</h3>
             <div className="mt-4"><Bullets tone="cross" items={["Dozens of government sites, each in its own format", "PDFs and XML with broken tables and footnotes", "Section hierarchy, amendments and metadata", "A search index you build and keep in sync", "Re-scrape it all, forever, as the law changes"]} /></div>
-            <p className="mt-4 text-[14px] text-muted">Weeks of setup. Maintenance that never ends.</p>
+            <p className="mt-4 text-fs-ui text-muted">Weeks of setup. Maintenance that never ends.</p>
           </div>
           <div className="rounded-panel border border-primary/40 bg-surface p-6">
-            <p className="font-mono text-[11px] uppercase tracking-wider text-success">The API</p>
-            <h3 className="mt-1 text-[20px] font-semibold">Or make one call</h3>
+            <p className="font-mono text-fs-nano uppercase tracking-wider text-success">The API</p>
+            <h3 className="mt-1 text-fs-20 font-semibold">Or make one call</h3>
             <div className="mt-4"><Bullets items={["Indexed and normalized to one schema", "Cited, with a link to the official source", "Relevance-ranked; filter by state or corpus", "Refreshed on a per-source schedule"]} /></div>
-            <p className="mt-4 text-[14px] text-muted">One API key.{dev(" (Mock: no real service behind this build.)")}</p>
+            <p className="mt-4 text-fs-ui text-muted">One API key.{dev(" (Mock: no real service behind this build.)")}</p>
           </div>
         </div>
       </Section>
       <Section id="coverage" title="Endpoints you will use most" lead="A selection of the endpoints listed on the public page. Try any of them in the playground (mock responses).">
         {endpointGroups.map((g) => (
           <div key={g} className="mb-6">
-            <h3 className="mb-2 text-[16px] font-semibold">{g}</h3>
+            <h3 className="mb-2 text-fs-lead font-semibold">{g}</h3>
             <SimpleTable head={["Method", "Path", "What it does", "Credits"]}
-              rows={endpoints.filter((e) => e.group === g).map((e) => [<span key="m" className="font-mono text-[12px]">{e.method}</span>, <code key="p" className="font-mono text-[12.5px]">{e.path}</code>, e.summary, String(e.credits)])} />
+              rows={endpoints.filter((e) => e.group === g).map((e) => [<span key="m" className="font-mono text-fs-xs">{e.method}</span>, <code key="p" className="font-mono text-fs-12.5">{e.path}</code>, e.summary, String(e.credits)])} />
           </div>
         ))}
       </Section>

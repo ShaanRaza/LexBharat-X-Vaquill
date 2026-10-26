@@ -19,14 +19,14 @@ function Newsletter() {
     if (j.ok) setEmail("");
   }
   return (
-    <form onSubmit={submit} className="max-w-[420px]">
-      <h3 className="text-[15px] font-semibold">API updates and coverage releases, monthly. <MockBadge>mock form</MockBadge></h3>
+    <form onSubmit={submit} className="max-w-w420">
+      <h3 className="text-fs-body font-semibold">API updates and coverage releases, monthly. <MockBadge>mock form</MockBadge></h3>
       <label htmlFor="email" className="sr-only">Email address</label>
       <div className="mt-3 flex gap-2">
-        <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" className="min-w-0 flex-1 rounded-control border border-[var(--control-border)] bg-surface px-3 py-2 text-[15px]" />
-        <button disabled={!valid} className="btn btn-primary !px-4 !py-2 !text-[15px] disabled:opacity-40">Subscribe</button>
+        <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" className="min-w-0 flex-1 rounded-control border border-[var(--control-border)] bg-surface px-3 py-2 text-fs-body" />
+        <button disabled={!valid} className="btn btn-primary !px-4 !py-2 !text-fs-body disabled:opacity-40">Subscribe</button>
       </div>
-      <p className="mt-2 min-h-5 text-[13px] text-muted" aria-live="polite">{msg}</p>
+      <p className="mt-2 min-h-5 text-fs-sm text-muted" aria-live="polite">{msg}</p>
     </form>
   );
 }
@@ -34,12 +34,12 @@ function Newsletter() {
 export default function SiteFooter() {
   return (
     <footer className="px-4 py-14 sm:px-6 lg:px-8">
-      <div className="mx-auto grid max-w-[1152px] gap-10 lg:grid-cols-[1.3fr_repeat(3,1fr)]">
+      <div className="mx-auto grid max-w-w1152 gap-10 lg:grid-cols-[1.3fr_repeat(3,1fr)]">
         <div>
           <Wordmark />
-          <p className="mt-4 max-w-[340px] text-[14px] leading-relaxed text-muted">LexBharat: browse Indian Acts and court judgment metadata, with the source credited on every page.{RELEASE ? "" : " (mock copy)"}</p>
-          <p className="mt-3 text-[14px] text-primary">hello@lexbharat.example</p>
-          <p className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-1 text-[13px] text-muted">
+          <p className="mt-4 max-w-w340 text-fs-ui leading-relaxed text-muted">LexBharat: browse Indian Acts and court judgment metadata, with the source credited on every page.{RELEASE ? "" : " (mock copy)"}</p>
+          <p className="mt-3 text-fs-ui text-primary">hello@lexbharat.example</p>
+          <p className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-1 text-fs-sm text-muted">
             <Link href="/slack" className="inline-flex min-h-6 items-center whitespace-nowrap hover:text-primary">Community</Link>
             <Link href="/word" className="inline-flex min-h-6 items-center whitespace-nowrap hover:text-primary">Word add-in</Link>
             <Link href="/for-lawyers" className="inline-flex min-h-6 items-center whitespace-nowrap hover:text-primary">For lawyers</Link>
@@ -48,16 +48,16 @@ export default function SiteFooter() {
         </div>
         {Object.entries(footerGroups).map(([h, items]) => (
           <div key={h}>
-            <h2 className="text-[13px] font-semibold uppercase tracking-wider text-muted">{h}</h2>
-            <ul className="mt-3 space-y-2 text-[15px]">
+            <h2 className="text-fs-sm font-semibold uppercase tracking-wider text-muted">{h}</h2>
+            <ul className="mt-3 space-y-2 text-fs-body">
               {items.map((x) => <li key={x.label}><Link href={x.href} className="hover:text-primary">{x.label}</Link></li>)}
             </ul>
           </div>
         ))}
       </div>
-      <div className="mx-auto mt-12 flex max-w-[1152px] flex-wrap items-start justify-between gap-8 border-t border-border pt-8">
+      <div className="mx-auto mt-12 flex max-w-w1152 flex-wrap items-start justify-between gap-8 border-t border-border pt-8">
         <Newsletter />
-        <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] text-muted"><span>{RELEASE ? "© LexBharat." : "LexBharat local build. Placeholder content, mocked backend. © LexBharat."}</span><LogoutLink /></p>
+        <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-fs-sm text-muted"><span>{RELEASE ? "© LexBharat." : "LexBharat local build. Placeholder content, mocked backend. © LexBharat."}</span><LogoutLink /></p>
       </div>
     </footer>
   );

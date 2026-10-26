@@ -17,7 +17,7 @@ export default function Word() {
         lead="Statute and regulation lookup grounded in the US primary law corpus, inside Microsoft Word. No copy-paste into a separate tab: ask in the task pane and get an answer with checkable citations."
         actions={[{ label: "Get started: create your account", href: "/auth/signup" }, { label: "Install guide", href: "/word/sideload", variant: "secondary" }]}
       >
-        <DevOnly><p className="mt-6 text-[13px] text-muted"><MockBadge>no add-in exists</MockBadge> This page recreates the marketing page only. There is no Word add-in in this build.</p></DevOnly>
+        <DevOnly><p className="mt-6 text-fs-sm text-muted"><MockBadge>no add-in exists</MockBadge> This page recreates the marketing page only. There is no Word add-in in this build.</p></DevOnly>
       </PageHero>
 
       <Section tone="accent" title="What it does in Word" lead="Everything happens on the file you have open, and applies as native Word changes. Every answer carries checkable sources.">
@@ -27,15 +27,15 @@ export default function Word() {
       <Section title="Hosted, or bring your own key" lead="The add-in is described as open source: run the hosted edition for the full product, or a community build on your own AI key.">
         <div className="grid gap-4 md:grid-cols-2">
           <div className="rounded-panel border border-primary/40 bg-surface p-6">
-            <h3 className="text-[20px] font-semibold">Account (hosted)</h3>
-            <p className="mt-1 text-[15px] text-muted">Sign in and answers are grounded in the full statute corpus, with cited authority. Nothing to run.</p>
+            <h3 className="text-fs-20 font-semibold">Account (hosted)</h3>
+            <p className="mt-1 text-fs-body text-muted">Sign in and answers are grounded in the full statute corpus, with cited authority. Nothing to run.</p>
             <div className="mt-4"><Bullets items={["Grounded in case law and statutes, with cited authority", "Statute verification and good-law signals", "Document compare and tracked-changes export", "Save work back to your matters and web app"]} /></div>
           </div>
           <div className="rounded-panel border border-border bg-surface p-6">
-            <h3 className="text-[20px] font-semibold">Bring your own key (community)</h3>
-            <p className="mt-1 text-[15px] text-muted">An open-source build that runs on your own AI provider key, with no account and no hosted backend.</p>
+            <h3 className="text-fs-20 font-semibold">Bring your own key (community)</h3>
+            <p className="mt-1 text-fs-body text-muted">An open-source build that runs on your own AI provider key, with no account and no hosted backend.</p>
             <div className="mt-4"><Bullets items={["Open source and self-hostable; no account required", "Your own provider key, kept on your device", "Full document tools, review, redlines and drafting", "Playbooks and prompt libraries saved locally"]} /></div>
-            <p className="mt-4 text-[14px]"><Link href="/word/sideload" className="text-primary hover:underline">Install guide →</Link></p>
+            <p className="mt-4 text-fs-ui"><Link href="/word/sideload" className="text-primary hover:underline">Install guide →</Link></p>
           </div>
         </div>
       </Section>
@@ -44,8 +44,8 @@ export default function Word() {
         <ol className="grid gap-4 md:grid-cols-2">
           {wordSteps.map((s, i) => (
             <li key={s} className="flex gap-4 rounded-panel border border-border bg-surface p-5">
-              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-primary/10 font-mono text-[14px] text-primary">{i + 1}</span>
-              <span className="text-[15px] leading-relaxed">{s}</span>
+              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-primary/10 font-mono text-fs-ui text-primary">{i + 1}</span>
+              <span className="text-fs-body leading-relaxed">{s}</span>
             </li>
           ))}
         </ol>

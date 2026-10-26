@@ -33,7 +33,7 @@ export default function Alerts() {
       </Section>
       <Section tone="accent" title="Subscribe once, get every change." lead="A source is something you can watch (a state's statutes, a federal register). A watch is your subscription to one.">
         <AlertsClient />
-        <div className="mt-8 max-w-[640px]"><CodeBlock label="example delivery (illustrative)" code={payload} /></div>
+        <div className="mt-8 max-w-w640"><CodeBlock label="example delivery (illustrative)" code={payload} /></div>
       </Section>
       <CtaBand title="Stop polling for changes you might miss." primary={{ label: "Get API key", href: "/auth/signup" }} />
       <DataNote kind="mock-api" files={["/api/mock/watches", "src/lib/mockStore.ts (simulated in-memory database)"]} />

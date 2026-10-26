@@ -22,7 +22,7 @@ export default function Plugin() {
         </CardGrid>
       </Section>
       <Section tone="accent" title="The commands">
-        <SimpleTable head={["Command", "What it does"]} rows={pluginCommands.map(([c, d]) => [<code key="c" className="font-mono text-[12.5px]">/primary-law:{c}</code>, d])} />
+        <SimpleTable head={["Command", "What it does"]} rows={pluginCommands.map(([c, d]) => [<code key="c" className="font-mono text-fs-12.5">/primary-law:{c}</code>, d])} />
       </Section>
       <Section title="Why the skill matters more than the tools" lead="An API can hand a model the right text and still get a wrong answer out of it. These are the failure modes the skill is designed to prevent.">
         <CardGrid cols={2}>

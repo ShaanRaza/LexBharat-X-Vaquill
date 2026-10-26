@@ -10,7 +10,7 @@ export default function About() {
     <>
       <PageHero eyebrow="About" title="Our story" lead="US primary law as clean, structured data: statutes, regulations, constitutions, court rules and executive orders through an API, an MCP server and an open dataset." />
       <Section title="Built for developers and companies">
-        <div className="max-w-[760px] space-y-4 text-[17px] leading-[1.75] text-muted">
+        <div className="max-w-w760 space-y-4 text-fs-17 leading-reading-loose text-muted">
           <p>US primary law is public, yet it is not usable. It lives across thousands of government sources, in inconsistent formats, with no stable structure and no single API.</p>
           <p>The product covers the complete US Code, the CFR and state and territory codes: normalized, cross-referenced and citation-addressable. (Paraphrased from the public About page.)</p>
           <p>It serves LegalTech and RegTech products, AI teams, compliance platforms, universities and government.</p>

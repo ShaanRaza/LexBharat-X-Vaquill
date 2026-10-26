@@ -7,7 +7,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
   return (
     <>
       <DevOnly>
-        <div className="absolute inset-x-0 top-0 z-40 bg-warning px-4 py-1.5 text-center text-[12px] font-medium text-white">
+        <div className="absolute inset-x-0 top-0 z-40 bg-warning px-4 py-1.5 text-center text-fs-xs font-medium text-white">
           LexBharat local build · placeholder content · all backend behavior is MOCKED
         </div>
       </DevOnly>

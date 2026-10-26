@@ -20,7 +20,7 @@ export default function LegalAid() {
           <Stat value="71%" label="of those got no help or not enough" />
           <Stat value="29%" label="received the help they needed" />
         </div>
-        <p className="mt-6 max-w-[720px] text-[16px] leading-relaxed text-muted">Data was never legal aid's biggest constraint, staffing is, but it is one line item that should not exist. (Paraphrased; figures as displayed on the public page.)</p>
+        <p className="mt-6 max-w-w720 text-fs-lead leading-relaxed text-muted">Data was never legal aid's biggest constraint, staffing is, but it is one line item that should not exist. (Paraphrased; figures as displayed on the public page.)</p>
       </Section>
       <Section tone="accent" title="The same service, free">
         <CardGrid>
@@ -40,7 +40,7 @@ export default function LegalAid() {
         </CardGrid>
       </Section>
       <Section id="apply" tone="accent" title="Apply for free legal aid access.">
-        <div className="max-w-[640px]">
+        <div className="max-w-w640">
           <MockForm kind="legal-aid" submitLabel="Apply" fields={[
             { name: "name", label: "Full name", required: true },
             { name: "email", label: "Email", type: "email", required: true },

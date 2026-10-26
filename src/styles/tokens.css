@@ -94,3 +94,92 @@
   /* fonts: the families themselves are loaded in app/layout.tsx and exposed as --font-sans / --font-mono / --font-serif */
   --font-reading: var(--font-serif), Georgia, serif;
 }
+
+/* ---- Phase 1 of the reskin: every value that used to be written inside a class name (text-[17px], bg-[#f4f1ec], max-w-[1152px] ...) now lives here, with the SAME value, so a reskin only edits this file. ---- */
+:root {
+  /* font sizes (px) for the text-fs-* classes, in addition to the scale above */
+  --text-30: 30px;
+  --text-20: 20px;
+  --text-32: 32px;
+  --text-22: 22px;
+  --text-12-5: 12.5px;
+  --text-36: 36px;
+  --text-40: 40px;
+  --text-17: 17px;
+  --text-26: 26px;
+  --text-34: 34px;
+  --text-44: 44px;
+  --text-48: 48px;
+  --text-64: 64px;
+  --text-72: 72px;
+  --text-56: 56px;
+  --text-21: 21px;
+  --text-38: 38px;
+  --text-46: 46px;
+  /* colours that were hard-coded in class names: named by role where the role is clear, otherwise 'legacy-<hex>' until the reskin gives them one */
+  --legacy-4b5563-rgb: 75 85 99;
+  --subtle-rgb: 101 98 95;
+  --soft-rgb: 65 64 64;
+  --strong-rgb: 26 24 24;
+  --legacy-2c2620-rgb: 44 38 32;
+  --legacy-f4f1ec-rgb: 244 241 236;
+  --legacy-282726-rgb: 40 39 38;
+  --legacy-ebe7e0-rgb: 235 231 224;
+  --legacy-10b781-rgb: 16 183 129;
+  --legacy-0b7556-rgb: 11 117 86;
+  --legacy-3b82f6-rgb: 59 130 246;
+  --legacy-1d5aa8-rgb: 29 90 168;
+  --danger-rgb: 180 35 35;
+  --legacy-c9c3b8-rgb: 201 195 184;
+  --legacy-b5aea3-rgb: 181 174 163;
+  --legacy-e0b341-rgb: 224 179 65;
+  --legacy-1d1a16-rgb: 29 26 22;
+  --legacy-f3f0ec-rgb: 243 240 236;
+  --legacy-a39c91-rgb: 163 156 145;
+  --legacy-6f685e-rgb: 111 104 94;
+  --legacy-8f887e-rgb: 143 136 126;
+  --legacy-5b5650-rgb: 91 86 80;
+  /* letter spacing, radius, line height, widths, shadow */
+  --tracking-caps-xwide: 0.14em;
+  --tracking-snug: -0.025em;
+  --tracking-tight-soft: -0.01em;
+  --tracking-caps-mid: 0.1em;
+  --tracking-caps-soft: 0.06em;
+  --radius-slim: 3px;
+  --leading-reading-loose: 1.75;
+  --leading-body: 1.6;
+  --leading-display: 1.1;
+  --leading-display-tight: 1.08;
+  --mw-440: 440px;
+  --mw-820: 820px;
+  --mw-900: 900px;
+  --mw-689: 689px;
+  --mw-760: 760px;
+  --mw-640: 640px;
+  --mw-720: 720px;
+  --mw-520: 520px;
+  --mw-560: 560px;
+  --mw-1152: 1152px;
+  --mw-1440: 1440px;
+  --mw-1216: 1216px;
+  --mw-860: 860px;
+  --mw-824: 824px;
+  --mw-620: 620px;
+  --mw-1280: 1280px;
+  --mw-420: 420px;
+  --mw-340: 340px;
+  --mw-320: 320px;
+  --mw-260: 260px;
+  --mw-1040: 1040px;
+  --shadow-pop: 0 6px 18px rgb(var(--foreground-rgb) / 0.08);
+  --legacy-cba099-rgb: 203 160 153;
+  --legacy-a8706a-rgb: 168 112 106;
+  --legacy-8a4a40-rgb: 138 74 64;
+  --legacy-3b302b-rgb: 59 48 43;
+  --legacy-54403a-rgb: 84 64 58;
+  --legacy-6e4e42-rgb: 110 78 66;
+  --white-rgb: 255 255 255;
+  /* primary colour with transparency, for the soft radial glows on dark bands */
+  --primary-glow-strong: #6e373066;
+  --primary-glow-soft: #6e373055;
+}

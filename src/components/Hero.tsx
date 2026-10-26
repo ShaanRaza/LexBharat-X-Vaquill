@@ -13,7 +13,7 @@ function CyclingHeadline() {
     return () => clearInterval(t);
   }, []);
   return (
-    <h1 className="text-[44px] font-semibold leading-[1.08] tracking-[-0.03em] sm:text-[64px] lg:text-[72px]">
+    <h1 className="text-fs-44 font-semibold leading-display-tight tracking-brand sm:text-fs-64 lg:text-fs-72">
       <span className="sr-only">US laws for your AI agents, your legal AI, your research platform and your compliance tools.</span>
       <span aria-hidden className="block">
         <span className="block">US laws for</span>
@@ -38,10 +38,10 @@ export default function Hero() {
   return (
     <section id="top" className="relative overflow-hidden px-4 pb-16 pt-40 sm:px-6 sm:pt-44 lg:px-8">
       <div aria-hidden className="pointer-events-none absolute -right-40 top-10 h-[900px] w-[900px] rounded-full border border-foreground/5" />
-      <div className="relative mx-auto max-w-[1216px]">
-        <div className="max-w-[860px] lg:pl-8">
+      <div className="relative mx-auto max-w-w1216">
+        <div className="max-w-w860 lg:pl-8">
           <CyclingHeadline />
-          <p className="mt-7 max-w-[640px] text-[18px] leading-relaxed text-muted">
+          <p className="mt-7 max-w-w640 text-fs-xl leading-relaxed text-muted">
             <strong className="font-medium text-foreground">LexBharat</strong> is an open API for US primary law{RELEASE ? "" : " (mock copy)"}:
             statutes, regulations, court rules and agency guidance, with source links.
           </p>
@@ -58,21 +58,21 @@ export default function Hero() {
               </span>
             </Link>
           </div>
-          <p className="mt-4 text-[15px] text-muted">Free credits for personal projects, student work, and academic research.</p>
-          <dl className="mt-10 flex max-w-[824px] flex-wrap gap-x-12 gap-y-6 border-t border-foreground/15 pt-8">
+          <p className="mt-4 text-fs-body text-muted">Free credits for personal projects, student work, and academic research.</p>
+          <dl className="mt-10 flex max-w-w824 flex-wrap gap-x-12 gap-y-6 border-t border-foreground/15 pt-8">
             {stats.map((s) => (
               <div key={s.l}>
-                <dt className="flex items-center gap-2 text-[34px] font-medium leading-none tracking-tight text-primary">
+                <dt className="flex items-center gap-2 text-fs-34 font-medium leading-none tracking-tight text-primary">
                   {s.v}
-                  {s.n && <span className="grid h-[18px] w-[18px] place-items-center rounded-full bg-primary/15 text-[10px] font-semibold">{s.n}</span>}
+                  {s.n && <span className="grid h-[18px] w-[18px] place-items-center rounded-full bg-primary/15 text-fs-micro font-semibold">{s.n}</span>}
                 </dt>
-                <dd className="mt-2 text-[14px] text-muted">{s.l}</dd>
+                <dd className="mt-2 text-fs-ui text-muted">{s.l}</dd>
               </div>
             ))}
           </dl>
         </div>
         <Link href="/claude-plugin"
-          className="mt-10 flex w-fit items-center gap-3 rounded-panel border border-border bg-surface px-4 py-3 text-[15px] lg:absolute lg:right-8 lg:top-[250px] lg:mt-0 lg:w-[272px] lg:justify-between">
+          className="mt-10 flex w-fit items-center gap-3 rounded-panel border border-border bg-surface px-4 py-3 text-fs-body lg:absolute lg:right-8 lg:top-[250px] lg:mt-0 lg:w-[272px] lg:justify-between">
           <span className="flex items-center gap-3"><span className="text-primary">✳</span>Available in an AI assistant</span> <span>→</span>
         </Link>
       </div>

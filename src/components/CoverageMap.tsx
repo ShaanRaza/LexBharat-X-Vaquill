@@ -8,8 +8,8 @@ import MockBadge from "./MockBadge";
 import DevOnly from "@/components/DevOnly";
 
 // Coverage layers and their map colours (white label on the two darker steps meets 4.5:1).
-const LAYER_COLOR = { 0: "#cba099", 1: "#a8706a", 2: "#6e3730" } as const;
-const HOVER_FILL = "#8a4a40";
+const LAYER_COLOR = { 0: "rgb(var(--legacy-cba099-rgb))", 1: "rgb(var(--legacy-a8706a-rgb))", 2: "var(--primary)" } as const;
+const HOVER_FILL = "rgb(var(--legacy-8a4a40-rgb))";
 const layers = ["Statutes", "Statutes + regulations", "Statutes + regulations + constitution"] as const;
 const PR = { name: "Puerto Rico", sections: 26672 };
 const MIN_ZOOM = 1, MAX_ZOOM = 8;
@@ -88,10 +88,10 @@ export default function CoverageMap() {
 
   return (
     <section className="bg-dark px-4 py-16 text-background sm:px-6 sm:py-24 lg:px-8" id="coverage">
-      <div className="mx-auto max-w-[1152px]">
+      <div className="mx-auto max-w-w1152">
         <Reveal>
-          <h2 className="font-serif text-[34px] leading-tight sm:text-[48px]">Every US jurisdiction, in one consistent format.</h2>
-          <DevOnly><p className="mt-3 text-[14px] text-background/60">US map: <MockBadge>state outlines recreated from the public page</MockBadge> Per-state counts are figures seen on the public page.</p></DevOnly>
+          <h2 className="font-serif text-fs-34 leading-tight sm:text-fs-48">Every US jurisdiction, in one consistent format.</h2>
+          <DevOnly><p className="mt-3 text-fs-ui text-background/60">US map: <MockBadge>state outlines recreated from the public page</MockBadge> Per-state counts are figures seen on the public page.</p></DevOnly>
         </Reveal>
 
         <div className="relative mt-8">
@@ -120,14 +120,14 @@ export default function CoverageMap() {
                     );
                   })}
                   <g transform="translate(779.48 224.51)">
-                    <path d="M0,0 Q-18.2,7.7 -28,22" fill="transparent" stroke="#6e3730" strokeWidth={1} strokeLinecap="round" />
+                    <path d="M0,0 Q-18.2,7.7 -28,22" fill="transparent" stroke="var(--primary)" strokeWidth={1} strokeLinecap="round" />
                     <text x={4} textAnchor="start" dominantBaseline="middle" fontSize={9} fontWeight={500} className="fill-foreground font-sans" aria-hidden="true">Washington, D.C.</text>
                   </g>
                 </g>
               </g>
             </svg>
             <button type="button" aria-label={label(PR.name, PR.sections)} {...hoverHandlers(PR.name)}
-              className="absolute bottom-3 left-24 z-10 flex h-9 w-14 items-center justify-center rounded-control border border-border text-[10px] font-semibold text-white shadow-sm transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+              className="absolute bottom-3 left-24 z-10 flex h-9 w-14 items-center justify-center rounded-control border border-border text-fs-micro font-semibold text-white shadow-sm transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
               style={{ backgroundColor: LAYER_COLOR[2] }}>PR</button>
             {hover && tip && !dragging && (() => {
               const bd = stateBreakdown[hover];
@@ -147,7 +147,7 @@ export default function CoverageMap() {
                     {bd.ag && (
                       <div className="mt-1 border-t border-border pt-2">
                         <dt className="text-muted">Agency guidance</dt><dd className="font-mono font-semibold">{bd.ag}</dd>
-                        {bd.src && <dd className="mt-0.5 text-[11px] leading-snug text-muted">{bd.src}</dd>}
+                        {bd.src && <dd className="mt-0.5 text-fs-nano leading-snug text-muted">{bd.src}</dd>}
                       </div>
                     )}
                     <div className="mt-1.5 flex items-center justify-between gap-3 border-t border-border pt-1.5"><dt className="text-muted">Total sections</dt><dd className="font-mono font-semibold text-primary">{bd.t}</dd></div>
@@ -179,7 +179,7 @@ export default function CoverageMap() {
 
         <dl className="mt-10 grid gap-px overflow-hidden rounded-panel bg-background/10 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map(([v, l]) => (
-            <div key={l} className="bg-dark p-5"><dt className="font-serif text-[30px] text-background">{v}</dt><dd className="mt-1 text-[14px] text-background/60">{l}</dd></div>
+            <div key={l} className="bg-dark p-5"><dt className="font-serif text-fs-30 text-background">{v}</dt><dd className="mt-1 text-fs-ui text-background/60">{l}</dd></div>
           ))}
         </dl>
 
@@ -189,11 +189,11 @@ export default function CoverageMap() {
             ["Federal administrative adjudications", "Decisions from executive-branch tribunals, served as they were issued. Check these the way you would check any decision."],
             ["Federal courts’ own rules", "Local rules from many rule sets, each taken from the court’s own site."],
           ].map(([h, p]) => (
-            <div key={h}><h3 className="text-[18px] font-semibold">{h}</h3><p className="mt-2 text-[15px] leading-relaxed text-background/70">{p}</p></div>
+            <div key={h}><h3 className="text-fs-xl font-semibold">{h}</h3><p className="mt-2 text-fs-body leading-relaxed text-background/70">{p}</p></div>
           ))}
         </div>
 
-        <dl className="mt-10 grid gap-4 border-t border-background/15 pt-6 text-[15px] sm:grid-cols-3">
+        <dl className="mt-10 grid gap-4 border-t border-background/15 pt-6 text-fs-body sm:grid-cols-3">
           {[["CFR", "Refreshed daily"], ["US Code", "Refreshed weekly"], ["State regulations", "Refreshed monthly"]].map(([a, b]) => (
             <div key={a} className="flex justify-between gap-4 sm:block"><dt className="font-medium">{a}</dt><dd className="text-background/60">{b}</dd></div>
           ))}

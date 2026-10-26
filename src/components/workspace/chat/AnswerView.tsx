@@ -88,13 +88,13 @@ export default function AnswerView({ text, sources, check, pending, queries, not
         <div className="mt-4 space-y-2">
           {citedDocs.length > 0 && (
             <section aria-label="Passages of your documents cited">
-              <h3 className="text-ui-sm font-semibold uppercase tracking-[0.08em] text-muted">Your documents cited</h3>
+              <h3 className="text-ui-sm font-semibold uppercase tracking-caps text-muted">Your documents cited</h3>
               <ol className="mt-1.5 space-y-2">{citedDocs.map((c) => <SourceRow key={c.n} c={c} />)}</ol>
             </section>
           )}
           {cited.length > 0 && (
             <section aria-label="Sources cited">
-              <h3 className="text-ui-sm font-semibold uppercase tracking-[0.08em] text-muted">Sources cited</h3>
+              <h3 className="text-ui-sm font-semibold uppercase tracking-caps text-muted">Sources cited</h3>
               <ol className="mt-1.5 space-y-2">{cited.map((c) => <SourceRow key={c.n} c={c} />)}</ol>
             </section>
           )}

@@ -24,7 +24,7 @@ export function LawsReferred({ laws }: { laws: { actKey: string; actName: string
   if (!laws.length) return null;
   return (
     <div className="mt-4 border-t border-border/60 pt-3">
-      <h3 className="text-ui-xs font-semibold uppercase tracking-[0.08em] text-secondary">Laws referred to</h3>
+      <h3 className="text-ui-xs font-semibold uppercase tracking-caps text-secondary">Laws referred to</h3>
       <ul className="mt-2 space-y-1.5 text-ui-sm">
         {laws.map((l) => (
           <li key={l.actKey} className="flex flex-wrap items-baseline gap-x-2 gap-y-1">

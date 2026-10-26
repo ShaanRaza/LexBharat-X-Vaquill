@@ -31,7 +31,7 @@ body {
 }
 
 .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .75rem 2rem; border-radius: 2px; font-weight: 500; font-size: 17px; transition: background .2s var(--ease-out), transform .12s; }
-.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary { background: var(--primary); color: var(--on-primary); }
 .btn-primary:hover { background: var(--primary-hover); }
 .btn-secondary { background: var(--raised); color: var(--foreground); }
 .btn-secondary:hover { background: var(--sunken); }
@@ -64,8 +64,8 @@ body {
 @media (prefers-reduced-motion: reduce) { .console-pop, .console-skel { animation: none; } }
 
 /* Map states: 0.75 px borders at any zoom; keyboard focus gets a gold 3 px border plus the global focus outline (the old inline outline:none left focus invisible). */
-.us-state { stroke: #f4f1ec; stroke-width: 0.75px; vector-effect: non-scaling-stroke; cursor: pointer; }
-.us-state:focus-visible { stroke: #e0b341; stroke-width: 3px; outline-color: #1e1b17; }
+.us-state { stroke: rgb(var(--legacy-f4f1ec-rgb)); stroke-width: 0.75px; vector-effect: non-scaling-stroke; cursor: pointer; }
+.us-state:focus-visible { stroke: rgb(var(--legacy-e0b341-rgb)); stroke-width: 3px; outline-color: rgb(var(--dark-rgb)); }
 
 /* Safari/Chrome paint autofilled fields pale yellow/blue. Keep MockForm fields on the site's white surface instead. */
 .mock-form input:-webkit-autofill, .mock-form input:-webkit-autofill:hover, .mock-form input:-webkit-autofill:focus,

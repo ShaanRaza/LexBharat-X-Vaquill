@@ -30,15 +30,15 @@ const clock = (t: number) => new Date(t).toLocaleTimeString([], { hour: "2-digit
 /** UI-side starting values. Confirmed: the search form and its Code view start with limit 5 although the spec default is 10. */
 const seedValues = (e: SpecEndpoint): FormValues => (e.path.endsWith("/us/statutes/search") ? { limit: "5" } : {});
 
-const btnBase = "inline-flex items-center justify-center whitespace-nowrap rounded-[4px] font-medium transition-[background-color,color,opacity,transform] duration-150 ease-out motion-reduce:transition-none focus-visible:outline-2";
+const btnBase = "inline-flex items-center justify-center whitespace-nowrap rounded-tight font-medium transition-[background-color,color,opacity,transform] duration-150 ease-out motion-reduce:transition-none focus-visible:outline-2";
 
 function MethodBadge({ m }: { m: string }) {
-  const c = m === "GET" ? "bg-[#10b781]/15 text-[#0b7556]" : m === "POST" ? "bg-[#3b82f6]/15 text-[#1d5aa8]" : m === "DELETE" ? "bg-error/15 text-[#b42323]" : "bg-warning/15 text-warning";
-  return <span className={`rounded-[4px] px-1.5 py-0.5 font-mono text-[10px] font-semibold ${c}`}>{m}</span>;
+  const c = m === "GET" ? "bg-legacy-10b781/15 text-legacy-0b7556" : m === "POST" ? "bg-legacy-3b82f6/15 text-legacy-1d5aa8" : m === "DELETE" ? "bg-error/15 text-danger" : "bg-warning/15 text-warning";
+  return <span className={`rounded-tight px-1.5 py-0.5 font-mono text-fs-micro font-semibold ${c}`}>{m}</span>;
 }
 
 function renderDesc(s: string) {
-  return s.split(/(`[^`]+`)/g).map((p, i) => (p.startsWith("`") ? <code key={i} className="rounded-[3px] bg-accent px-1 font-mono text-[11px]">{p.slice(1, -1)}</code> : <span key={i}>{p}</span>));
+  return s.split(/(`[^`]+`)/g).map((p, i) => (p.startsWith("`") ? <code key={i} className="rounded-slim bg-accent px-1 font-mono text-fs-nano">{p.slice(1, -1)}</code> : <span key={i}>{p}</span>));
 }
 
 function Clamp({ children, long }: { children: React.ReactNode; long: boolean }) {
@@ -46,7 +46,7 @@ function Clamp({ children, long }: { children: React.ReactNode; long: boolean })
   return (
     <div>
       <div className={!more && long ? "max-h-[5.2rem] overflow-hidden" : ""}>{children}</div>
-      {long && <button type="button" aria-expanded={more} onClick={() => setMore((m) => !m)} className="-ml-1 mt-0.5 inline-flex min-h-6 items-center rounded-[3px] px-1 text-[12px] text-primary underline underline-offset-2">{more ? "Show less" : "Show more"} {more ? "▴" : "▾"}</button>}
+      {long && <button type="button" aria-expanded={more} onClick={() => setMore((m) => !m)} className="-ml-1 mt-0.5 inline-flex min-h-6 items-center rounded-slim px-1 text-fs-xs text-primary underline underline-offset-2">{more ? "Show less" : "Show more"} {more ? "▴" : "▾"}</button>}
     </div>
   );
 }
@@ -54,13 +54,13 @@ function Clamp({ children, long }: { children: React.ReactNode; long: boolean })
 function SwitchBtn({ id, label, on, onClick }: { id: string; label: string; on: boolean; onClick: () => void }) {
   return (
     <button id={id} type="button" role="switch" aria-checked={on} aria-label={label} onClick={onClick}
-      className={`relative h-5 w-9 shrink-0 rounded-full transition-colors ${on ? "bg-primary" : "bg-[#c9c3b8]"}`}>
+      className={`relative h-5 w-9 shrink-0 rounded-full transition-colors ${on ? "bg-primary" : "bg-legacy-c9c3b8"}`}>
       <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform ${on ? "translate-x-[18px]" : "translate-x-0.5"}`} />
     </button>
   );
 }
 
-const inputCls = "w-full rounded-[4px] border border-transparent bg-accent px-3 py-2 text-[14px] outline-none transition-colors placeholder:text-muted/70 focus:border-primary focus:bg-background";
+const inputCls = "w-full rounded-tight border border-transparent bg-accent px-3 py-2 text-fs-ui outline-none transition-colors placeholder:text-muted/70 focus:border-primary focus:bg-background";
 
 function FieldBlock({ f, value, set }: { f: SpecField; value: FormValue; set: (v: FormValue) => void }) {
   const id = `pg-${f.name}`;
@@ -71,14 +71,14 @@ function FieldBlock({ f, value, set }: { f: SpecField; value: FormValue; set: (v
   return (
     <div className="space-y-2">
       <div className="flex items-baseline justify-between gap-3">
-        <label htmlFor={id} className="text-[16px] font-medium">{labelOf(f.name)} <span className="ml-1 font-mono text-[11px] font-normal text-muted">{f.name}</span>{f.required && <span className="ml-1 text-error" aria-hidden>*</span>}</label>
-        {range && <span className="font-mono text-[11px] text-muted">{range}</span>}
+        <label htmlFor={id} className="text-fs-lead font-medium">{labelOf(f.name)} <span className="ml-1 font-mono text-fs-nano font-normal text-muted">{f.name}</span>{f.required && <span className="ml-1 text-error" aria-hidden>*</span>}</label>
+        {range && <span className="font-mono text-fs-nano text-muted">{range}</span>}
       </div>
       <Clamp long={long}>
-        <p className="text-[13px] leading-relaxed text-muted">{renderDesc(f.description)}</p>
+        <p className="text-fs-sm leading-relaxed text-muted">{renderDesc(f.description)}</p>
         {f.enumLabels && f.enum && (
-          <ul data-lenis-prevent className="mt-2 max-h-28 overflow-y-auto rounded-[6px] bg-accent p-2 text-[12px]">
-            {f.enum.map((t) => <li key={t} className="flex gap-2 py-0.5"><span className="shrink-0 rounded-[3px] bg-surface px-1.5 font-mono text-[11px]">{t}</span><span className="text-muted">{f.enumLabels?.[t]}</span></li>)}
+          <ul data-lenis-prevent className="mt-2 max-h-28 overflow-y-auto rounded-panel bg-accent p-2 text-fs-xs">
+            {f.enum.map((t) => <li key={t} className="flex gap-2 py-0.5"><span className="shrink-0 rounded-slim bg-surface px-1.5 font-mono text-fs-nano">{t}</span><span className="text-muted">{f.enumLabels?.[t]}</span></li>)}
           </ul>
         )}
       </Clamp>
@@ -86,34 +86,34 @@ function FieldBlock({ f, value, set }: { f: SpecField; value: FormValue; set: (v
       {f.kind === "enum" && (
         <Listbox id={id} ariaLabel={labelOf(f.name)} value={typeof value === "string" ? value : ""} onChange={(v) => set(v || undefined)} maxHeight="max-h-64"
           triggerClass={`${inputCls} flex cursor-pointer items-center justify-between text-left`}
-          triggerContent={<><span>{typeof value === "string" && value ? <span className="font-mono text-[13px]">{value}</span> : <>Any{f.default !== undefined && <span className="ml-2 font-mono text-[12px] text-muted">{String(f.default)}</span>}</>}</span><span aria-hidden className="text-[10px] text-muted">▾</span></>}
-          items={[{ kind: "option", value: "", text: "any", label: <span>Any</span> }, ...(f.enum ?? []).map((t) => ({ kind: "option" as const, value: t, text: t, label: <span className="font-mono text-[13px]">{t}</span> }))]} />
+          triggerContent={<><span>{typeof value === "string" && value ? <span className="font-mono text-fs-sm">{value}</span> : <>Any{f.default !== undefined && <span className="ml-2 font-mono text-fs-xs text-muted">{String(f.default)}</span>}</>}</span><span aria-hidden className="text-fs-micro text-muted">▾</span></>}
+          items={[{ kind: "option", value: "", text: "any", label: <span>Any</span> }, ...(f.enum ?? []).map((t) => ({ kind: "option" as const, value: t, text: t, label: <span className="font-mono text-fs-sm">{t}</span> }))]} />
       )}
       {f.kind === "number" && (
         <div className="flex flex-wrap items-center gap-2">
           {f.presets && (
-            <div role="group" aria-label={`${labelOf(f.name)} presets`} className="flex rounded-[6px] bg-accent p-0.5">
-              {f.presets.map((p) => <button key={p} type="button" aria-pressed={value === String(p)} onClick={() => set(String(p))} className={`rounded-[4px] px-2.5 py-1 font-mono text-[12px] ${value === String(p) ? "bg-surface shadow-sm" : "text-muted"}`}>{p}</button>)}
+            <div role="group" aria-label={`${labelOf(f.name)} presets`} className="flex rounded-panel bg-accent p-0.5">
+              {f.presets.map((p) => <button key={p} type="button" aria-pressed={value === String(p)} onClick={() => set(String(p))} className={`rounded-tight px-2.5 py-1 font-mono text-fs-xs ${value === String(p) ? "bg-surface shadow-sm" : "text-muted"}`}>{p}</button>)}
             </div>
           )}
           <input id={id} type="number" inputMode="numeric" min={f.min} max={f.max} step={f.integer ? 1 : "any"} value={typeof value === "string" ? value : ""} placeholder={f.default !== undefined ? String(f.default) : ""} aria-label={`${labelOf(f.name)}${range ? `, ${range.replace("-", " to ")}` : ""}`}
             aria-invalid={!!err} aria-describedby={err ? `${id}-err` : undefined}
             onChange={(e) => set(e.target.value)} className={`${inputCls} font-mono ${f.presets ? "w-28" : "w-40"} ${err ? "!border-error" : ""}`} />
-          {err && <p id={`${id}-err`} role="alert" className="basis-full text-[12px] text-[#b42323]">{err}</p>}
+          {err && <p id={`${id}-err`} role="alert" className="basis-full text-fs-xs text-danger">{err}</p>}
         </div>
       )}
       {f.kind === "boolean" && (
         <div className="flex items-center gap-3">
           <SwitchBtn id={id} label={labelOf(f.name)} on={value === undefined ? !!f.default : value === true} onClick={() => set(!(value === undefined ? !!f.default : value === true))} />
-          <span className="text-[13px] text-muted">{value === undefined ? `default: ${String(!!f.default)}` : value ? "true" : "false"}</span>
+          <span className="text-fs-sm text-muted">{value === undefined ? `default: ${String(!!f.default)}` : value ? "true" : "false"}</span>
         </div>
       )}
       {f.kind === "date" && <input id={id} type="date" aria-label={labelOf(f.name)} value={typeof value === "string" ? value : ""} onChange={(e) => set(e.target.value)} className={`${inputCls} w-48`} />}
       {f.kind === "text" && !f.multi && <input id={id} type="text" value={typeof value === "string" ? value : ""} placeholder={f.example !== undefined ? String(f.example) : ""} onChange={(e) => set(e.target.value)} className={inputCls} />}
       {(f.kind === "textarea" || f.kind === "array" || (f.kind === "text" && f.multi)) && (
         <div>
-          <textarea id={id} rows={2} value={typeof value === "string" ? value : ""} placeholder={f.example !== undefined ? String(f.example) : "one per line"} onChange={(e) => set(e.target.value)} className={`${inputCls} resize-y font-mono text-[13px]`} />
-          <p className="mt-1 flex justify-between text-[11px] text-muted"><span>one per line</span><span>{lines} value{lines === 1 ? "" : "s"}</span></p>
+          <textarea id={id} rows={2} value={typeof value === "string" ? value : ""} placeholder={f.example !== undefined ? String(f.example) : "one per line"} onChange={(e) => set(e.target.value)} className={`${inputCls} resize-y font-mono text-fs-sm`} />
+          <p className="mt-1 flex justify-between text-fs-nano text-muted"><span>one per line</span><span>{lines} value{lines === 1 ? "" : "s"}</span></p>
         </div>
       )}
     </div>
@@ -122,18 +122,18 @@ function FieldBlock({ f, value, set }: { f: SpecField; value: FormValue; set: (v
 type FormValue = FormValues[string];
 
 function RunButton({ running, elapsed, disabled, onRun, onCancel, title }: { running: boolean; elapsed: number; disabled: boolean; onRun: () => void; onCancel: () => void; title?: string }) {
-  if (running) return <button type="button" onClick={onCancel} className={`${btnBase} h-9 gap-2 bg-accent px-3 text-[13px] text-foreground ring-1 ring-border hover:bg-sunken`}><span aria-hidden>▢</span>Cancel <span className="font-mono text-[12px] text-muted" aria-live="off">{fmtS(elapsed)}</span></button>;
+  if (running) return <button type="button" onClick={onCancel} className={`${btnBase} h-9 gap-2 bg-accent px-3 text-fs-sm text-foreground ring-1 ring-border hover:bg-sunken`}><span aria-hidden>▢</span>Cancel <span className="font-mono text-fs-xs text-muted" aria-live="off">{fmtS(elapsed)}</span></button>;
   return (
     <button type="button" onClick={onRun} disabled={disabled} title={title}
-      className={`${btnBase} h-9 gap-2 bg-primary px-3 text-[13px] text-white hover:bg-primary-hover active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-primary`}>
-      <span aria-hidden>▷</span>Run <kbd className="rounded-[3px] bg-white/25 px-1.5 py-0.5 font-sans text-[11px]">⌘↵</kbd>
+      className={`${btnBase} h-9 gap-2 bg-primary px-3 text-fs-sm text-white hover:bg-primary-hover active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-primary`}>
+      <span aria-hidden>▷</span>Run <kbd className="rounded-slim bg-white/25 px-1.5 py-0.5 font-sans text-fs-nano">⌘↵</kbd>
     </button>
   );
 }
 
 function StatusChip({ status }: { status: number }) {
   const ok = status >= 200 && status < 300;
-  return <span className={`rounded-full px-2 py-0.5 font-mono text-[11px] ring-1 ${ok ? "bg-success/15 text-[#0b7556] ring-success/40" : "bg-error/10 text-[#b42323] ring-error/40"}`}>{status}</span>;
+  return <span className={`rounded-full px-2 py-0.5 font-mono text-fs-nano ring-1 ${ok ? "bg-success/15 text-legacy-0b7556 ring-success/40" : "bg-error/10 text-danger ring-error/40"}`}>{status}</span>;
 }
 
 // ---- Visual renderers (Pricing layout CONFIRMED; the rest INFERRED) -----------------------------------------------------
@@ -150,21 +150,21 @@ function Visual({ result }: { result: Result }) {
   const b = result.body;
   if (!result.ok) {
     const msg = isObj(b) && typeof b.error === "string" ? b.error : "Request failed.";
-    return <div role="alert" className="rounded-[6px] border border-error/40 bg-error/5 p-4 text-[14px]"><p className="font-medium text-[#b42323]">Error {result.status}</p><p className="mt-1">{msg}</p></div>;
+    return <div role="alert" className="rounded-panel border border-error/40 bg-error/5 p-4 text-fs-ui"><p className="font-medium text-danger">Error {result.status}</p><p className="mt-1">{msg}</p></div>;
   }
   if (isObj(b) && Array.isArray(b.costs)) {
     const costs = b.costs as Cost[];
     return (
       <div>
-        <p className="mb-4 text-[13px] text-muted"><strong className="font-semibold text-foreground">${Number(b.dollarPerCredit).toFixed(4)}</strong> per credit · {Number(b.minCredits).toLocaleString()}-{Number(b.maxCredits).toLocaleString()} credits per purchase</p>
+        <p className="mb-4 text-fs-sm text-muted"><strong className="font-semibold text-foreground">${Number(b.dollarPerCredit).toFixed(4)}</strong> per credit · {Number(b.minCredits).toLocaleString()}-{Number(b.maxCredits).toLocaleString()} credits per purchase</p>
         <ul className="divide-y divide-border">
           {costs.map((c) => (
             <li key={c.endpoint} className="flex items-start justify-between gap-4 py-3">
               <div className="min-w-0">
-                <p className="text-[13px] leading-relaxed">{c.description}</p>
-                <div className="mt-2 flex flex-wrap gap-1.5"><span className="rounded-[4px] bg-accent px-2 py-0.5 text-[11px]">{catLabel(c.category)}</span><span className="rounded-[4px] bg-accent px-2 py-0.5 font-mono text-[11px]">{c.endpoint} · {c.operation}</span></div>
+                <p className="text-fs-sm leading-relaxed">{c.description}</p>
+                <div className="mt-2 flex flex-wrap gap-1.5"><span className="rounded-tight bg-accent px-2 py-0.5 text-fs-nano">{catLabel(c.category)}</span><span className="rounded-tight bg-accent px-2 py-0.5 font-mono text-fs-nano">{c.endpoint} · {c.operation}</span></div>
               </div>
-              <div className="shrink-0 text-right"><span className="rounded-full bg-accent px-2.5 py-0.5 font-mono text-[12px] ring-1 ring-border">{c.credits} credit{c.credits === 1 ? "" : "s"}</span><p className="mt-1 text-[12px] text-muted">${c.usdCost.toFixed(2)}/call</p></div>
+              <div className="shrink-0 text-right"><span className="rounded-full bg-accent px-2.5 py-0.5 font-mono text-fs-xs ring-1 ring-border">{c.credits} credit{c.credits === 1 ? "" : "s"}</span><p className="mt-1 text-fs-xs text-muted">${c.usdCost.toFixed(2)}/call</p></div>
             </li>
           ))}
         </ul>
@@ -180,12 +180,12 @@ function Visual({ result }: { result: Result }) {
           const title = String(o.citation ?? o.title ?? o.label ?? o.term ?? o.publicLaw ?? o.name ?? o.id ?? o.kind ?? `Result ${i + 1}`);
           const tags = [o.corpusType, o.state, o.actStatus, o.goodLawStatus].filter((x): x is string => typeof x === "string");
           return (
-            <li key={i} className="rounded-[6px] border border-border p-3">
-              <p className="text-[14px] font-medium">{title}</p>
-              {typeof o.title === "string" && o.citation ? <p className="text-[13px] text-muted">{o.title}</p> : null}
-              {tags.length > 0 && <div className="mt-2 flex flex-wrap gap-1.5">{tags.map((t) => <span key={t} className="rounded-[4px] bg-accent px-2 py-0.5 font-mono text-[11px]">{t}</span>)}</div>}
-              {typeof o.excerpt === "string" && <p className="mt-2 text-[13px] leading-relaxed">{o.excerpt}</p>}
-              {typeof o.actId === "string" && <p className="mt-2 font-mono text-[11px] text-muted">{o.actId}</p>}
+            <li key={i} className="rounded-panel border border-border p-3">
+              <p className="text-fs-ui font-medium">{title}</p>
+              {typeof o.title === "string" && o.citation ? <p className="text-fs-sm text-muted">{o.title}</p> : null}
+              {tags.length > 0 && <div className="mt-2 flex flex-wrap gap-1.5">{tags.map((t) => <span key={t} className="rounded-tight bg-accent px-2 py-0.5 font-mono text-fs-nano">{t}</span>)}</div>}
+              {typeof o.excerpt === "string" && <p className="mt-2 text-fs-sm leading-relaxed">{o.excerpt}</p>}
+              {typeof o.actId === "string" && <p className="mt-2 font-mono text-fs-nano text-muted">{o.actId}</p>}
             </li>
           );
         })}
@@ -194,14 +194,14 @@ function Visual({ result }: { result: Result }) {
   }
   if (isObj(b)) {
     return (
-      <dl className="space-y-2 text-[13px]">
+      <dl className="space-y-2 text-fs-sm">
         {Object.entries(b).filter(([k]) => !k.startsWith("_")).map(([k, v]) => (
-          <div key={k} className="flex flex-col gap-0.5 border-b border-border/60 pb-2 sm:flex-row sm:gap-4"><dt className="w-40 shrink-0 font-mono text-[12px] text-muted">{k}</dt><dd className="min-w-0 break-words">{typeof v === "object" ? <pre className="whitespace-pre-wrap font-mono text-[11px]">{JSON.stringify(v, null, 2)}</pre> : String(v)}</dd></div>
+          <div key={k} className="flex flex-col gap-0.5 border-b border-border/60 pb-2 sm:flex-row sm:gap-4"><dt className="w-40 shrink-0 font-mono text-fs-xs text-muted">{k}</dt><dd className="min-w-0 break-words">{typeof v === "object" ? <pre className="whitespace-pre-wrap font-mono text-fs-nano">{JSON.stringify(v, null, 2)}</pre> : String(v)}</dd></div>
         ))}
       </dl>
     );
   }
-  return <pre className="font-mono text-[11px]">{JSON.stringify(b, null, 2)}</pre>;
+  return <pre className="font-mono text-fs-nano">{JSON.stringify(b, null, 2)}</pre>;
 }
 
 // Segmented control with roving arrow-key navigation (WAI-ARIA tabs pattern, automatic activation).
@@ -214,11 +214,11 @@ function Segmented<T extends string>({ label, value, options, onChange }: { labe
     e.preventDefault(); onChange(options[to].id); refs.current[to]?.focus();
   };
   return (
-    <div role="tablist" aria-label={label} className="flex rounded-[6px] bg-accent p-0.5">
+    <div role="tablist" aria-label={label} className="flex rounded-panel bg-accent p-0.5">
       {options.map((o, i) => (
         <button key={o.id} ref={(el) => { refs.current[i] = el; }} role="tab" aria-selected={value === o.id} tabIndex={value === o.id ? 0 : -1} aria-label={o.text}
           onClick={() => onChange(o.id)} onKeyDown={(e) => move(e, i)}
-          className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-[4px] px-3 py-1.5 text-[13px] transition-colors ${value === o.id ? "bg-surface shadow-sm" : "text-muted hover:text-foreground"}`}>{o.label}</button>
+          className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-tight px-3 py-1.5 text-fs-sm transition-colors ${value === o.id ? "bg-surface shadow-sm" : "text-muted hover:text-foreground"}`}>{o.label}</button>
       ))}
     </div>
   );
@@ -228,7 +228,7 @@ const CopyBtn = ({ onCopy, label, light }: { onCopy: () => void; label: string; 
   const [done, setDone] = useState(false);
   return (
     <button type="button" aria-label={done ? "Copied" : label} onClick={() => { onCopy(); setDone(true); setTimeout(() => setDone(false), 1500); }}
-      className={`rounded-[4px] p-1.5 transition-colors ${light ? "text-[#b5aea3] hover:bg-white/10 hover:text-white" : "text-muted hover:bg-accent hover:text-foreground"}`}>
+      className={`rounded-tight p-1.5 transition-colors ${light ? "text-legacy-b5aea3 hover:bg-white/10 hover:text-white" : "text-muted hover:bg-accent hover:text-foreground"}`}>
       {done
         ? <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
         : <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" /><path d="M5 15V6a2 2 0 0 1 2-2h8" /></svg>}
@@ -241,15 +241,15 @@ const CopyBtn = ({ onCopy, label, light }: { onCopy: () => void; label: string; 
 function CodeBlock({ lang, code, onCopy }: { lang: Lang; code: string; onCopy: () => void }) {
   const numbered = lang === "JavaScript";
   const rows = code.split("\n");
-  const hl = (t: string) => t.split(/(VAQUILL_API_KEY)/).map((p, i) => (p === "VAQUILL_API_KEY" ? <mark key={i} className="rounded-[3px] bg-[#e0b341]/30 px-0.5 text-inherit">{p}</mark> : p));
+  const hl = (t: string) => t.split(/(VAQUILL_API_KEY)/).map((p, i) => (p === "VAQUILL_API_KEY" ? <mark key={i} className="rounded-slim bg-legacy-e0b341/30 px-0.5 text-inherit">{p}</mark> : p));
   return (
-    <div className="rounded-[6px] bg-[#1d1a16] text-[#f3f0ec]">
-      <div className="flex items-center justify-between px-4 pt-2 font-mono text-[10px] uppercase tracking-wider text-[#a39c91]"><span>{lang}</span><CopyBtn light label="Copy code" onCopy={onCopy} /></div>
-      <pre data-lenis-prevent tabIndex={0} aria-label={`${lang} snippet`} className="overflow-x-auto px-4 pb-4 pt-1 font-mono text-[11px] leading-[1.7] outline-none focus-visible:ring-1 focus-visible:ring-white/40">
+    <div className="rounded-panel bg-legacy-1d1a16 text-legacy-f3f0ec">
+      <div className="flex items-center justify-between px-4 pt-2 font-mono text-fs-micro uppercase tracking-wider text-legacy-a39c91"><span>{lang}</span><CopyBtn light label="Copy code" onCopy={onCopy} /></div>
+      <pre data-lenis-prevent tabIndex={0} aria-label={`${lang} snippet`} className="overflow-x-auto px-4 pb-4 pt-1 font-mono text-fs-nano leading-reading outline-none focus-visible:ring-1 focus-visible:ring-white/40">
         <code className="grid" style={{ gridTemplateColumns: numbered ? "auto 1fr" : "1fr" }}>
           {rows.map((r, i) => (
             <span key={i} className="contents">
-              {numbered && <span aria-hidden className="select-none pr-4 text-right text-[#6f685e]">{i + 1}</span>}
+              {numbered && <span aria-hidden className="select-none pr-4 text-right text-legacy-6f685e">{i + 1}</span>}
               <span className="whitespace-pre">{numbered ? hl(r) : r}{"\n"}</span>
             </span>
           ))}
@@ -323,8 +323,8 @@ export default function PlaygroundApp({ initialEndpoint }: { initialEndpoint: st
         for (const e of list.filter((x) => (x.group ?? "") === g)) {
           out.push({ kind: "option", value: e.id, text: e.name, label: (
             <div>
-              <div className="flex flex-wrap items-baseline gap-x-2"><MethodBadge m={e.method} /><span className="font-medium">{e.name}</span><span className="font-mono text-[11px] text-muted">{e.path}</span></div>
-              <p className="mt-0.5 text-[12px] leading-snug text-muted">{e.summary}</p>
+              <div className="flex flex-wrap items-baseline gap-x-2"><MethodBadge m={e.method} /><span className="font-medium">{e.name}</span><span className="font-mono text-fs-nano text-muted">{e.path}</span></div>
+              <p className="mt-0.5 text-fs-xs leading-snug text-muted">{e.summary}</p>
             </div>
           ) });
         }
@@ -383,8 +383,8 @@ export default function PlaygroundApp({ initialEndpoint }: { initialEndpoint: st
   // INFERRED: the live "Copy link" payload was not captured; this encodes the selected endpoint only (never values or keys).
   const copyLink = () => copy(`${location.origin}/developer?tab=playground&endpoint=${encodeURIComponent(ep?.id ?? "")}`, "Link copied");
 
-  if (specErr) return <div className="max-w-[880px] pt-2"><h1 className="text-[21px] font-semibold">Playground</h1><div role="alert" className="mt-4 rounded-[8px] border border-error/40 bg-error/5 p-4 text-[14px]">Could not load the endpoint list. <button type="button" onClick={loadSpec} className="ml-2 text-primary underline">Retry</button></div></div>;
-  if (!spec || !ep) return <div className="max-w-[880px] pt-2" aria-busy="true"><h1 className="text-[21px] font-semibold">Playground</h1><div className="console-skel mt-4 h-10 rounded-[6px] bg-accent" /><div className="console-skel mt-4 h-64 rounded-[8px] bg-surface" /></div>;
+  if (specErr) return <div className="max-w-content pt-2"><h1 className="text-fs-21 font-semibold">Playground</h1><div role="alert" className="mt-4 rounded-field border border-error/40 bg-error/5 p-4 text-fs-ui">Could not load the endpoint list. <button type="button" onClick={loadSpec} className="ml-2 text-primary underline">Retry</button></div></div>;
+  if (!spec || !ep) return <div className="max-w-content pt-2" aria-busy="true"><h1 className="text-fs-21 font-semibold">Playground</h1><div className="console-skel mt-4 h-10 rounded-panel bg-accent" /><div className="console-skel mt-4 h-64 rounded-field bg-surface" /></div>;
 
   const shownResult = result && resultFor === ep.id ? result : null;
   const count = shownResult ? arrayOf(shownResult.body)?.length : undefined;
@@ -398,68 +398,68 @@ export default function PlaygroundApp({ initialEndpoint }: { initialEndpoint: st
   ];
 
   return (
-    <div className="max-w-[880px] pt-2" onKeyDown={(e) => { if ((e.metaKey || e.ctrlKey) && e.key === "Enter") { e.preventDefault(); void run(); } }}>
+    <div className="max-w-content pt-2" onKeyDown={(e) => { if ((e.metaKey || e.ctrlKey) && e.key === "Enter") { e.preventDefault(); void run(); } }}>
       <div className="flex items-start justify-between gap-3">
-        <div className="min-w-0"><h1 className="text-[21px] font-semibold">Playground</h1><p className="mt-0.5 text-[14px] text-muted">Run live requests against the API</p></div>
+        <div className="min-w-0"><h1 className="text-fs-21 font-semibold">Playground</h1><p className="mt-0.5 text-fs-ui text-muted">Run live requests against the API</p></div>
         <div className="flex items-center gap-1">
-          <button type="button" onClick={copyLink} className="inline-flex h-8 items-center gap-1.5 whitespace-nowrap rounded-[4px] px-2.5 text-[13px] hover:bg-accent"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" /></svg>Copy link</button>
-          <button type="button" aria-label="Walk me through Playground" onClick={() => setTour(0)} className="grid h-8 w-8 place-items-center rounded-full text-[13px] text-muted hover:bg-accent">?</button>
+          <button type="button" onClick={copyLink} className="inline-flex h-8 items-center gap-1.5 whitespace-nowrap rounded-tight px-2.5 text-fs-sm hover:bg-accent"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" /></svg>Copy link</button>
+          <button type="button" aria-label="Walk me through Playground" onClick={() => setTour(0)} className="grid h-8 w-8 place-items-center rounded-full text-fs-sm text-muted hover:bg-accent">?</button>
         </div>
       </div>
 
       {tour !== null && (
-        <div role="dialog" aria-label="Playground tour" className="relative z-20 ml-auto mt-2 w-full max-w-[320px] rounded-[8px] bg-surface p-4 shadow-lg ring-1 ring-border">
-          <p className="text-[11px] uppercase tracking-wide text-muted">Step {tour + 1} of {tourSteps.length}</p>
-          <p className="mt-1 font-medium">{tourSteps[tour][0]}</p><p className="mt-1 text-[13px] text-muted">{tourSteps[tour][1]}</p>
-          <div className="mt-3 flex justify-between"><button type="button" onClick={() => setTour(null)} className="text-[13px] text-muted hover:text-foreground">Skip</button>
-            <div className="flex gap-2">{tour > 0 && <button type="button" onClick={() => setTour(tour - 1)} className="h-8 rounded-[4px] px-3 text-[13px] ring-1 ring-border">Back</button>}
-              <button type="button" onClick={() => setTour(tour + 1 >= tourSteps.length ? null : tour + 1)} className="h-8 rounded-[4px] bg-primary px-3 text-[13px] text-white">{tour + 1 >= tourSteps.length ? "Done" : "Next"}</button></div></div>
+        <div role="dialog" aria-label="Playground tour" className="relative z-20 ml-auto mt-2 w-full max-w-w320 rounded-field bg-surface p-4 shadow-lg ring-1 ring-border">
+          <p className="text-fs-nano uppercase tracking-wide text-muted">Step {tour + 1} of {tourSteps.length}</p>
+          <p className="mt-1 font-medium">{tourSteps[tour][0]}</p><p className="mt-1 text-fs-sm text-muted">{tourSteps[tour][1]}</p>
+          <div className="mt-3 flex justify-between"><button type="button" onClick={() => setTour(null)} className="text-fs-sm text-muted hover:text-foreground">Skip</button>
+            <div className="flex gap-2">{tour > 0 && <button type="button" onClick={() => setTour(tour - 1)} className="h-8 rounded-tight px-3 text-fs-sm ring-1 ring-border">Back</button>}
+              <button type="button" onClick={() => setTour(tour + 1 >= tourSteps.length ? null : tour + 1)} className="h-8 rounded-tight bg-primary px-3 text-fs-sm text-white">{tour + 1 >= tourSteps.length ? "Done" : "Next"}</button></div></div>
         </div>
       )}
 
       {/* Endpoint picker */}
-      <p className="mt-4 text-[12px] font-medium uppercase tracking-wide text-muted">Sample US endpoints (demo)</p>
+      <p className="mt-4 text-fs-xs font-medium uppercase tracking-wide text-muted">Sample US endpoints (demo)</p>
       <div className="mt-1.5">
         <Listbox ariaLabel="Endpoint" value={ep.id} onChange={pick} items={items} panelClass="w-[min(32rem,92vw)]" maxHeight="max-h-[min(36rem,80vh)]"
-          triggerClass="flex w-full cursor-pointer items-center justify-between gap-3 rounded-[6px] bg-accent px-3 py-2 text-left text-[14px]"
-          triggerContent={<><span className="flex min-w-0 flex-wrap items-center gap-x-2.5 gap-y-0.5"><MethodBadge m={ep.method} /><span className="font-medium">{ep.name}</span><span className="truncate font-mono text-[12px] text-muted">{ep.path}</span></span><span aria-hidden className="text-[11px] text-muted">▾</span></>} />
+          triggerClass="flex w-full cursor-pointer items-center justify-between gap-3 rounded-panel bg-accent px-3 py-2 text-left text-fs-ui"
+          triggerContent={<><span className="flex min-w-0 flex-wrap items-center gap-x-2.5 gap-y-0.5"><MethodBadge m={ep.method} /><span className="font-medium">{ep.name}</span><span className="truncate font-mono text-fs-xs text-muted">{ep.path}</span></span><span aria-hidden className="text-fs-nano text-muted">▾</span></>} />
       </div>
 
       {needsKey && ready && (
-        <div className="mt-4 rounded-[8px] bg-accent p-4 ring-1 ring-border">
+        <div className="mt-4 rounded-field bg-accent p-4 ring-1 ring-border">
           <p className="flex items-center gap-2 font-medium"><span aria-hidden>🔑</span>Create an API key to start</p>
-          <p className="mt-1 text-[13px] text-muted">One click. The key works here and anywhere else you need it, and will be here next time you sign in.</p>
-          <button type="button" onClick={() => { create(); say("Mock API key created. It lives only in this browser."); }} className={`${btnBase} mt-3 h-9 gap-2 bg-primary px-3 text-[13px] text-white hover:bg-primary-hover`}>Create API key</button>
-          <p className="mt-2 flex flex-wrap items-center gap-2"><span className="rounded-[2px] border border-warning/50 bg-warning/10 px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-warning">Mock key</span> <span className="text-[12px] text-muted">A random string kept in this browser; it unlocks nothing real.</span></p>
+          <p className="mt-1 text-fs-sm text-muted">One click. The key works here and anywhere else you need it, and will be here next time you sign in.</p>
+          <button type="button" onClick={() => { create(); say("Mock API key created. It lives only in this browser."); }} className={`${btnBase} mt-3 h-9 gap-2 bg-primary px-3 text-fs-sm text-white hover:bg-primary-hover`}>Create API key</button>
+          <p className="mt-2 flex flex-wrap items-center gap-2"><span className="rounded-control border border-warning/50 bg-warning/10 px-1.5 py-0.5 font-mono text-fs-micro font-medium uppercase tracking-wider text-warning">Mock key</span> <span className="text-fs-xs text-muted">A random string kept in this browser; it unlocks nothing real.</span></p>
         </div>
       )}
 
       {/* Form */}
-      <section aria-label="Request" className="mt-4 rounded-[8px] bg-surface p-5 shadow-sm ring-1 ring-border/60">
+      <section aria-label="Request" className="mt-4 rounded-field bg-surface p-5 shadow-sm ring-1 ring-border/60">
         {primary ? (
           <div>
-            <label htmlFor="pg-primary" className="text-[16px] font-medium">{labelOf(primary.name)} <span className="ml-1 font-mono text-[11px] font-normal text-muted">{primary.name}</span></label>
-            <div className="mt-2 rounded-[6px] bg-accent p-3 transition-colors focus-within:bg-background focus-within:ring-1 focus-within:ring-primary">
+            <label htmlFor="pg-primary" className="text-fs-lead font-medium">{labelOf(primary.name)} <span className="ml-1 font-mono text-fs-nano font-normal text-muted">{primary.name}</span></label>
+            <div className="mt-2 rounded-panel bg-accent p-3 transition-colors focus-within:bg-background focus-within:ring-1 focus-within:ring-primary">
               <textarea id="pg-primary" rows={4} maxLength={primary.maxLength} placeholder={primary.example !== undefined ? String(primary.example) : ""} value={typeof values[primary.name] === "string" ? (values[primary.name] as string) : ""}
-                onChange={(e) => setField(primary.name, e.target.value)} className="w-full resize-none bg-transparent text-[15px] outline-none placeholder:text-muted/70" />
+                onChange={(e) => setField(primary.name, e.target.value)} className="w-full resize-none bg-transparent text-fs-body outline-none placeholder:text-muted/70" />
               <div className="mt-2 flex items-center justify-between gap-3">
-                {cost !== null ? <span className="rounded-full bg-surface/70 px-2 py-0.5 font-mono text-[11px] text-muted ring-1 ring-border">{cost} credit{cost === 1 ? "" : "s"}</span> : <span />}
+                {cost !== null ? <span className="rounded-full bg-surface/70 px-2 py-0.5 font-mono text-fs-nano text-muted ring-1 ring-border">{cost} credit{cost === 1 ? "" : "s"}</span> : <span />}
                 <RunButton running={running} elapsed={elapsed} disabled={!canRun} onRun={run} onCancel={cancel} title={blockedAll} />
               </div>
             </div>
           </div>
         ) : (
-          <p className="text-[13px] text-muted">{ep.summary}</p>
+          <p className="text-fs-sm text-muted">{ep.summary}</p>
         )}
 
         {(rest.length > 0 || primary?.examples) && (
           <div className={primary ? "mt-6" : "mt-5"}>
-            <h2 className="text-[17px]">Parameters</h2>
+            <h2 className="text-fs-17">Parameters</h2>
             {primary?.examples && (
-              <div className="mt-3 flex flex-wrap items-center gap-2"><span className="text-[11px] uppercase tracking-[0.12em] text-muted">Examples</span>
+              <div className="mt-3 flex flex-wrap items-center gap-2"><span className="text-fs-nano uppercase tracking-caps-wide text-muted">Examples</span>
                 {primary.examples.map((x, i) => <button key={x} type="button" aria-pressed={values[primary.name] === (i === 0 ? "notice required before terminating an at-will employee" : x)}
                   onClick={() => setField(primary.name, i === 0 ? "notice required before terminating an at-will employee" : x)} // first chip's text is CONFIRMED; the others are INFERRED
-                  className="rounded-full bg-accent px-3 py-1.5 text-[13px] ring-1 ring-transparent hover:ring-border aria-pressed:ring-primary">{x}</button>)}
+                  className="rounded-full bg-accent px-3 py-1.5 text-fs-sm ring-1 ring-transparent hover:ring-border aria-pressed:ring-primary">{x}</button>)}
               </div>
             )}
             <div className="mt-4 space-y-6">
@@ -467,27 +467,27 @@ export default function PlaygroundApp({ initialEndpoint }: { initialEndpoint: st
             </div>
           </div>
         )}
-        {ep.fields.length === 0 && <p className="mt-3 text-[13px] text-muted">This endpoint takes no parameters.</p>}
+        {ep.fields.length === 0 && <p className="mt-3 text-fs-sm text-muted">This endpoint takes no parameters.</p>}
 
         {!primary && (
-          <div className="mt-6 flex items-center gap-3"><RunButton running={running} elapsed={elapsed} disabled={!canRun} onRun={run} onCancel={cancel} title={blockedAll} />{cost ? <span className="rounded-full bg-accent px-2 py-0.5 font-mono text-[11px] text-muted">{cost} credit{cost === 1 ? "" : "s"}</span> : null}</div>
+          <div className="mt-6 flex items-center gap-3"><RunButton running={running} elapsed={elapsed} disabled={!canRun} onRun={run} onCancel={cancel} title={blockedAll} />{cost ? <span className="rounded-full bg-accent px-2 py-0.5 font-mono text-fs-nano text-muted">{cost} credit{cost === 1 ? "" : "s"}</span> : null}</div>
         )}
-        {blockedAll && <p className="mt-4 flex items-center gap-2 text-[13px] text-muted"><span aria-hidden>{needsKey ? "🔑" : ""}</span>{blockedAll}</p>}
+        {blockedAll && <p className="mt-4 flex items-center gap-2 text-fs-sm text-muted"><span aria-hidden>{needsKey ? "🔑" : ""}</span>{blockedAll}</p>}
       </section>
 
-      <div className="mt-4 flex items-start gap-2 text-[13px] text-muted"><span aria-hidden className="mt-0.5">🛡</span>
+      <div className="mt-4 flex items-start gap-2 text-fs-sm text-muted"><span aria-hidden className="mt-0.5">🛡</span>
         <p><strong className="font-medium text-foreground">The API does not store your query text.</strong> Requests exist in memory for the length of the call. We keep per-day call counts for billing, not what you searched for. <strong className="font-medium text-foreground">(Local mock: requests never leave this computer.)</strong> <a href="/security" className="text-primary underline underline-offset-2">What we store</a>{" "}
           <DevOnly><MockBadge>statement copied from the live UI</MockBadge></DevOnly></p></div>
 
       {recent.length > 0 && (
-        <section aria-label="Recent runs" className="mt-4 rounded-[8px] bg-surface p-5 ring-1 ring-border/60">
-          <div className="flex items-center justify-between"><h2 className="text-[17px]">Recent runs</h2><button type="button" onClick={() => saveRecent([])} className="text-[13px] hover:underline">Clear</button></div>
-          <p className="mt-2 text-[13px] text-muted">Kept in this tab only. Selecting a run reloads its request without sending it.</p>
+        <section aria-label="Recent runs" className="mt-4 rounded-field bg-surface p-5 ring-1 ring-border/60">
+          <div className="flex items-center justify-between"><h2 className="text-fs-17">Recent runs</h2><button type="button" onClick={() => saveRecent([])} className="text-fs-sm hover:underline">Clear</button></div>
+          <p className="mt-2 text-fs-sm text-muted">Kept in this tab only. Selecting a run reloads its request without sending it.</p>
           <ul className="mt-2">
             {recent.map((r) => (
-              <li key={r.id}><button type="button" onClick={() => reload(r)} className="flex w-full items-center justify-between gap-3 rounded-[4px] px-1 py-2 text-left hover:bg-accent">
-                <span className="truncate text-[14px]">{r.name}</span>
-                <span className="flex shrink-0 items-center gap-3 font-mono text-[12px] text-muted"><StatusChip status={r.result.status} /><span>{fmtS(r.result.ms)}</span><span>{clock(r.at)}</span></span>
+              <li key={r.id}><button type="button" onClick={() => reload(r)} className="flex w-full items-center justify-between gap-3 rounded-tight px-1 py-2 text-left hover:bg-accent">
+                <span className="truncate text-fs-ui">{r.name}</span>
+                <span className="flex shrink-0 items-center gap-3 font-mono text-fs-xs text-muted"><StatusChip status={r.result.status} /><span>{fmtS(r.result.ms)}</span><span>{clock(r.at)}</span></span>
               </button></li>
             ))}
           </ul>
@@ -497,23 +497,23 @@ export default function PlaygroundApp({ initialEndpoint }: { initialEndpoint: st
       {/* Output / Code */}
       <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
         <Segmented label="Panel" value={tab} onChange={setTab} options={[
-          { id: "output", text: "Output", label: <><span aria-hidden className="font-mono text-[11px]">▤</span>Output</> },
-          { id: "code", text: "Code", label: <><span aria-hidden className="font-mono text-[11px]">&lt;/&gt;</span>Code</> },
+          { id: "output", text: "Output", label: <><span aria-hidden className="font-mono text-fs-nano">▤</span>Output</> },
+          { id: "code", text: "Code", label: <><span aria-hidden className="font-mono text-fs-nano">&lt;/&gt;</span>Code</> },
         ]} />
         {tab === "output"
-          ? <Segmented label="Output format" value={view} onChange={setView} options={[{ id: "visual", text: "Visual", label: <><span aria-hidden>👁</span>Visual</> }, { id: "json", text: "JSON", label: <><span aria-hidden className="font-mono text-[11px]">{"{ }"}</span>JSON</> }]} />
+          ? <Segmented label="Output format" value={view} onChange={setView} options={[{ id: "visual", text: "Visual", label: <><span aria-hidden>👁</span>Visual</> }, { id: "json", text: "JSON", label: <><span aria-hidden className="font-mono text-fs-nano">{"{ }"}</span>JSON</> }]} />
           : <Segmented label="Language" value={lang} onChange={setLang} options={(["cURL", "Python", "JavaScript"] as const).map((l) => ({ id: l, text: l, label: <>{l}</> }))} />}
       </div>
 
-      <section aria-label={tab === "output" ? "Output" : "Code"} className="mt-3 overflow-hidden rounded-[8px] bg-surface ring-1 ring-border/60">
+      <section aria-label={tab === "output" ? "Output" : "Code"} className="mt-3 overflow-hidden rounded-field bg-surface ring-1 ring-border/60">
         {tab === "code" ? (
           <div className="p-3">
             <CodeBlock lang={lang} code={snippet} onCopy={() => copy(snippet, "Code copied")} />
-            <DevOnly><p className="mt-2 text-[12px] text-muted"><MockBadge>reproduced bug</MockBadge> The JavaScript snippet omits the comma after <code className="font-mono">method: &quot;POST&quot;</code>, exactly as the live product does.</p></DevOnly>
+            <DevOnly><p className="mt-2 text-fs-xs text-muted"><MockBadge>reproduced bug</MockBadge> The JavaScript snippet omits the comma after <code className="font-mono">method: &quot;POST&quot;</code>, exactly as the live product does.</p></DevOnly>
           </div>
         ) : running ? (
           <div className="p-5" aria-busy="true">
-            <div className="flex items-center justify-between"><p className="text-[16px]">Running…</p><span className="flex items-center gap-3"><span className="font-mono text-[12px] text-muted">{fmtS(elapsed)}</span><button type="button" onClick={cancel} className="h-8 rounded-[4px] px-3 text-[13px] ring-1 ring-border hover:bg-accent">▢ Cancel</button></span></div>
+            <div className="flex items-center justify-between"><p className="text-fs-lead">Running…</p><span className="flex items-center gap-3"><span className="font-mono text-fs-xs text-muted">{fmtS(elapsed)}</span><button type="button" onClick={cancel} className="h-8 rounded-tight px-3 text-fs-sm ring-1 ring-border hover:bg-accent">▢ Cancel</button></span></div>
             <div className="mt-5 divide-y divide-border" aria-hidden="true">
               {[0, 1, 2].map((i) => (
                 <div key={i} className="flex items-start justify-between gap-4 py-3" style={{ animationDelay: `${i * 120}ms` }}>
@@ -526,23 +526,23 @@ export default function PlaygroundApp({ initialEndpoint }: { initialEndpoint: st
         ) : shownResult ? (
           <div className="p-5">
             <div className="flex items-center justify-between gap-3">
-              <h2 className="text-[17px]">{view === "visual" ? (count !== undefined ? `Results (${count})` : "Response") : "Response body"}</h2>
-              <span className="flex items-center gap-2"><span title="This response was generated on this computer" className="rounded-[2px] border border-warning/50 bg-warning/10 px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-warning">Mock</span><StatusChip status={shownResult.status} /><span className="font-mono text-[12px] text-muted">{(shownResult.ms / 1000).toFixed(3)}s</span><CopyBtn label="Copy response" onCopy={() => copy(json, "Response copied")} /></span>
+              <h2 className="text-fs-17">{view === "visual" ? (count !== undefined ? `Results (${count})` : "Response") : "Response body"}</h2>
+              <span className="flex items-center gap-2"><span title="This response was generated on this computer" className="rounded-control border border-warning/50 bg-warning/10 px-1.5 py-0.5 font-mono text-fs-micro font-medium uppercase tracking-wider text-warning">Mock</span><StatusChip status={shownResult.status} /><span className="font-mono text-fs-xs text-muted">{(shownResult.ms / 1000).toFixed(3)}s</span><CopyBtn label="Copy response" onCopy={() => copy(json, "Response copied")} /></span>
             </div>
-            <div className="mt-4">{view === "visual" ? <Visual result={shownResult} /> : <pre data-lenis-prevent tabIndex={0} aria-label="JSON response" className="max-h-[560px] overflow-auto rounded-[6px] bg-accent p-3 font-mono text-[11px] leading-[1.6]"><code>{json}</code></pre>}</div>
-            <DevOnly><p className="mt-3 text-[12px] text-muted">{ep.path === "/api/v1/api-credits/pricing" ? <MockBadge>pricing body is the confirmed shape</MockBadge> : <MockBadge>invented response shape (inferred)</MockBadge>}</p></DevOnly>
+            <div className="mt-4">{view === "visual" ? <Visual result={shownResult} /> : <pre data-lenis-prevent tabIndex={0} aria-label="JSON response" className="max-h-[560px] overflow-auto rounded-panel bg-accent p-3 font-mono text-fs-nano leading-body"><code>{json}</code></pre>}</div>
+            <DevOnly><p className="mt-3 text-fs-xs text-muted">{ep.path === "/api/v1/api-credits/pricing" ? <MockBadge>pricing body is the confirmed shape</MockBadge> : <MockBadge>invented response shape (inferred)</MockBadge>}</p></DevOnly>
           </div>
         ) : (
           <div className="grid place-items-center px-6 py-14 text-center">
-            <span aria-hidden className="grid h-12 w-12 place-items-center rounded-[6px] bg-accent text-[18px] text-muted">▷</span>
-            <p className="mt-4 text-[16px] font-medium">No response yet</p>
-            <p className="mt-1 max-w-[260px] text-[13px] text-muted">Run a request to see the result here, formatted or as raw JSON.</p>
+            <span aria-hidden className="grid h-12 w-12 place-items-center rounded-panel bg-accent text-fs-xl text-muted">▷</span>
+            <p className="mt-4 text-fs-lead font-medium">No response yet</p>
+            <p className="mt-1 max-w-w260 text-fs-sm text-muted">Run a request to see the result here, formatted or as raw JSON.</p>
           </div>
         )}
       </section>
 
       <p className="sr-only" role="status" aria-live="polite">{announce}</p>
-      <div role="status" aria-live="polite" className="pointer-events-none fixed bottom-6 left-1/2 z-[120] -translate-x-1/2">{toast && <div className="rounded-full bg-foreground px-4 py-2 text-[13px] text-background shadow-lg">{toast}</div>}</div>
+      <div role="status" aria-live="polite" className="pointer-events-none fixed bottom-6 left-1/2 z-[120] -translate-x-1/2">{toast && <div className="rounded-full bg-foreground px-4 py-2 text-fs-sm text-background shadow-lg">{toast}</div>}</div>
     </div>
   );
 }

@@ -17,8 +17,8 @@ export default function Contact() {
             { name: "topic", label: "Topic", type: "select", options: ["Product question", "Pricing", "Privacy or legal", "Partnership"] },
             { name: "message", label: "Message", type: "textarea", required: true },
           ]} />
-          <aside className="rounded-panel border border-border bg-surface p-6 text-[15px]">
-            <h2 className="text-[16px] font-semibold">Email</h2>
+          <aside className="rounded-panel border border-border bg-surface p-6 text-fs-body">
+            <h2 className="text-fs-lead font-semibold">Email</h2>
             <p className="mt-1 text-primary">hello@lexbharat.example</p>
             <p className="mt-4 text-muted">We aim to reply within one business day (placeholder copy).</p>
           </aside>

@@ -3,7 +3,7 @@
 export default function DeveloperLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <div role="note" className="bg-warning px-4 py-1.5 text-center text-[12px] font-medium text-white">Demo developer console · responses, API key and credits are simulated in this browser · nothing here calls a live service · Sample data is US law. India API coming soon.</div>
+      <div role="note" className="bg-warning px-4 py-1.5 text-center text-fs-xs font-medium text-white">Demo developer console · responses, API key and credits are simulated in this browser · nothing here calls a live service · Sample data is US law. India API coming soon.</div>
       {children}
     </>
   );

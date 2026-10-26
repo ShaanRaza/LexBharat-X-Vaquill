@@ -28,7 +28,7 @@ export default function JudgmentFullText({ chunks, mentions }: { chunks: ScChunk
   const mixed = chunks.filter((c) => INDIC.test(c.t)).length;
   return (
     <section aria-labelledby="fulltext" className="mt-5 rounded-card bg-surface p-5 shadow-sm ring-1 ring-border/60">
-      <h2 id="fulltext" className="scroll-mt-24 text-ui-xs font-semibold uppercase tracking-[0.08em] text-secondary">Judgment text (English, as extracted from the report)</h2>
+      <h2 id="fulltext" className="scroll-mt-24 text-ui-xs font-semibold uppercase tracking-caps text-secondary">Judgment text (English, as extracted from the report)</h2>
       <p className="mt-1 text-ui-sm text-secondary">{chunks.length} {chunks.length === 1 ? "passage" : "passages"}, {paragraphs.length.toLocaleString("en-IN")} paragraphs, in reading order. Extracted by machine from the printed report: line breaks, running heads and OCR errors are possible, and the margin letters (A, B, C …) of the printed report are left out. Check the original before quoting.</p>
       {mixed > 0 && <Notice tone="warn" compact className="mt-3"><p>{mixed} {mixed === 1 ? "passage contains" : "passages contain"} text in another script (marked below); the English reading of those lines may be incomplete.</p></Notice>}
       <div className="mt-4"><JudgmentReader paragraphs={paragraphs} /></div>

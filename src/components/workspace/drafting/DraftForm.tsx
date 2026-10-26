@@ -85,7 +85,7 @@ export default function DraftForm({ templateId }: { templateId: string }) {
               </ol>
               {notes.map((n, i) => <p key={i} className="mt-2 text-ui-sm text-muted">{n}</p>)}
             </Panel>
-            {secs.filter((s) => s.text).map((s) => <Panel as="article" key={s.id}><h3 className="text-ui-sm font-semibold uppercase tracking-[0.08em] text-muted">{s.title}</h3><div className="mt-1 whitespace-pre-wrap font-serif text-ui-body leading-relaxed">{s.text}{s.status === "writing" && <span aria-hidden className="ml-0.5 inline-block h-4 w-1.5 animate-pulse bg-muted align-middle" />}</div></Panel>)}
+            {secs.filter((s) => s.text).map((s) => <Panel as="article" key={s.id}><h3 className="text-ui-sm font-semibold uppercase tracking-caps text-muted">{s.title}</h3><div className="mt-1 whitespace-pre-wrap font-serif text-ui-body leading-relaxed">{s.text}{s.status === "writing" && <span aria-hidden className="ml-0.5 inline-block h-4 w-1.5 animate-pulse bg-muted align-middle" />}</div></Panel>)}
           </div>
           <div className="space-y-4">{(basis.length > 0 || phase === "done") && <LegalBasis basis={basis} note={basisNote} />}<Checklist items={checklist} /></div>
         </div>
@@ -102,7 +102,7 @@ export default function DraftForm({ templateId }: { templateId: string }) {
       {t.reliesOn.length > 0 && <p className="mt-2 text-ui-sm text-muted">Relies on: {t.reliesOn.map((r) => r.lookup).join(", ")} (the sections are retrieved and shown with the draft).</p>}
       {topErr && <Notice tone="bad" role="alert" className="mt-4"><p>{topErr}</p></Notice>}
       {groups.map((g) => (
-        <fieldset key={g} className="mt-6 space-y-4 rounded-card bg-surface p-card ring-1 ring-border/60"><legend className="px-1 text-ui-sm font-semibold uppercase tracking-[0.08em] text-muted">{g}</legend>
+        <fieldset key={g} className="mt-6 space-y-4 rounded-card bg-surface p-card ring-1 ring-border/60"><legend className="px-1 text-ui-sm font-semibold uppercase tracking-caps text-muted">{g}</legend>
           {visible.filter((f) => (f.group ?? "Details") === g).map((f) => <Field key={f.key} f={f as never} value={values[f.key] ?? ""} error={errors[f.key]} onChange={(v) => set(f.key, v)} />)}
         </fieldset>
       ))}

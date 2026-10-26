@@ -61,7 +61,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
   const mark = { shown: "✓", partly: "◐", absent: "–" } as const;
   return (
     <BrowseShell>
-      <div className="mx-auto max-w-[880px] pt-2">
+      <div className="mx-auto max-w-content pt-2">
         <nav aria-label="Breadcrumb" className="text-ui-base text-secondary">
           <Link href="/workspace/browse" className="inline-flex min-h-8 items-center hover:text-primary hover:underline">Browse Laws &amp; Judgments</Link><span aria-hidden> / </span>
           <Link href={`/workspace/browse/judgments/${slug}`} className="hover:text-primary hover:underline">{court.name}</Link><span aria-hidden> / </span>
@@ -72,7 +72,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
             <p>The text of this record matches <Link className="underline" href={`/workspace/browse/judgments/${slug}/${dup.year}/${dup.of}`}>{dup.of}</Link> word for word (only the printed report page differs): the source lists it twice.</p>
           </Notice>
         )}
-        <h1 className="mt-2 text-ui-title font-semibold leading-snug tracking-[-0.02em]">{heading}</h1>
+        <h1 className="mt-2 text-ui-title font-semibold leading-snug tracking-tight">{heading}</h1>
         <p className="mt-1.5 flex flex-wrap items-center gap-2 text-ui-base text-secondary">
           <span>{court.name}</span>
           {c.citation ? <><span aria-hidden>·</span><code className="font-mono text-foreground">{c.citation}</code></> : c.caseNumber ? <><span aria-hidden>·</span><span>Case no. {c.caseNumber}</span></> : null}
@@ -95,14 +95,14 @@ export default async function CasePage({ params, searchParams }: { params: Promi
         )}
         {!full && preview && (
           <section aria-labelledby="preview" className="mt-5 rounded-card bg-surface p-5 shadow-sm ring-1 ring-border/60">
-            <h2 id="preview" className="text-ui-xs font-semibold uppercase tracking-[0.08em] text-secondary">Opening text (as extracted)</h2>
+            <h2 id="preview" className="text-ui-xs font-semibold uppercase tracking-caps text-secondary">Opening text (as extracted)</h2>
             <p className="mt-2 text-ui-body leading-relaxed"><StatuteText text={preview} mentions={mentions} />…</p>
             <LawsReferred laws={lawsReferred(mentions)} />
             <p className="mt-2 text-ui-xs text-muted">The first part of the English report, usually the headnote. OCR errors are possible. The full judgment text is not available in LexBharat.</p>
           </section>
         )}
         <section aria-labelledby="prov" className="mt-5 rounded-card bg-accent/50 p-5 ring-1 ring-border/50">
-          <h2 id="prov" className="text-ui-xs font-semibold uppercase tracking-[0.08em] text-secondary">Where each field comes from</h2>
+          <h2 id="prov" className="text-ui-xs font-semibold uppercase tracking-caps text-secondary">Where each field comes from</h2>
           <p className="mt-1 text-ui-sm text-secondary">All data is from the open-india-law dataset ({stats.attribution?.licence}, snapshot {stats.attribution?.snapshot}). ✓ as recorded, ◐ present but imperfect, – absent, with the reason.</p>
           <ul className="mt-3 space-y-1.5 text-ui-sm">
             {prov.map((r) => (<li key={r.field} className="grid grid-cols-[18px_130px_1fr] gap-x-2"><span aria-hidden className="text-muted">{mark[r.state]}</span><span className="font-medium">{r.field}</span><span className="text-secondary">{r.note}</span></li>))}

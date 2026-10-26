@@ -23,27 +23,27 @@ export default function ScSearchResults({ q }: { q: string }) {
   const chip = "rounded-md bg-accent px-2 py-0.5";
   return (
     <section aria-labelledby="sc-hits" className="mt-4">
-      <h2 id="sc-hits" className="text-[18px] font-semibold">Supreme Court cases{data ? <span className="ml-2 text-[14px] font-normal text-muted">{data.total.toLocaleString("en-IN")} {data.total === 1 ? "case" : "cases"}</span> : null}</h2>
-      {err && <div role="alert" className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-error/40 bg-error/5 p-3 text-[14px]"><span>{err}</span><button type="button" onClick={() => setRetry((n) => n + 1)} className="h-8 rounded-lg px-3 ring-1 ring-border hover:bg-accent">Try again</button></div>}
+      <h2 id="sc-hits" className="text-fs-xl font-semibold">Supreme Court cases{data ? <span className="ml-2 text-fs-ui font-normal text-muted">{data.total.toLocaleString("en-IN")} {data.total === 1 ? "case" : "cases"}</span> : null}</h2>
+      {err && <div role="alert" className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-error/40 bg-error/5 p-3 text-fs-ui"><span>{err}</span><button type="button" onClick={() => setRetry((n) => n + 1)} className="h-8 rounded-lg px-3 ring-1 ring-border hover:bg-accent">Try again</button></div>}
       {!data && !err && <div className="mt-3 space-y-2" aria-busy="true">{[0, 1].map((i) => <div key={i} className="console-skel h-14 rounded-xl bg-accent" />)}</div>}
       {data && (
         <>
           <ul className="mt-2 space-y-2">
             {data.results.map((c) => (
               <li key={c.caseId} className="relative rounded-xl bg-surface px-5 py-4 shadow-sm ring-1 ring-border/60 transition-colors hover:ring-primary/50">
-                <Link href={`/workspace/browse/judgments/supreme-court-of-india/${c.year}/${encodeURIComponent(c.caseId)}`} className="text-[15px] font-medium text-primary after:absolute after:inset-0 after:rounded-xl after:content-['']">{c.title}</Link>
-                <p className="mt-1.5 flex flex-wrap items-center gap-1.5 text-[12px] text-[#535151]">
+                <Link href={`/workspace/browse/judgments/supreme-court-of-india/${c.year}/${encodeURIComponent(c.caseId)}`} className="text-fs-body font-medium text-primary after:absolute after:inset-0 after:rounded-xl after:content-['']">{c.title}</Link>
+                <p className="mt-1.5 flex flex-wrap items-center gap-1.5 text-fs-xs text-secondary">
                   {fmtDate(c.decisionDate) && <span className={chip}>{fmtDate(c.decisionDate)}</span>}
-                  {c.citation && <span className="relative z-10 inline-flex items-center gap-1.5"><code className="font-mono text-[12px] text-foreground">{c.citation}</code><CopyButton text={c.citation} label="Copy citation" /></span>}
+                  {c.citation && <span className="relative z-10 inline-flex items-center gap-1.5"><code className="font-mono text-fs-xs text-foreground">{c.citation}</code><CopyButton text={c.citation} label="Copy citation" /></span>}
                   {c.disposition && <span className={chip} title={`As recorded: ${c.disposition}`}>{displayDisposition(c.disposition)}</span>}
                   <span className="font-mono">· {c.caseId}</span>
                 </p>
               </li>
             ))}
-            {!data.results.length && <li className="rounded-xl border border-dashed border-border p-6 text-center text-[14px] text-muted">No Supreme Court case matches. Try fewer words or a party&apos;s surname.</li>}
+            {!data.results.length && <li className="rounded-xl border border-dashed border-border p-6 text-center text-fs-ui text-muted">No Supreme Court case matches. Try fewer words or a party&apos;s surname.</li>}
           </ul>
           {data.total > data.pageSize && (
-            <div className="mt-3 flex items-center justify-between text-[14px]">
+            <div className="mt-3 flex items-center justify-between text-fs-ui">
               <button type="button" disabled={page <= 1} onClick={() => setPage((p) => p - 1)} className="h-9 rounded-lg px-3 ring-1 ring-border hover:bg-accent disabled:opacity-40">← Previous</button>
               <span className="text-muted">Page {data.page} of {Math.max(1, Math.ceil(data.total / data.pageSize))}</span>
               <button type="button" disabled={!data.hasMore} onClick={() => setPage((p) => p + 1)} className="h-9 rounded-lg px-3 ring-1 ring-border hover:bg-accent disabled:opacity-40">Next →</button>

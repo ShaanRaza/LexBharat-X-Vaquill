@@ -23,34 +23,34 @@ export default function HubList({ items, base, linked, noun }: { items: Item[]; 
     <div>
       <div className="flex flex-wrap items-center gap-3">
         <label htmlFor="hub-q" className="sr-only">Search {noun}</label>
-        <input id="hub-q" value={q} onChange={(e) => { setQ(e.target.value); setPage(0); }} placeholder={`Search ${items.length} ${noun}…`} className="min-w-[220px] flex-1 rounded-control border border-[var(--control-border)] bg-surface px-3 py-2 text-[15px]" />
+        <input id="hub-q" value={q} onChange={(e) => { setQ(e.target.value); setPage(0); }} placeholder={`Search ${items.length} ${noun}…`} className="min-w-[220px] flex-1 rounded-control border border-[var(--control-border)] bg-surface px-3 py-2 text-fs-body" />
         {cats.length > 2 && (
-          <select aria-label="Category" value={cat} onChange={(e) => { setCat(e.target.value); setPage(0); }} className="rounded-control border border-[var(--control-border)] bg-surface px-3 py-2 text-[15px]">
+          <select aria-label="Category" value={cat} onChange={(e) => { setCat(e.target.value); setPage(0); }} className="rounded-control border border-[var(--control-border)] bg-surface px-3 py-2 text-fs-body">
             {cats.map((c) => <option key={c}>{c}</option>)}
           </select>
         )}
-        <p className="text-[13px] text-muted" aria-live="polite">{filtered.length} of {items.length}</p>
+        <p className="text-fs-sm text-muted" aria-live="polite">{filtered.length} of {items.length}</p>
       </div>
 
       <ul className="mt-6 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
         {slice.map((i) => {
           const body = (
             <article className="h-full rounded-panel border border-border bg-surface p-5 transition-transform duration-300 ease-out hover:-translate-y-0.5">
-              {i.category && <p className="mb-1 font-mono text-[11px] uppercase tracking-wider text-primary">{i.category}</p>}
-              <h2 className="text-[16px] font-semibold leading-snug">{i.title}</h2>
-              {i.summary && <p className="mt-1 text-[13px] leading-relaxed text-muted">{i.summary}</p>}
+              {i.category && <p className="mb-1 font-mono text-fs-nano uppercase tracking-wider text-primary">{i.category}</p>}
+              <h2 className="text-fs-lead font-semibold leading-snug">{i.title}</h2>
+              {i.summary && <p className="mt-1 text-fs-sm leading-relaxed text-muted">{i.summary}</p>}
             </article>
           );
           return <li key={i.slug}>{linked ? <Link href={`${base}/${i.slug}`} className="block h-full">{body}</Link> : body}</li>;
         })}
       </ul>
-      {filtered.length === 0 && <p className="mt-6 text-[15px] text-muted">Nothing matches “{q}”.</p>}
+      {filtered.length === 0 && <p className="mt-6 text-fs-body text-muted">Nothing matches “{q}”.</p>}
 
       {pages > 1 && (
         <nav className="mt-8 flex items-center justify-between gap-3" aria-label="Pagination">
-          <button onClick={() => setPage(Math.max(0, cur - 1))} disabled={cur === 0} className="btn btn-secondary !px-4 !py-2 !text-[14px] disabled:opacity-40">← Previous</button>
-          <span className="text-[14px] text-muted">Page {cur + 1} of {pages}</span>
-          <button onClick={() => setPage(Math.min(pages - 1, cur + 1))} disabled={cur >= pages - 1} className="btn btn-secondary !px-4 !py-2 !text-[14px] disabled:opacity-40">Next →</button>
+          <button onClick={() => setPage(Math.max(0, cur - 1))} disabled={cur === 0} className="btn btn-secondary !px-4 !py-2 !text-fs-ui disabled:opacity-40">← Previous</button>
+          <span className="text-fs-ui text-muted">Page {cur + 1} of {pages}</span>
+          <button onClick={() => setPage(Math.min(pages - 1, cur + 1))} disabled={cur >= pages - 1} className="btn btn-secondary !px-4 !py-2 !text-fs-ui disabled:opacity-40">Next →</button>
         </nav>
       )}
     </div>

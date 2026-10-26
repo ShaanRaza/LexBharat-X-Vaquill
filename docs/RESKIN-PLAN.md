@@ -150,3 +150,43 @@ Working rule for every phase: no change to `src/lib/**`, `src/app/api/**`, SQL, 
 ## 8. Effort and order (estimate, assuming B1 and B3 are settled)
 
 Phase 1 is the longest by volume (mechanical, ~80 files); phases 2–3 are the riskiest; 4a/4b can run as separate sessions after 3. I would do phase 0 and 1 first, because phase 1 can be done and merged on its own with zero visual change and makes every later phase a token edit. Nothing starts until you approve this plan and answer B1–B3.
+
+
+---
+# Update 2026-10-26: decisions, Phase 0 and Phase 1 (branch `reskin`)
+
+## Decisions from the owner
+- **B1 (licence):** the owner of `mrharit/Lex-bharat` says we may reuse its code, styles and logo in LexBharat. (Recorded as the owner's statement; no licence file was added to that repo.)
+- **B2 (logo):** use "LB" as the logo for now. Phase 3 will build a simple LB mark from tokens; the pilcrow logo is not used yet.
+- **B3 (rendering):** done. `npm install` ran in the clone only; the design was run locally (port 3200) and photographed at 1280 px and 375 px: `docs/screenshots/reskin-design/` (home, security, contact, terms). The home page is 17,000 px tall at desktop and 25,000 px on a phone. What the screenshots confirm: forest-green glow header with grain and white guide lines, dark floating nav pill with a white button, serif headings, mono uppercase kickers with the pilcrow, pale-green footer with a large serif tagline. Everything in section 1 of this plan matches.
+- **Public pages without the password:** home, privacy, terms, security, contact (and the other public marketing pages) must open without the password; the app (`/workspace`, `/admin`, `/developer`...) stays behind the gate. This changes `src/middleware.ts` and `src/lib/access/` (today every page needs the password except `/access`), so it belongs to **Phase 5**, not Phase 1, with its own tests (the gate tests in `token.test.mjs` plus a route-by-route check that no app or API route became public).
+- **Privacy, Terms and Security pages** will be written from what LexBharat actually does, never copied from the design (the design's text describes an enterprise product with masking, hash-chained audit and a hosted/self-hosted model that we do not have). Facts to state, to be checked by a lawyer before launch: it is a **testing phase**; **not legal advice**; data is stored in Neon Postgres (Acts, chats, drafts, regulator and judgment text/vectors, five projects), Supabase (Vault files and text, feedback, usage counters, rate limits), Vercel (hosting, analytics); questions, Vault passages and drafts are sent to the AI providers we use (Google Gemini for answers/drafting/review/scan reading, Voyage AI for embeddings); the browser id cookie and access cookie; no accounts; what is logged (usage counters, feedback); the sources and licences of the legal data (open-india-law CC BY 4.0, India Code); deletion and contact route. This list will be re-derived from the code at Phase 5 so it cannot drift.
+
+## Phase 0: done
+Branch `reskin` created from `main` (`main` untouched). Tools for the no-change proof live in `qa/reskin/` (not `scripts/`): `cdp.mjs` (headless Chrome driver), `snap.mjs` (snapshots 41 pages at 1280 and 375 px: a whole-page PNG plus the computed style and box of every element), `compare.mjs` (computed-style and pixel comparison, threshold 0), `tokenise.mjs` (the Phase 1 codemod). Pages: home and 15 public pages, docs, developer, auth, 404, the password page, workspace, browse (judgments and Acts tabs), Act pages (NI Act, section 138, Constitution Article 21, a regulator instrument), SC and HC court and year pages, a short and a long case page, chat, drafting, review, vault, admin. Snapshots are taken from a production build with throwaway passwords and animations frozen. **Repeatability proved first:** two snapshots of the unchanged code are identical in all 82 page/width pairs (0 style differences, 0 pixels). (Without freezing, only the home page's moving testimonial strip differed.) Not covered by snapshots: interaction states (open menus, hover, focus, streaming answers, the editor while typing) and the admin page behind its login (the snapshot shows its login form); the full feature pass covers behaviour.
+
+## Phase 1: done, no pixel changed
+What moved into `src/styles/tokens.css` (and `tailwind.config.ts`), always with the identical value:
+| Kind | Replaced | Notes |
+|---|---:|---|
+| Font sizes `text-[Npx]` | 502 | to `text-fs-N` (existing names kept: micro 10, nano 11, xs 12, sm 13, ui 14, body 15, lead 16, xl 18, display 24, title 28); 18 new sizes added (12.5, 17, 20, 21, 22, 26, 30, 32, 34, 36, 38, 40, 44, 46, 48, 56, 64, 72) |
+| Colours `text/bg/border-[#hex]` | 88 | 5 matched existing tokens (secondary, ink, primary, primary-hover, dark); 4 got a role name (subtle, strong, soft, danger); 18 are `legacy-<hex>` until the reskin gives them a role |
+| Inline colours in code (Nav logo, coverage map, testimonials, `globals.css`) | 17 | to `rgb(var(--token-rgb))` / `var(--primary)`; two soft gradients use new `--primary-glow-strong/soft` tokens (hex with alpha, exact) |
+| Radius `rounded-[Npx]` | 46 | tight, panel, field, control, new `slim` (3 px) |
+| Letter spacing, line height | 51 + 9 | existing tokens plus 5 + 4 new |
+| Max widths `max-w-[Npx]` | 75 | `max-w-content` (880) and 21 new `max-w-wNNN` tokens |
+| Shadow, `white` | 1 + 33 | `shadow-pop`; Tailwind's `white` now reads `--white-rgb` |
+Touched: 75 files (70 components/pages for class names, `globals.css`, `tailwind.config.ts`, `tokens.css`, 4 components with inline colours). Result: **0** `text-[Npx]`, `rounded-[`, `tracking-[`, `leading-[`, `max-w-[Npx]`, colour-hex classes or inline hex left in `src/components` and `src/app` (apart from one code comment).
+Left on purpose (not colour/type/radius): layout dimensions such as `w-[...]`, `h-[...]`, `grid-cols-[...]`, percentages and `ch` widths; the palette *listing* in `src/data/company.ts` and the Brand page (documentation of the colours, shown as text); `bg-[var(--code-bg)]`-style classes that already read a token. These will be tidied in Phase 2 together with the kit.
+
+### Proof
+| Gate | Result |
+|---|---|
+| Computed styles + pixels, 41 pages x 2 widths, baseline vs after | **PASS: 82 of 82 identical, 0 style differences, 0 pixels** |
+| Baseline repeatability (same code twice) | 82 of 82 identical |
+| `npm run test:extract` | 194 of 194 pass |
+| `npm run qa:sweep`, `npm run build` | pass |
+| `git diff main -- src/lib src/app/api scripts` | **empty** |
+Two things the proof caught on the way: a gradient written as `rgb(var(--primary-rgb)/0.333)` differed by one colour level in 7,263 pixels from the original hex alpha `#6e373055`, so the alpha stayed a hex token; and the home page's moving testimonial strip made the baseline unrepeatable until animations were frozen in the snapshot.
+
+**Stopped before Phase 2**, as instructed.

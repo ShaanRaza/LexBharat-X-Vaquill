@@ -20,7 +20,7 @@ export function LegalBasis({ basis, note }: { basis: BasisItem[]; note?: string 
       </div>
     </li>
   );
-  const Group = ({ title, items, badge }: { title: string; items: BasisItem[]; badge?: string }) => items.length ? <><p className="mt-3 flex items-center gap-2 text-ui-xs font-semibold uppercase tracking-[0.08em] text-muted">{title}{badge && <Badge tone="complete">{badge}</Badge>}</p><ol className="mt-1.5 space-y-2.5">{items.map((b) => <Row key={b.n} b={b} />)}</ol></> : null;
+  const Group = ({ title, items, badge }: { title: string; items: BasisItem[]; badge?: string }) => items.length ? <><p className="mt-3 flex items-center gap-2 text-ui-xs font-semibold uppercase tracking-caps text-muted">{title}{badge && <Badge tone="complete">{badge}</Badge>}</p><ol className="mt-1.5 space-y-2.5">{items.map((b) => <Row key={b.n} b={b} />)}</ol></> : null;
   return (
     <Panel as="section" aria-label="Legal basis">
       <h3 className="text-ui-base font-semibold">Legal basis</h3>

@@ -111,7 +111,7 @@ export default function ReviewRunView({ id }: { id: string }) {
             {changes.map((c, i) => (
               <Panel as="li" key={i}>
                 <p className="flex flex-wrap items-center gap-2"><strong className="text-ui-body font-semibold">Clause {c.ref}</strong><Badge tone={CLAUSE_BADGE[c.risk].tone}>{CLAUSE_BADGE[c.risk].text}</Badge></p>
-                <p className="mt-2 text-ui-sm font-semibold uppercase tracking-[0.08em] text-muted">Proposed wording</p>
+                <p className="mt-2 text-ui-sm font-semibold uppercase tracking-caps text-muted">Proposed wording</p>
                 <p className="mt-1 whitespace-pre-wrap rounded-panel bg-accent px-3 py-2 text-ui-base">{c.change!.wording}</p>
                 <p className="mt-2 text-ui-base text-secondary"><strong className="font-medium text-foreground">Why: </strong>{c.change!.why}</p>
               </Panel>

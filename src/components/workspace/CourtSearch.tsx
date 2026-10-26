@@ -13,7 +13,7 @@ export default function CourtSearch({ court, courtName, isSupreme }: { court: st
       <SearchField id="court-q" value={q} onChange={setQ} label={`Search ${courtName}, all years`}
         shortPlaceholder={isSupreme ? "Party name or 5491/2024" : "Party name or 933/2024"}
         placeholder={isSupreme ? "Try a party name, a title word, a citation or a case number like 5491/2024" : "Try a petitioner or respondent name, a case number like 933/2024, or a year"} />
-      <p className="mt-2 text-[13px] text-[#535151]">{isSupreme ? "Searches the title (both parties), citation and case number from the judgment heading, in every year, newest first. Not judgment text." : "Searches party names, case numbers and case years as recorded in the dataset, in every year of this court, newest first. Not judgment text."}</p>
+      <p className="mt-2 text-fs-sm text-secondary">{isSupreme ? "Searches the title (both parties), citation and case number from the judgment heading, in every year, newest first. Not judgment text." : "Searches party names, case numbers and case years as recorded in the dataset, in every year of this court, newest first. Not judgment text."}</p>
       {term.length >= 2 && (isSupreme ? <><ScSearchResults q={term} /><JudgmentTextSearch q={term} /></> : <HcSearchResults q={term} court={court} />)}
     </div>
   );

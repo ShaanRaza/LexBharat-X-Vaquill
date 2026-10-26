@@ -71,17 +71,17 @@ export default function Listbox({ items, value, onChange, ariaLabel, id, trigger
       </button>
       {open && (
         <div ref={panel} id={uid} role="listbox" data-lenis-prevent tabIndex={-1} aria-label={ariaLabel} aria-activedescendant={active >= 0 ? `${uid}-${active}` : undefined} onKeyDown={onKey}
-          className={`console-pop absolute left-0 top-full z-[105] mt-1 overflow-y-auto rounded-[6px] bg-surface p-1 text-[14px] text-foreground shadow-md outline-none ring-1 ring-border ${maxHeight} ${panelClass}`}>
+          className={`console-pop absolute left-0 top-full z-[105] mt-1 overflow-y-auto rounded-panel bg-surface p-1 text-fs-ui text-foreground shadow-md outline-none ring-1 ring-border ${maxHeight} ${panelClass}`}>
           {items.map((it, i) => {
-            if (it.kind === "group") return <div key={`g${i}`} role="presentation" className="py-1.5 pl-8 pr-2 text-[11px] font-semibold uppercase tracking-wide text-muted">{it.label}</div>;
-            if (it.kind === "sub") return <div key={`s${i}`} role="presentation" className="my-1 rounded-[2px] bg-accent px-3 py-1 text-[12px] text-muted">{it.label}</div>;
+            if (it.kind === "group") return <div key={`g${i}`} role="presentation" className="py-1.5 pl-8 pr-2 text-fs-nano font-semibold uppercase tracking-wide text-muted">{it.label}</div>;
+            if (it.kind === "sub") return <div key={`s${i}`} role="presentation" className="my-1 rounded-control bg-accent px-3 py-1 text-fs-xs text-muted">{it.label}</div>;
             const n = opts.findIndex((o) => o.i === i);
             const sel = it.value === value;
             return (
               <div key={`o${i}`} id={`${uid}-${n}`} data-opt={n} role="option" aria-selected={sel}
                 onMouseEnter={() => setActive(n)} onClick={() => choose(it.value)}
-                className={`relative flex w-full cursor-pointer select-none rounded-[2px] py-1.5 pl-8 pr-2 ${active === n ? "bg-accent" : ""}`}>
-                {sel && <span aria-hidden className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[13px]">✓</span>}
+                className={`relative flex w-full cursor-pointer select-none rounded-control py-1.5 pl-8 pr-2 ${active === n ? "bg-accent" : ""}`}>
+                {sel && <span aria-hidden className="absolute left-2.5 top-1/2 -translate-y-1/2 text-fs-sm">✓</span>}
                 <div className="min-w-0 flex-1">{it.label}</div>
               </div>
             );

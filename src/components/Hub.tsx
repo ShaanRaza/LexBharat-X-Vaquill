@@ -13,7 +13,7 @@ export function HubIndex({ hub, eyebrow, title, lead, linked = true, base, noun 
     <>
       <PageHero eyebrow={eyebrow} title={title} lead={lead} />
       <Section>
-        <DevOnly><p className="mb-6 text-[13px] text-muted"><MockBadge>titles only</MockBadge> All {items.length} entries from the public listing are present. Their bodies are placeholders.</p></DevOnly>
+        <DevOnly><p className="mb-6 text-fs-sm text-muted"><MockBadge>titles only</MockBadge> All {items.length} entries from the public listing are present. Their bodies are placeholders.</p></DevOnly>
         <HubList items={items} base={base} linked={linked} noun={noun} />
       </Section>
       <DataNote kind="placeholder" files={["src/data/hubs.generated.ts", "src/data/hubs.ts"]} />
@@ -44,7 +44,7 @@ export function HubArticle({ hub, slug, eyebrow, back, backLabel }: { hub: HubKe
           <ul>{related.map((r) => <li key={r.slug}><Link href={`${back}/${r.slug}`}>{r.title}</Link></li>)}</ul>
           <p><Link href={back}>← Back to {backLabel}</Link></p>
         </Prose>
-        <nav className="mt-10 flex max-w-[760px] flex-wrap justify-between gap-4 border-t border-border pt-6 text-[15px]" aria-label="Previous and next">
+        <nav className="mt-10 flex max-w-w760 flex-wrap justify-between gap-4 border-t border-border pt-6 text-fs-body" aria-label="Previous and next">
           {prev ? <Link href={`${back}/${prev.slug}`} className="inline-block max-w-[45%] py-1.5 text-primary hover:underline">← {prev.title}</Link> : <span />}
           {next ? <Link href={`${back}/${next.slug}`} className="inline-block max-w-[45%] py-1.5 text-right text-primary hover:underline">{next.title} →</Link> : <span />}
         </nav>

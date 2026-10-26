@@ -25,7 +25,7 @@ export default function OpenLaw() {
         <div className="grid gap-8 sm:grid-cols-3"><Stat value="5.4M+" label="Total sections" /><Stat value="56" label="Jurisdictions" /><Stat value="308" label="Files in the snapshot" /></div>
       </Section>
       <Section tone="accent" title="What is in the dataset" lead="A small slice of the schema, as listed on the public page.">
-        <SimpleTable head={["Field", "Meaning"]} rows={fields.map(([f, m]) => [<code key="f" className="font-mono text-[12.5px]">{f}</code>, m])} />
+        <SimpleTable head={["Field", "Meaning"]} rows={fields.map(([f, m]) => [<code key="f" className="font-mono text-fs-12.5">{f}</code>, m])} />
       </Section>
       <Section title="Access the data" lead="The real site links to a hosted dataset, a code repository and a file mirror. Here those links are inert on purpose.">
         <CardGrid>

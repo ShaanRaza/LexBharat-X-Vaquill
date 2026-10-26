@@ -10,5 +10,5 @@ export default function CopyButton({ text, label, className = "" }: { text: stri
     catch { const t = document.createElement("textarea"); t.value = text; t.style.position = "fixed"; t.style.opacity = "0"; document.body.appendChild(t); t.select(); try { document.execCommand("copy"); } catch { /* nothing more to try */ } t.remove(); }
     setDone(true); setTimeout(() => setDone(false), 1500);
   }
-  return <button type="button" onClick={copy} aria-label={`${label}: ${text}`} title={label} className={`inline-flex min-h-6 items-center rounded-md px-1.5 text-[11px] text-[#535151] ring-1 ring-border hover:bg-accent ${className}`}>{done ? "Copied" : "Copy"}</button>;
+  return <button type="button" onClick={copy} aria-label={`${label}: ${text}`} title={label} className={`inline-flex min-h-6 items-center rounded-md px-1.5 text-fs-nano text-secondary ring-1 ring-border hover:bg-accent ${className}`}>{done ? "Copied" : "Copy"}</button>;
 }
