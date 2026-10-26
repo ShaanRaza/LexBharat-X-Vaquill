@@ -30,28 +30,28 @@ function Overview() {
         <Link href="/docs" className="inline-flex min-h-8 items-center gap-1.5 text-fs-sm text-subtle hover:text-foreground"><I d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z" />Docs</Link>
       </div>
 
-      <section className="mt-5 flex flex-wrap items-center justify-between gap-4 rounded-xl bg-surface p-5 shadow-sm ring-1 ring-border/60">
+      <section className="mt-5 flex flex-wrap items-center justify-between gap-4 rounded-card bg-surface p-5 shadow-sm ring-1 ring-border/60">
         <div>
           <p className="text-fs-sm text-secondary">Credit balance</p>
           <p className="mt-1 text-fs-44 font-semibold leading-none tracking-tight">1,000 <span className="text-fs-lead font-normal text-secondary">credits</span></p>
           <p className="mt-3 text-fs-ui">On <strong className="font-medium">Pay as you go</strong> <span className="text-subtle">(mock)</span></p>
           <p className="mt-1 text-fs-ui text-secondary">No usage recorded in the last 30 days.</p>
         </div>
-        <button type="button" disabled title="Not part of this clone: billing and credits are not recreated" className="inline-flex h-11 items-center gap-2 rounded-lg bg-primary px-5 text-fs-body font-medium text-white opacity-50"><I d="M6 6h15l-2 9H8zM6 6L5 3H2M9 20h.01M18 20h.01" />Buy credits</button>
+        <button type="button" disabled title="Not part of this clone: billing and credits are not recreated" className="inline-flex h-11 items-center gap-2 rounded-button bg-primary px-5 text-fs-body font-medium text-white opacity-50"><I d="M6 6h15l-2 9H8zM6 6L5 3H2M9 20h.01M18 20h.01" />Buy credits</button>
       </section>
 
-      <section className="mt-4 rounded-xl bg-legacy-ebe7e0/70 p-4 ring-1 ring-border/50">
+      <section className="mt-4 rounded-card bg-legacy-ebe7e0/70 p-4 ring-1 ring-border/50">
         <div className="flex items-start justify-between gap-3"><p className="flex items-center gap-2 text-fs-body font-medium"><span aria-hidden className="text-primary"><I d="M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6z" /></span>The API does not store your query text.</p>
           <Link href="/security" className="inline-flex min-h-8 shrink-0 items-center text-fs-sm text-secondary hover:text-foreground">See exactly what is stored</Link></div>
         <p className="mt-1.5 pl-7 text-fs-sm text-secondary">Requests exist in memory for the length of the call. We keep per-day call counts for billing, not what you searched for.</p>
       </section>
 
       <div className="mt-4 grid gap-4 md:grid-cols-2">
-        <section className="rounded-xl bg-surface p-5 shadow-sm ring-1 ring-border/60">
+        <section className="rounded-card bg-surface p-5 shadow-sm ring-1 ring-border/60">
           <div className="flex items-center justify-between"><h2 className="text-fs-20">API key</h2><Link href="/developer?tab=api-key" className="inline-flex min-h-8 items-center text-fs-sm text-primary hover:underline">Manage ↗</Link></div>
           {key ? (
             <>
-              <div className="mt-3 flex items-center gap-2 rounded-lg bg-accent px-3 py-2.5"><code className="min-w-0 flex-1 truncate font-mono text-fs-sm">{prefix}</code>
+              <div className="mt-3 flex items-center gap-2 rounded-field bg-accent px-3 py-2.5"><code className="min-w-0 flex-1 truncate font-mono text-fs-sm">{prefix}</code>
                 <button type="button" aria-label={copied ? "Copied" : "Copy key prefix"} onClick={() => { navigator.clipboard?.writeText(prefix).catch(() => {}); setCopied(true); setTimeout(() => setCopied(false), 1500); }} className="grid size-8 place-items-center rounded-md text-secondary hover:bg-surface"><I d={copied ? "M5 12.500l4.500 4.500L19 7.500" : "M9 9h11v11H9zM5 15V5a1 1 0 0 1 1-1h10"} /></button></div>
               <p className="mt-3 text-fs-sm text-secondary">Only the prefix is shown here. This is a mock key kept in this browser; manage it in the API Keys tab.</p>
             </>
@@ -62,7 +62,7 @@ function Overview() {
             </>
           )}
         </section>
-        <section className="rounded-xl bg-surface p-5 shadow-sm ring-1 ring-border/60">
+        <section className="rounded-card bg-surface p-5 shadow-sm ring-1 ring-border/60">
           <div className="flex items-center justify-between"><h2 className="text-fs-20">Usage</h2><span title="Not part of this clone" className="text-fs-sm text-subtle">View all ↗</span></div>
           <div className="mt-3 grid grid-cols-2 gap-4">
             <div><p className="text-fs-sm text-secondary">Credits used, all time</p><p className="mt-1 text-fs-title font-medium leading-none">0</p></div>
@@ -84,10 +84,10 @@ function Overview() {
         </ul>
       </section>
 
-      <section className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-xl bg-surface p-5 shadow-sm ring-1 ring-border/60">
+      <section className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-card bg-surface p-5 shadow-sm ring-1 ring-border/60">
         <div className="max-w-w560"><h2 className="text-fs-22">Free for non-commercial use</h2>
           <p className="mt-2 text-fs-ui leading-relaxed text-secondary">API access is free for personal use, legal aid, and other non-commercial work. Write to us with who you are, your LinkedIn profile, and what you are building, and we will grant you enough credits to cover the year.</p></div>
-        <Link href="/contact" className="inline-flex h-10 items-center gap-2 rounded-lg px-4 text-fs-ui ring-1 ring-border hover:bg-accent"><I d="M4 6h16v12H4zM4 7l8 6 8-6" />Email us</Link>
+        <Link href="/contact" className="inline-flex h-10 items-center gap-2 rounded-button px-4 text-fs-ui ring-1 ring-control-border hover:bg-accent"><I d="M4 6h16v12H4zM4 7l8 6 8-6" />Email us</Link>
       </section>
       <p className="mt-4 text-fs-xs text-subtle">Mock page: every figure is fixed, nothing here is tied to a real account, key or balance.</p>
     </div>

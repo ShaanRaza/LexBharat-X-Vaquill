@@ -59,7 +59,7 @@ export default function PricingFaq() {
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             {features.map(([h, p], i) => (
               <Reveal key={h} delay={i * 80}>
-                <article className="rounded-panel border border-border bg-surface p-6">
+                <article className="rounded-card border border-border bg-surface p-6">
                   <h3 className="text-fs-20 font-semibold">{h}</h3>
                   <div className="mt-4 grid aspect-[16/9] place-items-center rounded-control bg-raised text-center text-fs-ui text-muted">{p}<br />(placeholder illustration)</div>
                   <Link href={h === "API Playground" ? "/playground" : "/alerts"} className="mt-3 inline-block py-1.5 text-fs-body text-primary hover:underline">Learn more →</Link>
@@ -77,7 +77,7 @@ export default function PricingFaq() {
           <div className="mt-8 grid gap-4 lg:grid-cols-2">
             {tiers.map((t, i) => (
               <Reveal key={t.name} delay={i * 80}>
-                <article className="flex h-full flex-col rounded-panel border border-border bg-surface p-7">
+                <article className="flex h-full flex-col rounded-card border border-border bg-surface p-7">
                   <h3 className="text-fs-display font-semibold">{t.name}</h3>
                   <p className="text-fs-body text-muted">{t.tag}</p>
                   <ul className="mt-5 space-y-2 text-fs-body">{t.items.map((x) => <li key={x} className="flex gap-2"><span className="text-primary">✓</span>{x}</li>)}</ul>
@@ -88,7 +88,7 @@ export default function PricingFaq() {
               </Reveal>
             ))}
           </div>
-          <article className="mt-4 rounded-panel border border-border bg-surface p-7">
+          <article className="mt-4 rounded-card border border-border bg-surface p-7">
             <div className="flex flex-wrap items-baseline justify-between gap-2"><h3 className="text-fs-20 font-semibold">Data licensing and bulk access</h3><span className="text-fs-body text-muted">Custom</span></div>
             <ul className="mt-3 grid gap-1 text-fs-body text-muted sm:grid-cols-2">
               {["Full corpus daily sync into your own database", "The source PDFs and text files", "Train and fine-tune on all of it", "Redistribution and white-label terms", "Volume pricing, custom SLA, invoicing"].map((x) => <li key={x}>✓ {x}</li>)}

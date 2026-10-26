@@ -24,7 +24,7 @@ function loadMine(feature: Feature, id: string): Promise<Mine | null> {
   });
 }
 
-const btn = "inline-flex size-9 items-center justify-center rounded-control text-ui-lead ring-1 ring-border hover:bg-accent focus-visible:outline-2 focus-visible:outline-primary";
+const btn = "inline-flex size-9 items-center justify-center rounded-control text-ui-lead ring-1 ring-control-border hover:bg-accent focus-visible:outline-2 focus-visible:outline-primary";
 
 export default function FeedbackBar({ feature, itemId, className = "" }: { feature: Feature; itemId: string; className?: string }) {
   const [vote, setVote] = useState<Vote | null>(null), [reasons, setReasons] = useState<string[]>([]), [comment, setComment] = useState("");
@@ -69,13 +69,13 @@ export default function FeedbackBar({ feature, itemId, className = "" }: { featu
           <fieldset>
             <legend className="text-secondary">What went wrong? (optional)</legend>
             <div className="mt-1 flex flex-wrap gap-1.5">
-              {REASONS.map((r: string) => <button type="button" key={r} aria-pressed={reasons.includes(r)} onClick={() => toggle(r)} className={`min-h-9 rounded-chip px-3 text-ui-sm ring-1 ring-border hover:bg-accent focus-visible:outline-2 focus-visible:outline-primary ${reasons.includes(r) ? "bg-accent font-medium ring-primary" : "bg-surface"}`}>{r}</button>)}
+              {REASONS.map((r: string) => <button type="button" key={r} aria-pressed={reasons.includes(r)} onClick={() => toggle(r)} className={`min-h-9 rounded-chip px-3 text-ui-sm ring-1 ring-control-border hover:bg-accent focus-visible:outline-2 focus-visible:outline-primary ${reasons.includes(r) ? "bg-accent font-medium ring-primary" : "bg-surface"}`}>{r}</button>)}
             </div>
           </fieldset>
           <label className="block"><span className="sr-only">Comment (optional)</span>
-            <textarea value={comment} onChange={(e) => setComment(e.target.value)} maxLength={MAX_COMMENT} rows={2} placeholder="Tell us more (optional). Please don't include confidential details." className="w-full rounded-panel bg-surface px-3 py-2 text-ui-base text-foreground ring-1 ring-border focus-visible:outline-2" />
+            <textarea value={comment} onChange={(e) => setComment(e.target.value)} maxLength={MAX_COMMENT} rows={2} placeholder="Tell us more (optional). Please don't include confidential details." className="w-full rounded-input bg-surface px-3 py-2 text-ui-base text-foreground ring-1 ring-control-border focus-visible:outline-2" />
           </label>
-          <div className="flex gap-2"><button type="submit" disabled={busy} className="min-h-9 rounded-panel bg-primary px-4 text-ui-sm font-medium text-on-primary disabled:opacity-50">Send</button><button type="button" onClick={() => setEditing(false)} className="min-h-9 rounded-panel px-3 text-ui-sm ring-1 ring-border hover:bg-accent">Not now</button></div>
+          <div className="flex gap-2"><button type="submit" disabled={busy} className="min-h-9 rounded-button bg-primary px-4 text-ui-sm font-medium text-on-primary disabled:opacity-50">Send</button><button type="button" onClick={() => setEditing(false)} className="min-h-9 rounded-button px-3 text-ui-sm ring-1 ring-control-border hover:bg-accent">Not now</button></div>
         </form>
       )}
     </div>

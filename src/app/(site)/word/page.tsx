@@ -31,7 +31,7 @@ export default function Word() {
             <p className="mt-1 text-fs-body text-muted">Sign in and answers are grounded in the full statute corpus, with cited authority. Nothing to run.</p>
             <div className="mt-4"><Bullets items={["Grounded in case law and statutes, with cited authority", "Statute verification and good-law signals", "Document compare and tracked-changes export", "Save work back to your matters and web app"]} /></div>
           </div>
-          <div className="rounded-panel border border-border bg-surface p-6">
+          <div className="rounded-card border border-border bg-surface p-6">
             <h3 className="text-fs-20 font-semibold">Bring your own key (community)</h3>
             <p className="mt-1 text-fs-body text-muted">An open-source build that runs on your own AI provider key, with no account and no hosted backend.</p>
             <div className="mt-4"><Bullets items={["Open source and self-hostable; no account required", "Your own provider key, kept on your device", "Full document tools, review, redlines and drafting", "Playbooks and prompt libraries saved locally"]} /></div>
@@ -43,7 +43,7 @@ export default function Word() {
       <Section tone="accent" title="How to install" lead="The add-in is described as not yet in Microsoft's store, so for now it is added by hand. It takes about three minutes.">
         <ol className="grid gap-4 md:grid-cols-2">
           {wordSteps.map((s, i) => (
-            <li key={s} className="flex gap-4 rounded-panel border border-border bg-surface p-5">
+            <li key={s} className="flex gap-4 rounded-card border border-border bg-surface p-5">
               <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-primary/10 font-mono text-fs-ui text-primary">{i + 1}</span>
               <span className="text-fs-body leading-relaxed">{s}</span>
             </li>

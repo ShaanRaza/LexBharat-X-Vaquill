@@ -11,7 +11,7 @@ const when = (iso: string) => new Date(iso).toLocaleString("en-IN", { day: "nume
 function Action({ title, text, href }: { title: string; text: string; href?: string }) {
   const body = <><span className="block text-ui-body font-medium">{title}{!href && <Badge className="ml-2 align-middle">Coming soon</Badge>}</span><span className="mt-1 block text-ui-base text-secondary">{text}</span></>;
   return href
-    ? <Link href={href} className="block rounded-card bg-surface p-card shadow-sm ring-1 ring-border/60 transition-colors hover:bg-accent/50 focus-visible:outline-2">{body}</Link>
+    ? <Link href={href} className="block rounded-card bg-surface p-card shadow-sm ring-1 ring-control-border/60 transition-colors hover:bg-accent/50 focus-visible:outline-2">{body}</Link>
     : <div role="link" aria-disabled="true" className="block cursor-not-allowed rounded-card bg-surface/60 p-card text-muted ring-1 ring-border/40">{body}</div>;
 }
 
@@ -48,7 +48,7 @@ export default function WorkspaceDashboard() {
           {chats?.length === 0 && (
             <div className="py-3 text-center">
               <p className="text-ui-base text-secondary">No chats on this browser yet.</p>
-              <Link href="/workspace/chat" className="mt-3 inline-flex min-h-10 items-center rounded-panel bg-primary px-4 text-ui-base font-medium text-on-primary hover:bg-primary-hover">Start a chat</Link>
+              <Link href="/workspace/chat" className="mt-3 inline-flex min-h-10 items-center rounded-button bg-primary px-4 text-ui-base font-medium text-on-primary hover:bg-primary-hover">Start a chat</Link>
             </div>
           )}
           {!!chats?.length && (

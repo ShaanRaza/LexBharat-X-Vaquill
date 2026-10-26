@@ -137,7 +137,7 @@ export default function CoverageMap() {
               const below = tip.y < 220;
               const rows: [string, string][] = [["Statutes", bd.s], ["Regulations", bd.r], ["Constitution", bd.c], ["Court rules", bd.ct]];
               return (
-                <div role="tooltip" className="pointer-events-none absolute z-20 w-64 rounded-panel border border-border bg-surface p-3.5 text-left text-foreground shadow-lg"
+                <div role="tooltip" className="pointer-events-none absolute z-20 w-64 rounded-card border border-border bg-surface p-3.5 text-left text-foreground shadow-lg"
                   style={{ left: x, top: tip.y, transform: `translate(-50%, ${below ? "16px" : "calc(-100% - 16px)"})` }}>
                   <p className="font-serif text-base">{hover}</p>
                   <dl className="mt-2 space-y-1 text-xs">

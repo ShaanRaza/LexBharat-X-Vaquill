@@ -13,7 +13,7 @@ import { RISK_BADGE, STATUS_TEXT } from "./labels";
 // The Review start page: pick a contract from the Vault (or add one), say what kind of contract it is and which side you are on, then start. Past reviews are listed below. Presentation only.
 type Meta = { ready: boolean; reviews: ReviewSummaryRow[]; limits: { daily: number; weekly: number; maxSaved: number }; usage: { day: number; week: number }; error?: string };
 const when = (iso: string) => new Date(iso).toLocaleString("en-IN", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" });
-const FIELD = "mt-1 h-11 w-full rounded-panel bg-surface px-3 text-ui-body ring-1 ring-border focus-visible:outline-2";
+const FIELD = "mt-1 h-11 w-full rounded-input bg-surface px-3 text-ui-body ring-1 ring-control-border focus-visible:outline-2";
 
 export default function ReviewHome() {
   const router = useRouter(), v = useVault();
@@ -59,7 +59,7 @@ export default function ReviewHome() {
           </div>
           {err && <Notice tone="bad" role="alert" compact><p>{err}</p></Notice>}
           <div className="flex flex-wrap items-center gap-3">
-            <button type="submit" disabled={busy || !docId || !type || !side || (meta ? !meta.ready : true)} className="h-11 rounded-panel bg-primary px-5 text-ui-base font-medium text-on-primary hover:bg-primary-hover disabled:opacity-50">{busy ? "Starting…" : "Start review"}</button>
+            <button type="submit" disabled={busy || !docId || !type || !side || (meta ? !meta.ready : true)} className="h-11 rounded-button bg-primary px-5 text-ui-base font-medium text-on-primary hover:bg-primary-hover disabled:opacity-50">{busy ? "Starting…" : "Start review"}</button>
             <p className="text-ui-sm text-muted">{meta ? `${meta.limits.daily} reviews a day, ${meta.limits.weekly} a week; ${left} left today.` : ""} A review takes a few minutes on the free plan.</p>
           </div>
         </Panel>

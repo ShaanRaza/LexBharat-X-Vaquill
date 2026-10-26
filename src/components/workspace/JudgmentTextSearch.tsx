@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Badge, Highlight, Notice, Panel } from "@/components/kit";
+import { Badge, Highlight, Notice, Panel, Toggle } from "@/components/kit";
 
 // Search INSIDE Supreme Court judgment text (GET /api/judgments/search-text): by meaning (default) or by words. Presentation and fetching only; the search lives in src/lib/judgments/scText.ts.
 // Colours, sizes and radii come from the tokens through Tailwind names and the shared kit.
@@ -26,12 +26,8 @@ export default function JudgmentTextSearch({ q }: { q: string }) {
   return (
     <section aria-labelledby="jt-hits" className="mt-8">
       <h2 id="jt-hits" className="text-ui-lead font-semibold">Inside Supreme Court judgments{data?.available && data.total > 0 ? <span className="ml-2 text-ui-base font-normal text-muted">{data.total.toLocaleString("en-IN")}{data.mode === "meaning" ? "" : ""} {data.total === 1 ? "judgment" : "judgments"}</span> : null}</h2>
-      <div role="group" aria-label="How to search judgment text" className="mt-2 flex flex-wrap gap-2">
-        {([["meaning", "By meaning"], ["words", "By words"]] as const).map(([k, l]) => (
-          <button key={k} type="button" aria-pressed={mode === k} onClick={() => { setData(null); setMode(k); }} className={`h-8 rounded-panel px-3 text-ui-sm ring-1 ring-border ${mode === k ? "bg-accent font-medium text-foreground" : "text-secondary hover:bg-accent"}`}>{l}</button>
-        ))}
-      </div>
-      {err && <Notice tone="bad" role="alert" className="mt-3"><p>{err}</p><button type="button" onClick={() => setRetry((n) => n + 1)} className="rounded-panel px-3 py-1 text-ui-base ring-1 ring-border hover:bg-accent">Try again</button></Notice>}
+      <Toggle label="How to search judgment text" className="mt-2" value={mode} onChange={(k) => { setData(null); setMode(k); }} options={[["meaning", "By meaning"], ["words", "By words"]] as const} />
+      {err && <Notice tone="bad" role="alert" className="mt-3"><p>{err}</p><button type="button" onClick={() => setRetry((n) => n + 1)} className="rounded-button px-3 py-1 text-ui-base ring-1 ring-control-border hover:bg-accent">Try again</button></Notice>}
       {!data && !err && <div className="mt-3 space-y-2" aria-busy="true">{[0, 1].map((i) => <div key={i} className="console-skel h-20 rounded-card bg-accent" />)}</div>}
       {data?.available && (
         <>
@@ -52,9 +48,9 @@ export default function JudgmentTextSearch({ q }: { q: string }) {
           </ul>
           {data.total > data.pageSize && (
             <div className="mt-3 flex items-center justify-between text-ui-base">
-              <button type="button" disabled={page <= 1} onClick={() => setPage((p) => p - 1)} className="h-9 rounded-panel px-3 ring-1 ring-border hover:bg-accent disabled:opacity-40">← Previous</button>
+              <button type="button" disabled={page <= 1} onClick={() => setPage((p) => p - 1)} className="h-9 rounded-button px-3 ring-1 ring-control-border hover:bg-accent disabled:opacity-40">← Previous</button>
               <span className="text-muted">Page {data.page}</span>
-              <button type="button" disabled={!data.hasMore} onClick={() => setPage((p) => p + 1)} className="h-9 rounded-panel px-3 ring-1 ring-border hover:bg-accent disabled:opacity-40">Next →</button>
+              <button type="button" disabled={!data.hasMore} onClick={() => setPage((p) => p + 1)} className="h-9 rounded-button px-3 ring-1 ring-control-border hover:bg-accent disabled:opacity-40">Next →</button>
             </div>
           )}
         </>

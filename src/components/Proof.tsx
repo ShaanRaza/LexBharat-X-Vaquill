@@ -72,7 +72,7 @@ export default function Proof() {
             <ul key={r} className={`${r ? "comment-marquee-reverse mt-4" : "comment-marquee"} flex w-max items-start gap-4 pr-4`}>
               {[...row, ...row].map((c, i) => (
                 <li key={i} aria-hidden={i >= row.length || undefined}
-                  className="w-72 shrink-0 self-center rounded-panel border border-border bg-surface p-4 shadow-pop sm:w-80"
+                  className="w-72 shrink-0 self-center rounded-card border border-border bg-surface p-4 shadow-pop sm:w-80"
                   style={{ transform: `translateY(${c.dy}px) rotate(${c.rot}deg)` }}>
                   <div className="flex items-center gap-2.5">
                     <span aria-hidden className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-fs-sm font-semibold text-white" style={{ backgroundColor: c.color }}>{c.name.split(" ").map((w) => w[0]).join("")}</span>

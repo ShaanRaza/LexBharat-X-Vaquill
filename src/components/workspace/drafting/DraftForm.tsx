@@ -12,7 +12,7 @@ import { useDraftingMeta } from "./useDraftingMeta";
 
 // The template form and the live generation view: the sections are written one by one, the progress list shows where it is, and a section that fails does not stop the rest.
 type Sec = { id: string; title: string; fixed: boolean; status: "waiting" | "writing" | "done" | "failed"; text: string };
-const INPUT = "w-full rounded-panel bg-surface px-3 py-2.5 text-ui-base text-foreground ring-1 ring-border focus-visible:outline-2";
+const INPUT = "w-full rounded-input bg-surface px-3 py-2.5 text-ui-base text-foreground ring-1 ring-control-border focus-visible:outline-2";
 
 function Field({ f, value, error, onChange }: { f: TemplateField; value: string; error?: string; onChange: (v: string) => void }) {
   const id = `f-${f.key}`, hint = f.type === "amount" && value ? (formatAmount(value) ?? "Enter digits only, for example 250000.") : f.type === "date" && value ? (formatDate(value) ?? "Not a real date.") : f.hint;
@@ -73,7 +73,7 @@ export default function DraftForm({ templateId }: { templateId: string }) {
         <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Draft for review by a qualified lawyer. Not legal advice.</strong> Testing phase: don&apos;t enter confidential client information.</p></Notice>
         <h1 className="mt-5 text-ui-title font-semibold">{phase === "done" ? "Your draft is ready" : "Writing your draft…"}</h1>
         <p className="mt-1 text-ui-base text-secondary">{t.title}</p>
-        {phase === "done" && draftId && <div className="mt-3 flex flex-wrap items-center gap-3"><button type="button" onClick={() => router.push(`/workspace/drafting/${draftId}`)} className="inline-flex min-h-10 items-center rounded-panel bg-primary px-5 text-ui-base font-medium text-white hover:bg-primary-hover">Open the draft to edit and export</button>{failed > 0 && <Badge tone="warn">{failed} section{failed === 1 ? "" : "s"} not generated: retry in the editor</Badge>}{emailStatus && <Badge tone={emailStatus === "sent" ? "complete" : "warn"}>{emailStatus === "sent" ? "Email sent" : "Email could not be sent"}</Badge>}</div>}
+        {phase === "done" && draftId && <div className="mt-3 flex flex-wrap items-center gap-3"><button type="button" onClick={() => router.push(`/workspace/drafting/${draftId}`)} className="inline-flex min-h-10 items-center rounded-button bg-primary px-5 text-ui-base font-medium text-white hover:bg-primary-hover">Open the draft to edit and export</button>{failed > 0 && <Badge tone="warn">{failed} section{failed === 1 ? "" : "s"} not generated: retry in the editor</Badge>}{emailStatus && <Badge tone={emailStatus === "sent" ? "complete" : "warn"}>{emailStatus === "sent" ? "Email sent" : "Email could not be sent"}</Badge>}</div>}
         <div className="mt-5 grid gap-5 lg:grid-cols-[1fr_20rem]">
           <div className="space-y-4">
             <Panel as="section" aria-label="Progress">
@@ -114,7 +114,7 @@ export default function DraftForm({ templateId }: { templateId: string }) {
         <label className="flex items-start gap-2 text-ui-sm text-secondary"><input type="checkbox" checked={allowMissing} onChange={(e) => setAllowMissing(e.target.checked)} className="mt-1" /><span>Generate even if some required details are missing. They will appear as highlighted placeholders such as <span className="draft-placeholder">[TENANT&apos;S ADDRESS]</span>.</span></label>
       </div>
       <div className="mt-6 flex flex-wrap items-center gap-3">
-        <button type="submit" className="min-h-11 rounded-panel bg-primary px-6 text-ui-base font-medium text-white hover:bg-primary-hover">Generate draft</button>
+        <button type="submit" className="min-h-11 rounded-button bg-primary px-6 text-ui-base font-medium text-white hover:bg-primary-hover">Generate draft</button>
         <span className="text-ui-sm text-muted">{meta.limits.daily} drafts a day, {meta.limits.weekly} a week. {Math.max(0, meta.limits.daily - meta.usage.day)} left today. It takes about a minute.</span>
       </div>
     </form>

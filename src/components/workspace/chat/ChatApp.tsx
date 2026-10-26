@@ -88,7 +88,7 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
           <div className="pt-6">
             <h1 className="text-ui-title font-semibold">Ask about Indian law</h1>
             <p className="mt-2 text-ui-body text-secondary">Answers come only from sections of Indian Central and State Acts, with a numbered link to each section used.</p>
-            <ul className="mt-5 flex flex-wrap gap-2">{EXAMPLES.map((x) => <li key={x}><button type="button" onClick={() => ask(x)} disabled={busy} className="rounded-chip bg-surface px-3 py-1.5 text-ui-base text-foreground ring-1 ring-border hover:bg-accent">{x}</button></li>)}</ul>
+            <ul className="mt-5 flex flex-wrap gap-2">{EXAMPLES.map((x) => <li key={x}><button type="button" onClick={() => ask(x)} disabled={busy} className="rounded-chip bg-surface px-3 py-1.5 text-ui-base text-foreground ring-1 ring-control-border hover:bg-accent">{x}</button></li>)}</ul>
           </div>
         )}
         {msgs.map((m, i) => m.role === "user"
@@ -106,8 +106,8 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
           <label htmlFor="chat-q" className="sr-only">Your question</label>
           <textarea id="chat-q" ref={box} rows={2} maxLength={MAX} value={input} onChange={(e) => setInput(e.target.value)} placeholder="Ask a question about an Indian Act…" disabled={busy}
             onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); ask(input); } }}
-            className="min-h-[3.25rem] flex-1 resize-none rounded-panel bg-surface px-3 py-2.5 text-ui-body text-foreground ring-1 ring-border focus-visible:outline-2 disabled:opacity-60" />
-          <button type="submit" disabled={busy || input.trim().length < 3} className="h-11 rounded-panel bg-primary px-5 text-ui-base font-medium text-on-primary disabled:opacity-50">{busy ? "Working…" : "Ask"}</button>
+            className="min-h-[3.25rem] flex-1 resize-none rounded-input bg-surface px-3 py-2.5 text-ui-body text-foreground ring-1 ring-control-border focus-visible:outline-2 disabled:opacity-60" />
+          <button type="submit" disabled={busy || input.trim().length < 3} className="h-11 rounded-button bg-primary px-5 text-ui-base font-medium text-on-primary disabled:opacity-50">{busy ? "Working…" : "Ask"}</button>
         </form>
         <p className="mt-2 text-ui-xs text-muted">Searches Indian Acts (and any Vault documents you attach). Judgments are not included yet. Not legal advice.{usage ? ` ${Math.max(0, usage.daily - usage.day)} of ${usage.daily} questions left today.` : ""}</p>
       </div>

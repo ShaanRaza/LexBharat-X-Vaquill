@@ -22,13 +22,13 @@ export function heads(c: CaseItem): { heading: string; parties: string | null } 
 }
 
 export default function CaseRow({ c, href, court, courtName, year }: { c: CaseItem; href: string; court: string; courtName?: string; year?: number }) {
-  const { heading, parties } = heads(c), date = fmtDate(c.decisionDate), chip = "rounded-md bg-accent px-2 py-0.5";
+  const { heading, parties } = heads(c), date = fmtDate(c.decisionDate), chip = "rounded-chip bg-accent px-2 py-0.5";
   return (
-    <li className="relative rounded-xl bg-surface px-5 py-4 shadow-sm ring-1 ring-border/60 transition-colors hover:ring-primary/50">
+    <li className="relative rounded-card bg-surface px-5 py-4 shadow-sm ring-1 ring-border/60 transition-colors hover:ring-primary/50">
       {/* the title link stretches over the whole row; the copy button sits above it */}
       <Link href={href} className="text-fs-body font-medium text-primary after:absolute after:inset-0 after:rounded-xl after:content-['']">{heading}</Link>
       {parties && <p className="mt-1 text-fs-ui text-foreground/80">{parties}</p>}
-      {c.benchExtracted?.length ? <p className="mt-1.5 flex flex-wrap gap-1" title="Bench from the judgment text">{c.benchExtracted.map((j) => <span key={j} className="rounded-md bg-accent px-2 py-0.5 text-fs-xs text-foreground/80">{j}</span>)}</p>
+      {c.benchExtracted?.length ? <p className="mt-1.5 flex flex-wrap gap-1" title="Bench from the judgment text">{c.benchExtracted.map((j) => <span key={j} className="rounded-chip bg-accent px-2 py-0.5 text-fs-xs text-foreground/80">{j}</span>)}</p>
         : c.judges?.length ? <p className="mt-1 text-fs-sm italic text-secondary">{court === "supreme-court-of-india" ? "Authoring judge: " : ""}{c.judges.join(", ")}</p> : null}
       <p className="mt-1.5 flex flex-wrap items-center gap-1.5 text-fs-xs text-secondary">
         {(courtName || year) && <span className={`${chip} font-medium text-foreground/80`}>{courtName}{courtName && year ? " · " : ""}{year}</span>}

@@ -15,7 +15,7 @@ export default function DocsHome() {
       <p className="mt-3 text-fs-17 text-muted">Guides, concepts, recipes and an API reference.{dev(" Every page here is a recreated summary written for this build (original wording, observed structure). Nothing is executed.")}</p>
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         {docsNav.map((s) => (
-          <section key={s.title} className="rounded-panel border border-border bg-surface p-5">
+          <section key={s.title} className="rounded-card border border-border bg-surface p-5">
             <h2 className="text-fs-lead font-semibold">{s.title}</h2>
             <ul className="mt-2 space-y-1 text-fs-ui">
               {s.pages.slice(0, 6).map((p) => (

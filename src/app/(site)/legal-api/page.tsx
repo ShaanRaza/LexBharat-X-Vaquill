@@ -17,7 +17,7 @@ export default function LegalApi() {
       />
       <Section tone="accent" title="Build the pipeline yourself, or make one call.">
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-panel border border-border bg-surface p-6">
+          <div className="rounded-card border border-border bg-surface p-6">
             <p className="font-mono text-fs-nano uppercase tracking-wider text-error">The hard way</p>
             <h3 className="mt-1 text-fs-20 font-semibold">Build the pipeline yourself</h3>
             <div className="mt-4"><Bullets tone="cross" items={["Dozens of government sites, each in its own format", "PDFs and XML with broken tables and footnotes", "Section hierarchy, amendments and metadata", "A search index you build and keep in sync", "Re-scrape it all, forever, as the law changes"]} /></div>

@@ -154,7 +154,7 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
             {anyFilter && <button type="button" onClick={clearFilters} className={clearFiltersCls}>Clear filters</button>}
             <span className="ml-auto self-end pb-3 text-fs-sm text-muted" role="status">{data ? `${fmt(data.total)} acts${data.source === "mock" ? " (mock rows)" : ""}` : ""}</span>
           </div>
-          {err && <div role="alert" className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-field border border-error/40 bg-error/5 p-3 text-fs-ui"><span>{err}</span><button type="button" onClick={() => setRetry((n) => n + 1)} className="h-8 rounded-field px-3 ring-1 ring-border hover:bg-accent">Try again</button></div>}
+          {err && <div role="alert" className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-field border border-error/40 bg-error/5 p-3 text-fs-ui"><span>{err}</span><button type="button" onClick={() => setRetry((n) => n + 1)} className="h-8 rounded-field px-3 ring-1 ring-control-border hover:bg-accent">Try again</button></div>}
           {!data && !err && <div className="mt-4 space-y-2" aria-busy="true">{[0, 1, 2, 3].map((i) => <div key={i} className="console-skel h-16 rounded-card bg-accent" />)}</div>}
           {data && (
             <>
@@ -163,10 +163,10 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
                   <li key={r.actId} className="rounded-card bg-surface px-5 py-4 shadow-sm ring-1 ring-border/60">
                     <p className="text-fs-body font-medium">{data.source === "real" ? <Link href={`/workspace/browse/acts/${r.actId}`} className="text-primary hover:underline">{r.title}</Link> : r.title}</p>
                     <p className="mt-1.5 flex flex-wrap items-center gap-1.5 text-fs-xs text-secondary">
-                      <span className="rounded-panel bg-accent px-2 py-0.5">{label(r.category)}</span>
-                      {r.state && <span className="rounded-panel bg-accent px-2 py-0.5">{label(r.state)}</span>}
-                      {r.department && <span className="rounded-panel bg-accent px-2 py-0.5">{label(r.department)}</span>}
-                      <span className="rounded-panel bg-accent px-2 py-0.5">{label(r.actStatus)}</span>
+                      <span className="rounded-chip bg-accent px-2 py-0.5">{label(r.category)}</span>
+                      {r.state && <span className="rounded-chip bg-accent px-2 py-0.5">{label(r.state)}</span>}
+                      {r.department && <span className="rounded-chip bg-accent px-2 py-0.5">{label(r.department)}</span>}
+                      <span className="rounded-chip bg-accent px-2 py-0.5">{label(r.actStatus)}</span>
                       {r.year !== null && <><span>{r.year}</span><span aria-hidden>·</span></>}<span>{data.source === "mock" ? `${r.sectionCount} sections (placeholder)` : r.sectionCount > 0 ? `${fmt(r.sectionCount)} sections` : "section count unavailable"}</span><span aria-hidden>·</span><span className="font-mono">{r.actId}</span>
                     </p>
                   </li>
@@ -174,9 +174,9 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
                 {!data.results.length && <li className="rounded-card border border-dashed border-border p-6 text-center text-fs-ui text-muted">No acts match these filters.</li>}
               </ul>
               <div className="mt-4 flex items-center justify-between text-fs-ui">
-                <button type="button" disabled={page <= 1} onClick={() => setPage((p) => p - 1)} className="h-9 rounded-field px-3 ring-1 ring-border hover:bg-accent disabled:opacity-40">← Previous</button>
+                <button type="button" disabled={page <= 1} onClick={() => setPage((p) => p - 1)} className="h-9 rounded-field px-3 ring-1 ring-control-border hover:bg-accent disabled:opacity-40">← Previous</button>
                 <span className="text-muted">Page {data.page} of {Math.max(1, Math.ceil(data.total / data.pageSize))}</span>
-                <button type="button" disabled={!data.hasMore} onClick={() => setPage((p) => p + 1)} className="h-9 rounded-field px-3 ring-1 ring-border hover:bg-accent disabled:opacity-40">Next →</button>
+                <button type="button" disabled={!data.hasMore} onClick={() => setPage((p) => p + 1)} className="h-9 rounded-field px-3 ring-1 ring-control-border hover:bg-accent disabled:opacity-40">Next →</button>
               </div>
               <p className="mt-3 text-fs-xs text-muted">{data.note}</p>
               {real && stats?.attribution && (

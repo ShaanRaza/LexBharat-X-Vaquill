@@ -10,6 +10,6 @@ const KIND = {
 export default function CitationChip({ n, href, label, kind = "act" }: { n: number; href: string; label: string; kind?: keyof typeof KIND }) {
   return (
     <Link href={href} title={label} aria-label={`${kind === "doc" ? "Your document" : kind === "judgment" ? "Judgment" : "Source"} ${n}: ${label}`}
-      className={`mx-0.5 inline-flex min-w-5 items-center justify-center rounded-chip px-1.5 align-baseline text-ui-xs font-medium ${KIND[kind]}`}>{n}</Link>
+      className={`mx-0.5 inline-flex min-w-5 items-center justify-center rounded-chip px-1.5 align-baseline font-mono text-ui-xs font-medium ${KIND[kind]}`}>{n}</Link>
   );
 }

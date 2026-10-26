@@ -2,7 +2,7 @@
 import { sectionWord } from "@/lib/acts/unitLabel.mjs";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Badge, Highlight, Notice, Panel, RepealedNote } from "@/components/kit";
+import { Badge, Highlight, Notice, Panel, RepealedNote, Toggle } from "@/components/kit";
 import { departmentLabel } from "@/lib/acts/departments.mjs";
 import { STATUS_INFO, INCOMPLETE_NOTICE, MISSING_NOTICE, officialSourceUrl } from "@/lib/acts/quality";
 
@@ -31,12 +31,8 @@ export default function SectionSearchResults({ q }: { q: string }) {
   return (
     <section aria-labelledby="sec-hits" className="mt-6">
       <h2 id="sec-hits" className="text-ui-lead font-semibold">Sections matching &ldquo;{q}&rdquo;{data?.searchAvailable && data.total > 0 ? <span className="ml-2 text-ui-base font-normal text-muted">{data.total.toLocaleString("en-IN")}{data.totalCapped ? "+" : ""} {data.total === 1 ? "section" : "sections"}</span> : null}</h2>
-      <div role="group" aria-label="What to search" className="mt-2 flex flex-wrap gap-2">
-        {([["acts", "Acts (Central and State)"], ["regulators", "Regulators, Law Commission"]] as const).map(([k, l]) => (
-          <button key={k} type="button" aria-pressed={scope === k} onClick={() => { setData(null); setScope(k); }} className={`h-8 rounded-panel px-3 text-ui-sm ring-1 ring-border ${scope === k ? "bg-accent font-medium text-foreground" : "text-secondary hover:bg-accent"}`}>{l}</button>
-        ))}
-      </div>
-      {err && <Notice tone="bad" role="alert" className="mt-3"><p>{err}</p><button type="button" onClick={() => setRetry((n) => n + 1)} className="rounded-panel px-3 py-1 text-ui-base ring-1 ring-border hover:bg-accent">Try again</button></Notice>}
+      <Toggle label="What to search" className="mt-2" value={scope} onChange={(k) => { setData(null); setScope(k); }} options={[["acts", "Acts (Central and State)"], ["regulators", "Regulators, Law Commission"]] as const} />
+      {err && <Notice tone="bad" role="alert" className="mt-3"><p>{err}</p><button type="button" onClick={() => setRetry((n) => n + 1)} className="rounded-button px-3 py-1 text-ui-base ring-1 ring-control-border hover:bg-accent">Try again</button></Notice>}
       {!data && !err && <div className="mt-3 space-y-2" aria-busy="true">{[0, 1, 2].map((i) => <div key={i} className="console-skel h-20 rounded-card bg-accent" />)}</div>}
       {data && !data.searchAvailable && <Notice tone="info" role="status" className="mt-3"><p><strong className="font-medium text-foreground">Section search is not available yet.</strong> {data.message ?? ""} Searching act titles below still works.</p></Notice>}
       {data?.searchAvailable && (
@@ -75,9 +71,9 @@ export default function SectionSearchResults({ q }: { q: string }) {
           </ul>
           {data.total > data.pageSize && (
             <div className="mt-3 flex items-center justify-between text-ui-base">
-              <button type="button" disabled={page <= 1} onClick={() => setPage((p) => p - 1)} className="h-9 rounded-panel px-3 ring-1 ring-border hover:bg-accent disabled:opacity-40">← Previous</button>
+              <button type="button" disabled={page <= 1} onClick={() => setPage((p) => p - 1)} className="h-9 rounded-button px-3 ring-1 ring-control-border hover:bg-accent disabled:opacity-40">← Previous</button>
               <span className="text-muted">Page {data.page} of {pages.toLocaleString("en-IN")}{data.totalCapped ? "+" : ""}</span>
-              <button type="button" disabled={!data.hasMore} onClick={() => setPage((p) => p + 1)} className="h-9 rounded-panel px-3 ring-1 ring-border hover:bg-accent disabled:opacity-40">Next →</button>
+              <button type="button" disabled={!data.hasMore} onClick={() => setPage((p) => p + 1)} className="h-9 rounded-button px-3 ring-1 ring-control-border hover:bg-accent disabled:opacity-40">Next →</button>
             </div>
           )}
         </>

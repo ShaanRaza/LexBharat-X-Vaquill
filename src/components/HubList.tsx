@@ -35,7 +35,7 @@ export default function HubList({ items, base, linked, noun }: { items: Item[]; 
       <ul className="mt-6 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
         {slice.map((i) => {
           const body = (
-            <article className="h-full rounded-panel border border-border bg-surface p-5 transition-transform duration-300 ease-out hover:-translate-y-0.5">
+            <article className="h-full rounded-card border border-border bg-surface p-5 transition-transform duration-300 ease-out hover:-translate-y-0.5">
               {i.category && <p className="mb-1 font-mono text-fs-nano uppercase tracking-wider text-primary">{i.category}</p>}
               <h2 className="text-fs-lead font-semibold leading-snug">{i.title}</h2>
               {i.summary && <p className="mt-1 text-fs-sm leading-relaxed text-muted">{i.summary}</p>}

@@ -36,7 +36,7 @@ export default function PlaygroundClient() {
 
   return (
     <div className="grid gap-4 lg:grid-cols-[360px_1fr] [&>*]:min-w-0">
-      <div className="space-y-4 rounded-panel border border-border bg-surface p-5">
+      <div className="space-y-4 rounded-card border border-border bg-surface p-5">
         <DevOnly><p className="text-fs-xs text-muted"><MockBadge>mock console</MockBadge> Runs against <code className="font-mono">/api/mock/playground</code>.</p></DevOnly>
         <div>
           <label htmlFor="pg-ep" className="mb-1 block text-fs-ui font-medium">Endpoint</label>
@@ -65,7 +65,7 @@ export default function PlaygroundClient() {
         </div>
         <div className="min-h-[260px] p-5 text-fs-body">
           {!res ? <p className="text-muted">Pick an endpoint and press “Run request”.</p> : view === "JSON" ? (
-            <pre className="overflow-x-auto font-mono text-fs-xs leading-5">{JSON.stringify(res, null, 2)}</pre>
+            <pre tabIndex={0} className="overflow-x-auto font-mono text-fs-xs leading-5">{JSON.stringify(res, null, 2)}</pre>
           ) : (
             <ul className="space-y-3">
               {items.map((it, i) => {
@@ -75,7 +75,7 @@ export default function PlaygroundClient() {
                     <p className="font-semibold">{String(o.cite ?? o.label ?? o.jurisdiction ?? `Result ${i + 1}`)}</p>
                     {o.title ? <p className="text-muted">{String(o.title)}</p> : null}
                     {o.excerpt ? <p className="mt-1 text-fs-ui">{String(o.excerpt)}</p> : null}
-                    {!o.title && !o.excerpt ? <pre className="overflow-x-auto font-mono text-fs-xs">{JSON.stringify(o)}</pre> : null}
+                    {!o.title && !o.excerpt ? <pre tabIndex={0} className="overflow-x-auto font-mono text-fs-xs">{JSON.stringify(o)}</pre> : null}
                   </li>
                 );
               })}
@@ -84,7 +84,7 @@ export default function PlaygroundClient() {
         </div>
         <div className="border-t border-border p-4">
           <p className="mb-2 text-fs-sm font-medium">Equivalent call</p>
-          <pre className="overflow-x-auto rounded-control bg-[var(--code-bg)] p-3 font-mono text-fs-xs leading-5">{curl}</pre>
+          <pre tabIndex={0} className="overflow-x-auto rounded-control bg-[var(--code-bg)] p-3 font-mono text-fs-xs leading-5">{curl}</pre>
         </div>
       </div>
     </div>

@@ -190,3 +190,39 @@ Left on purpose (not colour/type/radius): layout dimensions such as `w-[...]`, `
 Two things the proof caught on the way: a gradient written as `rgb(var(--primary-rgb)/0.333)` differed by one colour level in 7,263 pixels from the original hex alpha `#6e373055`, so the alpha stayed a hex token; and the home page's moving testimonial strip made the baseline unrepeatable until animations were frozen in the snapshot.
 
 **Stopped before Phase 2**, as instructed.
+
+
+---
+# Update: Phase 2 (fonts and shared components), branch `reskin`
+
+Phase 1 (87dbbec) was merged into `main` first (fast-forward; tests, qa:sweep and build re-run on `main`: 194/194, pass, pass). Phase 2 lives only on `reskin`.
+
+## What changed
+- **Fonts (all free, OFL):** Geist (text and UI, 400/500/600), Geist Mono (labels, code), Source Serif 4 (headings; self-hosted weight 400 with its optical-size axis, copied from the design repo), IBM Plex Sans Devanagari (not preloaded; the browser fetches it only when a page shows Devanagari text, via `unicode-range`). Workspace page titles (`.console h1`) use the serif.
+- **Palette** (`src/styles/tokens.css`, one file): green paper `#f4f5ef`, cards white, ink `#0f1f1a`, muted `#55665d`, forest brand `#1f4d3a` (hover `#163a2b`), accent tint `#e3ede4`, success `#257548`, warning `#765810`, error `#8a2e2a`. **Control outlines use a separate `control-border` token `#5e6d64`** (5.5:1 on white, 5.0:1 on the page; the decorative `border` hairline is 1.4:1 and is not used for controls).
+- **Shapes:** buttons, toggles and chips are pills; inputs 12 px; cards 16 px; panels 10 px.
+- **Type scale kept:** workspace UI stays 14-15 px. Reading text (judgment reader, Act section text) is Geist 17 px (`text-reading`, token `--text-reading`). The design's 17 px scale for the *public pages* is Phase 5 (those pages still use their current sizes in the new fonts and colours).
+- **Shared kit** (`src/components/kit/`, tokens only): new `Button` (primary / secondary / ghost / quiet, sm/md/lg, link or button), `Toggle` (pill option group), `Eyebrow` (mono pilcrow label), `MarkedPage` and `MarkedScope`, class helpers in `controls.ts` (`buttonClass`, `fieldClass`, `selectClass`, `toggleClass`); restyled `Badge`, `CitationChip` (mono pill; act, document and judgment variants stay distinct), `Notice`, `Panel`, `SearchField` (pill search bar), selects, the Previous/Next buttons, scope and mode toggles, judgment reader controls.
+- **Role-based shape codemods** (`qa/reskin/phase2-codemod.mjs`, `...2.mjs`): ~100 buttons, inputs, cards and chips across 59 files got the new radius and the control outline token by role (class strings only).
+- **The marked page** (`.marked`, `.marked-scope` in `globals.css`; component `MarkedPage`): the passage is lifted to white with a forest outline and two corner handles; in a scope the surrounding blocks dim to 80% (never in print, where it becomes an outline). Used first on the **selected Act section** (its text) and on the **judgment passage a citation or search result points at** (`#passage-N`, the reader dims the other passages).
+- Small a11y fixes found by axe: scrollable code blocks got `tabIndex=0`; the drafting placeholder highlight now sets its own text colour; one testimonial avatar tint was darkened.
+
+## Checks
+| Gate | Result |
+|---|---|
+| `git diff main -- src/lib src/app/api scripts` | **empty** |
+| `npm run test:extract` | 194 of 194 |
+| `npm run qa:sweep`, `npm run build` | pass |
+| Contrast of the token pairs in use (`node qa/reskin/contrast.mjs`) | **PASS**: every text pair >= 4.5:1 on surface, page, raised and accent; status badges on their tints >= 4.5:1; control-border >= 4.5:1 |
+| axe-core WCAG 2.0/2.1/2.2 A+AA, 12 screens x 1280 and 375 px | **0 violations** (after fixing 4 it found) |
+| Feature pass: `scripts/w9/final-check.mjs` | 56 of 57; the one failure is "smart (meaning) search" |
+| `scripts/w10/w10-check.mjs` | 16 of 17; the one failure is "search inside judgments by meaning" |
+Both failures are the free Voyage limit (3 requests a minute): the checks fire several searches by meaning in a row, the search falls back to keywords (`semantic_error`) and the assertion on "by meaning" fails. Re-run alone a minute later, both pass (Limitation Act sections first for the specific-performance question; a Supreme Court judgment for the cheque question). No other check failed, including login/gate, Browse, Act pages, Vault, Chat with a judgment chip, Drafting (5 templates, .docx and PDF), Review end to end, feedback and admin.
+
+## Screenshots (before = `main`, after = `reskin`, same fixture data)
+`docs/screenshots/reskin-phase2/<screen>-<1280|375>-<before|after>.png` for: `01-dashboard`, `02-chat-answer`, `03-act-selected-section`, `04-sc-judgment`, `05-drafting-editor`, `06-review-result`, `07-vault-list` (28 pairs). The data (a chat answer with citations, a draft, a Vault document, a Review) is created once under a fixed test browser id by `qa/reskin/fixtures.mjs`; shots by `qa/reskin/screens.mjs`.
+
+## Known and left for later phases
+Shell (top bar, sidebar, drawer, banner, password page) is only re-coloured and re-fonted, not restructured (Phase 3). The feedback thumbs, the chat composer and some ad-hoc controls still carry their old structure with the new colours. Public marketing pages keep their layout, not the design's (Phase 5). Layout dimensions (`w-[...]`, `h-[...]`) and the brand palette listing remain as noted in Phase 1.
+
+**Stopped before Phase 3.**

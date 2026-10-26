@@ -46,7 +46,7 @@ function ApiDemo() {
           <span>request.sh</span>
           <button onClick={run} disabled={busy} className="rounded-control bg-primary px-3 py-1 font-sans text-fs-xs font-medium text-white hover:bg-primary-hover disabled:opacity-60">{busy ? "Running…" : "Run (mock)"}</button>
         </div>
-        <pre className="overflow-x-auto p-4 font-mono text-fs-12.5 leading-6 text-legacy-2c2620">
+        <pre tabIndex={0} className="overflow-x-auto p-4 font-mono text-fs-12.5 leading-6 text-legacy-2c2620">
 {`curl -G https://api.lexbharat.example/v1/statutes/resolve \\
   -H "Authorization: Bearer $API_KEY" \\
   --data-urlencode "cite=${cite}"`}
@@ -62,7 +62,7 @@ function ApiDemo() {
         </div>
         <div className="p-5 text-fs-body">
           {!data ? <p className="text-muted">Press “Run (mock)” to see the simulated response.</p> : view === "JSON" ? (
-            <pre className="overflow-x-auto font-mono text-fs-xs leading-5">{JSON.stringify(data, null, 2)}</pre>
+            <pre tabIndex={0} className="overflow-x-auto font-mono text-fs-xs leading-5">{JSON.stringify(data, null, 2)}</pre>
           ) : (
             <>
               <p className="text-fs-sm text-muted">Title 42 › Chapter 21 › Subchapter I › § 1983</p>
@@ -92,7 +92,7 @@ export default function AccessAndDemo() {
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {paths.map(([h, a, b, g], i) => (
             <Reveal key={h} delay={i * 70}>
-              <article className="group h-full rounded-panel border border-border bg-surface p-6 transition-transform duration-300 ease-out hover:-translate-y-1">
+              <article className="group h-full rounded-card border border-border bg-surface p-6 transition-transform duration-300 ease-out hover:-translate-y-1">
                 <div className="grid h-12 w-12 place-items-center rounded-full bg-primary/10 font-serif text-fs-display text-primary">{g}</div>
                 <h3 className="mt-5 text-fs-xl font-semibold">{h}</h3>
                 <p className="mt-1 text-fs-body">{a}</p>
@@ -103,7 +103,7 @@ export default function AccessAndDemo() {
         </div>
 
         <p className="mt-10 text-fs-body text-muted">Try the database claim <MockBadge>illustrative snippet</MockBadge></p>
-        <pre className="mt-3 overflow-x-auto rounded-panel border border-[var(--code-border)] bg-[var(--code-bg)] p-4 font-mono text-fs-12.5 leading-6">{sql}</pre>
+        <pre tabIndex={0} className="mt-3 overflow-x-auto rounded-panel border border-[var(--code-border)] bg-[var(--code-bg)] p-4 font-mono text-fs-12.5 leading-6">{sql}</pre>
 
         <dl className="mt-10 grid gap-6 sm:grid-cols-2">
           {details.map(([t, d]) => (

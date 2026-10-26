@@ -133,8 +133,8 @@ export default function ConsoleShell({ tab, variant = "data", lawTab, children }
             <span className="min-w-0 leading-tight"><span className="block truncate text-fs-ui font-medium">{session ? "Signed in" : "Not signed in"}</span><span className="block truncate text-fs-xs text-muted" title={session?.email}>{session?.email ?? "Demo console"}</span></span>
           </div>
           {session
-            ? <button type="button" onClick={() => { clearMockSession(); router.push("/auth/login"); }} className="mt-2 inline-flex min-h-8 items-center rounded-panel px-2 text-fs-sm text-primary hover:bg-accent">Sign out</button>
-            : <Link href="/auth/login" className="mt-2 inline-flex min-h-8 items-center rounded-panel px-2 text-fs-sm text-primary hover:bg-accent">Sign in (demo)</Link>}
+            ? <button type="button" onClick={() => { clearMockSession(); router.push("/auth/login"); }} className="mt-2 inline-flex min-h-8 items-center rounded-button px-2 text-fs-sm text-primary hover:bg-accent">Sign out</button>
+            : <Link href="/auth/login" className="mt-2 inline-flex min-h-8 items-center rounded-button px-2 text-fs-sm text-primary hover:bg-accent">Sign in (demo)</Link>}
           <div className="mt-1 px-2"><LogoutLink /></div>
         </div>
       </div>

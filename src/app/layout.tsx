@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Schibsted_Grotesk, Source_Code_Pro, Newsreader } from "next/font/google";
+import { Geist, Geist_Mono, IBM_Plex_Sans_Devanagari } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import DataAttribution from "@/components/DataAttribution";
@@ -8,10 +9,12 @@ import AccessDevBanner from "@/components/AccessDevBanner";
 import VisitPing from "@/components/VisitPing";
 import { Analytics } from "@vercel/analytics/next";
 
-const sans = Schibsted_Grotesk({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
-const mono = Source_Code_Pro({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
-// The public site's display serif could not be identified; Newsreader is an approximation.
-const serif = Newsreader({ subsets: ["latin"], variable: "--font-serif", display: "swap" });
+// Fonts of the reskin (all free, OFL): Geist for text and UI, Geist Mono for small labels and code, Source Serif 4 for headings (self-hosted: weight 400 with its optical-size axis, copied from the design repo),
+// IBM Plex Sans Devanagari for Hindi. The Devanagari file is not preloaded and is only fetched when a page actually shows Devanagari text (the browser downloads it by unicode-range).
+const sans = Geist({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-sans", display: "swap" });
+const mono = Geist_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-mono", display: "swap" });
+const serif = localFont({ src: "./fonts/source-serif-4-opsz-400.woff2", weight: "400", style: "normal", variable: "--font-serif", display: "swap", adjustFontFallback: "Times New Roman" });
+const deva = IBM_Plex_Sans_Devanagari({ subsets: ["devanagari"], weight: ["400", "500"], variable: "--font-deva", display: "swap", preload: false });
 
 export const metadata: Metadata = {
   title: RELEASE ? "LexBharat | Indian Acts and court judgments" : "LexBharat | Indian Acts and court judgments (local mock)",
@@ -22,7 +25,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable} ${serif.variable}`}>
+    <html lang="en" className={`${sans.variable} ${mono.variable} ${serif.variable} ${deva.variable}`}>
       <body>
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[100] focus:rounded-control focus:bg-foreground focus:px-4 focus:py-2 focus:text-background">Skip to main content</a>
         <AccessDevBanner />

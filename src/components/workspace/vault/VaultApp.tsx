@@ -46,9 +46,9 @@ export default function VaultApp() {
           <h2 id="docs" className="text-ui-lead font-semibold">Your documents</h2>
           <div className="flex flex-wrap gap-2">
             <label className="sr-only" htmlFor="vault-q">Search documents by name</label>
-            <input id="vault-q" type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search by name" className="h-10 w-44 rounded-panel bg-surface px-3 text-ui-base ring-1 ring-border focus-visible:outline-2" />
+            <input id="vault-q" type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search by name" className="h-10 w-44 rounded-input bg-surface px-3 text-ui-base ring-1 ring-control-border focus-visible:outline-2" />
             <label className="sr-only" htmlFor="vault-sort">Sort documents</label>
-            <select id="vault-sort" value={sort} onChange={(e) => setSort(e.target.value as Sort)} className="h-10 rounded-panel bg-surface px-2 text-ui-base ring-1 ring-border focus-visible:outline-2">{Object.entries(SORTS).map(([k, t]) => <option key={k} value={k}>{t}</option>)}</select>
+            <select id="vault-sort" value={sort} onChange={(e) => setSort(e.target.value as Sort)} className="h-10 rounded-input bg-surface px-2 text-ui-base ring-1 ring-control-border focus-visible:outline-2">{Object.entries(SORTS).map(([k, t]) => <option key={k} value={k}>{t}</option>)}</select>
           </div>
         </div>
         {err && <Notice tone="bad" role="alert" compact className="mt-3"><p>{err}</p></Notice>}
@@ -62,8 +62,8 @@ export default function VaultApp() {
                 {editing === d.id ? (
                   <form onSubmit={(e) => { e.preventDefault(); save(d); }} className="flex flex-wrap items-center gap-2">
                     <label className="sr-only" htmlFor={`rn-${d.id}`}>New name for {d.name}</label>
-                    <input id={`rn-${d.id}`} autoFocus value={draft} maxLength={120} onChange={(e) => setDraft(e.target.value)} onKeyDown={(e) => { if (e.key === "Escape") { setEditing(null); backToRename(d.id); } }} className="h-10 min-w-0 flex-1 rounded-panel bg-surface px-3 text-ui-base ring-1 ring-border focus-visible:outline-2" />
-                    <button type="submit" className="h-10 rounded-panel bg-primary px-4 text-ui-base font-medium text-on-primary">Save</button>
+                    <input id={`rn-${d.id}`} autoFocus value={draft} maxLength={120} onChange={(e) => setDraft(e.target.value)} onKeyDown={(e) => { if (e.key === "Escape") { setEditing(null); backToRename(d.id); } }} className="h-10 min-w-0 flex-1 rounded-input bg-surface px-3 text-ui-base ring-1 ring-control-border focus-visible:outline-2" />
+                    <button type="submit" className="h-10 rounded-button bg-primary px-4 text-ui-base font-medium text-on-primary">Save</button>
                     <button type="button" onClick={() => { setEditing(null); backToRename(d.id); }} className={BTN}>Cancel</button>
                   </form>
                 ) : (

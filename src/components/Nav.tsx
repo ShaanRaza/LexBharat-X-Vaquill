@@ -40,7 +40,7 @@ export default function Nav() {
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
       </button>
       {open && (
-        <div className="absolute left-4 right-4 top-14 rounded-panel border border-border bg-surface p-4 shadow-lg md:hidden">
+        <div className="absolute left-4 right-4 top-14 rounded-card border border-border bg-surface p-4 shadow-lg md:hidden">
           {[...navLinks, { label: "Sign in", href: "/auth/login" }, { label: "Get API key", href: "/auth/signup" }].map((l) => (
             <Link key={l.label} href={l.href} onClick={() => setOpen(false)} className="block py-2 text-fs-17">{l.label}</Link>
           ))}

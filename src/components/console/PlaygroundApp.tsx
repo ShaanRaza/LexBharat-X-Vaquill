@@ -513,7 +513,7 @@ export default function PlaygroundApp({ initialEndpoint }: { initialEndpoint: st
           </div>
         ) : running ? (
           <div className="p-5" aria-busy="true">
-            <div className="flex items-center justify-between"><p className="text-fs-lead">Running…</p><span className="flex items-center gap-3"><span className="font-mono text-fs-xs text-muted">{fmtS(elapsed)}</span><button type="button" onClick={cancel} className="h-8 rounded-tight px-3 text-fs-sm ring-1 ring-border hover:bg-accent">▢ Cancel</button></span></div>
+            <div className="flex items-center justify-between"><p className="text-fs-lead">Running…</p><span className="flex items-center gap-3"><span className="font-mono text-fs-xs text-muted">{fmtS(elapsed)}</span><button type="button" onClick={cancel} className="h-8 rounded-tight px-3 text-fs-sm ring-1 ring-control-border hover:bg-accent">▢ Cancel</button></span></div>
             <div className="mt-5 divide-y divide-border" aria-hidden="true">
               {[0, 1, 2].map((i) => (
                 <div key={i} className="flex items-start justify-between gap-4 py-3" style={{ animationDelay: `${i * 120}ms` }}>

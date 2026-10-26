@@ -21,20 +21,20 @@ export default function HcSearchResults({ q, court }: { q: string; court?: strin
   return (
     <section aria-labelledby="hc-hits" className="mt-6">
       <h2 id="hc-hits" className="text-fs-xl font-semibold">High Court cases{data?.indexAvailable ? <span className="ml-2 text-fs-ui font-normal text-muted">{data.total.toLocaleString("en-IN")} {data.total === 1 ? "case" : "cases"}</span> : null}</h2>
-      {err && <div role="alert" className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-error/40 bg-error/5 p-3 text-fs-ui"><span>{err}</span><button type="button" onClick={() => setRetry((n) => n + 1)} className="h-8 rounded-lg px-3 ring-1 ring-border hover:bg-accent">Try again</button></div>}
+      {err && <div role="alert" className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-field border border-error/40 bg-error/5 p-3 text-fs-ui"><span>{err}</span><button type="button" onClick={() => setRetry((n) => n + 1)} className="h-8 rounded-button px-3 ring-1 ring-control-border hover:bg-accent">Try again</button></div>}
       {!data && !err && <div className="mt-3 space-y-2" aria-busy="true">{[0, 1].map((i) => <div key={i} className="console-skel h-14 rounded-xl bg-accent" />)}</div>}
-      {data && !data.indexAvailable && <p className="mt-3 rounded-lg bg-accent px-4 py-3 text-fs-ui text-secondary">High Court name search is not available on this site yet: it needs the High Court search index, which is not loaded here. You can still open any High Court and year from the list below.</p>}
+      {data && !data.indexAvailable && <p className="mt-3 rounded-field bg-accent px-4 py-3 text-fs-ui text-secondary">High Court name search is not available on this site yet: it needs the High Court search index, which is not loaded here. You can still open any High Court and year from the list below.</p>}
       {data?.indexAvailable && (
         <>
           <ul className="mt-2 space-y-2">
             {data.results.map((c) => <CaseRow key={`${c.court}-${c.year}-${c.caseId}`} c={c} court={c.court} courtName={c.courtName} year={c.year} href={`/workspace/browse/judgments/${c.court}/${c.year}/${encodeURIComponent(c.caseId)}?p=${c.mainPage}`} />)}
-            {!data.results.length && <li className="rounded-xl border border-dashed border-border p-6 text-center text-fs-ui text-muted">No High Court case matches. Try a surname or a case number such as 933/2024.</li>}
+            {!data.results.length && <li className="rounded-card border border-dashed border-border p-6 text-center text-fs-ui text-muted">No High Court case matches. Try a surname or a case number such as 933/2024.</li>}
           </ul>
           {data.total > data.pageSize && (
             <div className="mt-3 flex items-center justify-between text-fs-ui">
-              <button type="button" disabled={page <= 1} onClick={() => setPage((p) => p - 1)} className="h-9 rounded-lg px-3 ring-1 ring-border hover:bg-accent disabled:opacity-40">← Previous</button>
+              <button type="button" disabled={page <= 1} onClick={() => setPage((p) => p - 1)} className="h-9 rounded-button px-3 ring-1 ring-control-border hover:bg-accent disabled:opacity-40">← Previous</button>
               <span className="text-muted">Page {data.page} of {Math.max(1, Math.ceil(data.total / data.pageSize)).toLocaleString("en-IN")}</span>
-              <button type="button" disabled={!data.hasMore} onClick={() => setPage((p) => p + 1)} className="h-9 rounded-lg px-3 ring-1 ring-border hover:bg-accent disabled:opacity-40">Next →</button>
+              <button type="button" disabled={!data.hasMore} onClick={() => setPage((p) => p + 1)} className="h-9 rounded-button px-3 ring-1 ring-control-border hover:bg-accent disabled:opacity-40">Next →</button>
             </div>
           )}
         </>

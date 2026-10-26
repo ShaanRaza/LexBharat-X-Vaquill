@@ -10,7 +10,7 @@ html.lenis, html.lenis body { height: auto; }
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-sans), var(--font-deva), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -86,5 +86,15 @@ body {
 .draft-doc .ProseMirror ul { list-style: disc; padding-left: 1.5rem; margin: 0 0 0.75rem; }
 .draft-doc .ProseMirror ol { list-style: decimal; padding-left: 1.5rem; margin: 0 0 0.75rem; }
 .draft-doc .ProseMirror li > p { margin: 0 0 0.3rem; }
-.draft-placeholder { background: rgb(var(--quality-warn-rgb) / 0.22); border-radius: var(--radius-chip); padding: 0 0.15em; }
+.draft-placeholder { background: rgb(var(--quality-warn-rgb) / 0.22); color: rgb(var(--foreground-rgb)); border-radius: var(--radius-chip); padding: 0 0.15em; }
 .draft-doc:focus-within { outline: 2px solid var(--primary); outline-offset: 2px; }   /* the editor shows where the keyboard is */
+
+/* ---- The marked page (reskin): the marked passage is lifted to white with a forest outline and corner handles; everything else in the same scope dims to 80%. Colours come from the tokens. ---- */
+.marked { position: relative; background: rgb(var(--white-rgb)); border-radius: var(--radius-tight); padding: 0.5rem 0.75rem; margin-inline: -0.75rem; box-shadow: 0 0 0 1.5px var(--primary), 0 10px 20px -12px rgb(var(--primary-rgb) / 0.4); }
+.marked::before, .marked::after { content: ""; position: absolute; width: 7px; height: 7px; background: var(--primary); border-radius: 1px; top: -4px; left: -4px; }
+.marked::after { top: auto; left: auto; bottom: -4px; right: -4px; }
+.marked-scope:has(.marked) > :not(.marked, :has(.marked)) { opacity: 0.8; }
+@media print { .marked { box-shadow: none; outline: 1.5px solid currentColor; } .marked-scope:has(.marked) > :not(.marked, :has(.marked)) { opacity: 1; } }
+
+/* Page titles in the workspace use the serif of the reskin (headings only; reading text and UI stay Geist). */
+.console h1 { font-family: var(--font-serif), Georgia, serif; font-weight: 400; }

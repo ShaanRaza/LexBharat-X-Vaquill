@@ -14,7 +14,7 @@ import { useReviewRun } from "./useReviewRun";
 // One review (/workspace/review/<id>): live progress while it runs, then the result: summary, clauses, suggested changes, missing clauses, Indian-law points with citation chips, and the .docx/PDF downloads.
 // Presentation only; the review itself runs on the server (src/lib/review).
 const H2 = "text-ui-lead font-semibold";
-const BTN = "rounded-chip px-3 py-1.5 text-ui-sm font-medium ring-1 ring-border text-foreground hover:bg-accent focus-visible:outline-2";
+const BTN = "rounded-chip px-3 py-1.5 text-ui-sm font-medium ring-1 ring-control-border text-foreground hover:bg-accent focus-visible:outline-2";
 
 function Step({ label, state, onRetry, detail }: { label: string; state: "pending" | "ok" | "failed" | "now"; onRetry?: () => void; detail?: string }) {
   return (

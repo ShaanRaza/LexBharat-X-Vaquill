@@ -86,7 +86,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
           <CopyButton text={ref} label={c.citation ? "Copy citation" : "Copy case reference"} className="!text-ui-xs !px-2 !py-0.5" />
           <span className="text-ui-xs text-muted">{c.citation ? "Copies the citation" : "Copies the case number with court and date"}</span>
         </p>
-        {full && <p className="mt-3"><a href="#fulltext" className="inline-flex min-h-9 items-center rounded-panel px-3 text-ui-base font-medium text-primary ring-1 ring-border hover:bg-accent">Read the judgment text ↓</a></p>}
+        {full && <p className="mt-3"><a href="#fulltext" className="inline-flex min-h-9 items-center rounded-button px-3 text-ui-base font-medium text-primary ring-1 ring-control-border hover:bg-accent">Read the judgment text ↓</a></p>}
         <dl className="mt-5 divide-y divide-border/60 rounded-card bg-surface shadow-sm ring-1 ring-border/60">
           {rows.map(([k, v]) => (<div key={k} className="grid gap-1 px-5 py-3 sm:grid-cols-[210px_1fr]"><dt className="text-ui-sm text-secondary">{k}</dt><dd className="text-ui-body">{v}</dd></div>))}
         </dl>
@@ -109,7 +109,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
           </ul>
           {JUDGE_COURTS.includes(slug) && <p className="mt-2 text-ui-xs text-muted">Judges and bench are exported only for Bombay, Gujarat and Orissa.</p>}
         </section>
-        <Link href={back} className="mt-4 inline-flex h-9 items-center rounded-panel px-3 text-ui-base ring-1 ring-border hover:bg-accent">← Back to {year} cases</Link>
+        <Link href={back} className="mt-4 inline-flex h-9 items-center rounded-button px-3 text-ui-base ring-1 ring-control-border hover:bg-accent">← Back to {year} cases</Link>
         {stats.attribution && <p className="mt-6 text-ui-xs text-muted">{stats.attribution.text} Licence: {stats.attribution.licence}, snapshot {stats.attribution.snapshot}. <a href={stats.attribution.url} className="underline" rel="noopener noreferrer" target="_blank">Dataset</a> Verify against the official source before relying on it; this is not legal advice.</p>}
       </div>
     </BrowseShell>

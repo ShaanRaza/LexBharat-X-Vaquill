@@ -2,48 +2,49 @@
    or var(--token). To reskin, edit this file only. */
 /* Design tokens: values observed in the public site's :root CSS. */
 :root {
-  --background: #f2f1ee;
+  --background: #f4f5ef;
   --surface: #fff;
-  --raised: #eae9e5;
-  --sunken: #e3e2df;
-  --foreground: #25211d;
-  --muted: #615950;
-  --border: #d9d8d5;
-  --primary: #6e3730;
-  --primary-hover: #5a2d27;
-  --primary-10: #6e37301a;
-  --accent: #eae9e5;
-  --dark: #1e1b17;
-  --success: #2f6b45;
-  --warning: #7d5310;
-  --error: #a4123c;
-  --control-border: #7c746a; /* form-field outline: >= 4:1 on white and on the page background (WCAG 1.4.11) */
-  --code-bg: #f7f6f3;
-  --code-border: #e2e0da;
+  --raised: #e6ebe1;
+  --sunken: #dde4d8;
+  --foreground: #0f1f1a;
+  --muted: #55665d;
+  --border: #d2d9cc;
+  --primary: #1f4d3a;
+  --primary-hover: #163a2b;
+  --primary-10: #1f4d3a1a;
+  --accent: #e3ede4;
+  --dark: #0f1f1a;
+  --success: #257548;
+  --warning: #765810;
+  --error: #8a2e2a;
+  --control-border: #5e6d64;
+  --control-border-rgb: 94 109 100; /* form-field outline: >= 4:1 on white and on the page background (WCAG 1.4.11) */
+  --code-bg: #f1f4ec;
+  --code-border: #d7dfd0;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
   /* RGB channels so Tailwind opacity modifiers (e.g. bg-primary/15) work */
-  --background-rgb: 242 241 238;
+  --background-rgb: 244 245 239;
   --surface-rgb: 255 255 255;
-  --raised-rgb: 234 233 229;
-  --sunken-rgb: 227 226 223;
-  --foreground-rgb: 37 33 29;
-  --muted-rgb: 97 89 80;
-  --border-rgb: 217 216 213;
-  --primary-rgb: 110 55 48;
-  --primary-hover-rgb: 90 45 39;
-  --accent-rgb: 234 233 229;
-  --dark-rgb: 30 27 23;
-  --success-rgb: 47 107 69;
-  --warning-rgb: 125 83 16;
-  --error-rgb: 164 18 60;
+  --raised-rgb: 230 235 225;
+  --sunken-rgb: 221 228 216;
+  --foreground-rgb: 15 31 26;
+  --muted-rgb: 85 102 93;
+  --border-rgb: 210 217 204;
+  --primary-rgb: 31 77 58;
+  --primary-hover-rgb: 22 58 43;
+  --accent-rgb: 227 237 228;
+  --dark-rgb: 15 31 26;
+  --success-rgb: 37 117 72;
+  --warning-rgb: 118 88 16;
+  --error-rgb: 138 46 42;
 }
 
 /* ---- Additions for shared UI kit and the Acts text pages. Everything a reskin needs is in this file. ---- */
 :root {
   /* text colours that used to be written as #535151 / #3f3a35 inside components */
-  --text-secondary-rgb: 83 81 81;
-  --text-ink-rgb: 63 58 53;
+  --text-secondary-rgb: 63 82 72;
+  --text-ink-rgb: 47 68 57;
   --on-primary: #fff;
 
   /* semantic quality colours (point at the palette above; change here to reskin) */
@@ -53,12 +54,14 @@
   --quality-info-rgb: var(--muted-rgb);
 
   /* radii */
-  --radius-tight: 4px;
-  --radius-field: 8px;
+  --radius-tight: 6px;
+  --radius-field: 12px;
   --radius-control: 2px;
-  --radius-panel: 6px;
-  --radius-chip: 6px;
-  --radius-card: 12px;
+  --radius-button: 999px;   /* buttons, toggles and chips are pills in the reskin */
+  --radius-input: 12px;
+  --radius-panel: 10px;
+  --radius-chip: 999px;
+  --radius-card: 16px;
 
   /* type scale (px) */
   --text-xs: 12px;
@@ -91,8 +94,9 @@
   --pad-chip-x: 0.5rem;
   --gap-stack: 0.75rem;
 
-  /* fonts: the families themselves are loaded in app/layout.tsx and exposed as --font-sans / --font-mono / --font-serif */
-  --font-reading: var(--font-serif), Georgia, serif;
+  /* fonts: the families themselves are loaded in app/layout.tsx and exposed as --font-sans (Geist) / --font-mono (Geist Mono) / --font-serif (Source Serif 4) / --font-deva (IBM Plex Sans Devanagari) */
+  --font-reading: var(--font-sans), var(--font-deva), system-ui, sans-serif;   /* reading text (judgments, Act sections) is Geist at the reading size below */
+  --text-reading: 17px;
 }
 
 /* ---- Phase 1 of the reskin: every value that used to be written inside a class name (text-[17px], bg-[#f4f1ec], max-w-[1152px] ...) now lives here, with the SAME value, so a reskin only edits this file. ---- */
@@ -118,9 +122,9 @@
   --text-46: 46px;
   /* colours that were hard-coded in class names: named by role where the role is clear, otherwise 'legacy-<hex>' until the reskin gives them one */
   --legacy-4b5563-rgb: 75 85 99;
-  --subtle-rgb: 101 98 95;
-  --soft-rgb: 65 64 64;
-  --strong-rgb: 26 24 24;
+  --subtle-rgb: 90 106 97;
+  --soft-rgb: 47 68 57;
+  --strong-rgb: 15 31 26;
   --legacy-2c2620-rgb: 44 38 32;
   --legacy-f4f1ec-rgb: 244 241 236;
   --legacy-282726-rgb: 40 39 38;
@@ -129,7 +133,7 @@
   --legacy-0b7556-rgb: 11 117 86;
   --legacy-3b82f6-rgb: 59 130 246;
   --legacy-1d5aa8-rgb: 29 90 168;
-  --danger-rgb: 180 35 35;
+  --danger-rgb: 138 46 42;
   --legacy-c9c3b8-rgb: 201 195 184;
   --legacy-b5aea3-rgb: 181 174 163;
   --legacy-e0b341-rgb: 224 179 65;
@@ -145,7 +149,7 @@
   --tracking-tight-soft: -0.01em;
   --tracking-caps-mid: 0.1em;
   --tracking-caps-soft: 0.06em;
-  --radius-slim: 3px;
+  --radius-slim: 4px;
   --leading-reading-loose: 1.75;
   --leading-body: 1.6;
   --leading-display: 1.1;
@@ -172,14 +176,14 @@
   --mw-260: 260px;
   --mw-1040: 1040px;
   --shadow-pop: 0 6px 18px rgb(var(--foreground-rgb) / 0.08);
-  --legacy-cba099-rgb: 203 160 153;
-  --legacy-a8706a-rgb: 168 112 106;
-  --legacy-8a4a40-rgb: 138 74 64;
-  --legacy-3b302b-rgb: 59 48 43;
-  --legacy-54403a-rgb: 84 64 58;
-  --legacy-6e4e42-rgb: 110 78 66;
+  --legacy-cba099-rgb: 168 197 180;
+  --legacy-a8706a-rgb: 63 112 88;
+  --legacy-8a4a40-rgb: 47 106 80;
+  --legacy-3b302b-rgb: 31 58 47;
+  --legacy-54403a-rgb: 47 74 60;
+  --legacy-6e4e42-rgb: 61 90 74;
   --white-rgb: 255 255 255;
   /* primary colour with transparency, for the soft radial glows on dark bands */
-  --primary-glow-strong: #6e373066;
-  --primary-glow-soft: #6e373055;
+  --primary-glow-strong: #1f4d3a66;
+  --primary-glow-soft: #1f4d3a55;
 }

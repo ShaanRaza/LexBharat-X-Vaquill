@@ -12,7 +12,7 @@ const TONE: Record<Tone, string> = {
 
 export default function Notice({ tone = "info", title, children, role, compact = false, className = "" }: { tone?: Tone; title?: string; children: ReactNode; role?: "note" | "status" | "alert"; compact?: boolean; className?: string }) {
   return (
-    <aside role={role ?? "note"} className={`rounded-panel border ${compact ? "px-3 py-2 text-ui-sm" : "p-card text-ui-base"} text-foreground ${TONE[tone]} ${className}`}>
+    <aside role={role ?? "note"} className={`rounded-card border ${compact ? "px-3 py-2 text-ui-sm" : "p-card text-ui-base"} text-foreground ${TONE[tone]} ${className}`}>
       {title && <p className="mb-1 text-ui-base font-semibold">{title}</p>}
       <div className="space-y-2 leading-relaxed text-secondary">{children}</div>
     </aside>

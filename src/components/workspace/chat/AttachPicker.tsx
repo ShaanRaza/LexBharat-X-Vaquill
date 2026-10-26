@@ -26,7 +26,7 @@ export default function AttachPicker({ value, onChange, disabled }: { value: Att
   return (
     <div ref={box} className="relative">
       <button ref={btn} type="button" disabled={disabled} aria-expanded={open} aria-controls={id} onClick={() => setOpen((o) => !o)}
-        className="h-9 rounded-chip bg-surface px-3 text-ui-sm text-secondary ring-1 ring-border hover:bg-accent focus-visible:outline-2 disabled:opacity-50">
+        className="h-9 rounded-chip bg-surface px-3 text-ui-sm text-secondary ring-1 ring-control-border hover:bg-accent focus-visible:outline-2 disabled:opacity-50">
         Attach from Vault{value.length ? ` (${value.length})` : ""}
       </button>
       {open && (

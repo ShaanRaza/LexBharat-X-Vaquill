@@ -17,7 +17,7 @@ type Full = DraftRow & { versions: VersionRow[] };
 type Save = "idle" | "saving" | "saved" | "error";
 const LABEL: Record<string, string> = { generated: "Generated version", checkpoint: "Earlier edit", saved: "Saved by you", "before-restore": "Before a restore" };
 const at = (iso: string) => new Date(iso).toLocaleString("en-IN", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" });
-const BTN = "inline-flex min-h-9 items-center rounded-panel px-3 text-ui-base ring-1 ring-border hover:bg-accent focus-visible:outline-2 disabled:opacity-50";
+const BTN = "inline-flex min-h-9 items-center rounded-button px-3 text-ui-base ring-1 ring-control-border hover:bg-accent focus-visible:outline-2 disabled:opacity-50";
 
 /** A notice numbers its paragraphs straight through: after a section is filled in, every numbered list takes the number after the previous one. */
 function renumber(editor: Editor) {
@@ -129,7 +129,7 @@ export default function DraftEditor({ draftId }: { draftId: string }) {
         <button type="button" onClick={() => download("docx")} className={BTN}>Download .docx</button>
         <button type="button" onClick={() => download("pdf")} className={BTN}>Download PDF</button>
         <button type="button" onClick={copy} className={BTN}>{copied ? "Copied" : "Copy text"}</button>
-        <button type="button" onClick={remove} className="ml-auto inline-flex min-h-9 items-center rounded-panel px-3 text-ui-sm text-muted hover:bg-accent">Delete draft</button>
+        <button type="button" onClick={remove} className="ml-auto inline-flex min-h-9 items-center rounded-button px-3 text-ui-sm text-muted hover:bg-accent">Delete draft</button>
       </div>
       {msg && <p role="status" className="mt-2 text-ui-sm text-secondary">{msg}</p>}
       <div className="mt-4 grid gap-5 lg:grid-cols-[1fr_21rem]">

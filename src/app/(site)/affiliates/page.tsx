@@ -24,9 +24,9 @@ export default function Affiliates() {
       </Section>
       <Section tone="accent" title="Who this is for">
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-panel border border-border bg-surface p-6"><h3 className="mb-3 text-fs-xl font-semibold">A good fit</h3>
+          <div className="rounded-card border border-border bg-surface p-6"><h3 className="mb-3 text-fs-xl font-semibold">A good fit</h3>
             <Bullets items={["Developers and technical writers covering legal data, RAG or agent tooling", "Legal ops consultants and legal IT firms", "Newsletter and community operators", "Maintainers of docs, awesome-lists and directories"]} /></div>
-          <div className="rounded-panel border border-border bg-surface p-6"><h3 className="mb-3 text-fs-xl font-semibold">Not eligible</h3>
+          <div className="rounded-card border border-border bg-surface p-6"><h3 className="mb-3 text-fs-xl font-semibold">Not eligible</h3>
             <Bullets tone="cross" items={["Lawyers recommending to their own clients without required disclosures", "In-house counsel referring their own employer", "Coupon, deal and cashback sites", "Anyone bidding on brand terms in paid search"]} /></div>
         </div>
       </Section>

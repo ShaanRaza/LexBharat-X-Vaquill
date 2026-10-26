@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Fragment } from "react";
-import { Badge, Notice, Panel, RepealedNote, StatusDot } from "@/components/kit";
+import { Badge, Notice, Panel, RepealedNote, StatusDot , MarkedPage } from "@/components/kit";
+import { buttonClass } from "@/components/kit/controls";
 import { PROVENANCE, CHAPTER_NOTE, INCOMPLETE_NOTICE, MISSING_NOTICE } from "@/lib/acts/quality";
 import type { ActTextView as View } from "@/lib/acts/viewModel";
 import ScheduleTableView, { STAMP_NOTE } from "./ScheduleTableView";
@@ -115,14 +116,14 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
                     <p><a className="underline" href={view.sourceUrl} target="_blank" rel="noopener noreferrer">Read this Act on India Code</a></p>
                   </Notice>
                 ) : (
-                  <div className="mt-4 space-y-3 font-reading text-ui-lead leading-reading">
+                  <MarkedPage className="mt-4 space-y-3 font-reading text-reading" label="Selected section">
                     {sel.blocks.map((b, i) => (b.type === "heading" ? <h3 key={i} className="pt-2 font-sans text-ui-base font-semibold uppercase tracking-wide text-secondary">{b.text}</h3> : <p key={i}>{b.text}</p>))}
-                  </div>
+                  </MarkedPage>
                 )}
 
                 <nav aria-label="Previous and next section" className="mt-6 flex items-center justify-between border-t border-border/70 pt-4 text-ui-base">
-                  {sel.prev ? <Link className="rounded-panel px-3 py-2 text-primary ring-1 ring-border hover:bg-accent" href={href(header.actId, sel.prev.key)}>← {sel.prev.label}</Link> : <span />}
-                  {sel.next ? <Link className="rounded-panel px-3 py-2 text-primary ring-1 ring-border hover:bg-accent" href={href(header.actId, sel.next.key)}>{sel.next.label} →</Link> : <span />}
+                  {sel.prev ? <Link className={buttonClass("secondary", "md", "text-primary")} href={href(header.actId, sel.prev.key)}>← {sel.prev.label}</Link> : <span />}
+                  {sel.next ? <Link className={buttonClass("secondary", "md", "text-primary")} href={href(header.actId, sel.next.key)}>{sel.next.label} →</Link> : <span />}
                 </nav>
               </Panel>
             ) : (

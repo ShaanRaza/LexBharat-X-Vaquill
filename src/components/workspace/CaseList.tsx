@@ -79,7 +79,7 @@ export default function CaseList({ court, year, courtName, searchable, filterabl
         </div>
       ) : null}
       {!searchable && <p className="mt-3 rounded-field bg-accent px-4 py-2.5 text-fs-sm text-secondary">Newest first.{filterable ? " Filters apply one at a time. Bench size is offered only for courts whose judge data is reliable." : " Filters are not available for this court yet."} Searching by party name is not available for High Courts on this site yet: it needs the High Court search index, which is not loaded here. Short text previews are not available yet. High Court records usually have a case number but no reporter citation.</p>}
-      {err && <div role="alert" className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-field border border-error/40 bg-error/5 p-3 text-fs-ui"><span>{err}</span><button type="button" onClick={() => setRetry((n) => n + 1)} className="h-8 rounded-field px-3 ring-1 ring-border hover:bg-accent">Try again</button></div>}
+      {err && <div role="alert" className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-field border border-error/40 bg-error/5 p-3 text-fs-ui"><span>{err}</span><button type="button" onClick={() => setRetry((n) => n + 1)} className="h-8 rounded-field px-3 ring-1 ring-control-border hover:bg-accent">Try again</button></div>}
       {!data && !err && <div className="mt-4 space-y-2" aria-busy="true">{[0, 1, 2].map((i) => <div key={i} className="console-skel h-16 rounded-card bg-accent" />)}</div>}
       {data && !data.available && <p className="mt-4 rounded-field bg-accent px-4 py-3 text-fs-ui text-secondary">{data.note}</p>}
       {data?.available && (
@@ -97,10 +97,10 @@ export default function CaseList({ court, year, courtName, searchable, filterabl
           </ul>
           <nav aria-label="Pagination" className="mt-4 text-fs-ui">
             <div className="flex flex-wrap items-center justify-center gap-1.5">
-              <button type="button" disabled={page <= 1} onClick={() => setPage((p) => p - 1)} className="h-9 rounded-field px-3 ring-1 ring-border hover:bg-accent disabled:opacity-40">← Previous</button>
+              <button type="button" disabled={page <= 1} onClick={() => setPage((p) => p - 1)} className="h-9 rounded-field px-3 ring-1 ring-control-border hover:bg-accent disabled:opacity-40">← Previous</button>
               {pageList(page, pages).map((n, i) => n === 0 ? <span key={`g${i}`} aria-hidden className="px-1 text-muted">…</span>
-                : <button key={n} type="button" aria-current={n === page ? "page" : undefined} onClick={() => go({ page: n })} className={`h-9 min-w-9 rounded-field px-2 ring-1 ring-border ${n === page ? "bg-primary text-on-primary" : "hover:bg-accent"}`}>{n}</button>)}
-              <button type="button" disabled={page >= pages} onClick={() => setPage((p) => p + 1)} className="h-9 rounded-field px-3 ring-1 ring-border hover:bg-accent disabled:opacity-40">Next →</button>
+                : <button key={n} type="button" aria-current={n === page ? "page" : undefined} onClick={() => go({ page: n })} className={`h-9 min-w-9 rounded-field px-2 ring-1 ring-control-border ${n === page ? "bg-primary text-on-primary" : "hover:bg-accent"}`}>{n}</button>)}
+              <button type="button" disabled={page >= pages} onClick={() => setPage((p) => p + 1)} className="h-9 rounded-field px-3 ring-1 ring-control-border hover:bg-accent disabled:opacity-40">Next →</button>
             </div>
             <p className="mt-2 text-center text-muted">Page {Math.min(page, pages).toLocaleString("en-IN")} of {pages.toLocaleString("en-IN")} · {data.total.toLocaleString("en-IN")} {data.total === 1 ? "case" : "cases"} ({scope === "all" ? "all years" : year})</p>
           </nav>

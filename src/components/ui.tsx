@@ -55,7 +55,7 @@ export function CardGrid({ cols = 3, children }: { cols?: 2 | 3 | 4; children: R
 
 export function Card({ title, children, href, tag, as: H = "h3" }: { title: React.ReactNode; children?: React.ReactNode; href?: string; tag?: string; as?: "h2" | "h3" }) {
   const body = (
-    <article className="h-full rounded-panel border border-border bg-surface p-6 transition-transform duration-300 ease-out hover:-translate-y-0.5">
+    <article className="h-full rounded-card border border-border bg-surface p-6 transition-transform duration-300 ease-out hover:-translate-y-0.5">
       {tag && <p className="mb-2 font-mono text-fs-nano uppercase tracking-wider text-primary">{tag}</p>}
       <H className="text-fs-xl font-semibold leading-snug">{title}</H>
       {children && <div className="mt-2 text-fs-body leading-relaxed text-muted">{children}</div>}

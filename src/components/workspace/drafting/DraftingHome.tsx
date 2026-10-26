@@ -35,15 +35,15 @@ export default function DraftingHome() {
         <h2 id="describe" className="text-ui-lead font-semibold">Describe what you need</h2>
         <form onSubmit={find} className="mt-3 flex flex-col gap-2 sm:flex-row">
           <label htmlFor="need" className="sr-only">What do you need to draft?</label>
-          <input id="need" value={text} onChange={(e) => setText(e.target.value)} maxLength={600} placeholder="For example: my tenant's cheque bounced and I want to send a notice" className="h-11 flex-1 rounded-panel bg-surface px-3 text-ui-body ring-1 ring-border focus-visible:outline-2" />
-          <button type="submit" disabled={busy || text.trim().length < 8} className="h-11 rounded-panel bg-primary px-5 text-ui-base font-medium text-white disabled:opacity-50">{busy ? "Looking…" : "Find a template"}</button>
+          <input id="need" value={text} onChange={(e) => setText(e.target.value)} maxLength={600} placeholder="For example: my tenant's cheque bounced and I want to send a notice" className="h-11 flex-1 rounded-input bg-surface px-3 text-ui-body ring-1 ring-control-border focus-visible:outline-2" />
+          <button type="submit" disabled={busy || text.trim().length < 8} className="h-11 rounded-button bg-primary px-5 text-ui-base font-medium text-white disabled:opacity-50">{busy ? "Looking…" : "Find a template"}</button>
         </form>
         {err && <Notice tone="bad" role="alert" compact className="mt-2"><p>{err}</p></Notice>}
         {pick && byId.get(pick.templateId) && (
           <Panel as="div" className="mt-3">
             <p className="flex flex-wrap items-center gap-2 text-ui-base"><strong className="font-medium">{byId.get(pick.templateId)!.title}</strong><Badge tone={FIT[pick.fit].tone}>{FIT[pick.fit].text}</Badge></p>
             <p className="mt-1 text-ui-base text-secondary">{pick.why}</p>
-            <Link href={`/workspace/drafting/new/${pick.templateId}`} className="mt-3 inline-flex min-h-10 items-center rounded-panel bg-primary px-4 text-ui-base font-medium text-white hover:bg-primary-hover">Use this template</Link>
+            <Link href={`/workspace/drafting/new/${pick.templateId}`} className="mt-3 inline-flex min-h-10 items-center rounded-button bg-primary px-4 text-ui-base font-medium text-white hover:bg-primary-hover">Use this template</Link>
           </Panel>
         )}
       </section>
@@ -52,7 +52,7 @@ export default function DraftingHome() {
         <h2 id="templates" className="text-ui-lead font-semibold">Templates</h2>
         <ul className="mt-3 grid gap-3 sm:grid-cols-2">
           {(meta?.templates ?? []).map((t) => (
-            <li key={t.id}><Link href={`/workspace/drafting/new/${t.id}`} className="block h-full rounded-card bg-surface p-card shadow-sm ring-1 ring-border/60 transition-colors hover:bg-accent/50 focus-visible:outline-2">
+            <li key={t.id}><Link href={`/workspace/drafting/new/${t.id}`} className="block h-full rounded-card bg-surface p-card shadow-sm ring-1 ring-control-border/60 transition-colors hover:bg-accent/50 focus-visible:outline-2">
               <span className="block text-ui-body font-medium">{t.title}</span>
               <span className="mt-1 block text-ui-base text-secondary">{t.description}</span>
             </Link></li>

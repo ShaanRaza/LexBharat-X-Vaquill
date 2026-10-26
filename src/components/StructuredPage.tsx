@@ -28,7 +28,7 @@ export default function StructuredPage({ page, dataFile }: { page: Structured; d
                 {s.sub && (
                   <div className="mt-4 space-y-4">
                     {s.sub.map((x) => (
-                      <div key={x} className="rounded-panel border border-border bg-surface p-4">
+                      <div key={x} className="rounded-card border border-border bg-surface p-4">
                         <h3 className="text-fs-17 font-semibold">{x}</h3>
                         <p className="mt-1 text-fs-body leading-relaxed text-muted">Placeholder description for “{x}”.</p>
                       </div>

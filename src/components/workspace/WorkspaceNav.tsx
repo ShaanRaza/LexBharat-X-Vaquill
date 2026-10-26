@@ -38,7 +38,7 @@ export default function WorkspaceNav({ active, logo, onNavigate }: { active?: La
     <nav aria-label="Legal Workspace" className="flex h-full flex-col">
       {logo}
       <div className="px-3 pb-3">
-        <Link href="/workspace/chat" onClick={onNavigate} className="flex min-h-10 items-center justify-center gap-2 rounded-panel bg-primary px-3 text-ui-base font-medium text-on-primary hover:bg-primary-hover"><Icon name="plus" />New chat</Link>
+        <Link href="/workspace/chat" onClick={onNavigate} className="flex min-h-10 items-center justify-center gap-2 rounded-button bg-primary px-3 text-ui-base font-medium text-on-primary hover:bg-primary-hover"><Icon name="plus" />New chat</Link>
       </div>
       <ul className="min-h-0 flex-1 space-y-0.5 overflow-y-auto px-2" data-lenis-prevent>
         <li><Item href="/workspace" icon="dashboard" label="Dashboard" active={active === "dashboard"} onNavigate={onNavigate} /></li>

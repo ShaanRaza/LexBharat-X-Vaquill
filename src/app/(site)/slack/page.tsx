@@ -14,7 +14,7 @@ export default function Slack() {
     <>
       <PageHero eyebrow="Community" title="Join the community" lead="On the real site, this address immediately forwards you to an external chat-workspace invitation. This local build shows that step as a page instead." />
       <Section>
-        <div className="max-w-w640 rounded-panel border border-border bg-surface p-6">
+        <div className="max-w-w640 rounded-card border border-border bg-surface p-6">
           <DevOnly><p className="text-fs-sm text-muted"><MockBadge>redirect shell</MockBadge></p></DevOnly>
           <h2 className="mt-2 text-fs-22 font-semibold">What happens on the real site</h2>
           <ol className="mt-3 list-decimal space-y-2 pl-6 text-fs-body text-muted">
