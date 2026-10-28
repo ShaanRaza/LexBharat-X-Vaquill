@@ -6,7 +6,7 @@ import { AiError } from "./models.mjs";
 import { sseEvents } from "./sse.mjs";
 
 const signalFor = (timeoutMs, signal) => (signal ? AbortSignal.any([signal, AbortSignal.timeout(timeoutMs)]) : AbortSignal.timeout(timeoutMs));
-const scrub = (s, env) => { let t = String(s ?? "").slice(0, 400); for (const k of ["GEMINI_API_KEY", "ANTHROPIC_API_KEY", "LITELLM_API_KEY", "OPENAI_API_KEY"]) if (env[k]) t = t.split(env[k]).join("<key>"); return t; };
+const scrub = (s, env) => { let t = String(s ?? "").slice(0, 400); for (const k of ["GEMINI_API_KEY", "ANTHROPIC_API_KEY", "LITELLM_API_KEY", "OPENAI_API_KEY", "OPENROUTER_API_KEY"]) if (env[k]) t = t.split(env[k]).join("<key>"); return t; };
 
 async function post(url, headers, body, { timeoutMs, signal, fetchImpl = fetch, env }) {
   let res;
@@ -67,28 +67,30 @@ export async function* streamAnthropic(o) {
 const isReasoning = (m) => /^(o\d|gpt-5)/.test(m);
 const effortFor = (m, thinking) => (/^gpt-5/.test(m) ? ({ off: "minimal", minimal: "minimal", low: "low", medium: "medium", high: "high" })[thinking] ?? "minimal" : ({ off: "low", minimal: "low", low: "low", medium: "medium", high: "high" })[thinking] ?? "low");
 const filePart = (f) => (f.mime === "application/pdf" ? { type: "file", file: { filename: "document.pdf", file_data: `data:${f.mime};base64,${f.data}` } } : { type: "image_url", image_url: { url: `data:${f.mime};base64,${f.data}` } });
-async function* streamChatCompletions(o, { url, key }) {
-  const reasoning = isReasoning(o.spec.model);
-  const res = await post(url, { Authorization: `Bearer ${key}` },
+// Base URL, key name and extra headers of a provider come from `providers` in ai-models.json (passed in as o.providerCfg); OpenRouter normalises parameters across models, so it always gets max_tokens + temperature.
+async function* streamChatCompletions(o, { url, key, headers = {}, normalised = false }) {
+  const reasoning = !normalised && isReasoning(o.spec.model);
+  const res = await post(url, { Authorization: `Bearer ${key}`, ...headers },
     { model: o.spec.model, stream: true, stream_options: { include_usage: true }, ...(o.json ? { response_format: { type: "json_object" } } : {}),
       ...(reasoning ? { max_completion_tokens: o.maxOutputTokens, reasoning_effort: effortFor(o.spec.model, o.thinking) } : { max_tokens: o.maxOutputTokens, temperature: o.temperature }),
       messages: [...(o.system ? [{ role: reasoning ? "developer" : "system", content: o.system }] : []), ...o.messages.map((m) => ({ role: m.role, content: m.files?.length ? [...m.files.map(filePart), { type: "text", text: m.content }] : m.content }))] }, o);
-  let usage = { inputTokens: 0, outputTokens: 0 }, finish = null;
+  let usage = { inputTokens: 0, outputTokens: 0, cost: undefined }, finish = null;
   for await (const ev of sseEvents(res.body)) {
     if (ev.data === "[DONE]") break;
     let j; try { j = JSON.parse(ev.data); } catch { continue; }
-    if (j.error) throw new AiError(/rate/i.test(j.error.type ?? j.error.code ?? "") ? "rate_limit" : "unavailable", "The model could not answer.", { detail: scrub(j.error.message, o.env) });
+    if (j.error) throw new AiError(/rate|429/i.test(`${j.error.type ?? ""}${j.error.code ?? ""}`) ? "rate_limit" : "unavailable", "The model could not answer.", { detail: scrub(j.error.message, o.env) });
     const c = j.choices?.[0]; if (c?.delta?.content) yield { type: "text", text: c.delta.content };
     if (c?.finish_reason === "content_filter") throw new AiError("blocked", "The model declined to answer this.");
+    if (c?.finish_reason === "error") throw new AiError("unavailable", "The model could not answer.");
     finish = c?.finish_reason ?? finish;
-    if (j.usage) usage = { inputTokens: j.usage.prompt_tokens ?? 0, outputTokens: j.usage.completion_tokens ?? 0 };
+    if (j.usage) usage = { inputTokens: j.usage.prompt_tokens ?? 0, outputTokens: j.usage.completion_tokens ?? 0, ...(typeof j.usage.cost === "number" ? { cost: j.usage.cost } : {}) };
   }
   yield { type: "done", usage, finish };
 }
-export async function* streamOpenAi(o) {
-  const key = o.env.OPENAI_API_KEY?.trim();
-  if (!key) throw new AiError("not_configured", "OPENAI_API_KEY is not set.");
-  yield* streamChatCompletions(o, { url: "https://api.openai.com/v1/chat/completions", key });
+const keyed = (o, name, def) => { const c = o.providerCfg ?? {}, keyEnv = c.keyEnv ?? def.keyEnv, key = o.env[keyEnv]?.trim(); if (!key) throw new AiError("not_configured", `${keyEnv} is not set.`); return { url: `${(c.baseUrl ?? def.baseUrl).replace(/\/$/, "")}/chat/completions`, key, headers: c.headers ?? {}, normalised: !!c.normalised }; };
+export async function* streamOpenAi(o) { yield* streamChatCompletions(o, keyed(o, "openai", { keyEnv: "OPENAI_API_KEY", baseUrl: "https://api.openai.com/v1" })); }
+export async function* streamOpenRouter(o) {
+  yield* streamChatCompletions(o, keyed(o, "openrouter", { keyEnv: "OPENROUTER_API_KEY", baseUrl: "https://openrouter.ai/api/v1", headers: {}, normalised: true }));
 }
 export async function* streamOpenAiCompat(o) {
   const key = o.env.LITELLM_API_KEY?.trim(), base = o.env.LITELLM_BASE_URL?.trim().replace(/\/$/, "");
@@ -96,4 +98,4 @@ export async function* streamOpenAiCompat(o) {
   yield* streamChatCompletions(o, { url: `${base}/chat/completions`, key });
 }
 
-export const STREAMERS = { gemini: streamGemini, openai: streamOpenAi, anthropic: streamAnthropic, litellm: streamOpenAiCompat };
+export const STREAMERS = { gemini: streamGemini, openai: streamOpenAi, openrouter: streamOpenRouter, anthropic: streamAnthropic, litellm: streamOpenAiCompat };

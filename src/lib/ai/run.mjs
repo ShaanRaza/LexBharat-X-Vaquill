@@ -14,7 +14,7 @@ export async function* streamTask(task, input, { config, env, fetchImpl }) {
   const t = resolveTask(task, config, env), chain = [t.primary, ...t.fallbacks], began = Date.now(), left = () => (t.budgetMs ? t.budgetMs - (Date.now() - began) : Infinity);
   let lastErr = null;
   for (const spec of chain) {
-    if (!providerConfigured(spec.provider, env)) { lastErr = new AiError("not_configured", `${spec.provider} is not set up.`); continue; }
+    if (!providerConfigured(spec.provider, env, config.providers?.[spec.provider])) { lastErr = new AiError("not_configured", `${spec.provider} is not set up.`); continue; }
     for (let attempt = 0; ; attempt++) {
     if (left() < MIN_ATTEMPT_MS) { if (lastErr) throw lastErr; }   // out of time: report the last real error
     let started = false;
@@ -23,7 +23,7 @@ export async function* streamTask(task, input, { config, env, fetchImpl }) {
     const onCaller = () => ac.abort(); input.signal?.addEventListener("abort", onCaller);
     let timer = ttft ? setTimeout(() => ac.abort(), ttft) : null;
     try {
-      for await (const ev of STREAMERS[spec.provider]({ spec, system: input.system, messages: input.messages, temperature: input.temperature ?? t.temperature, maxOutputTokens: input.maxOutputTokens ?? t.maxOutputTokens,
+      for await (const ev of STREAMERS[spec.provider]({ spec, providerCfg: config.providers?.[spec.provider], system: input.system, messages: input.messages, temperature: input.temperature ?? t.temperature, maxOutputTokens: input.maxOutputTokens ?? t.maxOutputTokens,
         thinking: t.thinking, json: input.json ?? t.json, timeoutMs: Math.min(input.timeoutMs ?? t.timeoutMs, left()), signal: ac.signal, env, fetchImpl })) {
         if (ev.type === "text") { started = true; if (timer) { clearTimeout(timer); timer = null; } }
         yield ev.type === "done" ? { ...ev, model: `${spec.provider}:${spec.model}` } : ev;

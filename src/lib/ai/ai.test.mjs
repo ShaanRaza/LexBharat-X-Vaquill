@@ -93,6 +93,19 @@ test("openai: direct endpoint, bearer key, reasoning models use max_completion_t
   assert.equal(providerConfigured("openai", {}), false); assert.equal(providerConfigured("openai", { OPENAI_API_KEY: "k" }), true);
   await assert.rejects(completeTask("chat", { messages: [{ role: "user", content: "q" }] }, { config: { tasks: { chat: { model: "openai:x" } } }, env: { OPENAI_API_KEY: "sk-secret-123" }, fetchImpl: fakeFetch(errResponse(400, "bad key sk-secret-123 here")) }), (e) => e.kind === "bad_request" && !JSON.stringify(e.detail).includes("sk-secret-123"));
 });
+test("openrouter: base URL, key name and headers come from config; prefixed model names; cost passed through", async () => {
+  calls.length = 0;
+  const d = (o) => `data: ${JSON.stringify(o)}\n\n`;
+  const cfg = { providers: { openrouter: { baseUrl: "https://example.test/api/v1/", keyEnv: "MY_OR_KEY", headers: { "HTTP-Referer": "https://app.lexbharat.ai", "X-Title": "LexBharat" } } }, tasks: { chat: { model: "openrouter:anthropic/claude-haiku-5.5", maxOutputTokens: 50 } } };
+  const r = await completeTask("chat", { system: "s", messages: [{ role: "user", content: "q" }] }, { config: cfg, env: { MY_OR_KEY: "sk-or-x" }, fetchImpl: fakeFetch(okResponse([d({ choices: [{ delta: { content: "hi" }, finish_reason: "stop" }] }), d({ choices: [], usage: { prompt_tokens: 4, completion_tokens: 2, cost: 0.0001 } }), "data: [DONE]\n\n"])) });
+  assert.equal(r.text, "hi"); assert.equal(r.model, "openrouter:anthropic/claude-haiku-5.5"); assert.equal(r.usage.cost, 0.0001);
+  assert.equal(calls[0].url, "https://example.test/api/v1/chat/completions"); const h = calls[0].init.headers;
+  assert.equal(h.Authorization, "Bearer sk-or-x"); assert.equal(h["HTTP-Referer"], "https://app.lexbharat.ai"); assert.equal(h["X-Title"], "LexBharat");
+  const b = JSON.parse(calls[0].init.body); assert.equal(b.model, "anthropic/claude-haiku-5.5"); assert.ok(b.max_tokens && "temperature" in b);
+  assert.equal((await completeTask("chat", { messages: [{ role: "user", content: "q" }] }, { config: cfg, env: {}, fetchImpl: fakeFetch() }).catch((e) => e)).kind, "not_configured");
+  assert.equal(providerConfigured("openrouter", { OPENROUTER_API_KEY: "k" }), true);
+  assert.equal(parseModelSpec("openrouter:openai/gpt-4.1-mini:free").model, "openai/gpt-4.1-mini:free");
+});
 test("fallback: a busy first model before any text moves to the next; an error after text is thrown; an unset provider is skipped", async () => {
   const cfg = { tasks: { chat: { model: "gemini:a", fallback: ["gemini:b"] } } };
   const r = await completeTask("chat", { messages: [{ role: "user", content: "q" }] }, { config: cfg, env, fetchImpl: fakeFetch(errResponse(429, "busy"), okResponse([gem({ candidates: [{ content: { parts: [{ text: "from b" }] } }] })])) });

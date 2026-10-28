@@ -1,5 +1,5 @@
 // Model per task: reads src/config/ai-models.json plus AI_MODEL_<TASK> overrides. PURE (no network). A spec is "provider:model", e.g. "gemini:gemini-3.5-flash-lite" or "anthropic:claude-haiku-5-5" or "openai:<model>".
-export const PROVIDERS = ["gemini", "openai", "anthropic", "litellm"];
+export const PROVIDERS = ["gemini", "openai", "openrouter", "anthropic", "litellm"];
 
 export function parseModelSpec(spec) {
   const m = /^([a-z]+):(.+)$/.exec(String(spec ?? "").trim());
@@ -31,8 +31,8 @@ export function resolveTask(task, config, env = {}) {
 }
 
 /** The environment variable that must be set for a provider. */
-export const providerKeyName = (provider) => ({ gemini: "GEMINI_API_KEY", openai: "OPENAI_API_KEY", anthropic: "ANTHROPIC_API_KEY", litellm: "LITELLM_API_KEY" })[provider];
-export const providerConfigured = (provider, env) => !!env[providerKeyName(provider)]?.trim() && (provider !== "litellm" || !!env.LITELLM_BASE_URL?.trim());
+export const providerKeyName = (provider) => ({ gemini: "GEMINI_API_KEY", openai: "OPENAI_API_KEY", openrouter: "OPENROUTER_API_KEY", anthropic: "ANTHROPIC_API_KEY", litellm: "LITELLM_API_KEY" })[provider];
+export const providerConfigured = (provider, env, providerCfg) => !!env[providerCfg?.keyEnv ?? providerKeyName(provider)]?.trim() && (provider !== "litellm" || !!env.LITELLM_BASE_URL?.trim());
 
 /** Failure from a model call. kind: rate_limit | unavailable | timeout | auth | blocked | bad_request | not_configured. The message never contains a key. */
 export class AiError extends Error {

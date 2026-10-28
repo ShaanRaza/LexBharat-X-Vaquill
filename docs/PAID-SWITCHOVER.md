@@ -141,10 +141,21 @@ Drafting, Review and Vault are all ON (W5, W6). Each page is switched by one fla
 - Paid Neon only if a project must exceed 1 GB; then only the connection string changes.
 
 
-## OpenAI (provider added 2026-10-29, not switched on yet)
+## OpenRouter / OpenAI (providers added 2026-10-29, NOT switched on)
 
-- **Provider:** `openai` in `src/lib/ai/providers.mjs`, key `OPENAI_API_KEY` (set in `.env.local` and Vercel Production + Preview), talks to `api.openai.com/v1/chat/completions` directly. Config only: use specs like `openai:<model>` in `src/config/ai-models.json` or `AI_MODEL_<TASK>`. Reasoning models (`gpt-5*`, `o*`) get `max_completion_tokens` and `reasoning_effort` (from the task's `thinking`) and no temperature; others get `max_tokens` and `temperature`. Images and PDFs are sent as image/file parts. Embeddings stay on Voyage.
-- **Fallback:** keep `gemini:...` in each task's `fallback` list (or `AI_FALLBACK_<TASK>`); the existing retry/fallback/budget rules apply unchanged.
-- **Self-test:** `/api/vault/selftest?openai=1` adds the row **"OpenAI, direct"** (one tiny request, no retries; uses the chat task's model if it is an OpenAI one, otherwise `openaiProbeModel` from `ai-models.json`).
-- **Not switched yet:** on 2026-10-29 OpenAI answered 401 `invalid_api_key` to the stored key, so the model list could not be read and no models were chosen. Next: fix the key, list models, pick a cheap model for `chat`, `answerCheck`, `queryRewrite`, `templatePick` and a stronger one for `review`, `drafting`, run the eval on both providers, then switch.
-- **Privacy wording:** once OpenAI is primary, the Privacy page and chat/Vault notes must say prompts and document text go to OpenAI (API data is not used to train by default, per OpenAI's terms at the time of writing; verify before claiming) instead of Gemini's free tier.
+- **What was added:** two OpenAI-style providers in `src/lib/ai/providers.mjs`: `openrouter` (one key, many makers; model names are prefixed, e.g. `openrouter:anthropic/claude-sonnet-5.5`, `openrouter:google/gemini-3.5-flash-lite`) and `openai` (api.openai.com direct). Base URL, key variable name and extra headers come from the `providers` block of `src/config/ai-models.json` (OpenRouter sends `HTTP-Referer: https://app.lexbharat.ai` and `X-Title: LexBharat`). Key: `OPENROUTER_API_KEY` (in `.env.local` and Vercel Production + Preview). Gemini stays each task's `fallback`; embeddings stay on Voyage. PDFs/images go as file/image parts; OpenRouter's reported `cost` is passed through in `usage`.
+- **Self-test:** `/api/vault/selftest?openrouter=1` adds the row **"OpenRouter, direct"**: one tiny request, no retries, and it states how much of the key's credit is left.
+- **The key:** a monthly limit of **$2** (not free tier, resets monthly). Checked 2026-10-29: $1.32 left before the evaluation, $0.90 after (the eval and two flawed first runs used about $0.42). `node scripts/ai/openrouter-info.mjs [regex]` prints the credit and matching models/prices (never the key).
+- **Scorecard (`scripts/ai/scorecard.mjs`):** the real chat prompt on 12 real statute sections (gold section + 3 other Acts' sections, shuffled) and 4 "not in the sources" questions; score 0-3 per answer (cites the right source [n], names section and Act, a fixed judge model says the legal answer is right) and 1 per "not found". Results (2026-10-29, one run each, small sample, so differences of a point or two are noise):
+
+| Model | Score | Cites right source | Names section+Act | Judge: right | Not-found | First text | Total | Cost / question (list price) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| gemini:gemini-3.5-flash-lite (today, free tier) | 36/40 | 11/12 | 10/12 | 11/12 | 4/4 | 1.6 s | 2.1 s | $0.0013 (you pay 0) |
+| openrouter:google/gemini-3.5-flash-lite | **37/40** | 11/12 | 11/12 | 11/12 | 4/4 | 1.2 s | 1.8 s | $0.0013 |
+| openrouter:openai/gpt-4.1-mini | 32/40 | 12/12 | 6/12 | 10/12 | 4/4 | 1.0 s | 1.8 s | $0.0012 |
+| openrouter:anthropic/claude-haiku-5.5 | 28/40 | 8/12 | 8/12 | 8/12 | 4/4 | 4.2 s | 4.8 s | $0.0008 |
+| openrouter:anthropic/claude-sonnet-5.5 (6 + 1 questions) | 18/19 | 6/6 | 6/6 | 6/6 | 0/1 | 4.3 s | 5.0 s | $0.0129 |
+
+  Caveats: sources are handed to the model (retrieval is not tested); the judge is one cheap model; Gemini's speed varies by the hour on the free tier (it was 8 s in an earlier run today). Sonnet missed the one "not found" it was given.
+- **Proposal (not applied):** `chat`, `answerCheck`, `queryRewrite`, `templatePick` -> `openrouter:google/gemini-3.5-flash-lite` (best score, fastest, no daily quota; about $0.0013 for the answer plus about $0.0004 for the check, so **about $0.002 per question**, 500 questions = $1). `review`, `drafting` -> `openrouter:anthropic/claude-sonnet-5.5` ($2 / $10 per million tokens; roughly $0.06 per contract review and $0.12 per draft). With the $2 monthly key limit that is roughly 15 reviews or 7 drafts or 900 questions in a month, so either raise the limit or keep review/drafting on Gemini until then. Keep `fallback` = the direct Gemini models.
+- **To switch:** edit the `model` of each task in `ai-models.json` (or set `AI_MODEL_<TASK>=openrouter:...`), keep the Gemini fallback, change the "free AI" wording in `ai-models.json` `ui.slowNoticeText`, and update the Privacy page: prompts and document text then go to OpenRouter and the model maker (OpenRouter's own logging/data settings should be checked in its dashboard first).

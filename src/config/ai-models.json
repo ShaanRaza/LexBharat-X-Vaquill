@@ -1,5 +1,21 @@
 {
-  "about": "Which model answers each task. Spec = provider:model. Override any task with an environment variable AI_MODEL_<TASK> (CHAT, ANSWER_CHECK, QUERY_REWRITE, TEMPLATE_PICK, DRAFTING, REVIEW, RERUN, OCR), for example AI_MODEL_CHAT=anthropic:claude-haiku-5-5. Providers: gemini (GEMINI_API_KEY), openai (OPENAI_API_KEY, api.openai.com directly; e.g. openai:<model>), anthropic (ANTHROPIC_API_KEY), litellm (LITELLM_BASE_URL + LITELLM_API_KEY, any OpenAI-compatible endpoint). thinking: off | minimal | low | medium | high. firstTokenMs: wait this long for the first text; a model that is merely slow inside this window is NOT abandoned (chat waits 30 s), and one that has produced nothing by then counts as failed and the fallback is used (0 = never); a model that answers with an error (busy, unavailable, rate limit) falls back at once. budgetMs: the most time one request may spend across all attempts, retries and fallbacks, so it ends before the host's request limit; fallback: tried in order when a model is busy or unavailable (override with AI_FALLBACK_<TASK>, comma-separated, empty = none). See docs/PAID-SWITCHOVER.md.",
+  "about": "Which model answers each task. Spec = provider:model. Override any task with an environment variable AI_MODEL_<TASK> (CHAT, ANSWER_CHECK, QUERY_REWRITE, TEMPLATE_PICK, DRAFTING, REVIEW, RERUN, OCR), for example AI_MODEL_CHAT=anthropic:claude-haiku-5-5. Providers: gemini (GEMINI_API_KEY), openai (OPENAI_API_KEY), openrouter (OPENROUTER_API_KEY, many makers through one key, e.g. openrouter:anthropic/<model>); base URLs and headers are in `providers` below, anthropic (ANTHROPIC_API_KEY), litellm (LITELLM_BASE_URL + LITELLM_API_KEY, any OpenAI-compatible endpoint). thinking: off | minimal | low | medium | high. firstTokenMs: wait this long for the first text; a model that is merely slow inside this window is NOT abandoned (chat waits 30 s), and one that has produced nothing by then counts as failed and the fallback is used (0 = never); a model that answers with an error (busy, unavailable, rate limit) falls back at once. budgetMs: the most time one request may spend across all attempts, retries and fallbacks, so it ends before the host's request limit; fallback: tried in order when a model is busy or unavailable (override with AI_FALLBACK_<TASK>, comma-separated, empty = none). See docs/PAID-SWITCHOVER.md.",
+  "providers": {
+    "about": "Where each OpenAI-style provider is reached. baseUrl and keyEnv (the environment variable holding the key) can be changed here; headers are sent on every request. OpenRouter's HTTP-Referer and X-Title are optional and only name the app on openrouter.ai. Model names for openrouter are prefixed with the maker, e.g. openrouter:anthropic/claude-sonnet-5-5.",
+    "openai": {
+      "baseUrl": "https://api.openai.com/v1",
+      "keyEnv": "OPENAI_API_KEY"
+    },
+    "openrouter": {
+      "baseUrl": "https://openrouter.ai/api/v1",
+      "keyEnv": "OPENROUTER_API_KEY",
+      "normalised": true,
+      "headers": {
+        "HTTP-Referer": "https://app.lexbharat.ai",
+        "X-Title": "LexBharat"
+      }
+    }
+  },
   "retry": {
     "about": "When a model answers 'unavailable' (503, or cannot be reached) before any text: wait waitMs and ask the SAME model again `times` times, and only then move to the task's fallback model. A task can set its own \"retryUnavailable\": {\"times\":0} to turn it off. Rate limits (429) and timeouts go straight to the fallback.",
     "unavailable": {
@@ -105,5 +121,6 @@
       ],
       "firstTokenMs": 45000
     }
-  }
+  },
+  "openrouterProbeModel": "google/gemini-3.5-flash-lite"
 }
