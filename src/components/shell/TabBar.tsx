@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AREAS, areaOf, isReadingPage } from "@/lib/shell/areas.mjs";
 import { Icon } from "./icons";
@@ -8,7 +8,7 @@ import { Icon } from "./icons";
 // The phone's bottom tab bar: the same five areas, as icons with labels. On reading pages (a law, a judgment) it slides away while you scroll down and returns when you scroll up, so the text has the screen.
 // Presentation only (the scroll listener only decides hidden or shown).
 export default function TabBar() {
-  const pathname = usePathname(), area = areaOf(pathname, useSearchParams().toString()), reading = isReadingPage(pathname), [hidden, setHidden] = useState(false);
+  const pathname = usePathname(), area = areaOf(pathname), reading = isReadingPage(pathname), [hidden, setHidden] = useState(false);
   useEffect(() => {
     setHidden(false); if (!reading) return;
     let last = window.scrollY;

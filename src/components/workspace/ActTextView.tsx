@@ -42,7 +42,7 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
   return (
     <div className="mx-auto max-w-w1040 pt-2">
       <nav aria-label="Breadcrumb" className="text-ui-base text-secondary">
-        <Link href="/workspace/browse?tab=acts" className="inline-flex min-h-8 items-center hover:text-primary hover:underline">Browse Laws &amp; Judgments</Link>
+        <Link href="/workspace/search" className="inline-flex min-h-8 items-center hover:text-primary hover:underline">Browse Laws &amp; Judgments</Link>
         <span aria-hidden> / </span><span>Acts &amp; Legislation</span>
       </nav>
       <h1 className="mt-2 text-ui-title font-semibold">{header.title}</h1>

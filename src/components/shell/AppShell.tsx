@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import TabBar from "./TabBar";
 import TopBar from "./TopBar";
 import WorkTabs from "./WorkTabs";
@@ -8,15 +7,15 @@ import WorkTabs from "./WorkTabs";
 export default function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="app-shell min-h-screen bg-background">
-      <Suspense fallback={<div className="h-topbar border-b border-border" />}><TopBar /></Suspense>
+      <TopBar />
       <aside aria-label="Testing phase notice" className="border-b border-quality-warn/30 bg-quality-warn/10 text-ui-sm text-foreground">
         <p className="mx-auto max-w-app px-page py-1.5"><strong className="font-medium">Testing phase:</strong> don&apos;t enter confidential client information. Answers are not legal advice.</p>
       </aside>
       <main id="main" tabIndex={-1} className="mx-auto w-full max-w-app px-page pb-24 pt-2 outline-none">
-        <Suspense fallback={null}><WorkTabs /></Suspense>
+        <WorkTabs />
         {children}
       </main>
-      <Suspense fallback={null}><TabBar /></Suspense>
+      <TabBar />
     </div>
   );
 }

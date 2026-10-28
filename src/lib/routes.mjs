@@ -4,7 +4,7 @@ export const routes = {
   desk: () => "/workspace",
   ask: (id) => (id ? `/workspace/chat/${enc(id)}` : "/workspace/chat"),
   askAbout: (docId) => `/workspace/chat?doc=${enc(docId)}`,
-  searchPage: () => "/workspace/browse?tab=acts",
+  searchPage: () => "/workspace/search",
   library: () => "/workspace/browse",
   law: (actId, sectionKey) => `/workspace/browse/acts/${enc(actId)}${sectionKey ? `?section=${enc(sectionKey)}` : ""}`,
   judgment: (court, year, caseId, page) => `/workspace/browse/judgments/${enc(court)}/${enc(year)}/${enc(caseId)}${page ? `?p=${enc(page)}` : ""}`,

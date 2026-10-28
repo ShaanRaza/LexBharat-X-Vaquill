@@ -3,7 +3,7 @@
 export const AREAS = [
   { id: "desk", label: "Desk", href: "/workspace" },
   { id: "ask", label: "Ask", href: "/workspace/chat" },
-  { id: "search", label: "Search", href: "/workspace/browse?tab=acts" },   // until the Search page exists (Phase 5) the Acts search box is where searching happens
+  { id: "search", label: "Search", href: "/workspace/search" },   // interim page: the Acts search box (Phase 5 builds the real Search page)
   { id: "library", label: "Library", href: "/workspace/browse" },
   { id: "work", label: "Work", href: "/workspace/drafting" },
 ];
@@ -14,12 +14,12 @@ export const WORK_TABS = [
   { id: "documents", label: "Documents", href: "/workspace/vault", feature: "vault" },
 ];
 const under = (path, base) => path === base || path.startsWith(`${base}/`);
-/** The area a page belongs to, or null for pages outside the five areas (Privacy, Terms, Security, the password page, 404). */
-export function areaOf(pathname, search = "") {
+/** The area a page belongs to, or null for pages outside the five areas (Privacy, Terms, Security, the password page, 404). Decided by the path alone, so it works while a page is built on the server. */
+export function areaOf(pathname) {
   const p = String(pathname ?? "").replace(/\/+$/, "") || "/";
   if (p === "/workspace") return "desk";
   if (under(p, "/workspace/chat")) return "ask";
-  if (p === "/workspace/browse") return new URLSearchParams(search).get("tab") === "acts" ? "search" : "library";
+  if (under(p, "/workspace/search")) return "search";
   if (under(p, "/workspace/browse")) return "library";
   if (under(p, "/workspace/drafting") || under(p, "/workspace/review") || under(p, "/workspace/vault")) return "work";
   return null;

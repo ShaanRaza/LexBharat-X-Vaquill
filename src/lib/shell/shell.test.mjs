@@ -4,10 +4,10 @@ import { AREAS, WORK_TABS, areaOf, isReadingPage, workTabOf } from "./areas.mjs"
 import { groupOrder, looksLikeCaseName, looksLikeCitation, matchWork, topResult } from "./quickfind.mjs";
 
 test("every page of today's app belongs to one area, and public pages to none", () => {
-  const want = { "/workspace": "desk", "/workspace/chat": "ask", "/workspace/chat/abc": "ask", "/workspace/browse": "library", "/workspace/browse/acts/IND_central_2189": "library", "/workspace/browse/judgments/supreme-court-of-india/2014/2014_INSC_514": "library",
+  const want = { "/workspace": "desk", "/workspace/chat": "ask", "/workspace/chat/abc": "ask", "/workspace/browse": "library", "/workspace/search": "search", "/workspace/browse/acts/IND_central_2189": "library", "/workspace/browse/judgments/supreme-court-of-india/2014/2014_INSC_514": "library",
     "/workspace/drafting": "work", "/workspace/drafting/x": "work", "/workspace/review": "work", "/workspace/vault": "work", "/workspace/vault/id": "work", "/privacy": null, "/access": null, "/nope": null };
   for (const [p, a] of Object.entries(want)) assert.equal(areaOf(p), a, p);
-  assert.equal(areaOf("/workspace/browse", "?tab=acts"), "search"); assert.equal(areaOf("/workspace/browse/", ""), "library"); assert.equal(areaOf("/workspace/"), "desk");
+  assert.equal(areaOf("/workspace/browse/"), "library"); assert.equal(areaOf("/workspace/"), "desk");
 });
 test("the five areas are the spec's, in order, and Work has Drafts, Reviews, Documents", () => {
   assert.deepEqual(AREAS.map((a) => a.label), ["Desk", "Ask", "Search", "Library", "Work"]);

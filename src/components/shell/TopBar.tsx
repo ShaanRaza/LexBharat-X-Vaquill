@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Logo } from "@/components/kit";
 import { AREAS, areaOf } from "@/lib/shell/areas.mjs";
 import QuickFind from "./QuickFind";
@@ -9,7 +9,7 @@ import UserMenu from "./UserMenu";
 // The slim top bar: the ¶ LexBharat logo (goes to Desk), the five areas (the current one underlined in the brand colour), Quick-find and the small menu. On a phone the areas move to the bottom tab bar.
 // Presentation only; which area is current comes from src/lib/shell/areas.mjs.
 export default function TopBar() {
-  const pathname = usePathname(), area = areaOf(pathname, useSearchParams().toString());
+  const pathname = usePathname(), area = areaOf(pathname);
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur">
       <div className="mx-auto grid h-topbar max-w-app grid-cols-[1fr_auto] items-center gap-6 px-page md:grid-cols-[auto_1fr_auto]">
