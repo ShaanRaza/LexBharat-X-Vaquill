@@ -131,3 +131,11 @@ A rough rule for planning: a contract of 10 pages is about 25 KB of text, 20 pas
 
 ## Scanned documents (W8)
 Scanned PDFs, JPG and PNG files are now read instead of refused: image-only pages go to the `ocr` model task (a few pages per step, saved page by page, resumable), text pages of a mixed PDF are left as they are. Limits: 20 scanned pages per document, 5 scanned documents per browser per day; a busy model leaves the document in "Waiting to read". Page numbers are kept for citing, and every place the text is shown or cited says "Read from scan — check the original". Details, limits and test results: `docs/W8.md`. New tables and columns: `scripts/w8/w8-schema.sql`.
+
+## Processing on Vercel (2026-10-28)
+
+Every step is its own short request, saved to Supabase before it returns, and the page calls the next one until the document is Ready: **read** a PDF in slices of up to `readPages` pages / `readBudgetMs` (`Reading page 40 of 150`), image-only pages in groups (`Reading scan 5 of 12`), then **chunk**, then **index** one embedding batch per step (`Indexing 32 of 900 passages`). The free Voyage limit is respected by the page waiting between embedding steps, never by sleeping inside a request. `/api/vault/<id>/process` has `maxDuration = 60` (the Hobby limit) and each step is designed to take a few seconds.
+
+- A failed step now answers HTTP 500 with the reason (and logs it); before, any error was turned into "Processing… (will retry)", which looped for ever and hid the cause. The page shows "Problem: …" and retries with a growing pause.
+- The "this document is being worked on" mark expires after 90 s (`lease.ts`), so a step cut off by the time limit cannot leave the document answering "busy" on a reused instance.
+- `GET /api/vault/selftest` (signed in) runs the stages on tiny generated files and reports pass/fail with timings: settings, storage write/read/delete, database, PDF slice, Word file. Add `?voyage=1` to also make one embedding request.

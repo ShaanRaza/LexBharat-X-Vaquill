@@ -51,3 +51,13 @@ test("text and pdf are extracted; a text-less pdf is reported as scanned", async
   const img = await extractText("jpg", new Uint8Array([0xff, 0xd8, 0xff, 0xe0])); assert.deepEqual(img.scanPages, [1]); assert.equal(img.pageCount, 1);
   const bad = await extractText("pdf", enc("not a pdf")); assert.equal(bad.pages, null); assert.match(bad.reason, /can't be read/);
 });
+
+test("readPdfPages reads a PDF in slices that add up to the one-shot text", async () => {
+  const { PDFDocument, StandardFonts } = await import("pdf-lib"), { readPdfPages, extractText } = await import("./extract.mjs");
+  const d = await PDFDocument.create(), f = await d.embedFont(StandardFonts.TimesRoman);
+  for (let i = 1; i <= 7; i++) d.addPage().drawText(`Page ${i} text of the agreement between the parties.`, { x: 40, y: 700, size: 11, font: f });
+  const bytes = await d.save(), a = await readPdfPages(bytes, 1, { maxPages: 3 }), b = await readPdfPages(bytes, 4, { maxPages: 3 }), c = await readPdfPages(bytes, 7, { maxPages: 3 });
+  assert.equal(a.total, 7); assert.equal(a.pages.length, 3); assert.equal(b.pages.length, 3); assert.equal(c.pages.length, 1);
+  assert.deepEqual([...a.pages, ...b.pages, ...c.pages], (await extractText("pdf", bytes)).pages.map((p, i) => p || ""));
+  assert.equal((await readPdfPages(new TextEncoder().encode("not a pdf"), 1)).total, 0);
+});

@@ -9,5 +9,9 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
     const r = await processStep(bid, id);
     if (r.state === "gone" && !r.message) return json({ error: "Document not found." }, 404);
     return json(r.doc ? { ...r, doc: { ...r.doc } } : r);
-  } catch { return json({ state: "embedding", waitMs: 15000, message: "Processing… (will retry)" }); }
+  } catch (e) {
+    // never answer "fine, keep waiting" for a real error: that hides the cause and loops for ever. The page shows this message and retries with a growing pause.
+    console.error("[vault/process] step failed", id, e);
+    return json({ state: "error", message: "A step failed on the server.", detail: String((e as Error)?.message ?? e).slice(0, 200) }, 500);
+  }
 }
