@@ -35,3 +35,27 @@ export async function extractText(kind, bytes, { scannedMinCharsPerPage = 25 } =
     return { pages: null, text: "", pageCount: null, scanned: false, scanPages: [], reason };
   }
 }
+
+/**
+ * Reads a few pages of a PDF, so a long file is read over several short steps instead of one long one. Reads pages `from`, `from+1`, ... (1-based) until `maxPages` are done, the end is reached or `budgetMs` has passed
+ * (at least one page is always read). Page text is the same as extractText gives (same joining, same cleaning). Never throws for bad files: `reason` says why. Returns { total, pages: string[], reason }.
+ */
+export async function readPdfPages(bytes, from, { maxPages = 50, budgetMs = 15000 } = {}) {
+  const buf = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes), t0 = Date.now();
+  try {
+    const { getDocumentProxy } = await import("unpdf");
+    const pdf = await getDocumentProxy(new Uint8Array(buf));
+    try {
+      const pages = [];
+      for (let p = from; p <= pdf.numPages && pages.length < maxPages; p++) {
+        if (pages.length && Date.now() - t0 > budgetMs) break;
+        const content = await (await pdf.getPage(p)).getTextContent();
+        pages.push(norm(content.items.filter((it) => it.str != null).map((it) => it.str + (it.hasEOL ? "\n" : "")).join("")));
+      }
+      return { total: pdf.numPages, pages, reason: "" };
+    } finally { await pdf.loadingTask.destroy().catch(() => null); }
+  } catch (e) {
+    const msg = String(e?.message ?? e);
+    return { total: 0, pages: [], reason: /password|encrypt/i.test(msg) ? "This file is password-protected, so it can't be read." : "This file can't be read. It may be damaged." };
+  }
+}

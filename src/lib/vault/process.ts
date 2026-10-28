@@ -3,20 +3,26 @@
 // Everything is stored as it goes, so an interrupted run (closed tab, restart) simply continues from the passages that still have no vector.
 import limitConfig from "@/config/vault-limits.json";
 import { chunkPages, pageAt } from "./chunk.mjs";
-import { extractText } from "./extract.mjs";
+import { extractText, readPdfPages } from "./extract.mjs";
+import type { Extracted } from "./extract.mjs";
+import { takeLease } from "./lease";
 import { MB, readVaultLimits, sniffKind } from "./files.mjs";
 import { EmbedWait, embedDocuments } from "./embedDocs";
 import { getFileStore } from "./storage";
 import { readScanPages } from "./ocr";
 import { mergePages, planScan } from "./scan.mjs";
 import { bump } from "@/lib/insights/server";
-import { addUsage, countEmbedded, deleteDoc, getDoc, getScanPages, patchDoc, pendingChunks, replaceChunks, saveScanPage, saveText, setVectors, usageCounts, type VaultDoc } from "./store";
+import { addUsage, countEmbedded, deleteDoc, getDoc, getScanPages, getText, patchDoc, pendingChunks, replaceChunks, saveScanPage, saveText, setVectors, usageCounts, type VaultDoc } from "./store";
 
 export type StepResult = { state: "extracted" | "reading" | "embedding" | "ready" | "unreadable" | "waiting" | "gone" | "busy"; doc?: VaultDoc; waitMs?: number; message?: string };
 const limits = () => readVaultLimits(limitConfig, process.env as Record<string, string | undefined>);
-const g = globalThis as unknown as { __vaultLocks?: Set<string> };
-const locks = (g.__vaultLocks ??= new Set<string>());
+const g = globalThis as unknown as { __vaultLocks?: Map<string, number> };
+const locks = (g.__vaultLocks ??= new Map<string, number>());
 const NO_TYPE = (k: string) => `This doesn't look like a real ${k === "pdf" ? "PDF" : k === "docx" ? "Word" : k === "txt" ? "text" : "picture"} file, so it can't be read.`;
+
+/** Where each page starts in the stored text (pages are joined by a blank line), and the pages back out of the stored text. */
+const startsOf = (pages: string[]) => { const out: number[] = []; let off = 0; for (const p of pages) { out.push(off); off += p.length + 2; } return out; };
+const pagesOf = (body: string, starts: number[] | null) => (starts ?? []).map((a, i) => body.slice(a, i + 1 < starts!.length ? starts![i + 1] - 2 : body.length));
 
 async function fail(bid: string, id: string, detail: string): Promise<StepResult> {
   await patchDoc(bid, id, { status: "unreadable", status_detail: detail });
@@ -28,8 +34,7 @@ export async function processStep(bid: string, id: string): Promise<StepResult> 
   if (!d0) return { state: "gone" };
   if (d0.status === "ready") return { state: "ready", doc: d0 };
   if (d0.status === "unreadable") return { state: "unreadable", doc: d0, message: d0.statusDetail ?? "" };
-  if (locks.has(id)) return { state: "busy", waitMs: 2000, doc: d0 };
-  locks.add(id);
+  if (!takeLease(locks, id)) return { state: "busy", waitMs: 2000, doc: d0 };
   try {
     // ---- step 1: read the text
     if (d0.chunkCount === 0) {
@@ -42,7 +47,24 @@ export async function processStep(bid: string, id: string): Promise<StepResult> 
       const bytes = await store.get(d0.storageKey);
       if (!bytes) return { state: "waiting", waitMs: 3000, doc: d0 };
       if (sniffKind(bytes) !== d0.kind) return fail(bid, id, NO_TYPE(d0.kind));
-      const ex = await extractText(d0.kind, bytes, { scannedMinCharsPerPage: lim.scannedMinCharsPerPage });
+      let ex: Extracted;
+      if (d0.kind === "pdf") {
+        // a PDF is read a few pages per step; every step saves the pages so far, so a cut-off step costs only its own pages
+        const tx = await getText(bid, id), have = tx?.pageStarts?.length ?? 0;
+        if (!(d0.pages && have >= d0.pages)) {
+          const r = await readPdfPages(bytes, have + 1, { maxPages: lim.readPages, budgetMs: lim.readBudgetMs });
+          if (!r.total) return fail(bid, id, r.reason || "This file can't be read.");
+          if (r.pages.length) {
+            const prev = tx ? pagesOf(tx.body, tx.pageStarts) : [], all = [...prev, ...r.pages.map((p) => (p.replace(/\s+/g, "").length < lim.scannedMinCharsPerPage ? "" : p))];
+            await saveText(bid, id, all.join("\n\n"), startsOf(all));
+            await patchDoc(bid, id, { pages: r.total, status_detail: `Reading page ${all.length} of ${r.total}` });
+            if (all.length < r.total) return { state: "reading", waitMs: 0, doc: (await getDoc(bid, id)) ?? undefined };
+          }
+        }
+        const done = await getText(bid, id), pages = done ? pagesOf(done.body, done.pageStarts) : [];
+        if (!pages.length) return fail(bid, id, "This file can't be read.");
+        ex = { pages, text: pages.join("\n\n"), pageCount: pages.length, scanned: false, scanPages: pages.flatMap((p, i) => (p === "" ? [i + 1] : [])), reason: "" };
+      } else ex = await extractText(d0.kind, bytes, { scannedMinCharsPerPage: lim.scannedMinCharsPerPage });
       if (!ex.pages) return fail(bid, id, ex.reason || "This file can't be read.");
       // ---- image-only pages (scans, photos): read by the "ocr" model, a few pages per step, each page saved as it is read
       if (ex.scanPages.length) {
@@ -74,11 +96,9 @@ export async function processStep(bid: string, id: string): Promise<StepResult> 
       const chunks = chunkPages(ex.pages, { chars: lim.chunkChars, overlap: lim.chunkOverlap }).map((c) => (ex.noPages ? { ...c, page: null } : c));   // Word and text files have no page numbers; never show "page 1" for them
       if (!chunks.length) return fail(bid, id, ex.scanPages.length ? "No text could be read from the scanned pages." : "No text was found in this file.");
       if (chunks.length > lim.maxChunks) return fail(bid, id, `This file is too long to index on the free plan (${chunks.length} passages; the most is ${lim.maxChunks}). Try a shorter document.`);
-      const starts: number[] = []; let off = 0;
-      for (const p of ex.pages) { starts.push(off); off += p.length + 2; }
-      await saveText(bid, id, ex.text, ex.noPages ? null : starts);
+      await saveText(bid, id, ex.text, ex.noPages ? null : startsOf(ex.pages));
       await replaceChunks(bid, id, chunks);
-      await patchDoc(bid, id, { pages: ex.pageCount, chunk_count: chunks.length, embedded_count: 0, size_bytes: size });
+      await patchDoc(bid, id, { pages: ex.pageCount, chunk_count: chunks.length, embedded_count: 0, size_bytes: size, status_detail: null });
       return { state: "extracted", doc: (await getDoc(bid, id)) ?? undefined, waitMs: 0 };
     }
     // ---- later steps: embed the next batch
@@ -90,6 +110,7 @@ export async function processStep(bid: string, id: string): Promise<StepResult> 
       const vecs = await embedDocuments(batch.map((c) => (c.label ? `${c.label}\n${c.body}` : c.body)), lim.embedMinGapMs);
       await setVectors(bid, id, batch.map((c, i) => ({ ...c, embedding: vecs[i] })));
     } catch (e) {
+      if (e instanceof EmbedWait && e.reason !== "gap") console.error("[vault] embedding wait", id, e.message);
       if (e instanceof EmbedWait) return { state: "embedding", waitMs: e.waitMs, doc: (await getDoc(bid, id)) ?? undefined, message: e.reason === "gap" ? "Processing… (waiting for the free-plan rate limit)" : "Processing… (the embedding service is busy, will retry)" };
       throw e;
     }
