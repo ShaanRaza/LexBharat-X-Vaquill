@@ -7,6 +7,8 @@ import AdminLogin from "@/components/AdminLogin";
 import AdminLogout from "@/components/AdminLogout";
 import { ADMIN_COOKIE, adminState, isAdminCookie } from "@/lib/insights/admin";
 import { adminMessages, adminData, insightsConfigured } from "@/lib/insights/server";
+import config from "@/config/ai-models.json";
+import { creditStatus } from "@/lib/ai/guard.mjs";
 import { byDay, ratio } from "@/lib/insights/rules.mjs";
 
 export const metadata: Metadata = { title: "Insights | LexBharat", robots: { index: false, follow: false } };
@@ -31,6 +33,7 @@ export default async function InsightsPage() {
   if (!d || d.error) {
     return shell(<><h1 className="text-ui-title font-semibold">Insights</h1><Notice tone="warn" role="status" className="mt-4"><p>{d?.error === "missing" ? "The W8 tables are not in Supabase yet. Paste scripts/w8/w8-schema.sql into Supabase's SQL Editor and press Run, then reload." : "The statistics could not be loaded. Try again in a moment."}</p></Notice></>);
   }
+  const credit = config.spendGuard?.provider ? await creditStatus({ config, env: process.env as Record<string, string | undefined>, force: true }) : null;
   const msgs = await adminMessages().catch(() => ({ error: "failed" as const, rows: [] }));
   const days = byDay(d.usage), pages: Record<string, number> = {}, templates: Record<string, number> = {};
   for (const x of days) { for (const [k, v] of Object.entries(x.visitsByPage)) pages[k] = (pages[k] ?? 0) + v; for (const [k, v] of Object.entries(x.draftsByTemplate)) templates[k] = (templates[k] ?? 0) + v; }
@@ -40,6 +43,7 @@ export default async function InsightsPage() {
     <>
       <div className="flex flex-wrap items-center justify-between gap-3"><h1 className="text-ui-title font-semibold">Insights</h1><div className="flex gap-2"><a href="/api/admin/feedback-csv" className="inline-flex min-h-9 items-center rounded-panel bg-primary px-3 text-ui-sm font-medium text-on-primary">Download feedback (CSV)</a><AdminLogout /></div></div>
       <p className="mt-1 text-ui-sm text-secondary">Last 30 days, India dates. Counts only: no IP addresses and no document text are stored.</p>
+      {credit && <Notice tone={credit.tripped ? "warn" : "info"} role="status" className="mt-4"><p><strong>AI spend guard:</strong> {!credit.checked ? `credit could not be read (${credit.reason}); the paid route stays on.` : credit.tripped ? `PAUSED. The ${credit.provider} key has $${credit.remaining?.toFixed(2)} left (limit $${credit.limit}), below $${credit.minRemaining?.toFixed(2)}, so everything uses free Gemini.` : `paid route on. The ${credit.provider} key has ${credit.remaining == null ? "no spending limit" : `$${credit.remaining.toFixed(2)} left of $${credit.limit}`}; it pauses below $${credit.minRemaining?.toFixed(2)}.`}</p></Notice>}
 
       <Panel className="mt-5 p-0">
         <h2 className="px-card pt-card text-ui-lead font-semibold">By day</h2>

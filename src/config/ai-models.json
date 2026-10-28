@@ -16,6 +16,12 @@
       }
     }
   },
+  "spendGuard": {
+    "about": "Monthly spend guard. Before a model of `provider` is used, the key's remaining credit is read (OpenRouter's /key endpoint, cached `cacheMs`). If it is below `minRemainingUsd` the provider is skipped and each task goes straight to its next model (free Gemini). If the credit cannot be read the provider is used as normal. The state is shown in the self-test and on /admin.",
+    "provider": "openrouter",
+    "minRemainingUsd": 0.25,
+    "cacheMs": 300000
+  },
   "retry": {
     "about": "When a model answers 'unavailable' (503, or cannot be reached) before any text: wait waitMs and ask the SAME model again `times` times, and only then move to the task's fallback model. A task can set its own \"retryUnavailable\": {\"times\":0} to turn it off. Rate limits (429) and timeouts go straight to the fallback.",
     "unavailable": {
@@ -24,31 +30,33 @@
     }
   },
   "ui": {
-    "about": "Words and timings the screens show while a model is working. slowNoticeMs: after this long with no answer yet, the page says the free AI is slow (so nobody thinks it has stopped).",
+    "about": "Words and timings the screens show while a model is working. slowNoticeMs: after this long with no answer yet, the page says the AI is slow (so nobody thinks it has stopped).",
     "slowNoticeMs": 10000,
-    "slowNoticeText": "Still thinking — the free AI is slow right now."
+    "slowNoticeText": "Still thinking — the AI is slow right now."
   },
   "tasks": {
     "chat": {
-      "model": "gemini:gemini-3.5-flash-lite",
+      "model": "openrouter:google/gemini-3.5-flash-lite",
       "thinking": "off",
       "temperature": 0.2,
       "maxOutputTokens": 2500,
       "timeoutMs": 45000,
       "fallback": [
+        "gemini:gemini-3.5-flash-lite",
         "gemini:gemini-3.6-flash"
       ],
       "firstTokenMs": 30000,
       "budgetMs": 55000
     },
     "answerCheck": {
-      "model": "gemini:gemini-3.5-flash-lite",
+      "model": "openrouter:google/gemini-3.5-flash-lite",
       "thinking": "off",
       "temperature": 0,
       "maxOutputTokens": 700,
       "timeoutMs": 30000,
       "json": true,
       "fallback": [
+        "gemini:gemini-3.5-flash-lite",
         "gemini:gemini-3.6-flash"
       ],
       "firstTokenMs": 15000
@@ -87,7 +95,7 @@
       "firstTokenMs": 30000
     },
     "queryRewrite": {
-      "model": "gemini:gemini-3.5-flash-lite",
+      "model": "openrouter:google/gemini-3.5-flash-lite",
       "thinking": "off",
       "temperature": 0,
       "maxOutputTokens": 300,
@@ -95,11 +103,12 @@
       "firstTokenMs": 8000,
       "json": true,
       "fallback": [
+        "gemini:gemini-3.5-flash-lite",
         "gemini:gemini-3.6-flash"
       ]
     },
     "templatePick": {
-      "model": "gemini:gemini-3.5-flash-lite",
+      "model": "openrouter:google/gemini-3.5-flash-lite",
       "thinking": "off",
       "temperature": 0,
       "maxOutputTokens": 200,
@@ -107,6 +116,7 @@
       "firstTokenMs": 8000,
       "json": true,
       "fallback": [
+        "gemini:gemini-3.5-flash-lite",
         "gemini:gemini-3.6-flash"
       ]
     },

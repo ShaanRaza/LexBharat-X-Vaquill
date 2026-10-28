@@ -1,6 +1,7 @@
 // Runs a task through its configured model, with fallbacks. PURE of app state (config, env and fetch are arguments).
 import { AiError, isRetryable, providerConfigured, resolveTask } from "./models.mjs";
 import { STREAMERS } from "./providers.mjs";
+import { creditStatus } from "./guard.mjs";
 
 // A model that has produced no text within `firstTokenMs` is given up on (treated as a timeout), so a slow model falls back to the next one instead of leaving the user waiting.
 const asAiError = (e) => (e instanceof AiError ? e : e?.name === "AbortError" || e?.name === "TimeoutError" ? new AiError("timeout", "The model took too long to answer.") : e);
@@ -12,9 +13,11 @@ const pause = (ms, signal) => new Promise((res) => { const id = setTimeout(res, 
 /** Streams a task: yields { type:"text", text } then { type:"done", usage, model }. If the first model fails BEFORE any text, the next fallback is tried; after text has been sent the error is thrown. */
 export async function* streamTask(task, input, { config, env, fetchImpl }) {
   const t = resolveTask(task, config, env), chain = [t.primary, ...t.fallbacks], began = Date.now(), left = () => (t.budgetMs ? t.budgetMs - (Date.now() - began) : Infinity);
-  let lastErr = null;
+  let lastErr = null, guard = null;
   for (const spec of chain) {
     if (!providerConfigured(spec.provider, env, config.providers?.[spec.provider])) { lastErr = new AiError("not_configured", `${spec.provider} is not set up.`); continue; }
+    // spend guard: a paid provider whose key is nearly out of credit is skipped, so the task goes to the next (free) model
+    if (config.spendGuard?.provider === spec.provider && spec !== chain[chain.length - 1]) { guard ??= await creditStatus({ config, env, fetchImpl }); if (guard.tripped) { lastErr = new AiError("not_configured", "The paid model is paused to protect the monthly budget."); continue; } }
     for (let attempt = 0; ; attempt++) {
     if (left() < MIN_ATTEMPT_MS) { if (lastErr) throw lastErr; }   // out of time: report the last real error
     let started = false;

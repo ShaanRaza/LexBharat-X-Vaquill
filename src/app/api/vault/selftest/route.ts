@@ -4,6 +4,8 @@ import { PDFDocument, StandardFonts } from "pdf-lib";
 import { Document, Packer, Paragraph } from "docx";
 import { bidOf, json, vaultReady } from "@/lib/vault/http";
 import { extractText, readPdfPages } from "@/lib/vault/extract.mjs";
+import config from "@/config/ai-models.json";
+import { creditStatus } from "@/lib/ai/guard.mjs";
 import { chatProbe, geminiProbe } from "@/lib/ai/probe";
 import { voyageProbe } from "@/lib/vault/embedDocs";
 import { getFileStore } from "@/lib/vault/storage";
@@ -16,6 +18,8 @@ export async function GET(req: Request) {
   const rows: Row[] = [], run = async (stage: string, f: () => Promise<string>) => { const t = Date.now(); try { rows.push({ stage, ok: true, ms: Date.now() - t, detail: await f() }); } catch (e) { rows.push({ stage, ok: false, ms: Date.now() - t, detail: String((e as Error)?.message ?? e).slice(0, 200) }); } };
   const env = (k: string) => !!process.env[k]?.trim();
   await run("settings", async () => { const need = ["SUPABASE_URL", "SUPABASE_SECRET_KEY", "VOYAGE_API_KEY"], miss = need.filter((k) => !env(k)); if (miss.length) throw new Error(`missing: ${miss.join(", ")}`); return `node ${process.version}, region ${process.env.VERCEL_REGION ?? "local"}, scan model key ${env("GEMINI_API_KEY") ? "set" : "NOT set"}`; });
+  // always shown when a spend guard is configured: is the paid route on, or paused because the credit is low?
+  if (config.spendGuard?.provider) await run("Spend guard (OpenRouter credit)", async () => { const c = await creditStatus({ config, env: process.env as Record<string, string | undefined>, force: true }); if (!c.checked) throw new Error(c.reason); return `${c.tripped ? "PAUSED, everything uses free Gemini" : "paid route on"}: $${c.remaining?.toFixed(2) ?? "no limit"} left of $${c.limit ?? "no limit"}, pauses below $${c.minRemaining?.toFixed(2)}`; });
   if (vaultReady()) {
     await run("storage", async () => {
       const st = getFileStore(), key = `${bid}/selftest/${crypto.randomUUID()}.txt`, { sb } = await import("@/lib/vault/supabase"), { default: lim } = await import("@/config/vault-limits.json");

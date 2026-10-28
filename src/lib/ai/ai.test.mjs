@@ -1,3 +1,4 @@
+import { creditStatus, resetGuardCache } from "./guard.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { parseModelSpec, resolveTask, providerConfigured, AiError } from "./models.mjs";
@@ -24,7 +25,8 @@ test("the shipped config defines every task and parses", () => {
   for (const t of ["chat", "answerCheck", "queryRewrite", "drafting", "review", "rerun"]) { const r = resolveTask(t, config, {}); assert.ok(r.primary.model); assert.ok(r.maxOutputTokens > 0); }
 });
 test("switching a task to Claude is an env/config change only", () => {
-  assert.equal(resolveTask("chat", config, {}).primary.provider, "gemini");
+  assert.equal(resolveTask("chat", config, {}).primary.provider, "openrouter"); assert.equal(resolveTask("review", config, {}).primary.provider, "gemini");   // review and drafting stay on free Gemini until credit is bought
+  for (const t of ["chat", "answerCheck", "queryRewrite", "templatePick"]) assert.ok(resolveTask(t, config, {}).fallbacks.every((f) => f.provider === "gemini") && resolveTask(t, config, {}).fallbacks.length >= 1);
   assert.deepEqual(resolveTask("chat", config, { AI_MODEL_CHAT: "anthropic:claude-haiku-5-5" }).primary, { provider: "anthropic", model: "claude-haiku-5-5" });
   assert.deepEqual(resolveTask("answerCheck", config, { AI_MODEL_ANSWER_CHECK: "anthropic:claude-haiku-5-5" }).primary.provider, "anthropic");
   assert.deepEqual(resolveTask("drafting", config, { AI_MODEL_DRAFTING: "litellm:claude-sonnet-5-5" }).primary, { provider: "litellm", model: "claude-sonnet-5-5" });
@@ -118,7 +120,7 @@ test("fallback: a busy first model before any text moves to the next; an error a
   await assert.rejects(() => completeTask("chat", { messages: [{ role: "user", content: "q" }] }, { config, env: {}, fetchImpl: fakeFetch() }), { kind: "not_configured" });
 });
 test("AI_FALLBACK_<TASK> replaces or removes the configured fallbacks", () => {
-  assert.equal(resolveTask("chat", config, {}).fallbacks.length, 1);
+  assert.equal(resolveTask("chat", config, {}).fallbacks.length, 2);
   assert.deepEqual(resolveTask("chat", config, { AI_FALLBACK_CHAT: "" }).fallbacks, []);
   assert.deepEqual(resolveTask("chat", config, { AI_FALLBACK_CHAT: "anthropic:claude-haiku-5-5, gemini:x" }).fallbacks, [{ provider: "anthropic", model: "claude-haiku-5-5" }, { provider: "gemini", model: "x" }]);
   assert.deepEqual(resolveTask("answerCheck", config, { AI_FALLBACK_ANSWER_CHECK: "" }).fallbacks, []);
@@ -192,4 +194,18 @@ test("when the time budget is used up no further attempt is made and the real er
   calls.length = 0;
   const r = await completeTask("chat", { messages: [{ role: "user", content: "q" }] }, { config: { tasks: { chat: { model: "gemini:a", fallback: ["gemini:b"], budgetMs: 50000 } } }, env, fetchImpl: fakeFetch(errResponse(429), say("fine")) });
   assert.equal(r.model, "gemini:b");   // with budget left, a rate-limited model falls back at once
+});
+
+test("spend guard: below the minimum credit the paid model is skipped and the free fallback answers; at or above it, and when unreadable, the paid model is used", async () => {
+  const cfg = (extra = {}) => ({ spendGuard: { provider: "openrouter", minRemainingUsd: 0.25, cacheMs: 60000 }, providers: { openrouter: { baseUrl: "https://example.test/api/v1", keyEnv: "OR" } }, tasks: { chat: { model: "openrouter:google/x", fallback: ["gemini:g"], ...extra } } });
+  const keyResp = (remaining) => ({ ok: true, status: 200, json: async () => ({ data: { limit: 2, limit_remaining: remaining } }) });
+  const d = (o) => `data: ${JSON.stringify(o)}\n\n`, orBody = () => okResponse([d({ choices: [{ delta: { content: "paid" }, finish_reason: "stop" }] }), "data: [DONE]\n\n"]);
+  const gemBody = () => okResponse([gem({ candidates: [{ content: { parts: [{ text: "free" }] } }] })]);
+  const e = { OR: "k", GEMINI_API_KEY: "g" };
+  const ask = (remaining, c = cfg()) => { resetGuardCache(); return completeTask("chat", { messages: [{ role: "user", content: "q" }] }, { config: c, env: e, fetchImpl: async (url, init) => (String(url).endsWith("/key") ? (remaining === "down" ? { ok: false, status: 500, json: async () => ({}) } : keyResp(remaining)) : (String(url).includes("openrouter") || String(url).includes("example.test") ? orBody() : gemBody())) }); };
+  assert.equal((await ask(0.2)).text, "free");
+  assert.equal((await ask(0.26)).text, "paid");
+  assert.equal((await ask("down")).text, "paid");
+  resetGuardCache(); const c = await creditStatus({ config: cfg(), env: e, fetchImpl: async () => keyResp(0.1) });
+  assert.equal(c.tripped, true); assert.equal(c.remaining, 0.1);
 });
