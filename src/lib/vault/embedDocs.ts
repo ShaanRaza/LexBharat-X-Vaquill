@@ -11,6 +11,25 @@ export const VOYAGE_DOC_REQUESTS_PER_MINUTE = 2;
 const g = globalThis as unknown as { __vaultVoyageLast?: number };
 export class EmbedWait extends Error { constructor(public waitMs: number, public reason: "gap" | "rate" | "error", public why = "") { super(`wait ${waitMs}${why ? ` (${why})` : ""}`); } }
 
+/** Why a fetch failed, without the message text (a header error would quote the key): the error name, its cause's code, and whether the key is a valid header value. */
+export function errWhy(e: unknown): string {
+  const x = e as { name?: string; cause?: { code?: string; name?: string } }, key = process.env.VOYAGE_API_KEY ?? "";
+  const keyOk = /^[\x21-\x7e]+$/.test(key.trim()) ? "" : `; VOYAGE_API_KEY holds a character a header cannot carry (length ${key.length}, trimmed ${key.trim().length})`;
+  return `${x?.name ?? "error"}${x?.cause?.code || x?.cause?.name ? ` / ${x.cause.code ?? x.cause.name}` : ""}${keyOk}`;
+}
+
+/** One request straight to Voyage, no gate and no waiting: for the self-test. Never throws; the key is not in the result. */
+export async function voyageProbe(): Promise<{ ok: boolean; status: number | null; ms: number; detail: string }> {
+  const key = process.env.VOYAGE_API_KEY?.trim(), t = Date.now();
+  if (!key) return { ok: false, status: null, ms: 0, detail: "no VOYAGE_API_KEY" };
+  try {
+    const r = await fetch(VOYAGE_URL, { method: "POST", headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" }, cache: "no-store", signal: AbortSignal.timeout(15000),
+      body: JSON.stringify({ input: ["selftest"], model: VOYAGE_MODEL, input_type: "document", output_dimension: EMBED_DIM, truncation: true }) });
+    const body = await r.text().catch(() => "");
+    return { ok: r.ok, status: r.status, ms: Date.now() - t, detail: r.ok ? "embedding returned" : body.replace(/\s+/g, " ").slice(0, 160) };
+  } catch (e) { return { ok: false, status: null, ms: Date.now() - t, detail: `request did not complete: ${errWhy(e)}` }; }
+}
+
 /** Embeds texts as documents. Throws EmbedWait (with how long to wait) when spaced out too closely or Voyage says busy. */
 export async function embedDocuments(texts: string[], minGapMs: number): Promise<number[][]> {
   const key = process.env.VOYAGE_API_KEY?.trim(); if (!key) throw new Error("no voyage key");
@@ -22,7 +41,7 @@ export async function embedDocuments(texts: string[], minGapMs: number): Promise
   let r: Response;
   try { r = await fetch(VOYAGE_URL, { method: "POST", headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" }, cache: "no-store", signal: AbortSignal.timeout(25000),
     body: JSON.stringify({ input: texts, model: VOYAGE_MODEL, input_type: "document", output_dimension: EMBED_DIM, truncation: true }) }); }
-  catch { throw new EmbedWait(15000, "error"); }
+  catch (e) { throw new EmbedWait(15000, "error", `the request to Voyage did not complete: ${errWhy(e)}`); }
   if (r.status === 429) throw new EmbedWait(Math.max(minGapMs, 30000), "rate");
   if (!r.ok) throw new EmbedWait(20000, "error", `Voyage answered ${r.status}: ${(await r.text().catch(() => "")).replace(/\s+/g, " ").slice(0, 160)}`);   // (Voyage's error text never contains the key)
   const j = (await r.json()) as { data?: { index: number; embedding: number[] }[] };

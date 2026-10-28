@@ -4,7 +4,7 @@ import { PDFDocument, StandardFonts } from "pdf-lib";
 import { Document, Packer, Paragraph } from "docx";
 import { bidOf, json, vaultReady } from "@/lib/vault/http";
 import { extractText, readPdfPages } from "@/lib/vault/extract.mjs";
-import { embedDocuments } from "@/lib/vault/embedDocs";
+import { voyageProbe } from "@/lib/vault/embedDocs";
 import { getFileStore } from "@/lib/vault/storage";
 import { listDocs } from "@/lib/vault/store";
 
@@ -36,6 +36,6 @@ export async function GET(req: Request) {
     if (!r.pages || !/agreement/.test(r.text)) throw new Error(r.reason || "no text");
     return "text found";
   });
-  if (new URL(req.url).searchParams.get("voyage") === "1") await run("embedding (Voyage)", async () => { const v = await embedDocuments(["selftest"], 0); return `${v.length} vector of ${v[0].length}`; });
+  if (new URL(req.url).searchParams.get("voyage") === "1") await run("Voyage, direct (no gate)", async () => { const v = await voyageProbe(); if (!v.ok) throw new Error(`${v.status ?? "no answer"}: ${v.detail}`); return `ok, ${v.status} in ${v.ms} ms`; });
   return json({ ok: rows.every((r) => r.ok), rows });
 }
