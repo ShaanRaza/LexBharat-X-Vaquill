@@ -1,89 +1,62 @@
-# LexBharat (local build)
+# LexBharat
 
-A local, educational recreation of the **publicly visible** website of a US-primary-law API company, branded **LexBharat**. It is a website you can click through on your own computer: about **590 pages**, a documentation site, and mock tools that behave like the real ones. It has **no real backend, no real database and no real accounts**.
+LexBharat is a working legal-research workspace for Indian law, **in a testing phase**. It is **not legal advice** and is protected by an access password; do not enter confidential client information.
 
-> **In one sentence:** everything you see is real *front-end*; everything that looks like it talks to a server is a *mock* running on your own machine.
+What it does today:
 
-## Run it
+- **Browse and search Acts**: Central and State/UT Acts (about 10,000), the Constitution of India, Orders/Rules/Schedules for a few Acts, regulator instruments (RBI, SEBI, MCA, DGFT, TRAI, IRDAI and others) and Law Commission reports. Keyword search, section lookup ("138 NI Act"), search by meaning, and Hindi keyword search over the Hindi text we show. Every section carries a quality label (complete / possibly incomplete / unreliable) and a link to the official source.
+- **Judgments**: Supreme Court (37,014 case records, full English text on case pages, search inside the text by meaning or words, statute links), High Court case lists for 25 courts (case records only).
+- **Chat** with citations to Act sections and Supreme Court judgment excerpts, with an automatic answer check.
+- **Drafting** (five templates), **Review** of an uploaded contract (clause risks, missing clauses, Indian-law points) and a **Vault** for your own documents (PDF, Word, text, scans), all stored per browser, no accounts.
+
+How honest it tries to be: where the source data is missing, scrambled or incomplete, the page says so, with counts and reasons (`docs/DATA-GAPS.md`, `docs/MISSING-SECTIONS.md`, `docs/SC-RECONCILIATION.md`).
+
+## Stack
+
+Next.js 15 (App Router, TypeScript), Tailwind CSS 3 with one design-token file (`src/styles/tokens.css`), Neon Postgres (with pgvector), Supabase (file storage, usage counters, feedback), Vercel (hosting and analytics), Voyage AI (`voyage-4` embeddings, 256 dimensions) and Google Gemini (answers, drafting, review, scan reading) through a small provider layer (`src/lib/ai`; LiteLLM or Anthropic can be configured instead).
+
+## Run it locally
 
 ```bash
-npm install        # first time only
-npm run dev        # http://localhost:3100
+npm install
+cp .env.example .env.local     # fill in the values you have; see below
+npm run dev                    # http://localhost:3100
 ```
 
-Open **http://localhost:3100**. Stop with `Ctrl+C`. (The app always starts on port 3100; this is set in `package.json`.)
+Without any keys the app starts, but search, chat and the stores report "not available yet" instead of failing. Local-only data (the full High Court case lists, local files) is read from folders named in `.env.local` (see `.env.example`).
 
-## What it recreates
+Checks: `npm run test:extract` (unit tests), `npm run qa:sweep` (offline check of all Supreme Court records), `npm run build`.
 
-| Area | Pages | How complete |
-|---|---|---|
-| Home page | `/` | **Full**: hero, interactive US map, API demo (mocked), pricing, FAQ, footer |
-| Product pages | `/legal-api`, `/mcp`, `/claude-plugin`, `/white-label`, `/affiliates`, `/open-us-law`, `/legal-aid`, `/in`, `/word`, `/word/sideload` | **Full** structure, placeholder copy |
-| Interactive tools | `/playground`, `/alerts` | **Mocked** but fully working in the browser |
-| Company pages | `/about`, `/customer` (+ story), `/contact`, `/partners`, `/support`, `/brand`, `/slack` | **Full** (fictional people; `/slack` is a redirect shell) |
-| For lawyers | `/for-lawyers`, `/for-lawyers/ethics`, `/use-case/legal-tech-developers`, `/security/vulnerability-disclosure` | **Partial**: headings and order observed, wording placeholder |
-| Content hubs | `/blog` (459), `/engineering` (24), `/clauses` (52), `/topics` (10), `/playbooks` (4), each with detail pages | **Partial**: every public title is listed with search and filters; article bodies are placeholders |
-| Legal pages | `/privacy`, `/terms`, `/dpa`, `/sla`, `/cookies`, `/refund-policy`, `/delete-data`, `/security`, `/accessibility` | **Partial**: real section structure, original placeholder wording, clearly labeled |
-| Documentation | `/docs` with 58 sidebar entries, 4 tabs, search, 12 endpoint reference pages, `llms.txt` | **Partial**: all pages exist with original explanatory text |
-| Sign in / Sign up | `/auth/login`, `/auth/signup`, `/auth/forgot-password` | **Shell** (mock) |
+## Environment variables
 
-The full page-by-page table, with data source and screenshot for each, is in [`docs/PAGES-AND-DATA-MAP.md`](docs/PAGES-AND-DATA-MAP.md).
+All names are in [`.env.example`](.env.example), with a comment for each. Secrets are never committed (`.env*.local` is git-ignored). On Vercel set them for **Production** and, to test a branch, also for **Preview**.
 
-## What is real vs. mocked (the short version)
+| Group | Variables |
+|---|---|
+| Access gate | `ACCESS_PASSWORD`, `ACCESS_COOKIE_SECRET`, `ADMIN_PASSWORD` |
+| Main database (Acts, chats, drafts) | `DATABASE_URL` |
+| Vectors (search by meaning) | `VECTOR_DATABASE_URL` (Acts), `VECTOR_DATABASE_URL_REGULATORY`, `VECTOR_DATABASE_URL_SC` |
+| Regulator and judgment text | `REG_DATABASE_URL`, `SC_DATABASE_URL`, `SC_KEYWORD_DATABASE_URL` |
+| Supabase (Vault, feedback, counters) | `SUPABASE_URL`, `SUPABASE_SECRET_KEY`, `VAULT_BUCKET` |
+| AI | `GEMINI_API_KEY`, `VOYAGE_API_KEY` |
 
-- **Real in this project:** the screens, layout, colors, fonts, animations, menus, tabs, accordions, the docs search box, the map hover, blog search and pagination, and form validation.
-- **Mocked:** every form, the home-page API demo, the Playground and Law Change Alerts. They call small local stubs under `/api/mock/*` (6 route files).
-- **Simulated database:** the Alerts page stores "watches" in server memory. It resets whenever the server restarts.
-- **Placeholder content:** logos, testimonials, founders, customers, article bodies, legal wording and screenshots are made up or generic.
-- **Not implemented at all:** accounts, API keys, billing, email, analytics, ads, tracking cookies, the Word add-in, the MCP server.
+## Data and licences
 
-Every page ends with a small **"data source"** strip that says where its content comes from, and recreated legal and docs pages carry a visible **"recreated placeholder"** notice.
-
-## Release toggle (hide dev-only annotations)
-
-One build-time flag, `NEXT_PUBLIC_RELEASE`, controls every dev/demo marker (orange banner, MOCK badges, data-source notes, "(local mock)" titles, placeholder disclaimers). Public content and layout are unchanged.
-
-| Command | Annotations |
-| --- | --- |
-| `npm run dev` | shown (`.env.development` sets `0`) |
-| `npm run build && npm run start` | hidden (`.env.production` sets `1`) |
-| `npm run dev:release` | hidden, in dev |
-| `npm run build:demo` | shown, in a production build |
-
-Shell variable beats `.env.local` beats the `.env.*` defaults. The value is inlined at build time, so rebuild (or restart dev) after changing it. Code reads it through `src/lib/release.ts` and `src/components/DevOnly.tsx`.
+- Legal data: [open-india-law](https://huggingface.co/datasets/vaquill/open-india-law) by Vaquill AI, compiled from India Code and regulator websites, **CC BY 4.0** (credited on every page that uses it). Source judgment PDFs: eCourts and the Supreme Court of India, published on the AWS Open Data Registry by Dattam Labs (CC BY 4.0).
+- `content/supplement/` holds section text copied by hand from India Code's Act PDFs to fill gaps in the dataset. **Permission to republish that text has not been confirmed** (`docs/INDIA-CODE-PERMISSION-EMAIL.md`); keep this repository private until it is.
+- Fonts: Geist, Geist Mono, Source Serif 4, IBM Plex Sans Devanagari (SIL Open Font License). See [`NOTICE.md`](NOTICE.md).
 
 ## Where to read more
 
 | File | What it explains |
 |---|---|
-| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Tools, libraries, folders and major components |
-| [`docs/DATA-FLOW.md`](docs/DATA-FLOW.md) | Where data lives, which mock API powers which screen |
-| [`docs/PAGES-AND-DATA-MAP.md`](docs/PAGES-AND-DATA-MAP.md) | Every page: full / partial / mocked, data kind, files, screenshots |
-| [`docs/PUBLIC-EVIDENCE.md`](docs/PUBLIC-EVIDENCE.md) | What was observed on the real public site |
-| [`docs/ASSUMPTIONS-AND-UNKNOWNS.md`](docs/ASSUMPTIONS-AND-UNKNOWNS.md) | What could and could not be verified; what is approximated |
-| [`qa/QA-REPORT.md`](qa/QA-REPORT.md) | **Pre-launch QA sign-off**: what was tested on every page, the issue register, fixes, and open items (marketing-site pass of 582 pages, plus addenda for the release toggle and the developer console; screenshots in `qa/screenshots/` and `qa/playground/`) |
-| [`docs/SCREENSHOTS.md`](docs/SCREENSHOTS.md) | 30 desktop and 16 mobile screenshots, mapped to pages |
+| [`docs/DATA-GAPS.md`](docs/DATA-GAPS.md) | What is missing or wrong in the data, with counts and a ranked fix list |
+| [`docs/W10.md`](docs/W10.md), [`docs/W9.md`](docs/W9.md), [`docs/W8.md`](docs/W8.md) | What was built in each work package, how it was checked |
+| [`docs/MISSING-SECTIONS.md`](docs/MISSING-SECTIONS.md), [`docs/SC-RECONCILIATION.md`](docs/SC-RECONCILIATION.md), [`docs/SC-TEXT-OVERLAP.md`](docs/SC-TEXT-OVERLAP.md) | Section gaps, Supreme Court counts, repeated-text check |
+| [`docs/PDF-DOWNLOAD-LIST.md`](docs/PDF-DOWNLOAD-LIST.md) | India Code PDFs still to be downloaded by hand |
+| [`docs/RESKIN-PLAN.md`](docs/RESKIN-PLAN.md) | The visual reskin plan and its phases (branch `reskin`) |
+| [`docs/CHAT.md`](docs/CHAT.md), [`docs/DRAFTING.md`](docs/DRAFTING.md), [`docs/VAULT.md`](docs/VAULT.md) | How Chat, Drafting and the Vault work |
+| [`docs/ACTS-SEARCH-W1B.md`](docs/ACTS-SEARCH-W1B.md), [`docs/SEMANTIC-ACTS.md`](docs/SEMANTIC-ACTS.md), [`docs/JUDGMENTS-HC.md`](docs/JUDGMENTS-HC.md) | Search, search by meaning, judgments |
+| [`docs/README-OLD-MOCK-BUILD.md`](docs/README-OLD-MOCK-BUILD.md) | The original README of the first, mock-only build (history) |
 
-A zipped bundle (`lexbharat-docs.zip`, no images) holds the README, the markdown docs, `playground-evidence.md` and the QA scripts and reports. Two files are deliberately **not** in it: `docs/PLAYGROUND-TEARDOWN.md` (logged-in session material) and `recut-evidence.md` (local paths and installed-app inventory); see `docs/BUNDLE-NOTES.md`.
-
-## Deploying to Vercel
-
-The project is a standard Next.js 15 app (no `output` setting, no custom server, no required secrets). The only environment variable is `NEXT_PUBLIC_RELEASE`: `1` hides dev/demo annotations and is baked in at build time. `.env.production` already sets it to `1`; pass it explicitly as well so a deploy never depends on that file. `.vercelignore` keeps `qa/`, screenshots, the docs zip and the evidence files out of the upload. From this folder (after `vercel login`):
-
-```bash
-vercel --prod -b NEXT_PUBLIC_RELEASE=1
-```
-
-Caveat: the Law Change Alerts demo stores its list in server memory, which does not persist reliably on serverless hosting. The site is `noindex` by design.
-
-## Acts & Judgments browser (mock)
-
-`/workspace/browse` recreates the "Browse Laws & Judgments" area (Supreme Court and High Courts with year pickers, plus an Acts & Legislation tab backed by a mock `/api/mock/acts/list`). All data is mock or display data; the real corpus is not accessible. What was investigated and found is in [docs/ACTS-AND-JUDGMENTS.md](docs/ACTS-AND-JUDGMENTS.md).
-
-## Developer console Playground (internal REA clone)
-
-`/developer?tab=playground` is a local, fully mocked recreation of the authenticated Vaquill Playground, built from `docs/PLAYGROUND-TEARDOWN.md` (project only; withheld from the zip). What was built, what is mocked vs confirmed, and the remaining gaps are in [docs/PLAYGROUND-BUILD.md](docs/PLAYGROUND-BUILD.md). The console always shows that it is a local mock, even in release builds. Re-run its browser QA (app must be on port 3100) with `node qa/playground-qa.mjs`.
-
-## Boundaries followed
-
-Only publicly visible pages were inspected: the home page, the pages listed in the site's public sitemap, the public docs and the sign-in/sign-up screens (viewed only). Nothing behind a login, nothing under disallowed paths (`/api/`, `/_next/`, `/private/`), no private or hidden endpoints, and no forms submitted on the real site. Nothing here claims to reveal the real site's source code, backend or database.
+The public marketing pages in `src/app/(site)` and the developer-console pages (`/developer`, `/docs`, the Playground) come from the first, mock-only build: they are demonstration pages with placeholder content, not a product claim (see the old README above).
