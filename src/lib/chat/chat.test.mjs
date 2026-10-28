@@ -45,7 +45,7 @@ test("buildChatPrompt puts sources with the newest question and keeps only recen
   const p = buildChatPrompt({ question: "Q?", history: hist, sources: [{ n: 1, actTitle: NI, number: "138", heading: "Dishonour", text: "text", inForce: false }] });
   assert.equal(p.messages.length, 9); assert.equal(p.messages.at(-1).role, "user");
   assert.ok(p.messages.at(-1).content.includes("[1] The Negotiable Instruments Act, 1881 [not in force] — Section 138 (Dishonour)")); assert.ok(p.messages.at(-1).content.endsWith("Question: Q?"));
-  assert.ok(p.system.includes("ONLY from the numbered sources")); assert.ok(p.system.includes("judgments are not included yet"));
+  assert.ok(p.system.includes("ONLY from the numbered sources")); assert.ok(p.system.includes("High Court and tribunal decisions are not included yet"));
   assert.ok(buildChatPrompt({ question: "Q", sources: [] }).messages[0].content.includes("no sections were found"));
   assert.ok(sourceBlock({ n: 1, actTitle: "A", number: "1", text: "x".repeat(SOURCE_CHARS * 2) }).length < SOURCE_CHARS + 80);
 });
@@ -144,4 +144,14 @@ test("a Supreme Court judgment source is labelled as an excerpt and adds its rul
   const p = buildChatPrompt({ question: "limitation under section 138?", sources: [j] });
   assert.match(p.system, /SUPREME COURT JUDGMENT/);
   assert.doesNotMatch(buildChatPrompt({ question: "q", sources: [{ n: 1, actTitle: "A Act", number: "1", text: "t" }] }).system, /SUPREME COURT JUDGMENT/);
+});
+
+test("the prompt no longer tells the model that judgments do not exist when it is given judgment excerpts", () => {
+  const base = buildChatPrompt({ question: "Q", sources: [{ n: 1, actTitle: NI, number: "138", text: "t" }] }).system;
+  const withJ = buildChatPrompt({ question: "Q", sources: [{ n: 1, actTitle: NI, number: "138", text: "t" }, { n: 2, kind: "judgment", actTitle: "A v. B", label: "[2014] 1 S.C.R. 1", text: "excerpt" }] }).system;
+  for (const sys of [base, withJ]) {
+    assert.ok(!/no judgments, no case law/i.test(sys), "must not say there are no judgments"); assert.ok(!/say that judgments are not included yet/i.test(sys));
+    assert.ok(sys.includes("Supreme Court judgments")); assert.ok(sys.includes("Never name a case that is not among the sources"));
+  }
+  assert.ok(withJ.includes("SUPREME COURT JUDGMENT: short excerpts") && !base.includes("short excerpts of reported judgments"));   // the extra rules are added only when an excerpt is among the sources
 });

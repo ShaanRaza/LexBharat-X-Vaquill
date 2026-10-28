@@ -100,7 +100,7 @@ export async function POST(req: Request) {
         const cites = ret.sources.map(citationOf);
         send({ type: "sources", sources: cites, searchMode: ret.searchMode, queries: [message, ...extra].slice(0, 4) });
         if (!ret.sources.length) {
-          const text = "I couldn't find any sections in the Acts I searched that relate to this question. This tool searches Indian Central and State Acts only; judgments are not included yet. Try describing the situation in other words, or name the Act and section.";
+          const text = "I couldn't find any sections in the Acts I searched that relate to this question. This tool searches Indian Central and State Acts and short excerpts of Supreme Court judgments; High Court and tribunal decisions are not included yet. Try describing the situation in other words, or name the Act and section.";
           send({ type: "delta", text });
           const check: CheckResult = { label: "not_found", unsupported: [] };
           send({ type: "check", ...check });
