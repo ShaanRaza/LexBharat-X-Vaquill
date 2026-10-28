@@ -128,3 +128,28 @@ test("files are sent to Gemini as inline data, to Anthropic as document/image bl
   const a = bodies[1].body.messages[0].content;
   assert.equal(a[0].type, "document"); assert.equal(a[0].source.media_type, "application/pdf"); assert.equal(a[1].type, "image"); assert.deepEqual(a[2], { type: "text", text: "read" });
 });
+
+const say = (t) => okResponse([gem({ candidates: [{ content: { parts: [{ text: t }] } }] })]);
+const modelOf = (c) => /models\/([^:]+):/.exec(c.url)[1];
+const withRetry = { retry: { unavailable: { times: 1, waitMs: 5 } }, tasks: { chat: { model: "gemini:a", fallback: ["gemini:b"] } } };
+test("a 503 is asked again once on the same model (after the configured wait) before the fallback is used", async () => {
+  calls.length = 0;
+  const r = await completeTask("chat", { messages: [{ role: "user", content: "q" }] }, { config: withRetry, env, fetchImpl: fakeFetch(errResponse(503, "overloaded"), say("fine")) });
+  assert.equal(r.text, "fine"); assert.equal(r.model, "gemini:a"); assert.deepEqual(calls.map(modelOf), ["a", "a"]);
+  calls.length = 0;
+  const r2 = await completeTask("chat", { messages: [{ role: "user", content: "q" }] }, { config: withRetry, env, fetchImpl: fakeFetch(errResponse(503), errResponse(503), say("from b")) });
+  assert.equal(r2.model, "gemini:b"); assert.deepEqual(calls.map(modelOf), ["a", "a", "b"]);
+  calls.length = 0;
+  await assert.rejects(() => completeTask("chat", { messages: [{ role: "user", content: "q" }] }, { config: withRetry, env, fetchImpl: fakeFetch(errResponse(503), errResponse(503), errResponse(503), errResponse(503)) }), { kind: "unavailable" });
+  assert.deepEqual(calls.map(modelOf), ["a", "a", "b", "b"]);   // each model gets one more try; then the real error is shown
+});
+test("a rate limit or a rejected key does not wait: rate limit goes straight to the fallback, an auth error stops", async () => {
+  calls.length = 0;
+  const r = await completeTask("chat", { messages: [{ role: "user", content: "q" }] }, { config: withRetry, env, fetchImpl: fakeFetch(errResponse(429, "busy"), say("b")) });
+  assert.equal(r.model, "gemini:b"); assert.deepEqual(calls.map(modelOf), ["a", "b"]);
+});
+test("the shipped config asks again once after 5 seconds, and a task can turn that off", () => {
+  assert.deepEqual(resolveTask("chat", config, {}).retryUnavailable, { times: 1, waitMs: 5000 });
+  assert.deepEqual(resolveTask("chat", { ...config, tasks: { chat: { ...config.tasks.chat, retryUnavailable: { times: 0 } } } }, {}).retryUnavailable, { times: 0, waitMs: 0 });
+  assert.deepEqual(resolveTask("chat", solo, {}).retryUnavailable, { times: 0, waitMs: 0 });
+});

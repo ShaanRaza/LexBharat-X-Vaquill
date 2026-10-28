@@ -5,12 +5,15 @@ import { STREAMERS } from "./providers.mjs";
 // A model that has produced no text within `firstTokenMs` is given up on (treated as a timeout), so a slow model falls back to the next one instead of leaving the user waiting.
 const asAiError = (e) => (e instanceof AiError ? e : e?.name === "AbortError" || e?.name === "TimeoutError" ? new AiError("timeout", "The model took too long to answer.") : e);
 
+const pause = (ms, signal) => new Promise((res) => { const id = setTimeout(res, ms); signal?.addEventListener("abort", () => { clearTimeout(id); res(); }, { once: true }); });
+
 /** Streams a task: yields { type:"text", text } then { type:"done", usage, model }. If the first model fails BEFORE any text, the next fallback is tried; after text has been sent the error is thrown. */
 export async function* streamTask(task, input, { config, env, fetchImpl }) {
   const t = resolveTask(task, config, env), chain = [t.primary, ...t.fallbacks];
   let lastErr = null;
   for (const spec of chain) {
     if (!providerConfigured(spec.provider, env)) { lastErr = new AiError("not_configured", `${spec.provider} is not set up.`); continue; }
+    for (let attempt = 0; ; attempt++) {
     let started = false;
     // the first-token deadline applies only while there is another model to fall back to; the last one in the chain is given its full timeout
     const ac = new AbortController(), ttft = spec === chain[chain.length - 1] ? 0 : (input.firstTokenMs ?? t.firstTokenMs);
@@ -26,7 +29,11 @@ export async function* streamTask(task, input, { config, env, fetchImpl }) {
     } catch (e) {
       lastErr = asAiError(e);
       if (started || !isRetryable(lastErr)) throw lastErr;
+      // "unavailable" (a 503 or no answer) is often over in seconds: wait, then ask the same model again before using the fallback (rule in ai-models.json)
+      if (lastErr instanceof AiError && lastErr.kind === "unavailable" && attempt < t.retryUnavailable.times && !input.signal?.aborted) { await pause(t.retryUnavailable.waitMs, input.signal); continue; }
     } finally { if (timer) clearTimeout(timer); input.signal?.removeEventListener("abort", onCaller); }
+    break;
+    }
   }
   throw lastErr ?? new AiError("not_configured", "No model is configured for this task.");
 }
