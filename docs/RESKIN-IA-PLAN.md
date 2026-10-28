@@ -36,12 +36,14 @@ Done on `reskin`, not pushed: the mock console, copied docs, mock account pages,
 
 **Feedback.** A message and an optional email are saved to a new table, `public.feedback_messages`, and listed in `/admin/insights` under "Messages from the Feedback form". It is a new table in the same Supabase project, not a change to `public.feedback`: that table's checks and unique key assume one thumbs vote on one chat answer, draft or review, and the stats count it. At most 5 messages an hour per browser; the browser is stored as a hash; no IP address; no email is sent. **To switch it on, run `scripts/w8/w8b-feedback-messages.sql` once in the Supabase SQL editor.** Until then the form says so in plain words.
 
-**Departures from the spec, for your OK:**
+**Departures from the spec (all four approved 2026-10-28):**
 1. **Phone menu.** The spec's phone top bar has only the logo and a search icon, which leaves Log out and Feedback unreachable on a phone. I added the same small menu button next to the search icon.
 2. **Work tabs sit above each page's own title** in Phase 2, because each page still draws its own heading. Phase 6 puts them under the title.
 3. **Search and Library both lead to the Acts and judgments browser** until Phase 5 gives Search its own page. Search is highlighted when you are on the Acts search tab; Library on everything else in the browser.
 4. **The testing banner is now one line under the top bar on every page.** The repeated "Testing phase" sentences inside pages were removed; the feature-specific warnings stay (drafts and reviews are for a lawyer to confirm, Vault is saved on this browser only).
-5. **Tab icon is an SVG only** (it scales to 32 and 16 px); extra PNG files would have needed more paths opened in the password gate.
+5. **Tab icon is an SVG only** (it scales to 32 and 16 px); extra PNG files would have needed more paths opened in the password gate. **Phase 8 adds a PNG apple-touch-icon** so iPhones show the logo on the home screen (it will need its path opened in the password gate, with a test).
+
+**Addendum (after the first live try):** Search now has its own interim address, `/workspace/search`, so the top bar tells Search from Library by the path alone and is in the page from the first byte on every page. Phase 5 replaces it with `/search` and redirects the old address. A real feedback save was tested end to end on the local build (saved, shown in `/admin/insights`, test row deleted).
 
 **Checks run:** `test:extract` 212 pass; `qa:sweep`; `build`; **axe-core** (WCAG 2 A and AA plus best practice) on 7 pages and on Quick-find, the menu and the Feedback form open, at desktop and phone width: no violations after two fixes (the banner and the dataset credit are now landmarks); no horizontal scroll at 375 px on any page; keyboard: Ctrl+K opens Quick-find with focus in the box, Escape closes it and returns focus. `ChatHistory` and `DraftHistory` are unused until Desk and Work reuse them.
 
@@ -219,7 +221,7 @@ Every phase ends with the checks you set: backend diff empty (`git diff main -- 
 5. **Library, Law page, Judgment page**, plus **Search** (tabs, filters; "Your documents" only if item 3 is approved).
 6. **Work**: Drafts, Reviews, Documents. The Vault card buttons (9806603) and the "Ready" hint come across unchanged.
 7. **Public pages**: Privacy, Terms, Security written truthfully (testing phase, not legal advice, Neon / Supabase / Vercel / Gemini / Voyage, cookies, what is logged, that Gemini's free tier and Voyage may use submitted text), public without the password, linked from the footer and the password page.
-8. **Final checks**, then merge into `main` (you push), then point app.lexbharat.ai back to Production.
+8. **Final checks**, a PNG apple-touch-icon (opened in the password gate with a test), then merge into `main` (you push), then point app.lexbharat.ai back to Production.
 
 ## 5. Keep-as-is list (from your rules)
 
