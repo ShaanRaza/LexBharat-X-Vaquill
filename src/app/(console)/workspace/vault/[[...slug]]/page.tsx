@@ -12,5 +12,5 @@ export default async function VaultPage({ params }: { params: Promise<{ slug?: s
   const { slug = [] } = await params;
   if (!workspace.features.vault.enabled) notFound();
   if (slug.length > 1 || (slug.length === 1 && !isUuid(slug[0]))) notFound();
-  return <ConsoleShell variant="lawspace" lawTab="vault">{slug.length ? <DocView key={slug[0]} id={slug[0]} /> : <VaultApp />}</ConsoleShell>;
+  return <ConsoleShell lawTab="vault">{slug.length ? <DocView key={slug[0]} id={slug[0]} /> : <VaultApp />}</ConsoleShell>;
 }

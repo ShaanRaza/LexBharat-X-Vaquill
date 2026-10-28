@@ -48,35 +48,12 @@ body {
   .comment-marquee, .comment-marquee-reverse { animation: none; }
 }
 
-/* Developer console (Playground clone). Tokens captured from the live console's computed styles (docs/PLAYGROUND-TEARDOWN.md):
-   page hsl(36 24% 94%), text hsl(30 13% 10%), muted text hsl(30 9% 38%), secondary/accent hsl(36 20% 90%), border rgb(222 218 211),
-   success hsl(160 84% 39%), destructive hsl(0 84% 60%). Primary stays #6e3730. Scoped so the marketing pages are untouched. */
-.console {
-  --background-rgb: 243 240 236; --foreground-rgb: 29 26 22; --muted-rgb: 106 97 88;
-  --accent-rgb: 235 231 224; --raised-rgb: 235 231 224; --sunken-rgb: 228 223 215; --border-rgb: 222 218 211;
-  --success-rgb: 16 183 129; --error-rgb: 239 68 68;
-  background: rgb(var(--background-rgb)); color: rgb(var(--foreground-rgb)); font-size: 14px;
-}
-.console-pop { animation: console-pop .12s var(--ease-out); }
-@keyframes console-pop { from { opacity: 0; transform: translateY(-4px) scale(.98); } }
+/* The signed-in page frame. It uses the LexBharat tokens as they are (the earlier override with a palette captured from another product's console is gone). */
+.console { background: rgb(var(--background-rgb)); color: rgb(var(--foreground-rgb)); font-size: 14px; }
+/* loading skeleton pulse */
 .console-skel { animation: console-pulse 1.4s ease-in-out infinite; }
 @keyframes console-pulse { 50% { opacity: .5; } }
-@media (prefers-reduced-motion: reduce) { .console-pop, .console-skel { animation: none; } }
-
-/* Map states: 0.75 px borders at any zoom; keyboard focus gets a gold 3 px border plus the global focus outline (the old inline outline:none left focus invisible). */
-.us-state { stroke: rgb(var(--legacy-f4f1ec-rgb)); stroke-width: 0.75px; vector-effect: non-scaling-stroke; cursor: pointer; }
-.us-state:focus-visible { stroke: rgb(var(--legacy-e0b341-rgb)); stroke-width: 3px; outline-color: rgb(var(--dark-rgb)); }
-
-/* Safari/Chrome paint autofilled fields pale yellow/blue. Keep MockForm fields on the site's white surface instead. */
-.mock-form input:-webkit-autofill, .mock-form input:-webkit-autofill:hover, .mock-form input:-webkit-autofill:focus,
-.mock-form textarea:-webkit-autofill, .mock-form select:-webkit-autofill {
-  -webkit-text-fill-color: rgb(var(--foreground-rgb));
-  caret-color: rgb(var(--foreground-rgb));
-  box-shadow: 0 0 0 1000px rgb(var(--surface-rgb)) inset;
-  transition: background-color 600000s 0s;
-}
-/* An autofilled-looking field with no value (placeholder showing) must keep the grey placeholder colour, not the text colour. */
-.mock-form input:-webkit-autofill:placeholder-shown { -webkit-text-fill-color: rgb(var(--muted-rgb)); }
+@media (prefers-reduced-motion: reduce) { .console-skel { animation: none; } }
 
 /* Drafting editor: the document area and the highlighted placeholders. Colours, fonts, sizes and radii come from src/styles/tokens.css. */
 .draft-doc .ProseMirror { outline: none; min-height: 30rem; font-family: var(--font-serif), Georgia, serif; font-size: var(--text-body); line-height: 1.7; color: var(--foreground); }
@@ -90,11 +67,19 @@ body {
 .draft-doc:focus-within { outline: 2px solid var(--primary); outline-offset: 2px; }   /* the editor shows where the keyboard is */
 
 /* ---- The marked page (reskin): the marked passage is lifted to white with a forest outline and corner handles; everything else in the same scope dims to 80%. Colours come from the tokens. ---- */
-.marked { position: relative; background: rgb(var(--white-rgb)); border-radius: var(--radius-tight); padding: 0.5rem 0.75rem; margin-inline: -0.75rem; box-shadow: 0 0 0 1.5px var(--primary), 0 10px 20px -12px rgb(var(--primary-rgb) / 0.4); }
-.marked::before, .marked::after { content: ""; position: absolute; width: 7px; height: 7px; background: var(--primary); border-radius: 1px; top: -4px; left: -4px; }
-.marked::after { top: auto; left: auto; bottom: -4px; right: -4px; }
+.marked { position: relative; background: rgb(var(--white-rgb)); border-radius: var(--radius-tight); padding: 0.5rem 0.75rem; margin-inline: -0.75rem; box-shadow: 0 0 0 1px rgb(var(--primary-rgb) / 0.35), 0 10px 20px -12px rgb(var(--primary-rgb) / 0.4); }
+.marked::before { content: ""; position: absolute; inset: calc(var(--mark-gap) * -1); pointer-events: none; background:
+    linear-gradient(var(--primary), var(--primary)) top left / var(--mark-corner) var(--mark-stroke),
+    linear-gradient(var(--primary), var(--primary)) top left / var(--mark-stroke) var(--mark-corner),
+    linear-gradient(var(--primary), var(--primary)) top right / var(--mark-corner) var(--mark-stroke),
+    linear-gradient(var(--primary), var(--primary)) top right / var(--mark-stroke) var(--mark-corner),
+    linear-gradient(var(--primary), var(--primary)) bottom left / var(--mark-corner) var(--mark-stroke),
+    linear-gradient(var(--primary), var(--primary)) bottom left / var(--mark-stroke) var(--mark-corner),
+    linear-gradient(var(--primary), var(--primary)) bottom right / var(--mark-corner) var(--mark-stroke),
+    linear-gradient(var(--primary), var(--primary)) bottom right / var(--mark-stroke) var(--mark-corner);
+  background-repeat: no-repeat; }
 .marked-scope:has(.marked) > :not(.marked, :has(.marked)) { opacity: 0.8; }
-@media print { .marked { box-shadow: none; outline: 1.5px solid currentColor; } .marked-scope:has(.marked) > :not(.marked, :has(.marked)) { opacity: 1; } }
+@media print { .marked { box-shadow: none; outline: 1.5px solid currentColor; } .marked::before { display: none; } .marked-scope:has(.marked) > :not(.marked, :has(.marked)) { opacity: 1; } }
 
 /* Page titles in the workspace use the serif of the reskin (headings only; reading text and UI stay Geist). */
 .console h1 { font-family: var(--font-serif), Georgia, serif; font-weight: 400; }

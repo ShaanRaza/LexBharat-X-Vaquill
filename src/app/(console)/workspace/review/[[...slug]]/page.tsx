@@ -12,5 +12,5 @@ export default async function ReviewPage({ params }: { params: Promise<{ slug?: 
   const { slug = [] } = await params;
   if (!workspace.features.review.enabled) notFound();
   if (slug.length > 1 || (slug.length === 1 && !isUuid(slug[0]))) notFound();
-  return <ConsoleShell variant="lawspace" lawTab="review">{slug.length ? <ReviewRunView key={slug[0]} id={slug[0]} /> : <ReviewHome />}</ConsoleShell>;
+  return <ConsoleShell lawTab="review">{slug.length ? <ReviewRunView key={slug[0]} id={slug[0]} /> : <ReviewHome />}</ConsoleShell>;
 }

@@ -390,3 +390,14 @@ Notes on the table: (1) "Sections in the PDF" counts every numbered or lettered 
 | Review (the service agreement test): copies among the sources | 0 of 14; the foreign-courts and damages points still cite Contract Act s.28 and s.73 |
 
 **Still wrong or missing after this.** Anything in the other Acts of the top-100 list (about 3,100 numbers); and sections these 8 Acts print that are Orders, Rules and Schedules (the CPC's Orders, the Limitation Act's Schedule, the Stamp Act's Schedule I) are not sections and were not filled. If a State-filed copy of another Act appears later, run `npm run load:supplement` again: it finds copies by title every time. Please spot-check more than the five sections listed earlier if you can; 519 sections is a lot of text to rely on without a second pair of eyes, and the highest-risk ones are in the Stamp Act (90 replaced, all by text from a 356-page PDF with long state-amendment blocks).
+
+## NI Act sections 143 and 145: already filled, nothing to download (checked 2026-10-28)
+
+Asked whether NI Act ss.143 and 145 should go on the India Code download list. They do not need to. Both are **filled from the India Code PDF already on disk** (`content/supplement/pdfs/ni-act-1881.pdf`, India Code file a1881-26.pdf, created 2023-06-26):
+
+| Section | Heading | Fill-in file | Status |
+|---|---|---|---|
+| 143 | Power of Court to try cases summarily | `content/supplement/ni-section-143.txt` | loaded 2026-10-24, shown as "Filled in from India Code" |
+| 145 | Evidence on affidavit | `content/supplement/ni-section-145.txt` | loaded 2026-10-24, shown as "Filled in from India Code" |
+
+They are missing only from the **raw open-india-law text files** (so a tool that reads those files directly, such as the first restructure mock-up, wrongly reports them as absent). The Act page in the app reads the database, which includes the supplement. The PDF on disk is the 2023 edition; amendments made after 2023-06-26 are not in it. NI Act is not on `docs/PDF-DOWNLOAD-LIST.md`, and nothing is added there: the Act's PDF is already held.

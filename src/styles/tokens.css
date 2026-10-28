@@ -87,6 +87,10 @@
   --w-sidebar-narrow: 200px;
   --w-drawer: min(260px, 85vw);
   --w-content: 880px;
+  /* the marked page: thin L-shaped corner marks drawn just outside the passage */
+  --mark-corner: 12px;
+  --mark-stroke: 1.5px;
+  --mark-gap: 5px;
   --leading-reading: 1.7;
 
   /* spacing used by shared components */

@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { PageHero, Section, SimpleTable, DataNote } from "@/components/ui";
 import MockBadge from "@/components/MockBadge";
-import MockForm from "@/components/MockForm";
 import { legalPages } from "@/data/legal";
 import DevOnly from "@/components/DevOnly";
 
@@ -46,10 +45,7 @@ export default function LegalView({ slug }: { slug: string }) {
                 {s.table && <div className="mt-4"><SimpleTable head={s.table.head} rows={s.table.rows} /></div>}
               </section>
             ))}
-            {p.slug === "delete-data" && (
-              <div className="max-w-w560"><MockForm kind="delete-data" submitLabel="Request deletion" fields={[{ name: "email", label: "Account email", type: "email", required: true }]} /></div>
-            )}
-            <p className="border-t border-border pt-4 text-fs-ui text-muted">Questions? Use the <Link href="/contact" className="text-primary hover:underline">contact form</Link> (mock).</p>
+            <p className="border-t border-border pt-4 text-fs-ui text-muted">Questions? See the contact details on <a href="https://lexbharat.ai" className="text-primary hover:underline" rel="noopener noreferrer">lexbharat.ai</a>.</p>
           </article>
         </div>
       </Section>

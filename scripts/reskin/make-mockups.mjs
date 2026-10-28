@@ -28,7 +28,7 @@ ${body}
 <nav class="tabbar" aria-label="Areas">${AREAS.map(([k, l, h]) => `<a href="${h}"${k === area ? ' aria-current="page"' : ""}>${ic(k)}<span>${l}</span></a>`).join("")}</nav>
 </body></html>
 `;
-const foot = '<p class="foot">Static mock-up · real tokens (src/styles/tokens.css) · real text: NI Act 1881 s.138 and neighbours, SC case 2014_INSC_514 (open-india-law, CC BY 4.0) · all other copy is sample.</p>';
+const foot = '<p class="credit">Data: <a href="#">open-india-law</a> by Vaquill AI (CC BY 4.0). Not legal advice.</p><p class="foot">Static mock-up · real tokens (src/styles/tokens.css) · real text: NI Act 1881 s.138 and neighbours, SC case 2014_INSC_514 (open-india-law, CC BY 4.0) · all other copy is sample.</p>';
 const s138 = para(data.act.s138), head138 = data.act.heading.replace(/\s+/g, " ");
 
 // ---------- Desk ----------
@@ -36,7 +36,8 @@ const desk = shell({ area: "desk", title: "Desk", body: `<main class="wrap"><div
   <p class="eyebrow">Desk</p>
   <h1 class="greeting" style="margin-top:.6rem">Good afternoon.</h1>
   <p class="lede" style="font-size:var(--text-lead)">Legal work in India, traced to the page.</p>
-  <div class="bigbox" role="search"><span class="in">Ask a question, find a law, or paste a section.</span><span class="kbd">138 NI Act</span><a class="btn primary" href="ask.html">Go ${ic("send")}</a></div>
+  <div class="bigbox" role="search"><span class="in typed">138 NI Act</span><a class="btn primary" href="law.html">Open ${ic("send")}</a></div>
+  <p class="enter"><span class="kbd">Enter</span> opens the law page: <b>NI Act, section 138</b>. <span class="muted">Empty box: "Ask a question, find a law, or paste a section." Not sure what you meant? Enter searches.</span></p>
   <div class="chips" style="margin-top:.9rem"><a class="chip" href="ask.html">Notice period for cheque bounce</a><a class="chip" href="law.html">Article 21</a><a class="chip" href="work.html">Draft a legal notice</a><a class="chip" href="law.html">Order 7 Rule 11</a></div>
   <h2>Recent work</h2>
   <div class="list card" style="padding-block:.3rem">
@@ -72,9 +73,9 @@ const ask = shell({ area: "ask", title: "Ask", body: `<main class="wrap"><div cl
   </div>
   <aside class="card page" id="page" aria-label="Cited page">
     <span class="sheet-grab" aria-hidden="true"></span>
-    <div class="head"><span class="eyebrow">Cited page · §1</span><span class="lab plain">NI Act, 1881 · s.138</span></div>
-    <div class="read scope"><p><b style="font-weight:500">${esc(head138)}</b></p>
-      <p style="color:var(--muted)">${esc(s138[0].slice(0, 190))}…</p>
+    <div class="head"><span class="eyebrow">Cited page · §1</span><span class="lab plain">NI Act, 1881 · s.138</span><a class="btn sm quiet sheet-close" href="#" aria-label="Close the cited page">Close</a></div>
+    <div class="read scope"><p class="sec"><span class="no">138.</span> ${esc(head138)}</p>
+      <p style="color:var(--muted)">${esc(s138[0].replace(/^138\.[^—]*—\s*/, "").slice(0, 170))}…</p>
       <div class="marked"><p style="margin:0">${esc(s138[3])}</p></div>
       <p class="ind" style="margin-top:.9rem">${esc(s138[4])}</p></div>
     <p class="small muted" style="margin-top:.8rem">Open the whole section ›</p>
@@ -88,7 +89,7 @@ const search = shell({ area: "search", title: "Search", body: `<main class="wrap
   <h1 class="title">Search</h1>
   <div class="row" style="margin-top:1rem"><div class="field" style="flex:1 1 18rem;display:flex;align-items:center;gap:.5rem;color:var(--foreground)">${ic("search")} notice after cheque bounces</div>
     <div class="toggle" role="group" aria-label="Search mode"><span class="on">By meaning</span><span>Exact words</span></div><span class="btn secondary filter-btn">${ic("filter")} Filters</span></div>
-  <div class="tabs" role="tablist"><a href="#" aria-current="page">Laws <span class="n">14</span></a><a href="#">Judgments <span class="n">212</span></a><a href="#">Regulators <span class="n">3</span></a><a href="#">Your documents <span class="n">1</span></a></div>
+  <div class="tabs" role="tablist"><a href="#" aria-current="page">Laws</a><a href="#">Judgments</a><a href="#">Regulators</a><a href="#">Your documents</a></div>
   <div class="search-grid">
     <aside class="filters" aria-label="Filters"><div><h3>Jurisdiction</h3><div class="check"><b class="on"></b>Central</div><div class="check"><b></b>State</div></div>
       <div><h3>Status</h3><div class="check"><b class="on"></b>In force</div><div class="check"><b></b>Repealed</div></div><div><h3>Year</h3><div class="select">Any year</div></div></aside>
@@ -99,7 +100,7 @@ const search = shell({ area: "search", title: "Search", body: `<main class="wrap
         <div class="meta"><span class="lab plain">Central</span><span class="lab ok">${ic("check")} In force</span></div></a>
       <a class="result" href="law.html"><div class="t">Section 139 · The Negotiable Instruments Act, 1881</div><p class="snip">${hlq(tidy(data.sections["139"]), ["cheque"])}</p>
         <div class="meta"><span class="lab plain">Central</span><span class="lab ok">${ic("check")} In force</span></div></a>
-      <p class="small muted" style="border-top:0;padding-top:1rem">Showing 3 of 14 (sample counts). Search by meaning can miss exact numbers; switch to Exact words for "138 NI Act".</p>
+      <p class="small muted" style="border-top:0;padding-top:1rem">Only this tab is searched. Counts appear on the other tabs in <b style="font-weight:500">Exact words</b> mode, where they cost nothing. By meaning can miss exact numbers: use Exact words for "138 NI Act".</p>
     </div></div>${foot}</main>` });
 
 // ---------- Library ----------
@@ -111,7 +112,7 @@ const lib = shell({ area: "library", title: "Library", body: `<main class="wrap"
   <p class="small muted" style="margin-top:.8rem">Section counts are from the dataset. "Possibly incomplete" means the Act text may be missing sections; the Act page says which.</p>${foot}</main>` });
 
 // ---------- Law page ----------
-const toc = data.act.toc.map(([n, h]) => `<a href="#" ${n === "138" ? 'aria-current="true"' : ""}><b>${n}</b><span>${esc(h)}</span></a>`).join("").replace(/(<a href="#" ><b>142<\/b>[^]*?<\/a>)/, '$1<a class="gap" href="#"><b>143</b><span>Not in the dataset</span></a>').replace(/(<a href="#" ><b>144<\/b>[^]*?<\/a>)/, '$1<a class="gap" href="#"><b>145</b><span>Not in the dataset</span></a>');
+const toc = data.act.toc.map(([n, h]) => `<a href="#" ${n === "138" ? 'aria-current="true"' : ""}><b>${n}</b><span>${esc(h)}</span></a>`).join("").replace(/(<a href="#" ><b>142<\/b>[^]*?<\/a>)/, `$1<a href="#"><b>143</b><span>${esc(data.act.tocSupplement["143"])} <i class="lab plain" style="height:18px">India Code</i></span></a>`).replace(/(<a href="#" ><b>144<\/b>[^]*?<\/a>)/, `$1<a href="#"><b>145</b><span>${esc(data.act.tocSupplement["145"])} <i class="lab plain" style="height:18px">India Code</i></span></a>`);
 const law = shell({ area: "library", title: "NI Act s.138", body: `<main class="wrap">
   <p class="crumbs"><a href="library.html">Library</a> › <a href="library.html">Acts</a> › Central › The Negotiable Instruments Act, 1881</p>
   <div class="lawhead" style="margin-top:.7rem"><h1>The Negotiable Instruments Act, 1881</h1>
@@ -120,15 +121,15 @@ const law = shell({ area: "library", title: "NI Act s.138", body: `<main class="
   <div class="book" style="margin-top:1.5rem">
     <nav class="toc" aria-label="Contents"><h3 style="margin-top:0">Sections</h3>${toc}<p class="small muted" style="padding:.6rem">Chapter headings are left out: they are damaged in the source data.</p></nav>
     <article class="read scope"><p class="muted" style="margin-bottom:.4rem">137. Presumption as to foreign law.</p>
-      <div class="marked"><h2 style="font-size:var(--text-22);line-height:1.25;margin-bottom:.7rem">${esc(head138)}</h2>${s138.map((t, i) => `<p class="${i > 0 && i < 5 ? "ind" : ""}" ${i === s138.length - 1 ? 'style="margin:0"' : ""}>${esc(i === 0 ? t.replace(/^138\.[^—]*—\s*/, "") : t)}</p>`).join("")}</div>
+      <div class="marked"><h2 class="sec" style="font-size:var(--text-22);line-height:1.25;margin-bottom:.7rem"><span class="no">138.</span> ${esc(head138)}</h2>${s138.map((t, i) => `<p class="${i > 0 && i < 5 ? "ind" : ""}" ${i === s138.length - 1 ? 'style="margin:0"' : ""}>${esc(i === 0 ? t.replace(/^138\.[^—]*—\s*/, "") : t)}</p>`).join("")}</div>
       <p class="muted" style="margin-top:.9rem">139. Presumption in favour of holder.</p></article>
     <aside class="rail notes-desktop margin-note" aria-label="Margin notes">
-      <div><h3>Judgments that cite this section</h3><a class="cite case" href="judgment.html"><i>v.</i>Dashrath Rupsingh Rathod (2014)</a><p class="muted" style="margin-top:.4rem">Where a section 138 complaint can be filed. See also section 142(2).</p></div>
-      <div><h3>Source</h3><p>open-india-law Acts dataset v2026.08, CC BY 4.0.<br>Official text: India Code.</p></div>
-      <div class="notice warn"><span>Sections 143 and 145 are not in the dataset. Check India Code before relying on this Act as complete.</span></div></aside>
+      <div><h3>Judgments</h3><a class="btn secondary sm multi" href="search.html">${ic("search")} Search judgments that mention section 138</a><p class="muted" style="margin-top:.4rem">Runs a judgment search for "section 138 Negotiable Instruments Act". Results are matches in the text, not a list of cases that rely on it.</p></div>
+      <div><h3>Source</h3><p>open-india-law Acts dataset v2026.08, CC BY 4.0. Sections 143 and 145 are filled in from India Code's PDF (2023 edition) and say so.<br>Official text: India Code.</p></div>
+      <div class="notice warn"><span>Printed as in the source. The dataset and India Code's own PDF both show two apparent typos in this section (“notice; in writing”, “debt of other liability”). We do not correct statute text.</span></div></aside>
   </div>
-  <div class="notes-phone margin-note"><div><h3>Judgments that cite this section</h3><a class="cite case" href="judgment.html"><i>v.</i>Dashrath Rupsingh Rathod (2014)</a></div><div><h3>Source</h3><p>open-india-law Acts dataset v2026.08, CC BY 4.0.</p></div>
-    <div class="notice warn"><span>Sections 143 and 145 are not in the dataset.</span></div></div>${foot}</main>` });
+  <div class="notes-phone margin-note"><div><h3>Judgments</h3><a class="btn secondary sm multi" href="search.html">${ic("search")} Search judgments that mention section 138</a></div><div><h3>Source</h3><p>open-india-law Acts dataset v2026.08, CC BY 4.0. Sections 143 and 145 are filled in from India Code's PDF.</p></div>
+    <div class="notice warn"><span>Printed as in the source: two apparent typos (“notice; in writing”, “debt of other liability”) are in India Code's own PDF too. We do not correct statute text.</span></div></div>${foot}</main>` });
 
 // ---------- Judgment page ----------
 const pv = (data.preview ?? "").replace(/^•\s*/, "").replace(/\s+/g, " "), [pvHead, pvRest = ""] = pv.split(" --- "), pvBody = (() => { const t = pvRest.replace(/^Jurisdiction:\s*•?\s*/, "Jurisdiction: "), cut = t.slice(0, 520), at = Math.max(cut.lastIndexOf(" - "), cut.lastIndexOf(". "), cut.lastIndexOf(" ")); return t.slice(0, at > 200 ? at : 520) + "…"; })();

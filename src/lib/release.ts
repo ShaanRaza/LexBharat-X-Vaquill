@@ -15,10 +15,9 @@
 export const RELEASE = process.env.NEXT_PUBLIC_RELEASE === "1";
 
 /** Suffix used in browser-tab titles. */
-export const BRAND_SUFFIX = RELEASE ? "LexBharat" : "LexBharat (local mock)";
+export const BRAND_SUFFIX = "LexBharat";
 /** Title suffix for the Acts & Judgments browser, which serves real data in every build. */
 export const WORKSPACE_SUFFIX = "LexBharat";
-export const DOCS_SUFFIX = RELEASE ? "LexBharat docs" : "LexBharat docs (local mock)";
 
 /** Returns the text in demo mode and an empty string in release mode. Use for dev-only sentences inside copy. */
 export const dev = (text: string): string => (RELEASE ? "" : text);

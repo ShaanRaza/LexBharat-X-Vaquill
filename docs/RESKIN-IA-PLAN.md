@@ -1,8 +1,32 @@
 # Restructure plan: five areas, one top bar (Step 1 of the spec in `docs/RESKIN-SPEC.md`)
 
-**Status: plan and mock-ups only.** Written on the `reskin` branch. No app page, route, component or backend file was changed for this step (only `docs/` and `scripts/reskin/` were added). Nothing is pushed. Waiting for your approval before Phase 1.
+**Status: plan approved with the decisions below; Phase 1 done and waiting for your approval.** Written on the `reskin` branch. Nothing is pushed.
 
 Scope you set: `reskin` branch only; no backend logic changes (search, Ask, Drafting, Review, Vault, limits, feedback); visual source is lexbharat.ai and the `mrharit/Lex-bharat` repo only; keep the testing banner, "not legal advice" notes, coverage warnings, the password gate and the Vault card buttons. Defaults applied to the spec's open questions: Desk stays minimal, light mode only, keep the "Was this right?" text, "Get started" on lexbharat.ai goes to the password page.
+
+## Approved decisions (2026-10-28)
+
+| # | Decision | Effect on the plan |
+|---|---|---|
+| 1 | Judgment URL is `/judgments/<court>/<year>/<case>` | Already in section 1 |
+| 2 | Law page contents list section numbers only; broken chapter names are logged in `docs/DATA-GAPS.md` (section 2.5) | No Part or Chapter headings anywhere until the data is repaired |
+| 3 | "Judgments citing this section" becomes a link to a judgment search for that section; no sample list in the real build | Law page margin (mock-up updated) |
+| 4 | Add the small read-only route for Search "Your documents", reusing the Vault search code, by meaning and by exact words | New `app/api/vault/search/route.ts` in Phase 5. Query embeddings count against Voyage's 3 requests a minute |
+| 5 | Only the open Search tab searches; counts on other tabs only where cheap (exact words); never sample numbers | Search mock-up updated |
+| 6 | Desk box shows what Enter will do; defaults to Search when unsure | Desk mock-up updated; Phase 3 |
+| 7 | `/privacy`, `/terms`, `/security` become public, with tests | Done in **Phase 7**, together with the rewritten text. They stay behind the password until then because the leftover text is placeholder |
+| 8 | One plain dataset credit line for Vaquill AI (CC BY 4.0) | In every page footer (mock-ups updated; `PublicFrame` has it now) |
+| 9 | Remove the copied marketing and extra legal pages; fold Cookies and data deletion into Privacy | Phase 1 removes the pages; Phase 7 writes the Cookies and deletion sections. **Feedback: your answer still has the unfilled placeholder "[EMAIL ADDRESS / small in-app form — pick one]".** Not needed until Phase 2 (the menu); I'll ask again then |
+| 10 | Mock-up fixes (a) to (e) | (a) L-shaped corner marks, now also in the real `.marked` rule and `tokens.css`; (b) phone sheet opens only from a chip; (c) "138." at the top of the marked section; (d) **NI Act ss.143 and 145 are not missing**: already filled from the India Code PDF (`docs/MISSING-SECTIONS.md`); (e) the s.138 typos are in India Code's own PDF too, so no official text differs (`docs/DATA-GAPS.md` section 2.6) |
+
+**Note on figures in the mock-ups:** the Law page shows "141 sections" and "3 possibly incomplete" from the raw text files. The running app counts differently (for the NI Act: 116 sections, 1 possibly incomplete, 40 filled in from India Code). The real build uses the app's counts.
+
+## Phase 1 status (done, waiting for your approval)
+
+Done on `reskin`, not pushed: the mock console, copied docs, mock account pages, 37 marketing pages, 9 mock and playground API routes and about 95 files of their data and components are deleted; the product switcher, country flag and "Data API" link are out of the shell; every old address redirects (`src/config/redirects.mjs`, tested). Two things found on the way and fixed:
+
+1. **A palette from another product's console was overriding the LexBharat tokens** for the whole signed-in frame (`.console` in `globals.css`, "captured from the live console's computed styles"). It is removed, so the app now uses the real tokens (and the old light-emerald success colour that failed contrast is gone).
+2. **The leftover placeholder Privacy, Terms and Security pages said "We do not train AI models on your data" and "nothing is stored"**, which is not true while Gemini and Voyage run on free plans and chats, drafts and documents are stored. Those three sections now say what actually happens. The pages are still behind the password.
 
 ## 0. What is in this step
 

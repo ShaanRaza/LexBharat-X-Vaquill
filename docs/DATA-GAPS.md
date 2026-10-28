@@ -287,6 +287,40 @@ Loaded: CPC (54 Orders, 709 Rules), Limitation (137 Articles), Stamp Act Schedul
 ### 2.4 Constitution
 Preamble: loaded (its own unit). Articles 500, Schedules 12: loaded. **Appendices I to III** (100th Amendment land-boundary Schedules, the 2019 Order, the Article 370(3) declaration) are in the PDF but not loaded. The Constitution text is "as on 10 September 2026" with amendments up to the 106th (2023). Impact: Low. Fix: free (PDF already on disk).
 
+### 2.5 Chapter and Part labels are unreliable (measured 2026-10-28)
+
+Measured over all 10,112 Acts in the text snapshot (`ACTS_TEXT_DATA_DIR`, open-india-law v2026.08), 211,553 sections:
+
+| What | Sections | Share |
+|---|---:|---:|
+| No chapter value at all | 100,330 | 47.4% |
+| Conflicting chapter values across the section's chunks (two or more different chapters recorded for one section) | 6,520 | 3.1% |
+| Chapter name with letters spaced apart ("O F C O M P E N S A T I O N") | 60 | 0.03% |
+| Acts with at least one conflicting or letter-spaced chapter | 1,180 of 10,112 | 11.7% |
+
+Worst Acts by sections affected: Arunachal Pradesh Municipal Act 2007 (103 of 461), West Bengal Sales Tax Act 1994 (79 of 106), Maharashtra Municipal Corporations Act (68 of 498), Telangana Land Revenue Act (57 of 164), Punjab Excise Act 1914 (53 of 226), Maharashtra Stamp Act (53 of 73), Wildlife (Protection) Act 1972 (50 of 117).
+
+**Examples in the Negotiable Instruments Act, 1881** (the Act the mock-ups use):
+- Seven chapter names are letter-spaced: "O F C O M P E N S A T I O N" (s.1), "O F N O T I NG A N D P R O T E S T" (s.99), "OF R E A S O N A B L E T I M E" (s.105), "S P E C I A L R U L E S O F E V I D E N C E" (s.118), "O F CROSSED C H E Q U E S" (s.123), "O F B I L L S I N S E T S" (s.132), "O F I N T E R N A T I O N A L LA W" (s.134).
+- Section 138 is stored under chapter **XVI** "O F I N T E R N A T I O N A L LA W", which is the heading of the previous group (ss.134 to 137). The section belongs to chapter **XVII**, as the Supreme Court's own opening text in `2014_INSC_514` says ("Chapter XVII of Negotiable Instruments Act"). So the label is wrong, not only badly spaced.
+- Section 1 carries three different chapters at once (`II`, `I`, `XII`).
+- One unrelated garbled value: "`. . 3 , - ' p&Llhi'&k$+te?'`" (Tamil Nadu Land Reforms (Fixation of Ceiling on Land) Act 1961, s.4).
+
+**Decision (2026-10-28):** the Law page contents list **section numbers and headings only**; no Part or Chapter headings are shown anywhere until the data is repaired. Fixing it needs the chapter headings re-read from each Act's PDF (the India Code supplement process); it is a data task and is not part of the restructure.
+
+### 2.6 Printed typos in Section 138, Negotiable Instruments Act (checked 2026-10-28)
+
+The dataset text of s.138 contains four oddities. We compared it against the on-disk India Code PDF (`content/supplement/pdfs/ni-act-1881.pdf`, India Code file a1881-26.pdf, created 2023-06-26), extracted with `scripts/supplement/extract-sections.mjs`:
+
+| Where | Dataset text | India Code PDF (official) |
+|---|---|---|
+| Proviso (a) | "thecheque" (missing space) | same ("thecheque") |
+| Proviso (b) | "giving a notice; in writing, to the drawer" | same |
+| Explanation | "debt of other liability" (the section otherwise says "debt or other liability") | same |
+| Punishment | "two years'" with a stray closing quote | `[a term which may be extended to two years’]`: an amendment bracket mark, not a typo |
+
+**Finding:** the typos are in the published source, not introduced by the dataset or by our extraction, so there is no "official text" that differs. The India Code supplement holds 40 NI Act fill-in files (for example 137, 142A, 143, 145, 147, 148) but none for s.138. **Decision:** show statute text exactly as printed, never silently corrected; the Law page carries a margin note naming the two apparent typos; the stray amendment marks are stripped for display only. Re-check s.13's "two typos" note in `docs/MISSING-SECTIONS.md` the same way.
+
 ## 3. JUDGMENTS
 
 ### 3.1 Supreme Court (37,014 case records, 1950 to 2025)

@@ -97,7 +97,7 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
       )}
 
       <section aria-labelledby="covers" className="mt-5 rounded-card bg-surface p-5 shadow-sm ring-1 ring-border/60">
-        <h2 id="covers" className="text-fs-xs font-semibold uppercase tracking-caps text-secondary">{real ? "What is live here" : "What the Data API covers"}</h2>
+        <h2 id="covers" className="text-fs-xs font-semibold uppercase tracking-caps text-secondary">{real ? "What is live here" : "What is covered"}</h2>
         {real && stats ? (
           <ul className="mt-3 space-y-3 text-fs-body leading-relaxed">
             <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-success text-fs-micro text-success">✓</span><span><strong className="font-medium">Acts &amp; legislation are live.</strong> <span className="text-secondary">{fmt(stats.acts)} {stats.scope ?? "acts"}, with {fmt(stats.sections)} section numbers counted. {stats.sectionText ? "Section text and search cover Central and State Acts (not regulator instruments); each section shows a quality flag." : "Act-level information only: the text of sections is not shown yet."}</span></span></li>
@@ -105,8 +105,8 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
           </ul>
         ) : (
           <ul className="mt-3 space-y-3 text-fs-body leading-relaxed">
-            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-success text-fs-micro text-success">✓</span><span><strong className="font-medium">Acts &amp; legislation are live.</strong> <span className="text-secondary">The acts endpoints are maintained and serve {BROWSE_STATS.acts} acts across {BROWSE_STATS.sections} sections, mirroring the Government of India&apos;s official repository.</span></span></li>
-            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-warning text-fs-micro text-warning">⊘</span><span><strong className="font-medium">Case law and tribunal decisions are not in the API corpus yet.</strong> <span className="text-secondary">You can browse and read them here, and coverage runs to mid-2025 only. If you need them over the API, <Link href="/contact" className="text-primary underline">get in touch</Link>.</span></span></li>
+            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-success text-fs-micro text-success">✓</span><span><strong className="font-medium">Acts &amp; legislation are live.</strong> <span className="text-secondary">{BROWSE_STATS.acts} acts across {BROWSE_STATS.sections} sections, mirroring the Government of India&apos;s official repository.</span></span></li>
+            <li className="flex gap-3"><span aria-hidden className="mt-1 grid size-4 shrink-0 place-items-center rounded-full border border-warning text-fs-micro text-warning">⊘</span><span><strong className="font-medium">Case law and tribunal decisions are only partly covered.</strong> <span className="text-secondary">You can browse and read what we hold here; coverage runs to mid-2025 only.</span></span></li>
           </ul>
         )}
       </section>

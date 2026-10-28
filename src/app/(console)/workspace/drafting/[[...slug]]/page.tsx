@@ -16,5 +16,5 @@ export default async function DraftingPage({ params }: { params: Promise<{ slug?
   else if (slug.length === 2 && slug[0] === "new" && getTemplate(slug[1])) { view = "form"; id = slug[1]; }
   else if (slug.length === 1 && isDraftId(slug[0])) { view = "editor"; id = slug[0]; }
   else notFound();
-  return <ConsoleShell variant="lawspace" lawTab="drafting"><DraftingApp view={view} id={id} /></ConsoleShell>;
+  return <ConsoleShell lawTab="drafting"><DraftingApp view={view} id={id} /></ConsoleShell>;
 }

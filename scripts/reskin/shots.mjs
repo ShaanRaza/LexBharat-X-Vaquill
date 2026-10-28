@@ -10,11 +10,12 @@ const tab = await (await fetch(`http://127.0.0.1:${PORT}/json/new?about:blank`, 
 const ws = new WebSocket(tab.webSocketDebuggerUrl); await new Promise((r) => ws.addEventListener("open", r));
 let id = 0; const pending = new Map(); ws.addEventListener("message", (m) => { const d = JSON.parse(m.data); if (d.id && pending.has(d.id)) { pending.get(d.id)(d); pending.delete(d.id); } });
 const send = (method, params = {}) => new Promise((res) => { const i = ++id; pending.set(i, res); ws.send(JSON.stringify({ id: i, method, params })); });
-const names = fs.readdirSync("docs/mockups").filter((f) => f.endsWith(".html")).map((f) => f.slice(0, -5));
+const names = fs.readdirSync("docs/mockups").filter((f) => f.endsWith(".html")).map((f) => f.slice(0, -5)), EXTRA = { phone: [["ask-sheet", "ask.html#page"]] };   // the phone sheet is closed until a citation chip is tapped, so it gets its own shot
 for (const [label, width, height, mobile] of [["desktop", 1280, 860, false], ["phone", 375, 812, true]]) {
-  for (const n of names) {
+  for (const n of [...names, ...(EXTRA[label] ?? []).map(([k]) => k)]) {
+    const page = (EXTRA[label] ?? []).find(([k]) => k === n)?.[1] ?? `${n}.html`;
     await send("Emulation.setDeviceMetricsOverride", { width, height, deviceScaleFactor: 2, mobile });
-    await send("Page.navigate", { url: `http://localhost:${WEB}/docs/mockups/${n}.html` }); await sleep(900);
+    await send("Page.navigate", { url: `http://localhost:${WEB}/docs/mockups/${page}` }); await sleep(900);
     await send("Runtime.evaluate", { expression: "document.fonts.ready.then(() => 1)", awaitPromise: true });
     const h = (await send("Runtime.evaluate", { expression: "Math.max(document.documentElement.scrollHeight, innerHeight)", returnByValue: true })).result.result.value;
     const shot = await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: label === "desktop", clip: { x: 0, y: 0, width, height: label === "phone" ? height : Math.min(h, 1500), scale: 1 } });

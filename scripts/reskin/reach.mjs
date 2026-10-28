@@ -3,7 +3,7 @@
 import fs from "node:fs"; import path from "node:path";
 const SRC = path.resolve("src"), all = []; (function walk(d) { for (const f of fs.readdirSync(d)) { const p = path.join(d, f); fs.statSync(p).isDirectory() ? walk(p) : all.push(p); } })(SRC);
 const rel = (p) => path.relative(SRC, p), set = new Set(all);
-const KEEP_APP = [/^app\/layout\.tsx$/, /^app\/globals\.css$/, /^app\/fonts\//, /^app\/favicon/, /^app\/access\//, /^app\/admin\//, /^app\/api\/(?!mock\/|playground\/)/, /^app\/\(console\)\/workspace\//, /^app\/\(site\)\/\[legal\]\//, /^app\/\(site\)\/security\//, /^middleware\.ts$/, /^app\/not-found/];
+const KEEP_APP = [/^app\/layout\.tsx$/, /^app\/globals\.css$/, /^app\/fonts\//, /^app\/favicon/, /^app\/access\//, /^app\/admin\//, /^app\/api\/(?!mock\/|playground\/)/, /^app\/\(console\)\/workspace\//, /^app\/\(site\)\/\[legal\]\//, /^app\/\(site\)\/layout\.tsx$/, /^app\/\(console\)\/layout\.tsx$/, /^app\/\(site\)\/security\//, /^middleware\.ts$/, /^app\/not-found/];
 const roots = all.filter((f) => KEEP_APP.some((r) => r.test(rel(f))));
 const EXT = ["", ".ts", ".tsx", ".mjs", ".js", ".json", ".css", "/index.ts", "/index.tsx"];
 const resolve = (from, spec) => { const base = spec.startsWith("@/") ? path.join(SRC, spec.slice(2)) : spec.startsWith(".") ? path.resolve(path.dirname(from), spec) : null; if (!base) return null; for (const e of EXT) if (set.has(base + e)) return base + e; return null; };

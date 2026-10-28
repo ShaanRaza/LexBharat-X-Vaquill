@@ -19,9 +19,8 @@ const serifStrong = Source_Serif_4({ subsets: ["latin"], weight: ["600"], variab
 const deva = IBM_Plex_Sans_Devanagari({ subsets: ["devanagari"], weight: ["400", "500"], variable: "--font-deva", display: "swap", preload: false });
 
 export const metadata: Metadata = {
-  title: RELEASE ? "LexBharat | Indian Acts and court judgments" : "LexBharat | Indian Acts and court judgments (local mock)",
-  description:
-    RELEASE ? "LexBharat: browse Indian Acts and court judgment metadata, with the source credited on every page." : "LexBharat: local educational build of an API marketing page. Placeholder content and mocked backend.",
+  title: "LexBharat | Indian Acts and court judgments",
+  description: "LexBharat: browse Indian Acts and court judgment metadata, with the source credited on every page.",
   robots: { index: false, follow: false },
 };
 

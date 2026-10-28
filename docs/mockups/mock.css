@@ -79,6 +79,7 @@ main { padding-block: 1.75rem 4rem; }
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: var(--pad-card); }
 .card.flat { padding: 0; overflow: hidden; }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; height: 40px; padding: 0 1.1rem; border-radius: var(--radius-button); font: 500 var(--text-ui)/1 var(--font-sans); border: 0; cursor: pointer; }
+.btn.multi { height: auto; min-height: 32px; padding-block: 0.45rem; text-align: left; white-space: normal; border-radius: var(--radius-panel); }
 .btn.sm { height: 32px; padding: 0 0.8rem; font-size: var(--text-sm); }
 .btn.primary { background: var(--primary); color: var(--on-primary); }
 .btn.secondary { background: var(--surface); color: var(--foreground); box-shadow: inset 0 0 0 1px var(--control-border); }
@@ -109,9 +110,17 @@ main { padding-block: 1.75rem 4rem; }
 .cite.doc { background: var(--surface); color: var(--muted); box-shadow: inset 0 0 0 1px var(--control-border); border-radius: var(--radius-tight); }
 .cite i { font: 500 var(--text-micro)/1 var(--font-mono); font-style: normal; opacity: 0.8; }
 /* the marked page: the cited paragraph on white with a forest outline and corner brackets; the rest dims (same rules as .marked in globals.css) */
-.marked { position: relative; background: rgb(var(--white-rgb)); border-radius: var(--radius-tight); padding: 0.5rem 0.75rem; margin-inline: -0.75rem; box-shadow: 0 0 0 1.5px var(--primary), 0 10px 20px -12px rgb(var(--primary-rgb) / 0.4); }
-.marked::before, .marked::after { content: ""; position: absolute; width: 7px; height: 7px; background: var(--primary); border-radius: 1px; top: -4px; left: -4px; }
-.marked::after { top: auto; left: auto; bottom: -4px; right: -4px; }
+.marked { position: relative; background: rgb(var(--white-rgb)); border-radius: var(--radius-tight); padding: 0.5rem 0.75rem; margin-inline: -0.75rem; box-shadow: 0 0 0 1px rgb(var(--primary-rgb) / 0.35), 0 10px 20px -12px rgb(var(--primary-rgb) / 0.4); }
+.marked::before { content: ""; position: absolute; inset: calc(var(--mark-gap) * -1); pointer-events: none; background:
+    linear-gradient(var(--primary), var(--primary)) top left / var(--mark-corner) var(--mark-stroke),
+    linear-gradient(var(--primary), var(--primary)) top left / var(--mark-stroke) var(--mark-corner),
+    linear-gradient(var(--primary), var(--primary)) top right / var(--mark-corner) var(--mark-stroke),
+    linear-gradient(var(--primary), var(--primary)) top right / var(--mark-stroke) var(--mark-corner),
+    linear-gradient(var(--primary), var(--primary)) bottom left / var(--mark-corner) var(--mark-stroke),
+    linear-gradient(var(--primary), var(--primary)) bottom left / var(--mark-stroke) var(--mark-corner),
+    linear-gradient(var(--primary), var(--primary)) bottom right / var(--mark-corner) var(--mark-stroke),
+    linear-gradient(var(--primary), var(--primary)) bottom right / var(--mark-stroke) var(--mark-corner);
+  background-repeat: no-repeat; }
 .scope:has(.marked) > :not(.marked, :has(.marked)) { opacity: 0.8; }
 .read { font-size: var(--text-reading); line-height: var(--leading-reading); }
 .read p { margin: 0 0 0.9rem; }
@@ -129,13 +138,18 @@ main { padding-block: 1.75rem 4rem; }
 .row .sub { font-size: var(--text-sm); color: var(--muted); }
 .feedback { font-size: var(--text-sm); color: var(--muted); display: flex; gap: 0.5rem; align-items: center; }
 .feedback b { font-weight: 500; color: var(--foreground); }
-.foot { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font: 400 var(--text-xs)/1.5 var(--font-mono); color: var(--muted); }
+.credit { margin-top: 2.5rem; font-size: var(--text-xs); color: var(--muted); }
+.credit a { text-decoration: underline; text-underline-offset: 2px; }
+.foot { margin-top: 0.6rem; padding-top: 0.8rem; border-top: 1px solid var(--border); font: 400 var(--text-xs)/1.5 var(--font-mono); color: var(--muted); }
 
 /* ---- Desk ---- */
 .desk { max-width: 52rem; margin-inline: auto; padding-top: 2.5rem; }
 .greeting { font-size: var(--text-greeting); line-height: 1.08; }
 .bigbox { margin-top: 1.5rem; display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0.6rem 0.6rem 1.25rem; background: var(--surface); border-radius: var(--radius-card); box-shadow: inset 0 0 0 1.5px var(--control-border), 0 18px 34px -24px rgb(var(--foreground-rgb) / 0.35); }
 .bigbox .in { flex: 1; font-size: var(--text-lead); color: var(--muted); min-width: 0; }
+.bigbox .in.typed { color: var(--foreground); }
+.enter { margin-top: 0.7rem; font-size: var(--text-sm); display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+.enter b { font-weight: 500; }
 .bigbox .btn { height: 44px; }
 .desk h2 { font: 500 var(--text-nano)/1 var(--font-mono); text-transform: uppercase; letter-spacing: var(--tracking-caps-wide); color: var(--muted); margin: 2.5rem 0 0.4rem; }
 .coverage { margin-top: 2rem; font-size: var(--text-sm); color: var(--muted); max-width: 44rem; }
@@ -154,6 +168,10 @@ main { padding-block: 1.75rem 4rem; }
 .page .head { display: flex; align-items: center; gap: 0.5rem; justify-content: space-between; margin-bottom: 0.9rem; }
 .page .read { font-size: var(--text-body); line-height: 1.65; }
 .sheet-grab { display: none; }
+.sheet-close { display: none; }
+.sec { font-family: var(--font-serif); }
+.sec .no { font-family: var(--font-mono); font-size: 0.8em; color: var(--primary); margin-right: 0.4rem; }
+.toc a i { font-style: normal; }
 
 /* ---- Search ---- */
 .search-grid { display: grid; grid-template-columns: var(--w-filters) minmax(0, 1fr); gap: 2rem; margin-top: 1.25rem; align-items: start; }
@@ -232,7 +250,9 @@ main { padding-block: 1.75rem 4rem; }
   .bigbox .btn { width: 100%; }
   .bigbox .kbd { display: none; }
   .ask { grid-template-columns: 1fr; }
-  .page { position: fixed; inset: auto 0 var(--h-tabbar) 0; top: auto; z-index: 25; max-height: 52vh; overflow: auto; border-radius: var(--radius-card) var(--radius-card) 0 0; box-shadow: 0 -18px 40px -20px rgb(var(--foreground-rgb) / 0.35); }
+  .page { display: none; position: fixed; inset: auto 0 var(--h-tabbar) 0; top: auto; z-index: 25; max-height: 52vh; overflow: auto; border-radius: var(--radius-card) var(--radius-card) 0 0; box-shadow: 0 -18px 40px -20px rgb(var(--foreground-rgb) / 0.35); }
+  .page:target { display: block; }
+  .sheet-close { display: inline-flex; }
   .sheet-grab { display: block; width: 2.5rem; height: 4px; border-radius: 4px; background: var(--border); margin: -0.5rem auto 0.8rem; }
   .search-grid { grid-template-columns: 1fr; gap: 1rem; }
   .filters { display: none; }

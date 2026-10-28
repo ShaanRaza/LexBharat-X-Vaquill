@@ -9,5 +9,5 @@ export const metadata: Metadata = { title: "Chat | LexBharat Legal Workspace" };
 export default async function ChatPage({ params }: { params: Promise<{ id?: string[] }> }) {
   const { id } = await params;
   if (id && (id.length !== 1 || !isChatId(id[0]))) notFound();
-  return <ConsoleShell variant="lawspace" lawTab="chat"><ChatApp chatId={id?.[0]} /></ConsoleShell>;
+  return <ConsoleShell lawTab="chat"><ChatApp chatId={id?.[0]} /></ConsoleShell>;
 }
