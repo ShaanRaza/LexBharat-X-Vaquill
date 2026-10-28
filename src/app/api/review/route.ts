@@ -5,6 +5,7 @@ import limitConfig from "@/config/review-limits.json";
 import { evaluateLimits, readLimits } from "@/lib/chat/limits.mjs";
 import { bidOf, envOf, json, NOT_SET_UP, vaultReady } from "@/lib/vault/http";
 import { addUsage, getDoc, getText, scanPageNumbers, usageCounts } from "@/lib/vault/store";
+import { NOT_A_CONTRACT, looksLikeContract } from "@/lib/review/reasons.mjs";
 import { isContractType, sideOk } from "@/lib/review/rules.mjs";
 import { newResult } from "@/lib/review/run";
 import { bump } from "@/lib/insights/server";
@@ -36,6 +37,7 @@ export async function POST(req: Request) {
     const verdict = evaluateLimits(await usageCounts(bid, "review"), limits(), "reviews");
     if (!verdict.allowed) { bump("limit_hit", `review_${verdict.reason}`); return json({ error: verdict.message, reason: verdict.reason }, 429); }
     const text = await getText(bid, doc.id); if (!text) return json({ error: "That document has no readable text." }, 422);
+    if (!looksLikeContract(text.body).ok) { bump("review_refused", "not_contract"); return json({ error: NOT_A_CONTRACT, reason: "not_contract" }, 422); }   // stop early: nothing is saved or counted against the limits
     const usageId = await addUsage(bid, "review"), result = newResult(text.body, type, text.pageStarts);
     result.usageId = usageId;
     if (doc.scanned) result.scanPages = await scanPageNumbers(bid, doc.id);

@@ -2,11 +2,12 @@
 // Loads one review and keeps it moving: while it is "running" it asks the server for the next step (a part of the contract, the summary, the law points) one at a time, and shows the saved result as it grows.
 // A failed step stays failed until the user presses Retry. No markup here.
 import { useCallback, useEffect, useRef, useState } from "react";
+import { isTransientReason } from "@/lib/review/reasons.mjs";
 import type { ReviewRun } from "@/lib/review/store";
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-/** A unit that failed only because the free model was busy (or its reply was unusable): it is retried automatically (twice, after a pause) before the user is asked to press Retry. */
-const BUSY = /busy|could not be (?:prepared|reviewed|read)/i;
+/** A unit that failed only for a reason that may pass by itself (limit, outage, unusable reply; see isTransientReason): it is retried automatically (twice, after a pause) before the user is asked to press Retry. */
+const BUSY = { test: (m: string) => isTransientReason(m) };
 function busyUnit(run: ReviewRun): number | "summary" | "law" | undefined {
   const r = run.result; if (!r) return undefined;
   const p = r.parts.find((x) => x.status === "failed" && BUSY.test(x.error ?? "")); if (p) return p.i;

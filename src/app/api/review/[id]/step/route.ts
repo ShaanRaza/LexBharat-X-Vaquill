@@ -13,5 +13,5 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
     const r = await stepReview(bid, id, retry); if (!r.run) return json({ error: "Review not found." }, 404);
     if (r.run.status === "failed" && r.run.result?.usageId) { await removeUsage(r.run.result.usageId).catch(() => null); }
     return json({ run: r.run, busy: !!r.busy });
-  } catch { return json({ error: "That step failed. It will be retried." }, 503); }
+  } catch (e) { console.error("[review/step] could not run or save a step:", (e as Error)?.name); return json({ error: "The server could not save this review's progress just now. It will try again." }, 503); }
 }
