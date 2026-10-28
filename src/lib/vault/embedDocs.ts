@@ -20,7 +20,7 @@ export async function embedDocuments(texts: string[], minGapMs: number): Promise
   if (since < minGapMs / 3) throw new EmbedWait(minGapMs / 3 - since, "gap");
   g.__vaultVoyageLast = Date.now();
   let r: Response;
-  try { r = await fetch(VOYAGE_URL, { method: "POST", headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" }, cache: "no-store", signal: AbortSignal.timeout(40000),
+  try { r = await fetch(VOYAGE_URL, { method: "POST", headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" }, cache: "no-store", signal: AbortSignal.timeout(25000),
     body: JSON.stringify({ input: texts, model: VOYAGE_MODEL, input_type: "document", output_dimension: EMBED_DIM, truncation: true }) }); }
   catch { throw new EmbedWait(15000, "error"); }
   if (r.status === 429) throw new EmbedWait(Math.max(minGapMs, 30000), "rate");

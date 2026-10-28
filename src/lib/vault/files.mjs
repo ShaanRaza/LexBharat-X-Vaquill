@@ -45,5 +45,5 @@ export function readVaultLimits(config, env = {}) {
   return { ...config, maxDocs: Math.floor(num(env.VAULT_MAX_DOCS, config.maxDocs)), maxTotalMb: num(env.VAULT_MAX_TOTAL_MB, config.maxTotalMb), maxFileMb: num(env.VAULT_MAX_FILE_MB, config.maxFileMb),
     bucket: env.VAULT_BUCKET?.trim() || config.bucket, signedUrlSeconds: Math.floor(num(env.VAULT_SIGNED_URL_SECONDS, config.signedUrlSeconds)), embedMinGapMs: Math.floor(num(env.VAULT_EMBED_MIN_GAP_MS, config.embedMinGapMs)),
     embedBatch: Math.floor(num(env.VAULT_EMBED_BATCH, config.embedBatch)),
-    maxScanPagesPerDoc: Math.floor(num(env.VAULT_MAX_SCAN_PAGES, config.maxScanPagesPerDoc ?? 20)), maxScanDocsPerDay: Math.floor(num(env.VAULT_MAX_SCAN_DOCS_PER_DAY, config.maxScanDocsPerDay ?? 5)), scanGroupPages: Math.floor(num(config.scanGroupPages, 5)), scanRetryMs: Math.floor(num(config.scanRetryMs, 30000)) };
+    maxScanPagesPerDoc: Math.floor(num(env.VAULT_MAX_SCAN_PAGES, config.maxScanPagesPerDoc ?? 20)), maxScanDocsPerDay: Math.floor(num(env.VAULT_MAX_SCAN_DOCS_PER_DAY, config.maxScanDocsPerDay ?? 5)), scanGroupPages: Math.floor(num(config.scanGroupPages, 5)), scanRetryMs: Math.floor(num(config.scanRetryMs, 30000)), readPages: Math.floor(num(config.readPages, 40)), readBudgetMs: Math.floor(num(config.readBudgetMs, 15000)) };
 }

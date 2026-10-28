@@ -11,7 +11,7 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export function useVault() {
   const [state, setState] = useState<VaultState | null>(null), [failed, setFailed] = useState(false), [notes, setNotes] = useState<UploadNote[]>([]), [wait, setWait] = useState<Record<string, string>>({});
-  const running = useRef(false), alive = useRef(true), [tick, setTick] = useState(0);
+  const running = useRef(false), alive = useRef(true), fails = useRef<Record<string, number>>({}), notBefore = useRef<Record<string, number>>({}), [tick, setTick] = useState(0);
   const stateRef = useRef(state); stateRef.current = state;   // always the latest list, also inside effects that run in the same commit
   const reload = useCallback(async () => {
     try { const r = await fetch("/api/vault", { cache: "no-store" }), j = await r.json(); if (!alive.current) return; setState(j); setFailed(!r.ok && !j.docs); }
@@ -27,15 +27,23 @@ export function useVault() {
     (async () => {
       try {
         for (;;) {
-          const next = (stateRef.current?.docs ?? []).find((d) => d.status === "processing" || d.status === "waiting"); if (!next || !alive.current) break;
+          const todo = (stateRef.current?.docs ?? []).filter((d) => d.status === "processing" || d.status === "waiting"); if (!todo.length || !alive.current) break;
+          const now = Date.now(), next = todo.find((d) => (notBefore.current[d.id] ?? 0) <= now);   // a document waiting out the free embedding limit does not hold up the others
+          if (!next) { await sleep(Math.min(Math.max(0, Math.min(...todo.map((d) => notBefore.current[d.id] ?? 0)) - now), 40000) + 50); continue; }
           let r: Response | null = null;
-          try { r = await fetch(`/api/vault/${next.id}/process`, { method: "POST" }); } catch { await sleep(5000); continue; }
-          if (r.status === 404) { await reload(); continue; }
-          const j = await r.json().catch(() => ({}));
+          try { r = await fetch(`/api/vault/${next.id}/process`, { method: "POST" }); } catch { r = null; }
+          if (r?.status === 404) { await reload(); continue; }
+          const j = r ? await r.json().catch(() => ({})) : {};
+          if (!r || !r.ok) {   // a failed step (server error, time limit, offline): say so, pause longer each time, and try again. It never loops without pausing and never hides the problem.
+            const n = (fails.current[next.id] = (fails.current[next.id] ?? 0) + 1);
+            setWait((w) => ({ ...w, [next.id]: `Problem: ${j.detail || j.message || (r ? `the server answered ${r.status}` : "no answer from the server")}. Trying again (attempt ${n + 1}).` }));
+            notBefore.current[next.id] = Date.now() + Math.min(2000 * 2 ** (n - 1), 30000); continue;
+          }
+          fails.current[next.id] = 0;
           if (j.doc) setState((s) => s && { ...s, docs: s.docs.map((d) => (d.id === j.doc.id ? j.doc : d)) });
           setWait((w) => ({ ...w, [next.id]: j.state === "embedding" || j.state === "waiting" || j.state === "reading" ? (j.state === "embedding" ? j.message : j.doc?.statusDetail) ?? j.message ?? "" : "" }));
           if (j.state === "gone" || j.state === "ready" || j.state === "unreadable") { await reload(); window.dispatchEvent(new Event("lb-vault-changed")); }
-          if (j.waitMs) await sleep(Math.min(j.waitMs, 40000));
+          notBefore.current[next.id] = j.waitMs ? Date.now() + Math.min(j.waitMs, 40000) : 0;
         }
       } finally { running.current = false; if (alive.current && (stateRef.current?.docs ?? []).some((d) => d.status === "processing" || d.status === "waiting")) setTimeout(() => alive.current && setTick((t) => t + 1), 2000); }   // never stay stuck on a document that is still processing
     })();

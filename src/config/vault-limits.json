@@ -1,5 +1,5 @@
 {
-  "about": "Vault limits (per browser) and processing settings. Env overrides: VAULT_MAX_DOCS, VAULT_MAX_TOTAL_MB, VAULT_MAX_FILE_MB, VAULT_BUCKET, VAULT_SIGNED_URL_SECONDS, VAULT_EMBED_MIN_GAP_MS, VAULT_EMBED_BATCH. embedMinGapMs spaces Voyage calls for the free account (3 requests a minute); embedBatch and embedMaxChars keep one request under the free token allowance. maxChunks stops a huge file from taking hours on the free plan. Paid Voyage: set the gap to about 1000 and raise the batch and maxChunks. Scans (W8): maxScanPagesPerDoc image-only pages are read per document, maxScanDocsPerDay scanned documents per browser per day; scanGroupPages pages go to the reading model in one request; scanRetryMs is how long a document waits before trying again when the model is busy. Env overrides: VAULT_MAX_SCAN_PAGES, VAULT_MAX_SCAN_DOCS_PER_DAY.",
+  "about": "Vault limits (per browser) and processing settings. Env overrides: VAULT_MAX_DOCS, VAULT_MAX_TOTAL_MB, VAULT_MAX_FILE_MB, VAULT_BUCKET, VAULT_SIGNED_URL_SECONDS, VAULT_EMBED_MIN_GAP_MS, VAULT_EMBED_BATCH. embedMinGapMs spaces Voyage calls for the free account (3 requests a minute); embedBatch and embedMaxChars keep one request under the free token allowance. maxChunks stops a huge file from taking hours on the free plan. Paid Voyage: set the gap to about 1000 and raise the batch and maxChunks. Scans (W8): maxScanPagesPerDoc image-only pages are read per document, maxScanDocsPerDay scanned documents per browser per day; scanGroupPages pages go to the reading model in one request; scanRetryMs is how long a document waits before trying again when the model is busy. readPages and readBudgetMs bound one reading step of a PDF (it stops at whichever comes first and the page carries on with the next step), so every step stays far below the host's time limit. Env overrides: VAULT_MAX_SCAN_PAGES, VAULT_MAX_SCAN_DOCS_PER_DAY.",
   "maxFileMb": 10,
   "maxDocs": 30,
   "maxTotalMb": 100,
@@ -16,5 +16,7 @@
   "maxScanPagesPerDoc": 20,
   "maxScanDocsPerDay": 5,
   "scanGroupPages": 5,
-  "scanRetryMs": 30000
+  "scanRetryMs": 30000,
+  "readPages": 40,
+  "readBudgetMs": 15000
 }
