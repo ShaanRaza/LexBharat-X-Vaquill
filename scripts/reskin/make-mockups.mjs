@@ -1,0 +1,181 @@
+// Writes the eight static mock-ups in docs/mockups/*.html (one responsive page per screen; the same file is shown at desktop and at 375 px).
+// Real content: Section 138 of the Negotiable Instruments Act and its neighbours, the Act list with section counts, and the Supreme Court record 2014_INSC_514 (docs/mockups/sample-data.json, open-india-law, CC BY 4.0).
+// Everything else is sample copy. Colours and sizes come only from src/styles/tokens.css through docs/mockups/mock.css. Usage: node scripts/reskin/make-mockups.mjs
+import fs from "node:fs";
+const data = JSON.parse(fs.readFileSync("docs/mockups/sample-data.json", "utf8")), esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const tidy = (t) => String(t).replace(/\.—\[\d* ?\[?\(/g, ". (").replace(/section(\d)/g, "section $1").replace(/\s+/g, " ");
+const para = (t) => t.replace(/_(\w+)_ ?\./g, "$1.").split(/\n\n+/).map((x) => x.trim()).filter(Boolean);
+const IC = {
+  desk: '<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>', ask: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+  search: '<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>', library: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+  work: '<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>', check: '<path d="M20 6L9 17l-5-5"/>', more: '<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
+  filter: '<path d="M3 5h18M6 12h12M10 19h4"/>', up: '<path d="M18 15l-6-6-6 6"/>', list: '<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>', send: '<path d="M5 12h14M13 6l6 6-6 6"/>', clip: '<path d="M21 12.5l-8.6 8.6a5 5 0 0 1-7-7l9-9a3.3 3.3 0 0 1 4.7 4.7l-9 9a1.7 1.7 0 0 1-2.4-2.4l8.3-8.3"/>',
+};
+const ic = (n) => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${IC[n]}</svg>`;
+const AREAS = [["desk", "Desk", "desk.html"], ["ask", "Ask", "ask.html"], ["search", "Search", "search.html"], ["library", "Library", "library.html"], ["work", "Work", "work.html"]];
+const LOGO = '<svg class="full" viewBox="0 0 432.26 78.75" aria-hidden="true"><use href="brand/sprite.svg#lockup"/></svg><svg class="mark" viewBox="0 0 64.69 78.75" aria-hidden="true"><use href="brand/sprite.svg#mark"/></svg>';
+const shell = ({ area, title, body, foot = "" }) => `<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(title)} | LexBharat mock-up</title><link rel="stylesheet" href="mock.css"></head>
+<body>
+<header class="topbar"><div class="wrap">
+  <a class="logo" href="desk.html" aria-label="LexBharat, go to Desk">${LOGO}</a>
+  <nav class="areas" aria-label="Areas">${AREAS.map(([k, l, h]) => `<a href="${h}"${k === area ? ' aria-current="page"' : ""}>${l}</a>`).join("")}</nav>
+  <div class="tools"><div class="quickfind" role="search"><svg class="i" viewBox="0 0 24 24" aria-hidden="true">${IC.search}</svg><span>Quick-find</span><span class="kbd">⌘K</span></div>
+    <a class="iconbtn phone-search" href="search.html" aria-label="Search">${ic("search")}</a><a class="iconbtn menu" href="#" aria-label="Menu: Log out, Feedback">${ic("more")}</a></div>
+</div></header>
+<div class="banner"><div class="wrap"><b>Testing phase:</b> don't enter confidential client information. Answers are not legal advice.</div></div>
+${body}
+<nav class="tabbar" aria-label="Areas">${AREAS.map(([k, l, h]) => `<a href="${h}"${k === area ? ' aria-current="page"' : ""}>${ic(k)}<span>${l}</span></a>`).join("")}</nav>
+</body></html>
+`;
+const foot = '<p class="foot">Static mock-up · real tokens (src/styles/tokens.css) · real text: NI Act 1881 s.138 and neighbours, SC case 2014_INSC_514 (open-india-law, CC BY 4.0) · all other copy is sample.</p>';
+const s138 = para(data.act.s138), head138 = data.act.heading.replace(/\s+/g, " ");
+
+// ---------- Desk ----------
+const desk = shell({ area: "desk", title: "Desk", body: `<main class="wrap"><div class="desk">
+  <p class="eyebrow">Desk</p>
+  <h1 class="greeting" style="margin-top:.6rem">Good afternoon.</h1>
+  <p class="lede" style="font-size:var(--text-lead)">Legal work in India, traced to the page.</p>
+  <div class="bigbox" role="search"><span class="in">Ask a question, find a law, or paste a section.</span><span class="kbd">138 NI Act</span><a class="btn primary" href="ask.html">Go ${ic("send")}</a></div>
+  <div class="chips" style="margin-top:.9rem"><a class="chip" href="ask.html">Notice period for cheque bounce</a><a class="chip" href="law.html">Article 21</a><a class="chip" href="work.html">Draft a legal notice</a><a class="chip" href="law.html">Order 7 Rule 11</a></div>
+  <h2>Recent work</h2>
+  <div class="list card" style="padding-block:.3rem">
+    <a class="row" href="ask.html"><span class="lab type">Ask</span><span class="grow"><span class="name">What is the time limit to send a notice after a cheque bounces?</span><br><span class="sub">Supported · 2 hours ago</span></span></a>
+    <a class="row" href="work.html"><span class="lab type">Draft</span><span class="grow"><span class="name">Legal notice: cheque dishonour</span><br><span class="sub">Edited yesterday · 3 versions</span></span></a>
+    <a class="row" href="work.html"><span class="lab type">Review</span><span class="grow"><span class="name">nda-test-contract.pdf</span><br><span class="sub">Medium risk · 26 Oct</span></span></a>
+    <a class="row" href="work.html"><span class="lab type">Document</span><span class="grow"><span class="name">service-agreement-test-contract.pdf</span><br><span class="sub">Ready · added 24 Oct</span></span></a>
+  </div>
+  <p class="coverage"><b style="font-weight:500;color:var(--foreground)">What's included.</b> Central and State Acts, the Constitution, Supreme Court judgments and regulator instruments. High Court cases are listed without full text, coverage is uneven by year, and some Act sections are marked possibly incomplete.</p>
+  ${foot}
+</div></main>` });
+
+// ---------- Ask ----------
+const ask = shell({ area: "ask", title: "Ask", body: `<main class="wrap"><div class="ask">
+  <div>
+    <p class="crumbs"><a href="desk.html">Desk</a> › Ask</p>
+    <h1 style="margin-top:.5rem">What is the time limit to send a notice after a cheque bounces?</h1>
+    <div class="answer">
+      <p>The payee must make a demand for payment by a written notice to the drawer <b style="font-weight:500">within thirty days</b> of receiving information from the bank that the cheque was returned unpaid <a class="cite law" href="#page"><i>§</i>1 · NI Act s.138</a>. The offence is complete only if the drawer then fails to pay within <b style="font-weight:500">fifteen days</b> of receiving that notice <a class="cite law" href="#page"><i>§</i>1</a>.</p>
+      <p>The Supreme Court decided where such a complaint can be filed in <a class="cite case" href="judgment.html"><i>v.</i>2 · Dashrath Rupsingh Rathod (2014)</a>; Parliament later changed that rule in section 142(2) <a class="cite law" href="law.html"><i>§</i>3 · NI Act s.142</a>, so check the section before relying on the case.</p>
+    </div>
+    <div class="conf"><span class="lab ok">${ic("check")} Supported</span><span class="small muted">Every sentence above points to a retrieved passage.</span><span class="feedback"><b>Was this right?</b> Yes · No</span></div>
+    <div class="followup"><span class="btn sm secondary">${ic("clip")} Attach from Vault</span><span class="in">Ask a follow-up…</span><span class="btn sm primary">Ask</span></div>
+    <p class="small muted" style="margin-top:.6rem">Searches Indian Acts and Supreme Court judgment excerpts, and any Vault documents you attach. Not legal advice. 28 of 30 questions left today.</p>
+    <div class="sources"><h2 class="eyebrow" style="margin-bottom:.6rem">Sources cited</h2>
+      <div class="list card" style="padding-block:.3rem">
+        <div class="row"><span class="cite law"><i>§</i>1</span><span class="grow"><span class="name">NI Act s.138</span> <span class="sub">Dishonour of cheque for insufficiency, etc., of funds</span></span></div>
+        <div class="row"><span class="cite case"><i>v.</i>2</span><span class="grow"><span class="name">Dashrath Rupsingh Rathod v. State of Maharashtra</span> <span class="sub">[2014] 11 S.C.R. 921</span></span></div>
+        <div class="row"><span class="cite law"><i>§</i>3</span><span class="grow"><span class="name">NI Act s.142</span> <span class="sub">Cognizance of offences</span></span></div>
+      </div>
+      <details><summary>Also searched (4 more passages not used)</summary><p class="small muted">Not cited: NI Act s.139, s.141 and two other passages.</p></details>
+    </div>
+  </div>
+  <aside class="card page" id="page" aria-label="Cited page">
+    <span class="sheet-grab" aria-hidden="true"></span>
+    <div class="head"><span class="eyebrow">Cited page · §1</span><span class="lab plain">NI Act, 1881 · s.138</span></div>
+    <div class="read scope"><p><b style="font-weight:500">${esc(head138)}</b></p>
+      <p style="color:var(--muted)">${esc(s138[0].slice(0, 190))}…</p>
+      <div class="marked"><p style="margin:0">${esc(s138[3])}</p></div>
+      <p class="ind" style="margin-top:.9rem">${esc(s138[4])}</p></div>
+    <p class="small muted" style="margin-top:.8rem">Open the whole section ›</p>
+  </aside>
+</div>${foot}</main>` });
+
+// ---------- Search ----------
+const hlq = (t, words) => words.reduce((a, w) => a.replace(new RegExp(`(${w})`, "gi"), '<mark class="hl">$1</mark>'), esc(t));
+const W = ["notice", "cheque", "thirty days"];
+const search = shell({ area: "search", title: "Search", body: `<main class="wrap">
+  <h1 class="title">Search</h1>
+  <div class="row" style="margin-top:1rem"><div class="field" style="flex:1 1 18rem;display:flex;align-items:center;gap:.5rem;color:var(--foreground)">${ic("search")} notice after cheque bounces</div>
+    <div class="toggle" role="group" aria-label="Search mode"><span class="on">By meaning</span><span>Exact words</span></div><span class="btn secondary filter-btn">${ic("filter")} Filters</span></div>
+  <div class="tabs" role="tablist"><a href="#" aria-current="page">Laws <span class="n">14</span></a><a href="#">Judgments <span class="n">212</span></a><a href="#">Regulators <span class="n">3</span></a><a href="#">Your documents <span class="n">1</span></a></div>
+  <div class="search-grid">
+    <aside class="filters" aria-label="Filters"><div><h3>Jurisdiction</h3><div class="check"><b class="on"></b>Central</div><div class="check"><b></b>State</div></div>
+      <div><h3>Status</h3><div class="check"><b class="on"></b>In force</div><div class="check"><b></b>Repealed</div></div><div><h3>Year</h3><div class="select">Any year</div></div></aside>
+    <div class="list">
+      <a class="result" href="law.html"><div class="t">Section 138 · The Negotiable Instruments Act, 1881</div><p class="snip">${hlq(para(data.act.s138)[3].replace(/^\(b\)\s*/, ""), W)}</p>
+        <div class="meta"><span class="lab plain">Central</span><span class="lab ok">${ic("check")} In force</span><span class="lab look">Act has 3 sections possibly incomplete</span></div></a>
+      <a class="result" href="law.html"><div class="t">Section 142 · The Negotiable Instruments Act, 1881</div><p class="snip">${hlq(tidy(data.sections["142"]).slice(0, 300) + "…", ["cheque", "complaint"])}</p>
+        <div class="meta"><span class="lab plain">Central</span><span class="lab ok">${ic("check")} In force</span></div></a>
+      <a class="result" href="law.html"><div class="t">Section 139 · The Negotiable Instruments Act, 1881</div><p class="snip">${hlq(tidy(data.sections["139"]), ["cheque"])}</p>
+        <div class="meta"><span class="lab plain">Central</span><span class="lab ok">${ic("check")} In force</span></div></a>
+      <p class="small muted" style="border-top:0;padding-top:1rem">Showing 3 of 14 (sample counts). Search by meaning can miss exact numbers; switch to Exact words for "138 NI Act".</p>
+    </div></div>${foot}</main>` });
+
+// ---------- Library ----------
+const lib = shell({ area: "library", title: "Library", body: `<main class="wrap">
+  <h1 class="title">Library</h1><p class="lede">Every Act, the Constitution, regulator instruments and judgments we hold, each with its source.</p>
+  <div class="tabs"><a href="#" aria-current="page">Acts</a><a href="#">Constitution</a><a href="#">Regulators</a><a href="#">Judgments</a></div>
+  <div class="toolbar"><div class="toggle"><span class="on">Central</span><span>State</span></div><span class="select">Category ▾</span><span class="select">Status: In force ▾</span><div class="field" style="flex:1 1 14rem;display:flex;align-items:center;gap:.5rem;color:var(--muted)">${ic("search")} Search within the list</div></div>
+  <div class="card" style="margin-top:1rem;padding-block:.3rem"><div class="cols list" style="display:grid">${data.libraryActs.map((a) => `<a class="row" href="law.html" style="padding:.8rem 0;border-top:1px solid rgb(var(--border-rgb)/.7)"><span class="grow"><span class="name">${esc(a.title)}</span><br><span class="sub">${a.sections} sections · Central</span></span>${a.incomplete ? `<span class="lab look">${a.incomplete} possibly incomplete</span>` : `<span class="lab plain">Complete</span>`}</a>`).join("")}</div></div>
+  <p class="small muted" style="margin-top:.8rem">Section counts are from the dataset. "Possibly incomplete" means the Act text may be missing sections; the Act page says which.</p>${foot}</main>` });
+
+// ---------- Law page ----------
+const toc = data.act.toc.map(([n, h]) => `<a href="#" ${n === "138" ? 'aria-current="true"' : ""}><b>${n}</b><span>${esc(h)}</span></a>`).join("").replace(/(<a href="#" ><b>142<\/b>[^]*?<\/a>)/, '$1<a class="gap" href="#"><b>143</b><span>Not in the dataset</span></a>').replace(/(<a href="#" ><b>144<\/b>[^]*?<\/a>)/, '$1<a class="gap" href="#"><b>145</b><span>Not in the dataset</span></a>');
+const law = shell({ area: "library", title: "NI Act s.138", body: `<main class="wrap">
+  <p class="crumbs"><a href="library.html">Library</a> › <a href="library.html">Acts</a> › Central › The Negotiable Instruments Act, 1881</p>
+  <div class="lawhead" style="margin-top:.7rem"><h1>The Negotiable Instruments Act, 1881</h1>
+    <div class="row"><span class="lab ok">${ic("check")} In force</span><span class="lab plain">Central</span><span class="lab look">3 sections possibly incomplete</span><span class="lab plain">141 sections in the dataset</span></div></div>
+  <p class="toc-phone" style="margin-top:1rem"><span class="btn secondary sm">${ic("list")} Contents</span></p>
+  <div class="book" style="margin-top:1.5rem">
+    <nav class="toc" aria-label="Contents"><h3 style="margin-top:0">Sections</h3>${toc}<p class="small muted" style="padding:.6rem">Chapter headings are left out: they are damaged in the source data.</p></nav>
+    <article class="read scope"><p class="muted" style="margin-bottom:.4rem">137. Presumption as to foreign law.</p>
+      <div class="marked"><h2 style="font-size:var(--text-22);line-height:1.25;margin-bottom:.7rem">${esc(head138)}</h2>${s138.map((t, i) => `<p class="${i > 0 && i < 5 ? "ind" : ""}" ${i === s138.length - 1 ? 'style="margin:0"' : ""}>${esc(i === 0 ? t.replace(/^138\.[^—]*—\s*/, "") : t)}</p>`).join("")}</div>
+      <p class="muted" style="margin-top:.9rem">139. Presumption in favour of holder.</p></article>
+    <aside class="rail notes-desktop margin-note" aria-label="Margin notes">
+      <div><h3>Judgments that cite this section</h3><a class="cite case" href="judgment.html"><i>v.</i>Dashrath Rupsingh Rathod (2014)</a><p class="muted" style="margin-top:.4rem">Where a section 138 complaint can be filed. See also section 142(2).</p></div>
+      <div><h3>Source</h3><p>open-india-law Acts dataset v2026.08, CC BY 4.0.<br>Official text: India Code.</p></div>
+      <div class="notice warn"><span>Sections 143 and 145 are not in the dataset. Check India Code before relying on this Act as complete.</span></div></aside>
+  </div>
+  <div class="notes-phone margin-note"><div><h3>Judgments that cite this section</h3><a class="cite case" href="judgment.html"><i>v.</i>Dashrath Rupsingh Rathod (2014)</a></div><div><h3>Source</h3><p>open-india-law Acts dataset v2026.08, CC BY 4.0.</p></div>
+    <div class="notice warn"><span>Sections 143 and 145 are not in the dataset.</span></div></div>${foot}</main>` });
+
+// ---------- Judgment page ----------
+const pv = (data.preview ?? "").replace(/^•\s*/, "").replace(/\s+/g, " "), [pvHead, pvRest = ""] = pv.split(" --- "), pvBody = (() => { const t = pvRest.replace(/^Jurisdiction:\s*•?\s*/, "Jurisdiction: "), cut = t.slice(0, 520), at = Math.max(cut.lastIndexOf(" - "), cut.lastIndexOf(". "), cut.lastIndexOf(" ")); return t.slice(0, at > 200 ? at : 520) + "…"; })();
+const judgment = shell({ area: "library", title: "Dashrath Rupsingh Rathod v. State of Maharashtra", body: `<main class="wrap">
+  <p class="crumbs"><a href="library.html">Library</a> › Judgments › <a href="library.html">Supreme Court of India</a> › 2014</p>
+  <div class="case-head"><h1 style="font-size:var(--text-32);line-height:1.12">DASHRATH RUPSINGH RATHOD v. STATE OF MAHARASHTRA &amp; ANR.</h1>
+    <dl><div><dt>Court</dt><dd>Supreme Court of India</dd></div><div><dt>Decided</dt><dd>1 August 2014</dd></div><div><dt>Citation</dt><dd>[2014] 11 S.C.R. 921</dd></div>
+    <div><dt>Bench (as extracted)</dt><dd>T.S. Thakur, Vikramajit Sen, C. Nagappan</dd></div><div><dt>Outcome</dt><dd>Disposed off</dd></div><div><dt>Case number</dt><dd class="muted">Not in the dataset</dd></div></dl></div>
+  <div class="book two" style="margin-top:1.75rem">
+    <article><div class="row" style="margin-bottom:.9rem"><span class="lab type">Opening text</span><span class="btn sm secondary">${ic("search")} Search within this judgment</span></div>
+      <div class="read scope"><div class="para"><span class="no">¶1</span><p style="margin:0 0 .9rem">${esc(pvHead)}</p></div>
+        <div class="para"><span class="no">¶2</span><div class="marked"><p style="margin:0">${esc(pvBody)}</p></div></div></div>
+      <p class="row" style="margin-top:1rem"><span class="btn secondary">Show full judgment</span><span class="btn quiet">${ic("up")} Back to top</span></p>
+      <div class="notice" style="margin-top:1rem"><span>Paragraph numbers here are for the mock-up. The real reader numbers the judgment's own paragraphs.</span></div></article>
+    <aside class="rail margin-note notes-desktop" aria-label="Margin notes">
+      <div><h3>Laws referred to</h3><div class="cases"><a class="cite law" href="law.html"><i>§</i>NI Act, 1881 · s.138</a><a class="cite law" href="law.html"><i>§</i>Cr.P.C., 1973 · s.177</a></div></div>
+      <div class="card" style="padding:1rem"><h3 style="margin-bottom:.5rem">Where this comes from</h3><p>Case record and text: open-india-law, built from public court judgments (CC BY 4.0). Source: eCourts and the Supreme Court of India.</p><p class="muted" style="margin-top:.5rem">Case number is empty in the dataset; the bench was read from the opening text.</p></div></aside>
+  </div>
+  <div class="notes-phone margin-note"><div><h3>Laws referred to</h3><div class="cases"><a class="cite law" href="law.html"><i>§</i>NI Act, 1881 · s.138</a><a class="cite law" href="law.html"><i>§</i>Cr.P.C., 1973 · s.177</a></div></div>
+    <div class="card" style="padding:1rem"><h3>Where this comes from</h3><p>open-india-law (CC BY 4.0). Source: eCourts and the Supreme Court of India.</p></div></div>${foot}</main>` });
+
+// ---------- Work ----------
+const work = shell({ area: "work", title: "Work", body: `<main class="wrap">
+  <h1 class="title">Work</h1><p class="lede">Everything you've made, saved on this browser only.</p>
+  <div class="tabs"><a href="#">Drafts <span class="n">2</span></a><a href="#">Reviews <span class="n">3</span></a><a href="#" aria-current="page">Documents <span class="n">2</span></a></div>
+  <div class="work-actions"><span class="btn primary">Add documents</span><div class="field" style="flex:1 1 12rem;max-width:18rem;height:40px;display:flex;align-items:center;gap:.5rem;color:var(--muted)">${ic("search")} Search by name</div><span class="select">Newest first ▾</span><span class="small muted">2 of 30 documents · 0.0 of 100 MB used</span></div>
+  <div class="notice good" style="margin-top:.9rem"><span><b style="font-weight:500">nda-test-contract.docx:</b> Ready. Ask a question about it or run a review. <u>Dismiss</u></span></div>
+  <div class="card" style="margin-top:1rem;padding-block:.3rem"><div class="list">
+    <div class="doc"><div class="row"><span class="grow"><span class="name">nda-test-contract.docx</span><br><span class="sub">Word · 12 KB · added 28 Oct</span></span><span class="lab ok">${ic("check")} Ready</span><span class="btn sm quiet">Rename</span><span class="btn sm quiet">Download</span><span class="btn sm quiet">Delete</span></div>
+      <div class="actions"><span class="btn sm primary">Ask about this</span><span class="btn sm secondary">Review</span><span class="btn sm ghost">Preview</span></div></div>
+    <div class="doc"><div class="row"><span class="grow"><span class="name">scan-clean-nda.pdf</span><br><span class="sub">PDF · 2 pages · added 26 Oct</span></span><span class="lab ok">${ic("check")} Ready</span><span class="btn sm quiet">Rename</span><span class="btn sm quiet">Download</span><span class="btn sm quiet">Delete</span></div>
+      <p class="small" style="margin-top:.3rem;color:var(--warning)">Read from scan — check the original</p><div class="actions"><span class="btn sm primary">Ask about this</span><span class="btn sm secondary">Review</span><span class="btn sm ghost">Preview</span></div></div>
+  </div></div>${foot}</main>` });
+
+// ---------- Password page ----------
+const access = `<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Password | LexBharat mock-up</title><link rel="stylesheet" href="mock.css"></head>
+<body><main class="glow"><section class="gate" aria-labelledby="g">
+  <span class="logo" role="img" aria-label="LexBharat">${LOGO}</span>
+  <h1 id="g">Enter the access password</h1><p class="muted small" style="margin-top:.5rem">LexBharat is in a testing phase. Ask the team for the password.</p>
+  <label class="sr" for="pw">Password</label><div class="field" id="pw" style="display:flex;align-items:center;color:var(--muted)">Password</div>
+  <span class="btn primary">Continue</span>
+  <p class="fine"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Security</a></p>
+  <p class="fine" style="margin-top:.6rem">Not legal advice. Don't enter confidential client information.</p>
+</section></main></body></html>
+`;
+
+const out = { desk, ask, search, library: lib, law, judgment, work, access };
+for (const [name, html] of Object.entries(out)) fs.writeFileSync(`docs/mockups/${name}.html`, html);
+console.log("wrote", Object.keys(out).map((n) => `${n}.html`).join(" "));
