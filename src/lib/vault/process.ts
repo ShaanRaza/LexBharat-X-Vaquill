@@ -110,6 +110,7 @@ export async function processStep(bid: string, id: string): Promise<StepResult> 
       const vecs = await embedDocuments(batch.map((c) => (c.label ? `${c.label}\n${c.body}` : c.body)), lim.embedMinGapMs);
       await setVectors(bid, id, batch.map((c, i) => ({ ...c, embedding: vecs[i] })));
     } catch (e) {
+      if (e instanceof EmbedWait && e.reason !== "gap") console.error("[vault] embedding wait", id, e.message);
       if (e instanceof EmbedWait) return { state: "embedding", waitMs: e.waitMs, doc: (await getDoc(bid, id)) ?? undefined, message: e.reason === "gap" ? "Processing… (waiting for the free-plan rate limit)" : "Processing… (the embedding service is busy, will retry)" };
       throw e;
     }

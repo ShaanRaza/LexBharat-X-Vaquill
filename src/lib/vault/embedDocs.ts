@@ -9,7 +9,7 @@ import { rateCheck } from "@/lib/limits/counters";
 export const VOYAGE_DOC_REQUESTS_PER_MINUTE = 2;
 
 const g = globalThis as unknown as { __vaultVoyageLast?: number };
-export class EmbedWait extends Error { constructor(public waitMs: number, public reason: "gap" | "rate" | "error") { super(`wait ${waitMs}`); } }
+export class EmbedWait extends Error { constructor(public waitMs: number, public reason: "gap" | "rate" | "error", public why = "") { super(`wait ${waitMs}${why ? ` (${why})` : ""}`); } }
 
 /** Embeds texts as documents. Throws EmbedWait (with how long to wait) when spaced out too closely or Voyage says busy. */
 export async function embedDocuments(texts: string[], minGapMs: number): Promise<number[][]> {
@@ -24,9 +24,9 @@ export async function embedDocuments(texts: string[], minGapMs: number): Promise
     body: JSON.stringify({ input: texts, model: VOYAGE_MODEL, input_type: "document", output_dimension: EMBED_DIM, truncation: true }) }); }
   catch { throw new EmbedWait(15000, "error"); }
   if (r.status === 429) throw new EmbedWait(Math.max(minGapMs, 30000), "rate");
-  if (!r.ok) throw new EmbedWait(20000, "error");
+  if (!r.ok) throw new EmbedWait(20000, "error", `Voyage answered ${r.status}: ${(await r.text().catch(() => "")).replace(/\s+/g, " ").slice(0, 160)}`);   // (Voyage's error text never contains the key)
   const j = (await r.json()) as { data?: { index: number; embedding: number[] }[] };
   const vecs = (j.data ?? []).sort((a, b) => a.index - b.index).map((d) => d.embedding);
-  if (vecs.length !== texts.length || vecs.some((v) => v.length !== EMBED_DIM)) throw new EmbedWait(20000, "error");
+  if (vecs.length !== texts.length || vecs.some((v) => v.length !== EMBED_DIM)) throw new EmbedWait(20000, "error", `Voyage sent ${vecs.length} vectors for ${texts.length} texts, ${vecs[0]?.length ?? 0} wide`);
   return vecs;
 }
