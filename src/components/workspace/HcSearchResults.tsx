@@ -27,7 +27,7 @@ export default function HcSearchResults({ q, court }: { q: string; court?: strin
       {data?.indexAvailable && (
         <>
           <ul className="mt-2 space-y-2">
-            {data.results.map((c) => <CaseRow key={`${c.court}-${c.year}-${c.caseId}`} c={c} court={c.court} courtName={c.courtName} year={c.year} href={`/workspace/browse/judgments/${c.court}/${c.year}/${encodeURIComponent(c.caseId)}?p=${c.mainPage}`} />)}
+            {data.results.map((c) => <CaseRow key={`${c.court}-${c.year}-${c.caseId}`} c={c} court={c.court} courtName={c.courtName} year={c.year} href={`/judgments/${c.court}/${c.year}/${encodeURIComponent(c.caseId)}?p=${c.mainPage}`} />)}
             {!data.results.length && <li className="rounded-card border border-dashed border-border p-6 text-center text-fs-ui text-muted">No High Court case matches. Try a surname or a case number such as 933/2024.</li>}
           </ul>
           {data.total > data.pageSize && (

@@ -111,16 +111,16 @@ export default function DraftEditor({ draftId }: { draftId: string }) {
   }
   async function download(format: "docx" | "pdf") { const ok = await flush(); if (!ok) { setMsg("Could not save your latest edit, so the file was not made. Try again."); return; } window.location.assign(`/api/drafting/${draftId}/export?format=${format}`); }
   async function copy() { if (!editor) return; try { await navigator.clipboard.writeText(docToText(editor.getJSON() as Doc)); setCopied(true); setTimeout(() => setCopied(false), 1800); } catch { setMsg("Copy was blocked by the browser. Select the text and copy it instead."); } }
-  async function remove() { if (!window.confirm("Delete this draft? This cannot be undone.")) return; await fetch(`/api/drafting/${draftId}`, { method: "DELETE" }); window.dispatchEvent(new Event("lb-drafts-changed")); router.push("/workspace/drafting"); }
+  async function remove() { if (!window.confirm("Delete this draft? This cannot be undone.")) return; await fetch(`/api/drafting/${draftId}`, { method: "DELETE" }); window.dispatchEvent(new Event("lb-drafts-changed")); router.push("/work/drafts"); }
 
-  if (err) return <Notice tone="bad" role="alert" className="mx-auto mt-6 max-w-3xl"><p>{err} <Link className="underline" href="/workspace/drafting">Back to Drafting</Link></p></Notice>;
+  if (err) return <Notice tone="bad" role="alert" className="mx-auto mt-6 max-w-3xl"><p>{err} <Link className="underline" href="/work/drafts">Back to Drafting</Link></p></Notice>;
   if (!d) return <p className="mx-auto max-w-5xl py-6 text-ui-base text-muted">Loading the draft…</p>;
   const failed = d.sections.filter((s) => s.status === "failed");
   return (
     <div className="mx-auto max-w-6xl pb-10">
       <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Draft for review by a qualified lawyer. Not legal advice.</strong></p></Notice>
       <div className="mt-4 flex flex-wrap items-center gap-3">
-        <Link href="/workspace/drafting" className="text-ui-sm text-primary underline">← Drafting</Link>
+        <Link href="/work/drafts" className="text-ui-sm text-primary underline">← Drafting</Link>
         <label htmlFor="draft-title" className="sr-only">Draft title</label>
         <input id="draft-title" value={title} onChange={(e) => setTitle(e.target.value)} onBlur={rename} onKeyDown={(e) => { if (e.key === "Enter") (e.target as HTMLInputElement).blur(); }} maxLength={120} className="min-w-0 flex-1 rounded-chip bg-transparent px-2 py-1 text-ui-lead font-semibold hover:bg-accent/50 focus-visible:bg-surface focus-visible:outline-2" />
         <span role="status" aria-live="polite" className="text-ui-sm text-muted">{save === "saving" ? "Saving…" : save === "error" ? "Not saved. Retrying on your next edit." : savedAt ? `Saved ${at(save === "saved" || savedAt ? savedAt : new Date().toISOString())}` : ""}</span>

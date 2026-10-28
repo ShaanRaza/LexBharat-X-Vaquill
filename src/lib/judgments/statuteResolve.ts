@@ -25,8 +25,8 @@ export async function resolveMentions(text: string, judgmentYear: number | null)
   }
   return mentions.map((m) => {
     const id = actIdOf(m.actKey), label = mentionLabel(m), k = id ? `${id}|${m.number}` : "";
-    if (id && found.has(k)) return { ...m, label, actId: id, state: "found", href: `/workspace/browse/acts/${id}?section=${encodeURIComponent(found.get(k)!)}` };
-    if (id && missing.has(k)) return { ...m, label, actId: id, state: "missing", href: `/workspace/browse/acts/${id}?section=m${m.number}` };
+    if (id && found.has(k)) return { ...m, label, actId: id, state: "found", href: `/law/${id}?section=${encodeURIComponent(found.get(k)!)}` };
+    if (id && missing.has(k)) return { ...m, label, actId: id, state: "missing", href: `/law/${id}/m${m.number}` };
     return { ...m, label, actId: id, state: "none", href: null };
   });
 }

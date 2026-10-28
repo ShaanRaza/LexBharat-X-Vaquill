@@ -31,7 +31,7 @@ export default function ScSearchResults({ q }: { q: string }) {
           <ul className="mt-2 space-y-2">
             {data.results.map((c) => (
               <li key={c.caseId} className="relative rounded-card bg-surface px-5 py-4 shadow-sm ring-1 ring-border/60 transition-colors hover:ring-primary/50">
-                <Link href={`/workspace/browse/judgments/supreme-court-of-india/${c.year}/${encodeURIComponent(c.caseId)}`} className="text-fs-body font-medium text-primary after:absolute after:inset-0 after:rounded-xl after:content-['']">{c.title}</Link>
+                <Link href={`/judgments/supreme-court-of-india/${c.year}/${encodeURIComponent(c.caseId)}`} className="text-fs-body font-medium text-primary after:absolute after:inset-0 after:rounded-xl after:content-['']">{c.title}</Link>
                 <p className="mt-1.5 flex flex-wrap items-center gap-1.5 text-fs-xs text-secondary">
                   {fmtDate(c.decisionDate) && <span className={chip}>{fmtDate(c.decisionDate)}</span>}
                   {c.citation && <span className="relative z-10 inline-flex items-center gap-1.5"><code className="font-mono text-fs-xs text-foreground">{c.citation}</code><CopyButton text={c.citation} label="Copy citation" /></span>}

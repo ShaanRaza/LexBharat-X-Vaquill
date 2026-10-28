@@ -11,7 +11,7 @@ import UploadButton from "./UploadButton";
 import { useJustReady } from "./useJustReady";
 import { useVault } from "./useVault";
 
-// The Vault page (/workspace/vault): add documents, see their status, search by name, sort, rename, download, delete. Presentation only; data and background work are in useVault.
+// The Vault page (/work/vault): add documents, see their status, search by name, sort, rename, download, delete. Presentation only; data and background work are in useVault.
 const SORTS = { newest: "Newest first", oldest: "Oldest first", name: "Name (A to Z)", size: "Largest first" } as const;
 type Sort = keyof typeof SORTS;
 const size = (b: number) => (b >= MB ? `${(b / MB).toFixed(1)} MB` : `${Math.max(1, Math.round(b / 1024))} KB`);
@@ -72,7 +72,7 @@ export default function VaultApp() {
                   </form>
                 ) : (
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                    <Link href={`/workspace/vault/${d.id}`} className="min-w-0 flex-1 basis-48 truncate text-ui-body font-medium hover:text-primary focus-visible:outline-2">{d.name}</Link>
+                    <Link href={`/work/vault/${d.id}`} className="min-w-0 flex-1 basis-48 truncate text-ui-body font-medium hover:text-primary focus-visible:outline-2">{d.name}</Link>
                     <DocStatus doc={d} note={v.wait[d.id]} />
                     <div className="flex gap-1">
                       <button type="button" id={`rb-${d.id}`} onClick={() => { setEditing(d.id); setDraft(d.name); setErr(""); }} className={BTN} aria-label={`Rename ${d.name}`}>Rename</button>

@@ -153,3 +153,18 @@ test("the shipped config asks again once after 5 seconds, and a task can turn th
   assert.deepEqual(resolveTask("chat", { ...config, tasks: { chat: { ...config.tasks.chat, retryUnavailable: { times: 0 } } } }, {}).retryUnavailable, { times: 0, waitMs: 0 });
   assert.deepEqual(resolveTask("chat", solo, {}).retryUnavailable, { times: 0, waitMs: 0 });
 });
+
+test("chat waits 30 s for the first answer and has a total time budget inside the host's 60 s limit", () => {
+  const t = resolveTask("chat", config, {}); assert.equal(t.firstTokenMs, 30000); assert.ok(t.budgetMs > 0 && t.budgetMs < 60000); assert.ok(t.timeoutMs >= t.firstTokenMs);
+  assert.equal(resolveTask("review", config, {}).budgetMs, 0);   // tasks without a budget are unchanged
+  assert.equal(config.ui.slowNoticeMs, 10000); assert.match(config.ui.slowNoticeText, /Still thinking/);
+});
+test("when the time budget is used up no further attempt is made and the real error is reported", async () => {
+  calls.length = 0;
+  const cfg = { retry: { unavailable: { times: 1, waitMs: 200 } }, tasks: { chat: { model: "gemini:a", fallback: ["gemini:b"], budgetMs: 2100 } } };
+  await assert.rejects(() => completeTask("chat", { messages: [{ role: "user", content: "q" }] }, { config: cfg, env, fetchImpl: fakeFetch(errResponse(503), errResponse(503), say("b")) }), { kind: "unavailable" });
+  assert.deepEqual(calls.map(modelOf), ["a"]);   // the wait before the retry left under 2 s of budget, so neither the retry nor the fallback ran
+  calls.length = 0;
+  const r = await completeTask("chat", { messages: [{ role: "user", content: "q" }] }, { config: { tasks: { chat: { model: "gemini:a", fallback: ["gemini:b"], budgetMs: 50000 } } }, env, fetchImpl: fakeFetch(errResponse(429), say("fine")) });
+  assert.equal(r.model, "gemini:b");   // with budget left, a rate-limited model falls back at once
+});

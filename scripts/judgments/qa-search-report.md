@@ -60,7 +60,7 @@ HC targets are real records drawn from the exported pages with a fixed seed. "Ga
 | Page SC | year page has the search bar | ?year=1990 | - | PASS |  |
 | Page SC | in-year search on the page | insurance | 2 | PASS | 2 case records in 1990 match |
 | Page SC | this year / all years toggle | insurance | 2 -> 526 | PASS | 526 cases match “insurance” across all years of Supreme Court of India |
-| Page SC | Kesavananda across years from a 1990 page | kesavananda (all years) | 1 | PASS | /workspace/browse/judgments/supreme-court-of-india/1973/1973_INSC_91?p=1&lp=1 |
+| Page SC | Kesavananda across years from a 1990 page | kesavananda (all years) | 1 | PASS | /judgments/supreme-court-of-india/1973/1973_INSC_91?p=1&lp=1 |
 | Page HC | "2024" on the Bombay 2025 page | 2024 | 10637 | PASS | 10,637 cases match “2024” in 2025 \| first: CIVIL APPEAL 2695 of 2024  ANITA WAMAN JAGTAP v. THE STATE OF MAHARASH |
 | Page HC | this year / all years toggle | gurukrupa | 1 -> 93 | PASS | 93 cases match “gurukrupa” across all years of Bombay High Court |
 | Page SC | court page (year grid) has the same search bar | kesavananda | - | PASS |  |

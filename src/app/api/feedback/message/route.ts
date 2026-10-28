@@ -1,5 +1,5 @@
 // POST /api/feedback/message {message, email?, page?} saves one free-text message from the in-app Feedback form (table in scripts/w8/w8b-feedback-messages.sql). The browser is stored as a hash;
-// no IP address is stored. At most 5 messages an hour per browser. No email is sent: the message is read in /admin/insights.
+// no IP address is stored. At most 5 messages an hour per browser. No email is sent: the message is read in /admin.
 import { bidOf, json } from "@/lib/drafting/http";
 import { validateMessage } from "@/lib/insights/rules.mjs";
 import { saveMessage } from "@/lib/insights/server";

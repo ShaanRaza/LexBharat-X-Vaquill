@@ -11,7 +11,7 @@ import UserMenu from "./UserMenu";
 export default function TopBar() {
   const pathname = usePathname(), area = areaOf(pathname);
   return (
-    <header className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur">
+    <header className="border-b border-border bg-background">
       <div className="mx-auto grid h-topbar max-w-app grid-cols-[1fr_auto] items-center gap-6 px-page md:grid-cols-[auto_1fr_auto]">
         <Logo href={AREAS[0].href} />
         <nav aria-label="Areas" className="hidden h-full justify-center md:flex">

@@ -3,5 +3,5 @@
 export function repealedNote(actId, table) {
   const r = table?.[actId];
   if (!r || typeof r !== "object") return null;
-  return { text: `Repealed — see ${r.short}`, short: r.short, newName: r.newName, name: r.name, href: `/workspace/browse/acts/${r.newActId}` };
+  return { text: `Repealed — see ${r.short}`, short: r.short, newName: r.newName, name: r.name, href: `/law/${r.newActId}` };
 }

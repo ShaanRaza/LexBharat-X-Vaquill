@@ -4,6 +4,8 @@ import { Notice, Panel } from "@/components/kit";
 import AnswerView from "./AnswerView";
 import FeedbackBar from "../FeedbackBar";
 import { docFromSearch } from "@/lib/vault/links.mjs";
+import ai from "@/config/ai-models.json";
+import { useSlowNotice } from "./useSlowNotice";
 import AttachPicker, { type Attached } from "./AttachPicker";
 import type { Citation, CheckResult } from "@/lib/chat/store";
 
@@ -18,11 +20,19 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
   const [chatId, setChatId] = useState<string | undefined>(undefined), [msgs, setMsgs] = useState<Msg[]>([]), [input, setInput] = useState(""), [busy, setBusy] = useState(false);
   const [sendErr, setSendErr] = useState(""), [loadErr, setLoadErr] = useState(""), [loading, setLoading] = useState(!!initialId), [usage, setUsage] = useState<Usage>(null);
   const [attached, setAttached] = useState<Attached[]>([]);
+  const slow = useSlowNotice(msgs.some((m) => m.pending && !m.content), ai.ui.slowNoticeMs);   // "Still thinking" after 10 s with no answer yet (wording and time: src/config/ai-models.json)
   const end = useRef<HTMLDivElement>(null), box = useRef<HTMLTextAreaElement>(null), current = useRef<string | undefined>(undefined);
 
   const refreshUsage = useCallback(() => { fetch("/api/chat", { cache: "no-store" }).then((r) => r.json()).then((j) => { if (j.usage && j.limits) setUsage({ day: j.usage.day, daily: j.limits.daily }); }).catch(() => null); }, []);
   useEffect(() => { refreshUsage(); }, [refreshUsage]);
-  // "Ask about this" on a Vault document opens /workspace/chat?doc=<id>: attach that document to the first question, then tidy the address so a reload does not attach it again.
+  // Desk sends a question as /ask?q=...: ask it once, then tidy the address so a reload does not ask it again.
+  const startedQ = useRef(false), askRef = useRef<((q: string) => void) | null>(null);
+  useEffect(() => {
+    if (startedQ.current || initialId) return;
+    const q = new URLSearchParams(window.location.search).get("q")?.trim(); if (!q) return;
+    startedQ.current = true; window.history.replaceState(null, "", window.location.pathname); askRef.current?.(q.slice(0, MAX));
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  // "Ask about this" on a Vault document opens /ask?doc=<id>: attach that document to the first question, then tidy the address so a reload does not attach it again.
   useEffect(() => {
     const id = docFromSearch(window.location.search); if (!id) return;
     window.history.replaceState(null, "", window.location.pathname);
@@ -64,7 +74,7 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
           const line = buf.slice(0, i).trim(); buf = buf.slice(i + 1);
           if (!line) continue;
           const e = JSON.parse(line);
-          if (e.type === "start") { if (!chatId) { current.current = e.chatId; setChatId(e.chatId); window.history.replaceState(null, "", `/workspace/chat/${e.chatId}`); window.dispatchEvent(new Event("lb-chats-changed")); } }
+          if (e.type === "start") { if (!chatId) { current.current = e.chatId; setChatId(e.chatId); window.history.replaceState(null, "", `/ask/${e.chatId}`); window.dispatchEvent(new Event("lb-chats-changed")); } }
           else if (e.type === "sources") patch((a) => ({ ...a, citations: e.sources, queries: e.queries }));
           else if (e.type === "note") patch((a) => ({ ...a, note: e.text }));
           else if (e.type === "cutoff") patch((a) => ({ ...a, check: { label: "check", unsupported: [], cutOff: true } }));
@@ -85,6 +95,7 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
   }
   useEffect(() => { if (input === "") return; setSendErr(""); }, [input]);
 
+  askRef.current = ask;   // always the latest ask, for the /ask?q= start above
   return (
     <div className="mx-auto flex min-h-[calc(100vh-7rem)] max-w-3xl flex-col">
       <div className="flex-1 space-y-5 py-5" aria-live="polite">
@@ -99,7 +110,7 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
         )}
         {msgs.map((m, i) => m.role === "user"
           ? <div key={i} className="flex justify-end"><div className="max-w-[85%] rounded-card bg-primary/10 px-4 py-2.5 text-ui-body text-foreground"><p className="whitespace-pre-wrap">{m.content}</p>{!!m.attached?.length && <p className="mt-1 text-ui-sm text-secondary">Attached: {m.attached.join(", ")}</p>}</div></div>
-          : <Panel as="article" key={i} className="px-card py-4">{m.pending && !m.content ? <p className="text-ui-base text-muted">Searching the Acts…</p> : <><AnswerView text={m.content} sources={m.citations ?? []} check={m.check} pending={m.pending} queries={m.queries} note={m.note} />{!m.pending && m.id && m.content ? <FeedbackBar feature="chat" itemId={String(m.id)} className="mt-4 border-t border-border/60 pt-3" /> : null}</>}</Panel>)}
+          : <Panel as="article" key={i} className="px-card py-4">{m.pending && !m.content ? <><p className="text-ui-base text-muted">Searching the Acts…</p>{slow && <p role="status" className="mt-1 text-ui-sm text-quality-warn">{ai.ui.slowNoticeText}</p>}</> : <><AnswerView text={m.content} sources={m.citations ?? []} check={m.check} pending={m.pending} queries={m.queries} note={m.note} />{!m.pending && m.id && m.content ? <FeedbackBar feature="chat" itemId={String(m.id)} className="mt-4 border-t border-border/60 pt-3" /> : null}</>}</Panel>)}
         <div ref={end} />
       </div>
       <div className="sticky bottom-0 bg-background pb-4 pt-2">

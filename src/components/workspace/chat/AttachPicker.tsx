@@ -33,7 +33,7 @@ export default function AttachPicker({ value, onChange, disabled }: { value: Att
         <div id={id} role="group" aria-label="Documents in your Vault" className="absolute bottom-11 left-0 z-20 w-[min(22rem,calc(100vw-2rem))] rounded-panel bg-surface p-3 shadow-lg ring-1 ring-border">
           {failed && <p className="text-ui-sm text-quality-bad">Could not load your Vault.</p>}
           {!docs && !failed && <p className="text-ui-sm text-muted">Loading…</p>}
-          {docs && docs.length === 0 && <p className="text-ui-sm text-secondary">Your Vault is empty. <Link href="/workspace/vault" className="text-primary hover:underline">Add a document</Link> first.</p>}
+          {docs && docs.length === 0 && <p className="text-ui-sm text-secondary">Your Vault is empty. <Link href="/work/vault" className="text-primary hover:underline">Add a document</Link> first.</p>}
           {docs && docs.length > 0 && (
             <>
               <ul className="max-h-60 space-y-1 overflow-y-auto" data-lenis-prevent>

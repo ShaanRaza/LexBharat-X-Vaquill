@@ -43,7 +43,7 @@ export default function DraftingHome() {
           <Panel as="div" className="mt-3">
             <p className="flex flex-wrap items-center gap-2 text-ui-base"><strong className="font-medium">{byId.get(pick.templateId)!.title}</strong><Badge tone={FIT[pick.fit].tone}>{FIT[pick.fit].text}</Badge></p>
             <p className="mt-1 text-ui-base text-secondary">{pick.why}</p>
-            <Link href={`/workspace/drafting/new/${pick.templateId}`} className="mt-3 inline-flex min-h-10 items-center rounded-button bg-primary px-4 text-ui-base font-medium text-white hover:bg-primary-hover">Use this template</Link>
+            <Link href={`/work/drafts/new/${pick.templateId}`} className="mt-3 inline-flex min-h-10 items-center rounded-button bg-primary px-4 text-ui-base font-medium text-white hover:bg-primary-hover">Use this template</Link>
           </Panel>
         )}
       </section>
@@ -52,7 +52,7 @@ export default function DraftingHome() {
         <h2 id="templates" className="text-ui-lead font-semibold">Templates</h2>
         <ul className="mt-3 grid gap-3 sm:grid-cols-2">
           {(meta?.templates ?? []).map((t) => (
-            <li key={t.id}><Link href={`/workspace/drafting/new/${t.id}`} className="block h-full rounded-card bg-surface p-card shadow-sm ring-1 ring-control-border/60 transition-colors hover:bg-accent/50 focus-visible:outline-2">
+            <li key={t.id}><Link href={`/work/drafts/new/${t.id}`} className="block h-full rounded-card bg-surface p-card shadow-sm ring-1 ring-control-border/60 transition-colors hover:bg-accent/50 focus-visible:outline-2">
               <span className="block text-ui-body font-medium">{t.title}</span>
               <span className="mt-1 block text-ui-base text-secondary">{t.description}</span>
             </Link></li>
@@ -69,7 +69,7 @@ export default function DraftingHome() {
             <ul className="divide-y divide-border/60">
               {meta.drafts.map((d) => (
                 <li key={d.id} className="flex items-center gap-2 py-2.5">
-                  <Link href={`/workspace/drafting/${d.id}`} className="flex min-w-0 flex-1 items-baseline justify-between gap-3 hover:text-primary"><span className="min-w-0 truncate text-ui-base">{d.title}</span><span className="shrink-0 text-ui-sm text-muted">{when(d.updatedAt)}</span></Link>
+                  <Link href={`/work/drafts/${d.id}`} className="flex min-w-0 flex-1 items-baseline justify-between gap-3 hover:text-primary"><span className="min-w-0 truncate text-ui-base">{d.title}</span><span className="shrink-0 text-ui-sm text-muted">{when(d.updatedAt)}</span></Link>
                   <button type="button" onClick={() => remove(d.id, d.title)} aria-label={`Delete draft: ${d.title}`} className="rounded-chip px-2 py-1 text-ui-sm text-muted hover:bg-accent">Delete</button>
                 </li>
               ))}

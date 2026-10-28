@@ -12,7 +12,7 @@ import { MIN_CHARS, groupOrder, matchShortcuts, matchWork } from "@/lib/shell/qu
 export type QfItem = { id: string; title: string; sub?: string; href: string; kind: string };
 export type QfGroups = { go: QfItem[]; laws: QfItem[]; mentions: QfItem[]; judgments: QfItem[]; work: QfItem[] };
 const EMPTY: QfGroups = { go: [], laws: [], mentions: [], judgments: [], work: [] };
-const PAGE: Record<string, { href: string; sub: string }> = { drafts: { href: routes.drafts(), sub: "Your drafts, and a new draft" }, reviews: { href: routes.reviews(), sub: "Contract reviews, and a new one" }, vault: { href: routes.documents(), sub: "Your documents" } };
+const PAGE: Record<string, { href: string; sub: string }> = { drafts: { href: routes.drafts(), sub: "Your drafts, and a new draft" }, reviews: { href: routes.reviews(), sub: "Contract reviews, and a new one" }, vault: { href: routes.vault(), sub: "Your documents" } };
 const ON = Object.entries(workspace.features).filter(([, f]) => f.enabled).map(([k]) => k);   // the pages switched on in src/config/workspace.json
 type J = Record<string, unknown>;
 const list = async (url: string): Promise<J> => { try { const r = await fetch(url, { cache: "no-store" }); return r.ok ? await r.json() : {}; } catch { return {}; } };
@@ -34,7 +34,7 @@ export function useQuickFind(open: boolean, q: string) {
         ...rs(c.chats).map((x) => ({ id: `c${x.id}`, title: String(x.title ?? "Chat"), sub: "Ask", href: routes.ask(String(x.id)), kind: "Ask", updatedAt: String(x.updatedAt ?? "") })),
         ...rs(d.drafts).map((x) => ({ id: `d${x.id}`, title: String(x.title ?? "Draft"), sub: "Draft", href: routes.drafts(String(x.id)), kind: "Draft", updatedAt: String(x.updatedAt ?? "") })),
         ...rs(r.reviews).map((x) => ({ id: `r${x.id}`, title: String(x.docName ?? "Review"), sub: "Review", href: routes.reviews(String(x.id)), kind: "Review", updatedAt: String(x.createdAt ?? "") })),
-        ...rs(v.docs).map((x) => ({ id: `v${x.id}`, title: String(x.name ?? "Document"), sub: "Document", href: routes.documents(String(x.id)), kind: "Document", updatedAt: String(x.createdAt ?? "") })),
+        ...rs(v.docs).map((x) => ({ id: `v${x.id}`, title: String(x.name ?? "Document"), sub: "Document", href: routes.vault(String(x.id)), kind: "Document", updatedAt: String(x.createdAt ?? "") })),
       ] as QfItem[]);
     });
     return () => { alive = false; };

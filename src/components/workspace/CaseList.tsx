@@ -89,7 +89,7 @@ export default function CaseList({ court, year, courtName, searchable, filterabl
             {data.results.map((c, idx) => {
               const y = c.year ?? year, p = c.mainPage ?? Math.floor(((page - 1) * PAGE + idx) / HC_PAGE) + 1;
               return <CaseRow key={`${y}-${c.caseId}`} c={c} court={court} year={scope === "all" ? y : undefined}
-                href={`/workspace/browse/judgments/${court}/${y}/${encodeURIComponent(c.caseId)}?p=${p}&lp=${page}${scope === "all" ? "&ya=1" : ""}`} />;
+                href={`/judgments/${court}/${y}/${encodeURIComponent(c.caseId)}?p=${p}&lp=${page}${scope === "all" ? "&ya=1" : ""}`} />;
             })}
             {!data.results.length && (page > pages && data.total > 0
               ? <li className="rounded-card border border-dashed border-border p-6 text-center text-fs-ui text-muted">No cases on this page. <button type="button" onClick={() => go({ page: pages })} className="font-medium text-primary underline">Go to the last page ({pages.toLocaleString("en-IN")})</button></li>

@@ -2,7 +2,7 @@
 // Usage: SHOTS_PASSWORD=... node --experimental-websocket scripts/reskin/shell-shots.mjs <phase> [base=http://localhost:3100]
 import { spawn } from "node:child_process"; import { tmpdir } from "node:os"; import path from "node:path"; import fs from "node:fs";
 const [, , phase = "phase2", BASE = "http://localhost:3100"] = process.argv, OUT = path.join("docs/screenshots", phase); fs.mkdirSync(OUT, { recursive: true });
-const PORT = 9355, sleep = (ms) => new Promise((r) => setTimeout(r, ms)), ACT = "/workspace/browse/acts/IND_central_2189?section=s138";
+const PORT = 9355, sleep = (ms) => new Promise((r) => setTimeout(r, ms)), ACT = "/law/IND_central_2189/s138";
 const chrome = spawn("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", ["--headless=new", "--disable-gpu", `--remote-debugging-port=${PORT}`, `--user-data-dir=${path.join(tmpdir(), "reskin-shell-shots")}`, "--hide-scrollbars", "about:blank"], { stdio: "ignore" });
 let ver; for (let i = 0; i < 50 && !ver; i++) { try { ver = await (await fetch(`http://127.0.0.1:${PORT}/json/version`)).json(); } catch { await sleep(200); } }
 const tab = await (await fetch(`http://127.0.0.1:${PORT}/json/new?about:blank`, { method: "PUT" })).json();
@@ -20,14 +20,17 @@ await send("Page.enable");
 for (const [label, w, h, mobile] of [["desktop", 1280, 860, false], ["phone", 375, 812, true]]) {
   await send("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 1, mobile });
   await go("/access"); await ev(`fetch("/api/access/login",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({password:${JSON.stringify(process.env.SHOTS_PASSWORD ?? "")}})}).then(r=>r.status)`);
-  for (const [name, p] of [["desk", "/workspace"], ["ask", "/workspace/chat"], ["search", "/workspace/browse?tab=acts"], ["library", "/workspace/browse"], ["law", ACT], ["work-drafts", "/workspace/drafting"], ["work-reviews", "/workspace/review"], ["work-documents", "/workspace/vault"]]) { await go(p); await shoot(`${name}-${label}`, w, h, mobile, label === "desktop"); }
+  for (const [name, p] of [["desk", "/"], ["ask", "/ask"], ["search", "/search"], ["library", "/library"], ["law", ACT], ["work-drafts", "/work/drafts"], ["work-reviews", "/work/reviews"], ["work-documents", "/work/vault"]]) { await go(p); await shoot(`${name}-${label}`, w, h, mobile, label === "desktop"); }
   // Quick-find
-  await go("/workspace/chat"); await ev(`document.dispatchEvent(new KeyboardEvent("keydown", { key: "k", ctrlKey: true, bubbles: true }))`); await sleep(400); await typeInto('[role="combobox"]', "138 NI Act"); await sleep(2200); await shoot(`quickfind-${label}`, w, h, mobile);
+  await go("/ask"); await ev(`document.dispatchEvent(new KeyboardEvent("keydown", { key: "k", ctrlKey: true, bubbles: true }))`); await sleep(400); await typeInto('[role="combobox"]', "138 NI Act"); await sleep(2200); await shoot(`quickfind-${label}`, w, h, mobile);
   await typeInto('[role="combobox"]', "cheque"); await sleep(2200); await shoot(`quickfind-work-${label}`, w, h, mobile);
   // menu and feedback
-  await go("/workspace"); await click('button[aria-label^="Menu: Feedback"]'); await sleep(300); await shoot(`menu-${label}`, w, h, mobile);
+  await go("/"); await click('button[aria-label^="Menu: Feedback"]'); await sleep(300); await shoot(`menu-${label}`, w, h, mobile);
   await click('[role="menuitem"]'); await sleep(400); await typeInto("textarea", "The search for section 138 worked well. Could Library show the Constitution?"); await shoot(`feedback-${label}`, w, h, mobile);
-  if (label === "phone") {   // the tab bar leaves while scrolling down a law and returns when scrolling up
+  if (label === "desktop") {   // the testing banner stays fully visible under the sticky top bar while a long page scrolls
+    await go(ACT); await ev("window.scrollTo(0, 900)"); await sleep(500); await shoot("law-scrolled-desktop", w, h, mobile);
+  }
+  if (label === "phone") {   // the tab bar leaves while scrolling down a law and returns when scrolling up; the banner scrolls away cleanly
     await go(ACT); await ev("window.scrollTo(0, 700)"); await sleep(600); await shoot("law-scrolled-down-phone", w, h, mobile);
     await ev("window.scrollTo(0, 520)"); await sleep(600); await shoot("law-scrolled-up-phone", w, h, mobile);
   }

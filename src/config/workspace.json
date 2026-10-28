@@ -4,19 +4,19 @@
     "drafting": {
       "enabled": true,
       "label": "Drafting",
-      "href": "/workspace/drafting",
+      "href": "/work/drafts",
       "action": "Draft a document"
     },
     "review": {
       "enabled": true,
       "label": "Review",
-      "href": "/workspace/review",
+      "href": "/work/reviews",
       "action": "Review a contract"
     },
     "vault": {
       "enabled": true,
       "label": "Vault",
-      "href": "/workspace/vault",
+      "href": "/work/vault",
       "action": "Open the vault"
     }
   }

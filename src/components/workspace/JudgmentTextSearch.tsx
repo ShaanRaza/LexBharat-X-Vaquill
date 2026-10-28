@@ -35,7 +35,7 @@ export default function JudgmentTextSearch({ q }: { q: string }) {
           <ul className="mt-3 space-y-2">
             {data.results.map((h) => (
               <Panel as="li" key={h.caseId} className="px-card py-4">
-                <Link href={`/workspace/browse/judgments/supreme-court-of-india/${h.year}/${encodeURIComponent(h.caseId)}#passage-${h.chunk}`} className="text-ui-body font-medium text-primary hover:underline">{h.title}</Link>
+                <Link href={`/judgments/supreme-court-of-india/${h.year}/${encodeURIComponent(h.caseId)}#passage-${h.chunk}`} className="text-ui-body font-medium text-primary hover:underline">{h.title}</Link>
                 <p className="mt-0.5 text-ui-sm text-secondary">{h.citation ?? h.caseId}{h.decisionDate ? ` · ${h.decisionDate}` : ""}{h.page ? ` · page ${h.page}` : ""}</p>
                 <p className="mt-2 text-ui-base leading-relaxed text-foreground"><Highlight snippet={h.passage} /></p>
                 <p className="mt-2 flex flex-wrap items-center gap-1.5">

@@ -1,0 +1,13 @@
+{
+  "about": "Words on Desk (the home page). Edit here to change the wording; no code change is needed. `chips` fill the box and run it, unless they have a `go` (a page: drafts, reviews or vault), which they open directly.",
+  "tagline": "Legal work in India, traced to the page.",
+  "placeholder": "Ask a question, find a law, or paste a section.",
+  "emptyHint": "A question opens Ask, a citation opens the law, a case name opens the judgment, and anything else searches.",
+  "chips": [
+    { "text": "Notice period for cheque bounce" },
+    { "text": "Article 21" },
+    { "text": "Order 7 Rule 11" },
+    { "text": "Draft a legal notice", "go": "drafts" }
+  ],
+  "coverage": "Central and State Acts, the Constitution, Supreme Court judgments and regulator instruments. High Court cases are listed without full text, coverage is uneven by year, and some Act sections are marked possibly incomplete."
+}

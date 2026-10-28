@@ -5,7 +5,7 @@ import { Badge, CitationChip, Notice, Panel } from "@/components/kit";
 import type { BasisItem, Warnings } from "@/lib/drafting/store";
 
 // Panels shared by the generation view and the editor: the legal basis (only sections that were actually retrieved), the "check before you use it" list, and the warnings.
-export const sectionHref = (c: { actId: string; sectionKey: string }) => `/workspace/browse/acts/${c.actId}?section=${encodeURIComponent(c.sectionKey)}`;
+export const sectionHref = (c: { actId: string; sectionKey: string }) => `/law/${c.actId}/${encodeURIComponent(c.sectionKey)}`;
 const label = (c: BasisItem) => `${c.actTitle}, ${c.number ? sectionWord(c.number) : "unnumbered text"}`;
 
 export function LegalBasis({ basis, note }: { basis: BasisItem[]; note?: string }) {

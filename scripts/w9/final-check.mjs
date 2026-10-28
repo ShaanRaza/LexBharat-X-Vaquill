@@ -11,12 +11,12 @@ const ndjson = async (res) => (await res.text()).split("\n").filter(Boolean).map
 async function withRetry(fn, tries = 4) { for (let i = 0; i < tries; i++) { const r = await fn(); if (!r.busy) return r; await sleep(65000); } return await fn(); }
 
 // ---- password gate
-const noCookie = await fetch(B + "/workspace", { redirect: "manual" }); ok("Gate", "a page without the password redirects to /access", noCookie.status >= 300 && noCookie.status < 400 && /\/access/.test(noCookie.headers.get("location") ?? ""));
+const noCookie = await fetch(B + "/", { redirect: "manual" }); ok("Gate", "a page without the password redirects to /access", noCookie.status >= 300 && noCookie.status < 400 && /\/access/.test(noCookie.headers.get("location") ?? ""));
 ok("Gate", "an API call without the password is refused (401)", (await fetch(B + "/api/chat")).status === 401);
 ok("Gate", "a wrong password is refused", (await login("not-the-password")).status === 401);
 const L = await login(); ok("Gate", "the right password opens the site", L.status === 200 && /lb_access=/.test(L.cookie));
 const A = L.cookie;
-ok("Gate", "the workspace opens with the cookie", (await api(A, "/workspace")).status === 200);
+ok("Gate", "the workspace opens with the cookie", (await api(A, "/")).status === 200);
 const lo = await api(A, "/api/access/logout", { method: "POST" }); const cleared = lo.headers.getSetCookie().join(";");
 ok("Gate", "logout clears the access cookie", lo.status === 200 && /lb_access=;|lb_access=\s*;|Max-Age=0/i.test(cleared), "");
 ok("Gate", "after logout the old cookie value is still signed, but a cleared cookie is refused", (await api("lb_bid=x", "/api/chat")).status === 401);
@@ -26,10 +26,10 @@ const courts = await (await api(A, "/api/judgments/courts")).json(); const list 
 ok("Browse", "courts list loads (Supreme Court + High Courts)", list.length >= 20, `${list.length} courts`);
 const sc = await (await api(A, "/api/judgments/list?court=supreme-court-of-india&year=2015&page=1&pageSize=12")).json();
 ok("Browse", "Supreme Court 2015 list loads", sc.available && sc.results.length === 12 && sc.total > 100, `${sc.total} cases`);
-const caseId = sc.results[0].caseId, cp = await api(A, `/workspace/browse/judgments/supreme-court-of-india/2015/${encodeURIComponent(caseId)}`); const html = await cp.text();
+const caseId = sc.results[0].caseId, cp = await api(A, `/judgments/supreme-court-of-india/2015/${encodeURIComponent(caseId)}`); const html = await cp.text();
 ok("Browse", "a Supreme Court case page renders", cp.status === 200 && /Opening text|Record ID/.test(html));
 const acts = await (await api(A, "/api/acts/list?pageSize=5")).json().catch(() => null); ok("Browse", "Acts list API answers", !!acts && (acts.results?.length ?? acts.acts?.length ?? 0) > 0);
-const hc = await api(A, "/workspace/browse/judgments/delhi-high-court"); const hch = await hc.text(); ok("Browse", "a High Court page shows counts and the 'not available' note", hc.status === 200 && /Counts by year only|not available/i.test(hch) || hc.status === 200);
+const hc = await api(A, "/library/judgments/delhi-high-court"); const hch = await hc.text(); ok("Browse", "a High Court page shows counts and the 'not available' note", hc.status === 200 && /Counts by year only|not available/i.test(hch) || hc.status === 200);
 
 // ---- search
 const kw = await (await api(A, `/api/acts/search?q=${encodeURIComponent("138 NI Act")}`)).json(); ok("Search", "keyword lookup '138 NI Act'", kw.mode === "lookup" && kw.results[0]?.number === "138");
@@ -39,7 +39,7 @@ for (const [q, want] of [["Order 7 Rule 11 CPC", "O7R11"], ["Article 137 Limitat
 for (const [q, want] of [["Article 21", "A21"], ["Art. 226 Constitution", "A226"], ["Article 32", "A32"], ["Art 14", "A14"], ["Article 21A", "A21A"], ["Seventh Schedule", "S7"]]) { const r = await (await api(A, `/api/acts/search?q=${encodeURIComponent(q)}`)).json(); ok("Search", `Constitution lookup '${q}'`, r.results?.[0]?.number === want && /Constitution of India/.test(r.results[0].actTitle)); }
 
 // ---- Act pages
-const page = async (id, q = "") => (await api(A, `/workspace/browse/acts/${id}${q}`)).text();
+const page = async (id, q = "") => (await api(A, `/law/${id}${q}`)).text();
 const cpc = await page("IND_central_2191", "?section=sO7R11"); ok("Act pages", "CPC Order 7 Rule 11 unit page", /Order 7 Rule 11/.test(cpc) && /Rejection of plaint/.test(cpc));
 const lim = await page("IND_central_1565", "?section=schedule"); ok("Act pages", "Limitation Schedule table", /Schedule: periods of limitation/.test(lim) && /Article/.test(lim));
 const stamp = await page("IND_central_15510", "?section=g1"); ok("Act pages", "Stamp Act Article 1: 'Not printed in the source PDF — check India Code'", /Not printed in the source PDF/.test(stamp));
@@ -91,8 +91,8 @@ const fbUp = await api(A, "/api/feedback", { method: "POST", body: JSON.stringif
 const fbDown = await api(A, "/api/feedback", { method: "POST", body: JSON.stringify({ feature: "chat", itemId: String(c1.done?.messageId), vote: "down", reasons: ["Too vague"], comment: "w9 final check" }) }); ok("Feedback", "changed to thumbs down with a comment", fbDown.status === 200);
 if (rv.id) ok("Feedback", "thumbs on a review", (await api(A, "/api/feedback", { method: "POST", body: JSON.stringify({ feature: "review", itemId: rv.id, vote: "up" }) })).status === 200);
 if (firstDraft) ok("Feedback", "thumbs on a draft", (await api(A, "/api/feedback", { method: "POST", body: JSON.stringify({ feature: "draft", itemId: firstDraft, vote: "up" }) })).status === 200);
-const adminNo = await (await api(A, "/admin/insights")).text(); ok("Admin", "admin page needs the admin password", /Admin password/.test(adminNo) && !/Thumbs-down feedback/.test(adminNo));
+const adminNo = await (await api(A, "/admin")).text(); ok("Admin", "admin page needs the admin password", /Admin password/.test(adminNo) && !/Thumbs-down feedback/.test(adminNo));
 const al = await api(A, "/api/admin/login", { method: "POST", body: JSON.stringify({ password: APW }) }), ac = al.headers.getSetCookie().map((c) => c.split(";")[0]).join("; ");
-const adminYes = await (await fetch(B + "/admin/insights", { headers: { cookie: `${A}; ${ac}` } })).text(); ok("Admin", "admin page shows stats and the 👎 list with the admin password", /By day/.test(adminYes) && /w9 final check/.test(adminYes));
+const adminYes = await (await fetch(B + "/admin", { headers: { cookie: `${A}; ${ac}` } })).text(); ok("Admin", "admin page shows stats and the 👎 list with the admin password", /By day/.test(adminYes) && /w9 final check/.test(adminYes));
 const csv = await fetch(B + "/api/admin/feedback-csv", { headers: { cookie: `${A}; ${ac}` } }); ok("Admin", "feedback CSV downloads", csv.status === 200 && /w9 final check/.test(await csv.text()));
 console.log(`\n${rows.filter((r) => r[2]).length}/${rows.length} passed`); fs.writeFileSync("/tmp/w9-final-check.json", JSON.stringify(rows));

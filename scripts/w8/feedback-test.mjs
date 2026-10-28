@@ -46,14 +46,14 @@ await sleep(800); const v1 = await counter("visit", "chat");
 ok("three visits to the same page by one browser count once; unknown pages are ignored", v1.n === v0.n + 1, `${v0.n}->${v1.n}`);
 
 // admin
-const adm = await api(A, "/admin/insights"), html = await adm.text();
+const adm = await api(A, "/admin"), html = await adm.text();
 ok("admin page without the admin password shows only the login form (no data)", adm.status === 200 && /Admin password/.test(html) && !/Thumbs-down feedback/.test(html) && !/It did not mention/.test(html));
 ok("feedback CSV is refused without the admin password", (await api(A, "/api/admin/feedback-csv")).status === 401);
 const bad = await api(A, "/api/admin/login", { method: "POST", body: JSON.stringify({ password: "nope-nope" }) }); ok("wrong admin password is refused", bad.status === 401);
 const same = await api(A, "/api/admin/login", { method: "POST", body: JSON.stringify({ password: process.env.TEST_PW }) }); ok("the site access password does NOT open the admin page", same.status === 401);
 const good = await api(A, "/api/admin/login", { method: "POST", body: JSON.stringify({ password: process.env.ADMIN_PW }) }), adminCookie = good.headers.getSetCookie().map((c) => c.split(";")[0]).join("; ");
 ok("right admin password is accepted", good.status === 200 && /lb_admin=/.test(adminCookie));
-const page = await (await fetch(B + "/admin/insights", { headers: { cookie: `${A}; ${adminCookie}` } })).text();
+const page = await (await fetch(B + "/admin", { headers: { cookie: `${A}; ${adminCookie}` } })).text();
 ok("admin page shows by-day totals, up/down per feature and the thumbs-down list", /By day/.test(page) && /Thumbs up \/ down/.test(page) && /Thumbs-down feedback/.test(page) && /Needs the section 143/.test(page) && /dishonour of a cheque/i.test(page));
 const csv = await fetch(B + "/api/admin/feedback-csv", { headers: { cookie: `${A}; ${adminCookie}` } }), raw = Buffer.from(await csv.arrayBuffer()), text = raw.toString("utf8").replace(/^\uFEFF/, "");
 ok("CSV downloads with a header, my row, and quoted fields", csv.status === 200 && /text\/csv/.test(csv.headers.get("content-type")) && raw.subarray(0, 3).equals(Buffer.from([0xef, 0xbb, 0xbf])) && text.startsWith("First vote,Last changed,Feature,Vote") && /Needs the section 143/.test(text), `${text.split("\r\n").length - 2} data row(s)`);

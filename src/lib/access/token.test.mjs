@@ -41,9 +41,9 @@ test("accessState: ready, dev-open, and fail closed", () => {
 });
 test("isPublicPath: only the password page, its API, and static files", () => {
   for (const p of ["/access", "/api/access/login", "/api/access/logout", "/_next/static/x.js", "/data/acts/acts.legislation.json", "/brand/logo.svg", "/favicon.ico"]) assert.equal(isPublicPath(p), true, p);
-  for (const p of ["/", "/workspace/browse", "/api/acts/search", "/api/chat", "/accessory", "/api/accessx", "/access/extra"]) assert.equal(isPublicPath(p), false, p);
+  for (const p of ["/", "/library", "/api/acts/search", "/api/chat", "/accessory", "/api/accessx", "/access/extra"]) assert.equal(isPublicPath(p), false, p);
 });
 test("safeNext keeps only same-site paths", () => {
-  assert.equal(safeNext("/workspace/chat?x=1"), "/workspace/chat?x=1");
+  assert.equal(safeNext("/ask?x=1"), "/ask?x=1");
   for (const bad of ["//evil.com", "https://evil.com", "/\\evil", "javascript:alert(1)", "", undefined, "/access", "/access?next=/"]) assert.equal(safeNext(bad), "/", String(bad));
 });

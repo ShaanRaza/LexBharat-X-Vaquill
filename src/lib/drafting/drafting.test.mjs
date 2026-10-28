@@ -133,7 +133,7 @@ test("template picking: a valid id is accepted, an invented id is not, fit is no
 test("email: off unless both settings exist; the address is validated; the message is escaped; failures never leak the key or the address", async () => {
   assert.equal(emailConfigured({}), false); assert.equal(emailConfigured({ RESEND_API_KEY: "k" }), false); assert.equal(emailConfigured({ RESEND_API_KEY: "k", RESEND_FROM: "LexBharat <drafts@example.com>" }), true);
   assert.equal(validEmail("a@b.co"), true); for (const bad of ["a", "a@b", "a b@c.com", "a@b.com,c@d.com", "<x>@y.com", ""]) assert.equal(validEmail(bad), false, bad);
-  const m = buildReadyEmail({ to: " me@example.com ", from: "x@y.com", title: 'NDA <script>"x"</script>', link: "https://x.test/workspace/drafting/1" });
+  const m = buildReadyEmail({ to: " me@example.com ", from: "x@y.com", title: 'NDA <script>"x"</script>', link: "https://x.test/work/drafts/1" });
   assert.deepEqual(m.to, ["me@example.com"]); assert.ok(!m.html.includes("<script>")); assert.ok(m.text.includes("not legal advice"));
   const env = { RESEND_API_KEY: "re_secret_key", RESEND_FROM: "x@y.com" }; let sent;
   assert.deepEqual(await sendReadyEmail({ env, to: "me@example.com", title: "T", link: "https://x.test/a", fetchImpl: async (u, i) => { sent = { u, i }; return { ok: true }; } }), { ok: true });

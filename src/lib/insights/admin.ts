@@ -1,4 +1,4 @@
-// The admin password for /admin/insights: a second password (ADMIN_PASSWORD) that must differ from the site's ACCESS_PASSWORD, kept in its own signed cookie. Server-only. Nothing here logs or returns a password.
+// The admin password for /admin: a second password (ADMIN_PASSWORD) that must differ from the site's ACCESS_PASSWORD, kept in its own signed cookie. Server-only. Nothing here logs or returns a password.
 import { constantTimeEqual, signAccessToken, verifyAccessToken } from "@/lib/access/token.mjs";
 
 export const ADMIN_COOKIE = "lb_admin", ADMIN_TTL_MS = 12 * 3600 * 1000;

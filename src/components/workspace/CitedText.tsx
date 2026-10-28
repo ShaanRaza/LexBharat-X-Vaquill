@@ -8,9 +8,9 @@ import type { Citation } from "@/lib/chat/store";
 
 // Text with citation chips and linked statute names, shared by Chat answers and Review. A source is either a section of an Act (links to that section) or a passage of the user's own document
 // (links to the document's preview at that page, drawn as a different kind of chip). Presentation only; the splitting logic is src/lib/chat/citations.mjs.
-export const sectionHref = (c: { actId: string; sectionKey: string }) => `/workspace/browse/acts/${c.actId}?section=${encodeURIComponent(c.sectionKey)}`;
-export const docHref = (c: Citation) => `/workspace/vault/${c.docId}${c.page ? `?page=${c.page}` : ""}`;
-export const judgmentHref = (c: Citation) => `/workspace/browse/judgments/supreme-court-of-india/${c.caseYear}/${encodeURIComponent(c.caseId ?? "")}${c.passage !== undefined ? `#passage-${c.passage}` : ""}`;
+export const sectionHref = (c: { actId: string; sectionKey: string }) => `/law/${c.actId}/${encodeURIComponent(c.sectionKey)}`;
+export const docHref = (c: Citation) => `/work/vault/${c.docId}${c.page ? `?page=${c.page}` : ""}`;
+export const judgmentHref = (c: Citation) => `/judgments/supreme-court-of-india/${c.caseYear}/${encodeURIComponent(c.caseId ?? "")}${c.passage !== undefined ? `#passage-${c.passage}` : ""}`;
 export const hrefOf = (c: Citation) => (c.kind === "doc" ? docHref(c) : c.kind === "judgment" ? judgmentHref(c) : sectionHref(c));
 /** "NDA.pdf, page 3, 4. Non-compete" or "Indian Contract Act, 1872, Section 27" */
 export const sourceLabel = (c: Citation) => c.kind === "judgment" ? `${c.actTitle}${c.label ? `, ${c.label}` : ""}${c.page ? `, page ${c.page}` : ""} (Supreme Court)` : c.kind === "doc" ? `${c.docName ?? c.actTitle}${c.page ? `, page ${c.page}` : ""}${c.label ? `, ${c.label}` : ""}${c.scan ? ", read from scan" : ""}` : `${c.actTitle}, ${c.number ? sectionWord(c.number) : "unnumbered text"}`;

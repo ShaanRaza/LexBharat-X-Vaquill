@@ -12,7 +12,7 @@ export type TextState = { available: true; view: View } | { available: false; re
 
 const fmt = (n: number) => n.toLocaleString("en-IN");
 const fmtDate = (iso: string) => new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
-const href = (actId: string, key: string) => `/workspace/browse/acts/${actId}?section=${encodeURIComponent(key)}`;
+const href = (actId: string, key: string) => `/law/${actId}/${encodeURIComponent(key)}`;
 
 /** Shown on every Acts text page, whether or not text is available. */
 export function ProvenanceNote({ sectionStatusLabel }: { sectionStatusLabel?: string }) {
@@ -42,7 +42,7 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
   return (
     <div className="mx-auto max-w-w1040 pt-2">
       <nav aria-label="Breadcrumb" className="text-ui-base text-secondary">
-        <Link href="/workspace/search" className="inline-flex min-h-8 items-center hover:text-primary hover:underline">Browse Laws &amp; Judgments</Link>
+        <Link href="/search" className="inline-flex min-h-8 items-center hover:text-primary hover:underline">Browse Laws &amp; Judgments</Link>
         <span aria-hidden> / </span><span>Acts &amp; Legislation</span>
       </nav>
       <h1 className="mt-2 text-ui-title font-semibold">{header.title}</h1>

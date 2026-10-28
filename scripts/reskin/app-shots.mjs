@@ -3,8 +3,8 @@
 import { spawn } from "node:child_process"; import { tmpdir } from "node:os"; import path from "node:path"; import fs from "node:fs";
 const [, , phase = "phase1", BASE = "http://localhost:3100"] = process.argv, OUT = path.join("docs/screenshots", phase); fs.mkdirSync(OUT, { recursive: true });
 const PORT = 9353, sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const PAGES = [["access", "/access", false], ["workspace", "/workspace", true], ["chat", "/workspace/chat", true], ["browse", "/workspace/browse", true], ["law", "/workspace/browse/acts/IND_central_2189?section=138", true],
-  ["vault", "/workspace/vault", true], ["review", "/workspace/review", true], ["drafting", "/workspace/drafting", true], ["privacy", "/privacy", true], ["notfound", "/this-page-does-not-exist", true]];
+const PAGES = [["access", "/access", false], ["workspace", "/", true], ["chat", "/ask", true], ["browse", "/library", true], ["law", "/law/IND_central_2189/138", true],
+  ["vault", "/work/vault", true], ["review", "/work/reviews", true], ["drafting", "/work/drafts", true], ["privacy", "/privacy", true], ["notfound", "/this-page-does-not-exist", true]];
 const chrome = spawn("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", ["--headless=new", "--disable-gpu", `--remote-debugging-port=${PORT}`, `--user-data-dir=${path.join(tmpdir(), "reskin-app-shots")}`, "--hide-scrollbars", "about:blank"], { stdio: "ignore" });
 let ver; for (let i = 0; i < 50 && !ver; i++) { try { ver = await (await fetch(`http://127.0.0.1:${PORT}/json/version`)).json(); } catch { await sleep(200); } }
 const tab = await (await fetch(`http://127.0.0.1:${PORT}/json/new?about:blank`, { method: "PUT" })).json();

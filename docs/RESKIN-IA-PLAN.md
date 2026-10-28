@@ -1,6 +1,6 @@
 # Restructure plan: five areas, one top bar (Step 1 of the spec in `docs/RESKIN-SPEC.md`)
 
-**Status: plan approved with the decisions below; Phases 1 and 2 done (Phase 2 waiting for your approval).** Written on the `reskin` branch. Nothing is pushed.
+**Status: plan approved with the decisions below; Phases 1 and 2 done; Phase 3 done and waiting for your approval.** Written on the `reskin` branch. Nothing is pushed.
 
 Scope you set: `reskin` branch only; no backend logic changes (search, Ask, Drafting, Review, Vault, limits, feedback); visual source is lexbharat.ai and the `mrharit/Lex-bharat` repo only; keep the testing banner, "not legal advice" notes, coverage warnings, the password gate and the Vault card buttons. Defaults applied to the spec's open questions: Desk stays minimal, light mode only, keep the "Was this right?" text, "Get started" on lexbharat.ai goes to the password page.
 
@@ -49,6 +49,18 @@ Done on `reskin`, not pushed: the mock console, copied docs, mock account pages,
 **Checks run:** `test:extract` 212 pass; `qa:sweep`; `build`; **axe-core** (WCAG 2 A and AA plus best practice) on 7 pages and on Quick-find, the menu and the Feedback form open, at desktop and phone width: no violations after two fixes (the banner and the dataset credit are now landmarks); no horizontal scroll at 375 px on any page; keyboard: Ctrl+K opens Quick-find with focus in the box, Escape closes it and returns focus. `ChatHistory` and `DraftHistory` are unused until Desk and Work reuse them.
 
 **Quick-find ranking (fixed after the first live try).** A bare number ("138", "302", "21", "43A") now lists the sections and Articles *numbered* that across the Acts first, best-known first, then a separate group "Mentions 138" for text matches; "138 NI", "s.138 NI Act", "NI 138", "section 138 negotiable" all put NI Act s.138 on top; a number matches a judgment only through its case number or a full citation of the same report series, never a report page number; CPC Orders read "Order XVIII Rule 7". The popular Acts, their short names (NI Act, CPC, CrPC, IPC, BNS, BNSS, BSA, IT Act, GST and more) and the well-known numbers are in `src/config/quickfind.json`, not in code; the logic is `src/lib/quickfind/rank.mjs` (8 tests), the data is read by `src/lib/acts/quickLaws.ts` behind a new read-only `/api/quickfind`. Exact words only; no Voyage. Known data limit: the Code of Criminal Procedure has no real Central entry (it is filed under States, 443 sections, without s.482), so "482" shows BNSS s.482 first and no Central CrPC s.482 (see `docs/MISSING-SECTIONS.md`).
+
+## Phase 3 status (done, waiting for your approval)
+
+**New addresses.** Desk `/` · Ask `/ask`, `/ask/<id>` · Search `/search` · Library `/library`, `/library/judgments/<court>` · Law `/law/<act>/<section>` · Judgment `/judgments/<court>/<year>/<case>` · Work `/work/drafts`, `/work/reviews`, `/work/vault` (each with `/<id>`) · Insights `/admin`. Every page, link, script and test now uses them; `src/lib/routes.mjs` builds them in one place. The route group is `(app)`; the old `(console)/workspace` tree is gone.
+
+**Permanent redirects (308).** Every old address (the whole `/workspace/...` tree, `/work/documents`, `/admin/insights`, and the removed pages) redirects in `src/config/redirects.mjs`, with ids kept; an old Act link with `?section=` becomes `/law/<act>/<section>` and the old `?tab=acts` becomes `/search`. 19 representative old addresses were checked on a running server. One cosmetic leftover: Next.js carries the old query string along on those two (`/law/<act>/s138?section=s138`, `/search?tab=acts`); it is harmless and the pages ignore it.
+
+**Desk (`/`).** A greeting that follows the device clock, one big box, four suggestion chips, shortcuts to Draft, Review and the Vault, your recent chats, drafts and reviews (newest first), and one honest coverage line (words in `src/config/desk.json`). The box decides what Enter does and says so under it: a question mark, a question word or six words or more opens **Ask** (and asks it); a citation ("138 NI Act", "Order 7 Rule 11", "Article 21") opens the **law page**; **a case name opens the judgment only when exactly one case matches**, otherwise it searches judgments; anything else **searches**. Unclear means Search, as decided. The logic is `src/lib/shell/desk.mjs` (tests). Search and Library now take `?q=`; Ask runs `?q=` once.
+
+**Also done:** page titles use the area names (Desk, Ask, Search, Library, Drafts, Reviews, Vault, Judgment; a law is titled by its Act); **the testing banner is part of the sticky header on desktop (always fully visible) and sits above the bar on phones, where it scrolls away cleanly**; the chat waits 30 s for a first answer, only falls back on a real error or after 30 s of nothing, and has a 55 s total budget so it ends before the host's 60 s limit; "Still thinking — the free AI is slow right now." appears after 10 s (timings and words in `ai-models.json`); `ChatHistory`, `DraftHistory` and the old dashboard were removed (Desk's Recent work replaces them).
+
+**Left for the next phases:** Ask's reading desk (Phase 4); the real Search page and the Library/Law/Judgment layouts (Phase 5; Search and Library still use the old browser component and its "Browse Laws & Judgments" heading); the Work page layouts (Phase 6).
 
 ## 0. What is in this step
 

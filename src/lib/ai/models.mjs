@@ -26,7 +26,7 @@ export function resolveTask(task, config, env = {}) {
   const spec = env[envName(task)]?.trim() || t.model;
   return {
     task, primary: parseModelSpec(spec), fallbacks: fallbackSpecs(task, t, env), retryUnavailable: retryRule(t.retryUnavailable ?? config.retry?.unavailable),
-    thinking: t.thinking ?? "off", temperature: t.temperature ?? 0.2, maxOutputTokens: t.maxOutputTokens ?? 1500, timeoutMs: t.timeoutMs ?? 60000, firstTokenMs: t.firstTokenMs ?? 0, json: !!t.json,
+    thinking: t.thinking ?? "off", temperature: t.temperature ?? 0.2, maxOutputTokens: t.maxOutputTokens ?? 1500, timeoutMs: t.timeoutMs ?? 60000, firstTokenMs: t.firstTokenMs ?? 0, budgetMs: Number(t.budgetMs) > 0 ? Number(t.budgetMs) : 0, json: !!t.json,
   };
 }
 

@@ -212,5 +212,7 @@
   --logo-h-sm: 18px;
   --logo-h: 22px;
   --logo-h-lg: 30px;
+  --text-greeting: 44px;
 }
-@media (max-width: 760px) { :root { --pad-page: 1rem; } }
+
+@media (max-width: 760px) { :root { --pad-page: 1rem; --text-greeting: 34px; } }

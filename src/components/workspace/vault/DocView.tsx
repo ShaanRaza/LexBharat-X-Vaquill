@@ -7,7 +7,7 @@ import type { VaultDoc } from "@/lib/vault/store";
 import DocStatus from "./DocStatus";
 import { SCAN_LABEL } from "@/lib/vault/scan.mjs";
 
-// A document's text preview (/workspace/vault/<id>?page=N). PDFs show their text page by page; Word and text files show the text. Presentation only.
+// A document's text preview (/work/vault/<id>?page=N). PDFs show their text page by page; Word and text files show the text. Presentation only.
 type Detail = { doc: VaultDoc; text: string | null; truncated: boolean; pageStarts: number[] | null; scanPages?: number[] };
 export default function DocView({ id }: { id: string }) {
   const [d, setD] = useState<Detail | null>(null), [err, setErr] = useState(""), target = useRef<HTMLElement>(null);
@@ -18,7 +18,7 @@ export default function DocView({ id }: { id: string }) {
   const pages = d?.text && d.pageStarts ? d.pageStarts.map((s, i) => d.text!.slice(s, d.pageStarts![i + 1] ?? undefined).trim()) : null;
   return (
     <div className="mx-auto max-w-3xl pb-10">
-      <p className="mt-3 text-ui-sm"><Link href="/workspace/vault" className="text-primary hover:underline">← Back to the Vault</Link></p>
+      <p className="mt-3 text-ui-sm"><Link href="/work/vault" className="text-primary hover:underline">← Back to the Vault</Link></p>
       {err && <Notice tone="bad" role="alert" className="mt-4"><p>{err}</p></Notice>}
       {!d && !err && <p className="mt-6 text-ui-base text-muted">Loading…</p>}
       {d && (

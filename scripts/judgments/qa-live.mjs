@@ -75,7 +75,7 @@ const PAGE = `(() => {
 
 const rows = [];
 for (const r of sample) {
-  const url = `${BASE}/workspace/browse/judgments/supreme-court-of-india/${r.year}/${encodeURIComponent(r.caseId)}`, why = [];
+  const url = `${BASE}/judgments/supreme-court-of-india/${r.year}/${encodeURIComponent(r.caseId)}`, why = [];
   let page = null;
   try {
     await go(url); page = await evaluate(PAGE);
@@ -93,7 +93,7 @@ for (const r of sample) {
       await evaluate(`[...document.querySelectorAll('main a')].find((a) => /Back to \\d{4} cases/.test(a.innerText)).click()`);
       await new Promise((x) => setTimeout(x, 2500));
       const landed = await evaluate(`({ path: location.pathname + location.search, body: (document.querySelector('main')||document.body).innerText.slice(0, 400) })`);
-      if (!landed.path.startsWith("/workspace/browse/judgments/supreme-court-of-india?year=" + r.year) || !/case records in/.test(landed.body + (await evaluate("document.body.innerText")))) why.push(`back link landed on ${landed.path}`);
+      if (!landed.path.startsWith("/library/judgments/supreme-court-of-india?year=" + r.year) || !/case records in/.test(landed.body + (await evaluate("document.body.innerText")))) why.push(`back link landed on ${landed.path}`);
     }
   } catch (e) { why.push(`error: ${String(e.message).slice(0, 100)}`); }
   if (why.length) { try { await go(url); const shot = await S("Page.captureScreenshot", { format: "jpeg", quality: 60 }); writeFileSync(path.join(SHOTS, `${r.caseId}.jpg`), Buffer.from(shot.data, "base64")); } catch { /* screenshot is best-effort */ } }

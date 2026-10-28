@@ -1,4 +1,4 @@
-// MOCK / DISPLAY DATA for the Acts & Judgments browser (/workspace/browse).
+// MOCK / DISPLAY DATA for the Acts & Judgments browser (/library).
 //
 // WHAT IS REAL vs MOCKED (see docs/ACTS-AND-JUDGMENTS.md):
 // - Headline figures, the six court counts marked `seen` and the layout come from a screenshot of the original authenticated app supplied by the

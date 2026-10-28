@@ -1,11 +1,16 @@
 {
-  "about": "Which model answers each task. Spec = provider:model. Override any task with an environment variable AI_MODEL_<TASK> (CHAT, ANSWER_CHECK, QUERY_REWRITE, TEMPLATE_PICK, DRAFTING, REVIEW, RERUN, OCR), for example AI_MODEL_CHAT=anthropic:claude-haiku-5-5. Providers: gemini (GEMINI_API_KEY), anthropic (ANTHROPIC_API_KEY), litellm (LITELLM_BASE_URL + LITELLM_API_KEY, any OpenAI-compatible endpoint). thinking: off | minimal | low | medium | high. firstTokenMs: give up on a model that has produced no text by then (0 = never) and use the fallback; fallback: tried in order when a model is busy or unavailable (override with AI_FALLBACK_<TASK>, comma-separated, empty = none). See docs/PAID-SWITCHOVER.md.",
+  "about": "Which model answers each task. Spec = provider:model. Override any task with an environment variable AI_MODEL_<TASK> (CHAT, ANSWER_CHECK, QUERY_REWRITE, TEMPLATE_PICK, DRAFTING, REVIEW, RERUN, OCR), for example AI_MODEL_CHAT=anthropic:claude-haiku-5-5. Providers: gemini (GEMINI_API_KEY), anthropic (ANTHROPIC_API_KEY), litellm (LITELLM_BASE_URL + LITELLM_API_KEY, any OpenAI-compatible endpoint). thinking: off | minimal | low | medium | high. firstTokenMs: wait this long for the first text; a model that is merely slow inside this window is NOT abandoned (chat waits 30 s), and one that has produced nothing by then counts as failed and the fallback is used (0 = never); a model that answers with an error (busy, unavailable, rate limit) falls back at once. budgetMs: the most time one request may spend across all attempts, retries and fallbacks, so it ends before the host's request limit; fallback: tried in order when a model is busy or unavailable (override with AI_FALLBACK_<TASK>, comma-separated, empty = none). See docs/PAID-SWITCHOVER.md.",
   "retry": {
     "about": "When a model answers 'unavailable' (503, or cannot be reached) before any text: wait waitMs and ask the SAME model again `times` times, and only then move to the task's fallback model. A task can set its own \"retryUnavailable\": {\"times\":0} to turn it off. Rate limits (429) and timeouts go straight to the fallback.",
     "unavailable": {
       "times": 1,
       "waitMs": 5000
     }
+  },
+  "ui": {
+    "about": "Words and timings the screens show while a model is working. slowNoticeMs: after this long with no answer yet, the page says the free AI is slow (so nobody thinks it has stopped).",
+    "slowNoticeMs": 10000,
+    "slowNoticeText": "Still thinking — the free AI is slow right now."
   },
   "tasks": {
     "chat": {
@@ -17,7 +22,8 @@
       "fallback": [
         "gemini:gemini-3.6-flash"
       ],
-      "firstTokenMs": 12000
+      "firstTokenMs": 30000,
+      "budgetMs": 55000
     },
     "answerCheck": {
       "model": "gemini:gemini-3.5-flash-lite",

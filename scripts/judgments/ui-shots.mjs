@@ -17,16 +17,16 @@ const click = (sel) => js(`(()=>{const e=[...document.querySelectorAll(${JSON.st
 const clickText = (t, sel = "button,[role=tab]") => js(`(()=>{const e=[...document.querySelectorAll(${JSON.stringify(sel)})].find(b=>b.textContent.trim().startsWith(${JSON.stringify(t)})); if(!e) return false; e.click(); return true})()`);
 const selectVal = (id, v) => js(`(()=>{const s=document.getElementById(${JSON.stringify(id)}); if(!s) return false; const set=Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype,'value').set; set.call(s,${JSON.stringify(v)}); s.dispatchEvent(new Event('change',{bubbles:true})); return true})()`);
 await send("Page.enable"); await view(1280, 800);
-await go("/workspace/browse"); await shot("01-browse-judgments");
+await go("/library"); await shot("01-browse-judgments");
 await clickText("Acts"); await sleep(1500); await selectVal("f-status", "repealed"); await sleep(1500); await shot("02-browse-acts-filter-changed");
-await go("/workspace/browse/judgments/bombay-high-court"); await shot("03-court-page");
-await go("/workspace/browse/judgments/supreme-court-of-india?year=2025"); await sleep(1500); await shot("04-court-year-page");
+await go("/library/judgments/bombay-high-court"); await shot("03-court-page");
+await go("/library/judgments/supreme-court-of-india?year=2025"); await sleep(1500); await shot("04-court-year-page");
 if (phase === "after") {
-  await go("/workspace/browse"); await clickText("Legal Data", "button[aria-haspopup]") || await js(`document.querySelector('[data-testid=product-switcher]')?.click()`); await sleep(400); await shot("05-product-dropdown");
-  await go("/workspace/browse"); await js(`document.querySelector('[data-testid=country-switcher]')?.click()`); await sleep(400); await shot("06-country-dropdown");
+  await go("/library"); await clickText("Legal Data", "button[aria-haspopup]") || await js(`document.querySelector('[data-testid=product-switcher]')?.click()`); await sleep(400); await shot("05-product-dropdown");
+  await go("/library"); await js(`document.querySelector('[data-testid=country-switcher]')?.click()`); await sleep(400); await shot("06-country-dropdown");
 }
-await view(375, 812, true); await go("/workspace/browse"); await shot("07-phone-browse");
+await view(375, 812, true); await go("/library"); await shot("07-phone-browse");
 await clickText("Acts"); await sleep(1500); await selectVal("f-status", "repealed"); await sleep(1200); await js(`document.getElementById("f-cat")?.scrollIntoView({block:"start"})`); await sleep(300); await shot("08-phone-acts-filter");
-await go("/workspace/browse/judgments/supreme-court-of-india?year=2025"); await sleep(1200); await shot("09-phone-court-year");
-if (phase === "after") { await go("/workspace/browse"); await js(`document.querySelector('[data-testid=product-switcher]')?.click()`); await sleep(400); await shot("10-phone-product-dropdown"); }
+await go("/library/judgments/supreme-court-of-india?year=2025"); await sleep(1200); await shot("09-phone-court-year");
+if (phase === "after") { await go("/library"); await js(`document.querySelector('[data-testid=product-switcher]')?.click()`); await sleep(400); await shot("10-phone-product-dropdown"); }
 chrome.kill(); process.exit(0);

@@ -32,7 +32,7 @@ export default function ReviewHome() {
   const sides = isContractType(type) ? CONTRACT_TYPES[type].sides : [];
   async function start(e: React.FormEvent) {
     e.preventDefault(); setBusy(true); setErr("");
-    try { const r = await fetch("/api/review", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ docId, contractType: type, side }) }), j = await r.json(); if (!r.ok) throw new Error(j.error || "Something went wrong."); router.push(`/workspace/review/${j.id}`); }
+    try { const r = await fetch("/api/review", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ docId, contractType: type, side }) }), j = await r.json(); if (!r.ok) throw new Error(j.error || "Something went wrong."); router.push(`/work/reviews/${j.id}`); }
     catch (x) { setErr((x as Error).message); setBusy(false); }
   }
   async function remove(id: string, name: string) { if (!window.confirm(`Delete the review of “${name}”? This cannot be undone.`)) return; await fetch(`/api/review/${id}`, { method: "DELETE" }).catch(() => null); load(); }
@@ -57,7 +57,7 @@ export default function ReviewHome() {
             </div>
             {v.notes.map((n, i) => <p key={i} role={n.ok ? "status" : "alert"} className={`mt-2 text-ui-sm ${n.ok ? "text-secondary" : "text-quality-bad"}`}>{n.name}: {n.message}</p>)}
             {docs.some((d) => d.status === "processing") && <p className="mt-2 text-ui-sm text-muted">A document you added is being prepared. It appears here as soon as it is ready. {docs.filter((d) => d.status === "processing").map((d) => <span key={d.id}><DocStatus doc={d} /> </span>)}</p>}
-            {ready.length === 0 && docs.length > 0 && !docs.some((d) => d.status === "processing") && <p className="mt-2 text-ui-sm text-quality-bad">None of your documents can be reviewed. <Link href="/workspace/vault" className="text-primary hover:underline">See the Vault</Link></p>}
+            {ready.length === 0 && docs.length > 0 && !docs.some((d) => d.status === "processing") && <p className="mt-2 text-ui-sm text-quality-bad">None of your documents can be reviewed. <Link href="/work/vault" className="text-primary hover:underline">See the Vault</Link></p>}
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div><label htmlFor="rv-type" className="text-ui-base font-medium">2. Type of contract</label>
@@ -82,7 +82,7 @@ export default function ReviewHome() {
             <ul className="divide-y divide-border/60">
               {meta.reviews.map((r) => (
                 <li key={r.id} className="flex flex-wrap items-center gap-x-3 gap-y-1 py-2.5">
-                  <Link href={`/workspace/review/${r.id}`} className="min-w-0 flex-1 basis-48 hover:text-primary"><span className="block truncate text-ui-base">{r.docName}</span><span className="block text-ui-sm text-muted">{CONTRACT_TYPES[r.contractType as keyof typeof CONTRACT_TYPES]?.label ?? r.contractType} · {r.side} · {when(r.createdAt)}</span></Link>
+                  <Link href={`/work/reviews/${r.id}`} className="min-w-0 flex-1 basis-48 hover:text-primary"><span className="block truncate text-ui-base">{r.docName}</span><span className="block text-ui-sm text-muted">{CONTRACT_TYPES[r.contractType as keyof typeof CONTRACT_TYPES]?.label ?? r.contractType} · {r.side} · {when(r.createdAt)}</span></Link>
                   {r.risk ? <Badge tone={RISK_BADGE[r.risk].tone}>{RISK_BADGE[r.risk].text}</Badge> : <Badge>{STATUS_TEXT[r.status]}</Badge>}
                   <button type="button" onClick={() => remove(r.id, r.docName)} aria-label={`Delete the review of ${r.docName}`} className="rounded-chip px-2 py-1 text-ui-sm text-muted hover:bg-accent focus-visible:outline-2">Delete</button>
                 </li>

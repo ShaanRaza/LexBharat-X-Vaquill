@@ -65,7 +65,7 @@ test("readPdfPages reads a PDF in slices that add up to the one-shot text", asyn
 import { chatLink, docFromSearch, newlyReady, previewLink, reviewLink } from "./links.mjs";
 test("document actions: links, ?doc= parsing, and what counts as newly Ready", () => {
   const id = "0f8fad5b-d9cb-469f-a165-70867728950e";
-  assert.equal(chatLink(id), `/workspace/chat?doc=${id}`); assert.equal(reviewLink(id), `/workspace/review?doc=${id}`); assert.equal(previewLink(id), `/workspace/vault/${id}`);
+  assert.equal(chatLink(id), `/ask?doc=${id}`); assert.equal(reviewLink(id), `/work/reviews?doc=${id}`); assert.equal(previewLink(id), `/work/vault/${id}`);
   assert.equal(docFromSearch(`?doc=${id}`), id); assert.equal(docFromSearch("?doc=../../x"), null); assert.equal(docFromSearch(""), null); assert.equal(docFromSearch("?other=1"), null);
   const d = (i, status) => ({ id: i, status });
   assert.deepEqual(newlyReady([d("a", "processing"), d("b", "ready"), d("c", "waiting")], [d("a", "ready"), d("b", "ready"), d("c", "ready"), d("n", "ready")]).map((x) => x.id), ["a", "c"]);

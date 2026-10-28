@@ -66,9 +66,9 @@ for (const [court, t] of Object.entries(targets)) {
 
 // ---------------- result links
 { const picks = [];
-  for (const [q, p] of [["kesavananda", "/api/judgments/search?q="], ["union of india", "/api/judgments/search?q="], ["muskan", "/api/judgments/search?q="], ["nazim", "/api/judgments/search?q="], ["state of punjab", "/api/judgments/search?q="]]) { const r = await page(`${p}${enc(q)}&pageSize=6`); const x = r.results?.[Math.floor(rnd() * Math.min(6, r.results.length))]; if (x) picks.push({ kind: "SC", id: x.caseId, url: `/workspace/browse/judgments/${SC}/${x.year}/${enc(x.caseId)}` }); }
-  for (const [court, t] of Object.entries(targets)) { const r = await page(`/api/judgments/search-hc?q=${enc(t.party)}&court=${court}&pageSize=6`); const x = r.results?.[0]; if (x) picks.push({ kind: "HC", id: x.caseId, url: `/workspace/browse/judgments/${x.court}/${x.year}/${enc(x.caseId)}?p=${x.mainPage}` }); }
-  const r = await page(`/api/judgments/search-hc?q=${enc("6241/2019")}&pageSize=6`); for (const x of (r.results ?? []).slice(0, 2)) picks.push({ kind: "HC", id: x.caseId, url: `/workspace/browse/judgments/${x.court}/${x.year}/${enc(x.caseId)}?p=${x.mainPage}` });
+  for (const [q, p] of [["kesavananda", "/api/judgments/search?q="], ["union of india", "/api/judgments/search?q="], ["muskan", "/api/judgments/search?q="], ["nazim", "/api/judgments/search?q="], ["state of punjab", "/api/judgments/search?q="]]) { const r = await page(`${p}${enc(q)}&pageSize=6`); const x = r.results?.[Math.floor(rnd() * Math.min(6, r.results.length))]; if (x) picks.push({ kind: "SC", id: x.caseId, url: `/library/judgments/${SC}/${x.year}/${enc(x.caseId)}` }); }
+  for (const [court, t] of Object.entries(targets)) { const r = await page(`/api/judgments/search-hc?q=${enc(t.party)}&court=${court}&pageSize=6`); const x = r.results?.[0]; if (x) picks.push({ kind: "HC", id: x.caseId, url: `/library/judgments/${x.court}/${x.year}/${enc(x.caseId)}?p=${x.mainPage}` }); }
+  const r = await page(`/api/judgments/search-hc?q=${enc("6241/2019")}&pageSize=6`); for (const x of (r.results ?? []).slice(0, 2)) picks.push({ kind: "HC", id: x.caseId, url: `/library/judgments/${x.court}/${x.year}/${enc(x.caseId)}?p=${x.mainPage}` });
   let ok = 0; const bad = [];
   for (const p of picks.slice(0, 10)) { const g = await api(p.url); const good = g.status === 200 && g.text.includes(p.id); ok += good; if (!good) bad.push(`${p.id} ${g.status}`); }
   rec("Links", "result links land on the right case page", `${Math.min(10, picks.length)} links (SC and HC)`, `${ok}/${Math.min(10, picks.length)}`, ok === Math.min(10, picks.length) && picks.length >= 10, bad.join("; ")); }
@@ -101,7 +101,7 @@ if (UI) {
   const num = (s) => Number((/([\d,]+)/.exec(s ?? "") ?? [])[1]?.replace(/,/g, "") ?? NaN);
   try {
     // SC year page: bar present, in-year search, toggle
-    await go(`${BASE}/workspace/browse/judgments/${SC}?year=1990`);
+    await go(`${BASE}/library/judgments/${SC}?year=1990`);
     const has1 = await ev(`!!document.querySelector('#case-q')`); rec("Page SC", "year page has the search bar", "?year=1990", "-", has1);
     await type("#case-q", "insurance"); const s1 = await status(); rec("Page SC", "in-year search on the page", "insurance", num(s1), num(s1) >= 1 && /in 1990|match/.test(s1) && /1990/.test(s1), s1);
     await ev(`[...document.querySelectorAll('[role=group] button')].find(b=>/All years/.test(b.innerText))?.click()`); await new Promise((r) => setTimeout(r, 2500)); const s2 = await status();
@@ -109,17 +109,17 @@ if (UI) {
     await type("#case-q", "kesavananda"); const s3 = await status(); const row = await ev(`(document.querySelector('ul.mt-2 li a')||{}).getAttribute&&document.querySelector('ul.mt-2 li a').getAttribute('href')`);
     rec("Page SC", "Kesavananda across years from a 1990 page", "kesavananda (all years)", num(s3), num(s3) >= 1 && /1973_INSC_91/.test(row ?? ""), String(row));
     // HC year page: "2024" on a 2025 page, toggle
-    await go(`${BASE}/workspace/browse/judgments/bombay-high-court?year=2025`);
+    await go(`${BASE}/library/judgments/bombay-high-court?year=2025`);
     await type("#case-q", "2024"); const h1 = await status(); const first = await ev(`(document.querySelector('ul.mt-2 li')||{}).innerText||''`);
     rec("Page HC", '"2024" on the Bombay 2025 page', "2024", num(h1), num(h1) > 1000 && /2024/.test(first) && /in 2025/.test(h1), `${h1} | first: ${first.replace(/\n/g, " ").slice(0, 70)}`);
     await type("#case-q", "gurukrupa"); const h2 = await status(); await ev(`[...document.querySelectorAll('[role=group] button')].find(b=>/All years/.test(b.innerText))?.click()`); await new Promise((r) => setTimeout(r, 2500)); const h3 = await status();
     rec("Page HC", "this year / all years toggle", "gurukrupa", `${num(h2)} -> ${num(h3)}`, num(h2) === 1 && num(h3) > 1, h3);
     // court overview pages (no year chosen): same bar on both courts
     for (const [court, q, expect] of [[SC, "kesavananda", /Supreme Court cases[\s\S]*1 case/], ["bombay-high-court", "gurukrupa", /High Court cases/]]) {
-      await go(`${BASE}/workspace/browse/judgments/${court}`); const r = await type("#court-q", q); const t = await ev(`document.querySelector('main').innerText`);
+      await go(`${BASE}/library/judgments/${court}`); const r = await type("#court-q", q); const t = await ev(`document.querySelector('main').innerText`);
       rec(court === SC ? "Page SC" : "Page HC", "court page (year grid) has the same search bar", q, "-", r !== "NO INPUT" && expect.test(t) && !(await ev(`!!document.querySelector('[role=alert]')`))); }
     // browse page: garbage and long input in the real bar
-    await go(`${BASE}/workspace/browse`);
+    await go(`${BASE}/library`);
     for (const [label, q] of [["special characters", "<>%$&"], ["random characters", "xqzjwvkp"]]) { await type("#browse-q", q); const t = await ev(`document.querySelector('main').innerText`);
       rec("Page garbage", `${label} in the browse search bar`, q, "-", !(await ev(`!!document.querySelector('[role=alert]')`)) && !/undefined|NaN|\[object/.test(t) && /0 cases|No Supreme Court case matches|No High Court case matches|Type a name/.test(t), "graceful empty state, no error alert"); }
     const len = await type("#browse-q", "kumar ".repeat(100)); rec("Page garbage", "600-character paste in the search bar", "kumar kumar ...", len, len === 200 && !(await ev(`!!document.querySelector('[role=alert]')`)), "input clamps at 200 characters, no error");

@@ -16,9 +16,9 @@ let bad = 0; await send("Page.enable");
 for (const [label, w, h, mobile] of [["desktop", 1280, 860, false], ["phone", 375, 812, true]]) {
   await send("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 1, mobile });
   await go("/access"); await ev(`fetch("/api/access/login",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({password:${JSON.stringify(process.env.SHOTS_PASSWORD ?? "")}})}).then(r=>r.status)`);
-  for (const [name, p] of [["workspace", "/workspace"], ["chat", "/workspace/chat"], ["browse", "/workspace/browse"], ["law", "/workspace/browse/acts/IND_central_2189?section=s138"], ["drafting", "/workspace/drafting"], ["review", "/workspace/review"], ["vault", "/workspace/vault"]]) { await go(p); bad += await run(`${name} ${label}`); }
-  await go("/workspace"); await ev(`document.dispatchEvent(new KeyboardEvent("keydown", { key: "k", ctrlKey: true, bubbles: true }))`); await sleep(400); await typeInto('[role="combobox"]', "138 NI Act"); await sleep(2200); bad += await run(`quick-find open ${label}`);
-  await go("/workspace"); await ev(`document.querySelector('button[aria-label^="Menu: Feedback"]').click()`); await sleep(300); bad += await run(`menu open ${label}`);
+  for (const [name, p] of [["workspace", "/"], ["chat", "/ask"], ["browse", "/library"], ["law", "/law/IND_central_2189/s138"], ["drafting", "/work/drafts"], ["review", "/work/reviews"], ["vault", "/work/vault"]]) { await go(p); bad += await run(`${name} ${label}`); }
+  await go("/"); await ev(`document.dispatchEvent(new KeyboardEvent("keydown", { key: "k", ctrlKey: true, bubbles: true }))`); await sleep(400); await typeInto('[role="combobox"]', "138 NI Act"); await sleep(2200); bad += await run(`quick-find open ${label}`);
+  await go("/"); await ev(`document.querySelector('button[aria-label^="Menu: Feedback"]').click()`); await sleep(300); bad += await run(`menu open ${label}`);
   await ev(`document.querySelector('[role="menuitem"]').click()`); await sleep(400); bad += await run(`feedback dialog ${label}`);
   await send("Network.clearBrowserCookies");
 }

@@ -16,7 +16,7 @@ const Svg = ({ d, size = 16 }: { d: string; size?: number }) => <svg width={size
 
 function CourtCard({ c, featured, real, countsOnly }: { c: Court; featured?: boolean; real?: boolean; countsOnly?: boolean }) {
   return (
-    <Link href={`/workspace/browse/judgments/${c.slug}`} className={`group flex items-center gap-4 rounded-card bg-surface px-5 py-4 shadow-sm ring-1 transition-colors hover:ring-primary/50 ${featured ? "ring-primary/30" : "ring-border/70"}`}>
+    <Link href={`/library/judgments/${c.slug}`} className={`group flex items-center gap-4 rounded-card bg-surface px-5 py-4 shadow-sm ring-1 transition-colors hover:ring-primary/50 ${featured ? "ring-primary/30" : "ring-border/70"}`}>
       <span className="grid size-11 shrink-0 place-items-center rounded-field bg-accent text-muted"><Svg d={BANK} size={22} /></span>
       <span className="min-w-0 flex-1 leading-snug">
         <span className="block text-fs-body font-medium text-primary">{c.name}</span>
@@ -42,9 +42,9 @@ async function readJson(r: Response): Promise<Record<string, unknown>> {
 }
 const PAGE = 8;
 
-export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "acts" }) {
+export default function BrowseLaws({ initialTab, initialQuery = "" }: { initialTab: "judgments" | "acts"; initialQuery?: string }) {
   const [tab, setTab] = useState(initialTab);
-  const [q, setQ] = useState("");
+  const [q, setQ] = useState(initialQuery);   // Desk and Quick-find send what was typed in ?q=
   const [category, setCategory] = useState("");
   const [status, setStatus] = useState("");
   const [state, setState] = useState("");
@@ -161,7 +161,7 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
               <ul className="mt-4 space-y-2">
                 {data.results.map((r) => (
                   <li key={r.actId} className="rounded-card bg-surface px-5 py-4 shadow-sm ring-1 ring-border/60">
-                    <p className="text-fs-body font-medium">{data.source === "real" ? <Link href={`/workspace/browse/acts/${r.actId}`} className="text-primary hover:underline">{r.title}</Link> : r.title}</p>
+                    <p className="text-fs-body font-medium">{data.source === "real" ? <Link href={`/law/${r.actId}`} className="text-primary hover:underline">{r.title}</Link> : r.title}</p>
                     <p className="mt-1.5 flex flex-wrap items-center gap-1.5 text-fs-xs text-secondary">
                       <span className="rounded-chip bg-accent px-2 py-0.5">{label(r.category)}</span>
                       {r.state && <span className="rounded-chip bg-accent px-2 py-0.5">{label(r.state)}</span>}

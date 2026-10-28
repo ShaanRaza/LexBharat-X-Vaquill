@@ -11,7 +11,7 @@ import type { CitationLite, ReviewRun } from "@/lib/review/store";
 import { CLAUSE_BADGE, RISK_BADGE } from "./labels";
 import { useReviewRun } from "./useReviewRun";
 
-// One review (/workspace/review/<id>): live progress while it runs, then the result: summary, clauses, suggested changes, missing clauses, Indian-law points with citation chips, and the .docx/PDF downloads.
+// One review (/work/reviews/<id>): live progress while it runs, then the result: summary, clauses, suggested changes, missing clauses, Indian-law points with citation chips, and the .docx/PDF downloads.
 // Presentation only; the review itself runs on the server (src/lib/review).
 const H2 = "text-ui-lead font-semibold";
 const BTN = "rounded-chip px-3 py-1.5 text-ui-sm font-medium ring-1 ring-control-border text-foreground hover:bg-accent focus-visible:outline-2";
@@ -35,7 +35,7 @@ function Step({ label, state, onRetry, detail }: { label: string; state: "pendin
 
 export default function ReviewRunView({ id }: { id: string }) {
   const { run, err, working, retry, auto } = useReviewRun(id), [onlyIssues, setOnlyIssues] = useState(false);
-  if (err && !run) return <div className="mx-auto max-w-3xl pb-10"><p className="mt-3 text-ui-sm"><Link href="/workspace/review" className="text-primary hover:underline">← Back to Review</Link></p><Notice tone="bad" role="alert" className="mt-4"><p>{err}</p></Notice></div>;
+  if (err && !run) return <div className="mx-auto max-w-3xl pb-10"><p className="mt-3 text-ui-sm"><Link href="/work/reviews" className="text-primary hover:underline">← Back to Review</Link></p><Notice tone="bad" role="alert" className="mt-4"><p>{err}</p></Notice></div>;
   if (!run?.result) return <div className="mx-auto max-w-3xl pb-10"><p className="mt-6 text-ui-base text-muted">Loading…</p></div>;
   const res = run.result, sum = res.summary.value, clauses = res.parts.flatMap((p) => p.clauses ?? []);
   const nowIdx = working ? (res.parts.find((p) => p.status === "pending")?.i ?? -1) : -1;
@@ -45,7 +45,7 @@ export default function ReviewRunView({ id }: { id: string }) {
   const done = run.status !== "running";
   return (
     <div className="mx-auto max-w-3xl pb-10">
-      <p className="mt-3 text-ui-sm"><Link href="/workspace/review" className="text-primary hover:underline">← Back to Review</Link></p>
+      <p className="mt-3 text-ui-sm"><Link href="/work/reviews" className="text-primary hover:underline">← Back to Review</Link></p>
       <h1 className="mt-4 break-words text-ui-title font-semibold">{run.docName}</h1>
       <p className="mt-2 text-ui-sm text-muted">{CONTRACT_TYPES[run.contractType as keyof typeof CONTRACT_TYPES]?.label ?? run.contractType} · reviewed for: {run.side}</p>
       <Notice tone="warn" role="note" compact className="mt-4"><p><strong className="font-medium text-foreground">{NOT_LEGAL_ADVICE}</strong></p></Notice>

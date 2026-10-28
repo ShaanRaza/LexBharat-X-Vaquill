@@ -17,5 +17,5 @@ const r = run?.result, clauses = r?.parts?.flatMap((p) => p.clauses ?? []) ?? []
 console.log({ status: run?.status, clauses: clauses.length, risk: r?.risk, summary: r?.summary?.status, lawStatus: law?.status, findings: law?.findings?.length, dropped: law?.dropped });
 console.log("law sources:", (law?.sources ?? []).map((s) => `${s.n}:${s.kind ?? "act"}:${s.actTitle.slice(0, 32)}`).join(" | "));
 console.log("findings:", (law?.findings ?? []).slice(0, 6).map((f) => `${f.text.slice(0, 110)} [${(f.cites ?? f.sources ?? []).join(",")}]`).join("\n  "));
-console.log("run url: /workspace/review/" + rv.id);
+console.log("run url: /work/reviews/" + rv.id);
 for (const f of ["docx", "pdf"]) { const e = await api(cookie, `/api/review/${rv.id}/export?format=${f}`); console.log("export", f, e.status); }

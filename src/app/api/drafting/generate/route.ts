@@ -52,7 +52,7 @@ export async function POST(req: Request) {
         const id = await createDraft(bid, { title: r.title, templateId: template.id, fields: values, extra: extra || null, basis: r.basis, checklist: r.checklist, sections: r.sections, warnings: r.warnings, doc: r.doc, model: r.model });
         send({ type: "saved", draftId: id, warnings: r.warnings, basis: r.basis, failed: r.sections.filter((s) => s.status === "failed").map((s) => s.id) });
         if (email) {
-          const link = `${new URL(req.url).origin}/workspace/drafting/${id}`;
+          const link = `${new URL(req.url).origin}/work/drafts/${id}`;
           const sent = await sendReadyEmail({ env: envOf(), to: email, title: r.title, link });
           send({ type: "email", status: sent.ok ? "sent" : "failed" });
         }
