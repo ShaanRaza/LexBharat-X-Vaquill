@@ -1,3 +1,5 @@
+> **Note (2026-10-28):** this document describes the first, mock-only build of the project. The product has since grown real Acts, judgments, Chat, Drafting, Review and Vault features on Neon, Supabase and AI providers. For the current state read the main [README](../README.md), [`DATA-GAPS.md`](DATA-GAPS.md) and the work-package notes ([`W8.md`](W8.md), [`W9.md`](W9.md), [`W10.md`](W10.md)).
+
 # Pages and data map (final state)
 
 Every public route in this build, with its **completeness**, **data kind**, **files** and **screenshots**.

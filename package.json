@@ -2,7 +2,7 @@
   "name": "lexbharat-local",
   "version": "0.1.0",
   "private": true,
-  "description": "LexBharat local build: an educational homepage recreation with placeholder assets and a MOCK backend only.",
+  "description": "LexBharat: a legal-research workspace for Indian law (Acts, judgments, chat, drafting, review, vault). Testing phase; not legal advice.",
   "scripts": {
     "predev": "node scripts/copy-static-data.mjs && node scripts/drafting/build-templates.mjs",
     "dev": "next dev --port 3100",
