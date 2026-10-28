@@ -9,7 +9,7 @@
 | Pri | # | Exact title on India Code | Year (Act no.) | Date filter (enactment date) | Save as (`content/supplement/pdfs/`) | What it fills |
 |---:|---:|---|---|---|---|---|
 | 1 | 1 | The Bharatiya Nagarik Suraksha Sanhita, 2023 | 2023 (46) | 01-01-2023 to 31-12-2023 | `bnss-2023.pdf` | First Schedule (classification of offences), Second Schedule (forms); any sections still missing (6 confident gaps) |
-| 1 | 2 | The Code of Criminal Procedure, 1973 | 1974 (2) | 01-01-1974 to 31-12-1974 | `crpc-1973.pdf` | First Schedule (classification of offences), Second Schedule (forms); repealed from 1 July 2024 but cited in thousands of judgments |
+| 1 | 2 | The Code of Criminal Procedure, 1973 | 1974 (2) | 01-01-1974 to 31-12-1974 | `crpc-1973.pdf` | First Schedule (classification of offences), Second Schedule (forms); repealed from 1 July 2024 but cited in thousands of judgments. **Also: our "Central" copy lacks 86 of sections 1 to 484 (including s.482) and is filed under States; see `docs/MISSING-SECTIONS.md` (CrPC section, 2026-10-28). Download this one first.** |
 | 1 | 3 | The Bharatiya Nyaya Sanhita, 2023 | 2023 (45) | 01-01-2023 to 31-12-2023 | `bns-2023.pdf` | the 7 confident missing sections |
 | 1 | 4 | The Bharatiya Sakshya Adhiniyam, 2023 | 2023 (47) | 01-01-2023 to 31-12-2023 | `bsa-2023.pdf` | the 4 confident missing sections |
 | 1 | 5 | The Companies Act, 2013 | 2013 (18) | 01-01-2013 to 31-12-2013 | `companies-act-2013.pdf` | 60 missing sections (27 confident) and Schedules I to VII (Schedule III accounts, VII CSR) |

@@ -1,6 +1,18 @@
 // Quick-find (⌘K): what to search for and how to order what comes back. PURE logic (no styling, no network). It uses keyword and exact-word search only, never a search by meaning, so typing never
 // spends the free Voyage limit (3 requests a minute for the whole app).
 export const MIN_CHARS = 2;
+/** Pages you can jump to by typing a word: "vault", "review", "draft" (and what people call them). Each has the `feature` key in src/config/workspace.json that can switch it off. */
+export const SHORTCUTS = [
+  { id: "drafts", label: "Drafts", words: ["draft", "drafts", "drafting"], feature: "drafting" },
+  { id: "reviews", label: "Reviews", words: ["review", "reviews", "reviewing"], feature: "review" },
+  { id: "vault", label: "Vault", words: ["vault", "documents", "document", "files", "uploads"], feature: "vault" },
+];
+/** The shortcuts a typed word points at: the word is the start of one of a page's names ("va", "vault", "rev"), and at least 2 letters long. `enabled` is the set of features switched on. */
+export function matchShortcuts(q, enabled) {
+  const w = String(q ?? "").toLowerCase().replace(/\s+/g, " ").trim();
+  if (w.length < 2 || /\s/.test(w)) return [];
+  return SHORTCUTS.filter((s) => (!enabled || enabled.includes(s.feature)) && (s.label.toLowerCase().startsWith(w) || s.words.some((x) => x.startsWith(w))));
+}
 const CITATION = /^\s*(?:(?:section|sec\.?|s\.?)\s*)?\d{1,4}[A-Za-z]{0,3}\s+(?:of\s+)?(?:the\s+)?[A-Za-z]|^\s*(?:order|o\.?)\s*\d+\s*(?:rule|r\.?)\s*\d+|^\s*art(?:icle|\.)?\s*\d+/i;
 const CASE_NAME = /\s(?:v\.?|vs\.?|versus)\s/i;
 /** A section, order-and-rule or article citation ("138 NI Act", "Order 7 Rule 11", "Article 21"). */
@@ -10,7 +22,7 @@ export const looksLikeCaseName = (q) => CASE_NAME.test(String(q ?? ""));
 /** The order the groups are shown in. A number (or a number with an Act) puts the sections and Articles NUMBERED that first and the text mentions after; a case name puts Judgments first; otherwise Laws, Mentions, Judgments, Your work. */
 export function groupOrder(q, numeric = false) {
   if (looksLikeCaseName(q)) return ["judgments", "laws", "mentions", "work"];
-  return ["laws", "mentions", "judgments", "work"];
+  return ["go", "laws", "mentions", "judgments", "work"];   // "go" (the Drafts, Reviews and Vault pages) only has anything when a page name was typed, and then it comes first
 }
 const norm = (s) => String(s ?? "").toLowerCase().replace(/\s+/g, " ").trim();
 /** Your own work (chats, drafts, reviews, documents) that matches: every word of the query appears in the title; titles that start with the query come first; at most `limit`. */

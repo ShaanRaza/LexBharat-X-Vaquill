@@ -427,3 +427,24 @@ So the page's own sentence, "116 sections: 115 no problems detected, 1 possibly 
 
 No data was changed. If you want the unnumbered block or section 118 re-read against the PDF, that is a fill-in file per section (the process in `content/supplement/README.md`).
 
+## Code of Criminal Procedure, 1973: what the "Central" copy lacks (checked 2026-10-28; read-only, no data changed)
+
+**Why this matters.** Quick-find for "482" shows BNSS s.482 first and no Central CrPC s.482, and the Act page for the CrPC is short of sections. The cause is in the data, not the screens.
+
+**What we hold.** 18 entries for the CrPC (database `acts` table). Only **one is marked Central: `IND_state_6796`** (its id says "state"; category "central"; status "repealed", which is correct since 1 July 2024). The rest are copies filed under States: Chandigarh ×4, Chhattisgarh ×3, Tripura, Rajasthan ×2, Punjab, Maharashtra, Uttar Pradesh, Delhi, and three small amending texts. So, as already noted above ("no Central entry"), the Central CrPC is a State-filed copy that was re-labelled.
+
+**What the "Central" copy lacks.** It has 443 rows: 442 numbered sections and 1 block with no number. The Code has sections 1 to 484, so:
+
+| Count | What |
+|---:|---|
+| **86** | numbers between 1 and 484 that the Central copy does not have |
+| 81 | of these, text for the number exists in the two larger copies (Delhi 525 sections, Rajasthan 524 sections). Those are State versions (they may carry State amendments), so they are not a safe source for the Central text |
+| **5** | of these, no copy at all has them: **101, 352, 404, 423, 483** (they may be printed as "omitted" in the Act; the PDF will say) |
+| 3 | lettered sections seen in some copy but not in the Central one: **41C, 433A, 441A** (it has the other 44 lettered sections we can see anywhere) |
+
+**The 81 numbers whose text exists only in the Delhi and Rajasthan copies:** 21, 26, 27, 200, 203, 207, 214, 217, 223, 224, 225, 226, 229, 230, 232, 234, 270, 271, 272, 273, 277, 280, 282, 283, 289, 295, 298, 312, 318, 321, 334, 336, 337, 347, 348, 349, 355, 362, 364, 368, 369, 370, 371, 372, 376, 380, 382, 383, 386, 387, 392, 393, 398, 400, 403, 405, 411, 413, 414, 420, 425, 428, 431, 434, 445, 447, 448, 449, 450, 451, 453, 460, 461, 462, 472, 474, 478, 479, 480, 481, 482.
+
+**What this comparison cannot tell.** It measures the Central copy against section numbers 1 to 484 and against our other copies, not against the official printed list: the official PDF is not on disk. Lettered sections that no copy has (if the Act has any) would not show up here, and a number in the "5 in no copy" list may be a section the Act itself prints as omitted. Both are settled by the PDF.
+
+**To fix it (waiting for you; nothing changed yet).** Download the CrPC from India Code as `content/supplement/pdfs/crpc-1973.pdf` (it is row 2 of `docs/PDF-DOWNLOAD-LIST.md`, priority 1; take the "as on" / latest PDF, not the enacted version). Then, as for the NI Act: `scripts/supplement/list-sections.mjs` gives the official list of sections, the missing ones are compared against it, and a fill-in file per section is checked word by word against the PDF. Open decisions for then: whether to fill the missing sections into the existing copy (which stays filed under States) or to create a proper Central entry for the Code and leave the State copies alone.
+

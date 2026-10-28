@@ -18,6 +18,7 @@ Scope you set: `reskin` branch only; no backend logic changes (search, Ask, Draf
 | 8 | One plain dataset credit line for Vaquill AI (CC BY 4.0) | In every page footer (mock-ups updated; `PublicFrame` has it now) |
 | 9 | Remove the copied marketing and extra legal pages; fold Cookies and data deletion into Privacy | Phase 1 removes the pages; Phase 7 writes the Cookies and deletion sections. **Feedback (answered 2026-10-28): a small in-app form (message + optional email), saved for /admin, no email sending.** Built in Phase 2 |
 | 10 | Mock-up fixes (a) to (e) | (a) L-shaped corner marks, now also in the real `.marked` rule and `tokens.css`; (b) phone sheet opens only from a chip; (c) "138." at the top of the marked section; (d) **NI Act ss.143 and 145 are not missing**: already filled from the India Code PDF (`docs/MISSING-SECTIONS.md`); (e) the s.138 typos are in India Code's own PDF too, so no official text differs (`docs/DATA-GAPS.md` section 2.6) |
+| 11 | Work tab renamed **Vault** (Drafts · Reviews · Vault); Desk gets three shortcut buttons (Draft a document, Review a contract, Open the vault); Quick-find has a "Go to" group for vault, review and draft | Built 2026-10-28 on the current pages. The spec's address `/work/documents` becomes **`/work/vault`** in Phase 6, with `/work/documents` redirecting to it (**please confirm**) |
 
 **Note on figures in the mock-ups:** the Law page shows "141 sections" and "3 possibly incomplete" from the raw text files. The running app counts differently (for the NI Act: 116 sections, 1 possibly incomplete, 40 filled in from India Code). The real build uses the app's counts.
 
@@ -32,13 +33,13 @@ Done on `reskin`, not pushed: the mock console, copied docs, mock account pages,
 
 **Built:** the pilcrow logo (`src/lib/brand.ts`, generated from the design repo's geometry; `components/kit/Logo.tsx`) and a tab icon (`src/app/icon.svg`, generated from the token colours); the slim top bar (logo, Desk · Ask · Search · Library · Work, Quick-find, menu), the phone bottom tab bar (hides while scrolling down a law or judgment, returns on scroll up), Quick-find (⌘K / Ctrl+K; laws by exact words, Supreme Court cases by party name or citation, your chats, drafts, reviews and documents; Enter opens the first result; never uses the Voyage limit), the testing banner under the bar, a `Tabs` component and Work's tabs, the Feedback form, `src/lib/routes.mjs` (every address in one place). The old sidebar, `ConsoleShell`, `BrowseShell` and `WorkspaceNav` are deleted. New tokens (`--h-topbar`, `--h-tabbar`, `--w-app`, `--w-quickfind`, `--w-dialog`, `--pad-page`, `--logo-h*`) are in `tokens.css`.
 
-**Where each area points until its own page exists (pages keep their old addresses; Phases 3 to 6 change these in `src/lib/shell/areas.mjs`):** Desk `/workspace` (the old dashboard) · Ask `/workspace/chat` · Search `/workspace/browse?tab=acts` (the Acts search box) · Library `/workspace/browse` · Work `/workspace/drafting` with Drafts · Reviews · Documents tabs.
+**Where each area points until its own page exists (pages keep their old addresses; Phases 3 to 6 change these in `src/lib/shell/areas.mjs`):** Desk `/workspace` (the old dashboard) · Ask `/workspace/chat` · Search `/workspace/browse?tab=acts` (the Acts search box) · Library `/workspace/browse` · Work `/workspace/drafting` with Drafts · Reviews · Vault tabs.
 
 **Feedback.** A message and an optional email are saved to a new table, `public.feedback_messages`, and listed in `/admin/insights` under "Messages from the Feedback form". It is a new table in the same Supabase project, not a change to `public.feedback`: that table's checks and unique key assume one thumbs vote on one chat answer, draft or review, and the stats count it. At most 5 messages an hour per browser; the browser is stored as a hash; no IP address; no email is sent. **To switch it on, run `scripts/w8/w8b-feedback-messages.sql` once in the Supabase SQL editor.** Until then the form says so in plain words.
 
 **Departures from the spec (all four approved 2026-10-28):**
 1. **Phone menu.** The spec's phone top bar has only the logo and a search icon, which leaves Log out and Feedback unreachable on a phone. I added the same small menu button next to the search icon.
-2. **Work tabs sit above each page's own title** in Phase 2, because each page still draws its own heading. Phase 6 puts them under the title.
+2. **Work tabs (now **Drafts · Reviews · Vault**) sit above each page's own title** in Phase 2, because each page still draws its own heading. Phase 6 puts them under the title.
 3. **Search and Library both lead to the Acts and judgments browser** until Phase 5 gives Search its own page. Search is highlighted when you are on the Acts search tab; Library on everything else in the browser.
 4. **The testing banner is now one line under the top bar on every page.** The repeated "Testing phase" sentences inside pages were removed; the feature-specific warnings stay (drafts and reviews are for a lawyer to confirm, Vault is saved on this browser only).
 5. **Tab icon is an SVG only** (it scales to 32 and 16 px); extra PNG files would have needed more paths opened in the password gate. **Phase 8 adds a PNG apple-touch-icon** so iPhones show the logo on the home screen (it will need its path opened in the password gate, with a test).
@@ -78,7 +79,7 @@ Done on `reskin`, not pushed: the mock console, copied docs, mock account pages,
 | `/workspace/browse/judgments/<court>/<year>/<case>` | `/judgments/<court>/<year>/<case>` | **Keeps the year** (spec says `/judgments/<court>/<case>`; see section 6, item 1). High Court links keep `?p=<page>` |
 | `/workspace/drafting`, `/workspace/drafting/<id>` | `/work/drafts`, `/work/drafts/<id>` | |
 | `/workspace/review`, `/workspace/review/<id>` | `/work/reviews`, `/work/reviews/<id>` | Review keeps `?doc=<id>` (the Vault "Review" button) |
-| `/workspace/vault`, `/workspace/vault/<id>` | `/work/documents`, `/work/documents/<id>` | `<id>` is the Preview page. Spec only lists the list page; the Preview page needs a home too |
+| `/workspace/vault`, `/workspace/vault/<id>` | `/work/vault`, `/work/vault/<id>` | `<id>` is the Preview page. Spec only lists the list page; the Preview page needs a home too |
 | `/workspace/chat?doc=<id>` (the Vault "Ask about this" button) | `/ask?doc=<id>` | |
 | `/developer`, `/developer?tab=*` | `/` (Desk) | Mock Developer console removed |
 
@@ -112,7 +113,7 @@ Done on `reskin`, not pushed: the mock console, copied docs, mock account pages,
 /search?q=             Search (tabs, filters)      /law/<act>[/<section>]   Law page
 /work/drafts[/<id>]    Drafts                      /judgments/<court>/<year>/<case>
 /work/reviews[/<id>]   Reviews                     /privacy /terms /security   public
-/work/documents[/<id>] Documents (Vault)           /access                  password page
+/work/vault[/<id>]     Vault                     /access                  password page
 /admin                 Insights                    /api/*                   unchanged
 ```
 
@@ -131,7 +132,7 @@ All old addresses go in `next.config.mjs` `redirects()` (permanent, with the que
 | `/workspace/browse/judgments/:court/:year/:case` | `/judgments/:court/:year/:case` |
 | `/workspace/drafting`, `/workspace/drafting/:id` | `/work/drafts`, `/work/drafts/:id` |
 | `/workspace/review`, `/workspace/review/:id` | `/work/reviews`, `/work/reviews/:id` |
-| `/workspace/vault`, `/workspace/vault/:id` | `/work/documents`, `/work/documents/:id` |
+| `/workspace/vault`, `/workspace/vault/:id` | `/work/vault`, `/work/vault/:id` |
 | `/admin/insights` | `/admin` |
 | `/developer`, `/docs`, `/docs/:path*`, `/auth/:path*`, every page in 1.3 | `/` (`/auth/*` goes to `/access`) |
 
@@ -170,7 +171,7 @@ The full file list is in the appendix (section 8).
 | `app/(app)/library/...`, `components/library/*` | Library tabs, built from `BrowseLaws`, `CaseList` |
 | `app/(app)/law/[actId]/[[...section]]/page.tsx`, `components/law/BookLayout.tsx` | Law page (contents, text, margin notes) |
 | `app/(app)/judgments/[court]/[year]/[caseId]/page.tsx`, `components/judgment/*` | Judgment page (header, reader, margin) |
-| `app/(app)/work/...`, `components/work/*` | Work tabs (Drafts, Reviews, Documents) |
+| `app/(app)/work/...`, `components/work/*` | Work tabs (Drafts, Reviews, Vault) |
 | `app/(public)/privacy`, `terms`, `security` | Public pages with a minimal layout |
 | `app/admin/page.tsx` | Insights at `/admin` |
 | `components/kit/`: `Tabs`, `FilterSheet`, `MarginNotes`, `Label` (replaces `Badge` usage), `EmptyState`, `SegmentedToggle` | Shared parts (section 3) |
@@ -221,7 +222,7 @@ Every phase ends with the checks you set: backend diff empty (`git diff main -- 
 3. **Desk and new addresses.** `routes.ts`, new route tree, all redirects in 1.6, Desk at `/`, link strings updated.
 4. **Ask** as a reading desk (`/ask`, `/ask/<id>`): cited page on the right, bottom sheet on phone.
 5. **Library, Law page, Judgment page**, plus **Search** (tabs, filters; "Your documents" only if item 3 is approved).
-6. **Work**: Drafts, Reviews, Documents. The Vault card buttons (9806603) and the "Ready" hint come across unchanged.
+6. **Work**: Drafts, Reviews, Vault. The Vault card buttons (9806603) and the "Ready" hint come across unchanged.
 7. **Public pages**: Privacy, Terms, Security written truthfully (testing phase, not legal advice, Neon / Supabase / Vercel / Gemini / Voyage, cookies, what is logged, that Gemini's free tier and Voyage may use submitted text), public without the password, linked from the footer and the password page.
 8. **Final checks**, a PNG apple-touch-icon (opened in the password gate with a test), then merge into `main` (you push), then point app.lexbharat.ai back to Production.
 
@@ -253,6 +254,21 @@ Testing banner (under the top bar), "not legal advice" notes, coverage and "poss
 - **A feature disappearing.** Phase checks include a pass of search, Ask (with a Vault document), Drafting (generate, edit, export), Review (run, export), Vault (upload, preview, rename, download, delete), judgment reader, feedback.
 - **Fixed bars on phones hiding content.** Tab bar and sheet are tested at 375 px with the keyboard open and on the longest reading pages.
 - **Voyage and Gemini limits.** No new model calls are added except as described in items 3 and 4.
+
+## 9. Later, not scheduled: "Old law ↔ new law" links
+
+*Added 2026-10-28 at your request. Not part of Phases 3 to 8; to be scheduled after you have seen the Law page (Phase 5).*
+
+**What it is.** On a section of a repealed Code, a link to its replacement, and the other way round: CrPC 482 shows "now BNSS 528"; IPC 302 shows "now BNS 103"; BNS 103 shows "replaces IPC 302"; the same for the Indian Evidence Act and the Bharatiya Sakshya Adhiniyam. It would appear on the Law page margin, under a Quick-find result, in search results, and next to a citation in Ask.
+
+**What it needs first.**
+1. **A mapping table**, section to section, with the relation stated honestly: same, reworded, split, merged, new, omitted. It cannot be guessed; it has to come from the Government's published comparison tables for the three new Codes. Check the terms of use, then load it as data (`src/config/old-new-law.json` or a table), reviewed by a lawyer before it is shown. Where there is no direct equivalent the link says so, not nothing.
+2. **The old Codes complete.** The Central CrPC is missing 86 sections including s.482 (see `docs/MISSING-SECTIONS.md`); a link from a section we do not hold would lead nowhere. The CrPC PDF fill comes first.
+3. **Repealed status shown clearly** (the Act page already marks IPC, CrPC and the Evidence Act as repealed).
+
+**How it would look.** One shared label component ("Now BNSS 528", "Replaces CrPC 482") in the existing label style, the same on every screen; no logic in the page. A short honest note: sections can be reworded, so read both; not legal advice. Tests: every mapped number exists in both Acts, no link points to a section we do not hold, and the example pairs (CrPC 482 → BNSS 528, IPC 302 → BNS 103) are checked.
+
+**Open questions for later:** whether to show it in Quick-find results or only on the Law page; and whether a lawyer-reviewed mapping for all ~1,200 sections is needed before launch or a partial list of the most-used sections is enough.
 
 ## 8. Appendix: files removable now (95)
 

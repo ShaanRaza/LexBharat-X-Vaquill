@@ -4,7 +4,7 @@ import { Tabs } from "@/components/kit";
 import { WORK_TABS, areaOf, workTabOf } from "@/lib/shell/areas.mjs";
 import workspace from "@/config/workspace.json";
 
-// Under the page title in Work: Drafts, Reviews, Documents. A tab for a feature switched off in src/config/workspace.json is left out. Renders nothing outside Work.
+// Under the page title in Work: Drafts, Reviews, Vault. A tab for a feature switched off in src/config/workspace.json is left out. Renders nothing outside Work.
 export default function WorkTabs() {
   const pathname = usePathname();
   if (areaOf(pathname) !== "work") return null;

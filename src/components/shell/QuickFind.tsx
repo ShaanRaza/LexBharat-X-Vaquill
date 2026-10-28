@@ -8,7 +8,7 @@ import { useQuickFind, type QfGroups, type QfItem } from "./useQuickFind";
 
 // Quick-find: one box for a law, a judgment, or your own work. Opens from the top bar (or ⌘K / Ctrl+K); on a phone it takes the whole screen. Up and Down move, Enter opens the highlighted result
 // (the first one to start with), Escape closes and returns focus to where it was. Presentation only; the searching is in useQuickFind.
-const LABEL: Record<keyof QfGroups, string> = { laws: "Laws", mentions: "Mentions", judgments: "Judgments", work: "Your work" };
+const LABEL: Record<keyof QfGroups, string> = { go: "Go to", laws: "Laws", mentions: "Mentions", judgments: "Judgments", work: "Your work" };
 
 export default function QuickFind() {
   const [open, setOpen] = useState(false), [q, setQ] = useState(""), [active, setActive] = useState(0), router = useRouter(), uid = useId();

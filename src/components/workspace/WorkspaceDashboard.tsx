@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Badge, Notice, Panel } from "@/components/kit";
+import { Badge, Button, Notice, Panel } from "@/components/kit";
 import workspace from "@/config/workspace.json";
 
 // The dashboard (/workspace): quick actions, this browser's recent chats, and an honest list of what works today. Presentation and one fetch; no search or chat logic here.
@@ -31,14 +31,15 @@ export default function WorkspaceDashboard() {
       <h1 className="mt-6 text-ui-title font-semibold">Welcome to LexBharat</h1>
       <p className="mt-2 text-ui-body text-secondary">Research Indian law in plain English, with a link to the section behind every answer.</p>
 
+      <nav aria-label="Shortcuts" className="mt-5 flex flex-wrap gap-2">
+        {(["drafting", "review", "vault"] as const).filter((k) => f[k].enabled).map((k) => <Button key={k} href={f[k].href} variant={k === "drafting" ? "primary" : "secondary"}>{f[k].action}</Button>)}
+      </nav>
+
       <section aria-labelledby="quick" className="mt-8">
         <h2 id="quick" className="text-ui-lead font-semibold">Start here</h2>
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
           <Action href="/workspace/chat" title="Ask a legal question" text="Get an answer from Indian Acts, with numbered citations." />
           <Action href="/workspace/browse" title="Search Acts & Judgments" text="Look up an Act or a section, or browse Supreme Court and High Court cases." />
-          <Action href={f.drafting.enabled ? f.drafting.href : undefined} title={f.drafting.action} text="Prepare a first draft from a template, with the Acts it relies on." />
-          <Action href={f.review.enabled ? f.review.href : undefined} title={f.review.action} text="Check a contract against the law and flag problems." />
-          <Action href={f.vault.enabled ? f.vault.href : undefined} title={f.vault.action} text="Keep your own documents here and use them in chat and review." />
         </div>
       </section>
 

@@ -7,11 +7,11 @@ export const AREAS = [
   { id: "library", label: "Library", href: "/workspace/browse" },
   { id: "work", label: "Work", href: "/workspace/drafting" },
 ];
-/** Tabs under the page title in Work (Drafts, Reviews, Documents). `feature` is the key in src/config/workspace.json that can switch one off. */
+/** Tabs under the page title in Work (Drafts, Reviews, Vault). `feature` is the key in src/config/workspace.json that can switch one off. */
 export const WORK_TABS = [
   { id: "drafts", label: "Drafts", href: "/workspace/drafting", feature: "drafting" },
   { id: "reviews", label: "Reviews", href: "/workspace/review", feature: "review" },
-  { id: "documents", label: "Documents", href: "/workspace/vault", feature: "vault" },
+  { id: "vault", label: "Vault", href: "/workspace/vault", feature: "vault" },
 ];
 const under = (path, base) => path === base || path.startsWith(`${base}/`);
 /** The area a page belongs to, or null for pages outside the five areas (Privacy, Terms, Security, the password page, 404). Decided by the path alone, so it works while a page is built on the server. */

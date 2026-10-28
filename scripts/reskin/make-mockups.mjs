@@ -39,6 +39,7 @@ const desk = shell({ area: "desk", title: "Desk", body: `<main class="wrap"><div
   <div class="bigbox" role="search"><span class="in typed">138 NI Act</span><a class="btn primary" href="law.html">Open ${ic("send")}</a></div>
   <p class="enter"><span class="kbd">Enter</span> opens the law page: <b>NI Act, section 138</b>. <span class="muted">Empty box: "Ask a question, find a law, or paste a section." Not sure what you meant? Enter searches.</span></p>
   <div class="chips" style="margin-top:.9rem"><a class="chip" href="ask.html">Notice period for cheque bounce</a><a class="chip" href="law.html">Article 21</a><a class="chip" href="work.html">Draft a legal notice</a><a class="chip" href="law.html">Order 7 Rule 11</a></div>
+  <div class="row" style="margin-top:1rem" role="group" aria-label="Shortcuts"><a class="btn primary" href="work.html">Draft a document</a><a class="btn secondary" href="work.html">Review a contract</a><a class="btn secondary" href="work.html">Open the Vault</a></div>
   <h2>Recent work</h2>
   <div class="list card" style="padding-block:.3rem">
     <a class="row" href="ask.html"><span class="lab type">Ask</span><span class="grow"><span class="name">What is the time limit to send a notice after a cheque bounces?</span><br><span class="sub">Supported · 2 hours ago</span></span></a>
@@ -154,7 +155,7 @@ const judgment = shell({ area: "library", title: "Dashrath Rupsingh Rathod v. St
 // ---------- Work ----------
 const work = shell({ area: "work", title: "Work", body: `<main class="wrap">
   <h1 class="title">Work</h1><p class="lede">Everything you've made, saved on this browser only.</p>
-  <div class="tabs"><a href="#">Drafts <span class="n">2</span></a><a href="#">Reviews <span class="n">3</span></a><a href="#" aria-current="page">Documents <span class="n">2</span></a></div>
+  <div class="tabs"><a href="#">Drafts <span class="n">2</span></a><a href="#">Reviews <span class="n">3</span></a><a href="#" aria-current="page">Vault <span class="n">2</span></a></div>
   <div class="work-actions"><span class="btn primary">Add documents</span><div class="field" style="flex:1 1 12rem;max-width:18rem;height:40px;display:flex;align-items:center;gap:.5rem;color:var(--muted)">${ic("search")} Search by name</div><span class="select">Newest first ▾</span><span class="small muted">2 of 30 documents · 0.0 of 100 MB used</span></div>
   <div class="notice good" style="margin-top:.9rem"><span><b style="font-weight:500">nda-test-contract.docx:</b> Ready. Ask a question about it or run a review. <u>Dismiss</u></span></div>
   <div class="card" style="margin-top:1rem;padding-block:.3rem"><div class="list">
