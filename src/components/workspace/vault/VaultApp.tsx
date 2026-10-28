@@ -2,11 +2,13 @@
 import Link from "next/link";
 import { SCAN_LABEL } from "@/lib/vault/scan.mjs";
 import { useMemo, useState } from "react";
-import { Notice, Panel } from "@/components/kit";
+import { Button, Notice, Panel } from "@/components/kit";
 import { MB } from "@/lib/vault/files.mjs";
 import type { VaultDoc } from "@/lib/vault/store";
+import DocActions from "./DocActions";
 import DocStatus from "./DocStatus";
 import UploadButton from "./UploadButton";
+import { useJustReady } from "./useJustReady";
 import { useVault } from "./useVault";
 
 // The Vault page (/workspace/vault): add documents, see their status, search by name, sort, rename, download, delete. Presentation only; data and background work are in useVault.
@@ -26,7 +28,7 @@ export default function VaultApp() {
   }, [v.state, q, sort]);
   async function save(d: VaultDoc) { const e = await v.rename(d.id, draft); if (e) setErr(e); else { setErr(""); setEditing(null); backToRename(d.id); } }
   async function del(d: VaultDoc) { if (window.confirm(`Delete “${d.name}”? The file, its text and its search data are removed for good. Reviews already made from it stay in Review until you delete them.`)) await v.remove(d.id); }
-  const lim = v.state?.limits;
+  const lim = v.state?.limits, fresh = useJustReady(v.state?.docs);
   return (
     <div className="mx-auto max-w-4xl pb-10">
       <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Saved on this browser only.</strong> Testing phase: don&apos;t upload confidential client documents.</p></Notice>
@@ -40,6 +42,8 @@ export default function VaultApp() {
         <p className="text-ui-sm text-muted">{lim ? `${v.state!.docs.length} of ${lim.maxDocs} documents · ${(v.state!.usedBytes / MB).toFixed(1)} of ${lim.maxTotalMb} MB used` : ""}</p>
       </div>
       <ul className="mt-3 space-y-2" aria-live="polite">{v.notes.map((n, i) => <li key={i}><Notice tone={n.ok ? "complete" : "bad"} role={n.ok ? "status" : "alert"} compact><p><strong className="font-medium text-foreground">{n.name}:</strong> {n.message}</p></Notice></li>)}</ul>
+
+      <ul className="mt-3 space-y-2" aria-live="polite">{fresh.ready.map((d) => <li key={d.id}><Notice tone="complete" role="status" compact><p className="flex flex-wrap items-center gap-x-3 gap-y-1"><span><strong className="font-medium text-foreground">{d.name}:</strong> Ready. Ask a question about it or run a review.</span><Button variant="quiet" size="sm" onClick={() => fresh.dismiss(d.id)} aria-label={`Dismiss the note about ${d.name}`}>Dismiss</Button></p></Notice></li>)}</ul>
 
       <section aria-labelledby="docs" className="mt-8">
         <div className="flex flex-wrap items-end justify-between gap-3">
@@ -78,6 +82,7 @@ export default function VaultApp() {
                   </div>
                 )}
                 <p className="mt-1 text-ui-sm text-muted">{TYPE[d.kind]} · {size(d.sizeBytes)} · {d.pages ? `${d.pages} page${d.pages === 1 ? "" : "s"}` : d.kind === "pdf" ? "pages: not known yet" : "no page numbers"} · added {when(d.createdAt)}</p>
+                {d.status === "ready" && editing !== d.id && <DocActions id={d.id} name={d.name} scanned={d.scanned} />}
                 {d.status === "unreadable" && d.statusDetail && <p className="mt-1 text-ui-sm text-quality-bad">{d.statusDetail}</p>}
                 {d.scanned && d.status === "ready" && <p className="mt-1 text-ui-sm text-quality-warn">{SCAN_LABEL}{d.scanSkipped > 0 ? `. ${d.scanSkipped} scanned page${d.scanSkipped === 1 ? " was" : "s were"} not read (limit per document).` : "."}</p>}
                 {d.status === "waiting" && <p className="mt-1 text-ui-sm text-quality-warn">{d.statusDetail || "Waiting to read. It will carry on by itself."} You can leave this page; it carries on when you come back.</p>}

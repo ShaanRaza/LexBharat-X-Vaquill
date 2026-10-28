@@ -1,8 +1,9 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Badge, Notice, Panel } from "@/components/kit";
+import { docFromSearch } from "@/lib/vault/links.mjs";
 import { CONTRACT_TYPES, isContractType } from "@/lib/review/rules.mjs";
 import type { ReviewSummaryRow } from "@/lib/review/store";
 import DocStatus from "@/components/workspace/vault/DocStatus";
@@ -20,6 +21,13 @@ export default function ReviewHome() {
   const [meta, setMeta] = useState<Meta | null>(null), [docId, setDocId] = useState(""), [type, setType] = useState(""), [side, setSide] = useState(""), [busy, setBusy] = useState(false), [err, setErr] = useState("");
   const load = useCallback(() => { fetch("/api/review", { cache: "no-store" }).then((r) => r.json()).then(setMeta).catch(() => setMeta({ ready: false, reviews: [], limits: { daily: 5, weekly: 20, maxSaved: 30 }, usage: { day: 0, week: 0 }, error: "Could not load your reviews." })); }, []);
   useEffect(() => { load(); }, [load]);
+  const wanted = useRef<string | null | undefined>(undefined);   // "Review" on a Vault document opens /workspace/review?doc=<id>: choose that document once, then tidy the address
+  useEffect(() => {
+    if (wanted.current === undefined) wanted.current = docFromSearch(window.location.search);
+    const id = wanted.current; if (!id || !v.state) return;
+    wanted.current = null; window.history.replaceState(null, "", window.location.pathname);
+    if (v.state.docs.some((d) => d.id === id && d.status === "ready")) setDocId(id);
+  }, [v.state]);
   const docs = v.state?.docs ?? [], ready = docs.filter((d) => d.status === "ready");
   const sides = isContractType(type) ? CONTRACT_TYPES[type].sides : [];
   async function start(e: React.FormEvent) {

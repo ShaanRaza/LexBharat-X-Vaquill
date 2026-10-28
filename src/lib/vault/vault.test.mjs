@@ -61,3 +61,13 @@ test("readPdfPages reads a PDF in slices that add up to the one-shot text", asyn
   assert.deepEqual([...a.pages, ...b.pages, ...c.pages], (await extractText("pdf", bytes)).pages.map((p, i) => p || ""));
   assert.equal((await readPdfPages(new TextEncoder().encode("not a pdf"), 1)).total, 0);
 });
+
+import { chatLink, docFromSearch, newlyReady, previewLink, reviewLink } from "./links.mjs";
+test("document actions: links, ?doc= parsing, and what counts as newly Ready", () => {
+  const id = "0f8fad5b-d9cb-469f-a165-70867728950e";
+  assert.equal(chatLink(id), `/workspace/chat?doc=${id}`); assert.equal(reviewLink(id), `/workspace/review?doc=${id}`); assert.equal(previewLink(id), `/workspace/vault/${id}`);
+  assert.equal(docFromSearch(`?doc=${id}`), id); assert.equal(docFromSearch("?doc=../../x"), null); assert.equal(docFromSearch(""), null); assert.equal(docFromSearch("?other=1"), null);
+  const d = (i, status) => ({ id: i, status });
+  assert.deepEqual(newlyReady([d("a", "processing"), d("b", "ready"), d("c", "waiting")], [d("a", "ready"), d("b", "ready"), d("c", "ready"), d("n", "ready")]).map((x) => x.id), ["a", "c"]);
+  assert.deepEqual(newlyReady([d("a", "processing")], [d("a", "unreadable")]), []);
+});

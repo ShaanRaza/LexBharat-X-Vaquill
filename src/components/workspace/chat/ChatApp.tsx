@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Notice, Panel } from "@/components/kit";
 import AnswerView from "./AnswerView";
 import FeedbackBar from "../FeedbackBar";
+import { docFromSearch } from "@/lib/vault/links.mjs";
 import AttachPicker, { type Attached } from "./AttachPicker";
 import type { Citation, CheckResult } from "@/lib/chat/store";
 
@@ -21,6 +22,12 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
 
   const refreshUsage = useCallback(() => { fetch("/api/chat", { cache: "no-store" }).then((r) => r.json()).then((j) => { if (j.usage && j.limits) setUsage({ day: j.usage.day, daily: j.limits.daily }); }).catch(() => null); }, []);
   useEffect(() => { refreshUsage(); }, [refreshUsage]);
+  // "Ask about this" on a Vault document opens /workspace/chat?doc=<id>: attach that document to the first question, then tidy the address so a reload does not attach it again.
+  useEffect(() => {
+    const id = docFromSearch(window.location.search); if (!id) return;
+    window.history.replaceState(null, "", window.location.pathname);
+    fetch("/api/vault", { cache: "no-store" }).then((r) => r.json()).then((j) => { const d = (j.docs ?? []).find((x: { id: string; name: string; status: string }) => x.id === id && x.status === "ready"); if (d) setAttached([{ id: d.id, name: d.name }]); }).catch(() => null);
+  }, []);
   // The address (initialId) changes either because THIS component just started a chat (its own history.replaceState: nothing to do) or because the user opened another chat or "New chat" from the sidebar (reset and load).
   useEffect(() => {
     if (initialId === current.current) return;
