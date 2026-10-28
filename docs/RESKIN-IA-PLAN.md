@@ -47,6 +47,8 @@ Done on `reskin`, not pushed: the mock console, copied docs, mock account pages,
 
 **Checks run:** `test:extract` 212 pass; `qa:sweep`; `build`; **axe-core** (WCAG 2 A and AA plus best practice) on 7 pages and on Quick-find, the menu and the Feedback form open, at desktop and phone width: no violations after two fixes (the banner and the dataset credit are now landmarks); no horizontal scroll at 375 px on any page; keyboard: Ctrl+K opens Quick-find with focus in the box, Escape closes it and returns focus. `ChatHistory` and `DraftHistory` are unused until Desk and Work reuse them.
 
+**Quick-find ranking (fixed after the first live try).** A bare number ("138", "302", "21", "43A") now lists the sections and Articles *numbered* that across the Acts first, best-known first, then a separate group "Mentions 138" for text matches; "138 NI", "s.138 NI Act", "NI 138", "section 138 negotiable" all put NI Act s.138 on top; a number matches a judgment only through its case number or a full citation of the same report series, never a report page number; CPC Orders read "Order XVIII Rule 7". The popular Acts, their short names (NI Act, CPC, CrPC, IPC, BNS, BNSS, BSA, IT Act, GST and more) and the well-known numbers are in `src/config/quickfind.json`, not in code; the logic is `src/lib/quickfind/rank.mjs` (8 tests), the data is read by `src/lib/acts/quickLaws.ts` behind a new read-only `/api/quickfind`. Exact words only; no Voyage. Known data limit: the Code of Criminal Procedure has no real Central entry (it is filed under States, 443 sections, without s.482), so "482" shows BNSS s.482 first and no Central CrPC s.482 (see `docs/MISSING-SECTIONS.md`).
+
 ## 0. What is in this step
 
 | Item | Where |

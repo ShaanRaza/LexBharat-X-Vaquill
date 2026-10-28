@@ -1,0 +1,292 @@
+{
+  "about": "Quick-find ranking for a bare section or Article number (\"138\", \"302\", \"21\", \"43A\") and for 'number + Act' (\"138 NI\", \"NI 138\", \"s.138 NI Act\", \"section 138 negotiable\"). `acts` is the list of popular Central Acts, most popular first: `title` is the start of the Act's title in the database (lower case), `names` are the short names people type (also single words of the title). `wellKnown` says which Act a number is best known from: \"138\" is the NI Act's section 138, \"21\" is Article 21 of the Constitution. A number not listed there is ranked by the order of `acts`, then Central before State, in force before repealed. Edit this file to change the ranking; no code change is needed. The Acts are matched on the Central copy only (State copies share titles).",
+  "acts": [
+    {
+      "key": "ni",
+      "title": "the negotiable instruments act",
+      "names": [
+        "ni act",
+        "n i act",
+        "ni",
+        "negotiable instruments act",
+        "negotiable instruments"
+      ]
+    },
+    {
+      "key": "constitution",
+      "title": "the constitution of india",
+      "names": [
+        "constitution",
+        "constitution of india",
+        "coi",
+        "const"
+      ]
+    },
+    {
+      "key": "ipc",
+      "title": "the indian penal code",
+      "names": [
+        "ipc",
+        "indian penal code",
+        "penal code"
+      ]
+    },
+    {
+      "key": "bns",
+      "title": "the bharatiya nyaya sanhita",
+      "names": [
+        "bns",
+        "bharatiya nyaya sanhita",
+        "nyaya sanhita"
+      ]
+    },
+    {
+      "key": "crpc",
+      "title": "the code of criminal procedure",
+      "names": [
+        "crpc",
+        "cr pc",
+        "cr.p.c",
+        "code of criminal procedure",
+        "criminal procedure code"
+      ]
+    },
+    {
+      "key": "bnss",
+      "title": "the bharatiya nagarik suraksha sanhita",
+      "names": [
+        "bnss",
+        "bharatiya nagarik suraksha sanhita",
+        "nagarik suraksha sanhita"
+      ]
+    },
+    {
+      "key": "cpc",
+      "title": "the code of civil procedure",
+      "names": [
+        "cpc",
+        "c p c",
+        "code of civil procedure",
+        "civil procedure code"
+      ]
+    },
+    {
+      "key": "evidence",
+      "title": "the indian evidence act",
+      "names": [
+        "evidence act",
+        "indian evidence act",
+        "iea"
+      ]
+    },
+    {
+      "key": "bsa",
+      "title": "the bharatiya sakshya adhiniyam",
+      "names": [
+        "bsa",
+        "bharatiya sakshya adhiniyam",
+        "sakshya adhiniyam"
+      ]
+    },
+    {
+      "key": "contract",
+      "title": "the indian contract act",
+      "names": [
+        "contract act",
+        "indian contract act"
+      ]
+    },
+    {
+      "key": "it",
+      "title": "the information technology act",
+      "names": [
+        "it act",
+        "information technology act",
+        "it"
+      ]
+    },
+    {
+      "key": "gst",
+      "title": "the central goods and services tax act",
+      "names": [
+        "gst",
+        "cgst",
+        "gst act",
+        "cgst act",
+        "goods and services tax",
+        "central goods and services tax act"
+      ]
+    },
+    {
+      "key": "limitation",
+      "title": "the limitation act",
+      "names": [
+        "limitation act",
+        "limitation"
+      ]
+    },
+    {
+      "key": "arbitration",
+      "title": "the arbitration and conciliation act",
+      "names": [
+        "arbitration act",
+        "arbitration and conciliation act",
+        "a&c act"
+      ]
+    }
+  ],
+  "wellKnown": {
+    "138": [
+      "ni"
+    ],
+    "139": [
+      "ni"
+    ],
+    "141": [
+      "ni"
+    ],
+    "142": [
+      "ni"
+    ],
+    "143A": [
+      "ni"
+    ],
+    "148": [
+      "ni"
+    ],
+    "14": [
+      "constitution"
+    ],
+    "19": [
+      "constitution"
+    ],
+    "21": [
+      "constitution"
+    ],
+    "32": [
+      "constitution"
+    ],
+    "226": [
+      "constitution"
+    ],
+    "227": [
+      "constitution"
+    ],
+    "300A": [
+      "constitution"
+    ],
+    "356": [
+      "constitution"
+    ],
+    "302": [
+      "ipc",
+      "bns"
+    ],
+    "304B": [
+      "ipc"
+    ],
+    "307": [
+      "ipc"
+    ],
+    "376": [
+      "ipc"
+    ],
+    "377": [
+      "ipc"
+    ],
+    "406": [
+      "ipc"
+    ],
+    "420": [
+      "ipc",
+      "bns"
+    ],
+    "498A": [
+      "ipc"
+    ],
+    "120B": [
+      "ipc"
+    ],
+    "34": [
+      "ipc",
+      "arbitration",
+      "cpc"
+    ],
+    "103": [
+      "bns"
+    ],
+    "318": [
+      "bns"
+    ],
+    "64": [
+      "bns"
+    ],
+    "85": [
+      "bns"
+    ],
+    "125": [
+      "crpc",
+      "bnss"
+    ],
+    "154": [
+      "crpc"
+    ],
+    "161": [
+      "crpc"
+    ],
+    "164": [
+      "crpc"
+    ],
+    "173": [
+      "crpc",
+      "bnss"
+    ],
+    "311": [
+      "crpc"
+    ],
+    "438": [
+      "crpc"
+    ],
+    "439": [
+      "crpc"
+    ],
+    "482": [
+      "crpc",
+      "bnss"
+    ],
+    "528": [
+      "bnss"
+    ],
+    "9": [
+      "cpc"
+    ],
+    "11": [
+      "cpc"
+    ],
+    "80": [
+      "cpc"
+    ],
+    "115": [
+      "cpc"
+    ],
+    "151": [
+      "cpc"
+    ],
+    "65B": [
+      "evidence",
+      "bsa"
+    ],
+    "27": [
+      "evidence"
+    ],
+    "66A": [
+      "it"
+    ],
+    "43": [
+      "it"
+    ],
+    "43A": [
+      "it"
+    ]
+  }
+}

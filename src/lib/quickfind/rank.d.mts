@@ -1,0 +1,10 @@
+export type QfConfig = { acts: { key: string; title: string; names: string[] }[]; wellKnown: Record<string, string[]> };
+export function resolveActs(phrase: string, cfg: QfConfig): string[];
+export function parseQuick(q: string, cfg: QfConfig): { kind: "number"; number: string } | { kind: "act-number"; number: string; acts: string[] } | { kind: "text" };
+export function popularKey(actTitle: string, category: string | null | undefined, cfg: QfConfig): string | null;
+export function titlePrefixes(keys: string[], cfg: QfConfig): string[];
+export function rankNumbered<T extends { actTitle: string; category?: string | null; actStatus?: string | null }>(rows: T[], number: string, cfg: QfConfig): T[];
+export function isFullCitation(q: string): boolean;
+export function numericOk(query: string, hit: { citation?: string | null; caseNumber?: string | null }): boolean;
+export function toRoman(n: number | string): string;
+export function unitReadable(number: string): string;

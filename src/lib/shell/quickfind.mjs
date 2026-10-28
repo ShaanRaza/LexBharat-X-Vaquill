@@ -7,11 +7,10 @@ const CASE_NAME = /\s(?:v\.?|vs\.?|versus)\s/i;
 export const looksLikeCitation = (q) => CITATION.test(String(q ?? ""));
 /** Two parties joined by "v.", "vs" or "versus". */
 export const looksLikeCaseName = (q) => CASE_NAME.test(String(q ?? ""));
-/** The order the groups are shown in: a citation puts Laws first, a case name puts Judgments first, everything else shows Laws, Judgments, Your work. */
-export function groupOrder(q) {
-  if (looksLikeCaseName(q)) return ["judgments", "laws", "work"];
-  if (looksLikeCitation(q)) return ["laws", "judgments", "work"];
-  return ["laws", "judgments", "work"];
+/** The order the groups are shown in. A number (or a number with an Act) puts the sections and Articles NUMBERED that first and the text mentions after; a case name puts Judgments first; otherwise Laws, Mentions, Judgments, Your work. */
+export function groupOrder(q, numeric = false) {
+  if (looksLikeCaseName(q)) return ["judgments", "laws", "mentions", "work"];
+  return ["laws", "mentions", "judgments", "work"];
 }
 const norm = (s) => String(s ?? "").toLowerCase().replace(/\s+/g, " ").trim();
 /** Your own work (chats, drafts, reviews, documents) that matches: every word of the query appears in the title; titles that start with the query come first; at most `limit`. */

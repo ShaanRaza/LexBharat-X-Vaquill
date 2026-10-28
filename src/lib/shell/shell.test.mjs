@@ -23,7 +23,7 @@ test("citations and case names are told apart; groups are ordered accordingly", 
   for (const q of ["cheque bounce notice", "what is bail", "138", "NI Act"]) assert.equal(looksLikeCitation(q), false, q);
   for (const q of ["State of UP v. Kumar", "Joshi vs Patil", "A versus B"]) assert.equal(looksLikeCaseName(q), true, q);
   assert.equal(looksLikeCaseName("overview of bail"), false);
-  assert.deepEqual(groupOrder("State v. Kumar"), ["judgments", "laws", "work"]); assert.deepEqual(groupOrder("138 NI Act"), ["laws", "judgments", "work"]); assert.deepEqual(groupOrder("bail"), ["laws", "judgments", "work"]);
+  assert.deepEqual(groupOrder("State v. Kumar"), ["judgments", "laws", "mentions", "work"]); assert.deepEqual(groupOrder("138 NI Act"), ["laws", "mentions", "judgments", "work"]); assert.deepEqual(groupOrder("138", true), ["laws", "mentions", "judgments", "work"]); assert.deepEqual(groupOrder("bail"), ["laws", "mentions", "judgments", "work"]);
 });
 test("your own work matches on every word, best first, and Enter opens the first result of the first group", () => {
   const items = [{ title: "Legal notice: cheque dishonour", updatedAt: "2026-10-27" }, { title: "NDA review", updatedAt: "2026-10-28" }, { title: "Cheque bounce question", updatedAt: "2026-10-20" }, { title: "Rent agreement", updatedAt: "2026-10-01" }];

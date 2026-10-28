@@ -8,12 +8,12 @@ import { useQuickFind, type QfGroups, type QfItem } from "./useQuickFind";
 
 // Quick-find: one box for a law, a judgment, or your own work. Opens from the top bar (or ⌘K / Ctrl+K); on a phone it takes the whole screen. Up and Down move, Enter opens the highlighted result
 // (the first one to start with), Escape closes and returns focus to where it was. Presentation only; the searching is in useQuickFind.
-const LABEL: Record<keyof QfGroups, string> = { laws: "Laws", judgments: "Judgments", work: "Your work" };
+const LABEL: Record<keyof QfGroups, string> = { laws: "Laws", mentions: "Mentions", judgments: "Judgments", work: "Your work" };
 
 export default function QuickFind() {
   const [open, setOpen] = useState(false), [q, setQ] = useState(""), [active, setActive] = useState(0), router = useRouter(), uid = useId();
   const input = useRef<HTMLInputElement>(null), back = useRef<HTMLElement | null>(null), box = useRef<HTMLDivElement>(null);
-  const { groups, order, busy, ready } = useQuickFind(open, q);
+  const { groups, order, busy, ready, mentionsLabel } = useQuickFind(open, q), label = (g: keyof QfGroups) => (g === "mentions" ? mentionsLabel : LABEL[g]);
   const flat: QfItem[] = order.flatMap((g) => groups[g]);
   const show = () => { back.current = document.activeElement as HTMLElement; setOpen(true); };
   const hide = () => { setOpen(false); setQ(""); setActive(0); setTimeout(() => back.current?.focus(), 0); };
@@ -57,8 +57,8 @@ export default function QuickFind() {
               {!ready && <p className="px-3 py-6 text-center text-ui-base text-muted">Type at least 2 characters. Enter opens the first result.</p>}
               {ready && !busy && flat.length === 0 && <p className="px-3 py-6 text-center text-ui-base text-muted">Nothing matched. <a className="text-primary underline" href={routes.searchPage()} onClick={hide}>Try Search</a>.</p>}
               {ready && order.map((g) => groups[g].length > 0 && (
-                <div key={g} role="group" aria-label={LABEL[g]} className="mb-1">
-                  <p className="px-3 pb-1 pt-2 font-mono text-fs-nano font-medium uppercase tracking-caps-wide text-muted">{LABEL[g]}</p>
+                <div key={g} role="group" aria-label={label(g)} className="mb-1">
+                  <p className="px-3 pb-1 pt-2 font-mono text-fs-nano font-medium uppercase tracking-caps-wide text-muted">{label(g)}</p>
                   {groups[g].map((it) => { n++; const on = n === active, idx = n; return (
                     <div key={it.id} id={`${uid}-${it.id}`} role="option" aria-selected={on} onMouseEnter={() => setActive(idx)} onClick={() => go(it)}
                       className={`flex cursor-pointer items-start gap-3 rounded-field px-3 py-2 ${on ? "bg-accent" : ""}`}>
