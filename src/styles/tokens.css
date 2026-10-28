@@ -83,9 +83,6 @@
   --tracking-brand: -0.03em;
 
   /* layout widths */
-  --w-sidebar: 236px;
-  --w-sidebar-narrow: 200px;
-  --w-drawer: min(260px, 85vw);
   --w-content: 880px;
   /* the marked page: thin L-shaped corner marks drawn just outside the passage */
   --mark-corner: 12px;
@@ -198,3 +195,22 @@
   --glow-deep-rgb: 23 61 46;
   --glow-shade-rgb: 8 26 19;
 }
+
+/* ---- Phase 2 (the new shell): sizes the top bar, phone tab bar, Quick-find and the logo need. Everything here is a value; components never write the number. ---- */
+:root {
+  --h-topbar: 56px;
+  --h-tabbar: 62px;
+  --w-app: 1200px;
+  --w-toc: 15rem;
+  --w-notes: 17rem;
+  --w-read: 40rem;
+  --w-ask-page: 27rem;
+  --w-filters: 14rem;
+  --w-quickfind: 15rem;
+  --w-dialog: 34rem;
+  --pad-page: 1.5rem;
+  --logo-h-sm: 18px;
+  --logo-h: 22px;
+  --logo-h-lg: 30px;
+}
+@media (max-width: 760px) { :root { --pad-page: 1rem; } }

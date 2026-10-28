@@ -6,7 +6,7 @@ import { Badge, Notice, Panel } from "@/components/kit";
 import AdminLogin from "@/components/AdminLogin";
 import AdminLogout from "@/components/AdminLogout";
 import { ADMIN_COOKIE, adminState, isAdminCookie } from "@/lib/insights/admin";
-import { adminData, insightsConfigured } from "@/lib/insights/server";
+import { adminMessages, adminData, insightsConfigured } from "@/lib/insights/server";
 import { byDay, ratio } from "@/lib/insights/rules.mjs";
 
 export const metadata: Metadata = { title: "Insights | LexBharat", robots: { index: false, follow: false } };
@@ -31,6 +31,7 @@ export default async function InsightsPage() {
   if (!d || d.error) {
     return shell(<><h1 className="text-ui-title font-semibold">Insights</h1><Notice tone="warn" role="status" className="mt-4"><p>{d?.error === "missing" ? "The W8 tables are not in Supabase yet. Paste scripts/w8/w8-schema.sql into Supabase's SQL Editor and press Run, then reload." : "The statistics could not be loaded. Try again in a moment."}</p></Notice></>);
   }
+  const msgs = await adminMessages().catch(() => ({ error: "failed" as const, rows: [] }));
   const days = byDay(d.usage), pages: Record<string, number> = {}, templates: Record<string, number> = {};
   for (const x of days) { for (const [k, v] of Object.entries(x.visitsByPage)) pages[k] = (pages[k] ?? 0) + v; for (const [k, v] of Object.entries(x.draftsByTemplate)) templates[k] = (templates[k] ?? 0) + v; }
   const tot = (f: (x: (typeof days)[number]) => number) => days.reduce((s, x) => s + f(x), 0), answers = tot((x) => x.answers), ms = tot((x) => x.answerMs);
@@ -64,6 +65,21 @@ export default async function InsightsPage() {
         <table className="mt-2 w-full text-ui-base"><thead className="text-left text-ui-sm text-secondary"><tr><th scope="col" className="py-1 pr-3 font-medium">Feature</th><th scope="col" className="py-1 pr-3 font-medium">👍</th><th scope="col" className="py-1 pr-3 font-medium">👎</th><th scope="col" className="py-1 font-medium">Share 👍</th></tr></thead>
           <tbody>{votes.map((v) => <tr key={v.f} className="border-t border-border/70"><th scope="row" className="py-1.5 pr-3 text-left font-medium">{FEATURE_NAMES[v.f]}</th><td className="pr-3">{v.up}</td><td className="pr-3">{v.down}</td><td>{v.upPct === null ? "–" : `${v.upPct}%`}</td></tr>)}</tbody></table>
       </Panel>
+
+      <section aria-labelledby="messages" className="mt-6">
+        <h2 id="messages" className="text-ui-lead font-semibold">Messages from the Feedback form ({msgs.rows.length}{msgs.rows.length >= 200 ? "+, newest 200" : ""})</h2>
+        {msgs.error === "missing" && <Notice tone="warn" role="status" className="mt-2"><p>The messages table is not in Supabase yet. Paste scripts/w8/w8b-feedback-messages.sql into the Supabase SQL editor and run it once; the Feedback form works as soon as it exists.</p></Notice>}
+        {msgs.error === "failed" && <Notice tone="warn" role="status" className="mt-2"><p>The messages could not be loaded. Reload the page.</p></Notice>}
+        {!msgs.error && msgs.rows.length === 0 && <p className="mt-2 text-ui-base text-muted">No messages yet.</p>}
+        <ul className="mt-3 space-y-3">
+          {msgs.rows.map((m) => (
+            <li key={m.id}><Panel as="article">
+              <p className="flex flex-wrap items-center gap-1.5 text-ui-sm text-secondary">{m.page && <Badge>{m.page}</Badge>}{m.email && <Badge tone="info">{m.email}</Badge>}<span>{when(m.created_at)}</span></p>
+              <p className="mt-2 whitespace-pre-wrap text-ui-base">{m.message}</p>
+            </Panel></li>
+          ))}
+        </ul>
+      </section>
 
       <section aria-labelledby="down" className="mt-6">
         <h2 id="down" className="text-ui-lead font-semibold">Thumbs-down feedback ({d.down.length}{d.down.length >= 300 ? "+, newest 300" : ""})</h2>

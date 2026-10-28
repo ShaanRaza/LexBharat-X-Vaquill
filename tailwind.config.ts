@@ -54,8 +54,10 @@ const config: Config = {
       },
       borderRadius: { control: "var(--radius-control)", tight: "var(--radius-tight)", panel: "var(--radius-panel)", chip: "var(--radius-chip)", field: "var(--radius-field)", card: "var(--radius-card)", slim: "var(--radius-slim)", button: "var(--radius-button)", input: "var(--radius-input)" },
       letterSpacing: { "caps-wide": "var(--tracking-caps-wide)", caps: "var(--tracking-caps)", tight: "var(--tracking-tight)", brand: "var(--tracking-brand)", "caps-xwide": "var(--tracking-caps-xwide)", "snug": "var(--tracking-snug)", "tight-soft": "var(--tracking-tight-soft)", "caps-mid": "var(--tracking-caps-mid)", "caps-soft": "var(--tracking-caps-soft)" },
-      width: { sidebar: "var(--w-sidebar)", "sidebar-narrow": "var(--w-sidebar-narrow)", drawer: "var(--w-drawer)" },
-      maxWidth: { content: "var(--w-content)", w440: "var(--mw-440)", w820: "var(--mw-820)", w900: "var(--mw-900)", w689: "var(--mw-689)", w760: "var(--mw-760)", w640: "var(--mw-640)", w720: "var(--mw-720)", w520: "var(--mw-520)", w560: "var(--mw-560)", w1152: "var(--mw-1152)", w1440: "var(--mw-1440)", w1216: "var(--mw-1216)", w860: "var(--mw-860)", w824: "var(--mw-824)", w620: "var(--mw-620)", w1280: "var(--mw-1280)", w420: "var(--mw-420)", w340: "var(--mw-340)", w320: "var(--mw-320)", w260: "var(--mw-260)", w1040: "var(--mw-1040)" },
+      width: { quickfind: "var(--w-quickfind)", toc: "var(--w-toc)", notes: "var(--w-notes)", filters: "var(--w-filters)" },
+      height: { topbar: "var(--h-topbar)", tabbar: "var(--h-tabbar)" },
+      minHeight: { topbar: "var(--h-topbar)" },
+      maxWidth: { app: "var(--w-app)", read: "var(--w-read)", dialog: "var(--w-dialog)", content: "var(--w-content)", w440: "var(--mw-440)", w820: "var(--mw-820)", w900: "var(--mw-900)", w689: "var(--mw-689)", w760: "var(--mw-760)", w640: "var(--mw-640)", w720: "var(--mw-720)", w520: "var(--mw-520)", w560: "var(--mw-560)", w1152: "var(--mw-1152)", w1440: "var(--mw-1440)", w1216: "var(--mw-1216)", w860: "var(--mw-860)", w824: "var(--mw-824)", w620: "var(--mw-620)", w1280: "var(--mw-1280)", w420: "var(--mw-420)", w340: "var(--mw-340)", w320: "var(--mw-320)", w260: "var(--mw-260)", w1040: "var(--mw-1040)" },
       fontSize: {
         // size-only twins (no line height) for pages that already set their own: text-fs-sm is exactly the old text-[13px]
         "fs-micro": "var(--text-micro)", "fs-nano": "var(--text-nano)", "fs-xs": "var(--text-xs)", "fs-sm": "var(--text-sm)", "fs-ui": "var(--text-ui)", "fs-body": "var(--text-body)", "fs-lead": "var(--text-lead)", "fs-xl": "var(--text-xl)", "fs-display": "var(--text-display)", "fs-title": "var(--text-title)", "fs-30": "var(--text-30)", "fs-20": "var(--text-20)", "fs-32": "var(--text-32)", "fs-22": "var(--text-22)", "fs-12.5": "var(--text-12-5)", "fs-36": "var(--text-36)", "fs-40": "var(--text-40)", "fs-17": "var(--text-17)", "fs-26": "var(--text-26)", "fs-34": "var(--text-34)", "fs-44": "var(--text-44)", "fs-48": "var(--text-48)", "fs-64": "var(--text-64)", "fs-72": "var(--text-72)", "fs-56": "var(--text-56)", "fs-21": "var(--text-21)", "fs-38": "var(--text-38)", "fs-46": "var(--text-46)",
@@ -67,7 +69,7 @@ const config: Config = {
         "reading": ["var(--text-reading)", { lineHeight: "var(--leading-reading)" }],
         "ui-title": ["var(--text-title)", { lineHeight: "1.2", letterSpacing: "-0.02em" }],
       },
-      spacing: { card: "var(--pad-card)", stack: "var(--gap-stack)", chip: "var(--pad-chip-x)" },
+      spacing: { card: "var(--pad-card)", stack: "var(--gap-stack)", chip: "var(--pad-chip-x)", page: "var(--pad-page)", tabbar: "var(--h-tabbar)", topbar: "var(--h-topbar)" },
       lineHeight: { reading: "var(--leading-reading)", "reading-loose": "var(--leading-reading-loose)", "body": "var(--leading-body)", "display": "var(--leading-display)", "display-tight": "var(--leading-display-tight)" },
       fontFamily: {
         sans: ["var(--font-sans)", "var(--font-deva)", "system-ui", "sans-serif"],

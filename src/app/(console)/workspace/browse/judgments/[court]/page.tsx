@@ -2,7 +2,7 @@ import awsYears from "@/config/hc-aws-years.json";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import BrowseShell from "@/components/console/BrowseShell";
+import AppShell from "@/components/shell/AppShell";
 import { ALL_COURTS, decades } from "@/data/workspaceBrowse";
 import CaseList from "@/components/workspace/CaseList";
 import CourtSearch from "@/components/workspace/CourtSearch";
@@ -34,7 +34,7 @@ export default async function CourtPage({ params, searchParams }: { params: Prom
   const noYear = real && summary?.cases != null && years.length ? Math.max(0, summary.cases - years.reduce((a, y) => a + (y.cases ?? 0), 0)) : 0;
   const restored = Object.entries(((awsYears.years as Record<string, Record<string, { added: number }>>)[slug]) ?? {}).sort((a, b) => Number(b[0]) - Number(a[0]));
   return (
-    <BrowseShell>
+    <AppShell>
       <div className="mx-auto max-w-content pt-2">
         <nav aria-label="Breadcrumb" className="text-fs-ui text-secondary"><Link href="/workspace/browse" className="inline-flex min-h-8 items-center hover:text-primary hover:underline">Browse Laws &amp; Judgments</Link><span aria-hidden> / </span>
           {picked ? <><Link href={`/workspace/browse/judgments/${slug}`} className="hover:text-primary hover:underline">{court.name}</Link><span aria-hidden> / </span><span>{picked}</span></> : <span>{court.name}</span>}</nav>
@@ -72,6 +72,6 @@ export default async function CourtPage({ params, searchParams }: { params: Prom
         )}
         {real && stats.attribution && <div className="mt-8 space-y-1 text-fs-xs text-muted"><p>{stats.attribution.text} Licence: {stats.attribution.licence}, snapshot {stats.attribution.snapshot}. <a href={stats.attribution.url} className="underline" rel="noopener noreferrer" target="_blank">Dataset</a></p>{stats.caveats.map((c) => <p key={c}>{c}</p>)}</div>}
       </div>
-    </BrowseShell>
+    </AppShell>
   );
 }

@@ -48,8 +48,6 @@ body {
   .comment-marquee, .comment-marquee-reverse { animation: none; }
 }
 
-/* The signed-in page frame. It uses the LexBharat tokens as they are (the earlier override with a palette captured from another product's console is gone). */
-.console { background: rgb(var(--background-rgb)); color: rgb(var(--foreground-rgb)); font-size: 14px; }
 /* loading skeleton pulse */
 .console-skel { animation: console-pulse 1.4s ease-in-out infinite; }
 @keyframes console-pulse { 50% { opacity: .5; } }
@@ -82,7 +80,7 @@ body {
 @media print { .marked { box-shadow: none; outline: 1.5px solid currentColor; } .marked::before { display: none; } .marked-scope:has(.marked) > :not(.marked, :has(.marked)) { opacity: 1; } }
 
 /* Page titles in the workspace use the serif of the reskin (headings only; reading text and UI stay Geist). */
-.console h1 { font-family: var(--font-serif), Georgia, serif; font-weight: 400; }
+.app-shell h1 { font-family: var(--font-serif), Georgia, serif; font-weight: 400; }
 
 /* The glow (reskin): forest ground with olive / ochre / sage lights, a soft vignette and a film-grain tile (public/grain.webp). Colours come from the --glow-* tokens. Text on it must be white. */
 .surface-glow { position: relative; isolation: isolate; overflow: hidden; color: rgb(var(--white-rgb)); background-color: rgb(var(--glow-base-rgb));

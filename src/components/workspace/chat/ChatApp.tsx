@@ -87,7 +87,6 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
 
   return (
     <div className="mx-auto flex min-h-[calc(100vh-7rem)] max-w-3xl flex-col">
-      <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Testing phase:</strong> don&apos;t enter confidential client information.</p></Notice>
       <div className="flex-1 space-y-5 py-5" aria-live="polite">
         {loading && <p className="text-ui-base text-muted">Loading chat…</p>}
         {loadErr && <Notice tone="bad" role="alert"><p>{loadErr}</p></Notice>}

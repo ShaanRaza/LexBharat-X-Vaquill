@@ -7,3 +7,5 @@ export function toCsv(columns: { key: string; label: string }[], rows: Record<st
 export function ratio(up: number, down: number): { up: number; down: number; total: number; upPct: number | null };
 export type DayRow = { day: string; visits: number; chats: number; drafts: number; reviews: number; uploads: number; scans: number; limits: number; busy: number; answers: number; answerMs: number; visitsByPage: Record<string, number>; draftsByTemplate: Record<string, number>; avgAnswerSec: number | null };
 export function byDay(rows: { day: string; metric: string; key: string; n: number | string; sum_ms?: number | string }[]): DayRow[];
+export const MIN_MESSAGE: number, MAX_MESSAGE: number, MAX_EMAIL: number;
+export function validateMessage(body: unknown): { ok: true; value: { message: string; email: string; page: string } } | { ok: false; error: string };

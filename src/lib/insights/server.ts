@@ -5,6 +5,7 @@ import { query, dbConfigured } from "@/lib/acts/db";
 import { sb, vaultConfigured } from "@/lib/vault/supabase";
 import { getRun } from "@/lib/review/store";
 import { getDraft } from "@/lib/drafting/store";
+import { rateCheck } from "@/lib/limits/counters";
 import { REASONS, type FeedbackInput } from "./rules.mjs";
 
 const salt = () => process.env.ACCESS_COOKIE_SECRET?.trim() || "dev-salt";
@@ -78,3 +79,22 @@ export async function allFeedback(): Promise<FeedbackRow[]> {
   const { data } = await sb().from("feedback").select("id, feature, vote, reasons, comment, model, snapshot, created_at, updated_at").order("updated_at", { ascending: false }).limit(5000);
   return (data ?? []) as FeedbackRow[];
 }
+
+// ---- free-text feedback messages (scripts/w8/w8b-feedback-messages.sql)
+export const MESSAGES_PER_HOUR = 5;
+export type MessageRow = { id: string; message: string; email: string | null; page: string | null; created_at: string };
+/** Saves one message from the in-app Feedback form. At most MESSAGES_PER_HOUR per browser per hour (counted in Supabase, so it holds across server instances). */
+export async function saveMessage(bid: string, m: { message: string; email: string; page: string }): Promise<{ ok: true } | { ok: false; status: number; error: string }> {
+  if (!insightsConfigured()) return { ok: false, status: 503, error: "Feedback is not set up on this server yet." };
+  const hash = browserHash(bid), gate = await rateCheck("feedback-message", hash, MESSAGES_PER_HOUR, 3600);
+  if (!gate.ok) return { ok: false, status: 429, error: `That is ${MESSAGES_PER_HOUR} messages in an hour. Please try again in ${Math.max(1, Math.ceil(gate.retryAfterSec / 60))} minutes.` };
+  const { error } = await sb().from("feedback_messages").insert({ browser_hash: hash, message: m.message, email: m.email || null, page: m.page || null });
+  if (error) return { ok: false, status: 503, error: /relation|does not exist|schema cache/i.test(error.message) ? "Feedback messages are not set up yet (scripts/w8/w8b-feedback-messages.sql has not been run)." : "Your message could not be saved. Please try again." };
+  return { ok: true };
+}
+/** The newest messages for the admin page. `error` is "missing" when the table has not been created yet. */
+export async function adminMessages(limit = 200): Promise<{ error: "missing" | "failed" | null; rows: MessageRow[] }> {
+  const { data, error } = await sb().from("feedback_messages").select("id, message, email, page, created_at").order("created_at", { ascending: false }).limit(limit);
+  return { error: error ? (/relation|does not exist|schema cache/i.test(error.message) ? "missing" : "failed") : null, rows: (data ?? []) as MessageRow[] };
+}
+

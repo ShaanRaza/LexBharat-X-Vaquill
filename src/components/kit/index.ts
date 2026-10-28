@@ -11,3 +11,5 @@ export { default as Eyebrow } from "./Eyebrow";
 export { default as MarkedPage, MarkedScope } from "./MarkedPage";
 export { buttonClass, fieldClass, selectClass, toggleClass } from "./controls";
 export { default as Logo, LogoMark } from "./Logo";
+export { default as Tabs } from "./Tabs";
+export type { TabItem } from "./Tabs";

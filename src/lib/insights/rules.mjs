@@ -52,3 +52,16 @@ export function byDay(rows) {
   }
   return [...days.values()].sort((a, b) => (a.day < b.day ? 1 : -1)).map((d) => ({ ...d, avgAnswerSec: d.answers ? Math.round(d.answerMs / d.answers / 100) / 10 : null }));
 }
+
+export const MIN_MESSAGE = 3, MAX_MESSAGE = 2000, MAX_EMAIL = 200;
+/** Checks the body of the in-app Feedback form: { message, email?, page? }. The page is kept as a path only (no query string). Returns { ok: true, value } or { ok: false, error }. */
+export function validateMessage(body) {
+  const b = body && typeof body === "object" ? body : {};
+  const message = typeof b.message === "string" ? b.message.replace(/\r\n/g, "\n").replace(/[ \t]+/g, " ").trim() : "";
+  if (message.length < MIN_MESSAGE) return { ok: false, error: "Write a short message (at least 3 characters)." };
+  if (message.length > MAX_MESSAGE) return { ok: false, error: `Please keep it under ${MAX_MESSAGE} characters.` };
+  const email = typeof b.email === "string" ? b.email.trim() : "";
+  if (email && (email.length > MAX_EMAIL || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) return { ok: false, error: "That email address does not look right. Leave it empty if you prefer." };
+  const page = typeof b.page === "string" && /^\/[A-Za-z0-9/_.-]{0,150}$/.test(b.page.split("?")[0].split("#")[0]) ? b.page.split("?")[0].split("#")[0] : "";
+  return { ok: true, value: { message, email, page } };
+}

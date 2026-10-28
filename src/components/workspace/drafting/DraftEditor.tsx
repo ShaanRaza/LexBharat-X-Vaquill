@@ -118,7 +118,7 @@ export default function DraftEditor({ draftId }: { draftId: string }) {
   const failed = d.sections.filter((s) => s.status === "failed");
   return (
     <div className="mx-auto max-w-6xl pb-10">
-      <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Draft for review by a qualified lawyer. Not legal advice.</strong> Testing phase: don&apos;t enter confidential client information.</p></Notice>
+      <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Draft for review by a qualified lawyer. Not legal advice.</strong></p></Notice>
       <div className="mt-4 flex flex-wrap items-center gap-3">
         <Link href="/workspace/drafting" className="text-ui-sm text-primary underline">← Drafting</Link>
         <label htmlFor="draft-title" className="sr-only">Draft title</label>

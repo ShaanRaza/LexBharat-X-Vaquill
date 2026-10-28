@@ -37,6 +37,7 @@ function Unavailable({ s, officialUrl }: { s: Extract<TextState, { available: fa
 
 export default function ActTextView({ header, state }: { header: ActHeader; state: TextState }) {
   const view = state.available ? state.view : null;
+  const unnumbered = view ? view.list.filter((i) => i.noNumber && !i.missing).length : 0, numbered = view ? view.counts.sections - unnumbered : 0;   // "N sections in our data": every numbered row, the dataset's and the India Code fill-ins
   const sel = view?.selected ?? null;
   return (
     <div className="mx-auto max-w-w1040 pt-2">
@@ -57,7 +58,11 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
             <Panel className="p-0">
               <p className="border-b border-border/70 px-4 py-3 text-ui-sm text-secondary" role="status">
                 {view.counts.sections > 0 && view.counts.sections === view.counts.supplemented ? `${fmt(view.counts.sections)} Articles and Schedules, all read from India Code's text PDF of this Act.` : <>
-                {fmt(view.counts.sections - view.counts.supplemented)} {view.hasSectionNumbers ? "sections" : "text blocks"}: {fmt(view.counts.complete)} no problems detected, {fmt(view.counts.possibly_incomplete)} possibly incomplete, {fmt(view.counts.garbled)} unreliable{view.counts.supplemented ? `, ${fmt(view.counts.supplemented)} filled in from India Code` : ""}{view.counts.missing ? `, ${fmt(view.counts.missing)} missing from our source data` : ""}.
+                {view.hasSectionNumbers ? <>
+                  <strong className="font-medium">{fmt(numbered)} sections in our data</strong>: {fmt(numbered - view.counts.supplemented)} from the open-india-law dataset and {fmt(view.counts.supplemented)} filled in from India Code{unnumbered ? `, plus ${fmt(unnumbered)} text block without a section number` : ""}. Dataset text ({fmt(view.counts.sections - view.counts.supplemented)} blocks): {fmt(view.counts.complete)} no problems detected, {fmt(view.counts.possibly_incomplete)} possibly incomplete, {fmt(view.counts.garbled)} unreliable{view.counts.missing ? `. ${fmt(view.counts.missing)} missing from our source data` : ""}.
+                </> : <>
+                  {fmt(view.counts.sections - view.counts.supplemented)} text blocks: {fmt(view.counts.complete)} no problems detected, {fmt(view.counts.possibly_incomplete)} possibly incomplete, {fmt(view.counts.garbled)} unreliable{view.counts.supplemented ? `, ${fmt(view.counts.supplemented)} filled in from India Code` : ""}{view.counts.missing ? `, ${fmt(view.counts.missing)} missing from our source data` : ""}.
+                </>}
                 </>}
               </p>
               {view.hasSchedule && (

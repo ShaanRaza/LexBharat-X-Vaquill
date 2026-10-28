@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Badge, Notice, Panel } from "@/components/kit";
 import workspace from "@/config/workspace.json";
 
-// The Legal Workspace dashboard (/workspace): quick actions, this browser's recent chats, and an honest list of what works today. Presentation and one fetch; no search or chat logic here.
+// The dashboard (/workspace): quick actions, this browser's recent chats, and an honest list of what works today. Presentation and one fetch; no search or chat logic here.
 type Chat = { id: string; title: string; updatedAt: string };
 const when = (iso: string) => new Date(iso).toLocaleString("en-IN", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" });
 
@@ -28,7 +28,6 @@ export default function WorkspaceDashboard() {
   const f = workspace.features;
   return (
     <div className="mx-auto max-w-4xl pb-10">
-      <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Testing phase:</strong> don&apos;t enter confidential client information.</p></Notice>
       <h1 className="mt-6 text-ui-title font-semibold">Welcome to LexBharat</h1>
       <p className="mt-2 text-ui-body text-secondary">Research Indian law in plain English, with a link to the section behind every answer.</p>
 

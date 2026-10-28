@@ -1,5 +1,5 @@
 {
-  "about": "Legal Workspace pages that are not built yet. Set \"enabled\": true to switch one on: it becomes a normal link in the sidebar and a live card on the dashboard (the page at `href` must exist).",
+  "about": "Pages that are not built yet. Set \"enabled\": true to switch one on: it becomes a normal link in the sidebar and a live card on the dashboard (the page at `href` must exist).",
   "features": {
     "drafting": {
       "enabled": true,

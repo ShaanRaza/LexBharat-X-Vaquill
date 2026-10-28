@@ -401,3 +401,29 @@ Asked whether NI Act ss.143 and 145 should go on the India Code download list. T
 | 145 | Evidence on affidavit | `content/supplement/ni-section-145.txt` | loaded 2026-10-24, shown as "Filled in from India Code" |
 
 They are missing only from the **raw open-india-law text files** (so a tool that reads those files directly, such as the first restructure mock-up, wrongly reports them as absent). The Act page in the app reads the database, which includes the supplement. The PDF on disk is the 2023 edition; amendments made after 2023-06-26 are not in it. NI Act is not on `docs/PDF-DOWNLOAD-LIST.md`, and nothing is added there: the Act's PDF is already held.
+
+## NI Act: why the counts are 155, 141, 116 and 156 (checked 2026-10-28; read-only, no data changed)
+
+Asked why the app shows 116 sections, the raw files 141, and the official Act "about 147", and which sections are missing. **Answer: none are missing against the official text we hold. The four numbers count different things.** Method: the official list is every section start in India Code's PDF (`content/supplement/pdfs/ni-act-1881.pdf`, India Code file a1881-26.pdf, created 2023-06-26) read with `scripts/supplement/list-sections.mjs`; the raw list is the Act's file in the open-india-law text snapshot v2026.08; the database list is the `act_sections_v` view the app reads (three read-only `SELECT`s).
+
+| Number | What it counts |
+|---:|---|
+| **155** | Sections printed in the official PDF: numbers 1 to 148 with no gaps, plus 7 inserted sections (45A, 75A, 85A, 104A, 131A, 142A, 143A). Section 2 is printed as repealed ("Rep. by the Repealing and Amending Act") and still counts as an entry. 148 is the highest plain number, which is the "about 147" |
+| **141** | Units in the raw dataset file: 140 numbered sections plus 1 text block with no section number and an empty heading. **15 official sections are absent from the raw file** (table below) |
+| **116** | What the app prints as "116 sections": the dataset rows the database kept, 115 numbered plus the 1 unnumbered block. The database drops 25 raw rows because a hand-filled India Code section replaces them (second table) |
+| **156** | Every row the Act page lists: 116 from the dataset + 40 filled in from India Code (25 replacements + 15 additions) = **155 numbered sections + 1 unnumbered text block** |
+
+So the page's own sentence, "116 sections: 115 no problems detected, 1 possibly incomplete, 0 unreliable, 40 filled in from India Code", is accurate line by line but reads as if the Act had 116. **Fixed in wording only (no data changed):** the line now starts with the total ("155 sections in our data") and then says where they came from.
+
+**The 15 sections missing from the raw file, all filled from India Code's PDF (loaded 2026-10-24):** 8 "Holder", 9 "Holder in due course", 10 "Payment in due course", 13 "Negotiable instrument", 45A Holder's right to duplicate of lost bill, 56 Indorsement for part of sum due, 75A Excuse for delay in presentment for acceptance or payment, 84 When cheque not duly presented and drawer damaged thereby, 85A Drafts drawn by one branch of a bank on another payable to order, 90 Extinguishment of rights of action on bill in acceptor's hands, 101 Contents of protest, 104A When noting equivalent to protest, 131A Application of Chapter to drafts, 143 Power of Court to try cases summarily, 145 Evidence on affidavit.
+
+**The 25 raw sections replaced by the supplement** (the raw text was wrong or damaged; see W7): 1, 2, 3, 4, 6, 7, 12, 16, 45, 55, 67, 75, 82, 83, 85, 100, 104, 117, 121, 131, 136, 137, 142A, 147, 148.
+
+**What is left to check, and cannot be settled from the files:**
+- The PDF is the **2023-06-26** edition. Anything amended after that date is not in it, so "155" is the count as of that edition, not necessarily today.
+- The **1 unnumbered text block** (key `b022`, empty heading): its content has not been read here; it may be a fragment that belongs to a numbered section.
+- Section 118 is flagged "possibly incomplete" (mixed structure) and 11 sections carry "duplicates collapsed" (18, 23, 24, 53, 57, 68, 71, 77, 126, 134, 135): the database merged repeated copies of the same section. Their text should be read against the PDF before anyone relies on them.
+- `src/lib/acts/knownCounts.mjs` uses 148 as the NI Act's "judgments citing it" reference count; that is unrelated to the section count.
+
+No data was changed. If you want the unnumbered block or section 118 re-read against the PDF, that is a fill-in file per section (the process in `content/supplement/README.md`).
+

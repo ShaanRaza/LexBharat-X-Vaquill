@@ -25,7 +25,7 @@ export default function DraftingHome() {
   const byId = new Map((meta?.templates ?? []).map((t) => [t.id, t]));
   return (
     <div className="mx-auto max-w-4xl pb-10">
-      <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Testing phase:</strong> don&apos;t enter confidential client information. Drafts are for review by a qualified lawyer and are not legal advice.</p></Notice>
+      <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Drafts are for review by a qualified lawyer and are not legal advice.</strong></p></Notice>
       <h1 className="mt-6 text-ui-title font-semibold">Drafting</h1>
       <p className="mt-2 text-ui-body text-secondary">Choose a template, fill in the details, and get a first draft grounded in the Act sections it relies on. Anything you leave out becomes a highlighted placeholder, never an invented fact.</p>
       {meta && !meta.ready && <Notice tone="warn" role="status" className="mt-4"><p>Drafting is not set up on this server yet (it needs the database and a model key).</p></Notice>}

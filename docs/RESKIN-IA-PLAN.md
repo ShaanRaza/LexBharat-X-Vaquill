@@ -1,6 +1,6 @@
 # Restructure plan: five areas, one top bar (Step 1 of the spec in `docs/RESKIN-SPEC.md`)
 
-**Status: plan approved with the decisions below; Phase 1 done and waiting for your approval.** Written on the `reskin` branch. Nothing is pushed.
+**Status: plan approved with the decisions below; Phases 1 and 2 done (Phase 2 waiting for your approval).** Written on the `reskin` branch. Nothing is pushed.
 
 Scope you set: `reskin` branch only; no backend logic changes (search, Ask, Drafting, Review, Vault, limits, feedback); visual source is lexbharat.ai and the `mrharit/Lex-bharat` repo only; keep the testing banner, "not legal advice" notes, coverage warnings, the password gate and the Vault card buttons. Defaults applied to the spec's open questions: Desk stays minimal, light mode only, keep the "Was this right?" text, "Get started" on lexbharat.ai goes to the password page.
 
@@ -16,7 +16,7 @@ Scope you set: `reskin` branch only; no backend logic changes (search, Ask, Draf
 | 6 | Desk box shows what Enter will do; defaults to Search when unsure | Desk mock-up updated; Phase 3 |
 | 7 | `/privacy`, `/terms`, `/security` become public, with tests | Done in **Phase 7**, together with the rewritten text. They stay behind the password until then because the leftover text is placeholder |
 | 8 | One plain dataset credit line for Vaquill AI (CC BY 4.0) | In every page footer (mock-ups updated; `PublicFrame` has it now) |
-| 9 | Remove the copied marketing and extra legal pages; fold Cookies and data deletion into Privacy | Phase 1 removes the pages; Phase 7 writes the Cookies and deletion sections. **Feedback: your answer still has the unfilled placeholder "[EMAIL ADDRESS / small in-app form — pick one]".** Not needed until Phase 2 (the menu); I'll ask again then |
+| 9 | Remove the copied marketing and extra legal pages; fold Cookies and data deletion into Privacy | Phase 1 removes the pages; Phase 7 writes the Cookies and deletion sections. **Feedback (answered 2026-10-28): a small in-app form (message + optional email), saved for /admin, no email sending.** Built in Phase 2 |
 | 10 | Mock-up fixes (a) to (e) | (a) L-shaped corner marks, now also in the real `.marked` rule and `tokens.css`; (b) phone sheet opens only from a chip; (c) "138." at the top of the marked section; (d) **NI Act ss.143 and 145 are not missing**: already filled from the India Code PDF (`docs/MISSING-SECTIONS.md`); (e) the s.138 typos are in India Code's own PDF too, so no official text differs (`docs/DATA-GAPS.md` section 2.6) |
 
 **Note on figures in the mock-ups:** the Law page shows "141 sections" and "3 possibly incomplete" from the raw text files. The running app counts differently (for the NI Act: 116 sections, 1 possibly incomplete, 40 filled in from India Code). The real build uses the app's counts.
@@ -27,6 +27,23 @@ Done on `reskin`, not pushed: the mock console, copied docs, mock account pages,
 
 1. **A palette from another product's console was overriding the LexBharat tokens** for the whole signed-in frame (`.console` in `globals.css`, "captured from the live console's computed styles"). It is removed, so the app now uses the real tokens (and the old light-emerald success colour that failed contrast is gone).
 2. **The leftover placeholder Privacy, Terms and Security pages said "We do not train AI models on your data" and "nothing is stored"**, which is not true while Gemini and Voyage run on free plans and chats, drafts and documents are stored. Those three sections now say what actually happens. The pages are still behind the password.
+
+## Phase 2 status (done, waiting for your approval)
+
+**Built:** the pilcrow logo (`src/lib/brand.ts`, generated from the design repo's geometry; `components/kit/Logo.tsx`) and a tab icon (`src/app/icon.svg`, generated from the token colours); the slim top bar (logo, Desk · Ask · Search · Library · Work, Quick-find, menu), the phone bottom tab bar (hides while scrolling down a law or judgment, returns on scroll up), Quick-find (⌘K / Ctrl+K; laws by exact words, Supreme Court cases by party name or citation, your chats, drafts, reviews and documents; Enter opens the first result; never uses the Voyage limit), the testing banner under the bar, a `Tabs` component and Work's tabs, the Feedback form, `src/lib/routes.mjs` (every address in one place). The old sidebar, `ConsoleShell`, `BrowseShell` and `WorkspaceNav` are deleted. New tokens (`--h-topbar`, `--h-tabbar`, `--w-app`, `--w-quickfind`, `--w-dialog`, `--pad-page`, `--logo-h*`) are in `tokens.css`.
+
+**Where each area points until its own page exists (pages keep their old addresses; Phases 3 to 6 change these in `src/lib/shell/areas.mjs`):** Desk `/workspace` (the old dashboard) · Ask `/workspace/chat` · Search `/workspace/browse?tab=acts` (the Acts search box) · Library `/workspace/browse` · Work `/workspace/drafting` with Drafts · Reviews · Documents tabs.
+
+**Feedback.** A message and an optional email are saved to a new table, `public.feedback_messages`, and listed in `/admin/insights` under "Messages from the Feedback form". It is a new table in the same Supabase project, not a change to `public.feedback`: that table's checks and unique key assume one thumbs vote on one chat answer, draft or review, and the stats count it. At most 5 messages an hour per browser; the browser is stored as a hash; no IP address; no email is sent. **To switch it on, run `scripts/w8/w8b-feedback-messages.sql` once in the Supabase SQL editor.** Until then the form says so in plain words.
+
+**Departures from the spec, for your OK:**
+1. **Phone menu.** The spec's phone top bar has only the logo and a search icon, which leaves Log out and Feedback unreachable on a phone. I added the same small menu button next to the search icon.
+2. **Work tabs sit above each page's own title** in Phase 2, because each page still draws its own heading. Phase 6 puts them under the title.
+3. **Search and Library both lead to the Acts and judgments browser** until Phase 5 gives Search its own page. Search is highlighted when you are on the Acts search tab; Library on everything else in the browser.
+4. **The testing banner is now one line under the top bar on every page.** The repeated "Testing phase" sentences inside pages were removed; the feature-specific warnings stay (drafts and reviews are for a lawyer to confirm, Vault is saved on this browser only).
+5. **Tab icon is an SVG only** (it scales to 32 and 16 px); extra PNG files would have needed more paths opened in the password gate.
+
+**Checks run:** `test:extract` 212 pass; `qa:sweep`; `build`; **axe-core** (WCAG 2 A and AA plus best practice) on 7 pages and on Quick-find, the menu and the Feedback form open, at desktop and phone width: no violations after two fixes (the banner and the dataset credit are now landmarks); no horizontal scroll at 375 px on any page; keyboard: Ctrl+K opens Quick-find with focus in the box, Escape closes it and returns focus. `ChatHistory` and `DraftHistory` are unused until Desk and Work reuse them.
 
 ## 0. What is in this step
 

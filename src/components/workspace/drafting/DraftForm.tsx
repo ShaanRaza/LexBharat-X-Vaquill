@@ -70,7 +70,7 @@ export default function DraftForm({ templateId }: { templateId: string }) {
     const failed = secs.filter((s) => s.status === "failed").length;
     return (
       <div className="mx-auto max-w-5xl pb-10">
-        <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Draft for review by a qualified lawyer. Not legal advice.</strong> Testing phase: don&apos;t enter confidential client information.</p></Notice>
+        <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Draft for review by a qualified lawyer. Not legal advice.</strong></p></Notice>
         <h1 className="mt-5 text-ui-title font-semibold">{phase === "done" ? "Your draft is ready" : "Writing your draft…"}</h1>
         <p className="mt-1 text-ui-base text-secondary">{t.title}</p>
         {phase === "done" && draftId && <div className="mt-3 flex flex-wrap items-center gap-3"><button type="button" onClick={() => router.push(`/workspace/drafting/${draftId}`)} className="inline-flex min-h-10 items-center rounded-button bg-primary px-5 text-ui-base font-medium text-white hover:bg-primary-hover">Open the draft to edit and export</button>{failed > 0 && <Badge tone="warn">{failed} section{failed === 1 ? "" : "s"} not generated: retry in the editor</Badge>}{emailStatus && <Badge tone={emailStatus === "sent" ? "complete" : "warn"}>{emailStatus === "sent" ? "Email sent" : "Email could not be sent"}</Badge>}</div>}
@@ -95,7 +95,7 @@ export default function DraftForm({ templateId }: { templateId: string }) {
 
   return (
     <form onSubmit={generate} className="mx-auto max-w-3xl pb-10" noValidate>
-      <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Testing phase:</strong> don&apos;t enter confidential client information. Drafts are for review by a qualified lawyer and are not legal advice.</p></Notice>
+      <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Drafts are for review by a qualified lawyer and are not legal advice.</strong></p></Notice>
       <p className="mt-5 text-ui-sm"><Link href="/workspace/drafting" className="text-primary underline">← All templates</Link></p>
       <h1 className="mt-2 text-ui-title font-semibold">{t.title}</h1>
       <p className="mt-2 text-ui-body text-secondary">{t.description}</p>

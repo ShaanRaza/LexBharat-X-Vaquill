@@ -31,3 +31,12 @@ test("counters become one row per day", () => {
   assert.equal(d[0].visits, 4); assert.equal(d[0].chats, 2); assert.equal(d[0].avgAnswerSec, 4.5);
   assert.equal(d[1].drafts, 1); assert.equal(d[1].draftsByTemplate["rent-agreement"], 1); assert.equal(d[1].scans, 4); assert.equal(d[1].avgAnswerSec, null);
 });
+
+import { MAX_MESSAGE, validateMessage } from "./rules.mjs";
+test("a feedback message needs some text, tolerates no email, rejects a bad one, and keeps the page as a path only", () => {
+  assert.deepEqual(validateMessage({ message: "  The search missed s.138  ", email: "", page: "/workspace/chat?x=1#y" }), { ok: true, value: { message: "The search missed s.138", email: "", page: "/workspace/chat" } });
+  assert.equal(validateMessage({ message: "ok" }).ok, false); assert.equal(validateMessage(null).ok, false); assert.equal(validateMessage({ message: "x".repeat(MAX_MESSAGE + 1) }).ok, false);
+  assert.equal(validateMessage({ message: "fine", email: "not-an-email" }).ok, false); assert.equal(validateMessage({ message: "fine", email: "a@b.in" }).ok, true);
+  assert.equal(validateMessage({ message: "fine", page: "javascript:alert(1)" }).value.page, ""); assert.equal(validateMessage({ message: "fine", page: "https://evil.example/x" }).value.page, "");
+  assert.equal(validateMessage({ message: "line one\r\nline two" }).value.message, "line one\nline two");
+});

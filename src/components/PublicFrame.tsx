@@ -18,7 +18,7 @@ export function PublicFooter() {
   return (
     <footer className="mx-auto max-w-w1152 border-t border-border px-4 py-8 text-ui-sm text-muted sm:px-6 lg:px-8">
       <nav aria-label="Legal" className="flex flex-wrap gap-x-5 gap-y-1">{LINKS.map((l) => <Link key={l.href} href={l.href} className="hover:text-primary">{l.label}</Link>)}</nav>
-      <p className="mt-3">Data: <a href="https://huggingface.co/datasets/vaquill/open-india-law" className="underline" rel="noopener noreferrer" target="_blank">open-india-law</a> by Vaquill AI (CC BY 4.0). Not legal advice.</p>
+      <p className="mt-3">Not legal advice. The dataset credit is at the foot of every page.</p>
     </footer>
   );
 }

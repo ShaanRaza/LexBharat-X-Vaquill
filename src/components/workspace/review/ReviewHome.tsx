@@ -39,7 +39,7 @@ export default function ReviewHome() {
   const left = meta ? Math.max(0, meta.limits.daily - meta.usage.day) : null;
   return (
     <div className="mx-auto max-w-4xl pb-10">
-      <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Testing phase:</strong> don&apos;t upload confidential client documents. Reviews are for a qualified lawyer to confirm and are not legal advice.</p></Notice>
+      <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Reviews are for a qualified lawyer to confirm and are not legal advice.</strong> Don&apos;t upload confidential client documents.</p></Notice>
       <h1 className="mt-6 text-ui-title font-semibold">Review a contract</h1>
       <p className="mt-2 text-ui-body text-secondary">Get a summary, a clause-by-clause risk reading, suggested wording, missing clauses and the Indian-law points that bear on the contract, each tied to a section we retrieved.</p>
       {meta && !meta.ready && <Notice tone="warn" role="status" className="mt-4"><p>Review is not set up on this server yet (it needs the Vault storage and a model key).</p></Notice>}
