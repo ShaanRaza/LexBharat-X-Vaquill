@@ -18,7 +18,7 @@ const solo = { tasks: { chat: { model: "gemini:gemini-3.5-flash-lite", thinking:
 test("parseModelSpec accepts provider:model and rejects the rest", () => {
   assert.deepEqual(parseModelSpec("gemini:gemini-3.5-flash-lite"), { provider: "gemini", model: "gemini-3.5-flash-lite" });
   assert.deepEqual(parseModelSpec("anthropic:claude-haiku-5-5"), { provider: "anthropic", model: "claude-haiku-5-5" });
-  for (const bad of ["", "gemini", "openai:gpt", ":x", undefined]) assert.throws(() => parseModelSpec(bad));
+  for (const bad of ["", "gemini", "mistral:large", ":x", undefined]) assert.throws(() => parseModelSpec(bad));
 });
 test("the shipped config defines every task and parses", () => {
   for (const t of ["chat", "answerCheck", "queryRewrite", "drafting", "review", "rerun"]) { const r = resolveTask(t, config, {}); assert.ok(r.primary.model); assert.ok(r.maxOutputTokens > 0); }
