@@ -10,10 +10,11 @@ import { lawPlan, missingClauses, splitParts } from "./rules.mjs";
 import { annotateClauses } from "./pages.mjs";
 import { getRun, saveRun, type ReviewResult, type ReviewRun } from "./store";
 import { getText } from "@/lib/vault/store";
+import { takeLease } from "@/lib/vault/lease";
 
 export const partChars = () => { const n = Number(process.env.REVIEW_PART_CHARS); return Number.isFinite(n) && n > 1000 ? n : limitConfig.partChars; };
-const g = globalThis as unknown as { __reviewLocks?: Set<string> };
-const locks = (g.__reviewLocks ??= new Set<string>());
+const g = globalThis as unknown as { __reviewLocks?: Map<string, number> };
+const locks = (g.__reviewLocks ??= new Map<string, number>());
 const kindOf = (e: unknown) => (e instanceof AiError && (e.kind === "rate_limit" || e.kind === "unavailable" || e.kind === "timeout") ? (bump("model_busy", "review"), "The model is busy.") : e instanceof AiError && e.kind === "blocked" ? "The model declined this part." : "This part could not be reviewed.");
 
 export function newResult(text: string, type: string, pageStarts: number[] | null): ReviewResult {
@@ -26,8 +27,7 @@ const ref = (r: ReviewResult) => (r.parts.some((p) => p.status === "failed") ? "
 /** Does the next unit of work (the first pending part, else the summary, else the law points). Returns the updated run. */
 export async function stepReview(bid: string, id: string, retry?: number | "summary" | "law"): Promise<{ run: ReviewRun | null; busy?: boolean }> {
   const run = await getRun(bid, id); if (!run?.result) return { run: null };
-  if (locks.has(id)) return { run, busy: true };
-  locks.add(id);
+  if (!takeLease(locks, id)) return { run, busy: true };
   try {
     const res = run.result, tx = run.docId ? await getText(bid, run.docId) : null;
     if (!tx) { res.parts.forEach((p) => { if (p.status === "pending") { p.status = "failed"; p.error = "The document is no longer in the Vault, so it cannot be reviewed."; } }); await saveRun(bid, id, { status: "failed", result: res }); return { run: { ...run, status: "failed" } }; }

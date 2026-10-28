@@ -6,5 +6,9 @@ export default function DocStatus({ doc, note }: { doc: VaultDoc; note?: string 
   if (doc.status === "ready") return <Badge tone="complete">Ready</Badge>;
   if (doc.status === "unreadable") return <Badge tone="bad" title={doc.statusDetail ?? undefined}>Can&apos;t read</Badge>;
   if (doc.status === "waiting") return <Badge tone="warn" title={doc.statusDetail ?? note}>Waiting to read</Badge>;
-  return <Badge tone="warn" title={note}>{doc.chunkCount === 0 ? (doc.scanned ? `Reading scan… ${doc.scanPages}/${doc.scanTotal}` : "Processing… reading") : `Processing… ${doc.embeddedCount}/${doc.chunkCount}`}</Badge>;
+  if (note?.startsWith("Problem")) return <Badge tone="bad" title={note}>Problem — retrying</Badge>;
+  const label = doc.chunkCount === 0
+    ? (doc.scanned ? `Reading scan… ${doc.scanPages} of ${doc.scanTotal}` : doc.statusDetail?.startsWith("Reading page") ? `${doc.statusDetail}…` : "Reading…")
+    : `Indexing… ${doc.embeddedCount} of ${doc.chunkCount} passages`;
+  return <Badge tone="warn" title={note}>{label}</Badge>;
 }

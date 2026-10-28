@@ -1,0 +1,41 @@
+// GET /api/vault/selftest[?voyage=1] -> runs each stage of document processing on tiny generated files and reports pass/fail with timings, so a deployment can be checked in one click (open it in the browser, signed in).
+// Stages: settings present, storage write/read/delete, database read, reading a PDF and a Word file with the same code the Vault uses, and (only with ?voyage=1, it uses one of the 3 requests a minute) one embedding request.
+import { PDFDocument, StandardFonts } from "pdf-lib";
+import { Document, Packer, Paragraph } from "docx";
+import { bidOf, json, vaultReady } from "@/lib/vault/http";
+import { extractText, readPdfPages } from "@/lib/vault/extract.mjs";
+import { embedDocuments } from "@/lib/vault/embedDocs";
+import { getFileStore } from "@/lib/vault/storage";
+import { listDocs } from "@/lib/vault/store";
+
+export const maxDuration = 60;
+type Row = { stage: string; ok: boolean; ms: number; detail: string };
+export async function GET(req: Request) {
+  const bid = bidOf(req); if (!bid) return json({ error: "Not found." }, 404);
+  const rows: Row[] = [], run = async (stage: string, f: () => Promise<string>) => { const t = Date.now(); try { rows.push({ stage, ok: true, ms: Date.now() - t, detail: await f() }); } catch (e) { rows.push({ stage, ok: false, ms: Date.now() - t, detail: String((e as Error)?.message ?? e).slice(0, 200) }); } };
+  const env = (k: string) => !!process.env[k]?.trim();
+  await run("settings", async () => { const need = ["SUPABASE_URL", "SUPABASE_SECRET_KEY", "VOYAGE_API_KEY"], miss = need.filter((k) => !env(k)); if (miss.length) throw new Error(`missing: ${miss.join(", ")}`); return `node ${process.version}, region ${process.env.VERCEL_REGION ?? "local"}, scan model key ${env("GEMINI_API_KEY") ? "set" : "NOT set"}`; });
+  if (vaultReady()) {
+    await run("storage", async () => {
+      const st = getFileStore(), key = `${bid}/selftest/${crypto.randomUUID()}.txt`, { sb } = await import("@/lib/vault/supabase"), { default: lim } = await import("@/config/vault-limits.json");
+      const up = await sb().storage.from(process.env.VAULT_BUCKET?.trim() || lim.bucket).upload(key, new Blob(["selftest"], { type: "text/plain" }), { upsert: false }); if (up.error) throw new Error(`write: ${up.error.message}`);
+      try { const size = await st.size(key); if (size !== 8) throw new Error(`size lookup gave ${size}`); const b = await st.get(key); if (!b || b.length !== 8) throw new Error("read back failed"); } finally { await st.remove([key]).catch(() => null); }
+      return "write, size, read, delete ok";
+    });
+    await run("database", async () => `${(await listDocs(bid)).length} documents listed`);
+  }
+  await run("read a PDF", async () => {
+    const d = await PDFDocument.create(), f = await d.embedFont(StandardFonts.TimesRoman);
+    for (let i = 1; i <= 3; i++) d.addPage().drawText(`Section ${i}. The petitioner submitted that the notice was served on the respondent on time.`, { x: 40, y: 700, size: 11, font: f });
+    const r = await readPdfPages(await d.save(), 1, { maxPages: 2 });
+    if (r.total !== 3 || r.pages.length !== 2 || !/petitioner/.test(r.pages[1])) throw new Error(r.reason || `got ${r.pages.length} of ${r.total} pages`);
+    return "3 pages, read 2 in a slice";
+  });
+  await run("read a Word file", async () => {
+    const r = await extractText("docx", await Packer.toBuffer(new Document({ sections: [{ children: [new Paragraph("This agreement is made between the parties.")] }] })));
+    if (!r.pages || !/agreement/.test(r.text)) throw new Error(r.reason || "no text");
+    return "text found";
+  });
+  if (new URL(req.url).searchParams.get("voyage") === "1") await run("embedding (Voyage)", async () => { const v = await embedDocuments(["selftest"], 0); return `${v.length} vector of ${v[0].length}`; });
+  return json({ ok: rows.every((r) => r.ok), rows });
+}
