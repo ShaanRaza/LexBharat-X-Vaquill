@@ -81,6 +81,18 @@ test("litellm / OpenAI-compatible stream parses deltas, [DONE] and usage", async
   const r = await completeTask("chat", { messages: [{ role: "user", content: "q" }] }, { config, env: { LITELLM_API_KEY: "k", LITELLM_BASE_URL: "http://localhost:4000/v1/", AI_MODEL_CHAT: "litellm:claude-haiku-5-5" }, fetchImpl: f });
   assert.equal(r.text, "AB"); assert.deepEqual(r.usage, { inputTokens: 7, outputTokens: 2 }); assert.equal(calls[0].url, "http://localhost:4000/v1/chat/completions");
 });
+test("openai: direct endpoint, bearer key, reasoning models use max_completion_tokens and no temperature, others the reverse; key never in an error", async () => {
+  calls.length = 0;
+  const d = (o) => `data: ${JSON.stringify(o)}\n\n`, body = () => [d({ choices: [{ delta: { content: "ok" }, finish_reason: "stop" }] }), d({ choices: [], usage: { prompt_tokens: 3, completion_tokens: 1 } }), "data: [DONE]\n\n"];
+  const run = (model, extra = {}) => completeTask("chat", { system: "s", messages: [{ role: "user", content: "q" }] }, { config, env: { OPENAI_API_KEY: "sk-test", AI_MODEL_CHAT: `openai:${model}`, ...extra }, fetchImpl: fakeFetch(okResponse(body())) });
+  const r = await run("gpt-4.1-mini");
+  assert.equal(r.text, "ok"); assert.equal(r.model, "openai:gpt-4.1-mini"); assert.deepEqual(r.usage, { inputTokens: 3, outputTokens: 1 });
+  assert.equal(calls[0].url, "https://api.openai.com/v1/chat/completions"); assert.equal(calls[0].init.headers.Authorization, "Bearer sk-test");
+  let b = JSON.parse(calls[0].init.body); assert.ok(b.max_tokens && "temperature" in b && !b.max_completion_tokens); assert.equal(b.messages[0].role, "system");
+  await run("gpt-5-mini"); b = JSON.parse(calls[1].init.body); assert.ok(b.max_completion_tokens && !("temperature" in b) && b.reasoning_effort === "minimal"); assert.equal(b.messages[0].role, "developer");
+  assert.equal(providerConfigured("openai", {}), false); assert.equal(providerConfigured("openai", { OPENAI_API_KEY: "k" }), true);
+  await assert.rejects(completeTask("chat", { messages: [{ role: "user", content: "q" }] }, { config: { tasks: { chat: { model: "openai:x" } } }, env: { OPENAI_API_KEY: "sk-secret-123" }, fetchImpl: fakeFetch(errResponse(400, "bad key sk-secret-123 here")) }), (e) => e.kind === "bad_request" && !JSON.stringify(e.detail).includes("sk-secret-123"));
+});
 test("fallback: a busy first model before any text moves to the next; an error after text is thrown; an unset provider is skipped", async () => {
   const cfg = { tasks: { chat: { model: "gemini:a", fallback: ["gemini:b"] } } };
   const r = await completeTask("chat", { messages: [{ role: "user", content: "q" }] }, { config: cfg, env, fetchImpl: fakeFetch(errResponse(429, "busy"), okResponse([gem({ candidates: [{ content: { parts: [{ text: "from b" }] } }] })])) });

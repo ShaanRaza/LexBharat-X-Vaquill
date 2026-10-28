@@ -139,3 +139,12 @@ Drafting, Review and Vault are all ON (W5, W6). Each page is switched by one fla
 - Free plan (checked 2026-10-23): 100 projects, 1 GB per project, 20 GB account total, 100 CU-hours per project per month, 2 CU max, scale to zero after 5 minutes (first query after a pause is slow).
 - In use: main text database 692 MB (chats add a few MB at most); vector database 779 MB (both near the 1 GB limit). Anything bigger (regulators) goes to a new free project, not into these.
 - Paid Neon only if a project must exceed 1 GB; then only the connection string changes.
+
+
+## OpenAI (provider added 2026-10-29, not switched on yet)
+
+- **Provider:** `openai` in `src/lib/ai/providers.mjs`, key `OPENAI_API_KEY` (set in `.env.local` and Vercel Production + Preview), talks to `api.openai.com/v1/chat/completions` directly. Config only: use specs like `openai:<model>` in `src/config/ai-models.json` or `AI_MODEL_<TASK>`. Reasoning models (`gpt-5*`, `o*`) get `max_completion_tokens` and `reasoning_effort` (from the task's `thinking`) and no temperature; others get `max_tokens` and `temperature`. Images and PDFs are sent as image/file parts. Embeddings stay on Voyage.
+- **Fallback:** keep `gemini:...` in each task's `fallback` list (or `AI_FALLBACK_<TASK>`); the existing retry/fallback/budget rules apply unchanged.
+- **Self-test:** `/api/vault/selftest?openai=1` adds the row **"OpenAI, direct"** (one tiny request, no retries; uses the chat task's model if it is an OpenAI one, otherwise `openaiProbeModel` from `ai-models.json`).
+- **Not switched yet:** on 2026-10-29 OpenAI answered 401 `invalid_api_key` to the stored key, so the model list could not be read and no models were chosen. Next: fix the key, list models, pick a cheap model for `chat`, `answerCheck`, `queryRewrite`, `templatePick` and a stronger one for `review`, `drafting`, run the eval on both providers, then switch.
+- **Privacy wording:** once OpenAI is primary, the Privacy page and chat/Vault notes must say prompts and document text go to OpenAI (API data is not used to train by default, per OpenAI's terms at the time of writing; verify before claiming) instead of Gemini's free tier.

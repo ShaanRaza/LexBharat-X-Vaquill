@@ -1,10 +1,10 @@
-// GET /api/vault/selftest[?voyage=1&gemini=1] -> runs each stage of document processing on tiny generated files and reports pass/fail with timings, so a deployment can be checked in one click (open it in the browser, signed in).
-// Stages: settings present, storage write/read/delete, database read, reading a PDF and a Word file with the same code the Vault uses, and (only with ?voyage=1, one request to Voyage) a direct Voyage request, and (only with ?gemini=1, one small request to the Review model) a direct Gemini request.
+// GET /api/vault/selftest[?voyage=1&gemini=1&openai=1] -> runs each stage of document processing on tiny generated files and reports pass/fail with timings, so a deployment can be checked in one click (open it in the browser, signed in).
+// Stages: settings present, storage write/read/delete, database read, reading a PDF and a Word file with the same code the Vault uses, and (only with ?voyage=1, one request to Voyage) a direct Voyage request, and (only with ?gemini=1, one small request to the Review model) a direct Gemini request, and (only with ?openai=1) a direct OpenAI request.
 import { PDFDocument, StandardFonts } from "pdf-lib";
 import { Document, Packer, Paragraph } from "docx";
 import { bidOf, json, vaultReady } from "@/lib/vault/http";
 import { extractText, readPdfPages } from "@/lib/vault/extract.mjs";
-import { geminiProbe } from "@/lib/ai/probe";
+import { geminiProbe, openaiProbe } from "@/lib/ai/probe";
 import { voyageProbe } from "@/lib/vault/embedDocs";
 import { getFileStore } from "@/lib/vault/storage";
 import { listDocs } from "@/lib/vault/store";
@@ -39,5 +39,6 @@ export async function GET(req: Request) {
   });
   if (new URL(req.url).searchParams.get("voyage") === "1") await run("Voyage, direct (no gate)", async () => { const v = await voyageProbe(); if (!v.ok) throw new Error(`${v.status ?? "no answer"}: ${v.detail}`); return `ok, ${v.status} in ${v.ms} ms`; });
   if (new URL(req.url).searchParams.get("gemini") === "1") await run("Gemini, direct (no retries)", async () => { const v = await geminiProbe(); if (!v.ok) throw new Error(`${v.status ?? "no answer"}: ${v.detail}`); return `ok, ${v.status} in ${v.ms} ms (${v.detail})`; });
+  if (new URL(req.url).searchParams.get("openai") === "1") await run("OpenAI, direct", async () => { const v = await openaiProbe(); if (!v.ok) throw new Error(`${v.status ?? "no answer"}: ${v.detail}`); return `ok, ${v.status} in ${v.ms} ms (${v.detail})`; });
   return json({ ok: rows.every((r) => r.ok), rows });
 }

@@ -6,7 +6,7 @@ import { AiError } from "./models.mjs";
 import { sseEvents } from "./sse.mjs";
 
 const signalFor = (timeoutMs, signal) => (signal ? AbortSignal.any([signal, AbortSignal.timeout(timeoutMs)]) : AbortSignal.timeout(timeoutMs));
-const scrub = (s, env) => { let t = String(s ?? "").slice(0, 400); for (const k of ["GEMINI_API_KEY", "ANTHROPIC_API_KEY", "LITELLM_API_KEY"]) if (env[k]) t = t.split(env[k]).join("<key>"); return t; };
+const scrub = (s, env) => { let t = String(s ?? "").slice(0, 400); for (const k of ["GEMINI_API_KEY", "ANTHROPIC_API_KEY", "LITELLM_API_KEY", "OPENAI_API_KEY"]) if (env[k]) t = t.split(env[k]).join("<key>"); return t; };
 
 async function post(url, headers, body, { timeoutMs, signal, fetchImpl = fetch, env }) {
   let res;
@@ -62,23 +62,38 @@ export async function* streamAnthropic(o) {
   yield { type: "done", usage, finish };
 }
 
-// ---------------- LiteLLM / any OpenAI-compatible endpoint (LITELLM_BASE_URL + LITELLM_API_KEY)
-export async function* streamOpenAiCompat(o) {
-  const key = o.env.LITELLM_API_KEY?.trim(), base = o.env.LITELLM_BASE_URL?.trim().replace(/\/$/, "");
-  if (!key || !base) throw new AiError("not_configured", "LITELLM_BASE_URL and LITELLM_API_KEY are not set.");
-  const res = await post(`${base}/chat/completions`, { Authorization: `Bearer ${key}` },
-    { model: o.spec.model, temperature: o.temperature, max_tokens: o.maxOutputTokens, stream: true, stream_options: { include_usage: true }, ...(o.json ? { response_format: { type: "json_object" } } : {}),
-      messages: [...(o.system ? [{ role: "system", content: o.system }] : []), ...o.messages.map((m) => ({ role: m.role, content: m.files?.length ? [...m.files.map((f) => ({ type: "image_url", image_url: { url: `data:${f.mime};base64,${f.data}` } })), { type: "text", text: m.content }] : m.content }))] }, o);
+// ---------------- OpenAI-style chat completions: OpenAI itself (OPENAI_API_KEY) and any compatible endpoint (LiteLLM: LITELLM_BASE_URL + LITELLM_API_KEY)
+// Reasoning models (gpt-5*, o1/o3/o4*) accept no temperature and take reasoning_effort instead; the others take temperature.
+const isReasoning = (m) => /^(o\d|gpt-5)/.test(m);
+const effortFor = (m, thinking) => (/^gpt-5/.test(m) ? ({ off: "minimal", minimal: "minimal", low: "low", medium: "medium", high: "high" })[thinking] ?? "minimal" : ({ off: "low", minimal: "low", low: "low", medium: "medium", high: "high" })[thinking] ?? "low");
+const filePart = (f) => (f.mime === "application/pdf" ? { type: "file", file: { filename: "document.pdf", file_data: `data:${f.mime};base64,${f.data}` } } : { type: "image_url", image_url: { url: `data:${f.mime};base64,${f.data}` } });
+async function* streamChatCompletions(o, { url, key }) {
+  const reasoning = isReasoning(o.spec.model);
+  const res = await post(url, { Authorization: `Bearer ${key}` },
+    { model: o.spec.model, stream: true, stream_options: { include_usage: true }, ...(o.json ? { response_format: { type: "json_object" } } : {}),
+      ...(reasoning ? { max_completion_tokens: o.maxOutputTokens, reasoning_effort: effortFor(o.spec.model, o.thinking) } : { max_tokens: o.maxOutputTokens, temperature: o.temperature }),
+      messages: [...(o.system ? [{ role: reasoning ? "developer" : "system", content: o.system }] : []), ...o.messages.map((m) => ({ role: m.role, content: m.files?.length ? [...m.files.map(filePart), { type: "text", text: m.content }] : m.content }))] }, o);
   let usage = { inputTokens: 0, outputTokens: 0 }, finish = null;
   for await (const ev of sseEvents(res.body)) {
     if (ev.data === "[DONE]") break;
     let j; try { j = JSON.parse(ev.data); } catch { continue; }
-    if (j.error) throw new AiError("unavailable", "The model could not answer.", { detail: scrub(j.error.message, o.env) });
+    if (j.error) throw new AiError(/rate/i.test(j.error.type ?? j.error.code ?? "") ? "rate_limit" : "unavailable", "The model could not answer.", { detail: scrub(j.error.message, o.env) });
     const c = j.choices?.[0]; if (c?.delta?.content) yield { type: "text", text: c.delta.content };
+    if (c?.finish_reason === "content_filter") throw new AiError("blocked", "The model declined to answer this.");
     finish = c?.finish_reason ?? finish;
     if (j.usage) usage = { inputTokens: j.usage.prompt_tokens ?? 0, outputTokens: j.usage.completion_tokens ?? 0 };
   }
   yield { type: "done", usage, finish };
 }
+export async function* streamOpenAi(o) {
+  const key = o.env.OPENAI_API_KEY?.trim();
+  if (!key) throw new AiError("not_configured", "OPENAI_API_KEY is not set.");
+  yield* streamChatCompletions(o, { url: "https://api.openai.com/v1/chat/completions", key });
+}
+export async function* streamOpenAiCompat(o) {
+  const key = o.env.LITELLM_API_KEY?.trim(), base = o.env.LITELLM_BASE_URL?.trim().replace(/\/$/, "");
+  if (!key || !base) throw new AiError("not_configured", "LITELLM_BASE_URL and LITELLM_API_KEY are not set.");
+  yield* streamChatCompletions(o, { url: `${base}/chat/completions`, key });
+}
 
-export const STREAMERS = { gemini: streamGemini, anthropic: streamAnthropic, litellm: streamOpenAiCompat };
+export const STREAMERS = { gemini: streamGemini, openai: streamOpenAi, anthropic: streamAnthropic, litellm: streamOpenAiCompat };
