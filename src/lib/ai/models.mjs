@@ -18,12 +18,14 @@ function fallbackSpecs(task, t, env) {
   return (v === undefined ? (t.fallback ?? []) : v.split(",").map((x) => x.trim()).filter(Boolean)).map(parseModelSpec);
 }
 
+/** { times, waitMs } for asking the same model again after "unavailable"; no rule (or times 0) means move straight to the fallback. */
+const retryRule = (r) => ({ times: Math.max(0, Math.min(3, Math.floor(Number(r?.times) || 0))), waitMs: Math.max(0, Math.min(15000, Number(r?.waitMs) || 0)) });
 export function resolveTask(task, config, env = {}) {
   const t = config.tasks?.[task];
   if (!t) throw new Error(`Unknown AI task "${task}".`);
   const spec = env[envName(task)]?.trim() || t.model;
   return {
-    task, primary: parseModelSpec(spec), fallbacks: fallbackSpecs(task, t, env),
+    task, primary: parseModelSpec(spec), fallbacks: fallbackSpecs(task, t, env), retryUnavailable: retryRule(t.retryUnavailable ?? config.retry?.unavailable),
     thinking: t.thinking ?? "off", temperature: t.temperature ?? 0.2, maxOutputTokens: t.maxOutputTokens ?? 1500, timeoutMs: t.timeoutMs ?? 60000, firstTokenMs: t.firstTokenMs ?? 0, json: !!t.json,
   };
 }
