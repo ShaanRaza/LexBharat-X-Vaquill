@@ -6,7 +6,7 @@ import { PROVENANCE, CHAPTER_NOTE, INCOMPLETE_NOTICE, MISSING_NOTICE } from "@/l
 import type { ActTextView as View } from "@/lib/acts/viewModel";
 import ScheduleTableView, { STAMP_NOTE } from "./ScheduleTableView";
 import DisplayText from "@/components/text/DisplayText";
-import { docTypeOf, sourceInfo, unitsWord, type DocRef } from "@/lib/docs/docType.mjs";
+import { docTypeOf, libraryHome, sourceInfo, unitsWord, type DocRef } from "@/lib/docs/docType.mjs";
 import { vocabOf } from "@/lib/text/clean.mjs";
 import { cleanLabel } from "@/lib/text/clean.mjs";
 
@@ -19,10 +19,11 @@ const fmtDate = (iso: string) => new Date(`${iso}T00:00:00Z`).toLocaleDateString
 const href = (actId: string, key: string) => `/law/${actId}/${encodeURIComponent(key)}`;
 
 /** Shown on every Acts text page, whether or not text is available. */
-export function ProvenanceNote({ sectionStatusLabel }: { sectionStatusLabel?: string }) {
+export function ProvenanceNote({ sectionStatusLabel, doc }: { sectionStatusLabel?: string; doc?: DocRef }) {
+  const regulator = !!doc && libraryHome(doc).label === "Regulators";   // a regulator's instrument was not compiled from India Code
   return (
     <Notice title="Where this text comes from" role="note">
-      <p>Source dataset: <a className="underline" href={PROVENANCE.datasetUrl} target="_blank" rel="noopener noreferrer">{PROVENANCE.dataset}</a>. Snapshot {PROVENANCE.snapshot}. Licence: {PROVENANCE.licence}.</p>
+      <p>Source dataset: <a className="underline" href={PROVENANCE.datasetUrl} target="_blank" rel="noopener noreferrer">{regulator ? PROVENANCE.dataset.replace(/, compiled from India Code.*$/, ", compiled from regulator websites") : PROVENANCE.dataset}</a>. Snapshot {PROVENANCE.snapshot}. Licence: {PROVENANCE.licence}.</p>
       <p>The text was extracted by machine from official documents. It can contain errors, gaps or scrambled characters, so every section shows a quality flag{sectionStatusLabel ? <> (this section: <strong className="font-medium text-foreground">{sectionStatusLabel}</strong>)</> : null}. {" "}{CHAPTER_NOTE} Not legal advice; check the official source.</p>
     </Notice>
   );
@@ -44,12 +45,13 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
   const view = state.available ? state.view : null;
   const unnumbered = view ? view.list.filter((i) => i.noNumber && !i.missing).length : 0, numbered = view ? view.counts.sections - unnumbered : 0;   // "N sections in our data": every numbered row, the dataset's and the India Code fill-ins
   const sel = view?.selected ?? null, dt = docTypeOf(header.doc ?? { title: header.title }), units = unitsWord(header.doc ?? { title: header.title }), src = sourceInfo(header.doc ?? { title: header.title }, view?.sourceUrl ?? header.officialUrl);
+  const home = libraryHome(header.doc ?? { title: header.title });
   const contents = view ? (
 <Panel className="p-0">
       <p className="border-b border-border/70 px-4 py-3 text-ui-sm text-secondary" role="status">
         {view.counts.sections > 0 && view.counts.sections === view.counts.supplemented ? `${fmt(view.counts.sections)} Articles and Schedules, all read from India Code's text PDF of this Act.` : <>
         {view.hasSectionNumbers ? <>
-          <strong className="font-medium">{fmt(numbered)} {units} in our data</strong>: {fmt(numbered - view.counts.supplemented)} from the open-india-law dataset and {fmt(view.counts.supplemented)} filled in from India Code{unnumbered ? `, plus ${fmt(unnumbered)} text block without a section number` : ""}. Dataset text ({fmt(view.counts.sections - view.counts.supplemented)} blocks): {fmt(view.counts.complete)} no problems detected, {fmt(view.counts.possibly_incomplete)} possibly incomplete, {fmt(view.counts.garbled)} unreliable{view.counts.missing ? `. ${fmt(view.counts.missing)} missing from our source data` : ""}.
+          <strong className="font-medium">{fmt(numbered)} {units} in our data</strong>: {fmt(numbered - view.counts.supplemented)} from the open-india-law dataset{view.counts.supplemented ? ` and ${fmt(view.counts.supplemented)} filled in from India Code` : ""}{unnumbered ? `, plus ${fmt(unnumbered)} text block without a section number` : ""}. Dataset text ({fmt(view.counts.sections - view.counts.supplemented)} blocks): {fmt(view.counts.complete)} no problems detected, {fmt(view.counts.possibly_incomplete)} possibly incomplete, {fmt(view.counts.garbled)} unreliable{view.counts.missing ? `. ${fmt(view.counts.missing)} missing from our source data` : ""}.
         </> : <>
           {fmt(view.counts.sections - view.counts.supplemented)} text blocks: {fmt(view.counts.complete)} no problems detected, {fmt(view.counts.possibly_incomplete)} possibly incomplete, {fmt(view.counts.garbled)} unreliable{view.counts.supplemented ? `, ${fmt(view.counts.supplemented)} filled in from India Code` : ""}{view.counts.missing ? `, ${fmt(view.counts.missing)} missing from our source data` : ""}.
         </>}
@@ -58,7 +60,7 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
       {view.hasSchedule && (
         <Link href={href(header.actId, "schedule")} aria-current={view.schedule ? "true" : undefined} className={`flex min-h-11 items-center border-b border-border/70 px-4 py-2 text-ui-base text-primary hover:bg-accent ${view.schedule ? "bg-accent font-medium" : ""}`}>Schedule as a table</Link>
       )}
-      <ul className="max-h-[70vh] overflow-y-auto py-1">
+      <ul className="max-h-[70vh] overflow-y-auto py-1 lg:max-h-none lg:overflow-visible">
         {view.list.map((it, n) => {
           const active = !view.schedule && it.key === sel?.key, newGroup = !!it.group && it.group !== view.list[n - 1]?.group;
           return (
@@ -80,20 +82,20 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
     <div className="mx-auto max-w-w1280 pt-2">
       <nav aria-label="Breadcrumb" className="text-ui-base text-secondary">
         <Link href="/library" className="inline-flex min-h-8 items-center hover:text-primary hover:underline">Library</Link>
-        <span aria-hidden> › </span><Link href="/library?tab=acts" className="inline-flex min-h-8 items-center hover:text-primary hover:underline">Acts</Link>
+        <span aria-hidden> › </span><Link href={home.href} className="inline-flex min-h-8 items-center hover:text-primary hover:underline">{home.label}</Link>
       </nav>
       <h1 className="mt-2 font-serif text-ui-title font-semibold">{header.title}</h1>
       {view && <p className="mt-1"><RepealedNote actId={header.actId} /></p>}
       {!view && <p className="mt-2 flex flex-wrap items-center gap-1.5">{header.meta.map((m) => <Badge key={m}>{m}</Badge>)}<RepealedNote actId={header.actId} /></p>}
 
-      {!view && <div className="mt-5"><ProvenanceNote sectionStatusLabel={sel?.statusInfo.label} /></div>}
+      {!view && <div className="mt-5"><ProvenanceNote sectionStatusLabel={sel?.statusInfo.label} doc={header.doc} /></div>}
 
       {!state.available && <Unavailable s={state} officialUrl={header.officialUrl} doc={header.doc} />}
 
       {view && (
         <div className="mt-6 grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[260px_minmax(0,1fr)] xl:grid-cols-[260px_minmax(0,1fr)_17rem]">
           <details className="rounded-card bg-surface ring-1 ring-border/60 lg:hidden"><summary className="min-h-11 cursor-pointer px-4 py-3 text-ui-base font-medium">Contents ({fmt(view.list.length)})</summary><div className="border-t border-border/70">{contents}</div></details>
-          <aside aria-label="Contents of this document" className="hidden lg:sticky lg:top-header lg:block lg:self-start">{contents}</aside>
+          <aside aria-label="Contents of this document" className="hidden lg:sticky lg:top-header lg:block lg:max-h-sticky lg:self-start lg:overflow-y-auto">{contents}</aside>
 
           <article aria-labelledby="sec-title">
             {!view.hasSectionNumbers && <Notice tone="warn" title={`${dt.unit} numbers are not available for this document`} className="mb-4"><p>The dataset has no numbers for its parts, so its text is shown as unnumbered blocks in the dataset&apos;s order.</p></Notice>}
@@ -132,7 +134,7 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
               <Panel><p className="text-ui-base text-secondary">This Act has no text in the export.</p></Panel>
             )}
           </article>
-          <aside aria-label="Notes about this text" className="space-y-3 lg:col-span-2 xl:col-span-1 xl:sticky xl:top-header xl:self-start">
+          <aside aria-label="Notes about this text" className="space-y-3 lg:col-span-2 xl:col-span-1 xl:sticky xl:top-header xl:max-h-sticky xl:self-start xl:overflow-y-auto">
             <Panel className="space-y-2 text-ui-sm">
               <h2 className="text-ui-xs font-semibold uppercase tracking-caps text-muted">This section</h2>
               {sel && !sel.missing && !sel.supplement && <p className="flex flex-wrap items-center gap-1.5"><Badge tone={sel.statusInfo.tone} title={sel.statusInfo.explain}>{sel.statusInfo.label}</Badge>{sel.flags.map((f) => <Badge key={f.key} tone={f.info.tone} title={f.info.explain}>{f.info.label}</Badge>)}</p>}
@@ -146,7 +148,7 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
               <p className="flex flex-wrap items-center gap-1.5">{header.meta.map((m) => <Badge key={m}>{m}</Badge>)}<RepealedNote actId={header.actId} /></p>
               <p className="text-secondary">{view.hasSectionNumbers ? `${fmt(numbered)} ${units} in our data.` : "Text blocks without numbers."}{view.counts.possibly_incomplete ? ` ${fmt(view.counts.possibly_incomplete)} possibly incomplete.` : ""}{view.counts.missing ? ` ${fmt(view.counts.missing)} not in our library yet.` : ""}</p>
             </Panel>
-            <ProvenanceNote sectionStatusLabel={sel?.statusInfo.label} />
+            <ProvenanceNote sectionStatusLabel={sel?.statusInfo.label} doc={header.doc} />
           </aside>
         </div>
       )}

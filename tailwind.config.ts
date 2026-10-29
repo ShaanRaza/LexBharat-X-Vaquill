@@ -72,6 +72,7 @@ const config: Config = {
         "question": ["var(--text-question)", { lineHeight: "1.2", letterSpacing: "-0.015em" }],
       },
       spacing: { card: "var(--pad-card)", stack: "var(--gap-stack)", chip: "var(--pad-chip-x)", page: "var(--pad-page)", tabbar: "var(--h-tabbar)", topbar: "var(--h-topbar)", header: "calc(var(--header-h) + var(--gap-sticky))", "page-bottom": "var(--pad-page-bottom)" },
+      maxHeight: { sticky: "calc(100dvh - var(--header-h) - 2 * var(--gap-sticky))" },   // a sticky column never grows taller than the screen below the header: it scrolls inside instead of being cut off
       lineHeight: { reading: "var(--leading-reading)", "reading-loose": "var(--leading-reading-loose)", "body": "var(--leading-body)", "display": "var(--leading-display)", "display-tight": "var(--leading-display-tight)" },
       fontFamily: {
         sans: ["var(--font-sans)", "var(--font-deva)", "system-ui", "sans-serif"],

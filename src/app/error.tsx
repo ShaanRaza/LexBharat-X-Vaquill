@@ -8,7 +8,7 @@ export default function Error({ reset }: { error: Error & { digest?: string }; r
       <div className="mx-auto max-w-w520 text-center">
         <p className="font-mono text-fs-xs uppercase tracking-caps-xwide text-error">Something went wrong</p>
         <h1 className="mt-3 text-fs-36 font-semibold tracking-brand">This page failed to load</h1>
-        <p className="mt-3 text-fs-lead text-muted">Try again. If it keeps happening, restart the dev server.</p>
+        <p className="mt-3 text-fs-lead text-muted">Try again. If it keeps happening, reload the page.</p>
         <div className="mt-8 flex justify-center gap-3">
           <Button variant="primary" onClick={reset}>Try again</Button>
           <Button href="/">Home</Button>

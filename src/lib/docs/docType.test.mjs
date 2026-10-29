@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { displayTitle, docTypeOf, sourceInfo, unitWord, unitsWord } from "./docType.mjs";
+import { caseTitle, displayTitle, docTypeOf, libraryHome, sourceInfo, unitWord, unitsWord } from "./docType.mjs";
 
 test("every kind of document names its units correctly", () => {
   assert.equal(unitWord("138", { title: "The Negotiable Instruments Act, 1881", category: "central" }), "Section 138");
@@ -36,4 +36,19 @@ test("titles are tidied: capitals, acronyms, glued digits, encoding, fallbacks",
   assert.equal(displayTitle("2019", { department: "rbi", year: 2019 }), "RBI instrument (2019)");
   assert.equal(displayTitle("MoEFCC notification"), "MoEFCC notification");
   assert.equal(displayTitle("नक्शा"), "नक्शा");
+});
+
+test("a regulator's instrument is never sent to India Code, and is filed under Regulators", () => {
+  const cbic = { title: "Advisory 02/2026", category: "regulatory", department: "cbic", actId: "REG_CBIC_advisory022026" };
+  assert.equal(sourceInfo(cbic, "https://www.indiacode.nic.in/"), null);
+  assert.equal(sourceInfo({ title: "The Negotiable Instruments Act, 1881", category: "central" }, "https://www.indiacode.nic.in/x").label, "India Code");
+  assert.deepEqual(libraryHome(cbic), { label: "Regulators", href: "/library?tab=regulators" });
+  assert.equal(libraryHome({ title: "The Constitution of India" }).label, "Constitution");
+  assert.equal(libraryHome({ title: "The Indian Penal Code, 1860", category: "central" }).label, "Acts");
+});
+test("case names lose a dangling 'versus'", () => {
+  assert.equal(caseTitle("IN RE: PROPER TREATMENT OF COVID 19 PATIENTS versus ."), "IN RE: PROPER TREATMENT OF COVID 19 PATIENTS");
+  assert.equal(caseTitle("IN RE: POLICY STRATEGY FOR GRANT OF BAIL versus"), "IN RE: POLICY STRATEGY FOR GRANT OF BAIL");
+  assert.equal(caseTitle("A versus B"), "A versus B");
+  assert.equal(caseTitle("State v. Kumar"), "State v. Kumar");
 });

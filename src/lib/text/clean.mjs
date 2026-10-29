@@ -24,6 +24,8 @@ export function stripMarkdown(s) {
     .replace(/`([^`\n]*)`/g, "$1")
     .replace(/^[ \t]*>[ \t]?/gm, "")
     .replace(/(?<![A-Za-z0-9])_([^_\n]+)_(?![A-Za-z0-9])/g, "$1")
+    .replace(/(?<=[A-Za-z0-9])_(?=[\s,.;:)\]]|$)/gm, "").replace(/(^|[\s(\[])_(?=[A-Za-z0-9])/gm, "$1")   // one half of an emphasis pair left behind when a snippet or the source cut the text in the middle
+    .replace(/^[ \t]*-{3,}[ \t]*$/gm, "").replace(/[ \t]*(?<![|:-])-{3,}(?![|:-])[ \t]*/g, " \u2014 ")   // lines of dashes are rules, dashes inside a line are a long dash
     .replace(/[ \t]+$/g, "");
 }
 

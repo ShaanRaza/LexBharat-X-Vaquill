@@ -18,7 +18,8 @@
     "load:supplement": "node scripts/supplement/load-supplement.mjs",
     "qa:sweep": "node scripts/judgments/qa-sweep.mjs",
     "qa:live": "node --experimental-websocket scripts/judgments/qa-live.mjs",
-    "index:hc-search": "node --max-old-space-size=6000 scripts/judgments/build-hc-search-index.mjs"
+    "index:hc-search": "node --max-old-space-size=6000 scripts/judgments/build-hc-search-index.mjs",
+    "ui-sweep": "node scripts/ui-sweep/sweep.mjs"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.0",
@@ -43,6 +44,7 @@
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
     "autoprefixer": "^10.4.0",
+    "playwright-core": "^1.64.1",
     "postcss": "^8.4.0",
     "tailwindcss": "3.4.19",
     "typescript": "^5.9.0"

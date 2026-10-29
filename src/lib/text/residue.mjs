@@ -12,6 +12,8 @@ export const RESIDUE = {
   "bracketed number before a bracket": /\[[0-9]{1,2}\s?\]/,
   "spaced brackets ( a )": /\(\s+[A-Za-z0-9]{1,4}\s+\)/,
   "space before punctuation": /[A-Za-z0-9)\]] +[.,;:](?=[ \t]*$|[ \t]+(?!\d))/m,
+  "emphasis underscore left on one side": /(?<=[A-Za-z0-9])_(?=[\s,.;:)\]]|$)|(?:^|[\s(\[])_(?=[A-Za-z0-9])/m,
+  "run of three or more hyphens": /(?<![|:-])-{3,}(?![|:-])/,
   "runs of spaces or tabs": /[ \t]{2,}/,
   "control character": /[\u0000-\u0008\u000b\u000c\u000e-\u001f]/,
 };

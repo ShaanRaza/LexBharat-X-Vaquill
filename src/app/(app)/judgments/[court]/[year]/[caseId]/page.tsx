@@ -1,3 +1,4 @@
+import { caseTitle } from "@/lib/docs/docType.mjs";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -37,7 +38,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
   const back = `/library/judgments/${slug}?year=${year}${ya === "1" ? "&years=all" : ""}${lp && Number(lp) > 1 ? `&page=${Math.floor(Number(lp))}` : ""}`;
   const dup = sc ? (scDuplicates.duplicates as Record<string, { of: string; year: number }>)[caseId] : undefined;
   const parties = c.petitioner && c.respondent ? `${c.petitioner} v. ${c.respondent}` : null;
-  const heading = parties ?? c.title ?? (c.caseNumber ? `Case ${c.caseNumber}` : `Case record ${c.caseId}`);
+  const heading = caseTitle(parties ?? c.title ?? "") || (c.caseNumber ? `Case ${c.caseNumber}` : `Case record ${c.caseId}`);
   const date = longDate(c.decisionDate);
   const benchN = c.benchExtracted?.length ?? c.benchSize;
   const benchWord = (n: number) => (n === 1 ? "Single judge" : n === 2 ? "Division bench" : `${n}-judge bench`);
@@ -110,7 +111,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
               </section>
             )}
           </div>
-          <aside aria-label="About this judgment" className="space-y-4 lg:sticky lg:top-header lg:self-start">
+          <aside aria-label="About this judgment" className="space-y-4 lg:sticky lg:top-header lg:max-h-sticky lg:self-start lg:overflow-y-auto">
             {hasText && <Panel><h2 className="text-ui-xs font-semibold uppercase tracking-caps text-muted">Case details</h2>{details(true)}</Panel>}
             {lawsReferred(mentions).length > 0 && <Panel className="[&>div]:mt-0 [&>div]:border-0 [&>div]:pt-0"><LawsReferred laws={lawsReferred(mentions)} /></Panel>}
         <section aria-labelledby="prov" className="mt-5 rounded-card bg-accent/50 p-5 ring-1 ring-border/50">

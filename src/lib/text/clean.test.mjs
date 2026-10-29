@@ -52,3 +52,9 @@ test("class check: no junk pattern survives cleaning, for samples of every patte
   for (const raw of samples) for (const [name, re] of Object.entries(RESIDUE)) { const parts = cleanParts(raw).filter((p) => p.t === "text").map((p) => p.v).join(""); assert.ok(!re.test(parts) || name === "runs of spaces or tabs" || name === "space before punctuation", `${name} left in the reading-view text of: ${raw}`); }
   assert.ok(Object.keys(RESIDUE).length >= 12);
 });
+
+test("half an emphasis pair and runs of dashes are not shown", () => {
+  assert.equal(cleanPlain("holder ... ibid_ , (w.e.f. 6-2-2003). liable"), "holder ... ibid, (w.e.f. 6-2-2003). liable");
+  assert.equal(cleanPlain("_ibid_, again and snake_case_name stay"), "ibid, again and snake_case_name stay");
+  assert.equal(cleanPlain("New Delhi ------for\n-----\nINFORMATION"), "New Delhi — for\n\nINFORMATION");
+});

@@ -1,0 +1,5 @@
+[
+  { "page": "terms", "kind": "wording", "match": "laceholder", "reason": "Phase 7 replaces the Terms, Privacy and Security pages (the old PageHero pages still say 'recreated placeholder'); do not remove this entry until then" },
+  { "page": "privacy", "kind": "wording", "match": "laceholder", "reason": "Phase 7 (see terms)" },
+  { "page": "security", "kind": "wording", "match": "laceholder", "reason": "Phase 7 (see terms)" }
+]

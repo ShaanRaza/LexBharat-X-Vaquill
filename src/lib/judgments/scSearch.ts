@@ -3,6 +3,7 @@
 // judgments and has no relevance model: results whose text contains the whole phrase come first, then results containing every word; each group is newest first.
 // No search service, database or dependency: the index is a ~6 MB static JSON file (public/data/judgments/sc-index.json) fetched once per server instance.
 import { staticJson } from "@/lib/staticData";
+import { caseTitle } from "@/lib/docs/docType.mjs";
 import { hayOf, matchesWords, queryWords } from "./scMatch";
 
 export type ScHit = { caseId: string; year: number; title: string; citation?: string; decisionDate?: string; disposition?: string; caseNumber?: string };
@@ -11,7 +12,7 @@ type Row = ScHit & { hay: string };
 let ROWS: Row[] | null = null;
 async function rows(): Promise<Row[]> {
   if (!ROWS) ROWS = ((await staticJson<{ rows: (string | number)[][] }>("judgments/sc-index.json")).rows).map(([caseId, year, title, citation, decisionDate, disposition, caseNumber]) => ({
-    caseId: caseId as string, year: year as number, title: title as string, ...(citation ? { citation: citation as string } : {}), ...(decisionDate ? { decisionDate: decisionDate as string } : {}),
+    caseId: caseId as string, year: year as number, title: caseTitle(title as string), ...(citation ? { citation: citation as string } : {}), ...(decisionDate ? { decisionDate: decisionDate as string } : {}),
     ...(disposition ? { disposition: disposition as string } : {}), ...(caseNumber ? { caseNumber: caseNumber as string } : {}),
     hay: hayOf(title as string, citation as string, caseNumber as string),
   }));

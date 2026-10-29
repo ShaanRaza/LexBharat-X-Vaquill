@@ -22,7 +22,7 @@ export default function LegalView({ slug }: { slug: string }) {
         </div>
         </DevOnly>
         <div className="grid gap-10 lg:grid-cols-[240px_1fr] [&>*]:min-w-0">
-          <nav aria-label="Contents" className="lg:sticky lg:top-header lg:self-start">
+          <nav aria-label="Contents" className="lg:sticky lg:top-header lg:max-h-sticky lg:self-start lg:overflow-y-auto">
             <p className="mb-2 font-mono text-fs-nano uppercase tracking-wider text-muted">Contents</p>
             <ol className="space-y-1 text-fs-ui">
               {p.sections.map((s) => <li key={s.h}><a href={`#${idOf(s.h)}`} className="text-muted hover:text-primary">{s.h}</a></li>)}

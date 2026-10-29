@@ -30,9 +30,10 @@ export const unitsWord = (doc) => docTypeOf(doc).units.toLowerCase();
 
 /** Where to read the original and what to call that place: { url, label } or null (no link rather than a wrong one). An India Code page for an Act; for a regulator, the regulator's own page when the data has one. */
 export function sourceInfo(doc = {}, url) {
-  const u = typeof url === "string" ? url.trim() : "";
-  if (u && INDIA_CODE.test(u)) return { url: u, label: "India Code" };
+  let u = typeof url === "string" ? url.trim() : "";
   const t = docTypeOf(doc), reg = t.type === "instrument" || t.type === "rules" || t.type === "regulations" ? !!(doc.department || doc.category === "regulatory" || isRegulatorId(doc.actId)) : false;
+  if (reg && INDIA_CODE.test(u)) u = "";   // the data layer's default link is India Code; a regulator's own circular or rules are not published there
+  if (u && INDIA_CODE.test(u)) return { url: u, label: "India Code" };
   if (reg) {
     if (/^https?:\/\//i.test(u)) { const dep = doc.department ? departmentLabel(doc.department) : null; let host = ""; try { host = new URL(u).hostname.replace(/^www\./, ""); } catch { /* unreadable */ } return { url: u, label: dep ? `${dep} website` : host || "the source" }; }
     return null;
@@ -71,4 +72,20 @@ export function displayTitle(title, doc = {}) {
     return shouting ? `${m[1]}${titleCase(core, i)}${m[3]}` : w;
   };
   return words.map((w, i) => (w.includes("-") ? w.split("-").map((p) => fix(p, i)).join("-") : fix(w, i))).join(" ");
+}
+
+/** The Library tab a document belongs to, for breadcrumbs: { label, href }. */
+export function libraryHome(doc = {}) {
+  const t = docTypeOf(doc);
+  if (t.type === "constitution") return { label: "Constitution", href: "/library?tab=constitution" };
+  if (doc.category === "regulatory" || doc.department || isRegulatorId(doc.actId)) return { label: "Regulators", href: "/library?tab=regulators" };
+  return { label: "Acts", href: "/library?tab=acts" };
+}
+
+/** A case name ready to print: the data joins the two parties with "versus" and leaves it dangling when a party is missing ("IN RE: X versus ." / "versus"). Drops the dangling joiner and stray full stops; case names keep their own capitals. */
+export function caseTitle(title) {
+  let t = String(title ?? "").replace(/\s+/g, " ").trim();
+  t = t.replace(/\s+(?:versus|vs\.?|v\.?)\s*[.,;:-]*\s*$/i, "").replace(/^\s*(?:versus|vs\.?|v\.?)\s+/i, "").replace(/\s+(?:versus|vs\.?)\s+[.,;:-]+\s*$/i, "");
+  t = t.replace(/\s+[.]\s*$/, "").replace(/\s+([.,;:])/g, "$1");
+  return t || String(title ?? "").trim();
 }

@@ -144,7 +144,7 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
     </div>
     <div className="min-w-0">
       {sheet && <button type="button" aria-label="Close the cited page" onClick={() => setSheet(false)} className="fixed inset-0 z-30 bg-foreground/30 lg:hidden" />}
-      <div className={`${sheet ? "fixed inset-x-0 bottom-0 z-40 rounded-t-card bg-background p-3 shadow-pop" : "hidden"} lg:static lg:z-auto lg:block lg:bg-transparent lg:p-0 lg:shadow-none lg:sticky lg:top-header lg:self-start lg:pt-5`}>
+      <div className={`${sheet ? "fixed inset-x-0 bottom-0 z-40 rounded-t-card bg-background p-3 shadow-pop" : "hidden"} lg:static lg:z-auto lg:block lg:bg-transparent lg:p-0 lg:shadow-none lg:sticky lg:top-header lg:max-h-sticky lg:self-start lg:overflow-y-auto lg:pt-5`}>
         <CitedPage source={selSource} answer={selMsg?.content ?? ""} shownN={selMsg && sel ? displayNumbers(selMsg.content, selMsg.citations ?? []).get(sel.n) : undefined} onClose={() => setSheet(false)} nudge={tick} />
       </div>
     </div>
