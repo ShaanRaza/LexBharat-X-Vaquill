@@ -10,7 +10,7 @@ const INDIC = /[\u0900-\u0DFF]/;
 /** Margin letters of the printed report (a lone "A" to "H" on a line) are not text of the judgment: they are left out of the display only (the stored text is unchanged). */
 const MARGIN = /^[A-H]$/;
 
-export default function JudgmentFullText({ chunks, mentions }: { chunks: ScChunk[]; mentions: Resolved[] }) {
+export default function JudgmentFullText({ chunks, mentions, withLaws = true }: { chunks: ScChunk[]; mentions: Resolved[]; /** show "Laws referred to" under the text (the judgment page puts it in the margin instead) */ withLaws?: boolean }) {
   let off = 0;
   const paragraphs: ReaderPara[] = [];
   for (const c of chunks) {
@@ -31,7 +31,7 @@ export default function JudgmentFullText({ chunks, mentions }: { chunks: ScChunk
       <p className="mt-1 text-ui-sm text-secondary">{chunks.length} {chunks.length === 1 ? "passage" : "passages"}, {paragraphs.length.toLocaleString("en-IN")} paragraphs, in reading order. Extracted by machine from the printed report: line breaks, running heads and OCR errors are possible, and the margin letters (A, B, C …) of the printed report are left out. Check the original before quoting.</p>
       {mixed > 0 && <Notice tone="warn" compact className="mt-3"><p>{mixed} {mixed === 1 ? "passage contains" : "passages contain"} text in another script (marked below); the English reading of those lines may be incomplete.</p></Notice>}
       <div className="mt-4"><JudgmentReader paragraphs={paragraphs} /></div>
-      <LawsReferred laws={lawsReferred(mentions)} />
+      {withLaws && <LawsReferred laws={lawsReferred(mentions)} />}
     </section>
   );
 }

@@ -24,6 +24,11 @@ export type SectionHit = {
   /** Regulator, Law Commission and tribunal-filed instruments only: the body's slug (sebi, rbi, law-commission ...). */
   department?: string | null;
 };
+/** Optional narrowing of a search: Central or State Acts, in force or repealed. */
+export type SearchFilters = { jurisdiction?: "central" | "state"; status?: "in_force" | "repealed" };
+const filterSql = (f: SearchFilters = {}, a = "a") => [f.jurisdiction === "central" ? `${a}.category = 'central'` : f.jurisdiction === "state" ? `${a}.category = 'state'` : "", f.status === "in_force" ? `${a}.act_status = 'in_force'` : f.status === "repealed" ? `${a}.act_status <> 'in_force'` : ""].filter(Boolean).join(" AND ");
+const passes = (f: SearchFilters, m: { central: boolean; actStatus: string }) => (!f.jurisdiction || (f.jurisdiction === "central") === m.central) && (!f.status || (f.status === "in_force") === (m.actStatus === "in_force"));
+
 export type SearchOutcome =
   | { available: false; reason: "not_configured" | "unreachable"; message: string }
   | { available: true; results: SectionHit[]; total: number; totalCapped: boolean; page: number; pageSize: number; hasMore: boolean; mode: "text" | "lookup" | "semantic"; note: string;
@@ -39,7 +44,7 @@ const COLS = `s.act_id AS "actId", a.title AS "actTitle", a.year, a.category, a.
 
 export const searchAvailable = () => dbConfigured();
 
-async function lookupHits(q: string, page: number, pageSize: number): Promise<SearchOutcome | null> {
+async function lookupHits(q: string, page: number, pageSize: number, filters: SearchFilters = {}): Promise<SearchOutcome | null> {
   const lk = parseSectionLookup(q);
   if (!lk) return null;
   const m = actMatcher(lk.actPhrase);
@@ -48,7 +53,7 @@ async function lookupHits(q: string, page: number, pageSize: number): Promise<Se
   if (!params.length) return null;
   const rows = await query<Omit<SectionHit, "snippet" | "via"> & { body: string | null }>(
     `SELECT ${COLS}, left(s.body, 400) AS body FROM acts a JOIN act_sections_v s ON s.act_id = a.act_id
-     WHERE ${where} AND upper(s.number) = ANY($${params.length + 1}::text[])
+     WHERE ${where} AND upper(s.number) = ANY($${params.length + 1}::text[])${filterSql(filters) ? ` AND ${filterSql(filters)}` : ""}
      ORDER BY (a.category = 'central') DESC, (a.act_status = 'in_force') DESC, length(a.title), s.ord LIMIT 24`, [...params, (lk.numbers ?? [lk.number]).map((n: string) => n.toUpperCase())]);
   if (!rows.length) {
     const num = /^\d{1,4}$/.test(lk.number) ? Number(lk.number) : null;
@@ -71,7 +76,7 @@ async function lookupHits(q: string, page: number, pageSize: number): Promise<Se
   return { available: true, results: slice, total: all.length, totalCapped: false, page, pageSize, hasMore: page * pageSize < all.length, mode: "lookup", note: `Lookup: ${unitLabel(lk.number)?.toLowerCase() ?? `section ${lk.number}`} of the Act matching "${lk.actPhrase}".` };
 }
 
-async function textSearch(q: string, page: number, pageSize: number): Promise<SearchOutcome> {
+async function textSearch(q: string, page: number, pageSize: number, filters: SearchFilters = {}): Promise<SearchOutcome> {
   try {
     const empty = (note: string): SearchOutcome => ({ available: true, results: [], total: 0, totalCapped: false, page, pageSize, hasMore: false, mode: "text", note });
     if (!hasSearchableChars(q)) return empty("The search has no letters or numbers to look for.");
@@ -87,7 +92,7 @@ async function textSearch(q: string, page: number, pageSize: number): Promise<Se
                 UNION ALL
                 SELECT x.act_id, x.section_key, ts_rank_cd(${SUPP_TSV}, q.tq, 32) FROM act_sections_supplement x, q WHERE ${SUPP_TSV} @@ q.tq
               ) u ORDER BY u.base DESC, u.act_id, u.section_key LIMIT ${MAX_RESULTS + 1}),
-            m AS MATERIALIZED (SELECT c.act_id, c.section_key, c.base * ${RANK_BOOST} AS rank FROM c JOIN act_sections_v s USING (act_id, section_key) JOIN acts a ON a.act_id = s.act_id, q),
+            m AS MATERIALIZED (SELECT c.act_id, c.section_key, c.base * ${RANK_BOOST} AS rank FROM c JOIN act_sections_v s USING (act_id, section_key) JOIN acts a ON a.act_id = s.act_id, q${filterSql(filters) ? ` WHERE ${filterSql(filters)}` : ""}),
             p AS (SELECT *, (SELECT count(*) FROM m) AS total FROM m ORDER BY rank DESC, act_id, section_key OFFSET $2 LIMIT $3)
        SELECT ${COLS}, p.total,
               ts_headline('english', left(s.body, 20000), q.tq, 'MaxFragments=2, MaxWords=26, MinWords=10, ShortWord=2, FragmentDelimiter=" … ", StartSel=${MARK_OPEN}, StopSel=${MARK_CLOSE}') AS snippet
@@ -145,7 +150,7 @@ async function replacedKeys(): Promise<Set<string>> {
   return replacedCache.keys;
 }
 
-async function semanticSearch(q: string, page: number, pageSize: number): Promise<SearchOutcome> {
+async function semanticSearch(q: string, page: number, pageSize: number, filters: SearchFilters = {}): Promise<SearchOutcome> {
   const stores = vectorStores();
   // one query embedding per vector size in use (normally just one)
   const vectors = new Map<number, Promise<number[]>>();
@@ -156,11 +161,12 @@ async function semanticSearch(q: string, page: number, pageSize: number): Promis
   const replaced = await replacedKeys();
   const near = settled.flatMap((r, i) => (r.status === "fulfilled" ? r.value.filter((h) => stores[i].corpus === "supplement" || !replaced.has(`${h.actId}|${h.sectionKey}`)) : []))
     .sort((a, b) => a.distance - b.distance);
-  const cands = distinctSections(near, SEM_POOL);
+  const cands0 = distinctSections(near, SEM_POOL);
   const info = new Map((await query<{ actId: string; sectionKey: string; actStatus: string; status: string; central: boolean; title: string; number: string | null; state: string | null }>(
     `SELECT s.act_id AS "actId", s.section_key AS "sectionKey", a.act_status AS "actStatus", s.status, (a.category = 'central') AS central, a.title, s.number, a.state
-     FROM act_sections_v s JOIN acts a ON a.act_id = s.act_id JOIN unnest($1::text[], $2::text[]) AS k(a, sk) ON s.act_id = k.a AND s.section_key = k.sk`, [cands.map((c) => c.actId), cands.map((c) => c.sectionKey)]))
+     FROM act_sections_v s JOIN acts a ON a.act_id = s.act_id JOIN unnest($1::text[], $2::text[]) AS k(a, sk) ON s.act_id = k.a AND s.section_key = k.sk`, [cands0.map((c) => c.actId), cands0.map((c) => c.sectionKey)]))
     .map((m) => [`${m.actId}|${m.sectionKey}`, m]));
+  const cands = filters.jurisdiction || filters.status ? cands0.filter((c) => { const m = info.get(`${c.actId}|${c.sectionKey}`); return !!m && passes(filters, m); }) : cands0;   // the filters narrow the candidates before ranking
   // similarity x 0.9 for Acts not in force; Central Acts x1.3, or, when the question names a State, that State's Acts x1.2; garbled sections dropped;
   // the same section filed several times collapses into one result (the Central filing wins)
   const list = rankSections(cands, info, SEM_MAX, undefined, { states: statesIn(q) }) as { actId: string; sectionKey: string; copies: number }[];
@@ -187,10 +193,11 @@ const FALLBACK_NOTE: Record<string, string> = {
 
 /** Section lookups ("138 NI Act") and quoted phrases use keyword search. Everything else is searched by meaning when it is set up (VOYAGE_API_KEY and VECTOR_DATABASE_URL),
  *  and falls back to keyword search, with a short note, when it is not or when it fails. `exact` forces keyword search. */
-export async function searchSections(q: string, page = 1, pageSize = PAGE_SIZE, opts: { exact?: boolean } = {}): Promise<SearchOutcome> {
+export async function searchSections(q: string, page = 1, pageSize = PAGE_SIZE, opts: { exact?: boolean; filters?: SearchFilters } = {}): Promise<SearchOutcome> {
+  const filters = opts.filters ?? {};
   if (!dbConfigured()) return { available: false, reason: "not_configured", message: "Section search is not available yet." };
   try {
-    const lookup = await lookupHits(q, page, pageSize);
+    const lookup = await lookupHits(q, page, pageSize, filters);
     if (lookup) return lookup;
   } catch {
     return { available: false, reason: "unreachable", message: "Section search could not be reached. Please try again in a moment." };
@@ -199,9 +206,9 @@ export async function searchSections(q: string, page = 1, pageSize = PAGE_SIZE, 
   const chosen = chooseMode(q, { exact: !!opts.exact, hindi: hasDevanagari(q), semanticReady: semanticReady() });
   let reason: string | null = chosen.reason;
   if (chosen.mode === "semantic" && hasSearchableChars(q)) {
-    try { return await semanticSearch(q, page, pageSize); } catch { reason = "semantic_error"; }
+    try { return await semanticSearch(q, page, pageSize, filters); } catch { reason = "semantic_error"; }
   }
-  const out = await textSearch(q, page, pageSize);
+  const out = await textSearch(q, page, pageSize, filters);
   if (!out.available) return out;
   const note = reason && FALLBACK_NOTE[reason] ? `${FALLBACK_NOTE[reason]} ${out.note}` : out.note;
   return { ...out, note, semantic: { used: false, ...(reason ? { reason } : {}) } };

@@ -7,14 +7,14 @@ import { chunksOf, getDocs, matchChunks, scanPageNumbers, type Passage, type Vau
 
 export type DocPassage = Passage & { docName: string; via: "meaning" | "keywords"; /** the page was read from a scan */ scan?: boolean };
 
-export async function searchAttached(bid: string, docIds: string[], question: string, k = 8): Promise<{ passages: DocPassage[]; docs: VaultDoc[]; mode: "meaning+keywords" | "keywords" }> {
+export async function searchAttached(bid: string, docIds: string[], question: string, k = 8, opts: { keywordsOnly?: boolean } = {}): Promise<{ passages: DocPassage[]; docs: VaultDoc[]; mode: "meaning+keywords" | "keywords" }> {
   const docs = await getDocs(bid, docIds), ids = docs.map((d) => d.id);
   if (!ids.length) return { passages: [], docs, mode: "keywords" };
   const name = new Map(docs.map((d) => [d.id, d.name])), picked = new Map<string, DocPassage>();
   const put = (p: Passage, via: DocPassage["via"]) => { if (!picked.has(p.id)) picked.set(p.id, { ...p, docName: name.get(p.docId) ?? "document", via }); };
   let mode: "meaning+keywords" | "keywords" = "keywords";
   const allEmbedded = docs.every((d) => d.chunkCount > 0 && d.embeddedCount >= d.chunkCount);
-  if (docs.some((d) => d.embeddedCount > 0)) {
+  if (!opts.keywordsOnly && docs.some((d) => d.embeddedCount > 0)) {   // keywordsOnly: no query embedding is made (the free Voyage plan allows 3 a minute)
     try { const v = await embedQuery(question); for (const m of (await matchChunks(bid, ids, v, 6)).filter((x) => x.similarity > 0.15)) put(m, "meaning"); mode = "meaning+keywords"; } catch { /* keyword ranking below */ }
   }
   const all = await chunksOf(bid, ids);

@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { Badge, Eyebrow, MarkedPage, MarkedScope, RepealedNote } from "@/components/kit";
 import { hrefOf, sourceLabel } from "@/components/workspace/CitedText";
 import { sectionWord } from "@/lib/acts/unitLabel.mjs";
-import { amendParts, vocabOf } from "@/lib/chat/amend.mjs";
+import AmendedText from "@/components/workspace/AmendedText";
+import { vocabOf } from "@/lib/chat/amend.mjs";
 import { markParagraph, sentencesCiting } from "@/lib/chat/marked.mjs";
 import type { Citation } from "@/lib/chat/store";
 
@@ -68,14 +69,9 @@ function ActPage({ d, sentences }: { d: Extract<Loaded, { kind: "act" }>; senten
       {d.status === "possibly_incomplete" && <Badge tone="warn" className="mt-1" title="Our copy of this section may be missing text">Possibly incomplete</Badge>}
       {!paragraphs.length ? <p className="mt-2 text-ui-base text-muted">The text of this section is not available here.</p> : (
         <MarkedScope className="mt-2 space-y-2 font-serif text-reading leading-reading text-foreground">
-          {paragraphs.map((p, i) => (i === marked ? <MarkedPage key={i} label="Passage the answer relied on"><p><Amended text={p} vocab={vocab} /></p></MarkedPage> : <p key={i}><Amended text={p} vocab={vocab} /></p>))}
+          {paragraphs.map((p, i) => (i === marked ? <MarkedPage key={i} label="Passage the answer relied on"><p><AmendedText text={p} vocab={vocab} /></p></MarkedPage> : <p key={i}><AmendedText text={p} vocab={vocab} /></p>))}
         </MarkedScope>
       )}
     </div>
   );
-}
-
-/** A paragraph of law with the amendment brackets removed and a small footnote mark where the amended words end (src/lib/chat/amend.mjs). */
-function Amended({ text, vocab }: { text: string; vocab: Set<string> }) {
-  return <>{amendParts(text, vocab).map((p, i) => (p.t === "text" ? <span key={i}>{p.v}</span> : <sup key={i} title={`Amended text (footnote ${p.n})`} className="ml-0.5 font-sans text-ui-xs text-muted">{p.n}</sup>))}</>;
 }

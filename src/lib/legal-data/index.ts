@@ -9,7 +9,7 @@ import { getCaseText } from "@/lib/judgments/scText";
 import { actsTextDir } from "@/lib/acts/sectionText";
 
 export { dbConfigured as legalDataConfigured } from "@/lib/acts/db";
-export { searchSections, primeSemanticQueries, type SectionHit, type SearchOutcome } from "@/lib/acts/searchStore";
+export { searchSections, primeSemanticQueries, type SectionHit, type SearchOutcome, type SearchFilters } from "@/lib/acts/searchStore";
 export { loadActText, type ActTextOutcome } from "@/lib/acts/actText";
 export { getActsStore } from "@/lib/acts";
 export { getJudgmentsStore } from "@/lib/judgments";

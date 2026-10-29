@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import AppShell from "@/components/shell/AppShell";
-import { Notice } from "@/components/kit";
+import { Notice, Panel } from "@/components/kit";
 import scDuplicates from "@/config/sc-duplicates.json";
 import CopyButton from "@/components/workspace/CopyButton";
 import { ALL_COURTS } from "@/data/workspaceBrowse";
@@ -56,13 +56,19 @@ export default async function CasePage({ params, searchParams }: { params: Promi
     ["Record ID", <span key="id" className="font-mono">{c.caseId}</span>],
   ];
   const prov = provenanceRows(slug, { parties: !!parties, judges: !!c.judges?.length, bench: !!benchN, benchExtracted: !!c.benchExtracted?.length, caseNumberExtracted: !!c.caseNumberExtracted, pages: !!c.pages, preview: !!preview, citation: !!c.citation, caseNumber: !!c.caseNumber, disposition: !!(c.disposition || c.dispositionLabel), date: !!c.decisionDate });
+  const hasText = !!(full && joined) || !!preview;
+  const details = (stacked: boolean) => (
+    <dl className="divide-y divide-border/60">
+      {rows.map(([k, v]) => (<div key={k} className={stacked ? "grid gap-0.5 py-2.5" : "grid gap-1 px-5 py-3 sm:grid-cols-[210px_1fr]"}><dt className="text-ui-xs text-secondary">{k}</dt><dd className={stacked ? "text-ui-base" : "text-ui-body"}>{v}</dd></div>))}
+    </dl>
+  );
   const mark = { shown: "✓", partly: "◐", absent: "–" } as const;
   return (
     <AppShell>
-      <div className="mx-auto max-w-content pt-2">
+      <div className="mx-auto max-w-w1280 pt-2">
         <nav aria-label="Breadcrumb" className="text-ui-base text-secondary">
-          <Link href="/library" className="inline-flex min-h-8 items-center hover:text-primary hover:underline">Browse Laws &amp; Judgments</Link><span aria-hidden> / </span>
-          <Link href={`/library/judgments/${slug}`} className="hover:text-primary hover:underline">{court.name}</Link><span aria-hidden> / </span>
+          <Link href="/library?tab=judgments" className="inline-flex min-h-8 items-center hover:text-primary hover:underline">Library</Link><span aria-hidden> › </span>
+          <Link href={`/library/judgments/${slug}`} className="hover:text-primary hover:underline">{court.name}</Link><span aria-hidden> › </span>
           <Link href={back} className="hover:text-primary hover:underline">{year}</Link>
         </nav>
         {dup && (
@@ -70,7 +76,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
             <p>The text of this record matches <Link className="underline" href={`/judgments/${slug}/${dup.year}/${dup.of}`}>{dup.of}</Link> word for word (only the printed report page differs): the source lists it twice.</p>
           </Notice>
         )}
-        <h1 className="mt-2 text-ui-title font-semibold leading-snug tracking-tight">{heading}</h1>
+        <h1 className="mt-2 font-serif text-ui-title font-semibold leading-snug tracking-tight">{heading}</h1>
         <p className="mt-1.5 flex flex-wrap items-center gap-2 text-ui-base text-secondary">
           <span>{court.name}</span>
           {c.citation ? <><span aria-hidden>·</span><code className="font-mono text-foreground">{c.citation}</code></> : c.caseNumber ? <><span aria-hidden>·</span><span>Case no. {c.caseNumber}</span></> : null}
@@ -85,28 +91,34 @@ export default async function CasePage({ params, searchParams }: { params: Promi
           <span className="text-ui-xs text-muted">{c.citation ? "Copies the citation" : "Copies the case number with court and date"}</span>
         </p>
         {full && <p className="mt-3"><a href="#fulltext" className="inline-flex min-h-9 items-center rounded-button px-3 text-ui-base font-medium text-primary ring-1 ring-control-border hover:bg-accent">Read the judgment text ↓</a></p>}
-        <dl className="mt-5 divide-y divide-border/60 rounded-card bg-surface shadow-sm ring-1 ring-border/60">
-          {rows.map(([k, v]) => (<div key={k} className="grid gap-1 px-5 py-3 sm:grid-cols-[210px_1fr]"><dt className="text-ui-sm text-secondary">{k}</dt><dd className="text-ui-body">{v}</dd></div>))}
-        </dl>
+        <div className="mt-5 grid gap-6 lg:grid-cols-[minmax(0,1fr)_21rem]">
+          <div className="min-w-0">
+            {!hasText && <Panel className="p-0">{details(false)}</Panel>}
+            {!hasText && sc === false && <Notice tone="info" role="note" compact className="mt-4"><p>This High Court record has case details only: the judgment text is not in our library.</p></Notice>}
         {full && joined && (
-          <JudgmentFullText chunks={full.chunks} mentions={mentions} />
-        )}
-        {!full && preview && (
-          <section aria-labelledby="preview" className="mt-5 rounded-card bg-surface p-5 shadow-sm ring-1 ring-border/60">
-            <h2 id="preview" className="text-ui-xs font-semibold uppercase tracking-caps text-secondary">Opening text (as extracted)</h2>
-            <p className="mt-2 text-ui-body leading-relaxed"><StatuteText text={preview} mentions={mentions} />…</p>
-            <LawsReferred laws={lawsReferred(mentions)} />
-            <p className="mt-2 text-ui-xs text-muted">The first part of the English report, usually the headnote. OCR errors are possible. The full judgment text is not available in LexBharat.</p>
-          </section>
-        )}
+              <JudgmentFullText chunks={full.chunks} mentions={mentions} withLaws={false} />
+            )}
+            {!full && preview && (
+              <section aria-labelledby="preview" className="mt-5 rounded-card bg-surface p-5 shadow-sm ring-1 ring-border/60">
+                <h2 id="preview" className="text-ui-xs font-semibold uppercase tracking-caps text-secondary">Opening text (as extracted)</h2>
+                <p className="mt-2 text-ui-body leading-relaxed"><StatuteText text={preview} mentions={mentions} />…</p>
+                <p className="mt-2 text-ui-xs text-muted">The first part of the English report, usually the headnote. OCR errors are possible. The full judgment text is not available in LexBharat.</p>
+              </section>
+            )}
+          </div>
+          <aside aria-label="About this judgment" className="space-y-4 lg:sticky lg:top-4 lg:self-start">
+            {hasText && <Panel><h2 className="text-ui-xs font-semibold uppercase tracking-caps text-muted">Case details</h2>{details(true)}</Panel>}
+            {lawsReferred(mentions).length > 0 && <Panel className="[&>div]:mt-0 [&>div]:border-0 [&>div]:pt-0"><LawsReferred laws={lawsReferred(mentions)} /></Panel>}
         <section aria-labelledby="prov" className="mt-5 rounded-card bg-accent/50 p-5 ring-1 ring-border/50">
-          <h2 id="prov" className="text-ui-xs font-semibold uppercase tracking-caps text-secondary">Where each field comes from</h2>
-          <p className="mt-1 text-ui-sm text-secondary">All data is from the open-india-law dataset ({stats.attribution?.licence}, snapshot {stats.attribution?.snapshot}). ✓ as recorded, ◐ present but imperfect, – absent, with the reason.</p>
-          <ul className="mt-3 space-y-1.5 text-ui-sm">
-            {prov.map((r) => (<li key={r.field} className="grid grid-cols-[18px_130px_1fr] gap-x-2"><span aria-hidden className="text-muted">{mark[r.state]}</span><span className="font-medium">{r.field}</span><span className="text-secondary">{r.note}</span></li>))}
-          </ul>
-          {JUDGE_COURTS.includes(slug) && <p className="mt-2 text-ui-xs text-muted">Judges and bench are exported only for Bombay, Gujarat and Orissa.</p>}
-        </section>
+              <h2 id="prov" className="text-ui-xs font-semibold uppercase tracking-caps text-secondary">Where each field comes from</h2>
+              <p className="mt-1 text-ui-sm text-secondary">All data is from the open-india-law dataset ({stats.attribution?.licence}, snapshot {stats.attribution?.snapshot}). ✓ as recorded, ◐ present but imperfect, – absent, with the reason.</p>
+              <ul className="mt-3 space-y-1.5 text-ui-sm">
+                {prov.map((r) => (<li key={r.field} className="grid grid-cols-[18px_130px_1fr] gap-x-2"><span aria-hidden className="text-muted">{mark[r.state]}</span><span className="font-medium">{r.field}</span><span className="text-secondary">{r.note}</span></li>))}
+              </ul>
+              {JUDGE_COURTS.includes(slug) && <p className="mt-2 text-ui-xs text-muted">Judges and bench are exported only for Bombay, Gujarat and Orissa.</p>}
+            </section>
+          </aside>
+        </div>
         <Link href={back} className="mt-4 inline-flex h-9 items-center rounded-button px-3 text-ui-base ring-1 ring-control-border hover:bg-accent">← Back to {year} cases</Link>
         {stats.attribution && <p className="mt-6 text-ui-xs text-muted">{stats.attribution.text} Licence: {stats.attribution.licence}, snapshot {stats.attribution.snapshot}. <a href={stats.attribution.url} className="underline" rel="noopener noreferrer" target="_blank">Dataset</a> Verify against the official source before relying on it; this is not legal advice.</p>}
       </div>

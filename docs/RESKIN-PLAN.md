@@ -268,3 +268,14 @@ Phase 2 feedback: the notes line in the message was still the template placehold
 - Kept: testing banner, "not legal advice", the check label (Supported / Partly supported / Check sources / Not found), "Was this right?", Attach from Vault, follow-up box, usage line.
 
 **Stopped after Phase 4** for screenshot approval.
+
+## Phase 5 — Search, Library, law page, judgment page (done, awaiting approval)
+
+- **Search (`/search?q=&tab=`):** one box, four tabs (Laws, Judgments, Regulators, Your documents), By meaning / Exact words, and filters on Laws (Central or State, in force or repealed; a filters button on phones). Only the open tab is searched; the tab shows a count once it has loaded. The filters needed a small change in the Acts search (`filters` option in `searchStore.ts`, `jurisdiction` and `status` on `/api/acts/search`). "Your documents" is new: `GET /api/vault/search` (this browser's own Vault files only, by meaning and exact words, or exact words only without an embedding). Not done: a Year filter and counts on tabs that have not been opened (they would cost extra searches).
+- **Library (`/library?tab=`):** Acts (Central to start with; Central or State, category, status, sort, search within the list), Constitution (Parts and Articles as a contents list), Regulators (each opens its instruments), Judgments (courts). The old "Browse Laws & Judgments" component is gone.
+- **Law page:** three columns on a wide screen (contents, text, margin notes), two on a laptop, and on a phone the contents sit behind a button and the notes move below the text. Margin: this section's quality flags, where to read it on India Code, this Act's status ("Repealed, see BNS"), counts, and where the text comes from. Amendment brackets are shown as footnote marks and "( a )" as "(a)". Not in the margin: judgments that cite this section (that needs a citation index we do not have).
+- **Judgment page:** header, the reader (first paragraphs, search inside, "Show full judgment") and a margin with case details, "Laws referred to" and where each field comes from. A High Court record with no text shows its details and says so.
+- **Shared parts and tokens:** `Tabs`, `Toggle`, `Panel`, `Badge`, `Notice` and the control classes from the kit; no hard-coded colours or fonts in the new files. `AmendedText` is shared with the Ask cited page.
+- **Data layer:** every new page and route reads through `src/lib/legal-data` (docs/DATA-ACCESS.md).
+
+**Stopped after Phase 5.**
