@@ -213,6 +213,8 @@
   --logo-h: 22px;
   --logo-h-lg: 30px;
   --text-greeting: 44px;
+  --text-question: 26px;   /* the question heading on the Ask reading desk */
+  --w-cited-page: 26rem;   /* width of the cited page beside an answer */
 }
 
-@media (max-width: 760px) { :root { --pad-page: 1rem; --text-greeting: 34px; } }
+@media (max-width: 760px) { :root { --pad-page: 1rem; --text-greeting: 34px; --text-question: 22px; } }

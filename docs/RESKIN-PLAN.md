@@ -256,3 +256,15 @@ Phase 2 feedback: the notes line in the message was still the template placehold
 `docs/screenshots/reskin-phase3/`: `01-dashboard-shell`, `01b-data-api-shell` (desktop only), `02-product-menu` (desktop), `03-mobile-drawer-open` (phone), `04-password-page`, `05-password-focus`, `06-dev-banner` (after only), each as `<name>-<1280|375>-<before|after>.png`. "Before" is the Phase 2 state. The dev banner only shows on a development server with an empty ACCESS_PASSWORD, which cannot run next to the production build (they share `.next`), so there is no "before" image for it; before Phase 3 it was a thin tinted strip of plain text.
 
 **Stopped before Phase 4.**
+
+## Phase 4 — Ask as a reading desk (done, awaiting approval)
+
+`/ask` and `/ask/<id>` are now a reading desk: each question is a serif heading with its answer below it (no chat bubbles); numbered citation chips are buttons that open the **cited page** on the right (sticky panel on desktop, bottom sheet with a scrim on phones; the sheet stays closed until a chip is tapped). The page opens on the paragraph the answer relied on, drawn as the marked page (white, forest outline, corner brackets; the rest dims), and scrolls to it. The first cited source opens by itself when an answer finishes. Judgment excerpts show their excerpt marked; a passage of your own document shows its name, page and preview with an "Open the document" link; every panel ends with "Open the whole section/judgment ›".
+
+- Logic stays out of the screens: choosing the paragraph is `src/lib/chat/marked.mjs` (unit-tested); the panel's text comes from one new read-only route, `GET /api/chat/source` (Act section or SC excerpt; behind the password gate like the rest of `/api/chat`). Search, prompts, citations, limits and feedback are unchanged.
+- Shared kit: `CitationChip` takes an optional `onSelect`/`active` (button instead of link), `CitedText` and `AnswerView` pass it through; new `components/ask/CitedPage.tsx` uses `MarkedPage`/`MarkedScope`, `Badge`, `Eyebrow`, `RepealedNote`.
+- Tokens: two new ones in `src/styles/tokens.css` (`--text-question`, `--w-cited-page`) with matching Tailwind names; no hard-coded colours or fonts in the new files.
+- Also fixed: the question box now sits above the phone tab bar instead of under it.
+- Kept: testing banner, "not legal advice", the check label (Supported / Partly supported / Check sources / Not found), "Was this right?", Attach from Vault, follow-up box, usage line.
+
+**Stopped after Phase 4** for screenshot approval.

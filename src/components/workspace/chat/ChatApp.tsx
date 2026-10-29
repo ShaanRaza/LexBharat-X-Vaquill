@@ -1,6 +1,8 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Notice, Panel } from "@/components/kit";
+import { Notice } from "@/components/kit";
+import CitedPage from "@/components/ask/CitedPage";
+import { citedNumbers } from "@/lib/chat/citations.mjs";
 import AnswerView from "./AnswerView";
 import FeedbackBar from "../FeedbackBar";
 import { docFromSearch } from "@/lib/vault/links.mjs";
@@ -20,6 +22,8 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
   const [chatId, setChatId] = useState<string | undefined>(undefined), [msgs, setMsgs] = useState<Msg[]>([]), [input, setInput] = useState(""), [busy, setBusy] = useState(false);
   const [sendErr, setSendErr] = useState(""), [loadErr, setLoadErr] = useState(""), [loading, setLoading] = useState(!!initialId), [usage, setUsage] = useState<Usage>(null);
   const [attached, setAttached] = useState<Attached[]>([]);
+  // the reading desk: which source's page is open beside the answers ({ i: message index, n: source number }), and whether the phone's bottom sheet is up
+  const [sel, setSel] = useState<{ i: number; n: number } | null>(null), [sheet, setSheet] = useState(false), [tick, setTick] = useState(0), autoFor = useRef(-1);
   const slow = useSlowNotice(msgs.some((m) => m.pending && !m.content), ai.ui.slowNoticeMs);   // "Still thinking" after 10 s with no answer yet (wording and time: src/config/ai-models.json)
   const end = useRef<HTMLDivElement>(null), box = useRef<HTMLTextAreaElement>(null), current = useRef<string | undefined>(undefined);
 
@@ -51,6 +55,14 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
     }).catch((e) => setLoadErr(e.message)).finally(() => setLoading(false));
   }, [initialId]);
   useEffect(() => { end.current?.scrollIntoView({ block: "end" }); }, [msgs]);
+  // when an answer is finished, open the first source it cites (once per answer; on a phone the sheet stays closed until a chip is tapped)
+  useEffect(() => {
+    const i = msgs.length - 1, m = msgs[i]; if (!m || m.role !== "assistant" || m.pending || !m.content || autoFor.current === i) return;
+    autoFor.current = i; const first = citedNumbers(m.content).find((n) => (m.citations ?? []).some((c) => c.n === n && c.kind !== "doc")); if (first) setSel({ i, n: first });
+  }, [msgs]);
+  useEffect(() => { if (!initialId) return; autoFor.current = -1; setSel(null); setSheet(false); }, [initialId]);   // another chat opened: start fresh
+  const pick = (i: number, n: number) => { setSel({ i, n }); setSheet(true); setTick((t) => t + 1); };
+  const selMsg = sel ? msgs[sel.i] : undefined, selSource = selMsg?.citations?.find((c) => c.n === sel?.n) ?? null;
 
   async function ask(question: string) {
     const q = question.replace(/\s+/g, " ").trim();
@@ -97,7 +109,8 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
 
   askRef.current = ask;   // always the latest ask, for the /ask?q= start above
   return (
-    <div className="mx-auto flex min-h-[calc(100vh-7rem)] max-w-3xl flex-col">
+    <div className="mx-auto grid max-w-w1152 gap-8 lg:grid-cols-[minmax(0,1fr)_var(--w-cited-page)]">
+    <div className="flex min-h-[calc(100vh-7rem)] min-w-0 flex-col">
       <div className="flex-1 space-y-5 py-5" aria-live="polite">
         {loading && <p className="text-ui-base text-muted">Loading chat…</p>}
         {loadErr && <Notice tone="bad" role="alert"><p>{loadErr}</p></Notice>}
@@ -109,11 +122,11 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
           </div>
         )}
         {msgs.map((m, i) => m.role === "user"
-          ? <div key={i} className="flex justify-end"><div className="max-w-[85%] rounded-card bg-primary/10 px-4 py-2.5 text-ui-body text-foreground"><p className="whitespace-pre-wrap">{m.content}</p>{!!m.attached?.length && <p className="mt-1 text-ui-sm text-secondary">Attached: {m.attached.join(", ")}</p>}</div></div>
-          : <Panel as="article" key={i} className="px-card py-4">{m.pending && !m.content ? <><p className="text-ui-base text-muted">Searching the Acts…</p>{slow && <p role="status" className="mt-1 text-ui-sm text-quality-warn">{ai.ui.slowNoticeText}</p>}</> : <><AnswerView text={m.content} sources={m.citations ?? []} check={m.check} pending={m.pending} queries={m.queries} note={m.note} />{!m.pending && m.id && m.content ? <FeedbackBar feature="chat" itemId={String(m.id)} className="mt-4 border-t border-border/60 pt-3" /> : null}</>}</Panel>)}
+          ? <h2 key={i} className="font-serif text-question text-foreground [overflow-wrap:anywhere]">{m.content}{!!m.attached?.length && <span className="mt-1 block font-sans text-ui-sm font-normal text-secondary">Attached: {m.attached.join(", ")}</span>}</h2>
+          : <article key={i} className="border-b border-border/60 pb-6">{m.pending && !m.content ? <><p className="text-ui-base text-muted">Searching the Acts…</p>{slow && <p role="status" className="mt-1 text-ui-sm text-quality-warn">{ai.ui.slowNoticeText}</p>}</> : <><AnswerView text={m.content} sources={m.citations ?? []} check={m.check} pending={m.pending} queries={m.queries} note={m.note} onPick={(n) => pick(i, n)} activeN={sel?.i === i ? sel.n : undefined} />{!m.pending && m.id && m.content ? <FeedbackBar feature="chat" itemId={String(m.id)} className="mt-4 border-t border-border/60 pt-3" /> : null}</>}</article>)}
         <div ref={end} />
       </div>
-      <div className="sticky bottom-0 bg-background pb-4 pt-2">
+      <div className="sticky bottom-tabbar bg-background pb-4 pt-2 lg:bottom-0">
         {sendErr && <Notice tone="bad" role="alert" compact className="mb-2"><p>{sendErr}</p></Notice>}
         <div className="mb-2 flex flex-wrap items-center gap-2">
           <AttachPicker value={attached} onChange={setAttached} disabled={busy} />
@@ -128,6 +141,13 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
         </form>
         <p className="mt-2 text-ui-xs text-muted">Searches Indian Acts and Supreme Court judgment excerpts (and any Vault documents you attach). Not legal advice.{usage ? ` ${Math.max(0, usage.daily - usage.day)} of ${usage.daily} questions left today.` : ""}</p>
       </div>
+    </div>
+    <div className="min-w-0">
+      {sheet && <button type="button" aria-label="Close the cited page" onClick={() => setSheet(false)} className="fixed inset-0 z-30 bg-foreground/30 lg:hidden" />}
+      <div className={`${sheet ? "fixed inset-x-0 bottom-0 z-40 rounded-t-card bg-background p-3 shadow-pop" : "hidden"} lg:static lg:z-auto lg:block lg:bg-transparent lg:p-0 lg:shadow-none lg:sticky lg:top-topbar lg:self-start lg:pt-5`}>
+        <CitedPage source={selSource} answer={selMsg?.content ?? ""} onClose={() => setSheet(false)} nudge={tick} />
+      </div>
+    </div>
     </div>
   );
 }
