@@ -1,0 +1,151 @@
+{
+ "at": "2026-10-29T09:34:12.014Z",
+ "rows": [
+  {
+   "id": "s1",
+   "q": "notice after cheque bounces",
+   "top": 3,
+   "rank": 2,
+   "ok": true,
+   "mode": "semantic",
+   "first": [
+    "Negotiable Instruments Act,  s93",
+    "Negotiable Instruments Act,  s138",
+    "Negotiable Instruments Act,  s94",
+    "Negotiable Instruments Act,  s?",
+    "Negotiable Instruments Act,  s97"
+   ]
+  },
+  {
+   "id": "s2",
+   "q": "138 NI Act",
+   "top": 1,
+   "rank": 1,
+   "ok": true,
+   "mode": "lookup",
+   "first": [
+    "Negotiable Instruments Act,  s138"
+   ]
+  },
+  {
+   "id": "s3",
+   "q": "time limit to file a complaint for cheque bounce",
+   "top": 3,
+   "rank": 3,
+   "ok": true,
+   "mode": "semantic",
+   "first": [
+    "Negotiable Instruments Act,  s138",
+    "Limitation Act, 1963 sA20",
+    "Negotiable Instruments Act,  s142",
+    "Negotiable Instruments Act,  s?",
+    "Limitation Act, 1963 sA40"
+   ]
+  },
+  {
+   "id": "s4",
+   "q": "punishment for theft",
+   "top": 3,
+   "rank": 1,
+   "ok": true,
+   "mode": "semantic",
+   "first": [
+    "Bharatiya Nyaya Sanhita, 202 s303",
+    "Bharatiya Nyaya Sanhita, 202 s307",
+    "Bharatiya Nyaya Sanhita, 202 s328",
+    "Bharatiya Nyaya Sanhita, 202 s306",
+    "Bharatiya Nyaya Sanhita, 202 s305"
+   ]
+  },
+  {
+   "id": "s5",
+   "q": "IPC 420 cheating punishment",
+   "top": 3,
+   "rank": 5,
+   "ok": false,
+   "mode": "semantic",
+   "first": [
+    "Information Technology Act,  s66D",
+    "Delhi Police Act, 1978 s108",
+    "Public Examinations (Prevent s9",
+    "Bharatiya Nagarik Suraksha S s531",
+    "Bharatiya Nyaya Sanhita, 202 s318"
+   ]
+  },
+  {
+   "id": "s6",
+   "q": "anticipatory bail",
+   "top": 3,
+   "rank": 1,
+   "ok": true,
+   "mode": "semantic",
+   "first": [
+    "Bharatiya Nagarik Suraksha S s482",
+    "Bharatiya Nagarik Suraksha S s430",
+    "Bharatiya Nagarik Suraksha S s480",
+    "Bharatiya Nagarik Suraksha S s483",
+    "Bharatiya Nagarik Suraksha S s47"
+   ]
+  },
+  {
+   "id": "s7",
+   "q": "drunk driving punishment",
+   "top": 3,
+   "rank": 1,
+   "ok": true,
+   "mode": "semantic",
+   "first": [
+    "Motor Vehicles Act, 1988 s185",
+    "Motor Vehicles Act, 1939, 4  s117",
+    "Motor Vehicles Act, 1939, 4  s7",
+    "Police Act, 1861 s34",
+    "Stage-Carriages Act, 1861 s12"
+   ]
+  },
+  {
+   "id": "s8",
+   "q": "punishment for murder",
+   "top": 3,
+   "rank": 2,
+   "ok": true,
+   "mode": "semantic",
+   "first": [
+    "Bharatiya Nyaya Sanhita, 202 s104",
+    "Bharatiya Nyaya Sanhita, 202 s103",
+    "Bharatiya Nyaya Sanhita, 202 s105",
+    "Bharatiya Nyaya Sanhita, 202 s109",
+    "Rajasthan Dacoity Affected A s9"
+   ]
+  },
+  {
+   "id": "s9",
+   "q": "can I get divorce in the first year of marriage",
+   "top": 3,
+   "rank": 2,
+   "ok": true,
+   "mode": "semantic",
+   "first": [
+    "Special Marriage Act, 1954 s29",
+    "Hindu Marriage Act, 1955 s14",
+    "Special Marriage Act, 1954 s30",
+    "Special Marriage Act, 1954 s28",
+    "Hindu Marriage Act, 1955 s13B"
+   ]
+  },
+  {
+   "id": "s10",
+   "q": "appeal when RTI reply not received",
+   "top": 3,
+   "rank": 1,
+   "ok": true,
+   "mode": "semantic",
+   "first": [
+    "Right to Information Act, 20 s19",
+    "Digital Personal Data Protec s29",
+    "Delhi Right to Information A s7",
+    "Petroleum and Natural Gas Re s37",
+    "Telecom Regulatory Authority s18"
+   ]
+  }
+ ]
+}

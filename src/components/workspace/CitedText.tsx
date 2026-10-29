@@ -1,5 +1,5 @@
 "use client";
-import { sectionWord } from "@/lib/acts/unitLabel.mjs";
+import { unitWord } from "@/lib/docs/docType.mjs";
 import Link from "next/link";
 import { Fragment } from "react";
 import { CitationChip } from "@/components/kit";
@@ -13,7 +13,7 @@ export const docHref = (c: Citation) => `/work/vault/${c.docId}${c.page ? `?page
 export const judgmentHref = (c: Citation) => `/judgments/supreme-court-of-india/${c.caseYear}/${encodeURIComponent(c.caseId ?? "")}${c.passage !== undefined ? `#passage-${c.passage}` : ""}`;
 export const hrefOf = (c: Citation) => (c.kind === "doc" ? docHref(c) : c.kind === "judgment" ? judgmentHref(c) : sectionHref(c));
 /** "NDA.pdf, page 3, 4. Non-compete" or "Indian Contract Act, 1872, Section 27" */
-export const sourceLabel = (c: Citation) => c.kind === "judgment" ? `${c.actTitle}${c.label ? `, ${c.label}` : ""}${c.page ? `, page ${c.page}` : ""} (Supreme Court)` : c.kind === "doc" ? `${c.docName ?? c.actTitle}${c.page ? `, page ${c.page}` : ""}${c.label ? `, ${c.label}` : ""}${c.scan ? ", read from scan" : ""}` : `${c.actTitle}, ${c.number ? sectionWord(c.number) : "unnumbered text"}`;
+export const sourceLabel = (c: Citation) => c.kind === "judgment" ? `${c.actTitle}${c.label ? `, ${c.label}` : ""}${c.page ? `, page ${c.page}` : ""} (Supreme Court)` : c.kind === "doc" ? `${c.docName ?? c.actTitle}${c.page ? `, page ${c.page}` : ""}${c.label ? `, ${c.label}` : ""}${c.scan ? ", read from scan" : ""}` : `${c.actTitle}, ${c.number ? unitWord(c.number, { title: c.actTitle, category: c.category }) : "unnumbered text"}`;
 
 export default function CitedText({ text, sources, onPick, activeN, shown }: { text: string; sources: Citation[]; onPick?: (n: number) => void; activeN?: number; shown?: Map<number, number> }) {
   return <>{linkSegments(text, sources).map((p, i) => {

@@ -21,7 +21,7 @@ export default function ReviewHome() {
   const [meta, setMeta] = useState<Meta | null>(null), [docId, setDocId] = useState(""), [type, setType] = useState(""), [side, setSide] = useState(""), [busy, setBusy] = useState(false), [err, setErr] = useState("");
   const load = useCallback(() => { fetch("/api/review", { cache: "no-store" }).then((r) => r.json()).then(setMeta).catch(() => setMeta({ ready: false, reviews: [], limits: { daily: 5, weekly: 20, maxSaved: 30 }, usage: { day: 0, week: 0 }, error: "Could not load your reviews." })); }, []);
   useEffect(() => { load(); }, [load]);
-  const wanted = useRef<string | null | undefined>(undefined);   // "Review" on a Vault document opens /workspace/review?doc=<id>: choose that document once, then tidy the address
+  const wanted = useRef<string | null | undefined>(undefined);   // "Review" on a Vault document opens /work/reviews?doc=<id>: choose that document once, then tidy the address
   useEffect(() => {
     if (wanted.current === undefined) wanted.current = docFromSearch(window.location.search);
     const id = wanted.current; if (!id || !v.state) return;

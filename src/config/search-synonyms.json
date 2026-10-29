@@ -1,0 +1,15 @@
+{
+  "about": "Everyday words that a statute does not use, and the statutory words that mean the same. Search by meaning (the Search page) adds the statutory words to the query before it is embedded and before words are compared (no AI call). `when`: any of these words in the query (matched after trimming a plural or -ed/-ing ending); `add`: the words appended. Edit this file to teach the search a new word; no code change.",
+  "rules": [
+    { "when": ["bounce", "bounced", "bounces", "bouncing"], "add": "dishonour of cheque for insufficiency of funds" },
+    { "when": ["tenant", "tenants"], "add": "lessee lease rent" },
+    { "when": ["landlord", "landlords"], "add": "lessor lease rent" },
+    { "when": ["evict", "eviction", "evicted"], "add": "ejectment determination of lease" },
+    { "when": ["fir"], "add": "first information report cognizable offence police" },
+    { "when": ["jail", "prison"], "add": "imprisonment" },
+    { "when": ["steal", "stolen", "stealing", "robbed", "robbery"], "add": "theft robbery property" },
+    { "when": ["defame", "defamed", "libel", "slander"], "add": "defamation" },
+    { "when": ["salary", "wages"], "add": "payment of wages" },
+    { "when": ["defective", "refund"], "add": "consumer defect in goods deficiency in service" }
+  ]
+}

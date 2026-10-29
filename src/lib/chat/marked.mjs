@@ -1,3 +1,4 @@
+import { cleanPlain } from "../text/clean.mjs";
 // Which paragraph of a cited section is "the marked page"? The one the answer's sentences that cite it share the most words with. PURE logic: no database, no network, no styling.
 const STOP = new Set("shall which under that this with from have been their there other such than when where whether section sections act acts also into upon only more must may can not any all are was were has its for the and who whom whose each every about after before within without".split(" "));
 const tokens = (s) => (String(s).toLowerCase().match(/[a-z]{4,}|\d+/g) ?? []).filter((w) => !STOP.has(w));
@@ -14,7 +15,7 @@ export function sentencesCiting(answer, n) {
 
 /** A section's text as readable paragraphs: markdown marks removed, one paragraph per line or blank-line block, empty ones dropped. */
 export function paragraphsOf(body) {
-  return String(body ?? "").replace(/\*\*/g, "").replace(/(^|\s)_([^_\n]+)_/g, "$1$2").replace(/^>\s?/gm, "").replace(/^#{1,6}\s+/gm, "").split(/\r?\n+/).map((p) => p.replace(/\s+/g, " ").trim()).filter(Boolean);
+  return String(body ?? "").split(/\r?\n+/).map((p) => cleanPlain(p).replace(/\s+/g, " ").trim()).filter(Boolean);   // the shared display layer (src/lib/text/clean.mjs)
 }
 
 /** { paragraphs, marked }: marked is the index of the paragraph that shares the most words with `sentences` (at least 2 words), or -1 when none clearly does. */

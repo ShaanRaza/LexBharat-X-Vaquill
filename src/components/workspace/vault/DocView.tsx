@@ -6,6 +6,7 @@ import { pageAt } from "@/lib/vault/chunk.mjs";
 import type { VaultDoc } from "@/lib/vault/store";
 import DocStatus from "./DocStatus";
 import { SCAN_LABEL } from "@/lib/vault/scan.mjs";
+import { cleanPlain } from "@/lib/text/clean.mjs";
 
 // A document's text preview (/work/vault/<id>?page=N). PDFs show their text page by page; Word and text files show the text. Presentation only.
 type Detail = { doc: VaultDoc; text: string | null; truncated: boolean; pageStarts: number[] | null; scanPages?: number[] };
@@ -15,7 +16,7 @@ export default function DocView({ id }: { id: string }) {
   const want = typeof window === "undefined" ? 0 : Number(new URLSearchParams(window.location.search).get("page")) || 0;
   useEffect(() => { target.current?.scrollIntoView({ block: "start" }); }, [d]);
   async function download() { const r = await fetch(`/api/vault/${id}/download`, { cache: "no-store" }), j = await r.json().catch(() => ({})); if (j.url) window.location.assign(j.url); }
-  const pages = d?.text && d.pageStarts ? d.pageStarts.map((s, i) => d.text!.slice(s, d.pageStarts![i + 1] ?? undefined).trim()) : null;
+  const pages = d?.text && d.pageStarts ? d.pageStarts.map((s, i) => cleanPlain(d.text!.slice(s, d.pageStarts![i + 1] ?? undefined))) : null;   // cleaned page by page: the page offsets are for the raw text
   return (
     <div className="mx-auto max-w-3xl pb-10">
       <p className="mt-3 text-ui-sm"><Link href="/work/vault" className="text-primary hover:underline">← Back to the Vault</Link></p>
@@ -31,7 +32,7 @@ export default function DocView({ id }: { id: string }) {
           {d.truncated && <Notice tone="info" compact className="mt-4"><p>Only the first part of a very long document is shown here.</p></Notice>}
           {pages ? pages.map((t, i) => (
             <Panel as="article" key={i} className="mt-4"><h2 ref={want === i + 1 ? (target as React.RefObject<HTMLHeadingElement>) : undefined} id={`p${i + 1}`} className="text-ui-sm font-semibold uppercase tracking-caps text-muted">Page {i + 1}{d.scanPages?.includes(i + 1) && <span className="ml-2 font-normal normal-case tracking-normal text-quality-warn">· {SCAN_LABEL}</span>}</h2><p className="mt-2 whitespace-pre-wrap text-ui-body leading-relaxed">{t}</p></Panel>
-          )) : d.text ? <Panel as="article" className="mt-4"><p className="whitespace-pre-wrap text-ui-body leading-relaxed">{d.text}</p></Panel> : null}
+          )) : d.text ? <Panel as="article" className="mt-4"><p className="whitespace-pre-wrap text-ui-body leading-relaxed">{cleanPlain(d.text)}</p></Panel> : null}
         </>
       )}
     </div>

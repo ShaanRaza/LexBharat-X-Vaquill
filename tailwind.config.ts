@@ -71,7 +71,7 @@ const config: Config = {
         "greeting": ["var(--text-greeting)", { lineHeight: "1.08", letterSpacing: "-0.02em" }],
         "question": ["var(--text-question)", { lineHeight: "1.2", letterSpacing: "-0.015em" }],
       },
-      spacing: { card: "var(--pad-card)", stack: "var(--gap-stack)", chip: "var(--pad-chip-x)", page: "var(--pad-page)", tabbar: "var(--h-tabbar)", topbar: "var(--h-topbar)" },
+      spacing: { card: "var(--pad-card)", stack: "var(--gap-stack)", chip: "var(--pad-chip-x)", page: "var(--pad-page)", tabbar: "var(--h-tabbar)", topbar: "var(--h-topbar)", header: "calc(var(--header-h) + var(--gap-sticky))", "page-bottom": "var(--pad-page-bottom)" },
       lineHeight: { reading: "var(--leading-reading)", "reading-loose": "var(--leading-reading-loose)", "body": "var(--leading-body)", "display": "var(--leading-display)", "display-tight": "var(--leading-display-tight)" },
       fontFamily: {
         sans: ["var(--font-sans)", "var(--font-deva)", "system-ui", "sans-serif"],

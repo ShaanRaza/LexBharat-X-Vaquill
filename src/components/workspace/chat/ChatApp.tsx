@@ -49,7 +49,7 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
     if (!initialId) { setLoading(false); return; }
     setLoading(true);
     fetch(`/api/chat/${initialId}`, { cache: "no-store" }).then(async (r) => {
-      if (!r.ok) throw new Error("This chat was not found on this browser.");
+      if (!r.ok) throw new Error("This question was not found on this browser.");
       const j = await r.json();
       setMsgs(j.messages.map((m: { id: number; role: "user" | "assistant"; content: string; citations: Citation[] | null; check: CheckResult | null }) => ({ id: m.id, role: m.role, content: m.content, citations: m.citations ?? [], check: m.check })));
     }).catch((e) => setLoadErr(e.message)).finally(() => setLoading(false));
@@ -112,7 +112,7 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
     <div className="mx-auto grid max-w-w1152 gap-8 lg:grid-cols-[minmax(0,1fr)_var(--w-cited-page)]">
     <div className="flex min-h-[calc(100vh-7rem)] min-w-0 flex-col">
       <div className="flex-1 space-y-5 py-5" aria-live="polite">
-        {loading && <p className="text-ui-base text-muted">Loading chat…</p>}
+        {loading && <p className="text-ui-base text-muted">Loading your question…</p>}
         {loadErr && <Notice tone="bad" role="alert"><p>{loadErr}</p></Notice>}
         {!loading && !loadErr && msgs.length === 0 && (
           <div className="pt-6">
@@ -144,7 +144,7 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
     </div>
     <div className="min-w-0">
       {sheet && <button type="button" aria-label="Close the cited page" onClick={() => setSheet(false)} className="fixed inset-0 z-30 bg-foreground/30 lg:hidden" />}
-      <div className={`${sheet ? "fixed inset-x-0 bottom-0 z-40 rounded-t-card bg-background p-3 shadow-pop" : "hidden"} lg:static lg:z-auto lg:block lg:bg-transparent lg:p-0 lg:shadow-none lg:sticky lg:top-topbar lg:self-start lg:pt-5`}>
+      <div className={`${sheet ? "fixed inset-x-0 bottom-0 z-40 rounded-t-card bg-background p-3 shadow-pop" : "hidden"} lg:static lg:z-auto lg:block lg:bg-transparent lg:p-0 lg:shadow-none lg:sticky lg:top-header lg:self-start lg:pt-5`}>
         <CitedPage source={selSource} answer={selMsg?.content ?? ""} shownN={selMsg && sel ? displayNumbers(selMsg.content, selMsg.citations ?? []).get(sel.n) : undefined} onClose={() => setSheet(false)} nudge={tick} />
       </div>
     </div>

@@ -1,4 +1,5 @@
 "use client";
+import { cleanPlain } from "@/lib/text/clean.mjs";
 import Link from "next/link";
 import { useState } from "react";
 import { Badge, Notice, Panel } from "@/components/kit";
@@ -96,7 +97,7 @@ export default function ReviewRunView({ id }: { id: string }) {
             {shown.map((c, i) => (
               <Panel as="li" key={i}>
                 <p className="flex flex-wrap items-center gap-2"><strong className="text-ui-body font-semibold">{c.ref}</strong><Badge tone={CLAUSE_BADGE[c.risk].tone}>{CLAUSE_BADGE[c.risk].text}</Badge>{c.page ? <span className="text-ui-sm text-muted">Page {c.page}</span> : null}{c.scan ? <Badge tone="warn" title={SCAN_LABEL}>Read from scan</Badge> : null}</p>
-                {c.quote && <blockquote className="mt-2 border-l-2 border-border pl-3 text-ui-base italic text-secondary">“{c.quote}”</blockquote>}
+                {c.quote && cleanPlain(c.quote) && <blockquote className="mt-2 border-l-2 border-border pl-3 text-ui-base italic text-secondary">“{cleanPlain(c.quote)}”</blockquote>}
                 <p className="mt-2 text-ui-base">{c.reason}</p>
               </Panel>
             ))}

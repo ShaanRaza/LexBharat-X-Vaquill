@@ -7,6 +7,8 @@ import fs from "node:fs";
 import { neon } from "@neondatabase/serverless";
 import { completeTask } from "../../src/lib/ai/run.mjs";
 import { detectNotFound } from "../../src/lib/chat/prompt.mjs";
+import { openingHedge } from "../../src/lib/chat/shape.mjs";
+import { copyKey } from "../../src/lib/acts/semantic.mjs";
 const env = Object.fromEntries(fs.readFileSync(".env.local", "utf8").split("\n").filter((l) => l.includes("=")).map((l) => [l.slice(0, l.indexOf("=")), l.slice(l.indexOf("=") + 1).replace(/^["']|["']$/g, "")]));
 const arg = (k, d) => { const i = process.argv.indexOf(`--${k}`); return i > 0 ? process.argv[i + 1] : d; };
 const label = process.argv[2]; if (!label || label.startsWith("--")) { console.log("usage: node scripts/eval/e2e.mjs <label> [--base url] [--only ids] [--limit n]"); process.exit(1); }
@@ -81,8 +83,12 @@ for (const q of qs) {
   const forbidden = (q.forbid ?? []).flatMap((f) => citedSources.filter((src) => src.actTitle?.toLowerCase().startsWith(f.act.toLowerCase()) && f.numbers.includes(String(src.number))).map((src) => `${src.actTitle} s${src.number}`));
   const refs = perGold.map((rows, i) => (matches[i][0] ? rows.find((g) => g.act_id === matches[i][0][0].actId && g.section_key === matches[i][0][0].sectionKey) : null) ?? rows[0]).filter(Boolean);
   const judged = notfoundQ ? nf : a.error || !golds.length || nf || !a.text ? false : await judge(refs, q.question, a.text);
-  const correct = notfoundQ ? nf : judged && !openedNotFound && mentions && !forbidden.length;
-  const row = { id: q.id, kind: q.kind ?? null, question: q.question, gold: [...goldKeys], goldFound: notfoundQ || perGold.every((r) => r.length > 0), oldMention, openedNotFound, mentions: q.mustMention ? mentions : null, forbidden: q.forbid ? forbidden : null, retrieved: notfoundQ ? nf : rank >= 0, rank: rank >= 0 && !notfoundQ ? rank + 1 : null, cited: notfoundQ ? nf : cited, correct, notFound: nf, check: a.check?.label ?? null, error: a.error ?? null, secs: +secs.toFixed(1), nSources: a.sources?.length ?? 0, queries: a.queries, topSources: (a.sources ?? []).slice(0, 5).map((s) => `${s.actTitle} s${s.number ?? "?"}`), answer: (a.text ?? "").slice(0, 1200), sources: (a.sources ?? []).map((src) => ({ n: src.n, t: src.actTitle, s: src.number ?? null })) };
+  // answer-quality checks that need no judge (class 6): the same citation twice in one sentence, the same section twice among the sources, a hedge before the answer
+  const dupCites = (a.text ?? "").split(/\n|(?<=[.;:!?])\s+/).some((seg) => { const m = [...seg.matchAll(/\[(\d{1,2})\]/g)].map((x) => x[1]); return new Set(m).size !== m.length; });
+  const seenKeys = new Set(), dupSources = (a.sources ?? []).some((src) => { const k = copyKey(src.actTitle, src.number); if (!k) return false; if (seenKeys.has(k)) return true; seenKeys.add(k); return false; });
+  const hedgeFirst = !notfoundQ && !!openingHedge(a.text ?? "");
+  const correct = notfoundQ ? nf : judged && !openedNotFound && mentions && !forbidden.length && !dupCites && !hedgeFirst;
+  const row = { id: q.id, kind: q.kind ?? null, question: q.question, gold: [...goldKeys], goldFound: notfoundQ || perGold.every((r) => r.length > 0), oldMention, openedNotFound, dupCites, dupSources, hedgeFirst, mentions: q.mustMention ? mentions : null, forbidden: q.forbid ? forbidden : null, retrieved: notfoundQ ? nf : rank >= 0, rank: rank >= 0 && !notfoundQ ? rank + 1 : null, cited: notfoundQ ? nf : cited, correct, notFound: nf, check: a.check?.label ?? null, error: a.error ?? null, secs: +secs.toFixed(1), nSources: a.sources?.length ?? 0, queries: a.queries, topSources: (a.sources ?? []).slice(0, 5).map((s) => `${s.actTitle} s${s.number ?? "?"}`), answer: (a.text ?? "").slice(0, 1200), sources: (a.sources ?? []).map((src) => ({ n: src.n, t: src.actTitle, s: src.number ?? null })) };
   row.score = (row.retrieved ? 1 : 0) + (row.cited ? 1 : 0) + (correct ? 1 : 0);   // a question that must be "not found" scores 3 only if the answer says so
   done.rows.push(row); fs.writeFileSync(OUT, JSON.stringify(done, null, 1));
   console.log(`q${q.id} ${row.score}/3 retrieved=${row.retrieved}${row.rank ? `@${row.rank}` : ""} cited=${cited} correct=${correct}${nf ? " NOTFOUND" : ""}${a.error ? " ERR " + a.error : ""} ${secs.toFixed(0)}s`);
@@ -93,5 +99,6 @@ if (!CHECK) console.log(`\n${label}: score ${rows.reduce((s, r) => s + r.score, 
 if (!CHECK) {
   const kinds = [...new Set(rows.map((r) => r.kind).filter(Boolean))];
   for (const k of kinds) { const rs = rows.filter((r) => r.kind === k); console.log(`  ${k}: ${rs.reduce((s, r) => s + r.score, 0)}/${3 * rs.length}`); }
+  const flag = (k) => rows.filter((r) => r[k]).length; console.log(`  answer quality: duplicate citation in a sentence ${flag("dupCites")}, same section twice among the sources ${flag("dupSources")}, hedge before the answer ${flag("hedgeFirst")}, opened with "couldn't find" ${flag("openedNotFound")}, cited a section that does not apply ${rows.filter((r) => r.forbidden?.length).length}`);
   const old = rows.filter((r) => r.oldMention !== null); if (old.length) console.log(`  answers that name the old section as the old law: ${old.filter((r) => r.oldMention).length}/${old.length}`);
 }

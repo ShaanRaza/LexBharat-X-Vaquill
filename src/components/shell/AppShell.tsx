@@ -1,3 +1,4 @@
+import StickyHeader from "./StickyHeader";
 import TabBar from "./TabBar";
 import TopBar from "./TopBar";
 import WorkTabs from "./WorkTabs";
@@ -18,11 +19,11 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="app-shell min-h-screen bg-background">
       <TestingBanner className="md:hidden" />
-      <div className="sticky top-0 z-30 bg-background">
+      <StickyHeader>
         <TopBar />
         <TestingBanner className="hidden md:block" />
-      </div>
-      <main id="main" tabIndex={-1} className="mx-auto w-full max-w-app px-page pb-24 pt-2 outline-none">
+      </StickyHeader>
+      <main id="main" tabIndex={-1} className="mx-auto w-full max-w-app px-page pb-page-bottom pt-2 outline-none">
         <WorkTabs />
         {children}
       </main>

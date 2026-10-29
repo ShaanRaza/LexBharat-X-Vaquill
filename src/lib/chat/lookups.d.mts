@@ -1,1 +1,1 @@
-export function extractLookups(question: string): string[];
+export * from "../acts/lookups.d.mts";

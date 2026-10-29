@@ -1,3 +1,4 @@
+import { previewText } from "../text/clean.mjs";
 // Turns a model answer into simple blocks for display: paragraphs and bullet / numbered lists. PURE logic. Bold markers are dropped (the prompt asks for plain text; this is the safety net).
 export function toBlocks(text) {
   const blocks = []; let cur = null;
@@ -15,9 +16,5 @@ export function toBlocks(text) {
   return blocks;
 }
 
-/** A short readable preview of a section's text (for unnumbered sources): skips markdown headings and all-capitals heading lines, drops markup, at most `max` characters. */
-export function previewOf(text, max = 140) {
-  const t = String(text).split(/\n{2,}/).map((p) => p.trim()).filter((p) => p && !/^#/.test(p) && !(p.length < 120 && p === p.toUpperCase())).join(" ")
-    .replace(/\*\*|_(?=\w)|(?<=\w)_/g, "").replace(/\s+/g, " ").trim();
-  return t.length > max ? t.slice(0, max).replace(/\s+\S*$/, "") + " …" : t;
-}
+/** A short readable preview of a section's text (for unnumbered sources): the shared display layer (src/lib/text/clean.mjs) cleans it and skips headings. */
+export const previewOf = (text, max = 140) => previewText(text, max);

@@ -33,7 +33,7 @@ export default function VaultApp() {
     <div className="mx-auto max-w-4xl pb-10">
       <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Saved on this browser only.</strong> Don&apos;t upload confidential client documents.</p></Notice>
       <h1 className="mt-6 text-ui-title font-semibold">Vault</h1>
-      <p className="mt-2 text-ui-body text-secondary">Keep your own documents here, then attach them to a chat question or review them as contracts. PDF, Word, text and picture (JPG, PNG) files, up to {lim?.maxFileMb ?? 10} MB each. Scanned pages are read by a model (at most 20 scanned pages per document and 5 scanned documents a day) and marked &quot;Read from scan — check the original&quot;.</p>
+      <p className="mt-2 text-ui-body text-secondary">Keep your own documents here, then attach them to a question in Ask or review them as contracts. PDF, Word, text and picture (JPG, PNG) files, up to {lim?.maxFileMb ?? 10} MB each. Scanned pages are read by a model (at most 20 scanned pages per document and 5 scanned documents a day) and marked &quot;Read from scan — check the original&quot;.</p>
       {v.state && !v.state.ready && <Notice tone="warn" role="status" className="mt-4"><p>The Vault is not set up on this server yet (no storage configured).</p></Notice>}
       {v.failed && <Notice tone="bad" role="alert" className="mt-4"><p>Could not load the Vault. Reload the page.</p></Notice>}
 

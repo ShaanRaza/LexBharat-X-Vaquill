@@ -12,5 +12,5 @@ export const STATE_NAMED_SEMANTIC: number;
 export function statesIn(q: string): Set<string>;
 export function copyKey(title: string | null | undefined, number: string | null | undefined): string | null;
 export type RankInfo = { actStatus: string; status: string; central?: boolean; title?: string | null; number?: string | null; state?: string | null };
-export function rankSections(cands: { actId: string; sectionKey: string; distance: number }[], info: Map<string, RankInfo>, limit?: number, factor?: number, boosts?: { central?: number; state?: number; states?: Set<string> }): { actId: string; sectionKey: string; score: number; central: boolean; copies: number }[];
+export function rankSections(cands: { actId: string; sectionKey: string; distance: number }[], info: Map<string, RankInfo>, limit?: number, factor?: number, boosts?: { central?: number; state?: number; states?: Set<string>; adjust?: (cand: any, info: any) => number }): { actId: string; sectionKey: string; score: number; central: boolean; copies: number }[];
 export function highlightQuery(q: string): string;

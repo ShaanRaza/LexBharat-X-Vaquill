@@ -100,7 +100,7 @@ export function rankSections(cands, info, limit = 60, factor = NOT_IN_FORCE_SEMA
   for (const c of cands) {
     const i = info.get(`${c.actId}|${c.sectionKey}`);
     if (!i || i.status === "garbled") continue;
-    const score = (1 - c.distance) * (i.actStatus === "in_force" ? 1 : factor) * (states.size ? (i.state && states.has(i.state) ? state : 1) : (i.central ? central : 1));
+    const score = (1 - c.distance) * (i.actStatus === "in_force" ? 1 : factor) * (states.size ? (i.state && states.has(i.state) ? state : 1) : (i.central ? central : 1)) * (boosts.adjust ? boosts.adjust(c, i) : 1);   // adjust: e.g. a section whose heading uses the query's own words (src/lib/acts/searchBoost.mjs)
     const item = { actId: c.actId, sectionKey: c.sectionKey, score, central: !!i.central, copies: 0 };
     const k = copyKey(i.title, i.number) ?? `${c.actId}|${c.sectionKey}`, g = groups.get(k);
     if (!g) { groups.set(k, item); continue; }

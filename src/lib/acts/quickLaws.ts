@@ -2,6 +2,7 @@
 // src/lib/quickfind/rank.mjs and src/config/quickfind.json; this file only fetches the candidates. Server-only.
 import cfgJson from "@/config/quickfind.json";
 import { dbConfigured, query } from "./db";
+import { displayTitle } from "@/lib/docs/docType.mjs";
 import { parseQuick, rankNumbered, titlePrefixes, type QfConfig } from "@/lib/quickfind/rank.mjs";
 
 const cfg = cfgJson as QfConfig;
@@ -20,5 +21,5 @@ export async function numberedLaws(q: string, limit = 8): Promise<QuickLaws> {
   const popular = await query<NumberedHit>(`SELECT ${COLS} ${FROM} WHERE ${NUMBER} AND a.category = 'central' AND lower(a.title) LIKE ANY($3::text[]) LIMIT 60`, [...args, patterns]).catch(() => []);
   const others = p.kind === "act-number" ? [] : await query<NumberedHit>(
     `SELECT ${COLS} ${FROM} WHERE ${NUMBER} AND NOT (a.category = 'central' AND lower(a.title) LIKE ANY($3::text[])) ORDER BY (a.category = 'central') DESC, (a.act_status = 'in_force') DESC, length(a.title), s.ord LIMIT 30`, [...args, patterns]).catch(() => []);
-  return { kind: p.kind, number: p.number, hits: rankNumbered([...popular, ...others], p.number, cfg).slice(0, limit) };
+  return { kind: p.kind, number: p.number, hits: rankNumbered([...popular, ...others], p.number, cfg).slice(0, limit).map((h) => ({ ...h, actTitle: displayTitle(h.actTitle, h) })) };
 }

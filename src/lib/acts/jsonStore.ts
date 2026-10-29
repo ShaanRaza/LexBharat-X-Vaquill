@@ -7,6 +7,7 @@ import regMeta from "@/data/acts/acts.regulations.meta.json";
 import type { ActItem } from "@/data/workspaceBrowse";
 import statusOverrides from "@/config/status-overrides.json";
 import { staticJson } from "@/lib/staticData";
+import { displayTitle } from "@/lib/docs/docType.mjs";
 import { runActsQuery } from "./query";
 import type { ActsStats, ActsStore } from "./types";
 
@@ -16,6 +17,7 @@ const toActs = (rs: unknown): ActItem[] => (rs as Record<string, unknown>[]).map
   const a: Record<string, unknown> = {};
   for (const [k, v] of Object.entries(r)) if (v !== null && v !== undefined) a[k] = v;
   if (!("year" in a)) a.year = null;
+  a.title = displayTitle(String(a.title ?? ""), a);   // display-ready (src/lib/docs/docType.mjs)
   return a as unknown as ActItem;
 });
 const zero = meta.zero_section_count + regMeta.zero_section_count, total = meta.acts + regMeta.acts;

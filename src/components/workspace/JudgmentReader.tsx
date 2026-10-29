@@ -14,9 +14,9 @@ const INITIAL = 20, STEP = 25, MAX_MATCHES = 2000;
 const Para = memo(function Para({ p, hits, activeStart, num, numId, marked }: { p: ReaderPara; hits: { start: number; end: number }[]; activeStart: number; num: number | null; numId: boolean; marked: boolean }) {
   const segs = useMemo(() => buildSegments(p.t, p.m, hits, activeStart), [p.t, p.m, hits, activeStart]);
   return (
-    <div id={p.first ? `passage-${p.chunk}` : undefined} className={`scroll-mt-24 ${marked ? "marked" : ""} ${p.indic ? "rounded-control border-l-2 border-quality-warn pl-3" : ""}`}>
+    <div id={p.first ? `passage-${p.chunk}` : undefined} className={`${marked ? "marked" : ""} ${p.indic ? "rounded-control border-l-2 border-quality-warn pl-3" : ""}`}>
       {p.first && (p.page || p.indic) && <p className="mb-1 select-none text-ui-xs text-muted">{p.page ? <span title="Page of the report where this passage starts">Page {p.page}</span> : null}{p.indic ? <span className="ml-2 text-quality-warn">Contains another script</span> : null}</p>}
-      {num !== null && <a id={numId ? `para-${num}` : undefined} href={`#para-${num}`} className="mb-0.5 inline-block select-none scroll-mt-24 text-ui-xs text-muted hover:text-primary" title="Paragraph number in the judgment (link to it)">¶ {num}</a>}
+      {num !== null && <a id={numId ? `para-${num}` : undefined} href={`#para-${num}`} className="mb-0.5 inline-block select-none text-ui-xs text-muted hover:text-primary" title="Paragraph number in the judgment (link to it)">¶ {num}</a>}
       <p className="whitespace-pre-line font-reading text-reading">
         {segs.map((s, i) => {
           const inner = s.hit ? <mark data-hit="1" {...(s.active ? { "data-active": "1" } : {})} className={`rounded-control px-0.5 text-foreground ${s.active ? "bg-primary/40 ring-1 ring-primary" : "bg-primary/15"}`}>{s.text}</mark> : s.text;

@@ -36,8 +36,8 @@ export default async function CourtPage({ params, searchParams }: { params: Prom
   return (
     <AppShell>
       <div className="mx-auto max-w-content pt-2">
-        <nav aria-label="Breadcrumb" className="text-fs-ui text-secondary"><Link href="/library" className="inline-flex min-h-8 items-center hover:text-primary hover:underline">Browse Laws &amp; Judgments</Link><span aria-hidden> / </span>
-          {picked ? <><Link href={`/library/judgments/${slug}`} className="hover:text-primary hover:underline">{court.name}</Link><span aria-hidden> / </span><span>{picked}</span></> : <span>{court.name}</span>}</nav>
+        <nav aria-label="Breadcrumb" className="text-fs-ui text-secondary"><Link href="/library" className="inline-flex min-h-8 items-center hover:text-primary hover:underline">Library</Link><span aria-hidden> › </span>
+          {picked ? <><Link href={`/library/judgments/${slug}`} className="hover:text-primary hover:underline">{court.name}</Link><span aria-hidden> › </span><span>{picked}</span></> : <span>{court.name}</span>}</nav>
         <h1 className="mt-2 text-fs-title font-semibold tracking-tight">{court.name}{picked ? ` · ${picked}` : ""}</h1>
         {real ? (
           <p className="mt-1 text-fs-body text-secondary">{summary?.cases != null ? `${fmt(summary.cases)} case records` : "Case count unavailable"}{summary?.firstYear ? `, ${summary.firstYear} to ${summary.lastYear}` : ""}. {picked ? "Case metadata only; judgment text is not available yet." : "Choose a year."}</p>

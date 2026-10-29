@@ -8,6 +8,7 @@ import CopyButton from "@/components/workspace/CopyButton";
 import { ALL_COURTS } from "@/data/workspaceBrowse";
 import { JUDGE_COURTS, SC_SLUG, provenanceRows } from "@/lib/judgments/provenance";
 import { WORKSPACE_SUFFIX } from "@/lib/release";
+import { cleanPlain } from "@/lib/text/clean.mjs";
 import JudgmentFullText from "@/components/workspace/JudgmentFullText";
 import StatuteText, { LawsReferred } from "@/components/workspace/StatuteLinks";
 import { getCaseText, getJudgmentsStore, lawsReferred, resolveMentions } from "@/lib/legal-data";
@@ -26,9 +27,12 @@ export default async function CasePage({ params, searchParams }: { params: Promi
   const store = getJudgmentsStore(), sc = slug === SC_SLUG;
   const c = await store.get(slug, year, caseId, p ? Math.floor(Number(p)) || undefined : undefined);
   if (!c) notFound(); // a real 404: the link does not match a case in the exported list (see the route scheme above)
-  const [stats, preview] = await Promise.all([store.stats(), sc ? store.preview(slug, year, caseId) : Promise.resolve(null)]);
-  const full = sc ? await getCaseText(caseId) : null;   // the whole English text, when the Supreme Court text projects are set up
+  const [stats, rawPreview] = await Promise.all([store.stats(), sc ? store.preview(slug, year, caseId) : Promise.resolve(null)]);
+  const rawFull = sc ? await getCaseText(caseId) : null;   // the whole English text, when the Supreme Court text projects are set up
+  // every judgment text is cleaned by the shared display layer BEFORE the Act mentions are found in it, so the links point at the text the reader sees
+  const full = rawFull ? { ...rawFull, chunks: rawFull.chunks.map((x) => ({ ...x, t: cleanPlain(x.t) })).filter((x) => x.t) } : null;
   const joined = full ? full.chunks.map((x) => x.t).join("\n\n") : null;
+  const preview = rawPreview ? cleanPlain(rawPreview) : null;
   const mentions = joined || preview ? await resolveMentions(joined ?? preview ?? "", Number.isInteger(year) ? year : null) : [];   // Act sections named in the opening text, linked where our data has them
   const back = `/library/judgments/${slug}?year=${year}${ya === "1" ? "&years=all" : ""}${lp && Number(lp) > 1 ? `&page=${Math.floor(Number(lp))}` : ""}`;
   const dup = sc ? (scDuplicates.duplicates as Record<string, { of: string; year: number }>)[caseId] : undefined;
@@ -106,7 +110,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
               </section>
             )}
           </div>
-          <aside aria-label="About this judgment" className="space-y-4 lg:sticky lg:top-4 lg:self-start">
+          <aside aria-label="About this judgment" className="space-y-4 lg:sticky lg:top-header lg:self-start">
             {hasText && <Panel><h2 className="text-ui-xs font-semibold uppercase tracking-caps text-muted">Case details</h2>{details(true)}</Panel>}
             {lawsReferred(mentions).length > 0 && <Panel className="[&>div]:mt-0 [&>div]:border-0 [&>div]:pt-0"><LawsReferred laws={lawsReferred(mentions)} /></Panel>}
         <section aria-labelledby="prov" className="mt-5 rounded-card bg-accent/50 p-5 ring-1 ring-border/50">

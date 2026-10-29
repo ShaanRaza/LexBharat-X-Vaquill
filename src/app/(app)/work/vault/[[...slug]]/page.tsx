@@ -7,7 +7,7 @@ import { isUuid } from "@/lib/vault/ids";
 import workspace from "@/config/workspace.json";
 
 export const metadata: Metadata = { title: "Vault | LexBharat" };
-// /workspace/vault and /workspace/vault/<document id>. Off (404) while the vault flag in src/config/workspace.json is false.
+// /work/vault and /work/vault/<document id>. Off (404) while the vault flag in src/config/workspace.json is false.
 export default async function VaultPage({ params }: { params: Promise<{ slug?: string[] }> }) {
   const { slug = [] } = await params;
   if (!workspace.features.vault.enabled) notFound();

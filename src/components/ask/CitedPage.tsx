@@ -3,11 +3,12 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Badge, Eyebrow, MarkedPage, MarkedScope, RepealedNote } from "@/components/kit";
 import { hrefOf, sourceLabel } from "@/components/workspace/CitedText";
-import { sectionWord } from "@/lib/acts/unitLabel.mjs";
-import AmendedText from "@/components/workspace/AmendedText";
-import { vocabOf } from "@/lib/chat/amend.mjs";
+import { unitWord } from "@/lib/docs/docType.mjs";
+import DisplayText from "@/components/text/DisplayText";
+import { vocabOf } from "@/lib/text/clean.mjs";
 import { markParagraph, sentencesCiting } from "@/lib/chat/marked.mjs";
 import type { Citation } from "@/lib/chat/store";
+import { cleanLabel } from "@/lib/text/clean.mjs";
 
 // The cited page beside an answer: the source the selected chip points to, opened at the paragraph the answer relied on, drawn as the "marked page" (the rest of the page dims).
 // Presentation and one fetch (/api/chat/source); choosing the paragraph is src/lib/chat/marked.mjs. Colours, sizes and shapes come from the tokens through the shared kit.
@@ -47,7 +48,7 @@ export default function CitedPage({ source, answer, onClose, nudge = 0, shownN, 
           <p className="text-ui-base font-medium text-foreground">{source.kind === "doc" ? source.docName ?? source.actTitle : source.actTitle}</p>
           <p className="text-ui-sm text-muted">{source.kind === "doc" || source.kind === "judgment" ? sourceLabel(source) : source.state ? source.state.replace(/-/g, " ") : "Central Act"} {source.kind !== "doc" && source.kind !== "judgment" && <RepealedNote actId={source.actId} />}</p>
           {source.kind === "doc" ? (
-            <p className="mt-3 text-ui-base text-secondary">{source.preview ?? "A passage of your own document."}{source.scan ? " Read from a scan: check the original." : ""}</p>
+            <p className="mt-3 text-ui-base text-secondary">{cleanLabel(source.preview) || "A passage of your own document."}{source.scan ? " Read from a scan: check the original." : ""}</p>
           ) : !ready ? <p className="mt-3 text-ui-base text-muted" role="status">Opening the page…</p>
           : state.error ? <p className="mt-3 text-ui-base text-quality-bad" role="alert">{state.error}</p>
           : state.data?.kind === "judgment" ? (
@@ -65,11 +66,11 @@ function ActPage({ d, sentences }: { d: Extract<Loaded, { kind: "act" }>; senten
   const { paragraphs, marked } = markParagraph(d.body, sentences), vocab = vocabOf(paragraphs);
   return (
     <div className="mt-3">
-      <p className="font-serif text-ui-body font-medium text-foreground">{d.number ? `${sectionWord(d.number)}.` : ""} {d.heading ?? ""}</p>
+      <p className="font-serif text-ui-body font-medium text-foreground">{d.number ? `${unitWord(d.number, { title: d.title })}.` : ""} {cleanLabel(d.heading)}</p>
       {d.status === "possibly_incomplete" && <Badge tone="warn" className="mt-1" title="Our copy of this section may be missing text">Possibly incomplete</Badge>}
       {!paragraphs.length ? <p className="mt-2 text-ui-base text-muted">The text of this section is not available here.</p> : (
         <MarkedScope className="mt-2 space-y-2 font-serif text-reading leading-reading text-foreground">
-          {paragraphs.map((p, i) => (i === marked ? <MarkedPage key={i} label="Passage the answer relied on"><p><AmendedText text={p} vocab={vocab} /></p></MarkedPage> : <p key={i}><AmendedText text={p} vocab={vocab} /></p>))}
+          {paragraphs.map((p, i) => (i === marked ? <MarkedPage key={i} label="Passage the answer relied on"><p><DisplayText text={p} vocab={vocab} /></p></MarkedPage> : <p key={i}><DisplayText text={p} vocab={vocab} /></p>))}
         </MarkedScope>
       )}
     </div>

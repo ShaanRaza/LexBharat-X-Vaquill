@@ -1,5 +1,7 @@
 // Keyword search over regulator instrument text (RBI, SEBI, MCA ... Law Commission, tribunal-filed) in reg_sections. LOGIC ONLY: no styling.
 // Same 'english' full-text config and weighting as the Acts search. The index is on the expression below, so every query must use exactly this expression.
+import { cleanPlain } from "@/lib/text/clean.mjs";
+import { tidyTitles } from "./searchStore";
 import { hasDevanagari, hasSearchableChars } from "./searchQuery.mjs";
 import { chooseMode, distinctSections, highlightQuery, rankSections } from "./semantic.mjs";
 import { embedQuery, voyageConfigured } from "./embed";
@@ -28,7 +30,7 @@ async function textRegulators(q: string, page: number, pageSize: number): Promis
               ts_headline('english', left(s.body, 20000), q.tq, 'MaxFragments=2, MaxWords=26, MinWords=10, ShortWord=2, FragmentDelimiter=" … ", StartSel=${MARK_OPEN}, StopSel=${MARK_CLOSE}') AS snippet
        FROM p JOIN reg_sections s USING (act_id, section_key) JOIN reg_acts a ON a.act_id = s.act_id, q ORDER BY p.rank DESC, s.act_id, s.ord`, [q, offset, pageSize], 15000);
     const total = rows.length ? Number(rows[0].total) : 0, capped = total > MAX_RESULTS;
-    const results = rows.map(({ total: _t, ...r }): SectionHit => ({ ...r, snippet: r.snippet ?? "", via: "text" }));
+    const results = rows.map(({ total: _t, ...r }): SectionHit => ({ ...r, snippet: cleanPlain(r.snippet ?? ""), via: "text" }));
     if (!rows.length && page === 1) return empty("No regulator section matches. Try fewer or different words, or put an exact phrase in quotes.");
     return { available: true, results, total: Math.min(total, MAX_RESULTS), totalCapped: capped, page, pageSize, hasMore: offset + results.length < Math.min(total, MAX_RESULTS), mode: "text", note: NOTE };
   } catch {
@@ -63,12 +65,12 @@ async function semanticRegulators(q: string, page: number, pageSize: number): Pr
      FROM k JOIN reg_sections s ON s.act_id = k.act_id AND s.section_key = k.section_key JOIN reg_acts a ON a.act_id = s.act_id, q ORDER BY k.n`,
     [slice.map((c) => c.actId), slice.map((c) => c.sectionKey), highlightQuery(q)], 15000);
   const lead = (b: string) => b.split(/\n{2,}/).map((p) => p.trim()).filter((p) => p && !/^#/.test(p)).join(" ").replace(/\*\*/g, "").replace(/\s+/g, " ").slice(0, 220);
-  const results = rows.map(({ body, snippet, ...r }): SectionHit => ({ ...r, snippet: snippet && snippet.includes(MARK_OPEN) ? snippet : lead(body ?? ""), via: "semantic" }));
+  const results = rows.map(({ body, snippet, ...r }): SectionHit => ({ ...r, snippet: snippet && snippet.includes(MARK_OPEN) ? cleanPlain(snippet) : cleanPlain(lead(body ?? "")), via: "semantic" }));
   return { ...base, results };
 }
 
 /** Regulator search: by meaning when it is set up (VOYAGE_API_KEY + the regulator vector store), otherwise, or for "quoted phrases" / exact=true, by keyword. */
-export async function searchRegulators(q: string, page: number, pageSize: number, opts: { exact?: boolean } = {}): Promise<SearchOutcome> {
+async function searchRegulatorsRaw(q: string, page: number, pageSize: number, opts: { exact?: boolean } = {}): Promise<SearchOutcome> {
   if (!regConfigured()) return { available: false, reason: "not_configured", message: "Regulator text search is not available yet." };
   const chosen = chooseMode(q, { exact: !!opts.exact, hindi: hasDevanagari(q), semanticReady: regSemanticReady() });
   if (chosen.mode === "semantic" && hasSearchableChars(q)) {
@@ -77,3 +79,5 @@ export async function searchRegulators(q: string, page: number, pageSize: number
   const out = await textRegulators(q, page, pageSize);
   return out.available ? { ...out, semantic: { used: false, ...(chosen.reason ? { reason: chosen.reason } : {}) } } : out;
 }
+
+export async function searchRegulators(q: string, page: number, pageSize: number, opts: { exact?: boolean } = {}): Promise<SearchOutcome> { return tidyTitles(await searchRegulatorsRaw(q, page, pageSize, opts)); }

@@ -1,0 +1,15 @@
+{
+  "about": "Search-only checks (no AI call): each query goes through GET /api/acts/search and the expected section must be among the first `top` results. Same expectation format as questions-hard.json (act title prefix + an anchor phrase of the section text). Run: node scripts/eval/search-check.mjs <label> (needs a local server: scripts/eval/serve.sh).",
+  "checks": [
+    { "id": "s1", "q": "notice after cheque bounces", "top": 3, "act": "The Negotiable Instruments Act, 1881", "section": "138", "anchor": "receipt of information by him from the bank regarding the return of the cheque as unpaid" },
+    { "id": "s2", "q": "138 NI Act", "top": 1, "act": "The Negotiable Instruments Act, 1881", "section": "138", "anchor": "receipt of information by him from the bank regarding the return of the cheque as unpaid" },
+    { "id": "s3", "q": "time limit to file a complaint for cheque bounce", "top": 3, "act": "The Negotiable Instruments Act, 1881", "section": "142", "anchor": "within one month of the date on which the cause of action arises" },
+    { "id": "s4", "q": "punishment for theft", "top": 3, "act": "The Bharatiya Nyaya Sanhita, 2023", "section": "303", "anchor": "whoever commits theft shall be punished" },
+    { "id": "s5", "q": "IPC 420 cheating punishment", "top": 3, "act": "The Bharatiya Nyaya Sanhita, 2023", "section": "318", "anchor": "whoever by deceiving any person fraudulently or dishonestly induces" },
+    { "id": "s6", "q": "anticipatory bail", "top": 3, "act": "The Bharatiya Nagarik Suraksha Sanhita, 2023", "section": "482", "anchor": "reason to believe that he may be arrested on an accusation of having committed a non bailable offence" },
+    { "id": "s7", "q": "drunk driving punishment", "top": 3, "act": "The Motor Vehicles Act, 1988", "section": "185", "anchor": "driving by a drunken person" },
+    { "id": "s8", "q": "punishment for murder", "top": 3, "act": "The Bharatiya Nyaya Sanhita, 2023", "section": "103", "anchor": "whoever commits murder shall be punished with death or imprisonment for life" },
+    { "id": "s9", "q": "can I get divorce in the first year of marriage", "top": 3, "act": "The Hindu Marriage Act, 1955", "section": "14", "anchor": "no petition for divorce to be presented within one year of marriage" },
+    { "id": "s10", "q": "appeal when RTI reply not received", "top": 3, "act": "The Right to Information Act, 2005", "section": "19", "anchor": "any person who does not receive a decision within the time specified" }
+  ]
+}

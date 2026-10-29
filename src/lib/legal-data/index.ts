@@ -7,6 +7,8 @@
 import { query, dbConfigured } from "@/lib/acts/db";
 import { getCaseText } from "@/lib/judgments/scText";
 import { actsTextDir } from "@/lib/acts/sectionText";
+import { cleanPlain, vocabOf } from "@/lib/text/clean.mjs";
+import { displayTitle } from "@/lib/docs/docType.mjs";
 
 export { dbConfigured as legalDataConfigured } from "@/lib/acts/db";
 export { searchSections, primeSemanticQueries, type SectionHit, type SearchOutcome, type SearchFilters } from "@/lib/acts/searchStore";
@@ -29,14 +31,14 @@ export const sectionTextAvailable = () => dbConfigured() || !!actsTextDir();
 
 export type SectionRef = { actId: string; sectionKey: string };
 export type SectionBody = { body: string; actStatus: string; year: number | null; sourceUrl: string | null };
-/** The text of many sections at once, each cut to `maxChars`: Map "actId|sectionKey" -> body and the Act's status, year and source. Sections without text are left out. */
+/** The text of many sections at once, cleaned for display (src/lib/text/clean.mjs) and cut to `maxChars` before cleaning: Map "actId|sectionKey" -> body and the Act's status, year and source. Sections without text are left out. */
 export async function sectionBodies(refs: SectionRef[], maxChars: number): Promise<Map<string, SectionBody>> {
   const out = new Map<string, SectionBody>();
   if (!refs.length) return out;
   const rows = await query<{ act_id: string; section_key: string; body: string | null; act_status: string; year: number | null; source_url: string | null }>(
     `SELECT s.act_id, s.section_key, left(s.body, $3) AS body, a.act_status, a.year, a.source_url FROM act_sections_v s JOIN acts a ON a.act_id = s.act_id JOIN unnest($1::text[], $2::text[]) AS k(a, sk) ON s.act_id = k.a AND s.section_key = k.sk`,
     [refs.map((r) => r.actId), refs.map((r) => r.sectionKey), maxChars]);
-  for (const r of rows) if (r.body?.trim()) out.set(`${r.act_id}|${r.section_key}`, { body: r.body, actStatus: r.act_status, year: r.year, sourceUrl: r.source_url });
+  for (const r of rows) { const body = cleanPlain(r.body, vocabOf(String(r.body ?? "").split(/\n+/))); if (body) out.set(`${r.act_id}|${r.section_key}`, { body, actStatus: r.act_status, year: r.year, sourceUrl: r.source_url }); }   // display-clean: the model never reads picture placeholders or amendment numbers
   return out;
 }
 
@@ -44,7 +46,7 @@ export type SectionDetail = { title: string; number: string | null; heading: str
 /** One section with its Act's title (cut to 20,000 characters), or null. Throws only when the source itself fails. */
 export async function sectionDetail(actId: string, sectionKey: string): Promise<SectionDetail | null> {
   const rows = await query<SectionDetail>(`SELECT a.title, s.number, s.heading, s.status, left(s.body, 20000) AS body FROM act_sections_v s JOIN acts a ON a.act_id = s.act_id WHERE s.act_id = $1 AND s.section_key = $2`, [actId, sectionKey]);
-  return rows[0] ?? null;
+  return rows[0] ? { ...rows[0], title: displayTitle(rows[0].title, { title: rows[0].title }) } : null;
 }
 
 /** An excerpt (one passage) of a Supreme Court judgment, or null when the text is not held. */

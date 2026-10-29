@@ -1,5 +1,5 @@
 // The chat prompt. PURE logic. The model sees numbered sources and must answer only from them.
-import { sectionWord } from "../acts/unitLabel.mjs";
+import { unitWord } from "../docs/docType.mjs";
 import { REPLACED_ADDENDUM } from "./currentlaw.mjs";
 import { missingAddendum } from "./gaps.mjs";
 export const SOURCE_CHARS = 9000, MAX_SOURCES = 10, HISTORY_TURNS = 4;
@@ -26,7 +26,7 @@ const clip = (s, n) => (s.length > n ? s.slice(0, n).replace(/\s+\S*$/, "") + " 
 export function sourceBlock(s) {
   if (s.kind === "judgment") return `[${s.n}] SUPREME COURT JUDGMENT "${s.actTitle}"${s.label ? ` ${s.label}` : ""}${s.page ? `, page ${s.page}` : ""} (an excerpt)\n${clip(s.text, SOURCE_CHARS)}`;
   if (s.kind === "doc") return `[${s.n}] YOUR DOCUMENT "${s.docName ?? s.actTitle}" — ${s.page ? `page ${s.page}` : "document text"}${s.label ? `, ${s.label}` : ""}\n${clip(s.text, SOURCE_CHARS)}`;
-  const head = `[${s.n}] ${s.actTitle}${s.state ? ` (${s.state.replace(/-/g, " ")})` : ""}${s.inForce === false ? ` [not in force${s.replacedBy ? `; replaced by ${s.replacedBy}` : ""}]` : ""} — ${s.number ? sectionWord(s.number) : "Unnumbered text"}${s.heading ? ` (${s.heading})` : ""}`;
+  const head = `[${s.n}] ${s.actTitle}${s.state ? ` (${s.state.replace(/-/g, " ")})` : ""}${s.inForce === false ? ` [not in force${s.replacedBy ? `; replaced by ${s.replacedBy}` : ""}]` : ""} — ${s.number ? unitWord(s.number, { title: s.actTitle, category: s.category, department: s.department }) : "Unnumbered text"}${s.heading ? ` (${s.heading})` : ""}`;
   return `${head}\n${clip(s.text, SOURCE_CHARS)}`;
 }
 

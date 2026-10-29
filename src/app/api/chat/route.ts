@@ -18,6 +18,9 @@ import { searchSections } from "@/lib/legal-data";
 import { officialSourceUrl } from "@/lib/acts/quality";
 import { tuningFlags } from "@/lib/chat/tuning.mjs";
 import { verifyCitations } from "@/lib/chat/verify.mjs";
+import { answerFirst, dedupeCitations, relatedOnlyIfApplicable } from "@/lib/chat/shape.mjs";
+import { expandQuery } from "@/lib/acts/searchBoost.mjs";
+import synonyms from "@/config/search-synonyms.json";
 import tuningConfig from "@/config/chat-tuning.json";
 import { citationOf, retrieveSources, type ChatSource } from "@/lib/chat/retrieve";
 import { docChatSources, searchAttached } from "@/lib/vault/search";
@@ -133,6 +136,9 @@ export async function POST(req: Request) {
         if (answer.trim() === lead.trim()) throw new AiError("unavailable", "The model returned no answer.");
         const aligned = alignCitations(ensureCitations(answer.trim(), ret.sources), ret.sources);
         const clean = sanitizeCitations(tune.citationCheck ? verifyCitations(aligned, ret.sources).text : aligned, ret.sources.length);
+        // shaping that needs no model: the answer first, "Related provisions" only if they apply (switch currentLaw), a citation shown once per sentence (switch citationCheck)
+        if (tune.currentLaw) clean.text = relatedOnlyIfApplicable(answerFirst(clean.text), ret.sources.map((x) => ({ n: x.n, number: x.number, heading: x.heading, text: x.text })), expandQuery(message, synonyms.rules).text);
+        if (tune.citationCheck) clean.text = dedupeCitations(clean.text);
         if (clean.text !== answer) send({ type: "replace", text: clean.text });
         if (cutOff) {
           const check: CheckResult = { label: "check", unsupported: [], cutOff: true, ...(absent.length ? { absent } : {}) };

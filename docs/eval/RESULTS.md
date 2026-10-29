@@ -53,3 +53,16 @@ A full 79-question confirmation run follows the last kept change.
 - New check on every question: an answer that opens with "I couldn't find..." although the expected section was shown is not "judged right".
 - Rows now keep the full source list (`sources`), so later scorer changes can be re-applied without re-running.
 - Consequence: tomorrow's (c) run is compared with a fresh baseline run of the same questions under the new scorer, run first the same day.
+
+## Search-only checks (10 queries, no AI call; `docs/eval/search-checks.json`, `scripts/eval/search-check.mjs`)
+
+The expected section must be within the first 3 results (rank 1 for the bare lookup "138 NI Act").
+
+| Run | Pass | Notes |
+|---|---|---|
+| before (Search as of Phase 5) | 8/10 | "notice after cheque bounces": s.138 at rank 4 (s.106, s.93, s.30 above it); "IPC 420 cheating punishment": BNS s.318 not in the results |
+| after | **10/10** | everyday words get their statutory words (`src/config/search-synonyms.json`), a section whose heading uses the user's own words is lifted, keyword hits lift a result up to 3 places, a section named inside the query is looked up first, a repealed section's replacement leads and is found from the old heading, the same section filed twice is one result |
+
+Two intermediate runs are in `docs/eval/runs/search-after.json` and `search-after2.json` (9/10 with one different failure each); the final is `search-after3.json`.
+
+The final confirmation run is 85 questions (51 main + 34 hard); 84 are scored (q130 is not scored until Hindu Succession Act s.6 is loaded).

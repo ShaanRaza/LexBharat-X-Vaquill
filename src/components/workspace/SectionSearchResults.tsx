@@ -1,10 +1,11 @@
 "use client";
-import { sectionWord } from "@/lib/acts/unitLabel.mjs";
+import { sourceInfo, unitWord } from "@/lib/docs/docType.mjs";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Badge, Highlight, Notice, Panel, RepealedNote, Toggle } from "@/components/kit";
 import { departmentLabel } from "@/lib/acts/departments.mjs";
 import { STATUS_INFO, INCOMPLETE_NOTICE, MISSING_NOTICE, officialSourceUrl } from "@/lib/acts/quality";
+import { cleanLabel } from "@/lib/text/clean.mjs";
 
 // Results of the Acts-tab search box over Central and State Acts (GET /api/acts/search): by meaning by default, exact words on request. Presentation and fetching only; the search itself lives in
 // src/lib/acts/searchStore.ts. Colours, sizes and radii come from the tokens through Tailwind names and the shared kit.
@@ -45,19 +46,19 @@ export default function SectionSearchResults({ q, scope: fixedScope, exact: exac
           {exact && data.mode === "text" && <button type="button" onClick={() => { setExact(false); setPage(1); }} className="mt-1 text-ui-sm font-medium text-primary underline">Search by meaning instead</button>}
           {data.missing && (
             <Notice tone="warn" role="status" className="mt-3">
-              <p><strong className="font-medium text-foreground">Section {data.missing.number} of {data.missing.actTitle}.</strong> {data.missing.beyond ? `There is no such section: the Act ends at Section ${data.missing.beyond}.` : MISSING_NOTICE.replace(" Read it on India Code.", "")} <a className="font-medium underline" href={officialSourceUrl(data.missing.sourceUrl)} target="_blank" rel="noopener noreferrer">Read it on India Code</a>.</p>
+              <p><strong className="font-medium text-foreground">{unitWord(data.missing.number, { title: data.missing.actTitle })} of {data.missing.actTitle}.</strong> {data.missing.beyond ? `There is no such ${unitWord("1", { title: data.missing.actTitle }).split(" ")[0].toLowerCase()}: it ends at ${data.missing.beyond}.` : MISSING_NOTICE.replace(" Read it on India Code.", "")} <a className="font-medium underline" href={officialSourceUrl(data.missing.sourceUrl)} target="_blank" rel="noopener noreferrer">Read it on India Code</a>.</p>
             </Notice>
           )}
           <ul className="mt-3 space-y-2">
             {data.results.map((h) => (
               <Panel as="li" key={`${h.actId}-${h.sectionKey}`} className="px-card py-4">
                 <Link href={`/law/${h.actId}/${encodeURIComponent(h.sectionKey)}`} className="text-ui-body font-medium text-primary hover:underline">
-                  {h.number ? sectionWord(h.number) : "Text block"}{h.heading ? ` — ${h.heading}` : ""}
+                  {h.number ? unitWord(h.number, { title: h.actTitle, category: h.category, department: h.department, actId: h.actId }) : "Text block"}{h.heading ? ` — ${cleanLabel(h.heading)}` : ""}
                 </Link>
-                <p className="mt-0.5 text-ui-sm text-secondary">{h.actTitle}{h.chapter ? ` · ${h.chapter}` : ""} <RepealedNote actId={h.actId} /></p>
+                <p className="mt-0.5 text-ui-sm text-secondary">{h.actTitle}{h.chapter ? ` · ${cleanLabel(h.chapter)}` : ""} <RepealedNote actId={h.actId} /></p>
                 {h.snippet && <p className="mt-2 text-ui-base leading-relaxed text-foreground"><Highlight snippet={h.snippet} /></p>}
                 {h.status === "possibly_incomplete" && (
-                  <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Possibly incomplete.</strong> {INCOMPLETE_NOTICE} <a className="font-medium underline" href={officialSourceUrl(h.sourceUrl)} target="_blank" rel="noopener noreferrer">Open on India Code</a></p></Notice>
+                  <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Possibly incomplete.</strong> {INCOMPLETE_NOTICE.replace("Check India Code", "Check the original")} {(() => { const src = sourceInfo({ title: h.actTitle, category: h.category, department: h.department, actId: h.actId }, h.sourceUrl); return src ? <a className="font-medium underline" href={src.url} target="_blank" rel="noopener noreferrer">Open on {src.label}</a> : null; })()}</p></Notice>
                 )}
                 <p className="mt-2 flex flex-wrap items-center gap-1.5">
                   <Badge>{h.department ? (departmentLabel(h.department) ?? label(h.department)) : label(h.category)}</Badge>{h.state && <Badge>{label(h.state)}</Badge>}{h.year !== null && <Badge>{h.year}</Badge>}

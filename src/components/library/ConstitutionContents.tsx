@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Fragment } from "react";
 import { Notice, Panel } from "@/components/kit";
 import type { SectionListItem } from "@/lib/acts/viewModel";
+import { cleanLabel } from "@/lib/text/clean.mjs";
 
 // Library > Constitution: Parts and Articles as a contents list, each Article linking to its page. Server-rendered from the Act's section list (src/lib/legal-data). Presentation only.
 export default function ConstitutionContents({ actId, items }: { actId: string; items: SectionListItem[] | null }) {
@@ -14,7 +15,7 @@ export default function ConstitutionContents({ actId, items }: { actId: string; 
           {items.map((it, i) => (
             <Fragment key={it.key}>
               {it.group && it.group !== items[i - 1]?.group && <li className="mt-4 break-after-avoid font-serif text-ui-body font-semibold first:mt-0">{it.group}</li>}
-              <li className="py-0.5"><Link href={`/law/${actId}/${encodeURIComponent(it.key)}`} className="text-primary hover:underline">{it.label}{it.heading ? ` — ${it.heading}` : ""}</Link></li>
+              <li className="py-0.5"><Link href={`/law/${actId}/${encodeURIComponent(it.key)}`} className="text-primary hover:underline">{it.label}{it.heading ? ` — ${cleanLabel(it.heading)}` : ""}</Link></li>
             </Fragment>
           ))}
         </ul>

@@ -48,30 +48,8 @@ export function Section({
   );
 }
 
-export function CardGrid({ cols = 3, children }: { cols?: 2 | 3 | 4; children: React.ReactNode }) {
-  const c = cols === 2 ? "md:grid-cols-2" : cols === 4 ? "sm:grid-cols-2 lg:grid-cols-4" : "md:grid-cols-2 lg:grid-cols-3";
-  return <div className={`grid gap-4 ${c}`}>{children}</div>;
-}
 
-export function Card({ title, children, href, tag, as: H = "h3" }: { title: React.ReactNode; children?: React.ReactNode; href?: string; tag?: string; as?: "h2" | "h3" }) {
-  const body = (
-    <article className="h-full rounded-card border border-border bg-surface p-6 transition-transform duration-300 ease-out hover:-translate-y-0.5">
-      {tag && <p className="mb-2 font-mono text-fs-nano uppercase tracking-wider text-primary">{tag}</p>}
-      <H className="text-fs-xl font-semibold leading-snug">{title}</H>
-      {children && <div className="mt-2 text-fs-body leading-relaxed text-muted">{children}</div>}
-    </article>
-  );
-  return href ? <Link href={href} className="block h-full">{body}</Link> : body;
-}
 
-export function CodeBlock({ code, label }: { code: string; label?: string }) {
-  return (
-    <div className="overflow-hidden rounded-panel border border-[var(--code-border)] bg-[var(--code-bg)]">
-      {label && <div className="border-b border-[var(--code-border)] px-4 py-2 font-mono text-fs-xs text-muted">{label}</div>}
-      <pre className="overflow-x-auto p-4 font-mono text-fs-12.5 leading-6 text-legacy-2c2620">{code}</pre>
-    </div>
-  );
-}
 
 export function SimpleTable({ head, rows }: { head: string[]; rows: React.ReactNode[][] }) {
   return (
@@ -92,39 +70,8 @@ export function SimpleTable({ head, rows }: { head: string[]; rows: React.ReactN
   );
 }
 
-export function Stat({ value, label }: { value: string; label: string }) {
-  return (
-    <div>
-      <p className="font-serif text-fs-34 leading-none text-primary">{value}</p>
-      <p className="mt-2 text-fs-ui text-muted">{label}</p>
-    </div>
-  );
-}
 
-export function Bullets({ items, tone = "check" }: { items: string[]; tone?: "check" | "cross" | "dot" }) {
-  const g = tone === "check" ? "✓" : tone === "cross" ? "✗" : "•";
-  const c = tone === "check" ? "text-success" : tone === "cross" ? "text-error" : "text-primary";
-  return (
-    <ul className="space-y-2 text-fs-body">
-      {items.map((x) => <li key={x} className="flex gap-2"><span className={c}>{g}</span><span>{x}</span></li>)}
-    </ul>
-  );
-}
 
-export function CtaBand({ title, primary, secondary }: { title: string; primary: { label: string; href: string }; secondary?: { label: string; href: string } }) {
-  return (
-    <section className="relative overflow-hidden bg-dark px-4 py-16 text-background sm:px-6 sm:py-20 lg:px-8">
-      <div aria-hidden className="absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,var(--primary-glow-strong),transparent_55%)]" />
-      <div className="relative mx-auto max-w-w1152">
-        <h2 className="max-w-w760 font-serif text-fs-32 leading-tight sm:text-fs-46">{title}</h2>
-        <div className="mt-7 flex flex-wrap gap-3">
-          <Link href={primary.href} className="btn bg-background text-foreground hover:bg-white">{primary.label}</Link>
-          {secondary && <Link href={secondary.href} className="btn border border-background/40 hover:border-background">{secondary.label}</Link>}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 const kindLabel = {
   static: "Static data (checked into the repo)",
@@ -147,6 +94,3 @@ export function DataNote({ kind, files }: { kind: keyof typeof kindLabel; files:
   );
 }
 
-export function Prose({ children }: { children: React.ReactNode }) {
-  return <div className="max-w-w760 space-y-4 text-fs-lead leading-reading-loose [&_h2]:mt-10 [&_h2]:text-fs-display [&_h2]:font-semibold [&_h2]:tracking-tight [&_h3]:mt-6 [&_h3]:text-fs-xl [&_h3]:font-semibold [&_a]:text-primary [&_a:hover]:underline [&_ul]:list-disc [&_ul]:pl-6 [&_code]:rounded [&_code]:bg-raised [&_code]:px-1 [&_code]:font-mono [&_code]:text-fs-sm text-foreground/90">{children}</div>;
-}

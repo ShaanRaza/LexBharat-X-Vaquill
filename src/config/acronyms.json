@@ -1,0 +1,12 @@
+{
+  "about": "Words that are always written in capitals (or a fixed mixed case) when a title or label is tidied. Lower-case key, the way it must be printed. Add a word here to fix it everywhere (src/lib/docs/docType.mjs).",
+  "words": {
+    "rbi": "RBI", "sebi": "SEBI", "mca": "MCA", "dgft": "DGFT", "trai": "TRAI", "moefcc": "MoEFCC", "cpcb": "CPCB", "irdai": "IRDAI", "dfs": "DFS", "cbic": "CBIC", "cbdt": "CBDT", "nclt": "NCLT", "nclat": "NCLAT",
+    "gst": "GST", "cgst": "CGST", "sgst": "SGST", "igst": "IGST", "utgst": "UTGST", "gstr": "GSTR", "tds": "TDS", "tcs": "TCS", "pan": "PAN", "itr": "ITR", "epf": "EPF", "esi": "ESI", "kyc": "KYC", "aml": "AML", "cft": "CFT",
+    "ndps": "NDPS", "fema": "FEMA", "ibc": "IBC", "uapa": "UAPA", "pocso": "POCSO", "rti": "RTI", "rera": "RERA", "cci": "CCI", "llp": "LLP", "msme": "MSME", "sarfaesi": "SARFAESI", "nbfc": "NBFC", "upi": "UPI",
+    "fdi": "FDI", "fpi": "FPI", "aif": "AIF", "reit": "REIT", "invit": "InvIT", "esop": "ESOP", "ipo": "IPO", "ipc": "IPC", "crpc": "CrPC", "cpc": "CPC", "bns": "BNS", "bnss": "BNSS", "bsa": "BSA", "ni": "NI",
+    "gsr": "GSR", "so": "S.O.", "sc": "SC", "hc": "HC", "cat": "CAT", "tdsat": "TDSAT", "ibbi": "IBBI", "aar": "AAR", "ncdrc": "NCDRC", "dggi": "DGGI", "itc": "ITC", "hs": "HS", "rbis": "RBI", "mou": "MoU", "nri": "NRI",
+    "ec": "EC", "cr": "CR", "us": "US", "uk": "UK", "uae": "UAE", "ii": "II", "iii": "III", "iv": "IV", "vi": "VI", "vii": "VII", "viii": "VIII", "ix": "IX", "xi": "XI", "xii": "XII"
+  },
+  "smallWords": ["a", "an", "and", "as", "at", "by", "for", "from", "in", "into", "of", "on", "or", "the", "to", "under", "with", "per", "vide"]
+}

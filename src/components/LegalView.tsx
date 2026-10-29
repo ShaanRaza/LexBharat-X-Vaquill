@@ -22,7 +22,7 @@ export default function LegalView({ slug }: { slug: string }) {
         </div>
         </DevOnly>
         <div className="grid gap-10 lg:grid-cols-[240px_1fr] [&>*]:min-w-0">
-          <nav aria-label="Contents" className="lg:sticky lg:top-24 lg:self-start">
+          <nav aria-label="Contents" className="lg:sticky lg:top-header lg:self-start">
             <p className="mb-2 font-mono text-fs-nano uppercase tracking-wider text-muted">Contents</p>
             <ol className="space-y-1 text-fs-ui">
               {p.sections.map((s) => <li key={s.h}><a href={`#${idOf(s.h)}`} className="text-muted hover:text-primary">{s.h}</a></li>)}
@@ -31,7 +31,7 @@ export default function LegalView({ slug }: { slug: string }) {
           </nav>
           <article className="max-w-w760 space-y-8">
             {p.sections.map((s) => (
-              <section key={s.h} id={idOf(s.h)} className="scroll-mt-24">
+              <section key={s.h} id={idOf(s.h)} >
                 <h2 className="text-fs-22 font-semibold tracking-tight">{s.h}</h2>
                 {s.p.map((t, i) => <p key={i} className="mt-3 text-fs-lead leading-reading-loose text-foreground/90">{t}</p>)}
                 {s.subs && (

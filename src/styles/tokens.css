@@ -200,6 +200,9 @@
 :root {
   --h-topbar: 56px;
   --h-tabbar: 62px;
+  --header-h: var(--h-topbar);        /* the height of the sticky header (top bar + testing banner); the app shell measures it and updates this value */
+  --gap-sticky: 1rem;                 /* space kept between the sticky header and anything that sticks or scrolls into view under it */
+  --pad-page-bottom: calc(var(--h-tabbar) + 2rem);   /* room at the bottom of a page for the phone tab bar */
   --w-app: 1200px;
   --w-toc: 15rem;
   --w-notes: 17rem;
@@ -218,3 +221,7 @@
 }
 
 @media (max-width: 760px) { :root { --pad-page: 1rem; --text-greeting: 34px; --text-question: 22px; } }
+
+/* Nothing may hide under the sticky header or the phone tab bar: anchors, scrollIntoView and keyboard focus all stop short of them. */
+html { scroll-padding-top: calc(var(--header-h) + var(--gap-sticky)); }
+@media (max-width: 767px) { html { scroll-padding-bottom: calc(var(--h-tabbar) + var(--gap-sticky)); } }

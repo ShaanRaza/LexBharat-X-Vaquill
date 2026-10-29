@@ -21,7 +21,7 @@ export default function UserMenu() {
       {open && (
         <div id={uid} role="menu" aria-label="Menu" className="absolute right-0 top-full z-40 mt-1 w-44 rounded-card bg-surface p-1.5 text-ui-base shadow-lg ring-1 ring-border">
           <button type="button" role="menuitem" onClick={() => { setOpen(false); setFeedback(true); }} className="flex w-full rounded-field px-3 py-2 text-left hover:bg-accent focus-visible:bg-accent focus-visible:outline-none">Feedback</button>
-          <div role="menuitem" className="rounded-field px-3 py-2 hover:bg-accent"><LogoutLink className="w-full text-left text-ui-base text-foreground" /></div>
+          <LogoutLink role="menuitem" className="flex w-full rounded-field px-3 py-2 text-left text-ui-base text-foreground hover:bg-accent focus-visible:bg-accent focus-visible:outline-none" />
         </div>
       )}
       {feedback && <FeedbackDialog onClose={() => { setFeedback(false); btn.current?.focus(); }} />}

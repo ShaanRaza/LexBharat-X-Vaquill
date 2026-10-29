@@ -17,7 +17,7 @@ export default function RecentWork() {
   useEffect(() => {
     Promise.all([get("/api/chat"), get("/api/drafting"), get("/api/review")]).then(([c, d, r]) => {
       const all: Item[] = [
-        ...rs(c.chats).map((x) => ({ id: `c${x.id}`, kind: "Ask" as const, title: String(x.title ?? "Chat"), at: String(x.updatedAt ?? ""), href: routes.ask(String(x.id)) })),
+        ...rs(c.chats).map((x) => ({ id: `c${x.id}`, kind: "Ask" as const, title: String(x.title ?? "Untitled question"), at: String(x.updatedAt ?? ""), href: routes.ask(String(x.id)) })),
         ...rs(d.drafts).map((x) => ({ id: `d${x.id}`, kind: "Draft" as const, title: String(x.title ?? "Draft"), at: String(x.updatedAt ?? ""), href: routes.drafts(String(x.id)) })),
         ...rs(r.reviews).map((x) => ({ id: `r${x.id}`, kind: "Review" as const, title: String(x.docName ?? "Review"), at: String(x.createdAt ?? ""), href: routes.reviews(String(x.id)), note: RISK[String(x.risk)] })),
       ];

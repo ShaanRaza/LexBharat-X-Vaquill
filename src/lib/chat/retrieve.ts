@@ -35,6 +35,7 @@ export type Retrieval = { gaps: LibraryGap[]; sources: ChatSource[]; searchMode:
 const keyOf = (h: SectionHit) => `${h.actId}|${h.sectionKey}`;
 import { narrowToExact } from "./exact.mjs";
 import { currentLawFirst } from "./currentlaw.mjs";
+import { dedupeCopies } from "@/lib/acts/dedupe.mjs";
 import { officialSourceUrl } from "@/lib/acts/quality";
 import type { Gap } from "./gaps.mjs";
 import replaced from "@/config/replaced-laws.json";
@@ -77,6 +78,7 @@ export async function retrieveSources(question: string, history: { role: string;
   let picked = merge(k).map((key) => hits.get(key)!).filter(Boolean);
   // The question names an exact provision: that unit goes first and sources from unrelated Acts are dropped (a few neighbours from the same Act stay), so the answer check is not confused by noise.
   // (sections the rewrite named, such as the new-law section for an old one, stay with the exact ones)
+  picked = dedupeCopies(picked);   // the same section filed under two Act records is one source, never two
   if (exact.length) picked = narrowToExact(picked, [...exact, ...first.filter((k) => !exact.includes(k))], keyOf);
   // current law first (switch): a repealed section and its replacement together -> the replacement leads and the old one is marked replaced
   if (opts.currentLaw) picked = currentLawFirst(picked, pool, replaced.pairs, { k, keyOf });

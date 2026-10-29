@@ -25,7 +25,7 @@ export default async function ActPage({ params }: { params: Promise<{ actId: str
   const meta = [label(act.category), act.state ? label(act.state) : null, act.department ? (departmentLabel(act.department) ?? label(act.department)) : null, label(act.actStatus), act.year !== null ? String(act.year) : null].filter((x): x is string => !!x);
   return (
     <AppShell>
-      <ActTextView header={{ actId, title: act.title, meta, officialUrl: text.available ? text.officialUrl : officialSourceUrl(null) }} state={state} />
+      <ActTextView header={{ actId, title: act.title, meta, officialUrl: text.available ? text.officialUrl : officialSourceUrl(null), doc: { title: act.title, category: act.category, department: act.department, actId } }} state={state} />
     </AppShell>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import { sectionWord } from "@/lib/acts/unitLabel.mjs";
+import { unitWord } from "@/lib/docs/docType.mjs";
 import { SCAN_LABEL } from "@/lib/vault/scan.mjs";
 import Link from "next/link";
 import { Badge, CitationChip, Notice, RepealedNote } from "@/components/kit";
@@ -7,6 +7,7 @@ import CitedText, { hrefOf, sourceLabel } from "@/components/workspace/CitedText
 import { citedNumbers, displayNumbers } from "@/lib/chat/citations.mjs";
 import { toBlocks } from "@/lib/chat/format.mjs";
 import type { Citation, CheckResult } from "@/lib/chat/store";
+import { cleanLabel } from "@/lib/text/clean.mjs";
 
 // One assistant answer: text with numbered citation chips and linked statute names, the answer-check label, and the list of sources used. Presentation only; the logic is in src/lib/chat.
 // The four honest labels (src/lib/chat/prompt.mjs CHECK_LABELS): complete and backed / some claims unbacked / incomplete or only partly covered / nothing found.
@@ -34,7 +35,7 @@ function SourceRow({ c, onPick, activeN, shown }: { c: Citation; onPick?: (n: nu
       <span className="shrink-0 self-start"><CitationChip n={c.n} href={hrefOf(c)} label={sourceLabel(c)} kind="doc" onSelect={onPick} active={activeN === c.n} shown={shown?.get(c.n)} /></span>
       <div className="min-w-0">
         <Link href={hrefOf(c)} className="font-medium text-quality-info hover:underline">{c.docName ?? c.actTitle}</Link>
-        <p className="text-secondary">{c.page ? `Page ${c.page}` : "Document text"}{c.label ? ` · ${c.label}` : ""}{c.scan ? <span className="text-quality-warn"> · {SCAN_LABEL}</span> : null}{c.preview ? <span className="text-muted"> — {c.preview}</span> : null}</p>
+        <p className="text-secondary">{c.page ? `Page ${c.page}` : "Document text"}{c.label ? ` · ${c.label}` : ""}{c.scan ? <span className="text-quality-warn"> · {SCAN_LABEL}</span> : null}{c.preview ? <span className="text-muted"> — {cleanLabel(c.preview)}</span> : null}</p>
       </div>
     </li>
   );
@@ -45,7 +46,7 @@ function SourceRow({ c, onPick, activeN, shown }: { c: Citation; onPick?: (n: nu
         <Link href={hrefOf(c)} className="font-medium text-primary hover:underline">{c.actTitle}</Link>
         <span className="text-muted">{c.state ? ` · ${c.state.replace(/-/g, " ")}` : ""}</span> <RepealedNote actId={c.actId} />
         <p className="text-secondary">
-          {c.number ? `${sectionWord(c.number)}${c.heading ? ` — ${c.heading}` : ""}` : <>Unnumbered text{c.preview ? <span className="text-muted"> — {c.preview}</span> : null}</>}
+          {c.number ? `${unitWord(c.number, { title: c.actTitle, category: c.category })}${c.heading ? ` — ${cleanLabel(c.heading)}` : ""}` : <>Unnumbered text{c.preview ? <span className="text-muted"> — {cleanLabel(c.preview)}</span> : null}</>}
           {c.status === "possibly_incomplete" && <Badge tone="warn" className="ml-2" title="Our copy of this section may be missing text">Possibly incomplete</Badge>}
         </p>
       </div>

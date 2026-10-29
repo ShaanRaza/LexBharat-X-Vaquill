@@ -14,7 +14,7 @@ import { byDay, ratio, topGaps } from "@/lib/insights/rules.mjs";
 export const metadata: Metadata = { title: "Insights | LexBharat", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
 
-const FEATURE_NAMES: Record<string, string> = { chat: "Chat answers", draft: "Drafts", review: "Reviews" };
+const FEATURE_NAMES: Record<string, string> = { chat: "Ask answers", draft: "Drafts", review: "Reviews" };
 const th = "px-3 py-2 text-left font-medium";
 const td = "px-3 py-2 align-top";
 const when = (iso: string) => new Date(iso).toLocaleString("en-IN", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit", timeZone: "Asia/Kolkata" });
@@ -50,7 +50,7 @@ export default async function InsightsPage() {
         <h2 className="px-card pt-card text-ui-lead font-semibold">By day</h2>
         <div className="mt-2 overflow-x-auto" tabIndex={0} role="region" aria-label="Usage by day, scrollable table">
           <table className="w-full min-w-[720px] border-collapse text-ui-sm">
-            <thead className="bg-accent text-secondary"><tr>{["Day", "Visits", "Chats asked", "Drafts", "Reviews", "Uploads", "Scans read", "Limits hit", "Model busy", "Avg answer (s)"].map((h) => <th key={h} scope="col" className={th}>{h}</th>)}</tr></thead>
+            <thead className="bg-accent text-secondary"><tr>{["Day", "Visits", "Questions asked", "Drafts", "Reviews", "Uploads", "Scans read", "Limits hit", "Model busy", "Avg answer (s)"].map((h) => <th key={h} scope="col" className={th}>{h}</th>)}</tr></thead>
             <tbody>
               {days.length === 0 && <tr><td colSpan={10} className="px-3 py-4 text-muted">Nothing counted yet.</td></tr>}
               {days.map((x) => <tr key={x.day} className="border-t border-border/70"><th scope="row" className={`${td} whitespace-nowrap font-medium`}>{x.day}</th><td className={td}>{x.visits}</td><td className={td}>{x.chats}</td><td className={td}>{x.drafts}</td><td className={td}>{x.reviews}</td><td className={td}>{x.uploads}</td><td className={td}>{x.scans}</td><td className={td}>{x.limits}</td><td className={td}>{x.busy}</td><td className={td}>{x.avgAnswerSec ?? "–"}</td></tr>)}
