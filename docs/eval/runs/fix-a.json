@@ -575,7 +575,7 @@
     "The Bharatiya Nagarik Suraksha Sanhita, 2023 s531",
     "The Bharatiya Nyaya Sanhita, 2023 s103"
    ],
-   "answer": "Whoever commits murder shall be punished with death, or imprisonment for life, and shall also be liable to fine, according to Section 103 of the Bharatiya Nyaya Sanhita, 2023 and Section 302 of the Indian Penal Code, 1860 [1][5]. Furthermore, when a group of five or more persons acting in concert commits murder on the ground of race, caste or community, sex, place of birth, language, personal belief or any other similar ground, each member of such group shall be punished with death or with imprisonment for life, and shall also be liable to fine under Section 103 of the Bharatiya Nyaya Sanhita, 2023 [5]. Additionally, under Section 104 of the Bharatiya Nyaya Sanhita, 2023, whoever being under sentence of imprisonment for life commits murder shall be punished with death or with imprisonment for life, which shall mean the remainder of that person's natural life [9].\n\nRelated provisions:\n- Section 303 of the Indian Penal Code, 1860, which provides that \"Whoever, being under sentence of 1[imprisonment for life], commits murder shall be punished with death\" [8].\n- Section 101 of the Bharatiya Nyaya Sanhita, 2023, which defines \"Murder.\u2014Except in the cases hereinafter excepted, culpable h",
+   "answer": "Whoever commits murder shall be punished with death, or imprisonment for life, and shall also be liable to fine, according to Section 103 of the Bharatiya Nyaya Sanhita, 2023 and Section 302 of the Indian Penal Code, 1860 [1][5]. Furthermore, when a group of five or more persons acting in concert commits murder on the ground of race, caste or community, sex, place of birth, language, personal belief or any other similar ground, each member of such group shall be punished with death or with imprisonment for life, and shall also be liable to fine under Section 103 of the Bharatiya Nyaya Sanhita, 2023 [5]. Additionally, under Section 104 of the Bharatiya Nyaya Sanhita, 2023, whoever being under sentence of imprisonment for life commits murder shall be punished with death or with imprisonment for life, which shall mean the remainder of that person's natural life [9].\n\nRelated provisions:\n- Section 303 of the Indian Penal Code, 1860, which provides that \"Whoever, being under sentence of 1[imprisonment for life], commits murder shall be punished with death\" [8].\n- Section 101 of the Bharatiya Nyaya Sanhita, 2023, which defines \"Murder.—Except in the cases hereinafter excepted, culpable h",
    "score": 3
   },
   {
@@ -1151,6 +1151,516 @@
     "The Sale of Goods Act, 1930 s59"
    ],
    "answer": "A condition is a stipulation essential to the main purpose of a contract of sale, the breach of which gives rise to a right to treat the contract as repudiated, while a warranty is a stipulation collateral to the main purpose of the contract, the breach of which gives rise to a claim for damages but not to a right to reject the goods and treat the contract as repudiated, under Section 12 of the Sale of Goods Act, 1930 [1]. This distinction is also discussed in the Supreme Court judgment Rajratan Babulal Agarwal versus Solartex India Pvt. Ltd. & Ors [11].\n\nRelated provisions:\n- Section 13 of the Sale of Goods Act, 1930, covering when condition to be treated as warranty [2].\n- Section 16 of the Sale of Goods Act, 1930, covering implied conditions as to quality or fitness [4].\n- Section 59 of the Sale of Goods Act, 1930, covering remedy for breach of warranty [5].\n- Section 60 of the Sale of Goods Act, 1930, covering repudiation of contract before due date [10].",
+   "score": 3
+  },
+  {
+   "id": 37,
+   "kind": null,
+   "question": "What is a lease of immovable property?",
+   "gold": [
+    "IND_central_2338|s105"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 20.3,
+   "nSources": 13,
+   "queries": [
+    "What is a lease of immovable property?",
+    "lease of immovable property definition lessor lessee premium rent transfer of property",
+    "Transfer of Property Act section 105",
+    "Transfer of Property Act lease duration rights and liabilities of lessor and lessee"
+   ],
+   "topSources": [
+    "The Transfer of Property Act, 1882 s105",
+    "The Income-tax Act, 1961 s269UA",
+    "The Transfer of Property Act, 1882 s108",
+    "The Transfer of Property Act, 1882 s109",
+    "The Income-tax Act, 1961 s1"
+   ],
+   "answer": "A lease of immovable property is a transfer of a right to enjoy such property, made for a certain time (express or implied) or in perpetuity, in consideration of a price paid or promised, or of money, a share of crops, service, or any other thing of value to be rendered periodically or on specified occasions to the transferor by the transferee, who accepts the transfer on such terms, as stated in Section 105 of the Transfer of Property Act, 1882 [1]. A lease stands created once there is such a transfer of a right to enjoy property, which can be made expressly or by implication, as discussed in the Supreme Court judgment of M/S Paul Rubber Industries Private Limited versus Amit Chand Mitra & Anr [12].\n\nRelated provisions:\n- Section 106 of the Transfer of Property Act, 1882, which covers the duration of certain leases in the absence of a written contract or local usage [9].\n- Section 107 of the Transfer of Property Act, 1882, which relates to how leases are made, as noted in the Supreme Court judgment of M/S Paul Rubber Industries Private Limited versus Amit Chand Mitra & Anr [12].\n- Section 108 of the Transfer of Property Act, 1882, which covers the rights and liabilities of the les",
+   "score": 3
+  },
+  {
+   "id": 38,
+   "kind": null,
+   "question": "How is a gift of immovable property made valid?",
+   "gold": [
+    "IND_central_2338|s123"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 3,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 16.7,
+   "nSources": 13,
+   "queries": [
+    "How is a gift of immovable property made valid?",
+    "gift of immovable property transfer registration delivery of possession",
+    "Transfer of Property Act section 122 section 123 gift immovable property",
+    "Registration Act section 17 compulsory registration gift deed"
+   ],
+   "topSources": [
+    "The Transfer of Property Act, 1882 s122",
+    "The Registration Act, 1908 s17",
+    "The Transfer of Property Act, 1882 s123",
+    "The Indian Succession Act, 1925 s191",
+    "The Oudh Estates Act, 1869 s17"
+   ],
+   "answer": "A gift of immovable property must be effected by a registered instrument signed by or on behalf of the donor, and attested by at least two witnesses, as provided in Section 123 of The Transfer of Property Act, 1882 [3]. As discussed by the Supreme Court in *Renikuntla Rajamma (D) by Lrs. v. K. Sarwanamma*, Section 123 regulates the mode of making a gift and provides that a gift of immovable property must be effected by a registered instrument signed by or on behalf of the donor and attested by at least two witnesses [11]. Furthermore, as explained by the Supreme Court in *Daulat Singh (D) thr. Lrs. v. The State of Rajasthan & Ors*, Section 123 provides that for a gift of immovable property to be valid, the transfer must be effectuated by means of a registered instrument bearing the signature of the donor and attested by at least two witnesses [12].\n\nConditions and time limits:\n- The transfer must be made voluntarily and without consideration by the donor to the donee [1][12].\n- The gift must be accepted by or on behalf of the donee [1][12].\n- Acceptance must be made during the lifetime of the donor and while the donor is still capable of giving [1][12]. If the donee dies before acc",
+   "score": 3
+  },
+  {
+   "id": 39,
+   "kind": null,
+   "question": "Where can a consumer file a complaint about defective goods or deficient service?",
+   "gold": [
+    "IND_central_15256|s035"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 2,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 14.2,
+   "nSources": 13,
+   "queries": [
+    "Where can a consumer file a complaint about defective goods or deficient service?",
+    "consumer dispute redressal commission jurisdiction complaint defective goods deficient service",
+    "Consumer Protection Act section 34 district commission jurisdiction",
+    "Consumer Protection Act section 35 manner in which complaint shall be made"
+   ],
+   "topSources": [
+    "The Consumer Protection Act, 2019 s34",
+    "The Consumer Protection Act, 2019 s35",
+    "The Consumer Protection Act, 1986 s17",
+    "The Consumer Protection Act, 1986 s11",
+    "The Consumer Protection Act, 1986 s22"
+   ],
+   "answer": "A consumer may file a complaint with a District Commission where the value of the goods or services paid as consideration does not exceed one crore rupees, pursuant to Section 34 of the Consumer Protection Act, 2019 [1]. Under Section 34 of the Consumer Protection Act, 2019, such a complaint shall be instituted within the local limits of whose jurisdiction:\n- the opposite party or each of the opposite parties, where there are more than one, at the time of the institution of the complaint, ordinarily resides or carries on business or has a branch office or personally works for gain [1].\n- any of the opposite parties, where there are more than one, at the time of the institution of the complaint, actually and voluntarily resides, or carries on business or has a branch office, or personally works for gain, provided that the permission of the District Commission is given [1].\n- the cause of action, wholly or in part, arises [1].\n- the complainant resides or personally works for gain [1].\n\nConditions and time limits:\n- The value of the goods or services paid as consideration must not exceed one crore rupees for the District Commission under Section 34 of the Consumer Protection Act, 201",
+   "score": 3
+  },
+  {
+   "id": 40,
+   "kind": null,
+   "question": "What is a partnership and who is a partner?",
+   "gold": [
+    "IND_central_2394|s004"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 13.7,
+   "nSources": 13,
+   "queries": [
+    "What is a partnership and who is a partner?",
+    "definition of partnership relation of partners meaning",
+    "Indian Partnership Act section 4 definition of partnership",
+    "Indian Partnership Act section 5 partnership not created by status"
+   ],
+   "topSources": [
+    "The Indian Partnership Act, 1932 s4",
+    "The Indian Partnership Act, 1932 s5",
+    "The Indian Contract Act, 1872 s239",
+    "The Cost Accountants Act, 1959 s8",
+    "The Indian Stamp Act, 1899 sA46"
+   ],
+   "answer": "Partnership is the relation between persons who have agreed to share the profits of a business carried on by all or any of them acting for all, and persons who have entered into partnership with one another are called individually partners [1].\n\nRelated provisions:\n- Section 5 of the Indian Partnership Act, 1932, which states that partnership not created by status and that the relation of partnership arises from contract and not from status [2].\n- Section 4 of the Cost Accountants Act, 1959, which defines partner and partnership by reference to section 4 of the Indian Partnership Act, 1932 [4].\n- Section 5 of the Chartered Accountants Act, 1949, which defines partner and partnership by reference to section 4 of the Indian Partnership Act, 1932 [6].\n- Section 2 of the Banning of Unregulated Deposit Schemes Act, 2019, which states that the expressions partner and firm shall have the meanings respectively assigned to them under the Indian Partnership Act, 1932 [9].",
+   "score": 3
+  },
+  {
+   "id": 41,
+   "kind": null,
+   "question": "What are the inherent powers of a civil court?",
+   "gold": [
+    "IND_central_2191|s151"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 13.9,
+   "nSources": 13,
+   "queries": [
+    "What are the inherent powers of a civil court?",
+    "inherent powers of civil court save abuse of process equity",
+    "Code of Civil Procedure section 151",
+    "Code of Civil Procedure inherent jurisdiction of court"
+   ],
+   "topSources": [
+    "The Code of Civil Procedure, 1908 s151",
+    "The Code of Civil Procedure, 1908 sO15AR6",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s528",
+    "The Industrial Employment (Standing Orders) Act, 1946 s11",
+    "The Code of Civil Procedure, 1908 sO34R15"
+   ],
+   "answer": "Nothing in the Code of Civil Procedure, 1908 shall limit or otherwise affect the inherent power of the Court to make such orders as may be necessary for the ends of justice or to prevent abuse of the process of the Court, as stated in Section 151 of the Code of Civil Procedure, 1908 [1].",
+   "score": 3
+  },
+  {
+   "id": 42,
+   "kind": null,
+   "question": "What are the duties of directors of a company?",
+   "gold": [
+    "IND_central_2114|s166"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 17.3,
+   "nSources": 13,
+   "queries": [
+    "What are the duties of directors of a company?",
+    "company director duties obligations fiduciary liabilities powers",
+    "Companies Act section 166 duties of directors",
+    "Companies Act section 179 powers of board of directors"
+   ],
+   "topSources": [
+    "The Companies Act, 2013 s166",
+    "The Companies Act, 2013 s179",
+    "The Companies Act, 2013 s3",
+    "The Companies Act, 2013 s470",
+    "The Companies Act, 2013 s378W"
+   ],
+   "answer": "Directors of a company must act in accordance with the articles of the company, as stated in Section 166 of the Companies Act, 2013 [1]. \n\nA director must act in good faith to promote the objects of the company for the benefit of its members as a whole, and in the best interests of the company, its employees, the shareholders, the community, and for the protection of the environment, under Section 166 of the Companies Act, 2013 [1].\n\nA director must exercise duties with due and reasonable care, skill, and diligence, and must exercise independent judgment, pursuant to Section 166 of the Companies Act, 2013 [1].\n\nA director must not involve themselves in situations where they have a direct or indirect interest that conflicts, or possibly may conflict, with the interest of the company, under Section 166 of the Companies Act, 2013 [1].\n\nA director must not achieve or attempt to achieve any undue gain or advantage either to themselves or to their relatives, partners, or associates, as provided in Section 166 of the Companies Act, 2013 [1].\n\nA director must not assign their office, and any assignment so made is void under Section 166 of the Companies Act, 2013 [1].\n\nAs discussed in the S",
+   "score": 3
+  },
+  {
+   "id": 43,
+   "kind": null,
+   "question": "Who can apply to the Tribunal for oppression and mismanagement?",
+   "gold": [
+    "IND_central_2114|s241"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 21,
+   "nSources": 13,
+   "queries": [
+    "Who can apply to the Tribunal for oppression and mismanagement?",
+    "application to Tribunal oppression and mismanagement company members eligible",
+    "Companies Act section 241 application to Tribunal",
+    "Companies Act section 244 right to apply for oppression and mismanagement"
+   ],
+   "topSources": [
+    "The Companies Act, 2013 s241",
+    "The Companies Act, 2013 s244",
+    "The Companies Act, 2013 s242",
+    "The Companies Act, 2013 s246",
+    "The Companies Act, 2013 s245"
+   ],
+   "answer": "Any member of a company who complains of conduct that is prejudicial to public interest, prejudicial or oppressive to any member or members, or prejudicial to the interests of the company, or who complains of certain material changes in the management or control of the company, may apply to the Tribunal, provided they have the right to apply under Section 244 of the Companies Act, 2013 [2]. \n\nAdditionally, the Central Government may itself apply to the Tribunal if it is of the opinion that the affairs of the company are being conducted in a manner prejudicial to public interest under Section 241 of the Companies Act, 2013 [1].\n\nUnder Section 244 of the Companies Act, 2013, the following members have the right to apply: [2]\n- In the case of a company having a share capital, not less than one hundred members of the company or not less than one-tenth of the total number of its members, whichever is less, or any member or members holding not less than one-tenth of the issued share capital of the company, subject to the condition that the applicant or applicants have paid all calls and other sums due on their shares [2].\n- In the case of a company not having a share capital, not less th",
+   "score": 3
+  },
+  {
+   "id": 44,
+   "kind": null,
+   "question": "What is the punishment for fraud under company law?",
+   "gold": [
+    "IND_central_2114|s447"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 19.7,
+   "nSources": 13,
+   "queries": [
+    "What is the punishment for fraud under company law?",
+    "punishment for fraud company law penalty imprisonment",
+    "Companies Act section 447 punishment for fraud",
+    "Companies Act section 448 false statement penalty"
+   ],
+   "topSources": [
+    "The Companies Act, 2013 s447",
+    "The Companies Act, 2013 s448",
+    "The Companies Act, 2013 s147",
+    "The Companies Act, 2013 s337",
+    "The Company Secretaries Act, 1980 s6"
+   ],
+   "answer": "Any person who is found guilty of fraud involving an amount of at least ten lakh rupees or one per cent. of the turnover of the company, whichever is lower, shall be punished with imprisonment for a term of not less than six months up to ten years, and shall also be liable to a fine ranging from the amount involved in the fraud up to three times that amount, as stated in Section 447 of the Companies Act, 2013 [1]. Where the fraud in question involves public interest, the term of imprisonment shall not be less than three years under Section 447 of the Companies Act, 2013 [1]. Where the fraud involves an amount less than ten lakh rupees or one per cent. of the turnover of the company, whichever is lower, and does not involve public interest, the person guilty shall be punished with imprisonment for a term up to five years, or with fine up to fifty lakh rupees, or with both under Section 447 of the Companies Act, 2013 [1].\n\nRelated provisions:\n- Section 448 of the Companies Act, 2013, covering \"Punishment for false statement\" in any return, report, certificate, financial statement, prospectus, statement or other document, making a person liable under section 447 [2].\n- Section 337 of ",
+   "score": 3
+  },
+  {
+   "id": 45,
+   "kind": null,
+   "question": "What is the punishment for identity theft using a computer?",
+   "gold": [
+    "IND_central_1999|s66C"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 16.4,
+   "nSources": 13,
+   "queries": [
+    "What is the punishment for identity theft using a computer?",
+    "punishment for identity theft using computer password fraud cyber crime",
+    "Information Technology Act section 66C punishment for identity theft",
+    "Information Technology Act section 66D cheating by personation using computer resource"
+   ],
+   "topSources": [
+    "The Information Technology Act, 2000 s66C",
+    "The Information Technology Act, 2000 s66D",
+    "The Aadhaar (Targeted Delivery of Financial and Other Subsidies, Benefits and Services) Act, 2016. s37",
+    "The Prevention of Money-Laundering Act, 2002 s13",
+    "The Telecommunications Act, 2023. s42"
+   ],
+   "answer": "Whoever fraudulently or dishonestly makes use of the electronic signature, password, or any other unique identification feature of any other person shall be punished with imprisonment of either description for a term which may extend to three years and shall also be liable to fine which may extend to rupees one lakh under Section 66C of the Information Technology Act, 2000 [1].\n\nRelated provisions:\n- Section 66D of the Information Technology Act, 2000, which covers punishment for cheating by personation by using computer resource [2].\n- Section 65 of the Information Technology Act, 2000, which covers tampering with computer source documents [7].\n- Section 66 of the Information Technology Act, 2000, which covers computer related offences [7].",
+   "score": 3
+  },
+  {
+   "id": 46,
+   "kind": null,
+   "question": "When are online intermediaries exempt from liability for third party content?",
+   "gold": [
+    "IND_central_1999|s079"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 17.6,
+   "nSources": 13,
+   "queries": [
+    "When are online intermediaries exempt from liability for third party content?",
+    "online intermediary liability exemption third party content safe harbour",
+    "Information Technology Act section 79 exemption of intermediary",
+    "Information Technology Intermediary Guidelines due diligence"
+   ],
+   "topSources": [
+    "The Information Technology Act, 2000 s79",
+    "The Information Technology Act, 2000 s87",
+    "The Information Technology Act, 2000 (Central Act 21 of 2000) s79",
+    "The INFORMATION TECHNOLOGY(AMENDMENT) ACT, 2008 s37",
+    "The Information Technology Act, 2000 s69A"
+   ],
+   "answer": "Online intermediaries are exempt from liability for any third party information, data, or communication link made available or hosted by them, notwithstanding anything contained in any law for the time being in force, provided specific conditions are met under Section 79 of the Information Technology Act, 2000 [1][3][6]. \n\nConditions and time limits:\n- The function of the intermediary must be limited to providing access to a communication system over which information made available by third parties is transmitted, temporarily stored, or hosted, or the intermediary does not initiate the transmission, select the receiver of the transmission, and select or modify the information contained in the transmission [1][3][6].\n- The intermediary must observe due diligence while discharging its duties under the Information Technology Act, 2000 and also observe such other guidelines as the Central Government may prescribe [1][3][6].\n- The exemption does not apply if the intermediary has conspired, abetted, aided, or induced the commission of the unlawful act, whether by threats, promise, or otherwise [1][3][6].\n- The exemption does not apply if, upon receiving actual knowledge or being notifie",
+   "score": 3
+  },
+  {
+   "id": 47,
+   "kind": null,
+   "question": "What is the time limit to reply to an RTI application?",
+   "gold": [
+    "IND_central_2065|s007"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 18.1,
+   "nSources": 13,
+   "queries": [
+    "What is the time limit to reply to an RTI application?",
+    "time limit to reply to RTI application disposal period",
+    "Right to Information Act section 7 time limit disposal of request",
+    "Right to Information Act section 19 first appeal time period"
+   ],
+   "topSources": [
+    "The Right to Information Act, 2005 s7",
+    "The Right to Information Act, 2005 s19",
+    "The Right to Information Act, 2005 s11",
+    "The Right to Information Act, 2005 s6",
+    "The Airports Economic Regulatory Authority of India Act, 2008 s18"
+   ],
+   "answer": "The time limit to reply to a request under the Right to Information Act, 2005 is as expeditiously as possible, and in any case within thirty days of the receipt of the request [1][11]. \n\nConditions and time limits:\n- The information must be provided within forty-eight hours of the receipt of the request where the information sought for concerns the life or liberty of a person [1].\n- Where an application is transferred to another public authority, the transfer shall be made as soon as practicable but in no case later than five days from the date of receipt of the application [4].\n- Where a third party is involved and given an opportunity to make a representation, the Central Public Information Officer or State Public Information Officer shall make a decision within forty days after receipt of the request under Section 6 [3].\n- In the case of information sought in respect of allegations of violation of human rights in certain excluded intelligence and security organisations, the information shall be provided within forty-five days from the date of the receipt of the request [8].\n\nRelated provisions:\n- Section 7 of the Right to Information Act, 2005 covers disposal of request and outl",
+   "score": 3
+  },
+  {
+   "id": 48,
+   "kind": null,
+   "question": "What is the punishment for drunk driving?",
+   "gold": [
+    "IND_central_1798|s185"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 13.4,
+   "nSources": 13,
+   "queries": [
+    "What is the punishment for drunk driving?",
+    "punishment for driving under the influence of alcohol or drugs driving in a drunken state",
+    "Motor Vehicles Act section 185 driving by a drunken person or under influence of drugs",
+    "Motor Vehicles Act section 202 power to arrest for driving under influence of alcohol"
+   ],
+   "topSources": [
+    "The Motor Vehicles Act, 1988 s185",
+    "The Motor Vehicles Act, 1988 s202",
+    "The Motor Vehicles Act, 1939, 4 of 1939 (Rep., Act 59 of 1988) s117",
+    "The Motor Vehicles Act, 1988 s203",
+    "The Motor Vehicles Act, 1988 s204"
+   ],
+   "answer": "For a first offence of driving or attempting to drive a motor vehicle by a drunken person or a person under the influence of drugs (having alcohol exceeding 30 mg. per 100 ml. of blood detected in a breath analyser test, or being under the influence of a drug to the extent of being incapable of exercising proper control), the punishment is imprisonment for a term which may extend to six months, or a fine which may extend to two thousand rupees, or both, as stated in Section 185 of the Motor Vehicles Act, 1988 [1][10]. For a second or subsequent offence committed within three years of the previous similar offence, the punishment is imprisonment for a term which may extend to two years, or a fine which may extend to three thousand rupees, or both, under Section 185 of the Motor Vehicles Act, 1988 [1][10].\n\nRelated provisions:\n- Section 202 of the Motor Vehicles Act, 1988, covering \"Power to arrest without warrant\" [2].\n- Section 203 of the Motor Vehicles Act, 1988, covering \"Breath tests\" [4].\n- Section 204 of the Motor Vehicles Act, 1988, covering \"Laboratory test\" [5].\n- Section 205 of the Motor Vehicles Act, 1988, covering \"Presumption of unfitness to drive\" [9].",
+   "score": 3
+  },
+  {
+   "id": 49,
+   "kind": null,
+   "question": "Is gratuity payable after five years of service?",
+   "gold": [
+    "IND_state_7791|s004"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 13.9,
+   "nSources": 13,
+   "queries": [
+    "Is gratuity payable after five years of service?",
+    "gratuity payable continuous service five years eligibility",
+    "Payment of Gratuity Act section 4 termination resignation",
+    "Payment of Gratuity Act section 2A continuous service"
+   ],
+   "topSources": [
+    "The Payment of Gratuity Act, 1972 s4",
+    "The Payment of Gratuity Act, 1972 s2",
+    "The Working Journalists and other Newspaper Employees (Conditions of Service) and Miscellaneous Provisions Act, 1955 s5",
+    "The Code on Social Security, 2020 s53",
+    "The Payment of Gratuity Act, 1972 s4A"
+   ],
+   "answer": "Gratuity is payable to an employee on the termination of their employment after they have rendered continuous service for not less than five years, specifically on superannuation, retirement, resignation, death, or disablement due to accident or disease, as stated in Section 4 of the Payment of Gratuity Act, 1972 [1] and Section 4 of the Payment of Gratuity Act, 1972 (Central Act) (Tamil Nadu) [7]. \n\nConditions and time limits:\n- The employee must render continuous service for not less than five years, except where termination of employment is due to death or disablement, in which case the completion of five years of continuous service is not necessary, according to Section 4 of the Payment of Gratuity Act, 1972 [1] and Section 4 of the Payment of Gratuity Act, 1972 (Central Act) (Tamil Nadu) [7].\n\nRelated provisions:\n- Section 5 of the Payment of Gratuity Act, 1972 regarding compulsory insurance of employer liability [5].\n- Section 7 of the Payment of Gratuity Act, 1972 regarding the determination and payment of the amount of gratuity [8].\n- Section 53 of the Code on Social Security, 2020 regarding payment of gratuity [4].\n- Section 54 of the Code on Social Security, 2020 regardin",
+   "score": 3
+  },
+  {
+   "id": 50,
+   "kind": null,
+   "question": "How can spouses obtain a divorce by mutual consent?",
+   "gold": [
+    "IND_central_1560|s13B"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 13.4,
+   "nSources": 13,
+   "queries": [
+    "How can spouses obtain a divorce by mutual consent?",
+    "divorce by mutual consent petition cooling period second motion",
+    "Hindu Marriage Act section 13B",
+    "Special Marriage Act section 28 mutual consent divorce"
+   ],
+   "topSources": [
+    "The Hindu Marriage Act, 1955 s13B",
+    "The Special Marriage Act, 1954 s28",
+    "The Parsi Marriage and Divorce Act, 1936. s32B",
+    "The Special Marriage Act, 1954 s34",
+    "The Divorce Act, 1869 s9"
+   ],
+   "answer": "Spouses can obtain a divorce by mutual consent by presenting a petition together to the district court on the grounds that they have been living separately for a period of one year or more, have not been able to live together, and have mutually agreed that the marriage should be dissolved, under Section 13B of the Hindu Marriage Act, 1955 [1], Section 28 of the Special Marriage Act, 1954 [2], or Section 32B of the Parsi Marriage and Divorce Act, 1936 [3]. Under Section 10A of the Divorce Act, 1869, Christian spouses may present such a petition to the District Court together on the ground that they have been living separately for two years or more, cannot live together, and have mutually agreed to dissolve the marriage [5]. \n\nThe Supreme Court in the judgment *Rinku Baheti versus Sandesh Sharda* noted that if the ingredients of living separately for one year or more, inability to live together, and mutual agreement are established under Section 13B(1) of the Hindu Marriage Act, 1955, it has to be construed as an irretrievable breakdown of marriage [1]. The Supreme Court in the judgment *Smt. Sureshta Devi versus Om Prakash* discussed the statutory provisions of Section 13B introduce",
+   "score": 3
+  },
+  {
+   "id": 51,
+   "kind": null,
+   "question": "What is theft punishment?",
+   "gold": [
+    "IND_central_20062|s303"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 3,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 16.8,
+   "nSources": 13,
+   "queries": [
+    "What is theft punishment?",
+    "theft punishment imprisonment fine Indian Penal Code",
+    "Indian Penal Code section 378 section 379 theft",
+    "theft definition punishment cognizable bailable compoundable"
+   ],
+   "topSources": [
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s378",
+    "The Bharatiya Nyaya Sanhita, 2023 s305",
+    "The Bharatiya Nyaya Sanhita, 2023 s303",
+    "The Bharatiya Nyaya Sanhita, 2023 s306",
+    "The CODE OF CRIMINAL PROCEDURE, 1973 s1"
+   ],
+   "answer": "Whoever commits theft shall be punished with imprisonment of either description for a term which may extend to three years, or with fine, or with both, under sub-section (2) of Section 303 of the Bharatiya Nyaya Sanhita, 2023 [3]. For a second or subsequent conviction under this section, the punishment is rigorous imprisonment for a term not less than one year and up to five years, along with fine [3]. For first-time convictions of theft where the stolen property's value is less than five thousand rupees, upon the return of the property's value or its restoration, the punishment is community service under sub-section (2) of Section 303 of the Bharatiya Nyaya Sanhita, 2023 [3].\n\nRelated provisions:\n- Section 305 of the Bharatiya Nyaya Sanhita, 2023, which covers theft in a dwelling house, means of transportation, or place of worship, etc., punishing it with imprisonment up to seven years and fine [2].\n- Section 306 of the Bharatiya Nyaya Sanhita, 2023, which covers theft by a clerk or servant of property in the possession of their master, punishing it with imprisonment up to seven years and fine [4].\n- Section 307 of the Bharatiya Nyaya Sanhita, 2023, which covers theft after prepar",
    "score": 3
   }
  ]
