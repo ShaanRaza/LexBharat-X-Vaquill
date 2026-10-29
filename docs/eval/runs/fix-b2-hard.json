@@ -1,0 +1,215 @@
+{
+ "label": "fix-b2-hard",
+ "at": "2026-10-29T08:13:57.836Z",
+ "rows": [
+  {
+   "id": 101,
+   "kind": "plain",
+   "question": "My tenant isn't paying rent, what can I do?",
+   "gold": [
+    "IND_central_2338|s111",
+    "IND_central_2338|s114",
+    "IND_central_2338|s114A"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": false,
+   "correct": false,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 20,
+   "nSources": 13,
+   "queries": [
+    "My tenant isn't paying rent, what can I do?",
+    "tenant default in payment of rent eviction grounds determination of lease",
+    "Transfer of Property Act section 111 determination of lease forfeiture",
+    "recovery of rent suit for arrears of rent landlord remedies"
+   ],
+   "topSources": [
+    "The Transfer of Property Act, 1882 s111",
+    "The delhi rent control act, 1958 s14",
+    "The Central Provinces Tenancy Act, 1898 s87",
+    "The Central Provinces Tenancy Act, 1898 s66",
+    "The Punjab Tenancy Act, 1887. s44"
+   ],
+   "answer": "I couldn't find a direct, comprehensive list of steps for non-payment of rent in a general context in the Acts I searched, but the sources provide specific provisions regarding rent defaults, ejectment, and protection against eviction in certain jurisdictions and under specific statutes.\n\nUnder Section 14 of the Delhi Rent Control Act, 1958, a landlord may apply to the Controller for an order for the recovery of possession of the premises on the ground that the tenant has neither paid nor tendered the whole of the arrears of the rent legally recoverable from him within two months of the date on which a notice of demand for the arrears of rent has been served on him [2]. However, no order for recovery of possession on this ground shall be made if the tenant makes payment or deposit as required by section 15 [2].\n\nRegarding Supreme Court judgments, in the case of J. Jermons versus Aliammal and Ors. [12], the Supreme Court observed that a tenant is in default of rent if they have not paid or tendered rent within fifteen days after the expiry of the time fixed in the agreement, or by the last day of the month next following in the absence of an agreement, but a default simpliciter is n",
+   "score": 1
+  },
+  {
+   "id": 110,
+   "kind": "hinglish",
+   "question": "police meri FIR darj nahi kar rahi, ab kya karu",
+   "gold": [
+    "IND_central_20099|s173"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 14.8,
+   "nSources": 13,
+   "queries": [
+    "police meri FIR darj nahi kar rahi, ab kya karu",
+    "police officer refuses to record information in cognizable cases remedy",
+    "Bharatiya Nagarik Suraksha Sanhita section 173 information in cognizable cases",
+    "Code of Criminal Procedure section 156 police refusal to register FIR magistrate order"
+   ],
+   "topSources": [
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s173",
+    "The CODE OF CRIMINAL PROCEDURE, 1973 s156",
+    "The Madras District Police Act, 1859 s8",
+    "The CODE OF CRIMINAL PROCEDURE, 1973 s154",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s191"
+   ],
+   "answer": "If the police refuse to record your information relating to the commission of a cognizable offence, you may send the substance of such information, in writing and by post, to the Superintendent of Police concerned under Section 173 of the Bharatiya Nagarik Suraksha Sanhita, 2023 [1]. If the Superintendent of Police is satisfied that the information discloses the commission of a cognizable offence, he shall either investigate the case himself or direct an investigation to be made by a subordinate police officer [1]. If the police still do not record the information, the aggrieved person may make an application to the Magistrate under Section 173 of the Bharatiya Nagarik Suraksha Sanhita, 2023 [1].\n\nRelated provisions:\n- Section 173 of the Bharatiya Nagarik Suraksha Sanhita, 2023, which covers information in cognizable cases and the procedure when an officer in charge refuses to record it [1].\n- Section 154 of the Code of Criminal Procedure, 1973, which covers information in cognizable cases and provides for sending the substance of the information by post to the Superintendent of Police upon refusal by a police station officer [4].\n- Section 175 of the Bharatiya Nagarik Suraksha San",
+   "score": 3
+  },
+  {
+   "id": 112,
+   "kind": "hinglish",
+   "question": "dahej ke liye sasural wale pareshan kar rahe hain, kaunsi dhara lagegi",
+   "gold": [
+    "IND_central_20062|s085",
+    "IND_central_1679|s003"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 2,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 18.2,
+   "nSources": 13,
+   "queries": [
+    "dahej ke liye sasural wale pareshan kar rahe hain, kaunsi dhara lagegi",
+    "dowry harassment cruelty by husband or relatives of husband",
+    "Bharatiya Nyaya Sanhita section 85 husband or relative of husband subjecting woman to cruelty",
+    "Dowry Prohibition Act section 3 penalty for giving or taking dowry"
+   ],
+   "topSources": [
+    "The Bharatiya Nyaya Sanhita, 2023 s85",
+    "The Dowry Prohibition Act, 1961 s3",
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s498A",
+    "The Bharatiya Nyaya Sanhita, 2023 (Draft stage of translated version) s?",
+    "The Dowry Prohibition Act, 1961 s4A"
+   ],
+   "answer": "Sasural walon dwara dahej ke liye pareshan karne par (kisi mahila ko dahej ki maang ya anya aisi maang ke liye ya aisi maang poori na hone par pareshan karne ke adhar par) Section 85 of the Bharatiya Nyaya Sanhita, 2023 ke antargat pati ya pati ke rishtedaar par karwayi ho sakti hai, jiske tahat unhe teen saal tak ki kaid aur jurmana ho sakta hai [1][8]. Isi vishay ke antargat Section 498A of the Indian Penal Code, 45 of 1860 aur Section 498A of the Indian Penal Code (chandigarh) mein bhi yeh प्रावधान diya gaya hai ki pati ya pati ka rishtedaar yadi mahila ko krurta (cruelty) yaani ki dahej aadi ki maang ke liye pareshan karta hai toh use teen saal tak ki kaid aur jurmana ho sakta hai [3][9][10]. Iske alawa, Section 3 of the Dowry Prohibition Act, 1961 ke tahat dahej lene, dene ya iska aadan-pradan karne par saza ka pravdhan hai [2]. Domestic Violence ke sandarbh mein, Section 3 of the Protection of Women from Domestic Violence Act, 2005 ke tahat kisi mahila ko dahej ya anya sampatti ki avaidh maang ke liye pareshan karna ya darana 'domestic violence' ke antargat aata hai [6].\n\nRelated provisions:\n- Section 86 of the Bharatiya Nyaya Sanhita, 2023, jo Section 85 ke liye \"cruelty\" (k",
+   "score": 3
+  },
+  {
+   "id": 118,
+   "kind": "two-act",
+   "question": "My husband is cruel and does not support me. Can he be punished and can I get monthly maintenance?",
+   "gold": [
+    "IND_central_20062|s085",
+    "IND_central_20099|s144"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 3,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 18.4,
+   "nSources": 13,
+   "queries": [
+    "My husband is cruel and does not support me. Can he be punished and can I get monthly maintenance?",
+    "cruelty by husband matrimonial offence punishment and maintenance for wife",
+    "Bharatiya Nyaya Sanhita section 85 husband or relative subjecting woman to cruelty",
+    "Code of Criminal Procedure section 125 order for maintenance of wives children and parents"
+   ],
+   "topSources": [
+    "The Bharatiya Nyaya Sanhita, 2023 s85",
+    "The CODE OF CRIMINAL PROCEDURE, 1973 s125",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s144",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s2",
+    "The Protection of Women from Domestic Violence Act, 2005 s20"
+   ],
+   "answer": "- Whoever being the husband or the relative of the husband of a woman subjects her to cruelty shall be punished with imprisonment for a term which may extend to three years and shall also be liable to fine under Section 85 of the Bharatiya Nyaya Sanhita, 2023 [1].\n- If any person having sufficient means neglects or refuses to maintain his wife who is unable to maintain herself, a Magistrate of the first class may, upon proof of such neglect or refusal, order such person to make a monthly allowance for the maintenance of his wife at such monthly rate as the Magistrate thinks fit under Section 144 of the Bharatiya Nagarik Suraksha Sanhita, 2023 [3].\n- As noted in the Supreme Court judgment \"Mohd. Abdul Samad versus The State of Telangana & Anr.\", Section 125 of the Code of Criminal Procedure, 1973 is intended to provide a speedy remedy, prevent vagrancy, and save a wife including a divorced woman from deprivation and destitution by compelling the husband to support her [2].\n- As noted in the Supreme Court judgment \"Reema Salkan versus Sumer Singh Salkan\", an able-bodied young man is presumed to be capable of earning sufficient money to reasonably maintain his wife and child, and he c",
+   "score": 3
+  },
+  {
+   "id": 119,
+   "kind": "two-act",
+   "question": "Does the limitation period apply to arbitration, and how long do I have to file a suit for a loan I gave?",
+   "gold": [
+    "IND_central_1978|s043",
+    "IND_central_1565|sA19"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 7,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 18.4,
+   "nSources": 13,
+   "queries": [
+    "Does the limitation period apply to arbitration, and how long do I have to file a suit for a loan I gave?",
+    "limitation period applicability to arbitration proceedings",
+    "limitation period for recovery of loan suit for money lent",
+    "Limitation Act section 21 arbitration limitation period and section 19 loan recovery"
+   ],
+   "topSources": [
+    "The Limitation Act, 1963 s21",
+    "The Special Economic Zones Act, 2005 s43",
+    "The Limitation Act, 1963 sA19",
+    "The Limitation Act, 1963 sA21",
+    "The Limitation Act, 1963 sA20"
+   ],
+   "answer": "The limitation period applies to arbitration [2][6][7]. The period of limitation for any dispute required to be referred to arbitration shall be regulated by the provisions of the Limitation Act, 1963, as if the dispute were a suit and the arbitrator a civil court, though an arbitrator may admit a dispute after the expiry of the period of limitation if the applicant satisfies the arbitrator of sufficient cause for not referring the dispute within such period [2][6][7]. Under Section 43 of the Arbitration and Conciliation Act, 1996, the Limitation Act, 1963 applies to arbitrations as it applies to proceedings in court, and an arbitration is deemed to have commenced on the date referred to in Section 21 [7].\n\nFor a suit for money lent, the limitation period depends on the nature of the agreement as provided in the First Division, Part II of the Schedule to the Limitation Act, 1963:\n- For money payable for money lent, the period of limitation is three years from when the loan is made, under Article 19 of the Limitation Act, 1963 [3].\n- For money lent under an agreement that it shall be payable on demand, the period of limitation is three years from when the loan is made, under Article",
+   "score": 3
+  },
+  {
+   "id": 121,
+   "kind": "bns-vs-ipc",
+   "question": "IPC 420 cheating punishment",
+   "gold": [
+    "IND_central_20062|s318"
+   ],
+   "goldFound": true,
+   "oldMention": false,
+   "retrieved": true,
+   "rank": 3,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 16.6,
+   "nSources": 6,
+   "queries": [
+    "IPC 420 cheating punishment",
+    "cheating and dishonestly inducing delivery of property punishment IPC 420",
+    "IPC section 420",
+    "Bharatiya Nyaya Sanhita section 318 cheating"
+   ],
+   "topSources": [
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s420",
+    "The INDIAN PENAL CODE s420",
+    "The Bharatiya Nyaya Sanhita, 2023 s318",
+    "EDMUNDS LYNGDOH versus STATE OF MEGHALAYA s?",
+    "RAM NARAIN POPLI versus CENTRAL BUREAU OF INVESTIGATION s?"
+   ],
+   "answer": "The punishment for cheating and dishonestly inducing the delivery of property is imprisonment of either description for a term which may extend to seven years, and liability to a fine, under Section 420 of The Indian Penal Code, 45 of 1860 [1] and Section 420 of The INDIAN PENAL CODE (chandigarh) [2]. The same punishment applies under Section 318(4) of The Bharatiya Nyaya Sanhita, 2023 [3].\n\nRelated provisions:\n- Section 318(1) of The Bharatiya Nyaya Sanhita, 2023, which covers cheating by deceiving any person and fraudulently or dishonestly inducing delivery of property, consent to retain property, or intentional inducement to do or omit anything causing damage or harm [3].\n- Section 318(2) of The Bharatiya Nyaya Sanhita, 2023, which covers general cheating punishable with imprisonment up to three years, or with fine, or with both [3].\n- Section 318(3) of The Bharatiya Nyaya Sanhita, 2023, which covers cheating with the knowledge that it is likely to cause wrongful loss to a person whose interest the offender was bound by law or legal contract to protect, punishable with imprisonment up to five years, or with fine, or with both [3].",
+   "score": 3
+  }
+ ]
+}

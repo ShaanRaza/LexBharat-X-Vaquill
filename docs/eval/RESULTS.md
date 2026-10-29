@@ -41,6 +41,7 @@ What fails: a repealed IPC section outranks BNS (q120 murder, q122 498A, q124 th
 | Change | Switch | Status |
 |---|---|---|
 | (b) hybrid keyword search + statutory rewrite | `hybridSearch`, `statutoryRewrite` | **kept (on)**: hard set 58 -> 62 of 84 (Hinglish 13 -> 18 of 18, plain 18 -> 20, two-Act q118 0 -> 3), main subset 37 -> 37; lost q119 and q121 (3 -> 0 each: unrelated Acts pulled in). One run. |
+| (b2) follow-up to (b): why q119/q121 fell to 0 | (general fixes, no switch) | **kept**: q119 0 -> 3, q121 0 -> 3 (hard subset 16/18; 13 controls 36/39 vs 37/39). Causes: with the rewrite skipped ("busy") nothing read "IPC 420" as a lookup, and keyword hits on short units of unrelated Acts (section-1 stubs) outranked the real sections; the statutory rewrite also stopped naming the Arbitration Act. Fixes: bare "IPC 420" / "302 IPC" are section lookups; keyword hits only boost meaning/exact matches and add at most 2 of their own at the end; the rewrite keeps every Act, number and part the user wrote; sections the rewrite names survive narrowing. The two lost points (q41 3 -> 2, q101 2 -> 1) are not retrieval: the expected section was still rank 1 in both; the answer or the judge varied (one run each). |
 | (c) current law first ("previously IPC s.379") | `currentLaw` | coded and unit-tested, not yet evaluated |
 | (d) citation-number check | `citationCheck` | coded and unit-tested, not yet evaluated |
 
