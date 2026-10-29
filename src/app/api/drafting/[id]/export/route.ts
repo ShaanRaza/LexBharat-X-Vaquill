@@ -1,5 +1,5 @@
 // GET /api/drafting/<id>/export?format=docx|pdf -> the latest edit of the draft as a file. Word and Google Docs open the .docx; the PDF uses standard fonts (the rupee sign is written "Rs.").
-import { dbConfigured } from "@/lib/acts/db";
+import { dbConfigured } from "@/lib/app-db";
 import { docToBlocks } from "@/lib/drafting/docmodel.mjs";
 import { buildDocx, buildPdf } from "@/lib/drafting/export.mjs";
 import { bidOf, json } from "@/lib/drafting/http";

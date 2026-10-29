@@ -9,6 +9,10 @@ test("the sentence says plainly that the section isn't in the library", () => {
   assert.match(gapSentence({ kind: "unreliable", number: "9", actTitle: NI }), /scrambled.*cannot quote/);
   assert.match(gapSentence({ kind: "mentioned", number: "9", actTitle: NI }), /The answer mentions Section 9 .* isn't in our library yet\./);
 });
+test("a section above the Act's last one does not exist, which is different from missing", () => {
+  assert.equal(gapSentence({ kind: "nosuch", number: "999", actTitle: NI, max: 148 }), "Section 999 of the Negotiable Instruments Act, 1881 doesn't exist: the Act's sections end at 148.");
+  assert.match(gapLead([{ kind: "nosuch", number: "999", actTitle: NI, max: 148 }]), /doesn't exist/);
+});
 test("the notice carries the sentence, the link and a label", () => {
   const n = gapNotice({ kind: "missing", number: "43", actTitle: "The Information Technology Act, 2000" }, "https://www.indiacode.nic.in/x");
   assert.equal(n.url, "https://www.indiacode.nic.in/x"); assert.equal(n.label, "Read Section 43 of the Information Technology Act, 2000 on India Code"); assert.match(n.text, /isn't in our library yet/);

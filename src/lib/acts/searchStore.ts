@@ -2,6 +2,7 @@
 import { query, dbConfigured } from "./db";
 import { actMatcher, hasDevanagari, hasSearchableChars, parseSectionLookup } from "./searchQuery.mjs";
 import { unitLabel } from "./unitLabel.mjs";
+import { knownMaxFor } from "./knownCounts.mjs";
 import { chooseMode, distinctSections, highlightQuery, rankSections, statesIn } from "./semantic.mjs";
 import { embedMany, embedQuery, voyageConfigured } from "./embed";
 import { vectorStores, vectorConfigured } from "./vectorStore";
@@ -29,7 +30,7 @@ export type SearchOutcome =
       /** How the query was searched: used=true for search by meaning; otherwise why keyword search ran instead (exact_requested, quoted_phrase, hindi, semantic_unavailable, semantic_error). */
       semantic?: { used: boolean; reason?: string };
       /** Set when the asked-for section number is confidently missing from our data (gaps.mjs): the UI shows the notice and the India Code link. */
-      missing?: { actTitle: string; actId: string; number: string; sourceUrl: string | null } };
+      missing?: { actTitle: string; actId: string; number: string; sourceUrl: string | null; /** the number is above the Act's last section: there is no such section (the highest number it has) */ beyond?: number | null } };
 
 /** First readable words of a section for a lookup result: skips markdown headings and all-capitals heading lines that lead some sections. */
 const leadSnippet = (body: string) => body.split(/\n{2,}/).map((p) => p.trim()).filter((p) => p && !/^#/.test(p) && !(p.length < 200 && p === p.toUpperCase())).join(" ").replace(/\*\*/g, "").replace(/\s+/g, " ").slice(0, 220);
@@ -60,7 +61,10 @@ async function lookupHits(q: string, page: number, pageSize: number): Promise<Se
       `SELECT a.act_id AS "actId", a.title AS "actTitle", a.source_url AS "sourceUrl" FROM acts a WHERE ${where} AND EXISTS (SELECT 1 FROM act_sections_v s WHERE s.act_id = a.act_id AND s.number ~ '^[0-9]')
        ORDER BY (a.category = 'central') DESC, (a.act_status = 'in_force') DESC, length(a.title) LIMIT 1`, params).catch(() => []);
     if (!held.length) return null;
-    return { available: true, results: [], total: 0, totalCapped: false, page, pageSize, hasMore: false, mode: "lookup", note: `Section ${lk.number} of ${held[0].actTitle} is missing from our source data.`, missing: { ...held[0], number: lk.number } };
+    // a number above the Act's last section is not "missing": there is no such section. The last section is the reference count for well-known Acts, else the highest number we hold (only when the number is far above it)
+    const top = (await query<{ m: number | null }>(`SELECT max((substring(number from '^[0-9]+'))::int) AS m FROM act_sections_v WHERE act_id = $1 AND number ~ '^[0-9]{1,3}' AND body IS NOT NULL`, [held[0].actId]).catch(() => []))[0]?.m ?? 0;
+    const known = knownMaxFor(held[0].actTitle), beyond = known ? (num > known ? known : null) : top && num > top * 2 + 20 ? top : null;
+    return { available: true, results: [], total: 0, totalCapped: false, page, pageSize, hasMore: false, mode: "lookup", note: beyond ? `${held[0].actTitle} has no Section ${lk.number}: its sections end at ${beyond}.` : `Section ${lk.number} of ${held[0].actTitle} is missing from our source data.`, missing: { ...held[0], number: lk.number, beyond } };
   }
   const all = rows.map(({ body, ...r }): SectionHit => ({ ...r, snippet: leadSnippet(body ?? ""), via: "lookup" }));
   const slice = all.slice((page - 1) * pageSize, page * pageSize);

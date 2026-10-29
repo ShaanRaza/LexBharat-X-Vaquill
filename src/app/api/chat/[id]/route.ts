@@ -1,5 +1,5 @@
 // GET /api/chat/<id> -> one chat with its messages; DELETE removes it. Only the browser that made the chat can open or delete it.
-import { dbConfigured } from "@/lib/acts/db";
+import { dbConfigured } from "@/lib/app-db";
 import { isBrowserId } from "@/lib/access/token.mjs";
 import { deleteChat, getChat, isChatId } from "@/lib/chat/store";
 

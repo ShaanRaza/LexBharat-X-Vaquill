@@ -1,6 +1,5 @@
 // GET /api/acts/<actId>/sections: section text for one act. Always { available: false } in this phase (see src/lib/sections). 404 for an unknown act.
-import { getActsStore } from "@/lib/acts";
-import { getSectionsStore } from "@/lib/sections";
+import { getActsStore, getSectionsStore } from "@/lib/legal-data";
 
 export async function GET(_req: Request, { params }: { params: Promise<{ actId: string }> }) {
   const { actId } = await params;

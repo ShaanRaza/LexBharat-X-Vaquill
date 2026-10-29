@@ -2,7 +2,7 @@
 //   {type:"start"} {type:"plan"} {type:"checklist"} {type:"basis"} {type:"note"} {type:"section_start"} {type:"delta"} {type:"section_done"} {type:"section_failed"}
 //   {type:"saved", draftId, warnings} {type:"email", status} {type:"done"} | {type:"error", code, message}
 // Limits per browser (src/config/drafting-limits.json). The email address, if given and Resend is set up, is used once to send the "ready" message and is never stored.
-import { dbConfigured } from "@/lib/acts/db";
+import { dbConfigured } from "@/lib/app-db";
 import { AiError, aiConfigured } from "@/lib/ai";
 import limitConfig from "@/config/drafting-limits.json";
 import { evaluateLimits, readLimits } from "@/lib/chat/limits.mjs";

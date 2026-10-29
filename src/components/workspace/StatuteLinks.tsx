@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { RepealedNote } from "@/components/kit";
 import { segments } from "@/lib/judgments/statuteLinks.mjs";
-import type { Resolved } from "@/lib/judgments/statuteResolve";
+import type { Resolved } from "@/lib/legal-data";
 
 // Presentation only: mentions arrive resolved from src/lib/judgments/statuteLinks.ts. Colours, sizes and radii come from the shared tokens.
 const linkClass = "rounded-chip text-primary underline decoration-dotted underline-offset-2 hover:decoration-solid focus-visible:outline-2 focus-visible:outline-primary";

@@ -1,5 +1,5 @@
 // GET /api/judgments/courts: every court with its case-record count (real) or null (mock), plus stats, caveats and attribution.
-import { getJudgmentsStore } from "@/lib/judgments";
+import { getJudgmentsStore } from "@/lib/legal-data";
 
 export async function GET() {
   const store = getJudgmentsStore();

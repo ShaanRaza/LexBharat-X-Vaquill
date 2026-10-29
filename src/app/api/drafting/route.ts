@@ -1,5 +1,5 @@
 // GET /api/drafting -> the templates (as the pages need them), this browser's saved drafts, usage and limits, and whether "email me" is available.
-import { dbConfigured } from "@/lib/acts/db";
+import { dbConfigured } from "@/lib/app-db";
 import { aiConfigured } from "@/lib/ai";
 import limitConfig from "@/config/drafting-limits.json";
 import { readLimits } from "@/lib/chat/limits.mjs";

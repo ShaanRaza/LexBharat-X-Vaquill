@@ -1,5 +1,5 @@
 // GET /api/judgments/case?court=<slug>&year=<yyyy>&id=<caseId>&p=<page>: one case's metadata. `p` is the 100-case page the list link carried (High Courts only).
-import { getJudgmentsStore } from "@/lib/judgments";
+import { getJudgmentsStore } from "@/lib/legal-data";
 
 export async function GET(req: Request) {
   const q = new URL(req.url).searchParams, court = q.get("court")?.trim() ?? "", id = q.get("id")?.trim() ?? "", year = Number(q.get("year")), p = q.get("p") ? Number(q.get("p")) : undefined;

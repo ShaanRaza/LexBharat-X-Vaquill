@@ -30,7 +30,8 @@ const IPC = "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)", BNS = "T
 test("pairFor matches the old Act by the start of its title, not a lookalike", () => {
   assert.equal(pairFor(IPC, replaced.pairs).new, "the bharatiya nyaya sanhita");
   assert.equal(pairFor("The Code of Criminal Procedure, 1973", replaced.pairs).label, "The Bharatiya Nagarik Suraksha Sanhita, 2023");
-  assert.equal(pairFor("The Code of Criminal Procedure (Amendment) Act, 2005", replaced.pairs)?.old ?? null, "the code of criminal procedure");   // an amending Act of the same name is still the old law family
+  assert.equal(pairFor("The Code of Criminal Procedure (Amendment) Act, 2005", replaced.pairs), null);   // an amending Act is its own Act, not the repealed code
+  assert.equal(pairFor("The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)", replaced.pairs).label, "The Bharatiya Nyaya Sanhita, 2023");
   assert.equal(pairFor(BNS, replaced.pairs), null); assert.equal(pairFor(NI, replaced.pairs), null);
 });
 test("current law first: the replacement leads, the old section is marked and kept after it", () => {

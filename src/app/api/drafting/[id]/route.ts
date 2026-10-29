@@ -1,5 +1,5 @@
 // GET /api/drafting/<id> -> the draft (with its version list); PUT {doc} autosaves the latest edit; PATCH {title} renames; DELETE removes it. Only the browser that made a draft can touch it.
-import { dbConfigured } from "@/lib/acts/db";
+import { dbConfigured } from "@/lib/app-db";
 import { validDoc } from "@/lib/drafting/docmodel.mjs";
 import { bidOf, json } from "@/lib/drafting/http";
 import { deleteDraft, getDraft, isDraftId, listVersions, MAX_DOC_BYTES, renameDraft, saveEdit } from "@/lib/drafting/store";

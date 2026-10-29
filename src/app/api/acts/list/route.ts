@@ -1,6 +1,6 @@
 // GET /api/acts/list: the acts browser's data call. Same params and response shape as the mock (and as the public docs' /in/acts/list), plus `source`
 // ("real" | "mock") so the UI can label what it shows. Data comes from the active ActsStore (src/lib/acts).
-import { getActsStore, parseActsQuery } from "@/lib/acts";
+import { getActsStore, parseActsQuery } from "@/lib/legal-data";
 
 export async function GET(req: Request) {
   const parsed = parseActsQuery(new URL(req.url).searchParams);

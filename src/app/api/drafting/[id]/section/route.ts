@@ -1,5 +1,5 @@
 // POST {sectionId} -> writes ONE section again (for a section that was "Not generated, retry"), in the same context as the draft (same facts, same retrieved law). Returns the text and editor nodes.
-import { dbConfigured } from "@/lib/acts/db";
+import { dbConfigured } from "@/lib/app-db";
 import { AiError, aiConfigured } from "@/lib/ai";
 import { rateCheck } from "@/lib/limits/counters";
 import { getTemplate } from "@/lib/drafting/catalog";

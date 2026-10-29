@@ -1,5 +1,5 @@
-export type GapKind = "missing" | "unreliable" | "mentioned";
-export type Gap = { kind: GapKind; number: string; actTitle: string };
+export type GapKind = "missing" | "unreliable" | "mentioned" | "nosuch";
+export type Gap = { kind: GapKind; number: string; actTitle: string; max?: number };
 export function gapSentence(g: Gap): string;
 export function gapNotice(g: Gap, url?: string | null): { kind: GapKind; text: string; url: string | null; label: string };
 export function gapLead(gaps: Gap[]): string;

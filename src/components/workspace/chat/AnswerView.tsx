@@ -54,16 +54,15 @@ function SourceRow({ c, onPick, activeN, shown }: { c: Citation; onPick?: (n: nu
 }
 
 export default function AnswerView({ text, sources, check, pending, queries, note, onPick, activeN }: { text: string; sources: Citation[]; check?: CheckResult | null; pending?: boolean; queries?: string[]; note?: string; onPick?: (n: number) => void; activeN?: number }) {
-  const Inline = ({ text }: { text: string; sources: Citation[] }) => <CitedText text={text} sources={sources} onPick={onPick} activeN={activeN} shown={shown} />;
   const blocks = toBlocks(text), nums = new Set(citedNumbers(text)), shown = displayNumbers(text, sources), byShown = (a: Citation, b: Citation) => (shown.get(a.n) ?? 0) - (shown.get(b.n) ?? 0);   // the numbers printed run 1, 2, 3... in the order the answer uses them
   const cited = sources.filter((x) => nums.has(x.n) && x.kind !== "doc").sort(byShown), citedDocs = sources.filter((x) => nums.has(x.n) && x.kind === "doc").sort(byShown), others = sources.filter((x) => !nums.has(x.n)).sort(byShown);
   return (
     <div>
       {note && <Notice tone="info" role="note" compact className="mb-3"><p>{note}</p></Notice>}
       <div className="space-y-3 text-ui-body leading-relaxed text-foreground">
-        {blocks.map((b, i) => b.type === "p" ? <p key={i}><Inline text={b.text} sources={sources} /></p>
-          : b.type === "ul" ? <ul key={i} className="list-disc space-y-1 pl-5">{b.items.map((it, j) => <li key={j}><Inline text={it} sources={sources} /></li>)}</ul>
-          : <ol key={i} className="list-decimal space-y-1 pl-5">{b.items.map((it, j) => <li key={j}><Inline text={it} sources={sources} /></li>)}</ol>)}
+        {blocks.map((b, i) => b.type === "p" ? <p key={i}><CitedText text={b.text} sources={sources} onPick={onPick} activeN={activeN} shown={shown} /></p>
+          : b.type === "ul" ? <ul key={i} className="list-disc space-y-1 pl-5">{b.items.map((it, j) => <li key={j}><CitedText text={it} sources={sources} onPick={onPick} activeN={activeN} shown={shown} /></li>)}</ul>
+          : <ol key={i} className="list-decimal space-y-1 pl-5">{b.items.map((it, j) => <li key={j}><CitedText text={it} sources={sources} onPick={onPick} activeN={activeN} shown={shown} /></li>)}</ol>)}
         {pending && <span aria-hidden className="inline-block h-4 w-1.5 animate-pulse rounded-sm bg-muted align-middle" />}
       </div>
       {!pending && check?.cutOff && <Notice tone="warn" role="note" compact className="mt-3"><p><strong className="font-medium text-foreground">The answer was cut off.</strong> Try again.</p></Notice>}

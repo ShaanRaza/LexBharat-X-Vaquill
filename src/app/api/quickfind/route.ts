@@ -1,8 +1,6 @@
 // GET /api/quickfind?q=<what was typed> -> { kind, number, laws, judgments } for Quick-find. `laws` are sections or Articles NUMBERED the typed number (a bare "138", or "138 NI", "NI 138", "s.138 NI Act"), best-known first;
 // `judgments` are Supreme Court cases for the words typed, where a number may match only a case number or a full citation, never a report page number ("8 S.C.R. 138"). Exact words only: no search by meaning, no Voyage.
-import { numberedLaws } from "@/lib/acts/quickLaws";
-import { getJudgmentsStore } from "@/lib/judgments";
-import { searchSupremeCourt } from "@/lib/judgments/scSearch";
+import { getJudgmentsStore, numberedLaws, searchSupremeCourt } from "@/lib/legal-data";
 import { numericOk } from "@/lib/quickfind/rank.mjs";
 
 export async function GET(req: Request) {

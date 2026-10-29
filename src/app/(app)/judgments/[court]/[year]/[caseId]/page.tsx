@@ -6,13 +6,11 @@ import { Notice } from "@/components/kit";
 import scDuplicates from "@/config/sc-duplicates.json";
 import CopyButton from "@/components/workspace/CopyButton";
 import { ALL_COURTS } from "@/data/workspaceBrowse";
-import { getJudgmentsStore } from "@/lib/judgments";
 import { JUDGE_COURTS, SC_SLUG, provenanceRows } from "@/lib/judgments/provenance";
 import { WORKSPACE_SUFFIX } from "@/lib/release";
 import JudgmentFullText from "@/components/workspace/JudgmentFullText";
-import { getCaseText } from "@/lib/judgments/scText";
 import StatuteText, { LawsReferred } from "@/components/workspace/StatuteLinks";
-import { lawsReferred, resolveMentions } from "@/lib/judgments/statuteResolve";
+import { getCaseText, getJudgmentsStore, lawsReferred, resolveMentions } from "@/lib/legal-data";
 
 // Case detail. Route scheme (stable): /judgments/<court-slug>/<year>/<caseId>?p=<100-case page>&lp=<list page>
 // `p` locates a High Court case inside the exported pages (the Supreme Court ignores it); `lp` only restores the list page on "back".

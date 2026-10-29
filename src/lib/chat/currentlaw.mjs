@@ -2,7 +2,8 @@
 // prompt tells the model to answer from the current law and name the old one as "previously ...". PURE logic; the pairs of laws are data (src/config/replaced-laws.json).
 
 /** The pair whose old Act this title belongs to, or null. Titles are compared in lower case from the start ("The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)"). */
-export const pairFor = (title, pairs) => { const t = String(title).toLowerCase().trim(); return pairs.find((p) => t.startsWith(p.old)) ?? null; };
+// an amending Act of the same name ("The Code of Criminal Procedure (Amendment) Act, 2005") is its own Act, not the repealed code
+export const pairFor = (title, pairs) => { const t = String(title).toLowerCase().trim(); return pairs.find((p) => t.startsWith(p.old) && !/^[\s,(]*(?:\(\s*)?(?:amendment|amending|second|third)\b/.test(t.slice(p.old.length))) ?? null; };
 const isNew = (title, pair) => String(title).toLowerCase().trim().startsWith(pair.new);
 
 /** hits: the picked hits [{ actTitle, actStatus }] in rank order; all: every candidate (a superset, rank order); k: how many may be returned.

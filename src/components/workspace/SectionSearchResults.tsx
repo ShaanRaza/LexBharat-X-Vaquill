@@ -9,7 +9,7 @@ import { STATUS_INFO, INCOMPLETE_NOTICE, MISSING_NOTICE, officialSourceUrl } fro
 // Results of the Acts-tab search box over Central and State Acts (GET /api/acts/search): by meaning by default, exact words on request. Presentation and fetching only; the search itself lives in
 // src/lib/acts/searchStore.ts. Colours, sizes and radii come from the tokens through Tailwind names and the shared kit.
 type Hit = { flags: string[]; actId: string; actTitle: string; year: number | null; category: string; state: string | null; sourceUrl: string | null; sectionKey: string; number: string | null; heading: string | null; chapter: string | null; status: keyof typeof STATUS_INFO; snippet: string; via: "text" | "lookup" | "semantic"; department?: string | null; copies?: number };
-type Resp = { searchAvailable: boolean; message?: string; results: Hit[]; total: number; totalCapped?: boolean; page: number; pageSize: number; hasMore: boolean; mode?: "text" | "lookup" | "semantic"; note?: string; missing?: { actTitle: string; number: string; sourceUrl: string | null } };
+type Resp = { searchAvailable: boolean; message?: string; results: Hit[]; total: number; totalCapped?: boolean; page: number; pageSize: number; hasMore: boolean; mode?: "text" | "lookup" | "semantic"; note?: string; missing?: { actTitle: string; number: string; sourceUrl: string | null; beyond?: number | null } };
 const label = (v: string) => v.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 
 export default function SectionSearchResults({ q }: { q: string }) {
@@ -42,7 +42,7 @@ export default function SectionSearchResults({ q }: { q: string }) {
           {exact && data.mode === "text" && <button type="button" onClick={() => { setExact(false); setPage(1); }} className="mt-1 text-ui-sm font-medium text-primary underline">Search by meaning instead</button>}
           {data.missing && (
             <Notice tone="warn" role="status" className="mt-3">
-              <p><strong className="font-medium text-foreground">Section {data.missing.number} of {data.missing.actTitle}.</strong> {MISSING_NOTICE.replace(" Read it on India Code.", "")} <a className="font-medium underline" href={officialSourceUrl(data.missing.sourceUrl)} target="_blank" rel="noopener noreferrer">Read it on India Code</a>.</p>
+              <p><strong className="font-medium text-foreground">Section {data.missing.number} of {data.missing.actTitle}.</strong> {data.missing.beyond ? `There is no such section: the Act ends at Section ${data.missing.beyond}.` : MISSING_NOTICE.replace(" Read it on India Code.", "")} <a className="font-medium underline" href={officialSourceUrl(data.missing.sourceUrl)} target="_blank" rel="noopener noreferrer">Read it on India Code</a>.</p>
             </Notice>
           )}
           <ul className="mt-3 space-y-2">

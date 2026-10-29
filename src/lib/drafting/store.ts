@@ -1,5 +1,5 @@
 // Saved drafts in the main Neon database (tables in scripts/drafting/drafting-schema.sql), keyed to the anonymous browser id. LOGIC ONLY. Every read and write checks the browser id.
-import { query } from "@/lib/acts/db";
+import { query } from "@/lib/app-db";
 import { addUsage, countersConfigured, removeUsage, usageCounts } from "@/lib/limits/counters";
 import type { Doc, SectionText } from "./docmodel.mjs";
 

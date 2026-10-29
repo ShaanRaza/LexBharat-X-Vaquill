@@ -3,7 +3,7 @@
 //   {type:"start", chatId} {type:"note", text} {type:"sources", sources:[...], queries:[...]} {type:"delta", text} {type:"replace", text} {type:"cutoff"} {type:"check", label, unsupported, missing} {type:"done"} | {type:"error", code, message}
 // GET  /api/chat -> this browser's chats (newest first), usage and the limits.
 // Needs the access cookie (middleware) and the anonymous browser id (x-lb-bid, set by the middleware). Answers use ONLY the retrieved Act sections; the answer check labels the result.
-import { dbConfigured } from "@/lib/acts/db";
+import { dbConfigured } from "@/lib/app-db";
 import { AiError, aiConfigured, aiModelFor, completeAi, streamAi } from "@/lib/ai";
 import { isBrowserId } from "@/lib/access/token.mjs";
 import limitConfig from "@/config/chat-limits.json";
@@ -14,7 +14,7 @@ import { buildRewritePrompt, parseRewrite } from "@/lib/chat/rewrite.mjs";
 import { gapLead, gapNotice, unretrievedMentions } from "@/lib/chat/gaps.mjs";
 import { extractLookups } from "@/lib/chat/lookups.mjs";
 import { logGap } from "@/lib/insights/server";
-import { searchSections } from "@/lib/acts/searchStore";
+import { searchSections } from "@/lib/legal-data";
 import { officialSourceUrl } from "@/lib/acts/quality";
 import { tuningFlags } from "@/lib/chat/tuning.mjs";
 import { verifyCitations } from "@/lib/chat/verify.mjs";
@@ -110,8 +110,8 @@ export async function POST(req: Request) {
         send({ type: "sources", sources: cites, searchMode: ret.searchMode, queries: [message, ...extra].slice(0, 4) });
         // sections the question names that the library does not hold (or holds only as scrambled text): say so plainly, link the Act on India Code, never answer from memory, and log it for the next downloads
         const absent: AbsentNote[] = ret.gaps.map((g) => gapNotice(g, g.url)), lead = gapLead(ret.gaps), logIt = docIds.length === 0;   // nothing is logged for a question that had a Vault document attached
-        if (logIt) for (const g of ret.gaps) logGap({ kind: g.kind === "unreliable" ? "unreliable_section" : "missing_section", question: message, act: g.actTitle, section: g.number, actId: g.actId });
-        const logNotFound = () => { if (logIt && !ret.gaps.length) { const l = extractLookups(message)[0]; logGap({ kind: "not_found", question: message, act: l ? l.replace(/^\S+\s+/, "") : null, section: l ? l.split(" ")[0] : null }); } };
+        if (logIt) for (const g of ret.gaps.filter((x) => x.kind !== "nosuch")) logGap({ kind: g.kind === "unreliable" ? "unreliable_section" : "missing_section", question: message, act: g.actTitle, section: g.number, actId: g.actId });
+        const logNotFound = () => { if (logIt && !ret.gaps.some((x) => x.kind !== "nosuch")) { const l = extractLookups(message)[0]; logGap({ kind: "not_found", question: message, act: l ? l.replace(/^\S+\s+/, "") : null, section: l ? l.split(" ")[0] : null }); } };
         if (!ret.sources.length) {
           const text = lead ? `${lead}\n\nI couldn't find other sections in the Acts I searched that answer this question. You can read the section on India Code (link below).` : "I couldn't find any sections in the Acts I searched that relate to this question. This tool searches Indian Central and State Acts and short excerpts of Supreme Court judgments; High Court and tribunal decisions are not included yet. Try describing the situation in other words, or name the Act and section.";
           send({ type: "delta", text });

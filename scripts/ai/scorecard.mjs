@@ -11,10 +11,11 @@ import { buildChatPrompt, detectNotFound } from "../../src/lib/chat/prompt.mjs";
 const env = Object.fromEntries(fs.readFileSync(".env.local", "utf8").split("\n").filter((l) => l.includes("=")).map((l) => [l.slice(0, l.indexOf("=")), l.slice(l.indexOf("=") + 1).replace(/^["']|["']$/g, "")]));
 const arg = (k, d) => { const i = process.argv.indexOf(`--${k}`); return i > 0 ? process.argv[i + 1] : d; };
 const N = Number(arg("n", 12)), BUDGET = Number(arg("budget", 0.25)), OUT = arg("out", null);
-const MODELS = arg("models", "gemini:gemini-3.5-flash-lite,openrouter:anthropic/claude-haiku-5.5,openrouter:openai/gpt-4.1-mini,openrouter:google/gemini-3.5-flash-lite,openrouter:anthropic/claude-sonnet-5.5").split(",");
+const MODELS = arg("models", "gemini:gemini-3.5-flash-lite").split(",");
 const SONNET_N = Number(arg("sonnet-n", 6));
 const config = JSON.parse(fs.readFileSync("src/config/ai-models.json", "utf8"));
-const JUDGE = "openrouter:anthropic/claude-haiku-5.5";
+const JUDGE = arg("judge", "gemini:gemini-3.5-flash-lite");   // evaluations use the free Gemini plan only: a paid route (openrouter:/openai:) must be asked for with --allow-paid
+if ([...MODELS, JUDGE].some((m) => /^(openrouter|openai|anthropic):/.test(m)) && !process.argv.includes("--allow-paid")) { console.log("A paid route (openrouter:, openai:, anthropic:) was asked for. Evaluations stay on free Gemini; add --allow-paid only if you have decided to spend credit."); process.exit(1); }
 // $ per 1M tokens (OpenRouter list, read 2026-10-29)
 const PRICE = { "gemini:gemini-3.5-flash-lite": [0.3, 2.5], "openrouter:anthropic/claude-haiku-5.5": [0.1, 0.5], "openrouter:openai/gpt-4.1-mini": [0.4, 1.6], "openrouter:google/gemini-3.5-flash-lite": [0.3, 2.5], "openrouter:anthropic/claude-sonnet-5.5": [2, 10], "openrouter:deepseek/deepseek-v4-flash": [0.091, 0.182] };
 let spent = 0;

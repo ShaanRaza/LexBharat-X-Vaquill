@@ -4,8 +4,7 @@
 import { normalizeQuery } from "@/lib/acts/searchQuery.mjs";
 import { clientKey } from "@/lib/acts/semantic.mjs";
 import { rateCheck } from "@/lib/limits/counters";
-import { scKeywordConfigured, scSemanticConfigured, scTextConfigured, searchJudgmentsByMeaning, searchJudgmentsByWords } from "@/lib/judgments/scText";
-import { scCase } from "@/lib/judgments/scMeta";
+import { scCase, scKeywordConfigured, scSemanticConfigured, scTextConfigured, searchJudgmentsByMeaning, searchJudgmentsByWords } from "@/lib/legal-data";
 
 const PAGE = 10;
 export async function GET(req: Request) {

@@ -2,8 +2,7 @@
 // High Court cases across ALL years (and courts) by PARTY NAMES and CASE NUMBERS as recorded in the dataset, from a compact static index. Not full-text search of judgments.
 // Newest first; a query that is a case number ("933/2024", "933 of 2024") returns exactly the cases with that number. Without the index: 200 with indexAvailable:false.
 import { ALL_COURTS } from "@/data/workspaceBrowse";
-import { getJudgmentsStore } from "@/lib/judgments";
-import { searchHighCourts } from "@/lib/judgments/hcSearch";
+import { getJudgmentsStore, searchHighCourts } from "@/lib/legal-data";
 import { SC_SLUG } from "@/lib/judgments/provenance";
 
 export async function GET(req: Request) {

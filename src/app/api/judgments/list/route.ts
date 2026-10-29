@@ -1,6 +1,6 @@
 // GET /api/judgments/list?court=<slug>&year=<yyyy>&page&pageSize&search: case METADATA for one court and year. Supreme Court and High Courts are listable;
 // High Courts answer { available: false } only while no case-page source is configured (docs/JUDGMENTS-HC.md). No judgment text is served.
-import { getJudgmentsStore } from "@/lib/judgments";
+import { getJudgmentsStore } from "@/lib/legal-data";
 
 export async function GET(req: Request) {
   const q = new URL(req.url).searchParams, get = (k: string) => q.get(k)?.trim() || null;

@@ -1,6 +1,6 @@
 // Running a contract review, one resumable step at a time. LOGIC ONLY. Steps: each part of the contract (clauses + risks), then the summary, then the Indian-law points. A part or step that fails is kept as
 // failed ("Not reviewed, retry") and the rest is untouched. The law points rest only on sections retrieved from our Acts; anything uncited is dropped (src/lib/review/prompts.mjs parseLaw).
-import { dbConfigured } from "@/lib/acts/db";
+import { dbConfigured } from "@/lib/app-db";
 import { bump } from "@/lib/insights/server";
 import { AiError, completeAi } from "@/lib/ai";
 import { citationOf, retrieveSources } from "@/lib/chat/retrieve";

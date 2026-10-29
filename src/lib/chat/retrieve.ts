@@ -2,14 +2,12 @@
 //   1. exact section lookups named in the question ("section 138 of the NI Act") come first;
 //   2. the question and up to 3 rewritten search queries are each searched with the Acts search (by meaning over Central + State Acts, keyword fallback, lookups for "<Act> section N");
 //   3. the lists are merged (a section found by several queries rises) and de-duplicated, then each section's text is loaded.
-import { query } from "@/lib/acts/db";
-import { primeSemanticQueries, searchSections, type SectionHit } from "@/lib/acts/searchStore";
+import { primeSemanticQueries, searchSections, sectionBodies, type SectionHit } from "@/lib/legal-data";
 import { extractLookups } from "./lookups.mjs";
 import { retrievalQuery, MAX_SOURCES } from "./prompt.mjs";
 import { mergeHybrid, mergeRanked } from "./rewrite.mjs";
 import { previewOf } from "./format.mjs";
-import { scSemanticConfigured, searchJudgmentsByMeaning } from "@/lib/judgments/scText";
-import { scCase } from "@/lib/judgments/scMeta";
+import { scCase, scSemanticConfigured, searchJudgmentsByMeaning } from "@/lib/legal-data";
 
 /** Supreme Court judgment passages close in meaning to the question (at most 3, only clearly relevant ones), as sources of kind "judgment". Empty when the SC projects are not set up or anything fails. */
 export async function judgmentSources(question: string, startN: number): Promise<ChatSource[]> {
@@ -53,7 +51,7 @@ export async function retrieveSources(question: string, history: { role: string;
   for (const [l, take] of wanted.filter(([l]) => !seenLookup.has(l.toLowerCase()) && !!seenLookup.add(l.toLowerCase())).slice(0, Math.max(5, forced.length))) {
     const r = await searchSections(l, 1, 3);
     if (r.available && r.mode === "lookup" && named.has(l.toLowerCase())) {   // a section the QUESTION names (not one the rewrite guessed): not held, or held only as scrambled text -> say so
-      if (r.missing) gaps.push({ kind: "missing", number: r.missing.number, actTitle: r.missing.actTitle, actId: r.missing.actId, url: officialSourceUrl(r.missing.sourceUrl) });
+      if (r.missing) gaps.push({ kind: r.missing.beyond ? "nosuch" : "missing", ...(r.missing.beyond ? { max: r.missing.beyond } : {}), number: r.missing.number, actTitle: r.missing.actTitle, actId: r.missing.actId, url: officialSourceUrl(r.missing.sourceUrl) });
       else if (r.results.length && r.results.every((h) => !usable(h))) gaps.push({ kind: "unreliable", number: r.results[0].number ?? l, actTitle: r.results[0].actTitle, actId: r.results[0].actId, url: officialSourceUrl(r.results[0].sourceUrl) });
     }
     if (r.available && r.mode === "lookup") { mode = "lookup"; for (const h of r.results.filter(usable).slice(0, take)) { hits.set(keyOf(h), h); if (!first.includes(keyOf(h))) first.push(keyOf(h)); if (named.has(l.toLowerCase()) && !exact.includes(keyOf(h))) exact.push(keyOf(h)); } }
@@ -83,12 +81,10 @@ export async function retrieveSources(question: string, history: { role: string;
   // current law first (switch): a repealed section and its replacement together -> the replacement leads and the old one is marked replaced
   if (opts.currentLaw) picked = currentLawFirst(picked, pool, replaced.pairs, { k, keyOf });
   if (!picked.length) return { gaps, sources: [], searchMode: mode, note, queries, exactKeys: [] };
-  const rows = await query<{ act_id: string; section_key: string; body: string | null }>(
-    `SELECT s.act_id, s.section_key, left(s.body, 9000) AS body FROM act_sections_v s JOIN unnest($1::text[], $2::text[]) AS k(a, sk) ON s.act_id = k.a AND s.section_key = k.sk`, [picked.map((h) => h.actId), picked.map((h) => h.sectionKey)]);
-  const body = new Map(rows.map((x) => [`${x.act_id}|${x.section_key}`, x.body ?? ""]));
+  const body = await sectionBodies(picked.map((h) => ({ actId: h.actId, sectionKey: h.sectionKey })), 9000);
   const sources: ChatSource[] = [];
   for (const h of picked) {
-    const text = body.get(keyOf(h))?.trim();
+    const text = body.get(keyOf(h))?.body.trim();
     if (!text) continue;
     sources.push({ n: sources.length + 1, actId: h.actId, sectionKey: h.sectionKey, actTitle: h.actTitle, year: h.year, category: h.category, state: h.state, inForce: h.actStatus === "in_force", sourceUrl: h.sourceUrl,
       number: h.number, heading: h.heading, status: h.status, text, via: h.via, ...((h as SectionHit & { replacedBy?: string }).replacedBy ? { replacedBy: (h as SectionHit & { replacedBy?: string }).replacedBy } : {}) });

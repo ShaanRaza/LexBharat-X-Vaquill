@@ -7,8 +7,7 @@
 import { normalizeQuery, hasDevanagari } from "@/lib/acts/searchQuery.mjs";
 import { clientKey } from "@/lib/acts/semantic.mjs";
 import { rateCheck } from "@/lib/limits/counters";
-import { searchSections, PAGE_SIZE } from "@/lib/acts/searchStore";
-import { searchRegulators } from "@/lib/acts/regSearch";
+import { searchSections, PAGE_SIZE, searchRegulators } from "@/lib/legal-data";
 
 const SEARCHES_PER_MINUTE = 30;
 

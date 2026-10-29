@@ -1,8 +1,7 @@
 import { Notice } from "@/components/kit";
-import type { Resolved } from "@/lib/judgments/statuteResolve";
-import type { ScChunk } from "@/lib/judgments/scText";
+import type { Resolved, ScChunk } from "@/lib/legal-data";
 import { LawsReferred } from "./StatuteLinks";
-import { lawsReferred } from "@/lib/judgments/statuteResolve";
+import { lawsReferred } from "@/lib/legal-data";
 import JudgmentReader, { type ReaderPara } from "./JudgmentReader";
 
 // The full English text of a Supreme Court judgment. Prepared here on the server (paragraphs in reading order by character offset in the report, each with the Act-section links found in it);

@@ -1,7 +1,7 @@
 // Turns the mentions found in a judgment's text (statuteLinks.mjs) into links to our Act pages. A mention is linked only when the Act is one of ours AND the section/unit exists in our data
 // (or is known to be missing from the source data, which has its own page). Anything else stays plain text.
 import acts from "@/config/statute-acts.json";
-import { query, dbConfigured } from "@/lib/acts/db";
+import { sectionPresence } from "@/lib/legal-data";
 import { findMentions, mentionLabel, type Mention } from "./statuteLinks.mjs";
 
 export type LinkState = "found" | "missing" | "none";
@@ -15,12 +15,11 @@ export async function resolveMentions(text: string, judgmentYear: number | null)
   const wanted = new Map<string, Set<string>>();   // actId -> numbers
   for (const m of mentions) { const id = actIdOf(m.actKey); if (id) (wanted.get(id) ?? wanted.set(id, new Set()).get(id)!).add(m.number); }
   const found = new Map<string, string>(), missing = new Set<string>();   // "actId|NUMBER" -> section key / known-missing
-  if (dbConfigured() && wanted.size) {
+  if (wanted.size) {
     await Promise.all([...wanted].map(async ([id, nums]) => {
-      const rows = await query<{ number: string; sectionKey: string }>(`SELECT number, section_key AS "sectionKey" FROM act_sections_v WHERE act_id = $1 AND upper(number) = ANY($2::text[])`, [id, [...nums]]).catch(() => []);
-      for (const r of rows) found.set(`${id}|${r.number.toUpperCase()}`, r.sectionKey);
-      const plain = [...nums].filter((n) => /^\d{1,4}$/.test(n)).map(Number);
-      if (plain.length) for (const r of await query<{ number: number }>(`SELECT m.number FROM act_missing_sections m WHERE m.act_id = $1 AND m.number = ANY($2::int[]) AND NOT EXISTS (SELECT 1 FROM act_sections_supplement x WHERE x.act_id = m.act_id AND x.number = m.number::text)`, [id, plain]).catch(() => [])) missing.add(`${id}|${r.number}`);
+      const p = await sectionPresence(id, [...nums]);
+      for (const [n, key] of p.found) found.set(`${id}|${n}`, key);
+      for (const n of p.missing) missing.add(`${id}|${n}`);
     }));
   }
   return mentions.map((m) => {

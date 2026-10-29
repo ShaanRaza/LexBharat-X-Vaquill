@@ -6,7 +6,7 @@ import AppShell from "@/components/shell/AppShell";
 import { ALL_COURTS, decades } from "@/data/workspaceBrowse";
 import CaseList from "@/components/workspace/CaseList";
 import CourtSearch from "@/components/workspace/CourtSearch";
-import { getJudgmentsStore } from "@/lib/judgments";
+import { getJudgmentsStore } from "@/lib/legal-data";
 import { WORKSPACE_SUFFIX } from "@/lib/release";
 
 export function generateStaticParams() { return ALL_COURTS.map((c) => ({ court: c.slug })); }

@@ -1,7 +1,7 @@
 // Feedback and usage counters on the Supabase free project (tables in scripts/w8/w8-schema.sql). Server-only. Nothing here may break a feature: counters are best-effort and never throw;
 // when the W8 tables are not created yet they quietly do nothing. The browser id is only ever stored as a hash; no IP address and no document text is stored.
 import { createHash } from "node:crypto";
-import { query, dbConfigured } from "@/lib/acts/db";
+import { query, dbConfigured } from "@/lib/app-db";
 import { sb, vaultConfigured } from "@/lib/vault/supabase";
 import { getRun } from "@/lib/review/store";
 import { getDraft } from "@/lib/drafting/store";

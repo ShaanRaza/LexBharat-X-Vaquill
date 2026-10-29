@@ -1,5 +1,5 @@
 // GET /api/judgments/years?court=<slug>: case-record count per decision year for one court.
-import { getJudgmentsStore } from "@/lib/judgments";
+import { getJudgmentsStore } from "@/lib/legal-data";
 
 export async function GET(req: Request) {
   const court = new URL(req.url).searchParams.get("court")?.trim() ?? "";

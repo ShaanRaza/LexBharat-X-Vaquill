@@ -1,7 +1,6 @@
 // GET /api/judgments/search?q=<words>&page=&pageSize=: Supreme Court cases across ALL years by words in the title (both parties) or the citation.
 // Static index, no search service: not full-text search of judgments, and High Courts are not covered (see docs/JUDGMENTS-HC.md).
-import { getJudgmentsStore } from "@/lib/judgments";
-import { searchSupremeCourt } from "@/lib/judgments/scSearch";
+import { getJudgmentsStore, searchSupremeCourt } from "@/lib/legal-data";
 
 export async function GET(req: Request) {
   const q = new URL(req.url).searchParams, get = (k: string) => q.get(k)?.trim() || null;

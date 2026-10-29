@@ -1,5 +1,5 @@
 // GET -> version list. POST {action:"save"} keeps a named snapshot of the current text; POST {action:"restore", versionId} puts an older version back (the current text is kept first as "before-restore").
-import { dbConfigured } from "@/lib/acts/db";
+import { dbConfigured } from "@/lib/app-db";
 import { bidOf, json } from "@/lib/drafting/http";
 import { addVersion, getDraft, getVersionDoc, isDraftId, listVersions, saveEdit } from "@/lib/drafting/store";
 
