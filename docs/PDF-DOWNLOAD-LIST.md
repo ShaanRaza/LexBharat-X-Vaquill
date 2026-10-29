@@ -27,6 +27,7 @@
 | 1 | 41 | The Information Technology Act, 2000 | 2000 (21) | 01-01-2000 to 31-12-2000 | `it-act-2000.pdf` | sections 43 and 66 are missing from our data (66C, 66D present); needed by the hard evaluation set |
 | 1 | 42 | The Transfer of Property Act, 1882 | 1882 (4) | 01-01-1882 to 31-12-1882 | `transfer-of-property-act-1882.pdf` | sections 106 and 108 are garbled in our data (contents-list text, 108 mixed with its sub-headings); section 111 is fine |
 | 1 | 43 | The Arbitration and Conciliation Act, 1996 | 1996 (26) | 01-01-1996 to 31-12-1996 | `arbitration-and-conciliation-act-1996.pdf` | section 34 is garbled (Schedule text mixed in); needed by the hard evaluation set |
+| 1 | 44 | The Hindu Succession Act, 1956 | 1956 (30) | 01-01-1956 to 31-12-1956 | `hindu-succession-act-1956.pdf` | section 6 (daughters as coparceners, 2005 amendment) is missing from our data; needed by hard question 130 (take the latest "as amended" PDF) |
 | 2 | 17 | The Child and Adolescent Labour (Prohibition and Regulation) Act, 1986 | 1986 (61) | 01-01-1986 to 31-12-1986 | `child-and-adolescent-labour-act-1986.pdf` | our record holds 3 sections |
 | 2 | 18 | The Muslim Women (Protection of Rights on Divorce) Act, 1986 | 1986 (25) | 01-01-1986 to 31-12-1986 | `muslim-women-divorce-act-1986.pdf` | our record holds 3 sections |
 | 2 | 19 | The Employees' Compensation Act, 1923 | 1923 (8) | 01-01-1923 to 31-12-1923 | `employees-compensation-act-1923.pdf` | no Central record (only State copies with 39 to 41 sections) |
@@ -50,7 +51,7 @@
 | 3 | 37 | The Guardians and Wards Act, 1890 | 1890 (8) | 01-01-1890 to 31-12-1890 | `guardians-and-wards-act-1890.pdf` | about 51 missing sections |
 | 3 | 38 | The Representation of the People Act, 1951 | 1951 (43) | 01-01-1951 to 31-12-1951 | `rpa-1951.pdf` | about 44 missing sections |
 | 3 | 39 | The Banking Regulation Act, 1949 | 1949 (10) | 01-01-1949 to 31-12-1949 | `banking-regulation-act-1949.pdf` | about 34 missing sections |
-| 3 | 40 | The Dowry Prohibition Act, 1961 | 1961 (28) | 01-01-1961 to 31-12-1961 | `dowry-prohibition-act-1961.pdf` | we hold 8 of about 42 numbers (some of the gap is the heuristic; check) |
+| 3 | 40 | The Dowry Prohibition Act, 1961 | 1961 (28) | 01-01-1961 to 31-12-1961 | `dowry-prohibition-act-1961.pdf` | we hold 8 of about 42 numbers (some of the gap is the heuristic; check); **section 4 (demanding dowry) is garbled in our data (only footnote text)**, needed by hard question 112 |
 
 ## Notes
 - **Act numbers and years in brackets are from memory** and are only a way to check you opened the right Act; where the row says "check", I am not certain of the number or the exact title, and the 2025 titles may be printed differently on India Code. If India Code does not have an Act, skip the row and tell me.

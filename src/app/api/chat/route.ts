@@ -112,7 +112,7 @@ export async function POST(req: Request) {
         }
 
         // 3. the answer, streamed. If the model fails AFTER some text, the partial answer is kept and marked as cut off.
-        const prompt = buildChatPrompt({ question: message, history, sources: ret.sources });
+        const prompt = buildChatPrompt({ question: message, history, sources: ret.sources, answerRules: tune.currentLaw });
         let answer = "", model = aiModelFor("chat"), cutOff = false;
         try {
           for await (const ev of streamAi("chat", { system: prompt.system, messages: prompt.messages })) {

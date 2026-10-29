@@ -8,10 +8,10 @@ const KIND = {
   judgment: "bg-accent text-foreground ring-1 ring-foreground/30 hover:bg-accent/60",
 } as const;
 // With onSelect the chip is a button that selects the source (the Ask reading desk shows the cited page beside the answer); `active` marks the selected one. Without it, it is a link to the source.
-export default function CitationChip({ n, href, label, kind = "act", onSelect, active = false }: { n: number; href: string; label: string; kind?: keyof typeof KIND; onSelect?: (n: number) => void; active?: boolean }) {
-  const cls = `mx-0.5 inline-flex min-w-5 items-center justify-center rounded-chip px-1.5 align-baseline font-mono text-ui-xs font-medium ${KIND[kind]}${active ? " ring-2 ring-primary" : ""}`, aria = `${kind === "doc" ? "Your document" : kind === "judgment" ? "Judgment" : "Source"} ${n}: ${label}`;
-  if (onSelect) return <button type="button" onClick={() => onSelect(n)} title={label} aria-label={aria} aria-pressed={active} className={cls}>{n}</button>;
+export default function CitationChip({ n, href, label, kind = "act", onSelect, active = false, shown }: { n: number; href: string; label: string; kind?: keyof typeof KIND; onSelect?: (n: number) => void; active?: boolean; /** the number to print when it differs from the stored one (an answer shows its citations 1, 2, 3... in order of use) */ shown?: number }) {
+  const cls = `mx-0.5 inline-flex min-w-5 items-center justify-center rounded-chip px-1.5 align-baseline font-mono text-ui-xs font-medium ${KIND[kind]}${active ? " ring-2 ring-primary" : ""}`, aria = `${kind === "doc" ? "Your document" : kind === "judgment" ? "Judgment" : "Source"} ${shown ?? n}: ${label}`;
+  if (onSelect) return <button type="button" onClick={() => onSelect(n)} title={label} aria-label={aria} aria-pressed={active} className={cls}>{shown ?? n}</button>;
   return (
-    <Link href={href} title={label} aria-label={aria} className={cls}>{n}</Link>
+    <Link href={href} title={label} aria-label={aria} className={cls}>{shown ?? n}</Link>
   );
 }

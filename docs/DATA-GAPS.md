@@ -424,3 +424,23 @@ Effort: S small, M medium, L large. Cost: free, paid, permission (India Code or 
 - Counts are exact where they come from SQL or the dataset files; "expected sections" and "missing numbers" are heuristics (highest number held or cited, or a reference count for 17 well-known Acts) and are marked as such.
 - The 170-Act list matches by title; I checked every "missing" by hand with a second search, but a few Acts may exist under unusual titles. The status verdicts in 1.4 use my own legal knowledge for the ones marked *to check*.
 - Nothing was fetched from India Code or any blocked site. Nothing in the database or code was changed.
+
+
+## Amendment markers and joined words in the text of laws (found in Phase 4, Oct 2026)
+
+Seen in the section text shown beside an Ask answer (NI Act s.138, s.142 and others):
+
+- **Amendment brackets with a footnote number:** `5[within thirty days]`, `4[a term which may be extended to two years]`, and a stray `[1] [( 1 )]` at the start of a section. The number points to a footnote line at the end of the section (`> 5. Subs. by ...`). The reading desk now drops the bracket and number from the text and shows a small superscript mark where the amended words end (`src/lib/chat/amend.mjs`). The stored text is unchanged.
+- **Spaced brackets:** `( a )`, `( 1 )`. Shown as `(a)`, `(1)`.
+- **Joined words from the copying:** `thecheque` (seen in NI s.138(a)). The reading desk splits `the` + a word only when that word also appears on its own in the same section. Other prefixes are not touched (they would split real words such as "another" or "offence"). Joined words elsewhere (not starting with "the") are NOT repaired; to find them, search section text for long lower-case runs that are not words (a dictionary pass would be needed).
+- **Not fixed in the data**, only at display time. If India Code PDFs are loaded later the markers come with them.
+
+## Sections found garbled or missing while writing the hard evaluation set (Oct 2026)
+
+| Act and section | Problem | Where it is tracked |
+|---|---|---|
+| Transfer of Property Act s.106 and s.108 | contents-list text / mixed with sub-headings | PDF-DOWNLOAD-LIST row 42 |
+| IT Act s.43 and s.66 | missing (66C and 66D present) | row 41 |
+| Arbitration Act s.34 | Schedule text mixed in | row 43 |
+| Dowry Prohibition Act s.4 | only footnote text | row 40 |
+| Hindu Succession Act s.6 | missing | row 44 |

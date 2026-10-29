@@ -99,3 +99,12 @@ export function alignCitations(text, sources) {
     return seg.replace(CITE_RE, () => (first ? ((first = false), `[${picks[0]}]`) : ""));
   }).join(" ")).join("\n");
 }
+
+/** Display numbers for an answer: the sources it cites are shown 1, 2, 3... in order of first use, the sources it does not cite follow in their own order. Display only: the stored numbers never change.
+ *  Returns a Map(storedNumber -> shownNumber). sources: [{ n }] */
+export function displayNumbers(text, sources) {
+  const have = new Set(sources.map((s) => s.n)), map = new Map(); let next = 1;
+  for (const n of citedNumbers(text)) if (have.has(n) && !map.has(n)) map.set(n, next++);
+  for (const s of sources) if (!map.has(s.n)) map.set(s.n, next++);
+  return map;
+}

@@ -23,9 +23,11 @@ const done = fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, "utf8")) : { l
 const jar = new Map();
 const keep = (r) => { for (const c of r.headers.getSetCookie?.() ?? []) { const [kv] = c.split(";"), i = kv.indexOf("="); jar.set(kv.slice(0, i), kv.slice(i + 1)); } };
 const cookie = () => [...jar].map(([k, v]) => `${k}=${v}`).join("; ");
+if (!CHECK) {   // --check only reads the database, no server needed
 const login = await fetch(`${BASE}/api/access/login`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ password: PASSWORD }) }); keep(login);
 keep(await fetch(`${BASE}/`, { headers: { cookie: cookie() }, redirect: "manual" }));
 const bid = jar.get("lb_bid") ?? [...jar].find(([k]) => /bid/i.test(k))?.[1];
+}
 
 async function ask(message) {
   const r = await fetch(`${BASE}/api/chat`, { method: "POST", headers: { "content-type": "application/json", cookie: cookie() }, body: JSON.stringify({ message }) });
@@ -54,21 +56,33 @@ const judge = async (gs, q, answer) => {
 };
 for (const q of qs) {
   if (done.rows.some((x) => x.id === q.id)) continue;
+  if (q.skip) { console.log(`q${q.id}: skipped (${q.skip.slice(0, 80)})`); continue; }
   const notfoundQ = q.expect === "notfound", specs = notfoundQ ? [] : q.golds ?? [{ act: q.act, anchor: q.anchor }];
   const perGold = [];   // one entry per expected section: its matching rows in Neon
-  for (const g of specs) perGold.push(await db.query(`SELECT s.act_id, s.section_key, s.number, a.title, s.body FROM acts a JOIN act_sections_v s ON s.act_id = a.act_id WHERE a.category = 'central' AND lower(a.title) LIKE lower($1) || '%' AND s.body IS NOT NULL AND regexp_replace(lower(s.body), '[^a-z0-9]+', ' ', 'g') LIKE '%' || $2 || '%'`, [g.act.replace(/,.*$/, ""), norm(g.anchor)]));
+  const FIND = `SELECT s.act_id, s.section_key, s.number, a.title, s.body FROM acts a JOIN act_sections_v s ON s.act_id = a.act_id WHERE a.category = 'central' AND lower(a.title) LIKE lower($1) || '%' AND s.body IS NOT NULL AND regexp_replace(lower(s.body), '[^a-z0-9]+', ' ', 'g') LIKE '%' || $2 || '%'`;
+  // a spec is one expectation; its `alts` are other accepted sections (any one counts), so its rows are the union
+  for (const g of specs) perGold.push((await Promise.all([g, ...(g.alts ?? [])].map((x) => db.query(FIND, [x.act.replace(/,.*$/, ""), norm(x.anchor)])))).flat());
   const golds = perGold.flat(), goldKeys = new Set(golds.map((g) => `${g.act_id}|${g.section_key}`));
   if (CHECK) { console.log(`q${q.id}: ${notfoundQ ? "(not-found question)" : perGold.map((r, i) => `${specs[i].act.slice(0, 28)} s${specs[i].section ?? "?"} -> ${r.length} match${r.length === 1 ? "" : "es"}${r[0] ? " [" + r.slice(0, 3).map((x) => x.number).join(",") + "]" : ""}`).join(" | ")}`); continue; }
   const t0 = Date.now(); let a = null;
   for (let k = 0; k < 3; k++) { a = await ask(q.question); if (!a.error) break; console.log(`  q${q.id}: ${a.error}, retrying`); await new Promise((res) => setTimeout(res, 20000)); }
   const secs = (Date.now() - t0) / 1000;
-  const ranks = perGold.map((rows) => { const keys = new Set(rows.map((g) => `${g.act_id}|${g.section_key}`)); return a.sources?.findIndex((s) => keys.has(`${s.actId}|${s.sectionKey}`)) ?? -1; });
-  const rank = ranks.length && ranks.every((r) => r >= 0) ? Math.max(...ranks) : -1;   // every expected section must be shown; rank = the worst one
-  const cited = ranks.length > 0 && ranks.every((r) => r >= 0 && new RegExp(`\\[${a.sources[r].n}\\]`).test(a.text ?? ""));
+  const matches = perGold.map((rows) => { const keys = new Set(rows.map((g) => `${g.act_id}|${g.section_key}`)); return (a.sources ?? []).map((src, i) => [src, i]).filter(([src]) => keys.has(`${src.actId}|${src.sectionKey}`)); });   // sources that satisfy each expectation
+  const ranks = matches.map((m) => (m.length ? m[0][1] : -1));
+  const rank = ranks.length && ranks.every((r) => r >= 0) ? Math.max(...ranks) : -1;   // every expectation must be shown; rank = the worst one
+  const cites = (n) => new RegExp(`\\[${n}\\]`).test(a.text ?? "");
+  const cited = matches.length > 0 && matches.every((m) => m.some(([src]) => cites(src.n)));   // each expectation cited through any one of its accepted sections
   const nf = detectNotFound(a.text ?? "");
   const oldMention = q.oldLaw ? new RegExp(`(previously|earlier|formerly|replaced|old|repealed|IPC)[^.]{0,80}${q.oldLaw}|${q.oldLaw}[^.]{0,80}(previously|earlier|formerly|replaced|repealed)`, "i").test(a.text ?? "") : null;   // answer names the old section as the old law
-  const correct = notfoundQ ? nf : a.error || !golds.length || nf || !a.text ? false : await judge(perGold.map((r) => r[0]).filter(Boolean), q.question, a.text);
-  const row = { id: q.id, kind: q.kind ?? null, question: q.question, gold: [...goldKeys], goldFound: notfoundQ || perGold.every((r) => r.length > 0), oldMention, retrieved: notfoundQ ? nf : rank >= 0, rank: rank >= 0 && !notfoundQ ? rank + 1 : null, cited: notfoundQ ? nf : cited, correct, notFound: nf, check: a.check?.label ?? null, error: a.error ?? null, secs: +secs.toFixed(1), nSources: a.sources?.length ?? 0, queries: a.queries, topSources: (a.sources ?? []).slice(0, 5).map((s) => `${s.actTitle} s${s.number ?? "?"}`), answer: (a.text ?? "").slice(0, 1200) };
+  const first = (a.text ?? "").trim().split(/(?<=[.!?])\s/)[0] ?? "";
+  const openedNotFound = !notfoundQ && /couldn[’']?t find|could not find|cannot find|can[’']?t find/i.test(first) && rank >= 0;   // opened with "I couldn't find..." although the expected section was shown
+  const mentions = (q.mustMention ?? []).every((re) => new RegExp(re, "i").test(a.text ?? ""));
+  const citedSources = (a.sources ?? []).filter((src) => cites(src.n));
+  const forbidden = (q.forbid ?? []).flatMap((f) => citedSources.filter((src) => src.actTitle?.toLowerCase().startsWith(f.act.toLowerCase()) && f.numbers.includes(String(src.number))).map((src) => `${src.actTitle} s${src.number}`));
+  const refs = perGold.map((rows, i) => (matches[i][0] ? rows.find((g) => g.act_id === matches[i][0][0].actId && g.section_key === matches[i][0][0].sectionKey) : null) ?? rows[0]).filter(Boolean);
+  const judged = notfoundQ ? nf : a.error || !golds.length || nf || !a.text ? false : await judge(refs, q.question, a.text);
+  const correct = notfoundQ ? nf : judged && !openedNotFound && mentions && !forbidden.length;
+  const row = { id: q.id, kind: q.kind ?? null, question: q.question, gold: [...goldKeys], goldFound: notfoundQ || perGold.every((r) => r.length > 0), oldMention, openedNotFound, mentions: q.mustMention ? mentions : null, forbidden: q.forbid ? forbidden : null, retrieved: notfoundQ ? nf : rank >= 0, rank: rank >= 0 && !notfoundQ ? rank + 1 : null, cited: notfoundQ ? nf : cited, correct, notFound: nf, check: a.check?.label ?? null, error: a.error ?? null, secs: +secs.toFixed(1), nSources: a.sources?.length ?? 0, queries: a.queries, topSources: (a.sources ?? []).slice(0, 5).map((s) => `${s.actTitle} s${s.number ?? "?"}`), answer: (a.text ?? "").slice(0, 1200), sources: (a.sources ?? []).map((src) => ({ n: src.n, t: src.actTitle, s: src.number ?? null })) };
   row.score = (row.retrieved ? 1 : 0) + (row.cited ? 1 : 0) + (correct ? 1 : 0);   // a question that must be "not found" scores 3 only if the answer says so
   done.rows.push(row); fs.writeFileSync(OUT, JSON.stringify(done, null, 1));
   console.log(`q${q.id} ${row.score}/3 retrieved=${row.retrieved}${row.rank ? `@${row.rank}` : ""} cited=${cited} correct=${correct}${nf ? " NOTFOUND" : ""}${a.error ? " ERR " + a.error : ""} ${secs.toFixed(0)}s`);

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Badge, Eyebrow, MarkedPage, MarkedScope, RepealedNote } from "@/components/kit";
 import { hrefOf, sourceLabel } from "@/components/workspace/CitedText";
 import { sectionWord } from "@/lib/acts/unitLabel.mjs";
+import { amendParts, vocabOf } from "@/lib/chat/amend.mjs";
 import { markParagraph, sentencesCiting } from "@/lib/chat/marked.mjs";
 import type { Citation } from "@/lib/chat/store";
 
@@ -14,7 +15,7 @@ type State = { key: string; data: Loaded | null; error: string };
 
 const sourceKey = (c: Citation) => (c.kind === "judgment" ? `j|${c.caseId}|${c.passage ?? 0}` : c.kind === "doc" ? `d|${c.docId}` : `a|${c.actId}|${c.sectionKey}`);
 
-export default function CitedPage({ source, answer, onClose, nudge = 0, className = "" }: { source: Citation | null; answer: string; onClose: () => void; /** changes whenever the reader picks a chip, so a panel that was hidden (the phone's sheet) scrolls to the marked passage when it is shown */ nudge?: number; className?: string }) {
+export default function CitedPage({ source, answer, onClose, nudge = 0, shownN, className = "" }: { source: Citation | null; answer: string; onClose: () => void; /** the number the answer prints for this source (1, 2, 3... in order of use) */ shownN?: number; /** changes whenever the reader picks a chip, so a panel that was hidden (the phone's sheet) scrolls to the marked passage when it is shown */ nudge?: number; className?: string }) {
   const [state, setState] = useState<State>({ key: "", data: null, error: "" }), box = useRef<HTMLElement>(null);
   const key = source ? sourceKey(source) : "";
   useEffect(() => {
@@ -36,7 +37,7 @@ export default function CitedPage({ source, answer, onClose, nudge = 0, classNam
   return (
     <aside ref={box} aria-label="Cited page" className={`max-h-[75vh] overflow-y-auto rounded-card bg-surface p-card shadow-sm ring-1 ring-border/60 ${className}`}>
       <div className="flex items-start justify-between gap-2">
-        <Eyebrow>{source ? `Cited page · ${source.kind === "judgment" ? "case" : source.kind === "doc" ? "your document" : "§"} ${source.n}` : "Cited page"}</Eyebrow>
+        <Eyebrow>{source ? `Cited page · ${source.kind === "judgment" ? "case" : source.kind === "doc" ? "your document" : "§"} ${shownN ?? source.n}` : "Cited page"}</Eyebrow>
         <button type="button" onClick={onClose} className="rounded-button px-2 py-1 text-ui-sm text-secondary hover:bg-accent focus-visible:outline-2 lg:hidden">Close</button>
       </div>
       {!source && <p className="mt-3 text-ui-base text-muted">Select a numbered source in the answer to read the cited page here, with the passage the answer relied on marked.</p>}
@@ -60,16 +61,21 @@ export default function CitedPage({ source, answer, onClose, nudge = 0, classNam
 }
 
 function ActPage({ d, sentences }: { d: Extract<Loaded, { kind: "act" }>; sentences: string[] }) {
-  const { paragraphs, marked } = markParagraph(d.body, sentences);
+  const { paragraphs, marked } = markParagraph(d.body, sentences), vocab = vocabOf(paragraphs);
   return (
     <div className="mt-3">
       <p className="font-serif text-ui-body font-medium text-foreground">{d.number ? `${sectionWord(d.number)}.` : ""} {d.heading ?? ""}</p>
       {d.status === "possibly_incomplete" && <Badge tone="warn" className="mt-1" title="Our copy of this section may be missing text">Possibly incomplete</Badge>}
       {!paragraphs.length ? <p className="mt-2 text-ui-base text-muted">The text of this section is not available here.</p> : (
         <MarkedScope className="mt-2 space-y-2 font-serif text-reading leading-reading text-foreground">
-          {paragraphs.map((p, i) => (i === marked ? <MarkedPage key={i} label="Passage the answer relied on"><p>{p}</p></MarkedPage> : <p key={i}>{p}</p>))}
+          {paragraphs.map((p, i) => (i === marked ? <MarkedPage key={i} label="Passage the answer relied on"><p><Amended text={p} vocab={vocab} /></p></MarkedPage> : <p key={i}><Amended text={p} vocab={vocab} /></p>))}
         </MarkedScope>
       )}
     </div>
   );
+}
+
+/** A paragraph of law with the amendment brackets removed and a small footnote mark where the amended words end (src/lib/chat/amend.mjs). */
+function Amended({ text, vocab }: { text: string; vocab: Set<string> }) {
+  return <>{amendParts(text, vocab).map((p, i) => (p.t === "text" ? <span key={i}>{p.v}</span> : <sup key={i} title={`Amended text (footnote ${p.n})`} className="ml-0.5 font-sans text-ui-xs text-muted">{p.n}</sup>))}</>;
 }

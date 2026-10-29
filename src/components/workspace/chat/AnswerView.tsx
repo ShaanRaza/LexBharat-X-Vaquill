@@ -4,7 +4,7 @@ import { SCAN_LABEL } from "@/lib/vault/scan.mjs";
 import Link from "next/link";
 import { Badge, CitationChip, Notice, RepealedNote } from "@/components/kit";
 import CitedText, { hrefOf, sourceLabel } from "@/components/workspace/CitedText";
-import { citedNumbers } from "@/lib/chat/citations.mjs";
+import { citedNumbers, displayNumbers } from "@/lib/chat/citations.mjs";
 import { toBlocks } from "@/lib/chat/format.mjs";
 import type { Citation, CheckResult } from "@/lib/chat/store";
 
@@ -19,10 +19,10 @@ const CHECK = {
 
 
 /** One source: its chip, then the Act name FIRST (every source shows it), then the section (or "Unnumbered text" with a short preview). A passage of the user's own document shows the document name and page instead. */
-function SourceRow({ c, onPick, activeN }: { c: Citation; onPick?: (n: number) => void; activeN?: number }) {
+function SourceRow({ c, onPick, activeN, shown }: { c: Citation; onPick?: (n: number) => void; activeN?: number; shown?: Map<number, number> }) {
   if (c.kind === "judgment") return (
     <li className="flex gap-2">
-      <span className="shrink-0 self-start"><CitationChip n={c.n} href={hrefOf(c)} label={sourceLabel(c)} kind="judgment" onSelect={onPick} active={activeN === c.n} /></span>
+      <span className="shrink-0 self-start"><CitationChip n={c.n} href={hrefOf(c)} label={sourceLabel(c)} kind="judgment" onSelect={onPick} active={activeN === c.n} shown={shown?.get(c.n)} /></span>
       <div className="min-w-0">
         <Link href={hrefOf(c)} className="font-medium text-foreground hover:underline">{c.actTitle}</Link>
         <p className="text-secondary">Supreme Court judgment{c.label ? ` · ${c.label}` : ""}{c.page ? ` · page ${c.page}` : ""} <Badge title="An excerpt of the judgment, not the whole">Excerpt</Badge></p>
@@ -31,7 +31,7 @@ function SourceRow({ c, onPick, activeN }: { c: Citation; onPick?: (n: number) =
   );
   if (c.kind === "doc") return (
     <li className="flex gap-2">
-      <span className="shrink-0 self-start"><CitationChip n={c.n} href={hrefOf(c)} label={sourceLabel(c)} kind="doc" onSelect={onPick} active={activeN === c.n} /></span>
+      <span className="shrink-0 self-start"><CitationChip n={c.n} href={hrefOf(c)} label={sourceLabel(c)} kind="doc" onSelect={onPick} active={activeN === c.n} shown={shown?.get(c.n)} /></span>
       <div className="min-w-0">
         <Link href={hrefOf(c)} className="font-medium text-quality-info hover:underline">{c.docName ?? c.actTitle}</Link>
         <p className="text-secondary">{c.page ? `Page ${c.page}` : "Document text"}{c.label ? ` · ${c.label}` : ""}{c.scan ? <span className="text-quality-warn"> · {SCAN_LABEL}</span> : null}{c.preview ? <span className="text-muted"> — {c.preview}</span> : null}</p>
@@ -40,7 +40,7 @@ function SourceRow({ c, onPick, activeN }: { c: Citation; onPick?: (n: number) =
   );
   return (
     <li className="flex gap-2">
-      <span className="shrink-0 self-start"><CitationChip n={c.n} href={hrefOf(c)} label={sourceLabel(c)} onSelect={onPick} active={activeN === c.n} /></span>
+      <span className="shrink-0 self-start"><CitationChip n={c.n} href={hrefOf(c)} label={sourceLabel(c)} onSelect={onPick} active={activeN === c.n} shown={shown?.get(c.n)} /></span>
       <div className="min-w-0">
         <Link href={hrefOf(c)} className="font-medium text-primary hover:underline">{c.actTitle}</Link>
         <span className="text-muted">{c.state ? ` · ${c.state.replace(/-/g, " ")}` : ""}</span> <RepealedNote actId={c.actId} />
@@ -54,8 +54,9 @@ function SourceRow({ c, onPick, activeN }: { c: Citation; onPick?: (n: number) =
 }
 
 export default function AnswerView({ text, sources, check, pending, queries, note, onPick, activeN }: { text: string; sources: Citation[]; check?: CheckResult | null; pending?: boolean; queries?: string[]; note?: string; onPick?: (n: number) => void; activeN?: number }) {
-  const Inline = ({ text }: { text: string; sources: Citation[] }) => <CitedText text={text} sources={sources} onPick={onPick} activeN={activeN} />;
-  const blocks = toBlocks(text), nums = new Set(citedNumbers(text)), cited = sources.filter((x) => nums.has(x.n) && x.kind !== "doc"), citedDocs = sources.filter((x) => nums.has(x.n) && x.kind === "doc"), others = sources.filter((x) => !nums.has(x.n));
+  const Inline = ({ text }: { text: string; sources: Citation[] }) => <CitedText text={text} sources={sources} onPick={onPick} activeN={activeN} shown={shown} />;
+  const blocks = toBlocks(text), nums = new Set(citedNumbers(text)), shown = displayNumbers(text, sources), byShown = (a: Citation, b: Citation) => (shown.get(a.n) ?? 0) - (shown.get(b.n) ?? 0);   // the numbers printed run 1, 2, 3... in the order the answer uses them
+  const cited = sources.filter((x) => nums.has(x.n) && x.kind !== "doc").sort(byShown), citedDocs = sources.filter((x) => nums.has(x.n) && x.kind === "doc").sort(byShown), others = sources.filter((x) => !nums.has(x.n)).sort(byShown);
   return (
     <div>
       {note && <Notice tone="info" role="note" compact className="mb-3"><p>{note}</p></Notice>}
@@ -89,20 +90,20 @@ export default function AnswerView({ text, sources, check, pending, queries, not
           {citedDocs.length > 0 && (
             <section aria-label="Passages of your documents cited">
               <h3 className="text-ui-sm font-semibold uppercase tracking-caps text-muted">Your documents cited</h3>
-              <ol className="mt-1.5 space-y-2">{citedDocs.map((c) => <SourceRow key={c.n} c={c} onPick={onPick} activeN={activeN} />)}</ol>
+              <ol className="mt-1.5 space-y-2">{citedDocs.map((c) => <SourceRow key={c.n} c={c} onPick={onPick} activeN={activeN} shown={shown} />)}</ol>
             </section>
           )}
           {cited.length > 0 && (
             <section aria-label="Sources cited">
               <h3 className="text-ui-sm font-semibold uppercase tracking-caps text-muted">Sources cited</h3>
-              <ol className="mt-1.5 space-y-2">{cited.map((c) => <SourceRow key={c.n} c={c} onPick={onPick} activeN={activeN} />)}</ol>
+              <ol className="mt-1.5 space-y-2">{cited.map((c) => <SourceRow key={c.n} c={c} onPick={onPick} activeN={activeN} shown={shown} />)}</ol>
             </section>
           )}
           {others.length > 0 && (
             <details className="text-ui-sm">
               <summary className="cursor-pointer text-secondary">Also searched ({others.length})</summary>
               {queries && queries.length > 0 && <p className="mt-2 text-muted">Searched for: {queries.map((q, i) => <span key={i}>{i > 0 ? " · " : ""}&ldquo;{q}&rdquo;</span>)}</p>}
-              <ol className="mt-2 space-y-2">{others.map((c) => <SourceRow key={c.n} c={c} onPick={onPick} activeN={activeN} />)}</ol>
+              <ol className="mt-2 space-y-2">{others.map((c) => <SourceRow key={c.n} c={c} onPick={onPick} activeN={activeN} shown={shown} />)}</ol>
             </details>
           )}
         </div>

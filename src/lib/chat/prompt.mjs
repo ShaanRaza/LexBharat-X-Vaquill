@@ -47,12 +47,19 @@ Some sources are marked SUPREME COURT JUDGMENT: short excerpts of reported judgm
 - What the LAW says comes from the Act sections among the sources; a judgment excerpt may show how a court applied or read a provision. If no Act section covers the point, say so.
 - If a judgment excerpt is only loosely related to the question, do not use it.`;
 
+/** Added when the answer-rules switch is on (chat-tuning.json, currentLaw): answer first, and list only related provisions that apply to the user's situation. */
+export const ANSWER_RULES = `
+
+Extra rules for this answer:
+- When the sources answer the question, the FIRST sentence states the answer directly, with the figure, period or step the question asks for (for example "The notice must be sent within 30 days of the bank's return memo."), followed by its citation. Never begin with "I couldn't find..." and then answer; if something is missing, say so in one line at the end.
+- "Related provisions": list only sections that directly apply to the user's situation or are the next step in it (for example the court, the time limit or the procedure for the same offence). Do not list a provision about a different instrument or subject (for example notice of dishonour of a bill of exchange when the question is about a cheque offence). If none qualifies, leave the line out.`;
+
 /** { system, messages } for the model. history: earlier turns [{ role, content }] (answers without their source blocks); the sources go with the newest question only. */
-export function buildChatPrompt({ question, history = [], sources }) {
+export function buildChatPrompt({ question, history = [], sources, answerRules = false }) {
   const hasDoc = sources.some((x) => x.kind === "doc"), hasJudgment = sources.some((x) => x.kind === "judgment");
   const past = history.slice(-HISTORY_TURNS * 2).map((m) => ({ role: m.role, content: clip(m.content, 1500) }));
   const block = sources.length ? sources.map(sourceBlock).join("\n\n") : "(no sections were found for this question)";
-  return { system: SYSTEM_PROMPT + (hasDoc ? DOC_ADDENDUM : "") + (hasJudgment ? JUDGMENT_ADDENDUM : "") + (sources.some((x) => x.replacedBy) ? REPLACED_ADDENDUM : ""), messages: [...past, { role: "user", content: `Sources:\n\n${block}\n\nQuestion: ${question}` }] };
+  return { system: SYSTEM_PROMPT + (hasDoc ? DOC_ADDENDUM : "") + (hasJudgment ? JUDGMENT_ADDENDUM : "") + (sources.some((x) => x.replacedBy) ? REPLACED_ADDENDUM : "") + (answerRules ? ANSWER_RULES : ""), messages: [...past, { role: "user", content: `Sources:\n\n${block}\n\nQuestion: ${question}` }] };
 }
 
 /** The search text for a question: a very short follow-up ("and for a company?") borrows the previous user question for retrieval. */

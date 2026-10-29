@@ -5,7 +5,9 @@ import { currentLawFirst, pairFor, REPLACED_ADDENDUM } from "./currentlaw.mjs";
 import { verifyCitations } from "./verify.mjs";
 import { buildRewritePrompt, REWRITE_SYSTEM, STATUTORY_ADDENDUM, mergeHybrid } from "./rewrite.mjs";
 import { extractLookups } from "./lookups.mjs";
-import { buildChatPrompt, sourceBlock } from "./prompt.mjs";
+import { buildChatPrompt, sourceBlock, ANSWER_RULES } from "./prompt.mjs";
+import { displayNumbers } from "./citations.mjs";
+import { amendParts, vocabOf } from "./amend.mjs";
 import cfg from "../../config/chat-tuning.json" with { type: "json" };
 import replaced from "../../config/replaced-laws.json" with { type: "json" };
 
@@ -89,4 +91,32 @@ test("hybrid merge: keyword hits boost but never outrank meaning/exact matches; 
   assert.deepEqual(out.slice(-2), ["x", "y"]); assert.equal(out.indexOf("d") < out.indexOf("x"), true); assert.equal(out.includes("z"), false);
   assert.deepEqual(mergeHybrid(sem, kw, 6, ["e"])[0], "e");           // exact lookups stay first
   assert.deepEqual(mergeHybrid([["a", "b"]], [], 5), ["a", "b"]);       // no keyword lists: the plain merge
+});
+
+test("answer rules are added to the prompt only when switched on", () => {
+  const src = [{ n: 1, actTitle: NI, inForce: true, number: "138", heading: "h", text: "x" }];
+  assert.ok(!buildChatPrompt({ question: "q", sources: src }).system.includes(ANSWER_RULES));
+  const on = buildChatPrompt({ question: "q", sources: src, answerRules: true }).system;
+  assert.ok(on.includes(ANSWER_RULES)); assert.match(on, /FIRST sentence states the answer directly/); assert.match(on, /bill of exchange/);
+});
+test("displayNumbers shows cited sources 1,2,3 in order of first use and the rest after", () => {
+  const src = [1, 2, 3, 4, 5, 6].map((n) => ({ n }));
+  const m = displayNumbers("Notice within 30 days [1]. Pay within 15 days [3]. File within a month [2][6].", src);
+  assert.deepEqual([...m], [[1, 1], [3, 2], [2, 3], [6, 4], [4, 5], [5, 6]]);
+  assert.deepEqual([...displayNumbers("Cites 1, 2, 3, 5, 6 [1][2][3][5][6].", src)].filter(([n]) => [1, 2, 3, 5, 6].includes(n)).map(([, s]) => s), [1, 2, 3, 4, 5]);
+  assert.deepEqual([...displayNumbers("No citations here.", src)].map(([, s]) => s), [1, 2, 3, 4, 5, 6]);
+  assert.equal(displayNumbers("Cites a source that does not exist [9].", src).has(9), false);
+});
+test("amendment markers: brackets and number leave the text, a footnote mark follows the words", () => {
+  assert.deepEqual(amendParts("within 5[thirty days] of the receipt"), [{ t: "text", v: "within thirty days" }, { t: "mark", n: 5 }, { t: "text", v: " of the receipt" }]);
+  assert.deepEqual(amendParts("a term which may be extended to 4[two years], or with fine"), [{ t: "text", v: "a term which may be extended to two years" }, { t: "mark", n: 4 }, { t: "text", v: ", or with fine" }]);
+  assert.deepEqual(amendParts("142. Cognizance of offences .—[1] [( 1 )] Notwithstanding"), [{ t: "text", v: "142. Cognizance of offences .—(1)" }, { t: "mark", n: 1 }, { t: "text", v: " Notwithstanding" }]);
+  assert.deepEqual(amendParts("( b ) the payee"), [{ t: "text", v: "(b) the payee" }]);
+  assert.deepEqual(amendParts("Plain text, section 138 [see below]"), [{ t: "text", v: "Plain text, section 138 [see below]" }]);   // a bracket not preceded by a number is left alone
+  assert.deepEqual(amendParts("2[a 3[very] long] clause").map((p) => (p.t === "text" ? p.v : `^${p.n}`)), ["a very", "^3", " long", "^2", " clause"]);
+});
+test("joined words are split only when the second half is a word used on its own in the same section", () => {
+  const vocab = vocabOf(["the cheque is returned unpaid", "(a) thecheque has been presented"]);
+  assert.equal(amendParts("(a) thecheque has been presented", vocab)[0].v, "(a) the cheque has been presented");
+  assert.equal(amendParts("another theory about income", vocab)[0].v, "another theory about income");   // real words stay whole
 });

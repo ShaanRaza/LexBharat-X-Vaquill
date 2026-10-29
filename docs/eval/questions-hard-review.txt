@@ -2,8 +2,9 @@ LEXBHARAT HARD EVALUATION QUESTIONS - FOR LAWYER REVIEW (draft, written by Claud
 For each: the question as a user would type it, the section(s) the answer should rest on, and a note. Please mark each OK / change / remove.
 
 101. [plain] My tenant isn't paying rent, what can I do?
-   Expected: The Transfer of Property Act - section 111
-   Note: Central law only gives notice/forfeiture (TPA s.106, 111(g)); eviction for non-payment is mostly State rent-control law. Is s.111 the right anchor? s.106 and s.108 are mangled in the data (contents-list text), so only s.111 can be scored.
+   Expected: The Transfer of Property Act - section 106 or 111
+   The answer must mention: rent[- ]control
+   Note: Accept TPA s.106 or s.111 (s.106 is garbled in our data, so only s.111 can be matched). A good answer must say that eviction for non-payment of rent is mainly governed by State rent-control law (checked by the words 'rent control'). Lawyer: confirm.
 
 102. [plain] A car hit my father and drove away. How do we claim compensation?
    Expected: The Motor Vehicles Act - section 161
@@ -14,8 +15,8 @@ For each: the question as a user would type it, the section(s) the answer should
    Note: BNSS s.35 (CrPC s.41). Also s.35(3) notice of appearance for offences up to 7 years.
 
 104. [plain] I lent my friend money three years ago. Is it too late to file a case to get it back?
-   Expected: The Limitation Act - section Schedule, Art. 19
-   Note: Art. 19 of the Schedule: three years from when the loan is made (Art. 21 if payable on demand). Section 3 and 5 also relevant. Data note: Limitation Act has only 43 sections in the data.
+   Expected: The Limitation Act - section Schedule, Art. 19 (also accepted: Limitation Act s.18; Limitation Act s.19)
+   Note: Art. 19 of the Schedule: three years from when the loan is made (Art. 21 if payable on demand). Section 3 and 5 also relevant. Data note: Limitation Act has only 43 sections in the data. Also accepted: Limitation Act s.18 (acknowledgment) and s.19 (part payment).
 
 105. [plain] I think I may be arrested in a false case. Can I get bail before they arrest me?
    Expected: The Bharatiya Nagarik Suraksha Sanhita - section 482
@@ -23,8 +24,8 @@ For each: the question as a user would type it, the section(s) the answer should
 
 106. [plain] My husband beats me. What law protects me?
    Expected: The Protection of Women from Domestic Violence Act - section 18
-   Expected: The Bharatiya Nyaya Sanhita - section 85
-   Note: PWDVA s.18 protection orders (also s.3 definition, s.12 application) and BNS s.85 (cruelty by husband or relatives; IPC 498A).
+   Expected: The Bharatiya Nyaya Sanhita - section 85 (also accepted: Bharatiya Nyaya Sanhita s.115)
+   Note: PWDVA s.18 protection orders (also s.3 definition, s.12 application) and BNS s.85 (cruelty by husband or relatives; IPC 498A). Also accepted for the criminal part: BNS s.115 (voluntarily causing hurt).
 
 107. [plain] What is the punishment for drunk driving?
    Expected: The Motor Vehicles Act - section 185
@@ -48,21 +49,21 @@ For each: the question as a user would type it, the section(s) the answer should
 
 112. [hinglish] dahej ke liye sasural wale pareshan kar rahe hain, kaunsi dhara lagegi
    Expected: The Bharatiya Nyaya Sanhita - section 85
-   Expected: The Dowry Prohibition Act - section 3
-   Note: BNS s.85-86 (cruelty incl. dowry demand), Dowry Prohibition Act s.3 and s.4; BNS s.80 only if death.
+   Expected: The Dowry Prohibition Act - section 4 (expected; 3 also accepted)
+   Note: Dowry Prohibition Act s.4 (demanding dowry) is the expected section and s.3 is also accepted. DATA: our s.4 is garbled (only footnote text), so the scorer can match only s.3 until the PDF is loaded (docs/PDF-DOWNLOAD-LIST.md row 40). BNS s.85-86 (cruelty incl. dowry demand); BNS s.80 only if death.
 
 113. [hinglish] non bailable case mein bail kaise milti hai
-   Expected: The Bharatiya Nagarik Suraksha Sanhita - section 480
-   Note: BNSS s.480 (CrPC s.437).
+   Expected: The Bharatiya Nagarik Suraksha Sanhita - section 480 (also accepted: Bharatiya Nagarik Suraksha Sanhita s.483)
+   Note: BNSS s.480 (CrPC s.437). Also accepted: BNSS s.483 (CrPC s.439).
 
 114. [hinglish] RTI ka jawab nahi aaya to appeal kahan karni hai
    Expected: The Right to Information Act - section 19
    Note: RTI Act s.19(1): first appeal to the officer senior to the PIO within 30 days; second appeal s.19(3) to the Information Commission within 90 days.
 
 115. [two-act] Someone cheated people online using my password. What is the punishment, and how do I prove the messages in court?
-   Expected: The Information Technology Act - section 66D
+   Expected: The Information Technology Act - section 66C (expected; 66D accepted) (also accepted: Information Technology Act s.66D)
    Expected: The Bharatiya Sakshya Adhiniyam - section 63
-   Note: IT Act s.66C/66D and BSA s.63 (certificate for electronic records; IEA s.65B before). IT Act s.66 and s.43 are missing in the data.
+   Note: IT Act s.66C (identity theft: using someone's password) expected, s.66D (cheating by personation) accepted, plus BSA s.63 for proving electronic records. IT Act s.66 and s.43 are missing in the data.
 
 116. [two-act] A company's director signed a cheque that bounced. Is the director personally liable, and can it also be cheating?
    Expected: The Negotiable Instruments Act - section 141
@@ -125,3 +126,32 @@ For each: the question as a user would type it, the section(s) the answer should
    Expected: the answer should say the sources do not contain this (no invented law).
    Note: A fact, not a law in the library. Right answer: not found.
 
+129. [consumer] Shop sold me a defective phone and won't replace it, where do I complain?
+   Expected: The Consumer Protection Act - section 35 (34 accepted) (also accepted: Consumer Protection Act s.34)
+   Note: Consumer Protection Act 2019 s.35 (how to file the complaint) expected; s.34 (District Commission's jurisdiction) accepted. Lawyer: confirm.
+
+130. [property] Do daughters get an equal share in father's ancestral property?
+   Expected: The Hindu Succession Act - section 6
+   NOT SCORED YET: Hindu Succession Act s.6 is not in our data (only s.5, 6B and 29 hold the word coparcener). Not scored until the Act's PDF is loaded (docs/PDF-DOWNLOAD-LIST.md).
+   Note: Hindu Succession Act s.6 (as amended in 2005: daughter is a coparcener by birth). Applies to Hindus. DATA: s.6 missing.
+
+131. [constitutional] Police are illegally detaining my brother, which court do I go to?
+   Expected: The Constitution of India - section Art. 226 (Art. 32 accepted) (also accepted: Constitution of India s.Art. 32)
+   Note: Habeas corpus: High Court under Art. 226 (usual first step) or Supreme Court under Art. 32. BNSS s.35-36 and Art. 22 also relevant. Lawyer: confirm which is expected first.
+
+132. [defamation] Someone posted lies about me on Facebook, can I file a case?
+   Expected: The Bharatiya Nyaya Sanhita - section 356
+   Old-law rule: answer from the current law and say it was previously IPC s.499
+   Note: BNS s.356 (defamation; previously IPC s.499/500). The IT Act's old s.66A is struck down and not relevant. The answer should name the old section as 'previously IPC s.499'.
+
+133. [workplace] My manager is sexually harassing me at work, where do I complain?
+   Expected: The Sexual Harassment of Women at Workplace - section 9
+   Note: POSH Act 2013 s.9 (complaint to the Internal Committee; s.4 constitution of the Internal Committee, s.6 Local Committee). BNS s.75 also relevant. Lawyer: confirm.
+
+134. [short] notice period for cheque bounce
+   Expected: The Negotiable Instruments Act - section 138
+   Expected: The Negotiable Instruments Act - section 142
+   The answer must NOT cite: Negotiable Instruments Act s.94, 105, 106, 63
+   Note: NI Act s.138 (30-day notice) expected and s.142 (complaint within one month) should also appear. Scored down if the answer opens with 'couldn't find' although the source answers it, or cites sections that do not apply to a cheque case (NI s.94, 105, 106 and 63 are about notice of dishonour of bills of exchange). Lawyer: confirm the list.
+
+General checks on every question: an answer that opens with "I couldn't find..." although the source answers it is marked not right.
