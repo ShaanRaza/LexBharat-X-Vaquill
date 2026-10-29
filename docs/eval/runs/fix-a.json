@@ -1,0 +1,1157 @@
+{
+ "label": "fix-a",
+ "at": "2026-10-28T19:53:24.286Z",
+ "rows": [
+  {
+   "id": 1,
+   "question": "What is the notice period before filing a cheque bounce complaint?",
+   "gold": [
+    "IND_central_2189|s138"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 12.9,
+   "nSources": 13,
+   "queries": [
+    "What is the notice period before filing a cheque bounce complaint?",
+    "cheque bounce notice period demand payment drawer dishonour",
+    "Negotiable Instruments Act section 138 notice period",
+    "Negotiable Instruments Act section 138 cause of action complaint limitation period"
+   ],
+   "topSources": [
+    "The Negotiable Instruments Act, 1881 s138",
+    "The Negotiable Instruments Act, 1881 s106",
+    "The Negotiable Instruments Act, 1881 s105",
+    "The Negotiable Instruments Act, 1881 s142",
+    "The Manipur Municipalities Act, 1994 s201"
+   ],
+   "answer": "When a cheque drawn on an account maintained by a person is returned unpaid by the bank because of insufficient funds or because it exceeds the amount arranged to be paid, the payee or holder in due course must make a demand for payment by giving a written notice to the drawer within thirty days of receiving information from the bank regarding the return of the cheque as unpaid, under Section 138 of the Negotiable Instruments Act, 1881 [1]. The Supreme Court in Yogendra Pratap Singh versus Savitri Pandey & Anr. notes that a complaint filed before the expiry of 15 days is premature and not maintainable [11], and in Kamlesh Kumar versus State of Bihar & Anr. explains that after sending this notice, 15 days' time must be given to the noticee to make the payment before a cause of action arises [12].\n\nConditions and time limits:\n- The cheque must be presented to the bank within six months from the date on which it is drawn or within the period of its validity, whichever is earlier, under Section 138 of the Negotiable Instruments Act, 1881 [1].\n- The payee or holder in due course must give a written notice demanding payment to the drawer within thirty days of receiving information from t",
+   "score": 3
+  },
+  {
+   "id": 2,
+   "question": "Within how many days must a cheque bounce complaint be filed after the cause of action arises?",
+   "gold": [
+    "IND_central_2189|s142"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 2,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 11.9,
+   "nSources": 13,
+   "queries": [
+    "Within how many days must a cheque bounce complaint be filed after the cause of action arises?",
+    "cheque bounce complaint filing time limitation period cause of action",
+    "Negotiable Instruments Act section 138 drawer liability",
+    "Negotiable Instruments Act section 142 cognizance of offences limitation period"
+   ],
+   "topSources": [
+    "The Negotiable Instruments Act, 1881 s138",
+    "The Negotiable Instruments Act, 1881 s142",
+    "The Limitation Act, 1963 sA20",
+    "The Negotiable Instruments Act, 1881 s143",
+    "The Negotiable Instruments Act, 1881 s140"
+   ],
+   "answer": "A complaint for an offence under section 138 must be made within one month of the date on which the cause of action arises under clause (c) of the proviso to section 138, according to Section 142 of the Negotiable Instruments Act, 1881 [2]. However, the court may take cognizance of a complaint after the prescribed period if the complainant satisfies the court that there was sufficient cause for not making the complaint within such period [2].\n\nConditions and time limits:\n- The complaint must be in writing and made by the payee or the holder in due course [2].\n- The complaint must be filed within one month from the date on which the cause of action arises under clause (c) of the proviso to Section 138 [2].\n\nRelated provisions:\n- Section 138 of the Negotiable Instruments Act, 1881 covers \"Dishonour of cheque for insufficiency, etc., of funds in the account\" [1].\n- Section 143 of the Negotiable Instruments Act, 1881 covers \"Power of Court to try cases summarily\" [4].\n- Section 140 of the Negotiable Instruments Act, 1881 covers \"Defence which may not be allowed in any prosecution under section 138\" [5].\n- Section 142A of the Negotiable Instruments Act, 1881 covers \"Validation for trans",
+   "score": 3
+  },
+  {
+   "id": 3,
+   "question": "What is the punishment for dishonour of a cheque for insufficient funds?",
+   "gold": [
+    "IND_central_2189|s138"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 10.2,
+   "nSources": 13,
+   "queries": [
+    "What is the punishment for dishonour of a cheque for insufficient funds?",
+    "dishonour of cheque insufficient funds punishment imprisonment fine",
+    "Negotiable Instruments Act section 138",
+    "Negotiable Instruments Act section 138 penalty cognizance"
+   ],
+   "topSources": [
+    "The Negotiable Instruments Act, 1881 s138",
+    "The Negotiable Instruments Act, 1881 s?",
+    "The Payment and Settlement Systems Act, 2007 s25",
+    "The Waqf Act, 1995 s73",
+    "The Prize Chits and Money Circulation Schemes (Banning) Act, 1978 s12"
+   ],
+   "answer": "The punishment for dishonour of a cheque for insufficiency of funds is imprisonment for a term which may extend to two years, or with fine which may extend to twice the amount of the cheque, or with both, as provided under Section 138 of the Negotiable Instruments Act, 1881 [1]. (Note: The Supreme Court judgment excerpt in Kusum Ingots and Alloys Ltd. v. Pennar Peterson Securities Ltd. and Ors. and the excerpt in Indian Bank Association and Others v. Union of India and Others refer to imprisonment for a term which may extend to one year [11][12].)\n\nConditions and time limits:\n- The cheque must be presented to the bank within a period of six months from the date on which it is drawn or within the period of its validity, whichever is earlier [1].\n- The payee or the holder in due course must make a demand for payment by giving a notice in writing to the drawer within thirty days of receiving information from the bank regarding the return of the cheque as unpaid [1]. (Note: The Supreme Court judgment excerpts in Kusum Ingots and Alloys Ltd. v. Pennar Peterson Securities Ltd. and Ors. and Indian Bank Association and Others v. Union of India and Others mention a notice period of within f",
+   "score": 3
+  },
+  {
+   "id": 4,
+   "question": "Is there a legal presumption in favour of the holder of a cheque?",
+   "gold": [
+    "IND_central_2189|s139"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 3,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 11.8,
+   "nSources": 13,
+   "queries": [
+    "Is there a legal presumption in favour of the holder of a cheque?",
+    "presumption in favour of holder of cheque",
+    "Negotiable Instruments Act section 138",
+    "Negotiable Instruments Act section 118 presumption holder in due course"
+   ],
+   "topSources": [
+    "The Negotiable Instruments Act, 1881 s138",
+    "The Negotiable Instruments Act, 1881 s118",
+    "The Negotiable Instruments Act, 1881 s139",
+    "The Negotiable Instruments Act, 1881 s9",
+    "The Negotiable Instruments Act, 1881 s120"
+   ],
+   "answer": "Yes, it shall be presumed, unless the contrary is proved, that the holder of a cheque received the cheque referred to in Section 138 of the Negotiable Instruments Act, 1881 for the discharge, in whole or in part, of any debt or other liability under Section 139 of the Negotiable Instruments Act, 1881 [3][13]. The Supreme Court of India in the judgment Basalingappa versus Mudibasappa noted that Section 139 of the Negotiable Instruments Act, 1881 provides for this presumption in favour of the holder [3]. Furthermore, Section 118 of the Negotiable Instruments Act, 1881 establishes that, until the contrary is proved, it shall be presumed that every negotiable instrument was made or drawn for consideration, that every negotiable instrument bearing a date was made or drawn on such date, and that the holder of a negotiable instrument is a holder in due course [2]. As discussed by the Supreme Court of India in Sri Dattatraya versus Sharanappa, Section 118 of the Negotiable Instruments Act, 1881 raises a rebuttable presumption against the drawer that the negotiable instrument was drawn and subsequently accepted, indorsed, negotiated, or transferred for an existing consideration, and that th",
+   "score": 3
+  },
+  {
+   "id": 5,
+   "question": "Who is liable when a company's cheque bounces?",
+   "gold": [
+    "IND_central_2189|s141"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 2,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 11.3,
+   "nSources": 13,
+   "queries": [
+    "Who is liable when a company's cheque bounces?",
+    "company cheque bounce liability director officer in charge Negotiable Instruments Act",
+    "Negotiable Instruments Act section 138 offence by companies section 141",
+    "criminal liability of directors company dishonour of cheque recovery procedure"
+   ],
+   "topSources": [
+    "The Negotiable Instruments Act, 1881 s138",
+    "The Negotiable Instruments Act, 1881 s141",
+    "The Prize Chits and Money Circulation Schemes (Banning) Act, 1978 s6",
+    "The Negotiable Instruments Act, 1881 s31",
+    "The Negotiable Instruments Act, 1881 s30"
+   ],
+   "answer": "When a cheque drawn by a company is dishonoured for insufficiency of funds or because it exceeds the amount arranged to be paid, the company as well as every person who, at the time the offence was committed, was in charge of, and was responsible to, the company for the conduct of the business of the company shall be deemed to be guilty of the offence and shall be liable to be proceeded against and punished accordingly under Section 141 of the Negotiable Instruments Act, 1881 [1][2][11][12][13]. Additionally, if it is proved that the offence has been committed with the consent or connivance of, or is attributable to any neglect on the part of, any director, manager, secretary, or other officer of the company, that individual shall also be deemed guilty and liable to be proceeded against and punished under Section 141 of the Negotiable Instruments Act, 1881 [2][12][13].\n\nConditions and time limits:\n- The cheque must be presented to the bank within six months from the date on which it is drawn or within the period of its validity, whichever is earlier, as stated in Section 138 of the Negotiable Instruments Act, 1881 [1].\n- The payee or holder in due course must make a demand for paym",
+   "score": 3
+  },
+  {
+   "id": 6,
+   "question": "Can a cheque bounce case be settled by compounding the offence?",
+   "gold": [
+    "IND_central_2189|s147"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 10.2,
+   "nSources": 13,
+   "queries": [
+    "Can a cheque bounce case be settled by compounding the offence?",
+    "cheque bounce case compounding of offence settlement Negotiable Instruments Act",
+    "Negotiable Instruments Act section 147 offence to be compoundable",
+    "Code of Criminal Procedure section 320 compounding of offences"
+   ],
+   "topSources": [
+    "The Negotiable Instruments Act, 1881 s147",
+    "The CODE OF CRIMINAL PROCEDURE, 1973 s320",
+    "The Cantonments Act, 2006 s332",
+    "The New Delhi Municipal Council Act, 1994 s374",
+    "The Payment and Settlement Systems Act, 2007 s31"
+   ],
+   "answer": "Yes, a cheque bounce case can be settled by compounding the offence. Every offence punishable under the Negotiable Instruments Act, 1881 is compoundable, notwithstanding anything contained in the Code of Criminal Procedure, 1973, as stated in Section 147 of the Negotiable Instruments Act, 1881 [1]. \n\nAs observed by the Supreme Court in the case of M/s. Meters and Instruments Private Limited & Anr. versus Kanchan Mehta, the concept of compounding involves the consent of the complainant, and compounding cannot be permitted merely by a unilateral payment without the consent of both parties [11]. The Supreme Court also noted in the same judgment that an accused could make an application for compounding at the first or second hearing, in which case the court ought to allow it, while a later application would require the accused to pay a higher amount towards costs [11]. Furthermore, as noted by the Supreme Court in Vinay Devanna Nayak versus Ryot Seva Sahakari Bank Ltd., though technically the provisions of Section 320 of the Code of Criminal Procedure, 1973 do not apply to non-Indian Penal Code offences, a compromise between the parties and payment of dues under Section 138 of the Nego",
+   "score": 3
+  },
+  {
+   "id": 7,
+   "question": "What is presumed about consideration for a negotiable instrument?",
+   "gold": [
+    "IND_central_2189|s118"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 13.1,
+   "nSources": 13,
+   "queries": [
+    "What is presumed about consideration for a negotiable instrument?",
+    "negotiable instrument presumption as to consideration holder in due course",
+    "Negotiable Instruments Act section 118 presumption as to consideration",
+    "Negotiable Instruments Act section 138 rebuttal of presumption consideration"
+   ],
+   "topSources": [
+    "The Negotiable Instruments Act, 1881 s118",
+    "The Negotiable Instruments Act, 1881 s138",
+    "The Negotiable Instruments Act, 1881 s139",
+    "The Negotiable Instruments Act, 1881 s43",
+    "The Negotiable Instruments Act, 1881 s46"
+   ],
+   "answer": "It shall be presumed, until the contrary is proved, that every negotiable instrument was made or drawn for consideration, and that every such instrument, when it has been accepted, indorsed, negotiated or transferred, was accepted, indorsed, negotiated or transferred for consideration, according to Section 118 of the Negotiable Instruments Act, 1881 [1].\n\nIn K.P.O. Moideen Kutty Hajee versus Pappu Manjooran and Anr. [1996] 2 S.C.R. 227, the Supreme Court noted that Section 118(a) is a presumption of law that throws the burden of proof of failure of consideration on the maker of the promissory note [11]. The initial burden rests on the plaintiff to prove execution, upon which Section 118 imposes a duty on the court to raise the presumption that the instrument was made for consideration, shifting the burden of establishing that the promissory note is not supported by consideration to the defendant [11].\n\nRelated provisions:\n- Section 43 of the Negotiable Instruments Act, 1881, which covers a negotiable instrument made, drawn, accepted, indorsed or transferred without consideration, or for a consideration which fails, creating no obligation of payment between the parties [4].\n- Sectio",
+   "score": 3
+  },
+  {
+   "id": 8,
+   "question": "What makes an agreement a valid contract?",
+   "gold": [
+    "IND_central_2187|s010"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 10.8,
+   "nSources": 13,
+   "queries": [
+    "What makes an agreement a valid contract?",
+    "agreement contract essential elements valid free consent lawful consideration object",
+    "Indian Contract Act section 10",
+    "Indian Contract Act section 11 competency to contract"
+   ],
+   "topSources": [
+    "The Indian Contract Act, 1872 s10",
+    "The Indian Contract Act, 1872 s11",
+    "The Indian Contract Act, 1872 s2",
+    "The Indian Contract Act, 1872 s13",
+    "The Code of Civil Procedure, 1908 sO13R11"
+   ],
+   "answer": "- An agreement becomes a contract if it is made by the free consent of parties competent to contract, for a lawful consideration and with a lawful object, and is not expressly declared to be void, according to Section 10 of the Indian Contract Act, 1872 [1].\n- In the Supreme Court judgment of \"U. P. Rajya Nirman Nigam Ltd. versus Indure Pvt. Ltd. and Others\", it was stated that where the contract is in a number of parts, it is essential to the validity of the contract that the contracting party should either have assented to or taken to have assented to the same thing in the same sense, or as it is sometimes put, there should be consensus ad idem [11].",
+   "score": 3
+  },
+  {
+   "id": 9,
+   "question": "What is free consent in contract law?",
+   "gold": [
+    "IND_central_2187|s014"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 31.7,
+   "nSources": 13,
+   "queries": [
+    "What is free consent in contract law?",
+    "free consent coercion undue influence fraud misrepresentation mistake contract voidable",
+    "Indian Contract Act section 14 15 16 17 18 20",
+    "consent caused by coercion undue influence fraud mistake void agreement section 19"
+   ],
+   "topSources": [
+    "The Indian Contract Act, 1872 s14",
+    "The Indian Contract Act, 1872 s19",
+    "The Bharatiya Nyaya Sanhita, 2023 s28",
+    "The Indian Contract Act, 1872 s19A",
+    "The Indian Contract Act, 1872 s13"
+   ],
+   "answer": "Consent is said to be free when it is not caused by coercion, undue influence, fraud, misrepresentation, or mistake [1][12]. Consent is considered so caused when it would not have been given but for the existence of such coercion, undue influence, fraud, misrepresentation, or mistake [1].\n\nRelated provisions:\n- Section 13 of the Indian Contract Act, 1872, which covers how two or more persons are said to consent when they agree upon the same thing in the same sense [5].\n- Section 14 of the Indian Contract Act, 1872, which defines free consent as consent not caused by coercion, undue influence, fraud, misrepresentation, or mistake [1].\n- Section 19 of the Indian Contract Act, 1872, which provides that when consent to an agreement is caused by coercion, fraud, or misrepresentation, the agreement is a contract voidable at the option of the party whose consent was so caused [2].\n- Section 19A of the Indian Contract Act, 1872, which provides that when consent to an agreement is caused by undue influence, the agreement is a contract voidable at the option of the party whose consent was so caused [4].",
+   "score": 3
+  },
+  {
+   "id": 10,
+   "question": "When can a contract be avoided if consent was obtained by coercion or misrepresentation?",
+   "gold": [
+    "IND_central_2187|s19A",
+    "IND_central_2187|s019"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": false,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 10.8,
+   "nSources": 13,
+   "queries": [
+    "When can a contract be avoided if consent was obtained by coercion or misrepresentation?",
+    "contract voidable coercion undue influence fraud misrepresentation consent",
+    "Indian Contract Act section 19",
+    "Indian Contract Act section 19A coercion misrepresentation"
+   ],
+   "topSources": [
+    "The Indian Contract Act, 1872 s19",
+    "The Indian Contract Act, 1872 s19A",
+    "The Indian Contract Act, 1872 s14",
+    "The Indian Contract Act, 1872 s15",
+    "The Indian Contract Act, 1872 s16"
+   ],
+   "answer": "A contract can be avoided when consent to an agreement is caused by coercion or misrepresentation, making it a contract voidable at the option of the party whose consent was so caused under Section 19 of the Indian Contract Act, 1872 [1]. \n\nHowever, a contract is not voidable if consent was caused by misrepresentation or by fraudulent silence if the party whose consent was so caused had the means of discovering the truth with ordinary diligence, as stated in the Exception to Section 19 of the Indian Contract Act, 1872 [1]. Furthermore, a fraud or misrepresentation that did not cause the consent of the party on whom it was practised or to whom it was made does not render a contract voidable under the Explanation to Section 19 of the Indian Contract Act, 1872 [1].\n\nRelated provisions:\n- Section 13 of the Indian Contract Act, 1872 defines \"consent\" as when two or more persons agree upon the same thing in the same sense [7].\n- Section 14 of the Indian Contract Act, 1872 defines \"free consent\" as consent not caused by coercion, undue influence, fraud, misrepresentation, or mistake [3].\n- Section 15 of the Indian Contract Act, 1872 defines \"coercion\" as the committing or threatening to c",
+   "score": 2
+  },
+  {
+   "id": 11,
+   "question": "What counts as fraud that makes a contract voidable?",
+   "gold": [
+    "IND_central_2187|s017"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 11.6,
+   "nSources": 13,
+   "queries": [
+    "What counts as fraud that makes a contract voidable?",
+    "fraud definition coercion undue influence misrepresentation voidable contract",
+    "Indian Contract Act section 17",
+    "Indian Contract Act section 19 voidable contracts fraud"
+   ],
+   "topSources": [
+    "The Indian Contract Act, 1872 s17",
+    "The Indian Contract Act, 1872 s19",
+    "The Indian Contract Act, 1872 s238",
+    "The Indian Contract Act, 1872 s23",
+    "The Indian Contract Act, 1872 s14"
+   ],
+   "answer": "Fraud that makes a contract voidable includes any of the following acts committed by a party to a contract, or with his connivance, or by his agent, with intent to deceive another party thereto or his agent, or to induce him to enter into the contract, as provided under Section 17 of the Indian Contract Act, 1872: [1]\n- the suggestion, as a fact, of that which is not true, by one who does not believe it to be true [1].\n- the active concealment of a fact by one having knowledge or belief of the fact [1].\n- a promise made without any intention of performing it [1].\n- any other act fitted to deceive [1].\n- any such act or omission as the law specially declares to be fraudulent [1].\nMere silence as to facts likely to affect willingness to enter into a contract is not fraud, unless the circumstances of the case are such that it is the duty of the person keeping silence to speak, or unless his silence is, in itself, equivalent to speech, under Section 17 of the Indian Contract Act, 1872 [1]. Under Section 19 of the Indian Contract Act, 1872, when consent to an agreement is caused by fraud, the agreement is a contract voidable at the option of the party whose consent was so caused, provid",
+   "score": 3
+  },
+  {
+   "id": 12,
+   "question": "Who is competent to enter into a contract?",
+   "gold": [
+    "IND_central_2187|s011"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 10.9,
+   "nSources": 13,
+   "queries": [
+    "Who is competent to enter into a contract?",
+    "competency to contract age of majority soundness of mind disqualification",
+    "Indian Contract Act section 11 capacity of parties to contract",
+    "Indian Contract Act section 12 sound mind for purpose of contracting"
+   ],
+   "topSources": [
+    "The Indian Contract Act, 1872 s11",
+    "The Indian Contract Act, 1872 s12",
+    "The Indian Council of World Affairs Act, 2001 s1",
+    "The Indian Contract Act, 1872 s183",
+    "The Company Secretaries Act, 1980 s8"
+   ],
+   "answer": "Every person is competent to contract who is of the age of majority according to the law to which they are subject, who is of sound mind, and who is not disqualified from contracting by any law to which they are subject, as stated in Section 11 of the Indian Contract Act, 1872 [1][12]. A person is considered to be of sound mind for the purpose of making a contract if, at the time of making it, they are capable of understanding it and of forming a rational judgment as to its effect upon their interests, according to Section 12 of the Indian Contract Act, 1872 [2][12].",
+   "score": 3
+  },
+  {
+   "id": 13,
+   "question": "Can a court award reasonable compensation when a contract fixes a penalty for breach?",
+   "gold": [
+    "IND_central_2187|s074"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 10.4,
+   "nSources": 13,
+   "queries": [
+    "Can a court award reasonable compensation when a contract fixes a penalty for breach?",
+    "compensation for breach of contract penalty stipulated reasonable compensation Indian Contract Act",
+    "Indian Contract Act section 74 compensation for breach where penalty stipulated",
+    "liquidated damages and penalty reasonable compensation proof of loss section 74"
+   ],
+   "topSources": [
+    "The Indian Contract Act, 1872 s74",
+    "The Indian Contract Act, 1872 s73",
+    "The Indian Contract Act, 1872 s75",
+    "The Specific Relief Act, 1963 s20",
+    "The Limited Liability Partnership Act, 2008 s3"
+   ],
+   "answer": "Yes, a court can award reasonable compensation when a contract fixes a penalty for breach, and the party complaining of the breach is entitled to receive reasonable compensation not exceeding the penalty stipulated for, whether or not actual damage or loss is proved to have been caused [1][11]. This is supported by the Supreme Court judgment in \"B.S.N.L versus RELIANCE COMMUNICATION LTD.\", which notes that under Section 74 of the Indian Contract Act, 1872, when a contract is breached and a penalty is stipulated, the party complaining is entitled to reasonable compensation not exceeding the penalty stipulated for [1]. Furthermore, the Supreme Court judgment in \"M/S. KAILASH NATH ASSOCIATES versus DELHI DEVELOPMENT AUTHORITY & ANR.\" explains that in cases where the amount fixed is in the nature of penalty, only reasonable compensation can be awarded not exceeding the penalty so stated, with the penalty serving as the upper limit beyond which the court cannot grant reasonable compensation [13].\n\nRelated provisions:\n- Section 74 of the Indian Contract Act, 1872, which covers \"Compensation for breach of contract where penalty stipulated for\" [1].\n- Section 73 of the Indian Contract Act,",
+   "score": 3
+  },
+  {
+   "id": 14,
+   "question": "Is an agreement in restraint of trade valid?",
+   "gold": [
+    "IND_central_2187|s027"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 9.5,
+   "nSources": 13,
+   "queries": [
+    "Is an agreement in restraint of trade valid?",
+    "agreement in restraint of trade void exception trade or business",
+    "Indian Contract Act section 27"
+   ],
+   "topSources": [
+    "The Indian Contract Act, 1872 s27",
+    "The Trade Unions Act, 1926 s19",
+    "The Industrial Relations Code, 2020 s18",
+    "The Indian Partnership Act, 1932 s11",
+    "The Competition Act, 2002 s3"
+   ],
+   "answer": "Every agreement by which any person is restrained from exercising a lawful profession, trade, or business of any kind is to that extent void, as stated in Section 27 of the Indian Contract Act, 1872 [1]. \n\nHowever, the sources provide the following exceptions and related rules where restrictions or agreements relating to trade are valid or treated differently:\n- A person who sells the goodwill of a business may agree with the buyer to refrain from carrying on a similar business within specified local limits, provided the buyer or any person deriving title from him carries on a like business there, and the limits appear reasonable to the Court having regard to the nature of the business, under Section 27 of the Indian Contract Act, 1872 [1].\n- An agreement between members of a registered Trade Union shall not be void or voidable merely because its objects are in restraint of trade, under Section 19 of the Trade Unions Act, 1926 [2] and Section 18 of the Industrial Relations Code, 2020 [3].\n- Partners may make a contract providing that a partner shall not carry on any business other than that of the firm while a partner, notwithstanding Section 27 of the Indian Contract Act, 1872, un",
+   "score": 3
+  },
+  {
+   "id": 15,
+   "question": "Is an agreement without consideration void?",
+   "gold": [
+    "IND_central_2187|s025"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 11.9,
+   "nSources": 13,
+   "queries": [
+    "Is an agreement without consideration void?",
+    "agreement without consideration void exception",
+    "Indian Contract Act section 25",
+    "consideration void agreement contract law"
+   ],
+   "topSources": [
+    "The Indian Contract Act, 1872 s25",
+    "The Indian Contract Act, 1872 s2",
+    "The Indian Contract Act, 1872 s23",
+    "The Indian Contract Act, 1872 s10",
+    "The Indian Contract Act, 1872 s24"
+   ],
+   "answer": "Yes, an agreement made without consideration is void, unless it is expressed in writing and registered under the law for the time being in force for the registration of documents and is made on account of natural love and affection between parties standing in a near relation to each other, or unless it is a promise to compensate wholly or in part a person who has already voluntarily done something for the promisor or something which the promisor was legally compellable to do, or unless it is a promise made in writing and signed by the person to be charged therewith or by his agent generally or specially authorized in that behalf to pay wholly or in part a debt of which the creditor might have enforced payment but for the law for the limitation of suits, as provided in Section 25 of the Indian Contract Act, 1872 [1][11]. \n\nRelated provisions:\n- Section 10 of the Indian Contract Act, 1872, covering what agreements are contracts, stating that all agreements are contracts if they are made by the free consent of parties competent to contract, for a lawful consideration and with a lawful object, and are not expressly declared to be void [4][11].\n- Section 2 of the Indian Contract Act, 18",
+   "score": 3
+  },
+  {
+   "id": 16,
+   "question": "How far is a surety liable for the debt of the principal debtor?",
+   "gold": [
+    "IND_central_2187|s128"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 10.1,
+   "nSources": 13,
+   "queries": [
+    "How far is a surety liable for the debt of the principal debtor?",
+    "surety liability extent principal debtor contract guarantee",
+    "Indian Contract Act section 128",
+    "nature and extent of surety liability Indian Contract Act"
+   ],
+   "topSources": [
+    "The Indian Contract Act, 1872 s128",
+    "The Indian Contract Act, 1872 s140",
+    "The Indian Contract Act, 1872 s145",
+    "The Indian Contract Act, 1872 s132",
+    "The Indian Contract Act, 1872 s134"
+   ],
+   "answer": "The liability of the surety is co-extensive with that of the principal debtor, unless it is otherwise provided by the contract, as stated in Section 128 of the Indian Contract Act, 1872 [1]. As explained in the Supreme Court judgment \"Bank of Bihar Ltd. versus Damodar Prasad & Anr.\", under Section 128 of the Indian Contract Act, save as provided in the contract, the surety's liability is co-extensive with that of the principal debtor, making the surety liable to pay the entire amount with immediate liability that is not deferred until the creditor exhausts remedies against the principal debtor [1]. For instance, where a bill of exchange is guaranteed and dishonoured by the acceptor, the surety is liable not only for the amount of the bill, but also for any interest and charges which may have become due on it, according to Section 128 of the Indian Contract Act, 1872 [1].\n\nRelated provisions:\n- Section 126 of the Indian Contract Act, 1872, covering the definitions of \"contract of guarantee\", \"surety\", \"principal debtor\", and \"creditor\" [10].\n- Section 133 of the Indian Contract Act, 1872, covering the discharge of surety by variance in terms of the contract [9].\n- Section 134 of the",
+   "score": 3
+  },
+  {
+   "id": 17,
+   "question": "What is a contract of guarantee and who is the surety?",
+   "gold": [
+    "IND_central_2187|s126"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 31.8,
+   "nSources": 13,
+   "queries": [
+    "What is a contract of guarantee and who is the surety?",
+    "contract of guarantee surety definition principal debtor creditor",
+    "Indian Contract Act section 126",
+    "Indian Contract Act section 127 section 128"
+   ],
+   "topSources": [
+    "The Indian Contract Act, 1872 s126",
+    "The Indian Contract Act, 1872 s127",
+    "The Indian Contract Act, 1872 s141",
+    "The Indian Contract Act, 1872 s145",
+    "The Indian Contract Act, 1872 s134"
+   ],
+   "answer": "A contract of guarantee is a contract to perform the promise, or discharge the liability, of a third person in case of his default, according to Section 126 of the Indian Contract Act, 1872 [1]. \n\nThe person who gives the guarantee is called the surety, according to Section 126 of the Indian Contract Act, 1872 [1].\n\nRelated provisions:\n- Section 126 of the Indian Contract Act, 1872 covers the definitions of \"contract of guarantee\", \"surety\", \"principal debtor\" and \"creditor\" [1].\n- Section 127 of the Indian Contract Act, 1872 covers the consideration for guarantee [2].\n- Section 140 of the Indian Contract Act, 1872 covers the rights of surety on payment or performance [10].\n- Section 145 of the Indian Contract Act, 1872 covers the implied promise to indemnify surety [4].",
+   "score": 3
+  },
+  {
+   "id": 18,
+   "question": "What is the punishment for murder?",
+   "gold": [
+    "IND_central_20062|s103"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 5,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 11.7,
+   "nSources": 13,
+   "queries": [
+    "What is the punishment for murder?",
+    "punishment for murder culpable homicide causing death penalty",
+    "Indian Penal Code section 302 punishment for murder",
+    "Indian Penal Code section 299 culpable homicide"
+   ],
+   "topSources": [
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s302",
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s299",
+    "The Bharatiya Nyaya Sanhita, 2023 s101",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s531",
+    "The Bharatiya Nyaya Sanhita, 2023 s103"
+   ],
+   "answer": "Whoever commits murder shall be punished with death, or imprisonment for life, and shall also be liable to fine, according to Section 103 of the Bharatiya Nyaya Sanhita, 2023 and Section 302 of the Indian Penal Code, 1860 [1][5]. Furthermore, when a group of five or more persons acting in concert commits murder on the ground of race, caste or community, sex, place of birth, language, personal belief or any other similar ground, each member of such group shall be punished with death or with imprisonment for life, and shall also be liable to fine under Section 103 of the Bharatiya Nyaya Sanhita, 2023 [5]. Additionally, under Section 104 of the Bharatiya Nyaya Sanhita, 2023, whoever being under sentence of imprisonment for life commits murder shall be punished with death or with imprisonment for life, which shall mean the remainder of that person's natural life [9].\n\nRelated provisions:\n- Section 303 of the Indian Penal Code, 1860, which provides that \"Whoever, being under sentence of 1[imprisonment for life], commits murder shall be punished with death\" [8].\n- Section 101 of the Bharatiya Nyaya Sanhita, 2023, which defines \"Murder.\u2014Except in the cases hereinafter excepted, culpable h",
+   "score": 3
+  },
+  {
+   "id": 19,
+   "question": "What is the punishment for theft?",
+   "gold": [
+    "IND_central_20062|s303"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 2,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 9.7,
+   "nSources": 13,
+   "queries": [
+    "What is the punishment for theft?",
+    "theft punishment imprisonment fine Indian Penal Code",
+    "Indian Penal Code section 378 section 379 theft",
+    "theft cognizable bailable compoundable offense criminal procedure"
+   ],
+   "topSources": [
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s378",
+    "The Bharatiya Nyaya Sanhita, 2023 s303",
+    "The Bharatiya Nyaya Sanhita, 2023 s305",
+    "The Bharatiya Nyaya Sanhita, 2023 s306",
+    "The CODE OF CRIMINAL PROCEDURE, 1973 s1"
+   ],
+   "answer": "Whoever commits theft shall be punished with imprisonment of either description for a term which may extend to three years, or with fine, or with both, and in case of a second or subsequent conviction, with rigorous imprisonment for a term not less than one year and up to five years along with fine, under Section 303 of the Bharatiya Nyaya Sanhita, 2023 [2]. \n\nConditions and time limits:\n- In cases of theft where the value of the stolen property is less than five thousand rupees and a person is convicted for the first time, upon return of the value of the property or restoration of the stolen property, the punishment shall be community service under Section 303 of the Bharatiya Nyaya Sanhita, 2023 [2].\n\nRelated provisions:\n- Section 305 of the Bharatiya Nyaya Sanhita, 2023 covers theft in a dwelling house, or means of transportation or place of worship, etc [3].\n- Section 306 of the Bharatiya Nyaya Sanhita, 2023 covers theft by a clerk or servant of property in possession of a master [4].\n- Section 307 of the Bharatiya Nyaya Sanhita, 2023 covers theft after preparation made for causing death, hurt or restraint in order to the committing of theft [7].\n- Section 3 of the Railway Prop",
+   "score": 3
+  },
+  {
+   "id": 20,
+   "question": "What is the offence of cheating and its punishment?",
+   "gold": [
+    "IND_central_20062|s318"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 3,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 9.9,
+   "nSources": 13,
+   "queries": [
+    "What is the offence of cheating and its punishment?",
+    "cheating offense definition fraudulent dishonest inducement delivery of property punishment",
+    "Indian Penal Code section 415 cheating",
+    "Indian Penal Code section 417 punishment for cheating"
+   ],
+   "topSources": [
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s415",
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s417",
+    "The Bharatiya Nyaya Sanhita, 2023 s318",
+    "The Prevention of Money-Laundering Act, 2002 s75",
+    "The Bharatiya Nyaya Sanhita, 2023 s322"
+   ],
+   "answer": "Whoever, by deceiving any person, fraudulently or dishonestly induces the person so deceived to deliver any property to any person, or to consent that any person shall retain any property, or intentionally induces the person so deceived to do or omit to do anything which he would not do or omit if he were not so deceived, and which act or omission causes or is likely to cause damage or harm to that person in body, mind, reputation or property, is said to cheat under Section 415 of the Indian Penal Code, 1860 [1] and Section 318 of the Bharatiya Nyaya Sanhita, 2023 [3]. A dishonest concealment of facts is a deception within the meaning of these sections [1][3].\n\nThe punishment for cheating is imprisonment of either description for a term which may extend to one year, or with fine, or with both under Section 417 of the Indian Penal Code, 1860 [2]. Under Section 318 of the Bharatiya Nyaya Sanhita, 2023, whoever cheats shall be punished with imprisonment of either description for a term which may extend to three years, or with fine, or with both [3]; whoever cheats with the knowledge that he is likely thereby to cause wrongful loss to a person whose interest in the transaction he was b",
+   "score": 3
+  },
+  {
+   "id": 21,
+   "question": "What is criminal breach of trust?",
+   "gold": [
+    "IND_central_20062|s316"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 3,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 10.8,
+   "nSources": 13,
+   "queries": [
+    "What is criminal breach of trust?",
+    "criminal breach of trust entrustment property dishonest misappropriation",
+    "Indian Penal Code section 405 criminal breach of trust",
+    "Indian Penal Code section 406 punishment for criminal breach of trust"
+   ],
+   "topSources": [
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s405",
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s406",
+    "The Bharatiya Nyaya Sanhita, 2023 s316",
+    "The Assam Rifles Act, 2006 s39",
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s409"
+   ],
+   "answer": "Criminal breach of trust is committed when a person who is in any manner entrusted with property, or with dominion over property, dishonestly misappropriates or converts that property to their own use, or dishonestly uses or disposes of that property in violation of any direction of law prescribing the mode in which such trust is to be discharged, or of any legal contract, express or implied, which they have made touching the discharge of such trust, or wilfully suffers any other person to do so, as provided in Section 405 of the Indian Penal Code, 1860 [1] and Section 316 of the Bharatiya Nyaya Sanhita, 2023 [3]. \n\nThe Supreme Court of India in Ram Narain Popli versus Central Bureau of Investigation noted that the offence consists in the wrongful appropriation of property consequent upon a lawful possession, and that it is distinguished from criminal misappropriation because the subject property is entrusted to the offender by the owner or by other lawful authority under a duty or obligation to apply it according to the trust [11]. The Supreme Court in Common Cause, A Registered Society versus Union of India & Ors. also noted that a trust under Section 405 arises only when there i",
+   "score": 3
+  },
+  {
+   "id": 22,
+   "question": "What is the punishment for defamation?",
+   "gold": [
+    "IND_central_20062|s356"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 2,
+   "cited": true,
+   "correct": false,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 11.2,
+   "nSources": 13,
+   "queries": [
+    "What is the punishment for defamation?",
+    "defamation punishment penalty fine imprisonment criminal imputation",
+    "Indian Penal Code section 499 section 500 defamation punishment",
+    "Bharatiya Nyaya Santha section 356 defamation"
+   ],
+   "topSources": [
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s499",
+    "The Bharatiya Nyaya Sanhita, 2023 s356",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s531",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s359",
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s500"
+   ],
+   "answer": "Whoever defames another shall be punished with simple imprisonment for a term which may extend to two years, or with fine, or with both, or with community service under sub-section (2) of Section 356 of the Bharatiya Nyaya Sanhita, 2023 [2]. Alternatively, under Section 500 of the Indian Penal Code, 1860, whoever defames another shall be punished with simple imprisonment for a term which may extend to two years, or with fine, or with both [5].\n\nRelated provisions:\n- Section 356(3) of the Bharatiya Nyaya Sanhita, 2023, which covers printing or engraving any matter knowing or having good reason to believe it is defamatory [2].\n- Section 356(4) of the Bharatiya Nyaya Sanhita, 2023, which covers selling or offering for sale any printed or engraved substance containing defamatory matter knowing that it contains such matter [2].\n- Section 501 of the Indian Penal Code, 1860, which covers printing or engraving matter known to be defamatory [6].\n- Section 502 of the Indian Penal Code, 1860, which covers the sale of printed or engraved substances containing defamatory matter [7].",
+   "score": 2
+  },
+  {
+   "id": 23,
+   "question": "What is dowry death and its punishment?",
+   "gold": [
+    "IND_central_20062|s080"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 3,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 10.8,
+   "nSources": 13,
+   "queries": [
+    "What is dowry death and its punishment?",
+    "dowry death definition ingredients and punishment imprisonment",
+    "Indian Penal Code section 304B dowry death",
+    "Dowry Prohibition Act section 3 penalty for demanding dowry"
+   ],
+   "topSources": [
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s304B",
+    "The Dowry Prohibition Act, 1961 s3",
+    "The Bharatiya Nyaya Sanhita, 2023 s80",
+    "The Dowry Prohibition Act, 1961 s4A",
+    "The Dowry Prohibition Act, 1961 s6"
+   ],
+   "answer": "Dowry death is defined as where the death of a woman is caused by any burns or bodily injury or occurs otherwise than under normal circumstances within seven years of her marriage, and it is shown that soon before her death she was subjected to cruelty or harassment by her husband or any relative of her husband for, or in connection with, any demand for dowry [1][3]. In such cases, the husband or relative shall be deemed to have caused her death, as stated in Section 304B of the Indian Penal Code, 1845 [1] and Section 80 of the Bharatiya Nyaya Sanhita, 2023 [3].\n\nThe punishment for committing dowry death is imprisonment for a term of not less than seven years, which may extend to imprisonment for life, under Section 304B of the Indian Penal Code, 1845 [1] and Section 80 of the Bharatiya Nyaya Sanhita, 2023 [3].\n\nRelated provisions:\n- Section 118 of the Bharatiya Sakshya Adhiniyam, 2023, which covers the presumption as to dowry death when it is shown that the woman was subjected to cruelty or harassment soon before her death [9].\n- Section 3 of the Protection of Women from Domestic Violence Act, 2005, which covers the definition of domestic violence including harassment to coerce me",
+   "score": 3
+  },
+  {
+   "id": 24,
+   "question": "Can I get anticipatory bail if I fear arrest?",
+   "gold": [
+    "IND_state_6796|s438"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 11.9,
+   "nSources": 13,
+   "queries": [
+    "Can I get anticipatory bail if I fear arrest?",
+    "direction for grant of bail to person apprehending arrest anticipatory bail",
+    "Code of Criminal Procedure section 438",
+    "Code of Criminal Procedure section 439 custody investigation"
+   ],
+   "topSources": [
+    "The CODE OF CRIMINAL PROCEDURE, 1973 s438",
+    "The CODE OF CRIMINAL PROCEDURE, 1973 s439",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s482",
+    "The CODE OF CRIMINAL PROCEDURE, 1973 s38",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s193"
+   ],
+   "answer": "Yes, when any person has reason to believe that they may be arrested on an accusation of having committed a non-bailable offence, they may apply to the High Court or the Court of Session for a direction that in the event of such arrest, they shall be released on bail, as provided under Section 438 of the Code of Criminal Procedure, 1973 and Section 482 of the Bharatiya Nagarik Suraksha Sanhita, 2023 [1][3]. \n\nRegarding the Supreme Court judgment on this matter, the excerpt from the Supreme Court judgment in Mukesh Kishanpuria versus State of West Bengal notes that anticipatory bail was rejected by the High Court, but observed that the petitioner could apply for regular and interim bail [13]. Only Supreme Court judgments are searched as short excerpts, while High Court and tribunal decisions are not included yet.\n\nConditions and time limits:\n- When making a direction for anticipatory bail, the Court may include conditions such as requiring the person to make themselves available for interrogation by a police officer as and when required, not directly or indirectly making any inducement, threat, or promise to any person acquainted with the facts of the case to dissuade them from disc",
+   "score": 3
+  },
+  {
+   "id": 25,
+   "question": "When can a person accused of a non-bailable offence be released on bail?",
+   "gold": [
+    "IND_state_6796|s437"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 11.7,
+   "nSources": 13,
+   "queries": [
+    "When can a person accused of a non-bailable offence be released on bail?",
+    "non-bailable offence accused release on bail conditions grounds",
+    "Code of Criminal Procedure section 437",
+    "Code of Criminal Procedure section 439"
+   ],
+   "topSources": [
+    "The CODE OF CRIMINAL PROCEDURE, 1973 s437",
+    "The CODE OF CRIMINAL PROCEDURE, 1973 s439",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s480",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s482",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s479"
+   ],
+   "answer": "A person accused or suspected of a non-bailable offence may be released on bail by an officer in charge of a police station, a Court other than the High Court or Court of Session, a High Court, or a Court of Session, subject to specific statutory restrictions and exceptions [1][2][3][9]. \n\nHowever, such a person shall not be released on bail if there appear reasonable grounds for believing they have been guilty of an offence punishable with death or imprisonment for life [1][3][9]. Furthermore, they shall not be released if the offence is a cognizable offence and they were previously convicted of an offence punishable with death, imprisonment for life, or imprisonment for seven years or more, or previously convicted on two or more occasions of a cognizable offence punishable with imprisonment for three years or more but less than seven years [1][3][9]. \n\nDespite these prohibitions, a Court may direct that such a person be released on bail under the following circumstances:\n- If the person is a child or under the age of sixteen years, a woman, or is sick or infirm [1][3][9].\n- If the Court is satisfied that it is just and proper to do so for any other special reason in cases involvi",
+   "score": 3
+  },
+  {
+   "id": 26,
+   "question": "Is the accused entitled to default bail if the police do not file the chargesheet in 60 or 90 days?",
+   "gold": [
+    "IND_state_6796|s167"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 11.4,
+   "nSources": 13,
+   "queries": [
+    "Is the accused entitled to default bail if the police do not file the chargesheet in 60 or 90 days?",
+    "accused entitlement default bail incomplete investigation chargesheet 60 90 days",
+    "Code of Criminal Procedure section 167 default bail chargesheet",
+    "CrPC section 167 custody period investigation completion"
+   ],
+   "topSources": [
+    "The CODE OF CRIMINAL PROCEDURE, 1973 s167",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s193",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s187",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s346",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s480"
+   ],
+   "answer": "- Yes, the accused is entitled to be released on bail (referred to as default bail) if the investigation is not completed and the charge-sheet is not filed within the specified period of 60 or 90 days, provided the accused is prepared to and does furnish bail [12][13].\n- As discussed by the Supreme Court in the judgment Bikramjit Singh versus The State of Punjab, on the expiry of the period of 90 days or 60 days, an indefeasible right accrues in favour of the accused for being released on bail on account of default by the investigating agency [12].\n- As noted by the Supreme Court in the same judgment, once this right has ripened into the status of indefeasibility, it cannot be frustrated by the prosecution on any pretext, and the accused can avail of liberty by filing an application stating that the statutory period has expired and that the accused is prepared to furnish the bail bond [12].\n\nConditions and time limits:\n- The investigation relates to an offence punishable with death, imprisonment for life, or imprisonment for a term of ten years or more: ninety days under Section 187 of the Bharatiya Nagarik Suraksha Sanhita, 2023 [3] (or Section 167 of the Code of Criminal Procedur",
+   "score": 3
+  },
+  {
+   "id": 27,
+   "question": "How is an FIR registered for a cognizable offence?",
+   "gold": [
+    "IND_state_6796|s154"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 11.2,
+   "nSources": 13,
+   "queries": [
+    "How is an FIR registered for a cognizable offence?",
+    "cognizable offence first information report registration procedure",
+    "Code of Criminal Procedure section 154 information in cognizable cases",
+    "Code of Criminal Procedure section 156 police officer power to investigate cognizable case"
+   ],
+   "topSources": [
+    "The CODE OF CRIMINAL PROCEDURE, 1973 s154",
+    "The CODE OF CRIMINAL PROCEDURE, 1973 s156",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s174",
+    "The Emigration Act, 1983 s25",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s173"
+   ],
+   "answer": "- Every information relating to the commission of a cognizable offence, if given orally to an officer in charge of a police station, must be reduced to writing by him or under his direction, and be read over to the informant, under Section 154 of the Code of Criminal Procedure, 1973 [1].\n- Every such information, whether given in writing or reduced to writing, must be signed by the person giving it, and the substance thereof must be entered in a book kept by such officer in the form prescribed by the State Government under Section 154 of the Code of Criminal Procedure, 1973 [1].\n- Under Section 173 of the Bharatiya Nagarik Suraksha Sanhita, 2023, information relating to the commission of a cognizable offence, irrespective of the area where the offence is committed, may be given orally or by electronic communication to an officer in charge of a police station [5].\n- If given orally under Section 173 of the Bharatiya Nagarik Suraksha Sanhita, 2023, it must be reduced to writing by the officer or under his direction, read over to the informant, and signed by the person giving it [5].\n- If given by electronic communication under Section 173 of the Bharatiya Nagarik Suraksha Sanhita, 20",
+   "score": 3
+  },
+  {
+   "id": 28,
+   "question": "When can a court appoint an arbitrator?",
+   "gold": [
+    "IND_central_1978|s011"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 12.5,
+   "nSources": 13,
+   "queries": [
+    "When can a court appoint an arbitrator?",
+    "appointment of arbitrator by court power procedure",
+    "Arbitration and Conciliation Act section 11 appointment of arbitrators",
+    "appointment of arbitrator court application high court supreme court"
+   ],
+   "topSources": [
+    "The Arbitration and Conciliation Act, 1996 s11",
+    "The Bengal Embankment Act, 1855 s21",
+    "The Arbitration and Conciliation Act, 1996 s33",
+    "The Indian Companies Act 1882, 6 of 1882, (Rep., Act 1 of 1956) s104",
+    "The Bharatiya Vayuyan Adhiniyam, 2024 s24"
+   ],
+   "answer": "A court can appoint an arbitrator in the following situations under the Arbitration and Conciliation Act, 1996 and the Arbitration Act 1940:\n\n- Under Section 11 of the Arbitration and Conciliation Act, 1996, in an arbitration with three arbitrators where parties fail to agree on an appointment procedure, if a party fails to appoint an arbitrator within thirty days from the receipt of a request to do so, or the two appointed arbitrators fail to agree on the third arbitrator within thirty days from the date of their appointment [1].\n- Under Section 11 of the Arbitration and Conciliation Act, 1996, in an arbitration with a sole arbitrator, if the parties fail to agree on the arbitrator within thirty days from receipt of a request by one party from the other party to so agree [1].\n- Under Section 11 of the Arbitration and Conciliation Act, 1996, where under an appointment procedure agreed upon by the parties, a party fails to act as required under that procedure, the parties or the two appointed arbitrators fail to reach an agreement expected of them under that procedure, or a person including an institution fails to perform any function entrusted to him or it under that procedure, upo",
+   "score": 3
+  },
+  {
+   "id": 29,
+   "question": "Can a court grant interim relief before arbitration starts?",
+   "gold": [
+    "IND_central_1978|s009"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 10.2,
+   "nSources": 13,
+   "queries": [
+    "Can a court grant interim relief before arbitration starts?",
+    "arbitration interim measures by court before commencement",
+    "Arbitration and Conciliation Act section 9",
+    "Arbitration and Conciliation Act section 17 interim measures tribunal"
+   ],
+   "topSources": [
+    "The Arbitration and Conciliation Act, 1996 s9",
+    "The Arbitration and Conciliation Act, 1996 s17",
+    "The Arbitration and Conciliation Act, 1996 s16",
+    "The Arbitration and Conciliation Act, 1996 s11",
+    "The Arbitration and Conciliation Act, 1996 s37"
+   ],
+   "answer": "Yes, a party may apply to a court for an interim measure of protection before the commencement of arbitral proceedings under Section 9 of the Arbitration and Conciliation Act, 1996 [1][12].\n\nConditions and time limits:\n- Where a court passes an order for any interim measure of protection before the commencement of arbitral proceedings, the arbitral proceedings must be commenced within a period of ninety days from the date of such order or within such further time as the court may determine, as stated in Section 9 of the Arbitration and Conciliation Act, 1996 [1].\n\nRelated provisions:\n- Section 9 of the Arbitration and Conciliation Act, 1996 covers interim measures, etc., by Court before or during arbitral proceedings or after the making of the arbitral award [1].\n- Section 17 of the Arbitration and Conciliation Act, 1996 covers interim measures ordered by the arbitral tribunal during the arbitral proceedings [2].\n- Section 37 of the Arbitration and Conciliation Act, 1996 covers appealable orders including those granting or refusing to grant any measure under Section 9 [5].\n- Section 11 of the Administrative Tribunals Act, 1985 is not present in the sources; however, Section 24 of t",
+   "score": 3
+  },
+  {
+   "id": 30,
+   "question": "On what grounds can an arbitral award be set aside and within what time?",
+   "gold": [
+    "IND_central_1978|s034"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 11,
+   "nSources": 13,
+   "queries": [
+    "On what grounds can an arbitral award be set aside and within what time?",
+    "arbitral award set aside grounds limitation period application",
+    "Arbitration and Conciliation Act section 34 setting aside award",
+    "Arbitration and Conciliation Act section 34 time limit condonation of delay"
+   ],
+   "topSources": [
+    "The Arbitration and Conciliation Act, 1996 s34",
+    "The Limitation Act, 1963 sA119",
+    "The Limitation Act, 1963 s119",
+    "The Arbitration and Conciliation Act, 1996 s2",
+    "The Arbitration and Conciliation Act, 1996 s13"
+   ],
+   "answer": "An arbitral award may be set aside by the Court only if the party making the application establishes on the basis of the record of the arbitral tribunal that a party was under some incapacity, the arbitration agreement is not valid under the law to which the parties have subjected it or the law for the time being in force, the party was not given proper notice of the appointment of an arbitrator or of the arbitral proceedings or was otherwise unable to present its case, the award deals with a dispute not contemplated by or not falling within the terms of the submission to arbitration or contains decisions on matters beyond the scope of the submission, or the composition of the arbitral tribunal or the arbitral procedure was not in accordance with the agreement of the parties (unless such agreement conflicted with a non-derogable provision) or with Part I of the Arbitration and Conciliation Act, 1996, as set out in Section 34 of the Arbitration and Conciliation Act, 1996 [1]. An arbitral award may also be set aside if the Court finds that the subject-matter of the dispute is not capable of settlement by arbitration under the law for the time being in force, or the arbitral award is ",
+   "score": 3
+  },
+  {
+   "id": 31,
+   "question": "How is a domestic arbitral award enforced?",
+   "gold": [
+    "IND_central_1978|s036"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 14.4,
+   "nSources": 13,
+   "queries": [
+    "How is a domestic arbitral award enforced?",
+    "enforcement of domestic arbitral award execution decree",
+    "Arbitration and Conciliation Act section 36 enforcement",
+    "Code of Civil Procedure order 21 execution of decree"
+   ],
+   "topSources": [
+    "The Arbitration and Conciliation Act, 1996 s36",
+    "The Arbitration and Conciliation Act, 1996 s3",
+    "The Arbitration and Conciliation Act, 1996 s1",
+    "The Arbitration and Conciliation Act, 1996 s47",
+    "The Arbitration and Conciliation Act, 1996 s2"
+   ],
+   "answer": "- Where the time for making an application to set aside the arbitral award under Section 34 of the Arbitration and Conciliation Act, 1996 has expired, the arbitral award shall be enforced in accordance with the provisions of the Code of Civil Procedure, 1908 in the same manner as if it were a decree of the court, subject to Section 36(2) of the Arbitration and Conciliation Act, 1996 [1].\n\nRelated provisions:\n- Section 36 of the Arbitration and Conciliation Act, 1996, which covers enforcement and stay of operation of arbitral awards [1].\n- Section 34 of the Arbitration and Conciliation Act, 1996, which covers applications for setting aside arbitral awards [1].\n- Order 21 Rule 11 of the Code of Civil Procedure, 1908, which covers oral and written applications for the execution of a decree [8].\n- Order 21 Rule 23 of the Code of Civil Procedure, 1908, which covers procedure after the issue of notice in execution proceedings [7].",
+   "score": 3
+  },
+  {
+   "id": 32,
+   "question": "What is an arbitration agreement?",
+   "gold": [
+    "IND_central_1978|s007"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 10.4,
+   "nSources": 13,
+   "queries": [
+    "What is an arbitration agreement?",
+    "arbitration agreement definition requirements validity written contract",
+    "Arbitration and Conciliation Act section 7"
+   ],
+   "topSources": [
+    "The Arbitration and Conciliation Act, 1996 s7",
+    "The Arbitration and Conciliation Act, 1996 s2",
+    "The Arbitration and Conciliation Act, 1996 s1",
+    "The Arbitration and Conciliation Act, 1996 s3",
+    "The Arbitration & Conciliation Act 1996 s7"
+   ],
+   "answer": "An arbitration agreement means an agreement by the parties to submit to arbitration all or certain disputes which have arisen or which may arise between them in respect of a defined legal relationship, whether contractual or not, as provided in Section 7 of the Arbitration and Conciliation Act, 1996 [1]. Such an agreement may be in the form of an arbitration clause in a contract or in the form of a separate agreement, and it must be in writing [1].\n\nConditions and time limits:\n- The agreement must be in writing [1].\n- An agreement is considered in writing if it is contained in a document signed by the parties, or in an exchange of letters, telex, telegrams, or other means of telecommunication including electronic communications that provide a record of the agreement [1].\n\nRelated provisions:\n- Section 2 of the Arbitration and Conciliation Act, 1996, which covers definitions including that an \"arbitration agreement\" means an agreement referred to in section 7 [2].\n- Section 8 of the Arbitration and Conciliation Act, 1996, which covers the power to refer parties to arbitration where there is an arbitration agreement [7].\n- Section 44 of the Arbitration and Conciliation Act, 1996, whi",
+   "score": 3
+  },
+  {
+   "id": 33,
+   "question": "How does the property of a Hindu male who dies without a will devolve?",
+   "gold": [
+    "IND_central_1713|s008"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 9.9,
+   "nSources": 13,
+   "queries": [
+    "How does the property of a Hindu male who dies without a will devolve?",
+    "Hindu male intestate succession devolution of property heirs class I class II",
+    "Hindu Succession Act section 8",
+    "Hindu Succession Act section 9 general rules of succession"
+   ],
+   "topSources": [
+    "The Hindu Succession Act, 1956 s8",
+    "The Hindu Succession Act, 1956 s9",
+    "The Indian Succession Act, 1925 s32",
+    "The Hindu Succession Act, 1956 s31",
+    "The Hindu Succession Act, 1956 s22"
+   ],
+   "answer": "The property of a male Hindu dying intestate devolves firstly upon the heirs being the relatives specified in class I of the Schedule, secondly if there is no heir of class I then upon the heirs being the relatives specified in class II of the Schedule, thirdly if there is no heir of any of the two classes then upon the agnates of the deceased, and lastly if there is no agnate then upon the cognates of the deceased, according to Section 8 of the Hindu Succession Act, 1956 [1]. As explained in the Supreme Court judgment \"Revanasiddappa & Anr. versus Mallikarjun & Ors.\", Section 8 of the Hindu Succession Act, 1956 provides for these general rules of succession applicable to the devolution of the property of a male Hindu dying intestate [1].\n\nRelated provisions:\n- Section 9 of the Hindu Succession Act, 1956, covering that among the heirs specified in the Schedule, those in class I shall take simultaneously and to the exclusion of all other heirs; those in the first entry in class II shall be preferred to those in the second entry; those in the second entry shall be preferred to those in the third entry; and so on in succession [2].\n- Section 29 of the Hindu Succession Act, 1956, cover",
+   "score": 3
+  },
+  {
+   "id": 34,
+   "question": "Does an acknowledgment in writing extend the limitation period?",
+   "gold": [
+    "IND_central_1565|s018"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 10.7,
+   "nSources": 13,
+   "queries": [
+    "Does an acknowledgment in writing extend the limitation period?",
+    "acknowledgment in writing effect on limitation period extension",
+    "Limitation Act section 18 effect of acknowledgment in writing",
+    "Limitation Act section 19 acknowledgment of payment debt"
+   ],
+   "topSources": [
+    "The Limitation Act, 1963 s18",
+    "The Limitation Act, 1963 s19",
+    "The Limitation Act, 1963 s20",
+    "The Indian Limitation Act 1871, 9 of 1871, (Rep., Act 15 of 1877) s20",
+    "The Indian Limitation Act 1908, 9 of 1908 (Rep., Act 36 of 1963) s16"
+   ],
+   "answer": "Yes, an acknowledgment in writing of liability in respect of any property or right, made before the expiration of the prescribed period for a suit or application by the party against whom it is claimed or by any person through whom they derive title or liability, computes a fresh period of limitation from the time when the acknowledgment was signed, as stated in Section 18 of the Limitation Act, 1963 [1]. The Supreme Court in OPG Power Generation Private Limited v. Enexio Power Cooling Solutions India Private Limited & Anr. noted that Section 18 of the Limitation Act, 1963 deals with the effect of acknowledgment in writing, providing that a fresh period of limitation shall be computed from the time the acknowledgment was signed when made before the expiration of the prescribed period [1].\n\nConditions and time limits:\n- The acknowledgment must be made before the expiration of the prescribed period for the suit or application [1][12].\n- It must be in writing and signed by the party against whom the property or right is claimed, or by any person through whom they derive their title or liability (or signed personally or by an agent duly authorised in that behalf) [1][12].\n- It must be ",
+   "score": 3
+  },
+  {
+   "id": 35,
+   "question": "How is a sale of immovable property defined and completed?",
+   "gold": [
+    "IND_central_2338|s054"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 11.6,
+   "nSources": 13,
+   "queries": [
+    "How is a sale of immovable property defined and completed?",
+    "sale of immovable property definition completion transfer of ownership",
+    "Transfer of Property Act section 54 sale how made",
+    "Registration Act section 17 compulsory registration of sale deed"
+   ],
+   "topSources": [
+    "The Transfer of Property Act, 1882 s54",
+    "The Registration Act, 1908 s17",
+    "The Income-tax Act, 1961 s65",
+    "The Code of Civil Procedure, 1908 sO21R94",
+    "The Transfer of Property Act, 1882 s38"
+   ],
+   "answer": "- A sale is defined as a transfer of ownership in exchange for a price paid or promised or part-paid and part-promised, according to Section 54 of the Transfer of Property Act, 1882 [1].\n- In order to constitute a sale, there must be a transfer of ownership from one person to another, where all rights and interests in the property possessed by a person are transferred with free consent to another person for a price called consideration, so that the title in the property passes from the seller to the buyer as stated in Lucknow Nagar Nigam & Others versus Kohli Brothers Colour Lab. Pvt. Ltd. & Others [11].\n- A transfer in the case of tangible immovable property of the value of one hundred rupees and upwards, or in the case of a reversion or other intangible thing, can be made only by a registered instrument, as provided in Section 54 of the Transfer of Property Act, 1882 [1].\n- In the State of Assam, such transfer must be by an instrument registered in the State of Assam, notwithstanding anything contained in the Indian Registration Act, 1908, as set out in Section 54 of the Transfer of Property Act, 1882 [1].\n- In the case of tangible immovable property of a value less than one hund",
+   "score": 3
+  },
+  {
+   "id": 36,
+   "question": "What is the difference between a condition and a warranty in a sale of goods?",
+   "gold": [
+    "IND_central_2390|s012"
+   ],
+   "goldFound": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 12.4,
+   "nSources": 13,
+   "queries": [
+    "What is the difference between a condition and a warranty in a sale of goods?",
+    "difference between condition and warranty sale of goods stipulation breach treat as repudiation",
+    "Sale of Goods Act section 12 condition warranty definition",
+    "Sale of Goods Act section 13 when condition to be treated as warranty"
+   ],
+   "topSources": [
+    "The Sale of Goods Act, 1930 s12",
+    "The Sale of Goods Act, 1930 s13",
+    "The Indian Contract Act, 1872 s115",
+    "The Sale of Goods Act, 1930 s16",
+    "The Sale of Goods Act, 1930 s59"
+   ],
+   "answer": "A condition is a stipulation essential to the main purpose of a contract of sale, the breach of which gives rise to a right to treat the contract as repudiated, while a warranty is a stipulation collateral to the main purpose of the contract, the breach of which gives rise to a claim for damages but not to a right to reject the goods and treat the contract as repudiated, under Section 12 of the Sale of Goods Act, 1930 [1]. This distinction is also discussed in the Supreme Court judgment Rajratan Babulal Agarwal versus Solartex India Pvt. Ltd. & Ors [11].\n\nRelated provisions:\n- Section 13 of the Sale of Goods Act, 1930, covering when condition to be treated as warranty [2].\n- Section 16 of the Sale of Goods Act, 1930, covering implied conditions as to quality or fitness [4].\n- Section 59 of the Sale of Goods Act, 1930, covering remedy for breach of warranty [5].\n- Section 60 of the Sale of Goods Act, 1930, covering repudiation of contract before due date [10].",
+   "score": 3
+  }
+ ]
+}

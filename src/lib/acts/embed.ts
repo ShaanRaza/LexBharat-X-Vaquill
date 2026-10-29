@@ -11,9 +11,33 @@ const cache = (g.__embedCache ??= new LruCache<number[]>(500));
 const inflight = (g.__embedInflight ??= new Map<string, Promise<number[]>>());
 export const embedStats = (g.__embedStats ??= { calls: 0, tokens: 0, cacheHits: 0 });
 
+// Evaluation runs only (both unset in production): EMBED_CACHE_FILE keeps query vectors on disk so a repeated evaluation makes no new Voyage requests, and EMBED_MIN_INTERVAL_MS spaces real requests out (the free account allows 3 a minute).
+const diskFile = () => process.env.EMBED_CACHE_FILE?.trim() || "";
+let disk: Record<string, number[]> | null = null, lastCall = 0;
+async function diskLoad(): Promise<Record<string, number[]>> {
+  if (disk) return disk;
+  disk = {};
+  const f = diskFile(); if (!f) return disk;
+  try { disk = JSON.parse(await (await import("node:fs/promises")).readFile(f, "utf8")); } catch { /* no file yet */ }
+  return disk!;
+}
 async function callVoyage(inputs: string[], dim: number): Promise<number[][]> {
   const apiKey = process.env.VOYAGE_API_KEY?.trim();
   if (!apiKey) throw new Error("no voyage key");
+  if (diskFile()) {
+    const d = await diskLoad(), keys = inputs.map((q) => `${dim}|${cacheKey(q)}`);
+    if (keys.every((k) => d[k])) return keys.map((k) => d[k]);
+    const gap = Number(process.env.EMBED_MIN_INTERVAL_MS) || 0, wait = lastCall + gap - Date.now();
+    if (wait > 0) await new Promise((r) => setTimeout(r, wait));
+    lastCall = Date.now();
+    const vecs = await callVoyageRaw(inputs, dim, apiKey);
+    vecs.forEach((v, i) => { d[keys[i]] = v; });
+    await (await import("node:fs/promises")).writeFile(diskFile(), JSON.stringify(d));
+    return vecs;
+  }
+  return callVoyageRaw(inputs, dim, apiKey);
+}
+async function callVoyageRaw(inputs: string[], dim: number, apiKey: string): Promise<number[][]> {
   const r = await fetch(VOYAGE_URL, {
     method: "POST", headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" }, cache: "no-store", signal: AbortSignal.timeout(10000),
     body: JSON.stringify({ input: inputs, model: VOYAGE_MODEL, input_type: "query", output_dimension: dim }),

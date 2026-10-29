@@ -22,3 +22,4 @@ src/content/templates.generated.json
 
 # India Code Act PDFs used to fill content/supplement (reuse terms not confirmed; the list is in content/supplement/pdfs/SOURCES.md)
 content/supplement/pdfs/*.pdf
+docs/eval/.cache/
