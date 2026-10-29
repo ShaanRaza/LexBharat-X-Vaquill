@@ -1,0 +1,955 @@
+{
+ "label": "fix-b-hard",
+ "at": "2026-10-29T07:39:21.807Z",
+ "rows": [
+  {
+   "id": 101,
+   "kind": "plain",
+   "question": "My tenant isn't paying rent, what can I do?",
+   "gold": [
+    "IND_central_2338|s111",
+    "IND_central_2338|s114",
+    "IND_central_2338|s114A"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": false,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 15.7,
+   "nSources": 13,
+   "queries": [
+    "My tenant isn't paying rent, what can I do?",
+    "tenant default in payment of rent eviction grounds determination of lease",
+    "Transfer of Property Act section 111 determination of lease forfeiture",
+    "state rent control act non payment of rent eviction procedure"
+   ],
+   "topSources": [
+    "The Transfer of Property Act, 1882 s111",
+    "The Central Provinces Tenancy Act, 1898 s66",
+    "The Punjab Tenancy Act, 1887. s44",
+    "The Portuguese Code of Civil Procedure, 1939 s2",
+    "The Gujarat Provincial Municipal Corporations Act, 1949 s1"
+   ],
+   "answer": "A landlord can apply to eject a tenant for arrears of rent under certain tenancy laws or take steps based on default in payment. Under Section 44 of the Punjab Tenancy Act, 1887, for an arrear of rent, the Revenue-officer shall cause a notice to be served on the tenant after receiving an application [3]. Under Section 85 of the Central Provinces Tenancy Act, 1898, a decree for an arrear of rent due in respect of an occupancy or ordinary holding or a holding held by a sub-tenant may be executed by the ejectment of the tenant, and the order shall be transferred to a Revenue-officer for execution who shall cause a notice to be served upon the tenant [9]. Under Section 15 of the Delhi Rent Control Act, 1958, in every proceeding for the recovery of possession on the ground of default in rent, the Controller shall make an order directing the tenant to pay or deposit the amount [8].\n\nConditions and time limits:\n- Under Section 44 of the Punjab Tenancy Act, 1887, the tenant is informed that if he does not pay the amount due to the Revenue-officer within fifteen days from receipt of the notice, he will be ejected [3].\n- Under Section 85 of the Central Provinces Tenancy Act, 1898, the notice",
+   "score": 2
+  },
+  {
+   "id": 102,
+   "kind": "plain",
+   "question": "A car hit my father and drove away. How do we claim compensation?",
+   "gold": [
+    "IND_central_1798|s161",
+    "IND_central_1798|s163"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 13.8,
+   "nSources": 13,
+   "queries": [
+    "A car hit my father and drove away. How do we claim compensation?",
+    "hit and run motor vehicle accident compensation claim application procedure",
+    "Motor Vehicles Act section 161 scheme for compensation in hit and run motor accidents",
+    "Bharatiya Nagarik Suraksha Sanhita information in road accident cases and injury compensation"
+   ],
+   "topSources": [
+    "The Motor Vehicles Act, 1988 s161",
+    "The Motor Vehicles Act, 1988 s163",
+    "The Motor Vehicles Act, 1988 s166",
+    "The Motor Vehicle Act, 1939 s161",
+    "The Motor Vehicles Act, 1988 s1"
+   ],
+   "answer": "- You can make an application for compensation if your father suffered death or grievous hurt from a hit and run motor accident, which is defined as an accident arising out of the use of a motor vehicle whose identity cannot be ascertained in spite of reasonable efforts [1].\n- The application for compensation may be made by the person who has sustained the injury, by the owner of the property, by all or any of the legal representatives where death has resulted, or by any agent duly authorised by the injured person or legal representatives [3].\n- Where all legal representatives have not joined the application, it shall be made on behalf of or for the benefit of all legal representatives, and those who have not joined shall be impleaded as respondents [3].\n- The application shall be made, at the option of the claimant, either to the Claims Tribunal having jurisdiction over the area where the accident occurred, or to the Claims Tribunal within the local limits of whose jurisdiction the claimant resides or carries on business or the defendant resides [3].\n- The fixed sum payable as compensation is twenty-five thousand rupees in respect of death and twelve thousand and five hundred rupe",
+   "score": 3
+  },
+  {
+   "id": 103,
+   "kind": "plain",
+   "question": "Can the police arrest me without a warrant?",
+   "gold": [
+    "IND_central_20099|s035"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 14.9,
+   "nSources": 13,
+   "queries": [
+    "Can the police arrest me without a warrant?",
+    "police arrest without warrant cognizable offence procedure",
+    "Bharatiya Nagarik Suraksha Sanhita section 35 arrest without order of magistrate",
+    "Code of Criminal Procedure section 41 arrest without warrant"
+   ],
+   "topSources": [
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s35",
+    "The CODE OF CRIMINAL PROCEDURE, 1973 s41",
+    "The Immigration and Foreigners Act, 2025 s25",
+    "The UTTAR PRADESH MUNICIPAL CORPORATION ACT, 1959 s1",
+    "The Bharatiya Nyaya Sanhita, 2023 (Draft stage of translated version) s?"
+   ],
+   "answer": "Yes, the police can arrest you without a warrant under certain circumstances [1][2][7][13]. \n\n- A police officer may without an order from a Magistrate and without a warrant arrest any person who commits a cognizable offence in the officer's presence [1][2].\n- A police officer may arrest without a warrant someone against whom a reasonable complaint has been made, credible information has been received, or reasonable suspicion exists of having committed a cognizable offence punishable with imprisonment for a term less than seven years or extending up to seven years, provided specific conditions are satisfied and reasons are recorded in writing [1][2][12].\n- A police officer may arrest without a warrant a person against whom credible information has been received of committing a cognizable offence punishable with imprisonment for more than seven years, a death sentence, or if the person is a proclaimed offender [1][2].\n- A police officer may arrest without a warrant anyone found in possession of reasonably suspected stolen property, anyone who obstructs a police officer in the execution of duty or escapes from lawful custody, or anyone reasonably suspected of being a deserter from th",
+   "score": 3
+  },
+  {
+   "id": 104,
+   "kind": "plain",
+   "question": "I lent my friend money three years ago. Is it too late to file a case to get it back?",
+   "gold": [
+    "IND_central_1565|sA19"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 4,
+   "cited": true,
+   "correct": false,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 18.2,
+   "nSources": 13,
+   "queries": [
+    "I lent my friend money three years ago. Is it too late to file a case to get it back?",
+    "recovery of money lent debt suit limitation period",
+    "Limitation Act article 19 money lent under an agreement",
+    "Limitation Act article 30 money lent payable on demand"
+   ],
+   "topSources": [
+    "The Constitution of India sA19",
+    "The Constitution of India sA30",
+    "The Limitation Act, 1963 sA21",
+    "The Limitation Act, 1963 sA19",
+    "The Chhattisgarh Co-operative Societies Act, 1960 s1"
+   ],
+   "answer": "I couldn't find a direct answer to whether it is too late to file a case to get your money back in the Acts I searched, as limitation periods depend on the specific nature of the agreement (such as whether it was a loan payable on demand, a loan where a cheque was given, or money deposited under an agreement), though the general period of limitation for suits relating to contracts such as money lent or money deposited under an agreement payable on demand is three years under the Limitation Act, 1963 [3][4][7].\n\nConditions and time limits:\n- For a suit for money lent under an agreement that it shall be payable on demand, the period of limitation is three years beginning from when the loan is made, as provided in Article 21 of the Limitation Act, 1963 [3].\n- For a suit for money payable for money lent, the period of limitation is three years beginning from when the loan is made, as provided in Article 19 of the Limitation Act, 1963 [4].\n- For a suit for money lent when the lender has given a cheque for the money, the period of limitation is three years beginning from when the cheque is paid, as provided in Article 20 of the Limitation Act, 1963 [6].\n- For a suit for money deposited u",
+   "score": 2
+  },
+  {
+   "id": 105,
+   "kind": "plain",
+   "question": "I think I may be arrested in a false case. Can I get bail before they arrest me?",
+   "gold": [
+    "IND_central_20099|s482"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 13.9,
+   "nSources": 13,
+   "queries": [
+    "I think I may be arrested in a false case. Can I get bail before they arrest me?",
+    "direction for grant of bail to person apprehending arrest anticipatory bail",
+    "Bharatiya Nagarik Suraksha Sanhita section 482 direction for grant of bail to person apprehending arrest",
+    "Code of Criminal Procedure section 438 anticipatory bail"
+   ],
+   "topSources": [
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s482",
+    "The CODE OF CRIMINAL PROCEDURE, 1973 s438",
+    "The CODE OF CRIMINAL PROCEDURE, 1973 s38",
+    "The CODE OF CRIMINAL PROCEDURE (AMENDMENT) ACT, 2005 s8",
+    "The CODE OF CRIMINAL PROCEDURE (AMENDMENT) ACT, 2005 s38"
+   ],
+   "answer": "Yes, any person who has reason to believe that they may be arrested on an accusation of having committed a non-bailable offence may apply to the High Court or the Court of Session for a direction that, in the event of such arrest, they shall be released on bail under Section 482 of the Bharatiya Nagarik Suraksha Sanhita, 2023 [1] (or under Section 438 of the Code of Criminal Procedure, 1973 in the provided amendments [3][4][5][6]).\n\nConditions and time limits:\n- The court may include conditions in the light of the facts of the particular case, such as requiring the person to make themselves available for interrogation by a police officer as and when required [1][2].\n- A condition that the person shall not, directly or indirectly, make any inducement, threat or promise to any person acquainted with the facts of the case to dissuade them from disclosing such facts to the Court or any police officer [1][2].\n- A condition that the person shall not leave India without the previous permission of the Court [1][2].\n- Where the court grants an interim order, a notice of not less than seven days, along with a copy of the order, must be served on the Public Prosecutor and the Superintendent o",
+   "score": 3
+  },
+  {
+   "id": 106,
+   "kind": "plain",
+   "question": "My husband beats me. What law protects me?",
+   "gold": [
+    "IND_central_2021|s018",
+    "IND_central_20062|s085"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": false,
+   "rank": null,
+   "cited": false,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 13.4,
+   "nSources": 13,
+   "queries": [
+    "My husband beats me. What law protects me?",
+    "domestic violence protection of women reliefs residence order magistrate",
+    "Protection of Women from Domestic Violence Act section 12",
+    "Bharatiya Nyaya Sanhita section 85 husband cruelty to woman"
+   ],
+   "topSources": [
+    "The Protection of Women from Domestic Violence Act, 2005 s12",
+    "The Bharatiya Nyaya Sanhita, 2023 s85",
+    "The Divorce Act, 1869 s3",
+    "The Protection of Women from Domestic Violence Act, 2005 s5",
+    "The Protection of Women from Domestic Violence Act, 2005 s2"
+   ],
+   "answer": "- When a husband subjects his wife to cruelty, he shall be punished with imprisonment for a term which may extend to three years and shall also be liable to fine under Section 85 of the Bharatiya Nyaya Sanhita, 2023 [2].\n- Civil law remedies and protection against domestic violence are also provided under the Protection of Women from Domestic Violence Act, 2005, where acts such as physical abuse, sexual abuse, verbal and emotional abuse, and economic abuse constitute domestic violence under Section 3 of the Protection of Women from Domestic Violence Act, 2005 [10].\n- Police officers, Protection Officers, service providers, and Magistrates have a duty to inform an aggrieved person of her rights—including the right to seek protection, monetary, custody, residence, or compensation orders, and the right to file a complaint under Section 498A of the Indian Penal Code—under Section 5 of the Protection of Women from Domestic Violence Act, 2005 [4].\n- In the Supreme Court judgment of Vaishali Abhimanyu Joshi versus Nanasaheb Gopal Joshi, the Court noted that where a woman is subjected to cruelty by her husband or his relatives, it is an offence, and the Protection of Women from Domestic Vi",
+   "score": 1
+  },
+  {
+   "id": 107,
+   "kind": "plain",
+   "question": "What is the punishment for drunk driving?",
+   "gold": [
+    "IND_central_1798|s185"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 12.5,
+   "nSources": 13,
+   "queries": [
+    "What is the punishment for drunk driving?",
+    "driving by a drunken person or by a person under the influence of drugs punishment",
+    "Motor Vehicles Act section 185 driving under influence of alcohol or drugs",
+    "Motor Vehicles Act section 202 power to arrest for driving under influence of alcohol"
+   ],
+   "topSources": [
+    "The Motor Vehicles Act, 1988 s185",
+    "The Motor Vehicles Act, 1988 s202",
+    "The Motor Vehicles Act, 1939, 4 of 1939 (Rep., Act 59 of 1988) s117",
+    "The Motor Vehicle Act 1988 s185",
+    "The Motor Vehicles Act, 1988 s203"
+   ],
+   "answer": "Whoever drives or attempts to drive a motor vehicle while having alcohol exceeding 30 mg per 100 ml of blood detected by a breath analyser, or while under the influence of a drug to such an extent as to be incapable of exercising proper control over the vehicle, is punishable for the first offence with imprisonment for a term up to six months, or with a fine up to two thousand rupees, or with both [1]. For a second or subsequent offence committed within three years of the previous similar offence, the punishment is imprisonment for a term up to two years, or a fine up to three thousand rupees, or with both [1].\n\nRelated provisions:\n- Section 202 of the Motor Vehicles Act, 1988 covers \"Power to arrest without warrant\" [2].\n- Section 203 of the Motor Vehicles Act, 1988 covers \"Breath tests\" [5].\n- Section 204 of the Motor Vehicles Act, 1988 covers \"Laboratory test\" [6].\n- Section 205 of the Motor Vehicles Act, 1988 covers \"Presumption of unfitness to drive\" [8].",
+   "score": 3
+  },
+  {
+   "id": 108,
+   "kind": "plain",
+   "question": "Can I file for divorce in the first year of marriage?",
+   "gold": [
+    "IND_central_1560|s014"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 15.9,
+   "nSources": 13,
+   "queries": [
+    "Can I file for divorce in the first year of marriage?",
+    "divorce petition before expiration of one year of marriage restriction",
+    "Hindu Marriage Act section 14 divorce within one year",
+    "dissolution of marriage exceptional hardship or depravity"
+   ],
+   "topSources": [
+    "The Hindu Marriage Act, 1955 s14",
+    "The Special Marriage Act, 1954 s29",
+    "The Hindu Marriage Act, 1955 s13",
+    "The Hindu Marriage Act, 1955 s12",
+    "The Special Marriage Act, 1954 s4"
+   ],
+   "answer": "Under Section 14 of the Hindu Marriage Act, 1955 and Section 29 of the Special Marriage Act, 1954, it is not competent for any court to entertain a petition for dissolution of marriage by a decree of divorce unless one year has elapsed (or passed) since the date of the marriage (or since the date of entering the certificate of marriage in the Marriage Certificate Book) [1][2]. However, the court may allow a petition to be presented before one year has elapsed upon an application made to it on the ground of exceptional hardship to the petitioner or exceptional depravity on the part of the respondent [1][2].\n\nConditions and time limits:\n- The general rule requires one full year to have elapsed or passed from the date of the marriage (or marriage certificate entry) before a divorce petition can be presented [1][2].\n- An exception allows filing before one year has elapsed only if the court grants leave upon an application showing exceptional hardship to the petitioner or exceptional depravity on the respondent [1][2].\n- If leave is obtained by misrepresentation or concealment, any decree pronounced may be conditioned not to take effect until after the expiry of one year, or the petitio",
+   "score": 3
+  },
+  {
+   "id": 109,
+   "kind": "hinglish",
+   "question": "cheque bounce ho gaya kya karu",
+   "gold": [
+    "IND_central_2189|s138"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 13.1,
+   "nSources": 13,
+   "queries": [
+    "cheque bounce ho gaya kya karu",
+    "dishonour of cheque for insufficiency of funds notice liability",
+    "Negotiable Instruments Act section 138 dishonour of cheque",
+    "Negotiable Instruments Act section 142 cognizance of offences"
+   ],
+   "topSources": [
+    "The Negotiable Instruments Act, 1881 s138",
+    "The Negotiable Instruments Act, 1881 s142",
+    "The Negotiable Instruments Act, 1881 s?",
+    "The Negotiable Instruments Act, 1881 s140",
+    "The Negotiable Instruments Act, 1881 s135"
+   ],
+   "answer": "Where a cheque drawn on an account maintained by a person with a banker for the payment of any amount of money to another person for the discharge, in whole or in part, of any debt or other liability is returned unpaid by the bank because of insufficient funds or because it exceeds the amount arranged to be paid from that account by an agreement with the bank, that person shall be deemed to have committed an offence under Section 138 of the Negotiable Instruments Act, 1881 [1]. The offence is punishable with imprisonment for a term which may be extended to two years, or with a fine which may extend to twice the amount of the cheque, or with both [1]. \n\nConditions and time limits:\n- The cheque must be presented to the bank within a period of six months from the date on which it is drawn or within the period of its validity, whichever is earlier [1].\n- The payee or holder in due course must make a demand for the payment of the said amount by giving a notice in writing to the drawer within thirty days of the receipt of information from the bank regarding the return of the cheque as unpaid [1].\n- The drawer of the cheque must fail to make the payment of the said amount to the payee or ",
+   "score": 3
+  },
+  {
+   "id": 110,
+   "kind": "hinglish",
+   "question": "police meri FIR darj nahi kar rahi, ab kya karu",
+   "gold": [
+    "IND_central_20099|s173"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 13.4,
+   "nSources": 13,
+   "queries": [
+    "police meri FIR darj nahi kar rahi, ab kya karu",
+    "information in cognizable cases police officer refuses to record FIR remedy",
+    "Bharatiya Nagarik Suraksha Sanhita section 173 information in cognizable cases",
+    "Code of Criminal Procedure section 154 police refusal to register FIR magistrate complaint"
+   ],
+   "topSources": [
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s173",
+    "The CODE OF CRIMINAL PROCEDURE, 1973 s154",
+    "The Madras District Police Act, 1859 s8",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s191",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s174"
+   ],
+   "answer": "If the police refuse to record your information regarding a cognizable offence, you may send the substance of such information, in writing and by post, to the Superintendent of Police concerned [1][2]. If the Superintendent of Police is satisfied that the information discloses the commission of a cognizable offence, he shall either investigate the case himself or direct an investigation to be made by any police officer subordinate to him, and that officer shall have all the powers of an officer in charge of a police station in relation to that offence [1][2]. If the Superintendent of Police fails to act, the aggrieved person may make an application to the Magistrate [1].\n\nRelated provisions:\n- Section 173 of the Bharatiya Nagarik Suraksha Sanhita, 2023, which covers information in cognizable cases and allows an aggrieved person to approach the Superintendent of Police or make an application to the Magistrate [1].\n- Section 154 of the Code of Criminal Procedure, 1973 [not in force], which covers information in cognizable cases and provides for sending information by post to the Superintendent of Police [2].\n- Section 174 of the Bharatiya Nagarik Suraksha Sanhita, 2023, which covers ",
+   "score": 3
+  },
+  {
+   "id": 111,
+   "kind": "hinglish",
+   "question": "kisi ne mera phone chura liya, uski saza kya hai",
+   "gold": [
+    "IND_central_20062|s303"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 13.1,
+   "nSources": 13,
+   "queries": [
+    "kisi ne mera phone chura liya, uski saza kya hai",
+    "theft punishment movable property unlawful taking",
+    "Bharatiya Nyaya Sanhita section 303 theft",
+    "Bharatiya Nagarik Suraksha Sanhita information in cognizable cases"
+   ],
+   "topSources": [
+    "The Bharatiya Nyaya Sanhita, 2023 s303",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s2",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s531",
+    "The Bharatiya Nyaya Sanhita, 2023 (Draft stage of translated version) s?",
+    "The Bharatiya Nyaya Sanhita, 2023 s306"
+   ],
+   "answer": "Whoever commits theft shall be punished with imprisonment of either description for a term which may extend to three years, or with fine, or with both, and in case of a second or subsequent conviction, with rigorous imprisonment for a term of one to five years and with fine, under Section 303 of the Bharatiya Nyaya Sanhita, 2023 [1]. If the theft is committed in any building, tent, or vessel used as a human dwelling or for the custody of property, or of any means of transport used for goods or passengers, or of any article or goods from such means of transport, the punishment is imprisonment up to seven years and a fine under Section 305 of the Bharatiya Nyaya Sanhita, 2023 [6].\n\nConditions and time limits:\n- For a first-time conviction of theft where the stolen property's value is less than five thousand rupees, upon the return or restoration of the property, the punishment shall be community service under Section 303 of the Bharatiya Nyaya Sanhita, 2023 [1].\n\nRelated provisions:\n- Section 306 of the Bharatiya Nyaya Sanhita, 2023 covers \"Theft by clerk or servant of property in possession of master\", punishable with imprisonment up to seven years and fine [5].\n- Section 304 of the",
+   "score": 3
+  },
+  {
+   "id": 112,
+   "kind": "hinglish",
+   "question": "dahej ke liye sasural wale pareshan kar rahe hain, kaunsi dhara lagegi",
+   "gold": [
+    "IND_central_20062|s085",
+    "IND_central_1679|s003"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 2,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 15.9,
+   "nSources": 13,
+   "queries": [
+    "dahej ke liye sasural wale pareshan kar rahe hain, kaunsi dhara lagegi",
+    "dowry harassment cruelty by husband or relatives of husband",
+    "Bharatiya Nyaya Sanhita section 85 husband or relative of husband subjecting woman to cruelty",
+    "Dowry Prohibition Act section 3 penalty for giving or taking dowry"
+   ],
+   "topSources": [
+    "The Bharatiya Nyaya Sanhita, 2023 s85",
+    "The Dowry Prohibition Act, 1961 s3",
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s498A",
+    "The Bharatiya Nyaya Sanhita, 2023 (Draft stage of translated version) s?",
+    "The Protection of Women from Domestic Violence Act, 2005 s3"
+   ],
+   "answer": "Sasural walo dwara dahej ke liye pareshan kiye jaane par Section 85 of the Bharatiya Nyaya Sanhita, 2023 ya Section 498A of the Indian Penal Code, 1860 ke antargat pati ya pati ke rishtedaar par karwayi ki ja sakti hai, jiske tahat agar woh mahila ko krurta (cruelty) ka shikar banate hain toh unhe teen saal tak ki kaid aur jurmana ho sakta hai [1][3]. Iske alawa, The Protection of Women from Domestic Violence Act, 2005 ki Section 3 ke tahat dahej ya anya sampatti ki mang poori karne ke liye ya na poori hone par pareshan karna gharelu hinsa (domestic violence) maana gaya hai [5].\n\nRelated provisions:\n- Section 86 of the Bharatiya Nyaya Sanhita, 2023, jo section 85 ke liye krurta (cruelty) ko paribhashit karta hai [10].\n- Section 3 of the Dowry Prohibition Act, 1961, jo dahej lene ya dene par dand ka pravdhan karta hai [2].\n- Section 4A of the Dowry Prohibition Act, 1961, jo vivah ke badle sampatti ya dhan ke vigyapan par rok lagata hai [8].\n- Section 498A of the Indian Penal Code, 1860, jo pati ya pati ke rishtedaar dwara mahila ko krurta ka shikar banane par dand deta hai [3].",
+   "score": 3
+  },
+  {
+   "id": 113,
+   "kind": "hinglish",
+   "question": "non bailable case mein bail kaise milti hai",
+   "gold": [
+    "IND_central_20099|s480"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 11.8,
+   "nSources": 13,
+   "queries": [
+    "non bailable case mein bail kaise milti hai",
+    "bail in non bailable offence procedure considerations",
+    "Bharatiya Nagarik Suraksha Sanhita section 480 bail in case of non bailable offence",
+    "Code of Criminal Procedure section 437 bail in non bailable offence"
+   ],
+   "topSources": [
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s480",
+    "The CODE OF CRIMINAL PROCEDURE, 1973 s437",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s83",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s478",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s47"
+   ],
+   "answer": "A person accused or suspected of a non-bailable offence may be released on bail by an officer in charge of a police station or by a Court (other than the High Court or Court of Session), but bail shall not be granted if there are reasonable grounds for believing that the person has been guilty of an offence punishable with death or imprisonment for life, or if the offence is cognizable and the person has a previous conviction for an offence punishable with death, imprisonment for life, or imprisonment for seven years or more, or has been previously convicted on two or more occasions of a cognizable offence punishable with imprisonment for three years or more but less than seven years, as provided in Section 480 of the Bharatiya Nagarik Suraksha Sanhita, 2023 [1]. \n\nHowever, the Court may direct that such a person be released on bail if the person is a child, a woman, sick, or infirm, or if the Court is satisfied that it is just and proper for any other special reason in cases of previous convictions, or if at any stage of the investigation, inquiry, or trial it appears there are no reasonable grounds for believing the accused committed a non-bailable offence but sufficient grounds ",
+   "score": 3
+  },
+  {
+   "id": 114,
+   "kind": "hinglish",
+   "question": "RTI ka jawab nahi aaya to appeal kahan karni hai",
+   "gold": [
+    "IND_central_2065|s019"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 14.6,
+   "nSources": 13,
+   "queries": [
+    "RTI ka jawab nahi aaya to appeal kahan karni hai",
+    "Right to Information Act penalty appeal non receipt of information",
+    "Right to Information Act section 19 appeal against decision",
+    "Right to Information Act section 20 penalties"
+   ],
+   "topSources": [
+    "The Right to Information Act, 2005 s19",
+    "The Right to Information Act, 2005 s20",
+    "The Criminal-Procedure-Code-CrPC-1973 s?",
+    "The Companies Act, 1956 No. 1 of 1956 s1",
+    "The Right to Information Act, 2005 s18"
+   ],
+   "answer": "If you do not receive a decision within the specified time under the Right to Information Act, 2005, you can prefer an appeal to an officer who is senior in rank to the Central Public Information Officer or State Public Information Officer in each public authority, as stated in Section 19 of the Right to Information Act, 2005 [1]. \n\nConditions and time limits:\n- The appeal must be preferred within thirty days from the expiry of the period specified under sub-section (1) or clause (a) of sub-section (3) of section 7, as stated in Section 19 of the Right to Information Act, 2005 [1].\n- The senior officer may admit the appeal after the expiry of the period of thirty days if satisfied that the appellant was prevented by sufficient cause from filing the appeal in time, as stated in Section 19 of the Right to Information Act, 2005 [1].\n- An appeal shall be disposed of within thirty days of the receipt of the appeal or within such extended period not exceeding a total of forty-five days from the date of filing, for reasons recorded in writing, as stated in Section 19 of the Right to Information Act, 2005 [1].\n\nRelated provisions:\n- Section 19 of the Right to Information Act, 2005 covers s",
+   "score": 3
+  },
+  {
+   "id": 115,
+   "kind": "two-act",
+   "question": "Someone cheated people online using my password. What is the punishment, and how do I prove the messages in court?",
+   "gold": [
+    "IND_central_1999|s66D",
+    "IND_central_20063|s063"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 3,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 13.2,
+   "nSources": 13,
+   "queries": [
+    "Someone cheated people online using my password. What is the punishment, and how do I prove the messages in court?",
+    "cheating by personation using computer resource identity theft punishment",
+    "Information Technology Act section 66C punishment for identity theft",
+    "Bharatiya Sakshya Adhiniyam section 63 admissibility of electronic records"
+   ],
+   "topSources": [
+    "The Information Technology Act, 2000 s66C",
+    "The Bharatiya Sakshya Adhiniyam, 2023 s63",
+    "The Information Technology Act, 2000 s66D",
+    "The Information Technology ACT, 2008 s3",
+    "The Aadhaar (Targeted Delivery of Financial and Other Subsidies, Benefits and Services) Act, 2016. s37"
+   ],
+   "answer": "I couldn't find the punishment for cheating online using someone else's password in the Acts I searched, but Section 66D of the Information Technology Act, 2000 provides that whoever, by means of any communication device or computer resource cheats by personating, shall be punished with imprisonment of either description for a term which may extend to three years and shall also be liable to fine which may extend to one lakh rupees [3]. Additionally, Section 66C of the Information Technology Act, 2000 provides that whoever fraudulently or dishonestly makes use of the electronic signature, password or any other unique identification feature of any other person shall be punished with imprisonment of either description for a term which may extend to three years and shall also be liable to fine which may extend to rupees one lakh [1].\n\nTo prove electronic messages or records in court, Section 63 of the Bharatiya Sakshya Adhiniyam, 2023 states that computer outputs (such as information contained in an electronic record printed on paper, stored, recorded, or copied in optical, magnetic, or semiconductor media) shall be deemed to be a document and shall be admissible in any proceedings, wi",
+   "score": 3
+  },
+  {
+   "id": 116,
+   "kind": "two-act",
+   "question": "A company's director signed a cheque that bounced. Is the director personally liable, and can it also be cheating?",
+   "gold": [
+    "IND_central_2189|s141",
+    "IND_central_20062|s318"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 5,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "partial",
+   "error": null,
+   "secs": 17.4,
+   "nSources": 13,
+   "queries": [
+    "A company's director signed a cheque that bounced. Is the director personally liable, and can it also be cheating?",
+    "director personal liability for dishonour of cheque company offence",
+    "Negotiable Instruments Act section 138 dishonour of cheque by company",
+    "Bharatiya Nyaya Sanhita section 316 cheating and dishonestly inducing delivery of property"
+   ],
+   "topSources": [
+    "The Negotiable Instruments Act, 1881 s138",
+    "The Bharatiya Nyaya Sanhita, 2023 s316",
+    "The Negotiable Instruments Act, 1881 s141",
+    "The Companies Act, 2013 s470",
+    "The Bharatiya Nyaya Sanhita, 2023 s318"
+   ],
+   "answer": "A director who signed a cheque that bounced is deemed guilty of an offence under Section 138 of the Negotiable Instruments Act, 1881, if they were in charge of and responsible to the company for the conduct of its business at the time the offence was committed, or if they are proved to have consented, connived, or been negligent [1]. However, a person who has resigned as a director with the knowledge of the complainant prior to the dishonour of the cheque cannot be considered a person in charge of the company at the time of dishonour [13]. Furthermore, an agent who signs their name to a cheque without indicating that they sign as an agent or do not intend to incur personal responsibility is personally liable on the instrument, except to those who induced them to sign upon the belief that only the principal would be held liable under Section 28 of the Negotiable Instruments Act, 1881 [7].\n\nRegarding whether it can also be cheating, a person who tenders in payment for an article a bill on a house with which they keep no money, and by which they expect that the bill will be dishonoured, intentionally deceives the other person and dishonestly induces them to deliver the article intendi",
+   "score": 3
+  },
+  {
+   "id": 117,
+   "kind": "two-act",
+   "question": "Is a contract signed by a 16 year old valid, and can a child be punished for a crime?",
+   "gold": [
+    "IND_central_2187|s011",
+    "IND_central_20062|s020"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": false,
+   "rank": null,
+   "cited": false,
+   "correct": false,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 19.1,
+   "nSources": 13,
+   "queries": [
+    "Is a contract signed by a 16 year old valid, and can a child be punished for a crime?",
+    "competency to contract age of majority minor agreement void",
+    "Indian Contract Act section 11",
+    "Juvenile Justice Care and Protection of Children Act age of criminal responsibility"
+   ],
+   "topSources": [
+    "The Indian Contract Act, 1872 s11",
+    "The Criminal-Procedure-Code-CrPC-1973 s?",
+    "The Portuguese Civil Code, 1867 s2",
+    "The Indian Contract Act, 1872 s248",
+    "The Child and Adolescent Labour (Prohibition and Regulation) Act, 1986 s14D"
+   ],
+   "answer": "I couldn't find provisions regarding the overall civil validity of a contract signed by a 16-year-old in the Acts I searched, other than the general rule that every person is competent to contract who is of the age of majority according to the law to which he is subject under Section 11 of the Indian Contract Act, 1872 [1], and that every person domiciled in India attains the age of majority on completing eighteen years under Section 3 of the Majority Act, 1875 [10]. \n\nRegarding whether a child can be punished for a crime:\n- Under Section 27 of the East Punjab Children's Act, 1949, no person who was a child at the date of the commission of the offence shall be sentenced to death or transported or committed to prison for any offence or in default of payment of fine, damages or costs, provided that a child who is fourteen years of age or upwards may be committed to prison where the court certifies that he is of so unruly or of so depraved a character that he is not a fit person to be sent to a certified school and that none of the other methods in which the case may legally be dealt with is suitable, as discussed in the Supreme Court judgment \"Balwant Kaur versus Union Territory of C",
+   "score": 0
+  },
+  {
+   "id": 118,
+   "kind": "two-act",
+   "question": "My husband is cruel and does not support me. Can he be punished and can I get monthly maintenance?",
+   "gold": [
+    "IND_central_20062|s085",
+    "IND_central_20099|s144"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": 2,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 18.7,
+   "nSources": 13,
+   "queries": [
+    "My husband is cruel and does not support me. Can he be punished and can I get monthly maintenance?",
+    "husband cruelty to wife punishment and maintenance",
+    "Bharatiya Nyaya Sanhita section 85 husband or relative subjecting woman to cruelty",
+    "Protection of Women from Domestic Violence Act maintenance and residence orders"
+   ],
+   "topSources": [
+    "The Bharatiya Nyaya Sanhita, 2023 s85",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s144",
+    "The Bharatiya Nyaya Sanhita, 2023 (Draft stage of translated version) s?",
+    "The Protection of Women from Domestic Violence Act, 2005 s20",
+    "The Hindu Adoptions and Maintenance  Act, 1956 s18"
+   ],
+   "answer": "A husband who subjects his wife to cruelty can be punished with imprisonment for a term that may extend to three years and is also liable to fine, under Section 85 of the Bharatiya Nyaya Sanhita, 2023 [1]. Furthermore, a magistrate of the first class may order a person having sufficient means who neglects or refuses to maintain his wife who is unable to maintain herself to make a monthly allowance for her maintenance, under Section 144 of the Bharatiya Nagarik Suraksha Sanhita, 2023 [2]. \n\nIn the Supreme Court judgment of Mohd. Abdul Samad versus The State of Telangana & Anr., it is noted that Section 125 of the CrPC is intended to provide a speedy remedy, prevent vagrancy, achieve a social purpose, and compel the husband to support the wife, and that a wife unable to maintain herself is legally entitled to enforce this right [12]. Additionally, the Supreme Court judgment of Reema Salkan versus Sumer Singh Salkan observes that an able-bodied young man is presumed capable of earning sufficient money to maintain his wife and child and is duty-bound to maintain his wife under personal law arising from marital status [13].\n\nConditions and time limits:\n- The wife must be unable to maint",
+   "score": 3
+  },
+  {
+   "id": 119,
+   "kind": "two-act",
+   "question": "Does the limitation period apply to arbitration, and how long do I have to file a suit for a loan I gave?",
+   "gold": [
+    "IND_central_1978|s043",
+    "IND_central_1565|sA19"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": false,
+   "rank": null,
+   "cited": false,
+   "correct": false,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 13.2,
+   "nSources": 13,
+   "queries": [
+    "Does the limitation period apply to arbitration, and how long do I have to file a suit for a loan I gave?",
+    "limitation period applicability to arbitration proceedings",
+    "Limitation Act period of limitation for suits to recover money lent loan",
+    "Limitation Act article for recovery of debt loan amount"
+   ],
+   "topSources": [
+    "The Chhattisgarh Co-operative Societies Act, 1960 s1",
+    "The Limitation Act, 1963 sA19",
+    "The Companies Act, 1956 No. 1 of 1956 s1",
+    "The Limitation Act, 1963 sA21",
+    "The Portuguese Civil Code, 1867 s2"
+   ],
+   "answer": "- The period of limitation in the case of any dispute which is required to be referred to arbitration is regulated by the provisions of the Limitation Act, 1963, as if the dispute was a suit and the arbitrator is a civil court, according to Section 43 of the Special Economic Zones Act, 2005 [7].\n- For money payable for money lent, the period of limitation is three years, and the period begins to run when the loan is made, as provided in Article 19 of the Limitation Act, 1963 [2].\n- For money lent under an agreement that it shall be payable on demand, the period of limitation is three years, and the period begins to run when the loan is made, as provided in Article 21 of the Limitation Act, 1963 [4].\n- When the lender has given a cheque for the money, the period of limitation is three years, and the period begins to run when the cheque is paid, as provided in Article 20 of the Limitation Act, 1963 [6].\n\nConditions and time limits:\n- Under Section 43 of the Special Economic Zones Act, 2005, an arbitrator may admit a dispute after the expiry of the period of limitation if the applicant satisfies the arbitrator that he had sufficient cause for not referring the dispute within such peri",
+   "score": 0
+  },
+  {
+   "id": 120,
+   "kind": "bns-vs-ipc",
+   "question": "What is the punishment for murder under IPC section 302?",
+   "gold": [
+    "IND_central_20062|s103"
+   ],
+   "goldFound": true,
+   "oldMention": false,
+   "retrieved": false,
+   "rank": null,
+   "cited": false,
+   "correct": false,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 11.1,
+   "nSources": 6,
+   "queries": [
+    "What is the punishment for murder under IPC section 302?",
+    "Bharatiya Nyaya Sanhita section 103 punishment for murder",
+    "Indian Penal Code section 302 punishment for murder"
+   ],
+   "topSources": [
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s302",
+    "The INDIAN PENAL CODE s302",
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s303",
+    "RAJENDRA PRASAD ETC. ETC. versus STATE OF UTTAR PRADESH s?",
+    "AJITSINGH HARNAMSINGH GUJRAL versus STATE OF MAHARASHTRA s?"
+   ],
+   "answer": "Whoever commits murder shall be punished with death, or imprisonment for life, and shall also be liable to fine, according to Section 302 of The Indian Penal Code, 45 of 1860 [1]. The same punishment is provided under Section 302 of The Indian Penal Code (Chandigarh), which states that whoever commits murder shall be punished with death or imprisonment for life, and shall also be liable to fine [1].\n\nRelated provisions:\n- Section 303 of The Indian Penal Code, 45 of 1860, regarding punishment for murder by life-convict, which states that whoever, being under sentence of imprisonment for life, commits murder shall be punished with death [3].",
+   "score": 0
+  },
+  {
+   "id": 121,
+   "kind": "bns-vs-ipc",
+   "question": "IPC 420 cheating punishment",
+   "gold": [
+    "IND_central_20062|s318"
+   ],
+   "goldFound": true,
+   "oldMention": false,
+   "retrieved": false,
+   "rank": null,
+   "cited": false,
+   "correct": false,
+   "notFound": false,
+   "check": "check",
+   "error": null,
+   "secs": 48.4,
+   "nSources": 11,
+   "queries": [
+    "IPC 420 cheating punishment"
+   ],
+   "topSources": [
+    "The Public Examinations (Prevention of Unfair Means) Act, 2024 s9",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s531",
+    "The Public Examinations (Prevention of Unfair Means) Act, 2024 s3",
+    "The Prevention of Money-Laundering Act, 2002 s75",
+    "The Bharatiya Nyaya Sanhita, 2023 s268"
+   ],
+   "answer": "I couldn't find the punishment for cheating under Section 420 of the Indian Penal Code in the Acts I searched. \n\nRegarding Supreme Court judgments, the sources contain excerpts from Edmunds Lyngdoh versus State of Meghalaya, Ram Narain Popli versus Central Bureau of Investigation, and Hridaya Rangan Pd. Verma and Ors. versus State of Bihar and Anr. [9][10][11]. Only Supreme Court judgments are searched as short excerpts, while High Court and tribunal decisions are not included yet.",
+   "score": 0
+  },
+  {
+   "id": 122,
+   "kind": "bns-vs-ipc",
+   "question": "Is section 498A of the IPC still law?",
+   "gold": [
+    "IND_central_20062|s085"
+   ],
+   "goldFound": true,
+   "oldMention": false,
+   "retrieved": false,
+   "rank": null,
+   "cited": false,
+   "correct": false,
+   "notFound": true,
+   "check": "not_found",
+   "error": null,
+   "secs": 86.6,
+   "nSources": 5,
+   "queries": [
+    "Is section 498A of the IPC still law?",
+    "Indian Penal Code section 498A husband or relative subjecting woman to cruelty repeal status",
+    "Bharatiya Nyaya Sanhita section 85 husband or relative of husband subjecting woman to cruelty",
+    "Criminal Law Amendment Act replacement of Indian Penal Code by Bharatiya Nyaya Sanhita"
+   ],
+   "topSources": [
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s498A",
+    "The INDIAN PENAL CODE s498A",
+    "SUPRIYO @ SUPRIYA CHAKRABORTY & ANR versus UNION OF INDIA s?",
+    "INDEPENDENT THOUGHT versus UNION OF INDIA & ANR. s?",
+    "NAVTEJ SINGH JOHAR & ORS. versus UNION OF INDIA THR. SECRETARY MINISTRY OF LAW AND JUSTICE s?"
+   ],
+   "answer": "I couldn't find whether Section 498A of the Indian Penal Code is still law in the Acts I searched. [1]",
+   "score": 0
+  },
+  {
+   "id": 123,
+   "kind": "bns-vs-ipc",
+   "question": "What is the new section for criminal conspiracy, earlier 120B?",
+   "gold": [
+    "IND_central_20062|s061"
+   ],
+   "goldFound": true,
+   "oldMention": true,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 13.4,
+   "nSources": 13,
+   "queries": [
+    "What is the new section for criminal conspiracy, earlier 120B?",
+    "punishment for criminal conspiracy Bharatiya Nyaya Sanhita",
+    "Bharatiya Nyaya Sanhita section 61 criminal conspiracy",
+    "Indian Penal Code section 120B criminal conspiracy equivalent"
+   ],
+   "topSources": [
+    "The Bharatiya Nyaya Sanhita, 2023 s61",
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s120B",
+    "The Bharatiya Nyaya Sanhita, 2023 s148",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s531",
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s108A"
+   ],
+   "answer": "The new provision for criminal conspiracy is Section 61 of the Bharatiya Nyaya Sanhita, 2023, replacing the earlier Section 120B [1][2].",
+   "score": 3
+  },
+  {
+   "id": 124,
+   "kind": "bns-vs-ipc",
+   "question": "What is the punishment for theft under IPC section 379?",
+   "gold": [
+    "IND_central_20062|s303"
+   ],
+   "goldFound": true,
+   "oldMention": false,
+   "retrieved": false,
+   "rank": null,
+   "cited": false,
+   "correct": false,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 10.2,
+   "nSources": 5,
+   "queries": [
+    "What is the punishment for theft under IPC section 379?",
+    "punishment for theft movable property Bharatiya Nyaya Sanhita",
+    "Bharatiya Nyaya Sanhita section 303 punishment for theft",
+    "Indian Penal Code section 379 punishment for theft"
+   ],
+   "topSources": [
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s379",
+    "The INDIAN PENAL CODE s379",
+    "RUCHIR RASTOGI versus PANKAJ RASTOGI AND OTHERS ETC. s?",
+    "GULZAR versus STATE OF M.P. s?",
+    "GILBERT PEREIRA versus STATE OF KARNATAKA s?"
+   ],
+   "answer": "Whoever commits theft shall be punished with imprisonment of either description for a term which may extend to three years, or with fine, or with both, according to Section 379 of the Indian Penal Code, 1860 [1][2].",
+   "score": 0
+  },
+  {
+   "id": 125,
+   "kind": "notfound",
+   "question": "What is the penalty under the Zorgian Space Resources Act, 2040?",
+   "gold": [],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": null,
+   "cited": true,
+   "correct": true,
+   "notFound": true,
+   "check": "not_found",
+   "error": null,
+   "secs": 60.3,
+   "nSources": 11,
+   "queries": [
+    "What is the penalty under the Zorgian Space Resources Act, 2040?",
+    "Zorgian Space Resources Act penalty offence punishment",
+    "Zorgian Space Resources Act section 2014"
+   ],
+   "topSources": [
+    "The Indian Antarctic Act, 2022 s42",
+    "The Indian Antarctic Act, 2022 s41",
+    "The Offshore Areas Mineral (Development and Regulation) Act, 2002 s23",
+    "The Coal Bearing Areas (Acquisition and Development) Act, 1957 s23",
+    "The Indian Antarctic Act, 2022 s44"
+   ],
+   "answer": "I couldn't find any mention of the Zorgian Space Resources Act, 2040 in the Acts I searched.",
+   "score": 3
+  },
+  {
+   "id": 126,
+   "kind": "notfound",
+   "question": "What did the US Supreme Court decide in Miranda v. Arizona about police questioning?",
+   "gold": [],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": null,
+   "cited": true,
+   "correct": true,
+   "notFound": true,
+   "check": "not_found",
+   "error": null,
+   "secs": 25.2,
+   "nSources": 13,
+   "queries": [
+    "What did the US Supreme Court decide in Miranda v. Arizona about police questioning?",
+    "constitutional rights of accused person right to silence legal representation",
+    "Code of Criminal Procedure section 41 right to have advocate present",
+    "Constitution of India article 20 self incrimination right to counsel"
+   ],
+   "topSources": [
+    "The CODE OF CRIMINAL PROCEDURE, 1973 s41",
+    "The Constitution of India sA20",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s340",
+    "The CONSTITUTION OF INDIA s13",
+    "The Geneva Conventions Act, 1960 s9"
+   ],
+   "answer": "I couldn't find details on what the US Supreme Court decided in Miranda v. Arizona about police questioning in the Acts I searched. I found excerpts from Supreme Court judgments mentioning Miranda v. Arizona in State (N.C.T. of Delhi) versus Navjot Sandhu@Afsan Guru and State of Punjab versus Balbir Singh and Ors. etc. etc., but those excerpts do not state what was decided about police questioning.",
+   "score": 3
+  },
+  {
+   "id": 127,
+   "kind": "notfound",
+   "question": "What is the minimum wage for a skilled worker in Karnataka this month?",
+   "gold": [],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": null,
+   "cited": true,
+   "correct": true,
+   "notFound": true,
+   "check": "not_found",
+   "error": null,
+   "secs": 18.2,
+   "nSources": 13,
+   "queries": [
+    "What is the minimum wage for a skilled worker in Karnataka this month?",
+    "Karnataka minimum wages skilled worker rate notification",
+    "Minimum Wages Act section 3 fixation of minimum rates of wages",
+    "Minimum Wages Act section 12 payment of minimum rate of wages"
+   ],
+   "topSources": [
+    "The MINIMUM WAGES ACT, 1948 s3",
+    "The Minimum Wages Act, 1948, 11 of 1948 (Rep., Act 29 of 2019) s12",
+    "The Code on Wages, 2019 s12",
+    "The PUDUCHERRY MUNICIPALITIES ACT, 1973 s54",
+    "The KARNATAKA SALES TAX ACT, 1957 s4"
+   ],
+   "answer": "I couldn't find the minimum wage for a skilled worker in Karnataka this month in the Acts I searched.",
+   "score": 3
+  },
+  {
+   "id": 128,
+   "kind": "notfound",
+   "question": "What is the current RBI repo rate?",
+   "gold": [],
+   "goldFound": true,
+   "oldMention": null,
+   "retrieved": true,
+   "rank": null,
+   "cited": true,
+   "correct": true,
+   "notFound": true,
+   "check": "not_found",
+   "error": null,
+   "secs": 23.3,
+   "nSources": 13,
+   "queries": [
+    "What is the current RBI repo rate?",
+    "RBI repo rate monetary policy interest rate determination",
+    "Reserve Bank of India Act repo rate policy rate",
+    "Banking Regulation Act interest rates policy rate"
+   ],
+   "topSources": [
+    "The Reserve Bank of India Act, 1934 s8",
+    "The Reserve Bank of India Act, 1934 s5",
+    "The Reserve Bank of India Act, 1934 s12",
+    "The Banking Regulation Act, 1949 s21",
+    "The Reserve Bank of India Act, 1934 s45T"
+   ],
+   "answer": "I couldn't find the current RBI repo rate in the Acts I searched.",
+   "score": 3
+  }
+ ]
+}

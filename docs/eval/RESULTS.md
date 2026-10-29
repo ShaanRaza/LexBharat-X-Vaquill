@@ -40,7 +40,7 @@ What fails: a repealed IPC section outranks BNS (q120 murder, q122 498A, q124 th
 
 | Change | Switch | Status |
 |---|---|---|
-| (b) hybrid keyword search + statutory rewrite | `hybridSearch`, `statutoryRewrite` | coded and unit-tested, not yet evaluated |
+| (b) hybrid keyword search + statutory rewrite | `hybridSearch`, `statutoryRewrite` | **kept (on)**: hard set 58 -> 62 of 84 (Hinglish 13 -> 18 of 18, plain 18 -> 20, two-Act q118 0 -> 3), main subset 37 -> 37; lost q119 and q121 (3 -> 0 each: unrelated Acts pulled in). One run. |
 | (c) current law first ("previously IPC s.379") | `currentLaw` | coded and unit-tested, not yet evaluated |
 | (d) citation-number check | `citationCheck` | coded and unit-tested, not yet evaluated |
 

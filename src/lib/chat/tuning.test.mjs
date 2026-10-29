@@ -8,7 +8,7 @@ import { buildChatPrompt, sourceBlock } from "./prompt.mjs";
 import cfg from "../../config/chat-tuning.json" with { type: "json" };
 import replaced from "../../config/replaced-laws.json" with { type: "json" };
 
-test("every switch is off in the shipped config until it has raised the score", () => { assert.deepEqual(tuningFlags(cfg, {}), { hybridSearch: false, statutoryRewrite: false, currentLaw: false, citationCheck: false }); });
+test("only the switches that raised the score are on in the shipped config", () => { assert.deepEqual(tuningFlags(cfg, {}), { hybridSearch: true, statutoryRewrite: true, currentLaw: false, citationCheck: false }); });
 test("an environment variable forces one switch on or off; other values use the config", () => {
   assert.equal(tuningFlags({}, { CHAT_TUNING_CURRENT_LAW: "1" }).currentLaw, true);
   assert.equal(tuningFlags({ citationCheck: true }, { CHAT_TUNING_CITATION_CHECK: "0" }).citationCheck, false);
