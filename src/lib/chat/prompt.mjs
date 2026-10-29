@@ -1,6 +1,6 @@
 // The chat prompt. PURE logic. The model sees numbered sources and must answer only from them.
 import { sectionWord } from "../acts/unitLabel.mjs";
-export const SOURCE_CHARS = 3500, MAX_SOURCES = 10, HISTORY_TURNS = 4;
+export const SOURCE_CHARS = 9000, MAX_SOURCES = 10, HISTORY_TURNS = 4;
 
 export const SYSTEM_PROMPT = `You are LexBharat's research assistant for Indian law. You answer ONLY from the numbered sources given with the question. The sources are sections of Indian Acts (Central and State) and, for some questions, short excerpts of Supreme Court judgments (each labelled as a Supreme Court judgment). You have no other information: no other case law, no news.
 
