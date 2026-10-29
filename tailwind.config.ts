@@ -69,6 +69,7 @@ const config: Config = {
         "reading": ["var(--text-reading)", { lineHeight: "var(--leading-reading)" }],
         "ui-title": ["var(--text-title)", { lineHeight: "1.2", letterSpacing: "-0.02em" }],
         "greeting": ["var(--text-greeting)", { lineHeight: "1.08", letterSpacing: "-0.02em" }],
+        "question": ["var(--text-question)", { lineHeight: "1.2", letterSpacing: "-0.015em" }],
       },
       spacing: { card: "var(--pad-card)", stack: "var(--gap-stack)", chip: "var(--pad-chip-x)", page: "var(--pad-page)", tabbar: "var(--h-tabbar)", topbar: "var(--h-topbar)" },
       lineHeight: { reading: "var(--leading-reading)", "reading-loose": "var(--leading-reading-loose)", "body": "var(--leading-body)", "display": "var(--leading-display)", "display-tight": "var(--leading-display-tight)" },
