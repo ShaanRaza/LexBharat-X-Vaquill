@@ -1,0 +1,8 @@
+{
+  "about": "Laws that were repealed and replaced. When Ask retrieves a section of an old law AND a section of its replacement, it answers from the current law and names the old section as 'previously ...' (switch: currentLaw in chat-tuning.json). `old` and `new` are the start of the Act title in lower case; `label` is how the replacement is named to the reader. Add a pair here to cover another repealed law; no code change.",
+  "pairs": [
+    { "old": "the indian penal code", "new": "the bharatiya nyaya sanhita", "label": "The Bharatiya Nyaya Sanhita, 2023" },
+    { "old": "the code of criminal procedure", "new": "the bharatiya nagarik suraksha sanhita", "label": "The Bharatiya Nagarik Suraksha Sanhita, 2023" },
+    { "old": "the indian evidence act", "new": "the bharatiya sakshya adhiniyam", "label": "The Bharatiya Sakshya Adhiniyam, 2023" }
+  ]
+}

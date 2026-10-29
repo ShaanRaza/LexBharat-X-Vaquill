@@ -26,7 +26,7 @@ export async function judgmentSources(question: string, startN: number): Promise
 
 export type ChatSource = {
   n: number; actId: string; sectionKey: string; actTitle: string; year: number | null; category: string; state: string | null; inForce: boolean; sourceUrl: string | null;
-  number: string | null; heading: string | null; status: string; text: string; via: string;
+  number: string | null; heading: string | null; status: string; text: string; via: string; /** set when the Act is repealed and its replacement is also among the sources */ replacedBy?: string;
   /** a passage of the user's own attached document (see src/lib/vault/search.ts) */
   kind?: "doc" | "judgment"; docId?: string; caseId?: string; caseYear?: number; passage?: number; docName?: string; page?: number | null; label?: string | null; /** the page was read from a scan */ scan?: boolean;
 };
@@ -34,8 +34,10 @@ export type Retrieval = { sources: ChatSource[]; searchMode: "semantic" | "text"
 
 const keyOf = (h: SectionHit) => `${h.actId}|${h.sectionKey}`;
 import { narrowToExact } from "./exact.mjs";
+import { currentLawFirst } from "./currentlaw.mjs";
+import replaced from "@/config/replaced-laws.json";
 
-export async function retrieveSources(question: string, history: { role: string; content: string }[] = [], extraQueries: string[] = [], k = MAX_SOURCES, forced: string[] = []): Promise<Retrieval> {
+export async function retrieveSources(question: string, history: { role: string; content: string }[] = [], extraQueries: string[] = [], k = MAX_SOURCES, forced: string[] = [], opts: { hybrid?: boolean; currentLaw?: boolean } = {}): Promise<Retrieval> {
   const hits = new Map<string, SectionHit>(), first: string[] = [], lists: string[][] = [];
   let mode: Retrieval["searchMode"] = "none", note = "";
   const usable = (h: SectionHit) => h.status !== "garbled";
@@ -58,9 +60,17 @@ export async function retrieveSources(question: string, history: { role: string;
     own.forEach((h) => hits.set(keyOf(h), h));
     lists.push(own.map(keyOf));
   });
+  // hybrid (switch): also keyword-search every query and merge those lists in, so a section whose words match is not lost to a vague meaning match
+  if (opts.hybrid) {
+    const kw = await Promise.all(queries.map((q) => searchSections(q, 1, 12, { exact: true })));
+    for (const r of kw) { if (!r.available) continue; const own = r.results.filter(usable).slice(0, 8); own.forEach((h) => { if (!hits.has(keyOf(h))) hits.set(keyOf(h), h); }); if (own.length) lists.push(own.map(keyOf)); }
+  }
+  const pool = opts.currentLaw ? mergeRanked(lists, 40, first).map((key) => hits.get(key)!).filter(Boolean) : [];
   let picked = mergeRanked(lists, k, first).map((key) => hits.get(key)!).filter(Boolean);
   // The question names an exact provision: that unit goes first and sources from unrelated Acts are dropped (a few neighbours from the same Act stay), so the answer check is not confused by noise.
   if (exact.length) picked = narrowToExact(picked, exact, keyOf);
+  // current law first (switch): a repealed section and its replacement together -> the replacement leads and the old one is marked replaced
+  if (opts.currentLaw) picked = currentLawFirst(picked, pool, replaced.pairs, { k, keyOf });
   if (!picked.length) return { sources: [], searchMode: mode, note, queries, exactKeys: [] };
   const rows = await query<{ act_id: string; section_key: string; body: string | null }>(
     `SELECT s.act_id, s.section_key, left(s.body, 9000) AS body FROM act_sections_v s JOIN unnest($1::text[], $2::text[]) AS k(a, sk) ON s.act_id = k.a AND s.section_key = k.sk`, [picked.map((h) => h.actId), picked.map((h) => h.sectionKey)]);
@@ -70,7 +80,7 @@ export async function retrieveSources(question: string, history: { role: string;
     const text = body.get(keyOf(h))?.trim();
     if (!text) continue;
     sources.push({ n: sources.length + 1, actId: h.actId, sectionKey: h.sectionKey, actTitle: h.actTitle, year: h.year, category: h.category, state: h.state, inForce: h.actStatus === "in_force", sourceUrl: h.sourceUrl,
-      number: h.number, heading: h.heading, status: h.status, text, via: h.via });
+      number: h.number, heading: h.heading, status: h.status, text, via: h.via, ...((h as SectionHit & { replacedBy?: string }).replacedBy ? { replacedBy: (h as SectionHit & { replacedBy?: string }).replacedBy } : {}) });
   }
   sources.push(...(await judgmentSources(retrievalQuery(question, history), sources.length + 1)));
   return { sources, searchMode: mode, note, queries, exactKeys: first };

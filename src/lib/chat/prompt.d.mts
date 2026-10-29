@@ -1,4 +1,4 @@
-export type PromptSource = { n: number; actTitle: string; year?: number | null; state?: string | null; inForce?: boolean; number: string | null; heading?: string | null; text: string; kind?: "doc" | "judgment"; docName?: string; page?: number | null; label?: string | null };
+export type PromptSource = { n: number; actTitle: string; year?: number | null; state?: string | null; inForce?: boolean; replacedBy?: string; number: string | null; heading?: string | null; text: string; kind?: "doc" | "judgment"; docName?: string; page?: number | null; label?: string | null };
 export const DOC_ADDENDUM: string;
 export const JUDGMENT_ADDENDUM: string;
 export const SOURCE_CHARS: number, MAX_SOURCES: number, HISTORY_TURNS: number, SYSTEM_PROMPT: string, CHECK_SYSTEM: string;

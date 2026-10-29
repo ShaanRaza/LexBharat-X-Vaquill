@@ -1,5 +1,6 @@
 // The chat prompt. PURE logic. The model sees numbered sources and must answer only from them.
 import { sectionWord } from "../acts/unitLabel.mjs";
+import { REPLACED_ADDENDUM } from "./currentlaw.mjs";
 export const SOURCE_CHARS = 9000, MAX_SOURCES = 10, HISTORY_TURNS = 4;
 
 export const SYSTEM_PROMPT = `You are LexBharat's research assistant for Indian law. You answer ONLY from the numbered sources given with the question. The sources are sections of Indian Acts (Central and State) and, for some questions, short excerpts of Supreme Court judgments (each labelled as a Supreme Court judgment). You have no other information: no other case law, no news.
@@ -24,7 +25,7 @@ const clip = (s, n) => (s.length > n ? s.slice(0, n).replace(/\s+\S*$/, "") + " 
 export function sourceBlock(s) {
   if (s.kind === "judgment") return `[${s.n}] SUPREME COURT JUDGMENT "${s.actTitle}"${s.label ? ` ${s.label}` : ""}${s.page ? `, page ${s.page}` : ""} (an excerpt)\n${clip(s.text, SOURCE_CHARS)}`;
   if (s.kind === "doc") return `[${s.n}] YOUR DOCUMENT "${s.docName ?? s.actTitle}" — ${s.page ? `page ${s.page}` : "document text"}${s.label ? `, ${s.label}` : ""}\n${clip(s.text, SOURCE_CHARS)}`;
-  const head = `[${s.n}] ${s.actTitle}${s.state ? ` (${s.state.replace(/-/g, " ")})` : ""}${s.inForce === false ? " [not in force]" : ""} — ${s.number ? sectionWord(s.number) : "Unnumbered text"}${s.heading ? ` (${s.heading})` : ""}`;
+  const head = `[${s.n}] ${s.actTitle}${s.state ? ` (${s.state.replace(/-/g, " ")})` : ""}${s.inForce === false ? ` [not in force${s.replacedBy ? `; replaced by ${s.replacedBy}` : ""}]` : ""} — ${s.number ? sectionWord(s.number) : "Unnumbered text"}${s.heading ? ` (${s.heading})` : ""}`;
   return `${head}\n${clip(s.text, SOURCE_CHARS)}`;
 }
 
@@ -51,7 +52,7 @@ export function buildChatPrompt({ question, history = [], sources }) {
   const hasDoc = sources.some((x) => x.kind === "doc"), hasJudgment = sources.some((x) => x.kind === "judgment");
   const past = history.slice(-HISTORY_TURNS * 2).map((m) => ({ role: m.role, content: clip(m.content, 1500) }));
   const block = sources.length ? sources.map(sourceBlock).join("\n\n") : "(no sections were found for this question)";
-  return { system: SYSTEM_PROMPT + (hasDoc ? DOC_ADDENDUM : "") + (hasJudgment ? JUDGMENT_ADDENDUM : ""), messages: [...past, { role: "user", content: `Sources:\n\n${block}\n\nQuestion: ${question}` }] };
+  return { system: SYSTEM_PROMPT + (hasDoc ? DOC_ADDENDUM : "") + (hasJudgment ? JUDGMENT_ADDENDUM : "") + (sources.some((x) => x.replacedBy) ? REPLACED_ADDENDUM : ""), messages: [...past, { role: "user", content: `Sources:\n\n${block}\n\nQuestion: ${question}` }] };
 }
 
 /** The search text for a question: a very short follow-up ("and for a company?") borrows the previous user question for retrieval. */

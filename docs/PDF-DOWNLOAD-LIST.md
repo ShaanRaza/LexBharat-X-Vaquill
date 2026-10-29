@@ -24,6 +24,9 @@
 | 1 | 14 | The Insurance Act, 1938 | 1938 (4) | 01-01-1938 to 31-12-1938 | `insurance-act-1938.pdf` | about 174 missing sections |
 | 1 | 15 | The Protection of Human Rights Act, 1993 | 1994 (10) | 01-01-1994 to 31-12-1994 | `protection-of-human-rights-act-1993.pdf` | our record holds 0 sections |
 | 1 | 16 | The Scheduled Castes and the Scheduled Tribes (Prevention of Atrocities) Act, 1989 | 1989 (33) | 01-01-1989 to 31-12-1989 | `sc-st-atrocities-act-1989.pdf` | our record holds 1 section |
+| 1 | 41 | The Information Technology Act, 2000 | 2000 (21) | 01-01-2000 to 31-12-2000 | `it-act-2000.pdf` | sections 43 and 66 are missing from our data (66C, 66D present); needed by the hard evaluation set |
+| 1 | 42 | The Transfer of Property Act, 1882 | 1882 (4) | 01-01-1882 to 31-12-1882 | `transfer-of-property-act-1882.pdf` | sections 106 and 108 are garbled in our data (contents-list text, 108 mixed with its sub-headings); section 111 is fine |
+| 1 | 43 | The Arbitration and Conciliation Act, 1996 | 1996 (26) | 01-01-1996 to 31-12-1996 | `arbitration-and-conciliation-act-1996.pdf` | section 34 is garbled (Schedule text mixed in); needed by the hard evaluation set |
 | 2 | 17 | The Child and Adolescent Labour (Prohibition and Regulation) Act, 1986 | 1986 (61) | 01-01-1986 to 31-12-1986 | `child-and-adolescent-labour-act-1986.pdf` | our record holds 3 sections |
 | 2 | 18 | The Muslim Women (Protection of Rights on Divorce) Act, 1986 | 1986 (25) | 01-01-1986 to 31-12-1986 | `muslim-women-divorce-act-1986.pdf` | our record holds 3 sections |
 | 2 | 19 | The Employees' Compensation Act, 1923 | 1923 (8) | 01-01-1923 to 31-12-1923 | `employees-compensation-act-1923.pdf` | no Central record (only State copies with 39 to 41 sections) |

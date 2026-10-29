@@ -9,9 +9,15 @@ export const REWRITE_SYSTEM = `You turn a question about Indian law into search 
 - If the question names a State or Union Territory, keep its name in the queries.
 - Do not answer the question. Indian law only.`;
 
-export function buildRewritePrompt({ question, history = [], docContext = "" }) {
+/** Added to the rewrite prompt when the statutory rewrite switch is on (chat-tuning.json): everyday words and Hinglish become the terms a statute uses, and the current criminal laws are named. */
+export const STATUTORY_ADDENDUM = `
+- The question may be in everyday words or in Hinglish (Hindi written in English letters). Write the queries in English, in the words a statute uses, not the user's words: for example "cheque bounce" is "dishonour of cheque for insufficiency of funds", "FIR darj nahi" is "information in cognizable cases, officer refuses to record it", "dahej" is "dowry", "chori" is "theft".
+- Prefer the CURRENT criminal laws: the Bharatiya Nyaya Sanhita (BNS, replaced the Indian Penal Code), the Bharatiya Nagarik Suraksha Sanhita (BNSS, replaced the Code of Criminal Procedure) and the Bharatiya Sakshya Adhiniyam (BSA, replaced the Indian Evidence Act). If the question names an old section (IPC 302, CrPC 438, Evidence Act 65B), make one query for the equivalent section of the new law, for example "Bharatiya Nyaya Sanhita section 103 punishment for murder", when you know it.
+- If the question describes a situation and not a law, name the heading the provision would carry, for example "tenant default in payment of rent forfeiture determination of lease".`;
+
+export function buildRewritePrompt({ question, history = [], docContext = "", statutory = false }) {
   const prev = [...history].reverse().find((m) => m.role === "user");
-  return { system: REWRITE_SYSTEM, messages: [{ role: "user", content: `${prev ? `Previous question in this chat: ${prev.content.slice(0, 300)}\n` : ""}${docContext ? `The user attached their own document; a relevant passage reads: ${docContext.slice(0, 400)}\nWrite the queries for the law that bears on that passage and the question.\n` : ""}Question: ${question}` }] };
+  return { system: statutory ? REWRITE_SYSTEM + STATUTORY_ADDENDUM : REWRITE_SYSTEM, messages: [{ role: "user", content: `${prev ? `Previous question in this chat: ${prev.content.slice(0, 300)}\n` : ""}${docContext ? `The user attached their own document; a relevant passage reads: ${docContext.slice(0, 400)}\nWrite the queries for the law that bears on that passage and the question.\n` : ""}Question: ${question}` }] };
 }
 
 /** The model's JSON -> up to 3 clean queries (trimmed, at most 120 characters, no duplicates, none equal to the question itself). Unreadable output gives []. */

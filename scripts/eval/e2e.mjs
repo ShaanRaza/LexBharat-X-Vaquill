@@ -16,7 +16,8 @@ const OUT = `docs/eval/runs/${label}.json`; fs.mkdirSync("docs/eval/runs", { rec
 const config = JSON.parse(fs.readFileSync("src/config/ai-models.json", "utf8"));
 const FREE = { ...config, tasks: { ...config.tasks, chat: { ...config.tasks.chat, model: "gemini:gemini-3.5-flash-lite", fallback: [], firstTokenMs: 0, budgetMs: 0, json: true, maxOutputTokens: 400, timeoutMs: 60000 } } };
 const db = neon(env.DATABASE_URL), norm = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
-let qs = JSON.parse(fs.readFileSync("docs/eval/questions.json", "utf8")).questions;
+const SET = arg("set", "main"), CHECK = process.argv.includes("--check");   // --set hard = docs/eval/questions-hard.json (several expected sections, "expect: notfound", old-law notes)
+let qs = JSON.parse(fs.readFileSync(SET === "hard" ? "docs/eval/questions-hard.json" : "docs/eval/questions.json", "utf8")).questions;
 if (only?.length) qs = qs.filter((q) => only.includes(q.id)); if (LIMIT) qs = qs.slice(0, LIMIT);
 const done = fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, "utf8")) : { label, at: new Date().toISOString(), rows: [] };
 const jar = new Map();
@@ -42,10 +43,10 @@ async function ask(message) {
   }
   return out;
 }
-const judge = async (g, q, answer) => {
+const judge = async (gs, q, answer) => {
   for (let k = 0; k < 3; k++) {
     try {
-      const r = await completeTask("chat", { system: 'You grade an answer about Indian law. Reply with JSON only: {"correct": true|false}. correct = the answer gives the right legal answer to the question according to the reference section. Extra related provisions do not matter. An answer that says it could not find the answer is not correct.', messages: [{ role: "user", content: `Reference section (${g.title}, section ${g.number}):\n${g.body.slice(0, 7000)}\n\nQuestion: ${q}\n\nAnswer:\n${answer}` }] }, { config: FREE, env: { ...env, GEMINI_API_KEY: env.GEMINI_API_KEY }, fetchImpl: fetch });
+      const r = await completeTask("chat", { system: 'You grade an answer about Indian law. Reply with JSON only: {"correct": true|false}. correct = the answer gives the right legal answer to the question according to the reference section(s); when there are several, the answer must cover each part of the question. Extra related provisions do not matter. An answer that says it could not find the answer is not correct.', messages: [{ role: "user", content: `${gs.map((g) => `Reference section (${g.title}, section ${g.number}):\n${g.body.slice(0, 7000 / gs.length)}`).join("\n\n")}\n\nQuestion: ${q}\n\nAnswer:\n${answer}` }] }, { config: FREE, env: { ...env, GEMINI_API_KEY: env.GEMINI_API_KEY }, fetchImpl: fetch });
       return JSON.parse(r.text.replace(/^```json|```$/g, "").trim()).correct === true;
     } catch (e) { await new Promise((res) => setTimeout(res, 8000)); }
   }
@@ -53,21 +54,30 @@ const judge = async (g, q, answer) => {
 };
 for (const q of qs) {
   if (done.rows.some((x) => x.id === q.id)) continue;
-  const golds = await db.query(`SELECT s.act_id, s.section_key, s.number, a.title, s.body FROM acts a JOIN act_sections_v s ON s.act_id = a.act_id WHERE a.category = 'central' AND lower(a.title) LIKE lower($1) || '%' AND s.body IS NOT NULL AND regexp_replace(lower(s.body), '[^a-z0-9]+', ' ', 'g') LIKE '%' || $2 || '%'`, [q.act.replace(/,.*$/, ""), norm(q.anchor)]);
-  const goldKeys = new Set(golds.map((g) => `${g.act_id}|${g.section_key}`));
+  const notfoundQ = q.expect === "notfound", specs = notfoundQ ? [] : q.golds ?? [{ act: q.act, anchor: q.anchor }];
+  const perGold = [];   // one entry per expected section: its matching rows in Neon
+  for (const g of specs) perGold.push(await db.query(`SELECT s.act_id, s.section_key, s.number, a.title, s.body FROM acts a JOIN act_sections_v s ON s.act_id = a.act_id WHERE a.category = 'central' AND lower(a.title) LIKE lower($1) || '%' AND s.body IS NOT NULL AND regexp_replace(lower(s.body), '[^a-z0-9]+', ' ', 'g') LIKE '%' || $2 || '%'`, [g.act.replace(/,.*$/, ""), norm(g.anchor)]));
+  const golds = perGold.flat(), goldKeys = new Set(golds.map((g) => `${g.act_id}|${g.section_key}`));
+  if (CHECK) { console.log(`q${q.id}: ${notfoundQ ? "(not-found question)" : perGold.map((r, i) => `${specs[i].act.slice(0, 28)} s${specs[i].section ?? "?"} -> ${r.length} match${r.length === 1 ? "" : "es"}${r[0] ? " [" + r.slice(0, 3).map((x) => x.number).join(",") + "]" : ""}`).join(" | ")}`); continue; }
   const t0 = Date.now(); let a = null;
   for (let k = 0; k < 3; k++) { a = await ask(q.question); if (!a.error) break; console.log(`  q${q.id}: ${a.error}, retrying`); await new Promise((res) => setTimeout(res, 20000)); }
   const secs = (Date.now() - t0) / 1000;
-  const rank = a.sources?.findIndex((s) => goldKeys.has(`${s.actId}|${s.sectionKey}`)) ?? -1;
-  const goldN = rank >= 0 ? a.sources[rank].n : null;
-  const cited = goldN !== null && new RegExp(`\\[${goldN}\\]`).test(a.text ?? "");
+  const ranks = perGold.map((rows) => { const keys = new Set(rows.map((g) => `${g.act_id}|${g.section_key}`)); return a.sources?.findIndex((s) => keys.has(`${s.actId}|${s.sectionKey}`)) ?? -1; });
+  const rank = ranks.length && ranks.every((r) => r >= 0) ? Math.max(...ranks) : -1;   // every expected section must be shown; rank = the worst one
+  const cited = ranks.length > 0 && ranks.every((r) => r >= 0 && new RegExp(`\\[${a.sources[r].n}\\]`).test(a.text ?? ""));
   const nf = detectNotFound(a.text ?? "");
-  const correct = a.error || !golds.length || nf || !a.text ? false : await judge(golds[0], q.question, a.text);
-  const row = { id: q.id, question: q.question, gold: [...goldKeys], goldFound: golds.length > 0, retrieved: rank >= 0, rank: rank >= 0 ? rank + 1 : null, cited, correct, notFound: nf, check: a.check?.label ?? null, error: a.error ?? null, secs: +secs.toFixed(1), nSources: a.sources?.length ?? 0, queries: a.queries, topSources: (a.sources ?? []).slice(0, 5).map((s) => `${s.actTitle} s${s.number ?? "?"}`), answer: (a.text ?? "").slice(0, 1200) };
-  row.score = (row.retrieved ? 1 : 0) + (cited ? 1 : 0) + (correct ? 1 : 0);
+  const oldMention = q.oldLaw ? new RegExp(`(previously|earlier|formerly|replaced|old|repealed|IPC)[^.]{0,80}${q.oldLaw}|${q.oldLaw}[^.]{0,80}(previously|earlier|formerly|replaced|repealed)`, "i").test(a.text ?? "") : null;   // answer names the old section as the old law
+  const correct = notfoundQ ? nf : a.error || !golds.length || nf || !a.text ? false : await judge(perGold.map((r) => r[0]).filter(Boolean), q.question, a.text);
+  const row = { id: q.id, kind: q.kind ?? null, question: q.question, gold: [...goldKeys], goldFound: notfoundQ || perGold.every((r) => r.length > 0), oldMention, retrieved: notfoundQ ? nf : rank >= 0, rank: rank >= 0 && !notfoundQ ? rank + 1 : null, cited: notfoundQ ? nf : cited, correct, notFound: nf, check: a.check?.label ?? null, error: a.error ?? null, secs: +secs.toFixed(1), nSources: a.sources?.length ?? 0, queries: a.queries, topSources: (a.sources ?? []).slice(0, 5).map((s) => `${s.actTitle} s${s.number ?? "?"}`), answer: (a.text ?? "").slice(0, 1200) };
+  row.score = (row.retrieved ? 1 : 0) + (row.cited ? 1 : 0) + (correct ? 1 : 0);   // a question that must be "not found" scores 3 only if the answer says so
   done.rows.push(row); fs.writeFileSync(OUT, JSON.stringify(done, null, 1));
   console.log(`q${q.id} ${row.score}/3 retrieved=${row.retrieved}${row.rank ? `@${row.rank}` : ""} cited=${cited} correct=${correct}${nf ? " NOTFOUND" : ""}${a.error ? " ERR " + a.error : ""} ${secs.toFixed(0)}s`);
   if (a.chatId) await fetch(`${BASE}/api/chat/${a.chatId}`, { method: "DELETE", headers: { cookie: cookie() } }).catch(() => null);   // remove the evaluation chat (exact id)
 }
 const rows = done.rows, n = rows.length, sum = (f) => rows.filter(f).length, pct = (x) => `${x}/${n} (${Math.round((100 * x) / Math.max(1, n))}%)`;
-console.log(`\n${label}: score ${rows.reduce((s, r) => s + r.score, 0)}/${3 * n} | expected section shown to the model ${pct(sum((r) => r.retrieved))} (top 3: ${sum((r) => r.rank && r.rank <= 3)}) | cited ${pct(sum((r) => r.cited))} | judged right ${pct(sum((r) => r.correct))} | "could not find" ${sum((r) => r.notFound)} | errors ${sum((r) => r.error)} | avg ${(rows.reduce((s, r) => s + r.secs, 0) / Math.max(1, n)).toFixed(1)} s`);
+if (!CHECK) console.log(`\n${label}: score ${rows.reduce((s, r) => s + r.score, 0)}/${3 * n} | expected section shown to the model ${pct(sum((r) => r.retrieved))} (top 3: ${sum((r) => r.rank && r.rank <= 3)}) | cited ${pct(sum((r) => r.cited))} | judged right ${pct(sum((r) => r.correct))} | "could not find" ${sum((r) => r.notFound)} | errors ${sum((r) => r.error)} | avg ${(rows.reduce((s, r) => s + r.secs, 0) / Math.max(1, n)).toFixed(1)} s`);
+if (!CHECK) {
+  const kinds = [...new Set(rows.map((r) => r.kind).filter(Boolean))];
+  for (const k of kinds) { const rs = rows.filter((r) => r.kind === k); console.log(`  ${k}: ${rs.reduce((s, r) => s + r.score, 0)}/${3 * rs.length}`); }
+  const old = rows.filter((r) => r.oldMention !== null); if (old.length) console.log(`  answers that name the old section as the old law: ${old.filter((r) => r.oldMention).length}/${old.length}`);
+}

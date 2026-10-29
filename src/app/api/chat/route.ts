@@ -11,6 +11,9 @@ import { evaluateLimits, readLimits } from "@/lib/chat/limits.mjs";
 import { alignCitations, citedNumbers, ensureCitations, sanitizeCitations } from "@/lib/chat/citations.mjs";
 import { buildChatPrompt, buildCheckPrompt, detectNotFound, parseCheck } from "@/lib/chat/prompt.mjs";
 import { buildRewritePrompt, parseRewrite } from "@/lib/chat/rewrite.mjs";
+import { tuningFlags } from "@/lib/chat/tuning.mjs";
+import { verifyCitations } from "@/lib/chat/verify.mjs";
+import tuningConfig from "@/config/chat-tuning.json";
 import { citationOf, retrieveSources, type ChatSource } from "@/lib/chat/retrieve";
 import { docChatSources, searchAttached } from "@/lib/vault/search";
 import { getDocs } from "@/lib/vault/store";
@@ -90,11 +93,12 @@ export async function POST(req: Request) {
           else if (dr.mode === "keywords") send({ type: "note", text: "Your document was searched by keywords because the meaning search was busy." });
         }
         // 1. query rewrite: one cheap call -> 2-3 search queries. Skipped, with a note, if the model is busy (it is also in the per-minute budget).
+        const tune = tuningFlags(tuningConfig, process.env);   // quality switches under evaluation (src/config/chat-tuning.json)
         let extra: string[] = [];
-        try { const rp = buildRewritePrompt({ question: message, history, docContext: docSrc[0]?.text }); extra = parseRewrite((await completeAi("queryRewrite", { system: rp.system, messages: rp.messages, json: true })).text, message); }
+        try { const rp = buildRewritePrompt({ question: message, history, docContext: docSrc[0]?.text, statutory: tune.statutoryRewrite }); extra = parseRewrite((await completeAi("queryRewrite", { system: rp.system, messages: rp.messages, json: true })).text, message); }
         catch { send({ type: "note", text: "Search help was skipped because the model is busy, so the sections found may be less complete." }); }
         // 2. retrieve for the question and each rewritten query, merged
-        const ret0 = await retrieveSources(message, history, extra);
+        const ret0 = await retrieveSources(message, history, extra, undefined, undefined, { hybrid: tune.hybridSearch, currentLaw: tune.currentLaw });
         // one numbering for everything the model may cite: the user's document passages first, then the Act sections
         const ret = { ...ret0, sources: [...docSrc, ...ret0.sources.map((x) => ({ ...x, n: x.n + docSrc.length }))] };
         const cites = ret.sources.map(citationOf);
@@ -116,7 +120,8 @@ export async function POST(req: Request) {
           }
         } catch (e) { if (!answer.trim()) throw e; cutOff = true; }
         if (!answer.trim()) throw new AiError("unavailable", "The model returned no answer.");
-        const clean = sanitizeCitations(alignCitations(ensureCitations(answer.trim(), ret.sources), ret.sources), ret.sources.length);
+        const aligned = alignCitations(ensureCitations(answer.trim(), ret.sources), ret.sources);
+        const clean = sanitizeCitations(tune.citationCheck ? verifyCitations(aligned, ret.sources).text : aligned, ret.sources.length);
         if (clean.text !== answer) send({ type: "replace", text: clean.text });
         if (cutOff) {
           const check: CheckResult = { label: "check", unsupported: [], cutOff: true };

@@ -1,0 +1,1 @@
+export function verifyCitations(text: string, sources: { n: number; actTitle: string; number?: string | null; heading?: string | null; text: string }[]): { text: string; swaps: { from: number; to: number; sentence: string }[] };

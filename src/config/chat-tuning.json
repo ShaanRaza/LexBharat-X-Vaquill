@@ -1,0 +1,7 @@
+{
+  "about": "Switches for the Ask quality changes under evaluation (docs/eval/RESULTS.md). All off until a switch has raised the end-to-end score. Each can be forced for a run with an environment variable: CHAT_TUNING_HYBRID_SEARCH, CHAT_TUNING_STATUTORY_REWRITE, CHAT_TUNING_CURRENT_LAW, CHAT_TUNING_CITATION_CHECK (1 or 0). Fix (b) = hybridSearch + statutoryRewrite together; (c) = currentLaw; (d) = citationCheck.",
+  "hybridSearch": false,
+  "statutoryRewrite": false,
+  "currentLaw": false,
+  "citationCheck": false
+}
