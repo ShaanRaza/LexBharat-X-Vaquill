@@ -1,0 +1,5891 @@
+{
+ "at": "2026-10-29T08:41:20.518Z",
+ "judgmentsScanned": 35596,
+ "acts": [
+  {
+   "rank": 1,
+   "actId": "IND_central_COI",
+   "title": "The Constitution of India",
+   "judgments": 13191,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "A226",
+     "cases": 3640,
+     "state": "held"
+    },
+    {
+     "number": "A14",
+     "cases": 3106,
+     "state": "held"
+    },
+    {
+     "number": "A32",
+     "cases": 3077,
+     "state": "held"
+    },
+    {
+     "number": "A136",
+     "cases": 2238,
+     "state": "held"
+    },
+    {
+     "number": "A21",
+     "cases": 1257,
+     "state": "held"
+    },
+    {
+     "number": "A19",
+     "cases": 1173,
+     "state": "held"
+    },
+    {
+     "number": "A227",
+     "cases": 998,
+     "state": "held"
+    },
+    {
+     "number": "A16",
+     "cases": 978,
+     "state": "held"
+    }
+   ],
+   "lostCases": 47,
+   "lostSections": [
+    {
+     "number": "A19L",
+     "cases": 15,
+     "state": "missing"
+    },
+    {
+     "number": "A3LL",
+     "cases": 10,
+     "state": "missing"
+    },
+    {
+     "number": "A3L",
+     "cases": 6,
+     "state": "missing"
+    },
+    {
+     "number": "A239A",
+     "cases": 5,
+     "state": "missing"
+    },
+    {
+     "number": "A238",
+     "cases": 4,
+     "state": "missing"
+    },
+    {
+     "number": "A251",
+     "cases": 4,
+     "state": "missing"
+    },
+    {
+     "number": "A268",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 2,
+   "actId": "IND_REP_659_1860",
+   "title": "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)",
+   "judgments": 6588,
+   "status": "missing 24 sections (24 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "302",
+     "cases": 2794,
+     "state": "held"
+    },
+    {
+     "number": "34",
+     "cases": 1814,
+     "state": "missing"
+    },
+    {
+     "number": "149",
+     "cases": 949,
+     "state": "held"
+    },
+    {
+     "number": "307",
+     "cases": 772,
+     "state": "held"
+    },
+    {
+     "number": "148",
+     "cases": 633,
+     "state": "held"
+    },
+    {
+     "number": "420",
+     "cases": 587,
+     "state": "held"
+    },
+    {
+     "number": "323",
+     "cases": 507,
+     "state": "held"
+    },
+    {
+     "number": "376",
+     "cases": 497,
+     "state": "held"
+    }
+   ],
+   "lostCases": 2125,
+   "lostSections": [
+    {
+     "number": "34",
+     "cases": 1814,
+     "state": "missing"
+    },
+    {
+     "number": "165",
+     "cases": 66,
+     "state": "missing"
+    },
+    {
+     "number": "375",
+     "cases": 62,
+     "state": "missing"
+    },
+    {
+     "number": "364A",
+     "cases": 37,
+     "state": "missing"
+    },
+    {
+     "number": "165A",
+     "cases": 35,
+     "state": "missing"
+    },
+    {
+     "number": "376A",
+     "cases": 19,
+     "state": "missing"
+    },
+    {
+     "number": "376C",
+     "cases": 10,
+     "state": "missing"
+    },
+    {
+     "number": "163",
+     "cases": 9,
+     "state": "missing"
+    },
+    {
+     "number": "14",
+     "cases": 9,
+     "state": "missing"
+    },
+    {
+     "number": "376DB",
+     "cases": 9,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 3,
+   "actId": "IND_state_6796",
+   "title": "The CODE OF CRIMINAL PROCEDURE, 1973",
+   "judgments": 4712,
+   "status": "missing 86 sections",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "313",
+     "cases": 1055,
+     "state": "held"
+    },
+    {
+     "number": "482",
+     "cases": 1023,
+     "state": "missing"
+    },
+    {
+     "number": "161",
+     "cases": 566,
+     "state": "held"
+    },
+    {
+     "number": "173",
+     "cases": 401,
+     "state": "held"
+    },
+    {
+     "number": "164",
+     "cases": 304,
+     "state": "held"
+    },
+    {
+     "number": "439",
+     "cases": 183,
+     "state": "held"
+    },
+    {
+     "number": "156",
+     "cases": 161,
+     "state": "held"
+    },
+    {
+     "number": "200",
+     "cases": 155,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 1788,
+   "lostSections": [
+    {
+     "number": "482",
+     "cases": 1023,
+     "state": "missing"
+    },
+    {
+     "number": "200",
+     "cases": 155,
+     "state": "missing"
+    },
+    {
+     "number": "386",
+     "cases": 60,
+     "state": "missing"
+    },
+    {
+     "number": "207",
+     "cases": 55,
+     "state": "missing"
+    },
+    {
+     "number": "428",
+     "cases": 52,
+     "state": "missing"
+    },
+    {
+     "number": "321",
+     "cases": 49,
+     "state": "missing"
+    },
+    {
+     "number": "203",
+     "cases": 43,
+     "state": "missing"
+    },
+    {
+     "number": "362",
+     "cases": 32,
+     "state": "missing"
+    },
+    {
+     "number": "433A",
+     "cases": 30,
+     "state": "missing"
+    },
+    {
+     "number": "451",
+     "cases": 21,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 4,
+   "actId": "IND_central_2191",
+   "title": "The Code of Civil Procedure, 1908",
+   "judgments": 4184,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "100",
+     "cases": 357,
+     "state": "held"
+    },
+    {
+     "number": "151",
+     "cases": 328,
+     "state": "held"
+    },
+    {
+     "number": "115",
+     "cases": 282,
+     "state": "held"
+    },
+    {
+     "number": "O7R11",
+     "cases": 242,
+     "state": "held"
+    },
+    {
+     "number": "11",
+     "cases": 194,
+     "state": "held"
+    },
+    {
+     "number": "9",
+     "cases": 156,
+     "state": "held"
+    },
+    {
+     "number": "96",
+     "cases": 155,
+     "state": "held"
+    },
+    {
+     "number": "O6R17",
+     "cases": 144,
+     "state": "held"
+    }
+   ],
+   "lostCases": 6,
+   "lostSections": [
+    {
+     "number": "313",
+     "cases": 3,
+     "state": "missing"
+    },
+    {
+     "number": "319",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 5,
+   "actId": "IND_REP_971_1872",
+   "title": "The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)",
+   "judgments": 2382,
+   "status": "missing 4 sections (4 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "27",
+     "cases": 319,
+     "state": "held"
+    },
+    {
+     "number": "114",
+     "cases": 256,
+     "state": "held"
+    },
+    {
+     "number": "32",
+     "cases": 181,
+     "state": "held"
+    },
+    {
+     "number": "106",
+     "cases": 179,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 139,
+     "state": "held"
+    },
+    {
+     "number": "25",
+     "cases": 125,
+     "state": "held"
+    },
+    {
+     "number": "145",
+     "cases": 100,
+     "state": "missing"
+    },
+    {
+     "number": "8",
+     "cases": 81,
+     "state": "held"
+    }
+   ],
+   "lostCases": 227,
+   "lostSections": [
+    {
+     "number": "145",
+     "cases": 100,
+     "state": "missing"
+    },
+    {
+     "number": "1138",
+     "cases": 56,
+     "state": "missing"
+    },
+    {
+     "number": "113A",
+     "cases": 43,
+     "state": "missing"
+    },
+    {
+     "number": "161",
+     "cases": 11,
+     "state": "missing"
+    },
+    {
+     "number": "114A",
+     "cases": 7,
+     "state": "missing"
+    },
+    {
+     "number": "65A",
+     "cases": 6,
+     "state": "missing"
+    },
+    {
+     "number": "75",
+     "cases": 4,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 6,
+   "actId": "IND_central_22042",
+   "title": "The Industrial Disputes Act, 1947",
+   "judgments": 1107,
+   "status": "missing 1 section (1 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "2",
+     "cases": 134,
+     "state": "held"
+    },
+    {
+     "number": "25",
+     "cases": 90,
+     "state": "held"
+    },
+    {
+     "number": "10",
+     "cases": 60,
+     "state": "held"
+    },
+    {
+     "number": "33",
+     "cases": 45,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 45,
+     "state": "held"
+    },
+    {
+     "number": "25F",
+     "cases": 38,
+     "state": "held"
+    },
+    {
+     "number": "18",
+     "cases": 18,
+     "state": "held"
+    },
+    {
+     "number": "11",
+     "cases": 16,
+     "state": "held"
+    }
+   ],
+   "lostCases": 16,
+   "lostSections": [
+    {
+     "number": "25FF",
+     "cases": 10,
+     "state": "missing"
+    },
+    {
+     "number": "6N",
+     "cases": 6,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 7,
+   "actId": "IND_REP_2832_1956",
+   "title": "The Companies Act 1956, 1 of 1956, (Rep., Act 18 of 2013)",
+   "judgments": 1086,
+   "status": "missing 338 sections",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "1",
+     "cases": 41,
+     "state": "missing"
+    },
+    {
+     "number": "617",
+     "cases": 37,
+     "state": "missing"
+    },
+    {
+     "number": "2",
+     "cases": 34,
+     "state": "missing"
+    },
+    {
+     "number": "391",
+     "cases": 25,
+     "state": "missing"
+    },
+    {
+     "number": "433",
+     "cases": 24,
+     "state": "missing"
+    },
+    {
+     "number": "529",
+     "cases": 24,
+     "state": "missing"
+    },
+    {
+     "number": "3",
+     "cases": 22,
+     "state": "missing"
+    },
+    {
+     "number": "397",
+     "cases": 21,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 517,
+   "lostSections": [
+    {
+     "number": "1",
+     "cases": 41,
+     "state": "missing"
+    },
+    {
+     "number": "617",
+     "cases": 37,
+     "state": "missing"
+    },
+    {
+     "number": "2",
+     "cases": 34,
+     "state": "missing"
+    },
+    {
+     "number": "391",
+     "cases": 25,
+     "state": "missing"
+    },
+    {
+     "number": "433",
+     "cases": 24,
+     "state": "missing"
+    },
+    {
+     "number": "529",
+     "cases": 24,
+     "state": "missing"
+    },
+    {
+     "number": "3",
+     "cases": 22,
+     "state": "missing"
+    },
+    {
+     "number": "397",
+     "cases": 21,
+     "state": "missing"
+    },
+    {
+     "number": "398",
+     "cases": 20,
+     "state": "missing"
+    },
+    {
+     "number": "446",
+     "cases": 20,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 8,
+   "actId": "IND_central_2435",
+   "title": "The Income-tax Act, 1961",
+   "judgments": 1084,
+   "status": "missing 104 sections",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "1",
+     "cases": 101,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 79,
+     "state": "held"
+    },
+    {
+     "number": "256",
+     "cases": 47,
+     "state": "held"
+    },
+    {
+     "number": "80",
+     "cases": 39,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 32,
+     "state": "held"
+    },
+    {
+     "number": "260A",
+     "cases": 21,
+     "state": "held"
+    },
+    {
+     "number": "10",
+     "cases": 20,
+     "state": "held"
+    },
+    {
+     "number": "4",
+     "cases": 19,
+     "state": "held"
+    }
+   ],
+   "lostCases": 85,
+   "lostSections": [
+    {
+     "number": "143",
+     "cases": 19,
+     "state": "missing"
+    },
+    {
+     "number": "132",
+     "cases": 16,
+     "state": "missing"
+    },
+    {
+     "number": "80HH",
+     "cases": 12,
+     "state": "missing"
+    },
+    {
+     "number": "139",
+     "cases": 10,
+     "state": "missing"
+    },
+    {
+     "number": "269",
+     "cases": 8,
+     "state": "missing"
+    },
+    {
+     "number": "115",
+     "cases": 6,
+     "state": "missing"
+    },
+    {
+     "number": "119",
+     "cases": 5,
+     "state": "missing"
+    },
+    {
+     "number": "184",
+     "cases": 3,
+     "state": "missing"
+    },
+    {
+     "number": "72",
+     "cases": 3,
+     "state": "missing"
+    },
+    {
+     "number": "153",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 9,
+   "actId": "IND_central_2338",
+   "title": "The Transfer of Property Act, 1882",
+   "judgments": 1070,
+   "status": "missing 15 sections (9 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "106",
+     "cases": 169,
+     "state": "held"
+    },
+    {
+     "number": "52",
+     "cases": 80,
+     "state": "held"
+    },
+    {
+     "number": "54",
+     "cases": 79,
+     "state": "held"
+    },
+    {
+     "number": "108",
+     "cases": 65,
+     "state": "held"
+    },
+    {
+     "number": "53A",
+     "cases": 63,
+     "state": "missing"
+    },
+    {
+     "number": "3",
+     "cases": 59,
+     "state": "held"
+    },
+    {
+     "number": "58",
+     "cases": 55,
+     "state": "held"
+    },
+    {
+     "number": "111",
+     "cases": 54,
+     "state": "held"
+    }
+   ],
+   "lostCases": 66,
+   "lostSections": [
+    {
+     "number": "53A",
+     "cases": 63,
+     "state": "missing"
+    },
+    {
+     "number": "56",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 10,
+   "actId": "IND_central_1565",
+   "title": "The Limitation Act, 1963",
+   "judgments": 959,
+   "status": "complete",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "5",
+     "cases": 260,
+     "state": "held"
+    },
+    {
+     "number": "14",
+     "cases": 113,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 91,
+     "state": "held"
+    },
+    {
+     "number": "29",
+     "cases": 75,
+     "state": "held"
+    },
+    {
+     "number": "A137",
+     "cases": 72,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 53,
+     "state": "held"
+    },
+    {
+     "number": "12",
+     "cases": 51,
+     "state": "held"
+    },
+    {
+     "number": "A65",
+     "cases": 48,
+     "state": "held"
+    }
+   ],
+   "lostCases": 44,
+   "lostSections": [
+    {
+     "number": "A144",
+     "cases": 12,
+     "state": "missing"
+    },
+    {
+     "number": "A142",
+     "cases": 7,
+     "state": "missing"
+    },
+    {
+     "number": "137",
+     "cases": 7,
+     "state": "missing"
+    },
+    {
+     "number": "43",
+     "cases": 7,
+     "state": "missing"
+    },
+    {
+     "number": "65",
+     "cases": 4,
+     "state": "missing"
+    },
+    {
+     "number": "113",
+     "cases": 4,
+     "state": "missing"
+    },
+    {
+     "number": "A148",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 11,
+   "actId": "IND_central_2187",
+   "title": "The Indian Contract Act, 1872",
+   "judgments": 821,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "23",
+     "cases": 139,
+     "state": "held"
+    },
+    {
+     "number": "73",
+     "cases": 55,
+     "state": "held"
+    },
+    {
+     "number": "28",
+     "cases": 46,
+     "state": "held"
+    },
+    {
+     "number": "56",
+     "cases": 45,
+     "state": "held"
+    },
+    {
+     "number": "70",
+     "cases": 39,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 39,
+     "state": "held"
+    },
+    {
+     "number": "74",
+     "cases": 34,
+     "state": "held"
+    },
+    {
+     "number": "65",
+     "cases": 28,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 12,
+   "actId": "IND_central_1978",
+   "title": "The Arbitration and Conciliation Act, 1996",
+   "judgments": 780,
+   "status": "missing 1 section (1 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "34",
+     "cases": 206,
+     "state": "held"
+    },
+    {
+     "number": "11",
+     "cases": 204,
+     "state": "held"
+    },
+    {
+     "number": "37",
+     "cases": 81,
+     "state": "held"
+    },
+    {
+     "number": "8",
+     "cases": 71,
+     "state": "held"
+    },
+    {
+     "number": "9",
+     "cases": 70,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 65,
+     "state": "held"
+    },
+    {
+     "number": "16",
+     "cases": 57,
+     "state": "held"
+    },
+    {
+     "number": "7",
+     "cases": 43,
+     "state": "held"
+    }
+   ],
+   "lostCases": 19,
+   "lostSections": [
+    {
+     "number": "29A",
+     "cases": 14,
+     "state": "missing"
+    },
+    {
+     "number": "12A",
+     "cases": 5,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 13,
+   "actId": "IND_central_2096",
+   "title": "The Representation of the People Act, 1951",
+   "judgments": 667,
+   "status": "missing 44 sections",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "123",
+     "cases": 69,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 55,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 37,
+     "state": "held"
+    },
+    {
+     "number": "116",
+     "cases": 36,
+     "state": "held"
+    },
+    {
+     "number": "83",
+     "cases": 36,
+     "state": "held"
+    },
+    {
+     "number": "81",
+     "cases": 35,
+     "state": "held"
+    },
+    {
+     "number": "116A",
+     "cases": 32,
+     "state": "held"
+    },
+    {
+     "number": "100",
+     "cases": 32,
+     "state": "held"
+    }
+   ],
+   "lostCases": 59,
+   "lostSections": [
+    {
+     "number": "33",
+     "cases": 18,
+     "state": "missing"
+    },
+    {
+     "number": "86",
+     "cases": 18,
+     "state": "missing"
+    },
+    {
+     "number": "82",
+     "cases": 13,
+     "state": "missing"
+    },
+    {
+     "number": "3A",
+     "cases": 7,
+     "state": "missing"
+    },
+    {
+     "number": "105",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 14,
+   "actId": "IND_REP_2248_1940",
+   "title": "The Arbitration Act 1940, 10 of 1940, (Rep., Act 26 of 1996)",
+   "judgments": 594,
+   "status": "missing 21 sections",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "20",
+     "cases": 49,
+     "state": "missing"
+    },
+    {
+     "number": "30",
+     "cases": 49,
+     "state": "held"
+    },
+    {
+     "number": "33",
+     "cases": 35,
+     "state": "missing"
+    },
+    {
+     "number": "8",
+     "cases": 27,
+     "state": "held"
+    },
+    {
+     "number": "34",
+     "cases": 27,
+     "state": "missing"
+    },
+    {
+     "number": "2",
+     "cases": 27,
+     "state": "held"
+    },
+    {
+     "number": "14",
+     "cases": 25,
+     "state": "held"
+    },
+    {
+     "number": "17",
+     "cases": 17,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 177,
+   "lostSections": [
+    {
+     "number": "20",
+     "cases": 49,
+     "state": "missing"
+    },
+    {
+     "number": "33",
+     "cases": 35,
+     "state": "missing"
+    },
+    {
+     "number": "34",
+     "cases": 27,
+     "state": "missing"
+    },
+    {
+     "number": "17",
+     "cases": 17,
+     "state": "missing"
+    },
+    {
+     "number": "39",
+     "cases": 15,
+     "state": "missing"
+    },
+    {
+     "number": "29",
+     "cases": 12,
+     "state": "missing"
+    },
+    {
+     "number": "41",
+     "cases": 9,
+     "state": "missing"
+    },
+    {
+     "number": "16",
+     "cases": 8,
+     "state": "missing"
+    },
+    {
+     "number": "28",
+     "cases": 5,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 15,
+   "actId": "IND_central_2475",
+   "title": "The Customs Act,1962",
+   "judgments": 539,
+   "status": "missing 55 sections",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "1",
+     "cases": 52,
+     "state": "held"
+    },
+    {
+     "number": "25",
+     "cases": 51,
+     "state": "missing"
+    },
+    {
+     "number": "2",
+     "cases": 35,
+     "state": "held"
+    },
+    {
+     "number": "14",
+     "cases": 33,
+     "state": "missing"
+    },
+    {
+     "number": "108",
+     "cases": 28,
+     "state": "missing"
+    },
+    {
+     "number": "111",
+     "cases": 28,
+     "state": "missing"
+    },
+    {
+     "number": "130",
+     "cases": 27,
+     "state": "missing"
+    },
+    {
+     "number": "28",
+     "cases": 26,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 213,
+   "lostSections": [
+    {
+     "number": "25",
+     "cases": 51,
+     "state": "missing"
+    },
+    {
+     "number": "14",
+     "cases": 33,
+     "state": "missing"
+    },
+    {
+     "number": "28",
+     "cases": 26,
+     "state": "missing"
+    },
+    {
+     "number": "12",
+     "cases": 17,
+     "state": "missing"
+    },
+    {
+     "number": "11",
+     "cases": 12,
+     "state": "missing"
+    },
+    {
+     "number": "3",
+     "cases": 8,
+     "state": "missing"
+    },
+    {
+     "number": "15",
+     "cases": 8,
+     "state": "missing"
+    },
+    {
+     "number": "27",
+     "cases": 8,
+     "state": "missing"
+    },
+    {
+     "number": "46",
+     "cases": 7,
+     "state": "missing"
+    },
+    {
+     "number": "18",
+     "cases": 6,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 16,
+   "actId": "IND_central_1798",
+   "title": "The Motor Vehicles Act, 1988",
+   "judgments": 532,
+   "status": "missing 2 sections (2 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "166",
+     "cases": 93,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 32,
+     "state": "held"
+    },
+    {
+     "number": "173",
+     "cases": 26,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 23,
+     "state": "held"
+    },
+    {
+     "number": "140",
+     "cases": 21,
+     "state": "held"
+    },
+    {
+     "number": "168",
+     "cases": 21,
+     "state": "held"
+    },
+    {
+     "number": "147",
+     "cases": 21,
+     "state": "held"
+    },
+    {
+     "number": "149",
+     "cases": 18,
+     "state": "held"
+    }
+   ],
+   "lostCases": 14,
+   "lostSections": [
+    {
+     "number": "163A",
+     "cases": 11,
+     "state": "missing"
+    },
+    {
+     "number": "192",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 17,
+   "actId": "IND_central_1558",
+   "title": "The Prevention of Corruption Act, 1988",
+   "judgments": 506,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "13",
+     "cases": 243,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 197,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 177,
+     "state": "held"
+    },
+    {
+     "number": "7",
+     "cases": 61,
+     "state": "held"
+    },
+    {
+     "number": "19",
+     "cases": 25,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 14,
+     "state": "held"
+    },
+    {
+     "number": "12",
+     "cases": 9,
+     "state": "held"
+    },
+    {
+     "number": "17",
+     "cases": 7,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 18,
+   "actId": "IND_central_2328",
+   "title": "The General Clauses Act, 1897",
+   "judgments": 500,
+   "status": "missing 13 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "6",
+     "cases": 87,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 60,
+     "state": "held"
+    },
+    {
+     "number": "21",
+     "cases": 36,
+     "state": "held"
+    },
+    {
+     "number": "8",
+     "cases": 18,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 16,
+     "state": "held"
+    },
+    {
+     "number": "27",
+     "cases": 14,
+     "state": "held"
+    },
+    {
+     "number": "10",
+     "cases": 14,
+     "state": "held"
+    },
+    {
+     "number": "26",
+     "cases": 13,
+     "state": "held"
+    }
+   ],
+   "lostCases": 16,
+   "lostSections": [
+    {
+     "number": "31",
+     "cases": 7,
+     "state": "missing"
+    },
+    {
+     "number": "42",
+     "cases": 5,
+     "state": "missing"
+    },
+    {
+     "number": "36",
+     "cases": 4,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 19,
+   "actId": "IND_central_1583",
+   "title": "The Specific Relief Act, 1963",
+   "judgments": 456,
+   "status": "missing 2 sections (2 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "16",
+     "cases": 82,
+     "state": "held"
+    },
+    {
+     "number": "20",
+     "cases": 72,
+     "state": "held"
+    },
+    {
+     "number": "6",
+     "cases": 41,
+     "state": "held"
+    },
+    {
+     "number": "34",
+     "cases": 40,
+     "state": "held"
+    },
+    {
+     "number": "14",
+     "cases": 33,
+     "state": "held"
+    },
+    {
+     "number": "41",
+     "cases": 25,
+     "state": "held"
+    },
+    {
+     "number": "28",
+     "cases": 24,
+     "state": "held"
+    },
+    {
+     "number": "42",
+     "cases": 22,
+     "state": "held"
+    }
+   ],
+   "lostCases": 4,
+   "lostSections": [
+    {
+     "number": "45",
+     "cases": 4,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 20,
+   "actId": "IND_central_19238",
+   "title": "The Central Excise Act, 1944",
+   "judgments": 401,
+   "status": "missing 5 sections (5 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "11",
+     "cases": 48,
+     "state": "held"
+    },
+    {
+     "number": "4",
+     "cases": 42,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 39,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 31,
+     "state": "held"
+    },
+    {
+     "number": "35L",
+     "cases": 30,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 29,
+     "state": "held"
+    },
+    {
+     "number": "35",
+     "cases": 27,
+     "state": "held"
+    },
+    {
+     "number": "11A",
+     "cases": 22,
+     "state": "held"
+    }
+   ],
+   "lostCases": 5,
+   "lostSections": [
+    {
+     "number": "11AB",
+     "cases": 5,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 21,
+   "actId": "IND_REP_2203_1939",
+   "title": "The Motor Vehicles Act, 1939, 4 of 1939 (Rep., Act 59 of 1988)",
+   "judgments": 398,
+   "status": "missing 93 sections",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "110",
+     "cases": 27,
+     "state": "missing"
+    },
+    {
+     "number": "2",
+     "cases": 25,
+     "state": "missing"
+    },
+    {
+     "number": "95",
+     "cases": 23,
+     "state": "held"
+    },
+    {
+     "number": "68",
+     "cases": 16,
+     "state": "missing"
+    },
+    {
+     "number": "1",
+     "cases": 13,
+     "state": "missing"
+    },
+    {
+     "number": "96",
+     "cases": 11,
+     "state": "missing"
+    },
+    {
+     "number": "3",
+     "cases": 10,
+     "state": "held"
+    },
+    {
+     "number": "11",
+     "cases": 7,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 125,
+   "lostSections": [
+    {
+     "number": "110",
+     "cases": 27,
+     "state": "missing"
+    },
+    {
+     "number": "2",
+     "cases": 25,
+     "state": "missing"
+    },
+    {
+     "number": "68",
+     "cases": 16,
+     "state": "missing"
+    },
+    {
+     "number": "1",
+     "cases": 13,
+     "state": "missing"
+    },
+    {
+     "number": "96",
+     "cases": 11,
+     "state": "missing"
+    },
+    {
+     "number": "11",
+     "cases": 7,
+     "state": "missing"
+    },
+    {
+     "number": "68C",
+     "cases": 6,
+     "state": "missing"
+    },
+    {
+     "number": "47",
+     "cases": 6,
+     "state": "missing"
+    },
+    {
+     "number": "64",
+     "cases": 4,
+     "state": "missing"
+    },
+    {
+     "number": "8",
+     "cases": 4,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 22,
+   "actId": "IND_central_2189",
+   "title": "The Negotiable Instruments Act, 1881",
+   "judgments": 382,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "138",
+     "cases": 305,
+     "state": "held"
+    },
+    {
+     "number": "141",
+     "cases": 79,
+     "state": "held"
+    },
+    {
+     "number": "139",
+     "cases": 49,
+     "state": "held"
+    },
+    {
+     "number": "142",
+     "cases": 39,
+     "state": "held"
+    },
+    {
+     "number": "118",
+     "cases": 31,
+     "state": "held"
+    },
+    {
+     "number": "147",
+     "cases": 12,
+     "state": "held"
+    },
+    {
+     "number": "145",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "143A",
+     "cases": 7,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 23,
+   "actId": "IND_central_1791",
+   "title": "The Narcotic Drugs and Psychotropic Substances Act, 1985",
+   "judgments": 355,
+   "status": "missing 7 sections (7 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "50",
+     "cases": 88,
+     "state": "held"
+    },
+    {
+     "number": "8",
+     "cases": 56,
+     "state": "held"
+    },
+    {
+     "number": "37",
+     "cases": 50,
+     "state": "missing"
+    },
+    {
+     "number": "21",
+     "cases": 49,
+     "state": "missing"
+    },
+    {
+     "number": "42",
+     "cases": 47,
+     "state": "held"
+    },
+    {
+     "number": "18",
+     "cases": 42,
+     "state": "held"
+    },
+    {
+     "number": "20",
+     "cases": 41,
+     "state": "held"
+    },
+    {
+     "number": "29",
+     "cases": 40,
+     "state": "held"
+    }
+   ],
+   "lostCases": 229,
+   "lostSections": [
+    {
+     "number": "37",
+     "cases": 50,
+     "state": "missing"
+    },
+    {
+     "number": "21",
+     "cases": 49,
+     "state": "missing"
+    },
+    {
+     "number": "15",
+     "cases": 29,
+     "state": "missing"
+    },
+    {
+     "number": "54",
+     "cases": 22,
+     "state": "missing"
+    },
+    {
+     "number": "41",
+     "cases": 15,
+     "state": "missing"
+    },
+    {
+     "number": "52A",
+     "cases": 13,
+     "state": "missing"
+    },
+    {
+     "number": "25",
+     "cases": 9,
+     "state": "missing"
+    },
+    {
+     "number": "32A",
+     "cases": 8,
+     "state": "missing"
+    },
+    {
+     "number": "36A",
+     "cases": 7,
+     "state": "missing"
+    },
+    {
+     "number": "27A",
+     "cases": 7,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 24,
+   "actId": "IND_central_2484",
+   "title": "The Central Sales Tax Act, 1956",
+   "judgments": 316,
+   "status": "missing 6 sections",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "5",
+     "cases": 49,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 32,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 30,
+     "state": "held"
+    },
+    {
+     "number": "8",
+     "cases": 28,
+     "state": "held"
+    },
+    {
+     "number": "14",
+     "cases": 18,
+     "state": "missing"
+    },
+    {
+     "number": "15",
+     "cases": 18,
+     "state": "missing"
+    },
+    {
+     "number": "4",
+     "cases": 10,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 9,
+     "state": "held"
+    }
+   ],
+   "lostCases": 41,
+   "lostSections": [
+    {
+     "number": "14",
+     "cases": 18,
+     "state": "missing"
+    },
+    {
+     "number": "15",
+     "cases": 18,
+     "state": "missing"
+    },
+    {
+     "number": "9",
+     "cases": 5,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 25,
+   "actId": "IND_central_1398",
+   "title": "The Arms Act, 1959",
+   "judgments": 285,
+   "status": "**absent** (title only, no text)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "25",
+     "cases": 109,
+     "state": "missing"
+    },
+    {
+     "number": "27",
+     "cases": 82,
+     "state": "missing"
+    },
+    {
+     "number": "1",
+     "cases": 36,
+     "state": "missing"
+    },
+    {
+     "number": "3",
+     "cases": 23,
+     "state": "missing"
+    },
+    {
+     "number": "302",
+     "cases": 17,
+     "state": "missing"
+    },
+    {
+     "number": "34",
+     "cases": 13,
+     "state": "missing"
+    },
+    {
+     "number": "7",
+     "cases": 12,
+     "state": "missing"
+    },
+    {
+     "number": "1A",
+     "cases": 8,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 346,
+   "lostSections": [
+    {
+     "number": "25",
+     "cases": 109,
+     "state": "missing"
+    },
+    {
+     "number": "27",
+     "cases": 82,
+     "state": "missing"
+    },
+    {
+     "number": "1",
+     "cases": 36,
+     "state": "missing"
+    },
+    {
+     "number": "3",
+     "cases": 23,
+     "state": "missing"
+    },
+    {
+     "number": "302",
+     "cases": 17,
+     "state": "missing"
+    },
+    {
+     "number": "34",
+     "cases": 13,
+     "state": "missing"
+    },
+    {
+     "number": "7",
+     "cases": 12,
+     "state": "missing"
+    },
+    {
+     "number": "1A",
+     "cases": 8,
+     "state": "missing"
+    },
+    {
+     "number": "29",
+     "cases": 6,
+     "state": "missing"
+    },
+    {
+     "number": "1B",
+     "cases": 6,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 26,
+   "actId": "IND_central_1560",
+   "title": "The Hindu Marriage Act, 1955",
+   "judgments": 283,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "13",
+     "cases": 127,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 48,
+     "state": "held"
+    },
+    {
+     "number": "9",
+     "cases": 32,
+     "state": "held"
+    },
+    {
+     "number": "5",
+     "cases": 20,
+     "state": "held"
+    },
+    {
+     "number": "11",
+     "cases": 18,
+     "state": "held"
+    },
+    {
+     "number": "12",
+     "cases": 18,
+     "state": "held"
+    },
+    {
+     "number": "24",
+     "cases": 16,
+     "state": "held"
+    },
+    {
+     "number": "28",
+     "cases": 13,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 27,
+   "actId": "IND_REP_1526_1908",
+   "title": "The Indian Limitation Act 1908, 9 of 1908 (Rep., Act 36 of 1963)",
+   "judgments": 269,
+   "status": "missing 17 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "5",
+     "cases": 15,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 11,
+     "state": "held"
+    },
+    {
+     "number": "29",
+     "cases": 10,
+     "state": "held"
+    },
+    {
+     "number": "18",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "28",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "12",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "19",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 28,
+   "actId": "IND_central_1514",
+   "title": "The Contempt of Courts Act, 1971",
+   "judgments": 266,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "2",
+     "cases": 56,
+     "state": "held"
+    },
+    {
+     "number": "19",
+     "cases": 29,
+     "state": "held"
+    },
+    {
+     "number": "12",
+     "cases": 28,
+     "state": "held"
+    },
+    {
+     "number": "15",
+     "cases": 21,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 14,
+     "state": "held"
+    },
+    {
+     "number": "14",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "20",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "10",
+     "cases": 5,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 29,
+   "actId": "IND_central_1713",
+   "title": "The Hindu Succession Act, 1956",
+   "judgments": 260,
+   "status": "missing 2 sections (2 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "14",
+     "cases": 54,
+     "state": "missing"
+    },
+    {
+     "number": "1",
+     "cases": 39,
+     "state": "held"
+    },
+    {
+     "number": "8",
+     "cases": 19,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 17,
+     "state": "held"
+    },
+    {
+     "number": "6",
+     "cases": 17,
+     "state": "missing"
+    },
+    {
+     "number": "15",
+     "cases": 13,
+     "state": "held"
+    },
+    {
+     "number": "4",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "29",
+     "cases": 5,
+     "state": "held"
+    }
+   ],
+   "lostCases": 71,
+   "lostSections": [
+    {
+     "number": "14",
+     "cases": 54,
+     "state": "missing"
+    },
+    {
+     "number": "6",
+     "cases": 17,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 30,
+   "actId": "IND_central_2190",
+   "title": "The Registration Act, 1908",
+   "judgments": 227,
+   "status": "missing 18 sections",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "17",
+     "cases": 46,
+     "state": "held"
+    },
+    {
+     "number": "49",
+     "cases": 16,
+     "state": "missing"
+    },
+    {
+     "number": "2",
+     "cases": 12,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 11,
+     "state": "held"
+    },
+    {
+     "number": "47",
+     "cases": 6,
+     "state": "missing"
+    },
+    {
+     "number": "60",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "34",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "69",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 22,
+   "lostSections": [
+    {
+     "number": "49",
+     "cases": 16,
+     "state": "missing"
+    },
+    {
+     "number": "47",
+     "cases": 6,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 31,
+   "actId": "IND_REP_1585_1913",
+   "title": "The Indian Companies Act 1913, 7 of 1913, (Rep., Act 1 of 1956)",
+   "judgments": 220,
+   "status": "missing 227 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "153",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "171",
+     "cases": 7,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 7,
+   "lostSections": [
+    {
+     "number": "171",
+     "cases": 7,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 32,
+   "actId": "IND_central_1579",
+   "title": "The Essential Commodities Act, 1955",
+   "judgments": 215,
+   "status": "missing 14 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "3",
+     "cases": 66,
+     "state": "held"
+    },
+    {
+     "number": "7",
+     "cases": 16,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 11,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 10,
+     "state": "held"
+    },
+    {
+     "number": "6",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "6A",
+     "cases": 4,
+     "state": "missing"
+    },
+    {
+     "number": "3C",
+     "cases": 3,
+     "state": "missing"
+    },
+    {
+     "number": "5",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 33,
+   "actId": "IND_central_19223",
+   "title": "The delhi rent control act, 1958",
+   "judgments": 201,
+   "status": "missing 2 sections (2 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "14",
+     "cases": 52,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 31,
+     "state": "held"
+    },
+    {
+     "number": "25",
+     "cases": 10,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "15",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "8",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "21",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "25B",
+     "cases": 5,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 5,
+   "lostSections": [
+    {
+     "number": "25B",
+     "cases": 5,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 34,
+   "actId": "IND_central_8774",
+   "title": "The Customs Tariff Act, 1975",
+   "judgments": 199,
+   "status": "missing 10 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "3",
+     "cases": 33,
+     "state": "held"
+    },
+    {
+     "number": "9A",
+     "cases": 12,
+     "state": "missing"
+    },
+    {
+     "number": "1",
+     "cases": 11,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "9",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 12,
+   "lostSections": [
+    {
+     "number": "9A",
+     "cases": 12,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 35,
+   "actId": "IND_central_2154",
+   "title": "The Insolvency and Bankruptcy Code, 2016.",
+   "judgments": 191,
+   "status": "missing 218 sections",
+   "needsDownload": false,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 36,
+   "actId": "IND_central_1679",
+   "title": "The Dowry Prohibition Act, 1961",
+   "judgments": 182,
+   "status": "missing 34 sections",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "4",
+     "cases": 66,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 46,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 45,
+     "state": "missing"
+    },
+    {
+     "number": "6",
+     "cases": 16,
+     "state": "held"
+    },
+    {
+     "number": "498A",
+     "cases": 13,
+     "state": "missing"
+    },
+    {
+     "number": "34",
+     "cases": 7,
+     "state": "missing"
+    },
+    {
+     "number": "498",
+     "cases": 5,
+     "state": "missing"
+    },
+    {
+     "number": "302",
+     "cases": 3,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 52,
+   "lostSections": [
+    {
+     "number": "2",
+     "cases": 45,
+     "state": "missing"
+    },
+    {
+     "number": "34",
+     "cases": 7,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 37,
+   "actId": "IND_central_2262",
+   "title": "The Societies Registration Act, 1860",
+   "judgments": 180,
+   "status": "missing 1 section (1 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "14",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "13",
+     "cases": 4,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 38,
+   "actId": "IND_REP_1544_1910",
+   "title": "The Indian Electricity Act, 1910, 9 of 1910 (Rep., Act 36 of 2003)",
+   "judgments": 178,
+   "status": "missing 26 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "6",
+     "cases": 17,
+     "state": "held"
+    },
+    {
+     "number": "22",
+     "cases": 14,
+     "state": "held"
+    },
+    {
+     "number": "24",
+     "cases": 10,
+     "state": "held"
+    },
+    {
+     "number": "26",
+     "cases": 9,
+     "state": "held"
+    },
+    {
+     "number": "7",
+     "cases": 8,
+     "state": "missing"
+    },
+    {
+     "number": "1",
+     "cases": 8,
+     "state": "missing"
+    },
+    {
+     "number": "39",
+     "cases": 7,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 5,
+     "state": "held"
+    }
+   ],
+   "lostCases": 22,
+   "lostSections": [
+    {
+     "number": "7",
+     "cases": 8,
+     "state": "missing"
+    },
+    {
+     "number": "1",
+     "cases": 8,
+     "state": "missing"
+    },
+    {
+     "number": "21",
+     "cases": 3,
+     "state": "missing"
+    },
+    {
+     "number": "51",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 39,
+   "actId": "IND_central_2390",
+   "title": "The Sale of Goods Act, 1930",
+   "judgments": 172,
+   "status": "missing 1 section (1 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "2",
+     "cases": 17,
+     "state": "held"
+    },
+    {
+     "number": "4",
+     "cases": 14,
+     "state": "held"
+    },
+    {
+     "number": "61",
+     "cases": 7,
+     "state": "held"
+    },
+    {
+     "number": "7",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "19",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "20",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 40,
+   "actId": "IND_central_2385",
+   "title": "The Indian Succession Act, 1925",
+   "judgments": 170,
+   "status": "missing 3 sections (3 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "63",
+     "cases": 28,
+     "state": "held"
+    },
+    {
+     "number": "276",
+     "cases": 7,
+     "state": "held"
+    },
+    {
+     "number": "213",
+     "cases": 7,
+     "state": "missing"
+    },
+    {
+     "number": "306",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "119",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "372",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "302",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "211",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 7,
+   "lostSections": [
+    {
+     "number": "213",
+     "cases": 7,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 41,
+   "actId": "IND_REP_2501_1948",
+   "title": "The Factories Act, 1948, 63 of 1948 (Rep., Act 37 of 2020)",
+   "judgments": 165,
+   "status": "missing 58 sections",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "2",
+     "cases": 23,
+     "state": "missing"
+    },
+    {
+     "number": "46",
+     "cases": 13,
+     "state": "missing"
+    },
+    {
+     "number": "1",
+     "cases": 3,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 39,
+   "lostSections": [
+    {
+     "number": "2",
+     "cases": 23,
+     "state": "missing"
+    },
+    {
+     "number": "46",
+     "cases": 13,
+     "state": "missing"
+    },
+    {
+     "number": "1",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 42,
+   "actId": "IND_central_1618",
+   "title": "The Conservation of Foreign Exchange and Prevention of Smuggling Activities Act, 1974",
+   "judgments": 158,
+   "status": "missing 4 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "3",
+     "cases": 5,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 43,
+   "actId": "IND_central_2058",
+   "title": "The Electricity Act, 2003",
+   "judgments": 157,
+   "status": "missing 165 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "1",
+     "cases": 23,
+     "state": "held"
+    },
+    {
+     "number": "125",
+     "cases": 23,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 18,
+     "state": "held"
+    },
+    {
+     "number": "86",
+     "cases": 15,
+     "state": "held"
+    },
+    {
+     "number": "63",
+     "cases": 15,
+     "state": "held"
+    },
+    {
+     "number": "62",
+     "cases": 14,
+     "state": "held"
+    },
+    {
+     "number": "61",
+     "cases": 12,
+     "state": "held"
+    },
+    {
+     "number": "14",
+     "cases": 9,
+     "state": "held"
+    }
+   ],
+   "lostCases": 3,
+   "lostSections": [
+    {
+     "number": "6",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 44,
+   "actId": "IND_central_2121",
+   "title": "The Right to Fair Compensation and Transparency in Land Acquisition, Rehabilitation and Resettlement Act, 2013",
+   "judgments": 157,
+   "status": "missing 83 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "24",
+     "cases": 5,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 45,
+   "actId": "IND_central_1930",
+   "title": "The Army Act, 1950",
+   "judgments": 156,
+   "status": "missing 156 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "3",
+     "cases": 9,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "69",
+     "cases": 7,
+     "state": "held"
+    },
+    {
+     "number": "63",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "164",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "20",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "52",
+     "cases": 4,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 46,
+   "actId": "IND_central_2006",
+   "title": "The Securitisation and Reconstruction of Financial Assets and Enforcement of Security Interest Act, 2002",
+   "judgments": 155,
+   "status": "missing 23 sections",
+   "needsDownload": false,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 47,
+   "actId": "IND_central_15510",
+   "title": "The Indian Stamp Act, 1899",
+   "judgments": 152,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "2",
+     "cases": 32,
+     "state": "held"
+    },
+    {
+     "number": "35",
+     "cases": 30,
+     "state": "held"
+    },
+    {
+     "number": "33",
+     "cases": 20,
+     "state": "held"
+    },
+    {
+     "number": "40",
+     "cases": 15,
+     "state": "held"
+    },
+    {
+     "number": "47A",
+     "cases": 14,
+     "state": "missing"
+    },
+    {
+     "number": "38",
+     "cases": 12,
+     "state": "held"
+    },
+    {
+     "number": "36",
+     "cases": 11,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 11,
+     "state": "held"
+    }
+   ],
+   "lostCases": 14,
+   "lostSections": [
+    {
+     "number": "47A",
+     "cases": 14,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 48,
+   "actId": "IND_central_2114",
+   "title": "The Companies Act, 2013",
+   "judgments": 148,
+   "status": "missing 60 sections (27 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "2",
+     "cases": 26,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 12,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 11,
+     "state": "held"
+    },
+    {
+     "number": "420",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "408",
+     "cases": 7,
+     "state": "held"
+    },
+    {
+     "number": "434",
+     "cases": 7,
+     "state": "missing"
+    },
+    {
+     "number": "421",
+     "cases": 6,
+     "state": "missing"
+    },
+    {
+     "number": "242",
+     "cases": 6,
+     "state": "held"
+    }
+   ],
+   "lostCases": 20,
+   "lostSections": [
+    {
+     "number": "434",
+     "cases": 7,
+     "state": "missing"
+    },
+    {
+     "number": "421",
+     "cases": 6,
+     "state": "missing"
+    },
+    {
+     "number": "326",
+     "cases": 4,
+     "state": "missing"
+    },
+    {
+     "number": "271",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 49,
+   "actId": "IND_central_1631",
+   "title": "The Advocates Act, 1961",
+   "judgments": 137,
+   "status": "missing 1 section (1 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "38",
+     "cases": 18,
+     "state": "held"
+    },
+    {
+     "number": "30",
+     "cases": 15,
+     "state": "held"
+    },
+    {
+     "number": "35",
+     "cases": 15,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 10,
+     "state": "held"
+    },
+    {
+     "number": "24",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 7,
+     "state": "held"
+    },
+    {
+     "number": "49",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "16",
+     "cases": 6,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 50,
+   "actId": "IND_central_1885",
+   "title": "The Banking Regulation Act, 1949",
+   "judgments": 127,
+   "status": "missing 34 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "5",
+     "cases": 15,
+     "state": "held"
+    },
+    {
+     "number": "45",
+     "cases": 11,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "21",
+     "cases": 7,
+     "state": "held"
+    },
+    {
+     "number": "35",
+     "cases": 7,
+     "state": "held"
+    },
+    {
+     "number": "35A",
+     "cases": 7,
+     "state": "missing"
+    },
+    {
+     "number": "2",
+     "cases": 7,
+     "state": "held"
+    },
+    {
+     "number": "6",
+     "cases": 5,
+     "state": "held"
+    }
+   ],
+   "lostCases": 7,
+   "lostSections": [
+    {
+     "number": "35A",
+     "cases": 7,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 51,
+   "actId": "IND_central_1832",
+   "title": "The Administrative Tribunals Act, 1985",
+   "judgments": 125,
+   "status": "missing 1 section (1 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "19",
+     "cases": 18,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 9,
+     "state": "held"
+    },
+    {
+     "number": "14",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "28",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "6",
+     "cases": 5,
+     "state": "missing"
+    },
+    {
+     "number": "3",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "21",
+     "cases": 5,
+     "state": "held"
+    }
+   ],
+   "lostCases": 5,
+   "lostSections": [
+    {
+     "number": "6",
+     "cases": 5,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 52,
+   "actId": "IND_central_3123",
+   "title": "The Wealth-tax Act, 1957",
+   "judgments": 124,
+   "status": "missing 2 sections (2 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "1",
+     "cases": 11,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 9,
+     "state": "held"
+    },
+    {
+     "number": "5",
+     "cases": 7,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "7",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "27",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 53,
+   "actId": "IND_central_1680",
+   "title": "The States Reorganisation Act, 1956",
+   "judgments": 120,
+   "status": "missing 4 sections (4 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "115",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "51",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "5",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "119",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 54,
+   "actId": "IND_REP_2463_1948",
+   "title": "The Minimum Wages Act, 1948, 11 of 1948 (Rep., Act 29 of 2019)",
+   "judgments": 110,
+   "status": "missing 8 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "3",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "5",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 55,
+   "actId": "IND_central_2394",
+   "title": "The Indian Partnership Act, 1932",
+   "judgments": 110,
+   "status": "missing 2 sections (2 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "69",
+     "cases": 14,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 7,
+     "state": "held"
+    },
+    {
+     "number": "4",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "42",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "25",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 56,
+   "actId": "IND_central_1410",
+   "title": "The Delhi Municipal Corporation Act, 1957",
+   "judgments": 108,
+   "status": "missing 127 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "4",
+     "cases": 7,
+     "state": "held"
+    },
+    {
+     "number": "115",
+     "cases": 6,
+     "state": "missing"
+    },
+    {
+     "number": "98",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "169",
+     "cases": 3,
+     "state": "missing"
+    },
+    {
+     "number": "2",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "126",
+     "cases": 3,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 12,
+   "lostSections": [
+    {
+     "number": "115",
+     "cases": 6,
+     "state": "missing"
+    },
+    {
+     "number": "169",
+     "cases": 3,
+     "state": "missing"
+    },
+    {
+     "number": "126",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 57,
+   "actId": "IND_central_2065",
+   "title": "The Right to Information Act, 2005",
+   "judgments": 108,
+   "status": "missing 1 section (1 confident)",
+   "needsDownload": true,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 58,
+   "actId": "IND_central_2409",
+   "title": "The Drugs and Cosmetics Act, 1940",
+   "judgments": 107,
+   "status": "missing 2 sections (2 confident)",
+   "needsDownload": true,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 59,
+   "actId": "IND_REP_2685_1952",
+   "title": "The Mines Act, 1952, 35 of 1952 (Rep., Act 37 of 2020)",
+   "judgments": 102,
+   "status": "missing 99 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "2",
+     "cases": 12,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "79",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "73",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "20",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 60,
+   "actId": "IND_central_1663",
+   "title": "The Representation of the People Act, 1950",
+   "judgments": 99,
+   "status": "missing 2 sections (2 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "20",
+     "cases": 7,
+     "state": "held"
+    },
+    {
+     "number": "16",
+     "cases": 7,
+     "state": "held"
+    },
+    {
+     "number": "23",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "7",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "19",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 61,
+   "actId": "IND_central_2152",
+   "title": "The Employees Provident Funds and Miscellaneous Provisions Act, 1952",
+   "judgments": 99,
+   "status": "missing 38 sections",
+   "needsDownload": false,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 62,
+   "actId": "IND_central_2304",
+   "title": "The Insurance Act, 1938",
+   "judgments": 97,
+   "status": "missing 174 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "64",
+     "cases": 16,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 9,
+     "state": "held"
+    },
+    {
+     "number": "45",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "64UM",
+     "cases": 4,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 63,
+   "actId": "IND_central_1638",
+   "title": "The Hindu Adoptions and Maintenance  Act, 1956",
+   "judgments": 92,
+   "status": "missing 8 sections",
+   "needsDownload": false,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 64,
+   "actId": "IND_central_1890",
+   "title": "The Securities and Exchange Board of India Act, 1992",
+   "judgments": 92,
+   "status": "missing 4 sections (4 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "15Z",
+     "cases": 15,
+     "state": "held"
+    },
+    {
+     "number": "11",
+     "cases": 7,
+     "state": "held"
+    },
+    {
+     "number": "15",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "15A",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 65,
+   "actId": "IND_central_1507",
+   "title": "The Probation of Offenders Act, 1958",
+   "judgments": 89,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "4",
+     "cases": 24,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "12",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "360",
+     "cases": 4,
+     "state": "missing"
+    },
+    {
+     "number": "6",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "18",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 66,
+   "actId": "IND_central_2398",
+   "title": "The Reserve Bank of India Act, 1934",
+   "judgments": 82,
+   "status": "missing 7 sections (7 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "45",
+     "cases": 7,
+     "state": "held"
+    },
+    {
+     "number": "58",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "42",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "7",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "45L",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 67,
+   "actId": "IND_central_2388",
+   "title": "The Indian Forest Act, 1927",
+   "judgments": 82,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "4",
+     "cases": 9,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "29",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "35",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "41",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "52",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 68,
+   "actId": "IND_central_2258",
+   "title": "The Delhi Special Police Establishment Act, 1946",
+   "judgments": 81,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "6",
+     "cases": 19,
+     "state": "missing"
+    },
+    {
+     "number": "6A",
+     "cases": 5,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 69,
+   "actId": "IND_central_2342",
+   "title": "The Explosive Substances Act, 1908",
+   "judgments": 80,
+   "status": "missing 4 sections",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "3",
+     "cases": 31,
+     "state": "missing"
+    },
+    {
+     "number": "4",
+     "cases": 28,
+     "state": "missing"
+    },
+    {
+     "number": "5",
+     "cases": 27,
+     "state": "held"
+    },
+    {
+     "number": "6",
+     "cases": 15,
+     "state": "held"
+    },
+    {
+     "number": "25",
+     "cases": 4,
+     "state": "missing"
+    },
+    {
+     "number": "34",
+     "cases": 3,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 59,
+   "lostSections": [
+    {
+     "number": "3",
+     "cases": 31,
+     "state": "missing"
+    },
+    {
+     "number": "4",
+     "cases": 28,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 70,
+   "actId": "IND_central_2264",
+   "title": "The Police Act, 1861",
+   "judgments": 77,
+   "status": "missing 27 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "7",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "44",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "17",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "42",
+     "cases": 3,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 3,
+   "lostSections": [
+    {
+     "number": "42",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 71,
+   "actId": "IND_REP_1300_1890",
+   "title": "The Indian Railways Act, 1890, 9 of 1890 (Rep., Act 24 of 1989)",
+   "judgments": 77,
+   "status": "missing 114 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "41",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "135",
+     "cases": 3,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 3,
+   "lostSections": [
+    {
+     "number": "135",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 72,
+   "actId": "IND_central_1632",
+   "title": "The Life Insurance Corporation Act, 1956",
+   "judgments": 72,
+   "status": "missing 2 sections (2 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "3",
+     "cases": 5,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 73,
+   "actId": "IND_central_1758",
+   "title": "The National Security Act, 1980",
+   "judgments": 72,
+   "status": "missing 20 sections",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "3",
+     "cases": 31,
+     "state": "missing"
+    },
+    {
+     "number": "2",
+     "cases": 18,
+     "state": "held"
+    },
+    {
+     "number": "5",
+     "cases": 3,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 34,
+   "lostSections": [
+    {
+     "number": "3",
+     "cases": 31,
+     "state": "missing"
+    },
+    {
+     "number": "5",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 74,
+   "actId": "IND_central_1391",
+   "title": "The Delhi Development Act, 1957",
+   "judgments": 71,
+   "status": "missing 6 sections (6 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "2",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "15",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "22",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 75,
+   "actId": "IND_REP_3205_1965",
+   "title": "The Payment of Bonus Act, 1965, 21 of 1965 (Rep., Act 29 of 2019)",
+   "judgments": 70,
+   "status": "missing 6 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "32",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 76,
+   "actId": "IND_central_2036",
+   "title": "The Prevention of Money-Laundering Act, 2002",
+   "judgments": 69,
+   "status": "missing 59 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "3",
+     "cases": 10,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 10,
+     "state": "held"
+    },
+    {
+     "number": "45",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "19",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "4",
+     "cases": 7,
+     "state": "held"
+    },
+    {
+     "number": "44",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "43",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 77,
+   "actId": "IND_REP_1580_1912",
+   "title": "The Delhi Laws Act, 1912, 13 of 1912 (Rep., Act 37 of 2023)",
+   "judgments": 63,
+   "status": "missing 4 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "7",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 78,
+   "actId": "IND_central_2318",
+   "title": "The Guardians and Wards Act, 1890",
+   "judgments": 62,
+   "status": "missing 51 sections",
+   "needsDownload": false,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 79,
+   "actId": "IND_REP_2130_1936",
+   "title": "The Payment of Wages Act, 1936, 4 of 1936 (Rep., Act 29 of 2019)",
+   "judgments": 61,
+   "status": "missing 2 sections (2 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "2",
+     "cases": 4,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 80,
+   "actId": "IND_REP_1217_1885",
+   "title": "The Indian Telegraph Act, 1885, 13 of 1885, (Rep., Act 44 of 2023)",
+   "judgments": 61,
+   "status": "missing 5 sections (5 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "4",
+     "cases": 19,
+     "state": "held"
+    },
+    {
+     "number": "5",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 5,
+     "state": "missing"
+    },
+    {
+     "number": "7",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 5,
+   "lostSections": [
+    {
+     "number": "2",
+     "cases": 5,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 81,
+   "actId": "IND_central_1627",
+   "title": "The University Grants Commission Act, 1956",
+   "judgments": 61,
+   "status": "missing 1 section (1 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "2",
+     "cases": 10,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 9,
+     "state": "held"
+    },
+    {
+     "number": "26",
+     "cases": 7,
+     "state": "held"
+    },
+    {
+     "number": "22",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "14",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 82,
+   "actId": "IND_central_2079",
+   "title": "The Protection of Children from Sexual Offences Act, 2012",
+   "judgments": 61,
+   "status": "missing 26 sections",
+   "needsDownload": false,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 83,
+   "actId": "IND_central_1724",
+   "title": "The Interest Act, 1978",
+   "judgments": 59,
+   "status": "missing 29 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "3",
+     "cases": 13,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 84,
+   "actId": "IND_central_1649",
+   "title": "The Hindu Minority and Guardianship Act, 1956",
+   "judgments": 57,
+   "status": "missing 21 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "13",
+     "cases": 3,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 3,
+   "lostSections": [
+    {
+     "number": "13",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 85,
+   "actId": "IND_central_2021",
+   "title": "The Protection of Women from Domestic Violence Act, 2005",
+   "judgments": 57,
+   "status": "missing 1 section (1 confident)",
+   "needsDownload": true,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 86,
+   "actId": "IND_central_1999",
+   "title": "The Information Technology Act, 2000",
+   "judgments": 56,
+   "status": "missing 4 sections (4 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "66",
+     "cases": 11,
+     "state": "missing"
+    },
+    {
+     "number": "2",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "67",
+     "cases": 4,
+     "state": "held"
+    }
+   ],
+   "lostCases": 11,
+   "lostSections": [
+    {
+     "number": "66",
+     "cases": 11,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 87,
+   "actId": "IND_REP_2406_1946",
+   "title": "The Foreigners Act, 1946, 31 of 1946 (Rep., Act 13 of 2025)",
+   "judgments": 55,
+   "status": "**absent** (title only, no text)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "3",
+     "cases": 12,
+     "state": "missing"
+    },
+    {
+     "number": "14",
+     "cases": 10,
+     "state": "missing"
+    },
+    {
+     "number": "2",
+     "cases": 6,
+     "state": "missing"
+    },
+    {
+     "number": "25",
+     "cases": 4,
+     "state": "missing"
+    },
+    {
+     "number": "212",
+     "cases": 3,
+     "state": "missing"
+    },
+    {
+     "number": "216",
+     "cases": 3,
+     "state": "missing"
+    },
+    {
+     "number": "9",
+     "cases": 3,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 41,
+   "lostSections": [
+    {
+     "number": "3",
+     "cases": 12,
+     "state": "missing"
+    },
+    {
+     "number": "14",
+     "cases": 10,
+     "state": "missing"
+    },
+    {
+     "number": "2",
+     "cases": 6,
+     "state": "missing"
+    },
+    {
+     "number": "25",
+     "cases": 4,
+     "state": "missing"
+    },
+    {
+     "number": "212",
+     "cases": 3,
+     "state": "missing"
+    },
+    {
+     "number": "216",
+     "cases": 3,
+     "state": "missing"
+    },
+    {
+     "number": "9",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 88,
+   "actId": "IND_central_1522",
+   "title": "The Citizenship Act, 1955",
+   "judgments": 55,
+   "status": "missing 4 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "9",
+     "cases": 10,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 9,
+     "state": "missing"
+    },
+    {
+     "number": "5",
+     "cases": 7,
+     "state": "held"
+    },
+    {
+     "number": "6A",
+     "cases": 5,
+     "state": "missing"
+    },
+    {
+     "number": "6",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "7A",
+     "cases": 3,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 14,
+   "lostSections": [
+    {
+     "number": "1",
+     "cases": 9,
+     "state": "missing"
+    },
+    {
+     "number": "6A",
+     "cases": 5,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 89,
+   "actId": "IND_central_2029",
+   "title": "The Army and Air Force (Disposal of Private Property) Act, 1950",
+   "judgments": 54,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 90,
+   "actId": "IND_REP_2740_1953",
+   "title": "The Estate Duty Act 1953, 34 of 1953, (Rep., Act 20 of 2000)",
+   "judgments": 53,
+   "status": "missing 2 sections (2 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "1",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 7,
+     "state": "held"
+    },
+    {
+     "number": "10",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "74",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "64",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "11",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "25",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 91,
+   "actId": "IND_central_2025",
+   "title": "The National Green Tribunal Act, 2010",
+   "judgments": 53,
+   "status": "missing 17 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "22",
+     "cases": 10,
+     "state": "held"
+    },
+    {
+     "number": "14",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "16",
+     "cases": 4,
+     "state": "missing"
+    },
+    {
+     "number": "15",
+     "cases": 3,
+     "state": "missing"
+    },
+    {
+     "number": "1",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 7,
+   "lostSections": [
+    {
+     "number": "16",
+     "cases": 4,
+     "state": "missing"
+    },
+    {
+     "number": "15",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 92,
+   "actId": "IND_central_19723",
+   "title": "The Provincial Insolvency Act, 1920",
+   "judgments": 51,
+   "status": "missing 20 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "61",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 93,
+   "actId": "IND_central_1508",
+   "title": "The Commissions of Inquiry Act, 1952",
+   "judgments": 51,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "3",
+     "cases": 9,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 94,
+   "actId": "IND_REP_3890_1986",
+   "title": "The Juvenile Justice Act 1986, 53 of 1986 (Rep., Act 56 of 2000)",
+   "judgments": 49,
+   "status": "missing 63 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "2",
+     "cases": 7,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 95,
+   "actId": "IND_central_2166",
+   "title": "The Requisitioning and Acquisition of Immovable Property Act, 1952",
+   "judgments": 48,
+   "status": "missing 21 sections",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "8",
+     "cases": 10,
+     "state": "missing"
+    },
+    {
+     "number": "7",
+     "cases": 4,
+     "state": "missing"
+    },
+    {
+     "number": "1",
+     "cases": 4,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 18,
+   "lostSections": [
+    {
+     "number": "8",
+     "cases": 10,
+     "state": "missing"
+    },
+    {
+     "number": "7",
+     "cases": 4,
+     "state": "missing"
+    },
+    {
+     "number": "1",
+     "cases": 4,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 96,
+   "actId": "IND_central_2018",
+   "title": "The State Financial Corporations Act, 1951",
+   "judgments": 48,
+   "status": "missing 33 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "29",
+     "cases": 17,
+     "state": "held"
+    },
+    {
+     "number": "31",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "30",
+     "cases": 3,
+     "state": "missing"
+    },
+    {
+     "number": "32",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 3,
+   "lostSections": [
+    {
+     "number": "30",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 97,
+   "actId": "IND_central_1988",
+   "title": "The Foreign Exchange Management Act, 1999",
+   "judgments": 48,
+   "status": "missing 21 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "2",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "35",
+     "cases": 3,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 3,
+   "lostSections": [
+    {
+     "number": "35",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 98,
+   "actId": "IND_central_1929",
+   "title": "The Telecom Regulatory Authority of India Act, 1997",
+   "judgments": 47,
+   "status": "missing 1 section (1 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "18",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "14",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "11",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 4,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 99,
+   "actId": "IND_central_1363",
+   "title": "The All-India Services Act, 1951",
+   "judgments": 46,
+   "status": "missing 2 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "3",
+     "cases": 12,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 4,
+     "state": "missing"
+    },
+    {
+     "number": "1",
+     "cases": 4,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 8,
+   "lostSections": [
+    {
+     "number": "2",
+     "cases": 4,
+     "state": "missing"
+    },
+    {
+     "number": "1",
+     "cases": 4,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 100,
+   "actId": "IND_REP_2231_1939",
+   "title": "The Defence of India Act 1939, 35 of 1939, (Rep., Act 2 of 1948)",
+   "judgments": 44,
+   "status": "missing 11 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "19",
+     "cases": 6,
+     "state": "missing"
+    },
+    {
+     "number": "2",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 6,
+   "lostSections": [
+    {
+     "number": "19",
+     "cases": 6,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 101,
+   "actId": "IND_central_1553",
+   "title": "The State Bank of India Act, 1955",
+   "judgments": 44,
+   "status": "missing 10 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "43",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "3",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "18",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 102,
+   "actId": "IND_central_1546",
+   "title": "The Government of Union Territories Act, 1963",
+   "judgments": 44,
+   "status": "missing 42 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "18",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 103,
+   "actId": "IND_central_1400",
+   "title": "The Navy Act, 1957",
+   "judgments": 42,
+   "status": "missing 161 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "77",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 4,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 104,
+   "actId": "IND_central_1568",
+   "title": "The Delhi Land Holdings (Ceiling) Act, 1960",
+   "judgments": 42,
+   "status": "missing 1 section (1 confident)",
+   "needsDownload": true,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 105,
+   "actId": "IND_central_2086",
+   "title": "The Right of Children to Free and Compulsory Education Act, 2009",
+   "judgments": 42,
+   "status": "missing 7 sections",
+   "needsDownload": false,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 106,
+   "actId": "IND_central_2170",
+   "title": "The Cinematograph Act, 1952",
+   "judgments": 41,
+   "status": "missing 12 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "6",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 107,
+   "actId": "IND_REP_3806_1984",
+   "title": "The Wakf Amendment Act, 1984, 69 of 1984 (Rep., Act 43 of 1995)",
+   "judgments": 41,
+   "status": "missing 25 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "30",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 108,
+   "actId": "IND_central_15709",
+   "title": "The Protection of Human Rights Act, 1993",
+   "judgments": 41,
+   "status": "**absent** (title only, no text)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "2",
+     "cases": 8,
+     "state": "missing"
+    },
+    {
+     "number": "21",
+     "cases": 6,
+     "state": "missing"
+    },
+    {
+     "number": "1",
+     "cases": 5,
+     "state": "missing"
+    },
+    {
+     "number": "12",
+     "cases": 3,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 22,
+   "lostSections": [
+    {
+     "number": "2",
+     "cases": 8,
+     "state": "missing"
+    },
+    {
+     "number": "21",
+     "cases": 6,
+     "state": "missing"
+    },
+    {
+     "number": "1",
+     "cases": 5,
+     "state": "missing"
+    },
+    {
+     "number": "12",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 109,
+   "actId": "IND_central_1908",
+   "title": "The Railways Act, 1989",
+   "judgments": 40,
+   "status": "missing 107 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "2",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "123",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "124A",
+     "cases": 4,
+     "state": "missing"
+    },
+    {
+     "number": "3",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "4",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "73",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 110,
+   "actId": "IND_central_2325",
+   "title": "The Prisons Act, 1894",
+   "judgments": 39,
+   "status": "missing 1 section (1 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "59",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "30",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "5",
+     "cases": 4,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 111,
+   "actId": "IND_central_1645",
+   "title": "The Punjab Reorganisation Act, 1966",
+   "judgments": 39,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "82",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "78",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "88",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "87",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 112,
+   "actId": "IND_central_19229",
+   "title": "The Punjab Land-Revenue Act, 1887",
+   "judgments": 37,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 113,
+   "actId": "IND_central_2293",
+   "title": "The Court-Fees Act, 1870",
+   "judgments": 37,
+   "status": "missing 24 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "7",
+     "cases": 4,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 114,
+   "actId": "IND_central_2349",
+   "title": "The Indian Easements Act, 1882",
+   "judgments": 37,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "60",
+     "cases": 4,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 115,
+   "actId": "IND_SPENT_2_1962",
+   "title": "The Defence of India Act, 1962",
+   "judgments": 37,
+   "status": "missing 13 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "43",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "29",
+     "cases": 6,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 116,
+   "actId": "IND_central_2483",
+   "title": "The Gift-tax Act, 1958",
+   "judgments": 37,
+   "status": "missing 45 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "26",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "5",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 117,
+   "actId": "IND_central_2077",
+   "title": "The Armed Forces Tribunal Act, 2007",
+   "judgments": 37,
+   "status": "missing 1 section (1 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "30",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "31",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "14",
+     "cases": 5,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 118,
+   "actId": "IND_central_2155",
+   "title": "The Rights of Persons with Disabilities Act, 2016.",
+   "judgments": 36,
+   "status": "missing 95 sections",
+   "needsDownload": false,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 119,
+   "actId": "IND_REP_2243_1940",
+   "title": "The Trade Marks Act 1940, 5 of 1940, (Rep., Act 43 of 1958)",
+   "judgments": 35,
+   "status": "missing 44 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "76",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 5,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 5,
+   "lostSections": [
+    {
+     "number": "1",
+     "cases": 5,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 120,
+   "actId": "IND_central_22044",
+   "title": "The Trade Unions Act, 1926",
+   "judgments": 35,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 121,
+   "actId": "IND_central_1367",
+   "title": "The Copyright Act, 1957",
+   "judgments": 35,
+   "status": "missing 5 sections (5 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "63",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "17",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 122,
+   "actId": "IND_central_2301",
+   "title": "The Explosives Act, 1884",
+   "judgments": 34,
+   "status": "missing 1 section (1 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "9",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "9B",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "98",
+     "cases": 4,
+     "state": "missing"
+    },
+    {
+     "number": "4",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "5",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 123,
+   "actId": "IND_central_1544",
+   "title": "The Protection of Civil Rights Act, 1955",
+   "judgments": 34,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "7",
+     "cases": 5,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 124,
+   "actId": "IND_central_1925",
+   "title": "The Legal Services Authorities Act, 1987",
+   "judgments": 34,
+   "status": "missing 11 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "21",
+     "cases": 5,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 125,
+   "actId": "IND_central_2156",
+   "title": "The Commercial Courts Act, 2015",
+   "judgments": 34,
+   "status": "missing 15 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "13",
+     "cases": 9,
+     "state": "held"
+    },
+    {
+     "number": "12A",
+     "cases": 8,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "12",
+     "cases": 5,
+     "state": "held"
+    },
+    {
+     "number": "2",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "37",
+     "cases": 3,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 3,
+   "lostSections": [
+    {
+     "number": "37",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 126,
+   "actId": "IND_central_1387",
+   "title": "The Special Marriage Act, 1954",
+   "judgments": 33,
+   "status": "missing 3 sections (3 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "28",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "27",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 127,
+   "actId": "IND_REP_1429_1899",
+   "title": "The Arbitration Act 1899, 9 of 1899, (Rep., Act 10 of 1940 )",
+   "judgments": 31,
+   "status": "missing 1 section (1 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "15",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 128,
+   "actId": "IND_central_1844",
+   "title": "The Family Courts Act, 1984",
+   "judgments": 31,
+   "status": "missing 8 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "7",
+     "cases": 12,
+     "state": "held"
+    },
+    {
+     "number": "19",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "9",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 129,
+   "actId": "IND_central_15256",
+   "title": "The Consumer Protection Act, 2019",
+   "judgments": 31,
+   "status": "missing 90 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "2",
+     "cases": 6,
+     "state": "held"
+    },
+    {
+     "number": "38",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 130,
+   "actId": "IND_central_2276",
+   "title": "The Fatal Accidents Act, 1855",
+   "judgments": 30,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "1",
+     "cases": 4,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 131,
+   "actId": "IND_central_2327",
+   "title": "The Indian Trust Act, 1882",
+   "judgments": 30,
+   "status": "missing 15 sections (3 confident)",
+   "needsDownload": true,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 132,
+   "actId": "IND_central_1770",
+   "title": "The Prevention of Damage to Public Property Act, 1984",
+   "judgments": 30,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "3",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 133,
+   "actId": "IND_central_1993",
+   "title": "The Trade Marks Act, 1999",
+   "judgments": 30,
+   "status": "missing 9 sections (9 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "2",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "134",
+     "cases": 3,
+     "state": "missing"
+    }
+   ],
+   "lostCases": 3,
+   "lostSections": [
+    {
+     "number": "134",
+     "cases": 3,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 134,
+   "actId": "IND_central_2379",
+   "title": "The Official Secrets Act, 1923",
+   "judgments": 29,
+   "status": "missing 1 section (1 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "3",
+     "cases": 9,
+     "state": "held"
+    },
+    {
+     "number": "4",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "9",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "5",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "1",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 135,
+   "actId": "IND_central_20099",
+   "title": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+   "judgments": 29,
+   "status": "missing 6 sections (6 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "473",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "47",
+     "cases": 4,
+     "state": "held"
+    },
+    {
+     "number": "173",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 136,
+   "actId": "IND_REP_104_1839",
+   "title": "The Interest Act, 1839, 32 of 1839 (Rep., Act 14 of 1978)",
+   "judgments": 28,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 137,
+   "actId": "IND_central_1552",
+   "title": "The Chartered Accountants Act, 1949",
+   "judgments": 28,
+   "status": "missing 2 sections (2 confident)",
+   "needsDownload": true,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 138,
+   "actId": "IND_central_2010",
+   "title": "The Competition Act, 2002",
+   "judgments": 28,
+   "status": "missing 174 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "3",
+     "cases": 5,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 139,
+   "actId": "IND_central_2045",
+   "title": "The Disaster Management Act, 2005",
+   "judgments": 28,
+   "status": "missing 11 sections (11 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "2",
+     "cases": 3,
+     "state": "held"
+    },
+    {
+     "number": "10",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 140,
+   "actId": "IND_central_2252",
+   "title": "The Union Territory Goods and Services Tax Act, 2017",
+   "judgments": 28,
+   "status": "missing 1 section (1 confident)",
+   "needsDownload": true,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 141,
+   "actId": "IND_REP_2110_1934",
+   "title": "The Indian Tariff Act, 1934, 32 of 1934 (Rep., Act 51 of 1975)",
+   "judgments": 27,
+   "status": "missing 5 sections",
+   "needsDownload": false,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 142,
+   "actId": "IND_central_19230",
+   "title": "The Punjab Tenancy Act, 1887.",
+   "judgments": 27,
+   "status": "missing 4 sections (4 confident)",
+   "needsDownload": true,
+   "topSections": [
+    {
+     "number": "5",
+     "cases": 4,
+     "state": "missing"
+    },
+    {
+     "number": "82",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 4,
+   "lostSections": [
+    {
+     "number": "5",
+     "cases": 4,
+     "state": "missing"
+    }
+   ]
+  },
+  {
+   "rank": 143,
+   "actId": "IND_central_1938",
+   "title": "The National Council for Teacher Education Act, 1993",
+   "judgments": 27,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 144,
+   "actId": "IND_central_1880",
+   "title": "The All India Council for Technical Education Act, 1987",
+   "judgments": 26,
+   "status": "missing 5 sections",
+   "needsDownload": false,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 145,
+   "actId": "IND_REP_1075_1877",
+   "title": "The Indian Limitation Act 1877, 15 of 1877, (Rep., Act 9 of 1908)",
+   "judgments": 25,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 146,
+   "actId": "IND_SPENT_4_1971",
+   "title": "The Defence and Internal Security of India Act, 1971",
+   "judgments": 25,
+   "status": "missing 23 sections",
+   "needsDownload": false,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 147,
+   "actId": "IND_central_1541",
+   "title": "The Road Transport Corporations Act, 1950",
+   "judgments": 24,
+   "status": "missing 3 sections (3 confident)",
+   "needsDownload": true,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 148,
+   "actId": "IND_REP_1785_1923",
+   "title": "The Indian Mines Act 1923, 4 of 1923, (Rep., Act 35 of 1952)",
+   "judgments": 24,
+   "status": "missing 19 sections",
+   "needsDownload": false,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 149,
+   "actId": "IND_central_2312",
+   "title": "The Provincial Small Cause Courts Act, 1887",
+   "judgments": 23,
+   "status": "missing 26 sections",
+   "needsDownload": false,
+   "topSections": [
+    {
+     "number": "17",
+     "cases": 3,
+     "state": "held"
+    }
+   ],
+   "lostCases": 0,
+   "lostSections": []
+  },
+  {
+   "rank": 150,
+   "actId": "IND_central_13053",
+   "title": "The Ancient Monuments and Archaeological Sites and Remains Act, 1958",
+   "judgments": 23,
+   "status": "complete",
+   "needsDownload": false,
+   "topSections": [],
+   "lostCases": 0,
+   "lostSections": []
+  }
+ ]
+}

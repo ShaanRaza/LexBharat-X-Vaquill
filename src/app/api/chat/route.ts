@@ -11,6 +11,11 @@ import { evaluateLimits, readLimits } from "@/lib/chat/limits.mjs";
 import { alignCitations, citedNumbers, ensureCitations, sanitizeCitations } from "@/lib/chat/citations.mjs";
 import { buildChatPrompt, buildCheckPrompt, detectNotFound, parseCheck } from "@/lib/chat/prompt.mjs";
 import { buildRewritePrompt, parseRewrite } from "@/lib/chat/rewrite.mjs";
+import { gapLead, gapNotice, unretrievedMentions } from "@/lib/chat/gaps.mjs";
+import { extractLookups } from "@/lib/chat/lookups.mjs";
+import { logGap } from "@/lib/insights/server";
+import { searchSections } from "@/lib/acts/searchStore";
+import { officialSourceUrl } from "@/lib/acts/quality";
 import { tuningFlags } from "@/lib/chat/tuning.mjs";
 import { verifyCitations } from "@/lib/chat/verify.mjs";
 import tuningConfig from "@/config/chat-tuning.json";
@@ -19,7 +24,7 @@ import { docChatSources, searchAttached } from "@/lib/vault/search";
 import { getDocs } from "@/lib/vault/store";
 import { vaultConfigured } from "@/lib/vault/supabase";
 import { bump } from "@/lib/insights/server";
-import { addMessage, chatTitle, countQuestion, createChat, deleteChat, deleteMessage, isChatId, listChats, ownsChat, recentTurns, uncountQuestion, usageFor, type CheckResult } from "@/lib/chat/store";
+import { addMessage, chatTitle, countQuestion, createChat, deleteChat, deleteMessage, isChatId, listChats, ownsChat, recentTurns, uncountQuestion, usageFor, type AbsentNote, type CheckResult } from "@/lib/chat/store";
 
 export const maxDuration = 60;
 const noStore = { "Cache-Control": "no-store" };
@@ -103,35 +108,46 @@ export async function POST(req: Request) {
         const ret = { ...ret0, sources: [...docSrc, ...ret0.sources.map((x) => ({ ...x, n: x.n + docSrc.length }))] };
         const cites = ret.sources.map(citationOf);
         send({ type: "sources", sources: cites, searchMode: ret.searchMode, queries: [message, ...extra].slice(0, 4) });
+        // sections the question names that the library does not hold (or holds only as scrambled text): say so plainly, link the Act on India Code, never answer from memory, and log it for the next downloads
+        const absent: AbsentNote[] = ret.gaps.map((g) => gapNotice(g, g.url)), lead = gapLead(ret.gaps), logIt = docIds.length === 0;   // nothing is logged for a question that had a Vault document attached
+        if (logIt) for (const g of ret.gaps) logGap({ kind: g.kind === "unreliable" ? "unreliable_section" : "missing_section", question: message, act: g.actTitle, section: g.number, actId: g.actId });
+        const logNotFound = () => { if (logIt && !ret.gaps.length) { const l = extractLookups(message)[0]; logGap({ kind: "not_found", question: message, act: l ? l.replace(/^\S+\s+/, "") : null, section: l ? l.split(" ")[0] : null }); } };
         if (!ret.sources.length) {
-          const text = "I couldn't find any sections in the Acts I searched that relate to this question. This tool searches Indian Central and State Acts and short excerpts of Supreme Court judgments; High Court and tribunal decisions are not included yet. Try describing the situation in other words, or name the Act and section.";
+          const text = lead ? `${lead}\n\nI couldn't find other sections in the Acts I searched that answer this question. You can read the section on India Code (link below).` : "I couldn't find any sections in the Acts I searched that relate to this question. This tool searches Indian Central and State Acts and short excerpts of Supreme Court judgments; High Court and tribunal decisions are not included yet. Try describing the situation in other words, or name the Act and section.";
           send({ type: "delta", text });
-          const check: CheckResult = { label: "not_found", unsupported: [] };
+          logNotFound();
+          const check: CheckResult = { label: "not_found", unsupported: [], ...(absent.length ? { absent } : {}) };
           send({ type: "check", ...check });
           finish(await addMessage(chatId, { role: "assistant", content: text, citations: [], check, model: null })); return;
         }
 
         // 3. the answer, streamed. If the model fails AFTER some text, the partial answer is kept and marked as cut off.
-        const prompt = buildChatPrompt({ question: message, history, sources: ret.sources, answerRules: tune.currentLaw });
-        let answer = "", model = aiModelFor("chat"), cutOff = false;
+        const prompt = buildChatPrompt({ question: message, history, sources: ret.sources, answerRules: tune.currentLaw, gaps: ret.gaps });
+        let answer = lead ? `${lead}\n\n` : "", model = aiModelFor("chat"), cutOff = false;
+        if (lead) send({ type: "delta", text: answer });
         try {
           for await (const ev of streamAi("chat", { system: prompt.system, messages: prompt.messages })) {
             if (ev.type === "text") { answer += ev.text; send({ type: "delta", text: ev.text }); } else if (ev.type === "done") model = ev.model;
           }
-        } catch (e) { if (!answer.trim()) throw e; cutOff = true; }
-        if (!answer.trim()) throw new AiError("unavailable", "The model returned no answer.");
+        } catch (e) { if (answer.trim() === lead.trim()) throw e; cutOff = true; }
+        if (answer.trim() === lead.trim()) throw new AiError("unavailable", "The model returned no answer.");
         const aligned = alignCitations(ensureCitations(answer.trim(), ret.sources), ret.sources);
         const clean = sanitizeCitations(tune.citationCheck ? verifyCitations(aligned, ret.sources).text : aligned, ret.sources.length);
         if (clean.text !== answer) send({ type: "replace", text: clean.text });
         if (cutOff) {
-          const check: CheckResult = { label: "check", unsupported: [], cutOff: true };
+          const check: CheckResult = { label: "check", unsupported: [], cutOff: true, ...(absent.length ? { absent } : {}) };
           send({ type: "cutoff" });
           finish(await addMessage(chatId, { role: "assistant", content: clean.text, citations: cites, check, model })); return;
         }
 
         // 4. answer check: a second, cheap call. "Not found" answers need no call. If the check fails the answer is labelled "Check sources", never left unlabelled.
+        // "Section N of <Act>" in the answer that is none of the sources found: if the library does not hold it, say so with a link (the model must not be the source of it)
+        for (const m of unretrievedMentions(clean.text, ret.sources)) {
+          const r = await searchSections(`${m.number} ${m.act}`, 1, 3).catch(() => null);
+          if (r && r.available && r.mode === "lookup" && r.missing) { const g = { kind: "mentioned" as const, number: r.missing.number, actTitle: r.missing.actTitle }; absent.push(gapNotice(g, officialSourceUrl(r.missing.sourceUrl))); if (logIt) logGap({ kind: "missing_section", question: message, act: g.actTitle, section: g.number, actId: r.missing.actId }); }
+        }
         let check: CheckResult;
-        if (detectNotFound(clean.text)) check = { label: "not_found", unsupported: [] };
+        if (detectNotFound(clean.text)) { check = { label: "not_found", unsupported: [] }; logNotFound(); }
         else {
           try {
             const cp = buildCheckPrompt({ question: message, answer: clean.text, sources: ret.sources });
@@ -140,6 +156,7 @@ export async function POST(req: Request) {
             check = { label: p.label, unsupported: p.unsupported, missing: p.missing, ...(p.unreadable ? { unavailable: true } : {}) };
           } catch { check = { label: "check", unsupported: [], unavailable: true }; }
         }
+        if (absent.length) check = { ...check, absent };
         // an answer that states law but cites no source cannot be "Supported"
         if ((check.label === "supported" || check.label === "partial") && citedNumbers(clean.text).length === 0) check = { label: "check", unsupported: check.unsupported, missing: [...(check.missing ?? []), "The answer does not cite any source."] };
         send({ type: "check", ...check });

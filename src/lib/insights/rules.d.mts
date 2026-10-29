@@ -9,3 +9,4 @@ export type DayRow = { day: string; visits: number; chats: number; drafts: numbe
 export function byDay(rows: { day: string; metric: string; key: string; n: number | string; sum_ms?: number | string }[]): DayRow[];
 export const MIN_MESSAGE: number, MAX_MESSAGE: number, MAX_EMAIL: number;
 export function validateMessage(body: unknown): { ok: true; value: { message: string; email: string; page: string } } | { ok: false; error: string };
+export function topGaps(rows: { at: string; kind: string; question: string; act?: string | null; section?: string | null }[], limit?: number): { sections: { act: string; section: string; count: number; unreliable: boolean; lastQuestion: string }[]; notFound: { question: string; count: number; act: string | null; section: string | null }[]; total: number };

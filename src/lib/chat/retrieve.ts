@@ -30,15 +30,19 @@ export type ChatSource = {
   /** a passage of the user's own attached document (see src/lib/vault/search.ts) */
   kind?: "doc" | "judgment"; docId?: string; caseId?: string; caseYear?: number; passage?: number; docName?: string; page?: number | null; label?: string | null; /** the page was read from a scan */ scan?: boolean;
 };
-export type Retrieval = { sources: ChatSource[]; searchMode: "semantic" | "text" | "lookup" | "none"; note: string; queries: string[]; /** keys ("actId|sectionKey") found by exact lookup: sections the question or the caller named */ exactKeys: string[] };
+/** A section the question names that the library does not hold (or holds only as scrambled text), with where to read it. */
+export type LibraryGap = Gap & { actId: string; url: string };
+export type Retrieval = { gaps: LibraryGap[]; sources: ChatSource[]; searchMode: "semantic" | "text" | "lookup" | "none"; note: string; queries: string[]; /** keys ("actId|sectionKey") found by exact lookup: sections the question or the caller named */ exactKeys: string[] };
 
 const keyOf = (h: SectionHit) => `${h.actId}|${h.sectionKey}`;
 import { narrowToExact } from "./exact.mjs";
 import { currentLawFirst } from "./currentlaw.mjs";
+import { officialSourceUrl } from "@/lib/acts/quality";
+import type { Gap } from "./gaps.mjs";
 import replaced from "@/config/replaced-laws.json";
 
 export async function retrieveSources(question: string, history: { role: string; content: string }[] = [], extraQueries: string[] = [], k = MAX_SOURCES, forced: string[] = [], opts: { hybrid?: boolean; currentLaw?: boolean } = {}): Promise<Retrieval> {
-  const hits = new Map<string, SectionHit>(), first: string[] = [], lists: string[][] = [];
+  const hits = new Map<string, SectionHit>(), first: string[] = [], lists: string[][] = [], gaps: LibraryGap[] = [];
   let mode: Retrieval["searchMode"] = "none", note = "";
   const usable = (h: SectionHit) => h.status !== "garbled";
   // exact lookups: sections named in the question (2 hits each), then sections the rewritten queries name, such as "Indian Contract Act section 11" (1 hit each; the model's guess is only a lead:
@@ -48,6 +52,10 @@ export async function retrieveSources(question: string, history: { role: string;
   const seenLookup = new Set<string>(), exact: string[] = [];   // exact: units the question itself names ("Order 7 Rule 11", "section 138 of the NI Act")
   for (const [l, take] of wanted.filter(([l]) => !seenLookup.has(l.toLowerCase()) && !!seenLookup.add(l.toLowerCase())).slice(0, Math.max(5, forced.length))) {
     const r = await searchSections(l, 1, 3);
+    if (r.available && r.mode === "lookup" && named.has(l.toLowerCase())) {   // a section the QUESTION names (not one the rewrite guessed): not held, or held only as scrambled text -> say so
+      if (r.missing) gaps.push({ kind: "missing", number: r.missing.number, actTitle: r.missing.actTitle, actId: r.missing.actId, url: officialSourceUrl(r.missing.sourceUrl) });
+      else if (r.results.length && r.results.every((h) => !usable(h))) gaps.push({ kind: "unreliable", number: r.results[0].number ?? l, actTitle: r.results[0].actTitle, actId: r.results[0].actId, url: officialSourceUrl(r.results[0].sourceUrl) });
+    }
     if (r.available && r.mode === "lookup") { mode = "lookup"; for (const h of r.results.filter(usable).slice(0, take)) { hits.set(keyOf(h), h); if (!first.includes(keyOf(h))) first.push(keyOf(h)); if (named.has(l.toLowerCase()) && !exact.includes(keyOf(h))) exact.push(keyOf(h)); } }
   }
   const queries = [retrievalQuery(question, history), ...extraQueries];
@@ -74,7 +82,7 @@ export async function retrieveSources(question: string, history: { role: string;
   if (exact.length) picked = narrowToExact(picked, [...exact, ...first.filter((k) => !exact.includes(k))], keyOf);
   // current law first (switch): a repealed section and its replacement together -> the replacement leads and the old one is marked replaced
   if (opts.currentLaw) picked = currentLawFirst(picked, pool, replaced.pairs, { k, keyOf });
-  if (!picked.length) return { sources: [], searchMode: mode, note, queries, exactKeys: [] };
+  if (!picked.length) return { gaps, sources: [], searchMode: mode, note, queries, exactKeys: [] };
   const rows = await query<{ act_id: string; section_key: string; body: string | null }>(
     `SELECT s.act_id, s.section_key, left(s.body, 9000) AS body FROM act_sections_v s JOIN unnest($1::text[], $2::text[]) AS k(a, sk) ON s.act_id = k.a AND s.section_key = k.sk`, [picked.map((h) => h.actId), picked.map((h) => h.sectionKey)]);
   const body = new Map(rows.map((x) => [`${x.act_id}|${x.section_key}`, x.body ?? ""]));
@@ -86,7 +94,7 @@ export async function retrieveSources(question: string, history: { role: string;
       number: h.number, heading: h.heading, status: h.status, text, via: h.via, ...((h as SectionHit & { replacedBy?: string }).replacedBy ? { replacedBy: (h as SectionHit & { replacedBy?: string }).replacedBy } : {}) });
   }
   sources.push(...(await judgmentSources(retrievalQuery(question, history), sources.length + 1)));
-  return { sources, searchMode: mode, note, queries, exactKeys: first };
+  return { gaps, sources, searchMode: mode, note, queries, exactKeys: first };
 }
 
 /** What is stored and sent to the browser for a source: no section text. */

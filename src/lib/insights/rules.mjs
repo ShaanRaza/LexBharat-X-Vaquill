@@ -65,3 +65,16 @@ export function validateMessage(body) {
   const page = typeof b.page === "string" && /^\/[A-Za-z0-9/_.-]{0,150}$/.test(b.page.split("?")[0].split("#")[0]) ? b.page.split("?")[0].split("#")[0] : "";
   return { ok: true, value: { message, email, page } };
 }
+
+/** Gap log rows -> what /admin shows: the sections testers hit that we do not hold (per Act and section, most often first, with the latest question) and the questions that came back "not found" (same question counted once, most often first).
+ *  rows: [{ at, kind: "missing_section"|"unreliable_section"|"not_found", question, act, section }] */
+export function topGaps(rows, limit = 15) {
+  const norm = (q) => String(q).toLowerCase().replace(/[^a-z0-9\u0900-\u097f]+/g, " ").trim();
+  const secs = new Map(), nf = new Map();
+  for (const r of [...rows].sort((a, b) => String(b.at).localeCompare(String(a.at)))) {   // newest first, so the first question kept is the latest
+    if (r.kind === "not_found") { const k = norm(r.question); if (!k) continue; const e = nf.get(k) ?? { question: r.question, count: 0, act: r.act ?? null, section: r.section ?? null }; e.count++; nf.set(k, e); }
+    else if (r.act && r.section) { const k = `${r.act}|${String(r.section).toUpperCase()}`; const e = secs.get(k) ?? { act: r.act, section: String(r.section), count: 0, unreliable: r.kind === "unreliable_section", lastQuestion: r.question }; e.count++; secs.set(k, e); }
+  }
+  const by = (a, b) => b.count - a.count;
+  return { sections: [...secs.values()].sort(by).slice(0, limit), notFound: [...nf.values()].sort(by).slice(0, limit), total: rows.length };
+}

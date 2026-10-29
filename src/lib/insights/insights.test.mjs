@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { byDay, csvCell, ratio, toCsv, validateFeedback } from "./rules.mjs";
+import { byDay, csvCell, ratio, toCsv, topGaps, validateFeedback } from "./rules.mjs";
 
 test("feedback is validated", () => {
   const ok = validateFeedback({ feature: "chat", vote: "down", itemId: "123", reasons: ["Wrong law", "Nonsense", "Wrong law"], comment: "  it   missed\n s. 138  " });
@@ -39,4 +39,21 @@ test("a feedback message needs some text, tolerates no email, rejects a bad one,
   assert.equal(validateMessage({ message: "fine", email: "not-an-email" }).ok, false); assert.equal(validateMessage({ message: "fine", email: "a@b.in" }).ok, true);
   assert.equal(validateMessage({ message: "fine", page: "javascript:alert(1)" }).value.page, ""); assert.equal(validateMessage({ message: "fine", page: "https://evil.example/x" }).value.page, "");
   assert.equal(validateMessage({ message: "line one\r\nline two" }).value.message, "line one\nline two");
+});
+
+test("topGaps counts missing sections per Act and section and 'not found' questions once each, newest question kept", () => {
+  const rows = [
+    { at: "2026-10-29T10:00:00Z", kind: "missing_section", question: "what does s.66 IT Act say", act: "The Information Technology Act, 2000", section: "66" },
+    { at: "2026-10-29T11:00:00Z", kind: "missing_section", question: "IT act section 66 hacking", act: "The Information Technology Act, 2000", section: "66" },
+    { at: "2026-10-28T11:00:00Z", kind: "unreliable_section", question: "TPA 106", act: "The Transfer of Property Act, 1882", section: "106" },
+    { at: "2026-10-29T12:00:00Z", kind: "not_found", question: "Rent control in Goa?", act: null, section: null },
+    { at: "2026-10-29T13:00:00Z", kind: "not_found", question: "rent control in goa", act: null, section: null },
+    { at: "2026-10-27T13:00:00Z", kind: "not_found", question: "something else", act: null, section: null },
+  ];
+  const g = topGaps(rows);
+  assert.equal(g.total, 6);
+  assert.deepEqual(g.sections.map((s) => [s.section, s.count, s.unreliable]), [["66", 2, false], ["106", 1, true]]);
+  assert.equal(g.sections[0].lastQuestion, "IT act section 66 hacking");
+  assert.deepEqual(g.notFound.map((n) => [n.question, n.count]), [["rent control in goa", 2], ["something else", 1]]);
+  assert.deepEqual(topGaps([]).sections, []);
 });

@@ -18,6 +18,17 @@ export function bump(metric: string, key = "", ms = 0): void {
   if (!insightsConfigured()) return;
   void (async () => { try { await sb().rpc("bump_usage", { p_metric: metric, p_key: key, p_ms: Math.round(ms) }); } catch { /* counters are best-effort */ } })();
 }
+/** One row in the gap log: a section the library lacks that a question or an answer named, or a "not found" answer. Stores the question text (clipped), the Act and the section, never the browser id. Best-effort. */
+export function logGap(g: { kind: "missing_section" | "unreliable_section" | "not_found"; question: string; act?: string | null; section?: string | null; actId?: string | null }): void {
+  if (!insightsConfigured()) return;
+  void (async () => { try { await sb().from("gap_log").insert({ kind: g.kind, question: g.question.replace(/\s+/g, " ").trim().slice(0, 300), act: g.act?.slice(0, 200) ?? null, section: g.section?.slice(0, 40) ?? null, act_id: g.actId?.slice(0, 120) ?? null }); } catch { /* the log is best-effort */ } })();
+}
+/** Gap log rows of the last `days` days for /admin ({ error } when the table is not created yet). */
+export async function adminGaps(days = 30) {
+  const since = new Date(Date.now() - days * 86400000).toISOString();
+  const { data, error } = await sb().from("gap_log").select("at, kind, question, act, section").gte("at", since).order("at", { ascending: false }).limit(3000);
+  return { error: error ? (/relation|does not exist|schema cache/i.test(error.message) ? ("missing" as const) : ("failed" as const)) : null, rows: (data ?? []) as { at: string; kind: string; question: string; act: string | null; section: string | null }[] };
+}
 /** Counts a page visit once per browser per page per day. */
 export async function noteVisit(bid: string, page: string): Promise<void> {
   if (!insightsConfigured()) return;

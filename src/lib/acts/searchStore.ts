@@ -55,8 +55,12 @@ async function lookupHits(q: string, page: number, pageSize: number): Promise<Se
     const gone = await query<{ actId: string; actTitle: string; sourceUrl: string | null }>(
       `SELECT a.act_id AS "actId", a.title AS "actTitle", a.source_url AS "sourceUrl" FROM acts a JOIN act_missing_sections m ON m.act_id = a.act_id WHERE ${where} AND m.number = $${params.length + 1}
        ORDER BY (a.category = 'central') DESC, (a.act_status = 'in_force') DESC, length(a.title) LIMIT 1`, [...params, num]).catch(() => []);
-    if (!gone.length) return null;
-    return { available: true, results: [], total: 0, totalCapped: false, page, pageSize, hasMore: false, mode: "lookup", note: `Section ${lk.number} of ${gone[0].actTitle} is missing from our source data.`, missing: { ...gone[0], number: lk.number } };
+    // not recorded as missing: still, an Act we hold whose numbers do not include this one is "not in our library", never a section to answer from memory
+    const held = gone.length ? gone : await query<{ actId: string; actTitle: string; sourceUrl: string | null }>(
+      `SELECT a.act_id AS "actId", a.title AS "actTitle", a.source_url AS "sourceUrl" FROM acts a WHERE ${where} AND EXISTS (SELECT 1 FROM act_sections_v s WHERE s.act_id = a.act_id AND s.number ~ '^[0-9]')
+       ORDER BY (a.category = 'central') DESC, (a.act_status = 'in_force') DESC, length(a.title) LIMIT 1`, params).catch(() => []);
+    if (!held.length) return null;
+    return { available: true, results: [], total: 0, totalCapped: false, page, pageSize, hasMore: false, mode: "lookup", note: `Section ${lk.number} of ${held[0].actTitle} is missing from our source data.`, missing: { ...held[0], number: lk.number } };
   }
   const all = rows.map(({ body, ...r }): SectionHit => ({ ...r, snippet: leadSnippet(body ?? ""), via: "lookup" }));
   const slice = all.slice((page - 1) * pageSize, page * pageSize);

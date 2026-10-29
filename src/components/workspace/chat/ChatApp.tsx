@@ -92,7 +92,7 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
           else if (e.type === "cutoff") patch((a) => ({ ...a, check: { label: "check", unsupported: [], cutOff: true } }));
           else if (e.type === "delta") patch((a) => ({ ...a, content: a.content + e.text }));
           else if (e.type === "replace") patch((a) => ({ ...a, content: e.text }));
-          else if (e.type === "check") patch((a) => ({ ...a, check: { label: e.label, unsupported: e.unsupported, missing: e.missing, unavailable: e.unavailable } }));
+          else if (e.type === "check") patch((a) => ({ ...a, check: { label: e.label, unsupported: e.unsupported, missing: e.missing, unavailable: e.unavailable, absent: e.absent } }));
           else if (e.type === "done") patch((a) => ({ ...a, id: e.messageId }));
           else if (e.type === "error") { failed = true; throw new Error(e.message); }
         }

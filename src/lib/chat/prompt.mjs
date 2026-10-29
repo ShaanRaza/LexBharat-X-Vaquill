@@ -1,6 +1,7 @@
 // The chat prompt. PURE logic. The model sees numbered sources and must answer only from them.
 import { sectionWord } from "../acts/unitLabel.mjs";
 import { REPLACED_ADDENDUM } from "./currentlaw.mjs";
+import { missingAddendum } from "./gaps.mjs";
 export const SOURCE_CHARS = 9000, MAX_SOURCES = 10, HISTORY_TURNS = 4;
 
 export const SYSTEM_PROMPT = `You are LexBharat's research assistant for Indian law. You answer ONLY from the numbered sources given with the question. The sources are sections of Indian Acts (Central and State) and, for some questions, short excerpts of Supreme Court judgments (each labelled as a Supreme Court judgment). You have no other information: no other case law, no news.
@@ -55,11 +56,11 @@ Extra rules for this answer:
 - "Related provisions": list only sections that directly apply to the user's situation or are the next step in it (for example the court, the time limit or the procedure for the same offence). Do not list a provision about a different instrument or subject (for example notice of dishonour of a bill of exchange when the question is about a cheque offence). If none qualifies, leave the line out.`;
 
 /** { system, messages } for the model. history: earlier turns [{ role, content }] (answers without their source blocks); the sources go with the newest question only. */
-export function buildChatPrompt({ question, history = [], sources, answerRules = false }) {
+export function buildChatPrompt({ question, history = [], sources, answerRules = false, gaps = [] }) {
   const hasDoc = sources.some((x) => x.kind === "doc"), hasJudgment = sources.some((x) => x.kind === "judgment");
   const past = history.slice(-HISTORY_TURNS * 2).map((m) => ({ role: m.role, content: clip(m.content, 1500) }));
   const block = sources.length ? sources.map(sourceBlock).join("\n\n") : "(no sections were found for this question)";
-  return { system: SYSTEM_PROMPT + (hasDoc ? DOC_ADDENDUM : "") + (hasJudgment ? JUDGMENT_ADDENDUM : "") + (sources.some((x) => x.replacedBy) ? REPLACED_ADDENDUM : "") + (answerRules ? ANSWER_RULES : ""), messages: [...past, { role: "user", content: `Sources:\n\n${block}\n\nQuestion: ${question}` }] };
+  return { system: SYSTEM_PROMPT + (hasDoc ? DOC_ADDENDUM : "") + (hasJudgment ? JUDGMENT_ADDENDUM : "") + (sources.some((x) => x.replacedBy) ? REPLACED_ADDENDUM : "") + (answerRules ? ANSWER_RULES : "") + (gaps.some((g) => g.kind !== "mentioned") ? missingAddendum(gaps) : ""), messages: [...past, { role: "user", content: `Sources:\n\n${block}\n\nQuestion: ${question}` }] };
 }
 
 /** The search text for a question: a very short follow-up ("and for a company?") borrows the previous user question for retrieval. */
