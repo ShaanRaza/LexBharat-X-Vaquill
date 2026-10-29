@@ -11,6 +11,7 @@ export const REWRITE_SYSTEM = `You turn a question about Indian law into search 
 
 /** Added to the rewrite prompt when the statutory rewrite switch is on (chat-tuning.json): everyday words and Hinglish become the terms a statute uses, and the current criminal laws are named. */
 export const STATUTORY_ADDENDUM = `
+- Keep what the user wrote: every Act, section number and subject the question itself names gets its own query (a question about two things needs a query for each), written the way the user named it (for example "IPC 420" stays a query about IPC section 420).
 - The question may be in everyday words or in Hinglish (Hindi written in English letters). Write the queries in English, in the words a statute uses, not the user's words: for example "cheque bounce" is "dishonour of cheque for insufficiency of funds", "FIR darj nahi" is "information in cognizable cases, officer refuses to record it", "dahej" is "dowry", "chori" is "theft".
 - Prefer the CURRENT criminal laws: the Bharatiya Nyaya Sanhita (BNS, replaced the Indian Penal Code), the Bharatiya Nagarik Suraksha Sanhita (BNSS, replaced the Code of Criminal Procedure) and the Bharatiya Sakshya Adhiniyam (BSA, replaced the Indian Evidence Act). If the question names an old section (IPC 302, CrPC 438, Evidence Act 65B), make one query for the equivalent section of the new law, for example "Bharatiya Nyaya Sanhita section 103 punishment for murder", when you know it.
 - If the question describes a situation and not a law, name the heading the provision would carry, for example "tenant default in payment of rent forfeiture determination of lease".`;
@@ -41,4 +42,12 @@ export function mergeRanked(lists, limit, first = []) {
   const out = [...new Set(first)];
   for (const k of rrf(lists.filter((l) => l.length))) { if (out.length >= limit) break; if (!out.includes(k)) out.push(k); }
   return out.slice(0, limit);
+}
+
+/** Hybrid merge: keyword results may BOOST a section the search by meaning already found (and the exact lookups), but they never outrank them, and at most `tail` sections found only by keywords are added at the end. */
+export function mergeHybrid(semanticLists, keywordLists, limit, first = [], tail = 2) {
+  const pool = new Set([...semanticLists.flat(), ...first]);
+  const boost = keywordLists.map((l) => l.filter((k) => pool.has(k)));
+  const only = [...new Set(keywordLists.flat().filter((k) => !pool.has(k)))].slice(0, tail);
+  return [...mergeRanked([...semanticLists, ...boost], limit - only.length, first), ...only].slice(0, limit);
 }

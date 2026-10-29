@@ -5,6 +5,12 @@ const SEC = String.raw`(?:[Ss]ections?|[Ss]ec\.|[Ss]\.)`;
 const RE = new RegExp(String.raw`\b${SEC}\s+(\d{1,4}[A-Za-z]{0,2})\s*(?:\([a-z0-9]+\))*\s+(?:of|under|in)\s+(?:the\s+)?${ACT}`, "g");
 const RE2 = new RegExp(String.raw`\b(?:the\s+)?${ACT}\s*,?\s+${SEC}\s+(\d{1,4}[A-Za-z]{0,2})`, "g");
 
+// Bare short names with a number: "IPC 420", "BNS 318", "302 IPC" (a year such as "BNS 2023" is not a section number).
+const SHORT = String.raw`(IPC|CrPC|CPC|BNSS|BNS|BSA)`;
+const RE3 = new RegExp(String.raw`\b${SHORT}\s*[-–.]?\s*(?:no\.?\s*)?(\d{1,4}[A-Za-z]{0,2})\b`, "g");
+const RE4 = new RegExp(String.raw`\b(\d{1,4}[A-Za-z]{0,2})\s+${SHORT}\b`, "g");
+const YEAR = /^(?:1[89]|20)\d\d$/;
+
 // Orders, Rules and Articles of the Schedules: "Order 7 Rule 11", "O.39 R.1 CPC", "Order 37 of the CPC", "Article 137 of the Limitation Act".
 const OR = /\b(?:Order|O\.?)\s*(\d{1,3}[A-Za-z]?)\s*,?\s*(?:Rules?|Rr?\.?)\s*(\d{1,3}[A-Za-z]?)(?:\s*(?:-|–|to|and)\s*(\d{1,3}))?/g;
 const OO = /\b(?:Order|O\.?)\s*(\d{1,3}[A-Za-z]?)\s+(?:of\s+(?:the\s+)?)?(?:CPC|C\.P\.C\.?|Code of Civil Procedure(?:,?\s*1908)?)/g;
@@ -20,6 +26,8 @@ export function extractLookups(question) {
   const add = (num, act) => { const s = `${num.toUpperCase()} ${act.replace(/\s+/g, " ").trim()}`; if (!out.includes(s)) out.push(s); };
   for (const m of question.matchAll(RE)) add(m[1], m[2]);
   for (const m of question.matchAll(RE2)) add(m[2], m[1]);
+  for (const m of question.matchAll(RE3)) if (!YEAR.test(m[2])) add(m[2], m[1]);
+  for (const m of question.matchAll(RE4)) if (!YEAR.test(m[1])) add(m[1], m[2]);
   for (const m of question.matchAll(OR)) { const s = `Order ${m[1].toUpperCase()} Rule ${m[2].toUpperCase()}${m[3] ? `-${m[3]}` : ""}`; if (!out.includes(s)) out.push(s); }
   for (const m of question.matchAll(OO)) { const s = `Order ${m[1].toUpperCase()} CPC`; if (!out.includes(s)) out.push(s); }
   for (const m of question.matchAll(ARTICLE)) { const s = `Article ${m[1].toUpperCase()} ${/stamp/i.test(m[2]) ? "Indian Stamp Act" : "Limitation Act"}`; if (!out.includes(s)) out.push(s); }

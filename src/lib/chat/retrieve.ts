@@ -6,7 +6,7 @@ import { query } from "@/lib/acts/db";
 import { primeSemanticQueries, searchSections, type SectionHit } from "@/lib/acts/searchStore";
 import { extractLookups } from "./lookups.mjs";
 import { retrievalQuery, MAX_SOURCES } from "./prompt.mjs";
-import { mergeRanked } from "./rewrite.mjs";
+import { mergeHybrid, mergeRanked } from "./rewrite.mjs";
 import { previewOf } from "./format.mjs";
 import { scSemanticConfigured, searchJudgmentsByMeaning } from "@/lib/judgments/scText";
 import { scCase } from "@/lib/judgments/scMeta";
@@ -60,15 +60,18 @@ export async function retrieveSources(question: string, history: { role: string;
     own.forEach((h) => hits.set(keyOf(h), h));
     lists.push(own.map(keyOf));
   });
-  // hybrid (switch): also keyword-search every query and merge those lists in, so a section whose words match is not lost to a vague meaning match
+  // hybrid (switch): also keyword-search every query. Keyword hits only boost sections the search by meaning found and add at most two of their own at the end (mergeHybrid), so a vague word match can not outrank them
+  const kwLists: string[][] = [];
   if (opts.hybrid) {
     const kw = await Promise.all(queries.map((q) => searchSections(q, 1, 12, { exact: true })));
-    for (const r of kw) { if (!r.available) continue; const own = r.results.filter(usable).slice(0, 8); own.forEach((h) => { if (!hits.has(keyOf(h))) hits.set(keyOf(h), h); }); if (own.length) lists.push(own.map(keyOf)); }
+    for (const r of kw) { if (!r.available) continue; const own = r.results.filter(usable).slice(0, 8); own.forEach((h) => { if (!hits.has(keyOf(h))) hits.set(keyOf(h), h); }); if (own.length) kwLists.push(own.map(keyOf)); }
   }
-  const pool = opts.currentLaw ? mergeRanked(lists, 40, first).map((key) => hits.get(key)!).filter(Boolean) : [];
-  let picked = mergeRanked(lists, k, first).map((key) => hits.get(key)!).filter(Boolean);
+  const merge = (n: number) => (opts.hybrid ? mergeHybrid(lists, kwLists, n, first) : mergeRanked(lists, n, first));
+  const pool = opts.currentLaw ? merge(40).map((key) => hits.get(key)!).filter(Boolean) : [];
+  let picked = merge(k).map((key) => hits.get(key)!).filter(Boolean);
   // The question names an exact provision: that unit goes first and sources from unrelated Acts are dropped (a few neighbours from the same Act stay), so the answer check is not confused by noise.
-  if (exact.length) picked = narrowToExact(picked, exact, keyOf);
+  // (sections the rewrite named, such as the new-law section for an old one, stay with the exact ones)
+  if (exact.length) picked = narrowToExact(picked, [...exact, ...first.filter((k) => !exact.includes(k))], keyOf);
   // current law first (switch): a repealed section and its replacement together -> the replacement leads and the old one is marked replaced
   if (opts.currentLaw) picked = currentLawFirst(picked, pool, replaced.pairs, { k, keyOf });
   if (!picked.length) return { sources: [], searchMode: mode, note, queries, exactKeys: [] };

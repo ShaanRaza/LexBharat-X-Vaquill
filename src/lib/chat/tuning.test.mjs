@@ -3,7 +3,8 @@ import assert from "node:assert/strict";
 import { tuningFlags } from "./tuning.mjs";
 import { currentLawFirst, pairFor, REPLACED_ADDENDUM } from "./currentlaw.mjs";
 import { verifyCitations } from "./verify.mjs";
-import { buildRewritePrompt, REWRITE_SYSTEM, STATUTORY_ADDENDUM } from "./rewrite.mjs";
+import { buildRewritePrompt, REWRITE_SYSTEM, STATUTORY_ADDENDUM, mergeHybrid } from "./rewrite.mjs";
+import { extractLookups } from "./lookups.mjs";
 import { buildChatPrompt, sourceBlock } from "./prompt.mjs";
 import cfg from "../../config/chat-tuning.json" with { type: "json" };
 import replaced from "../../config/replaced-laws.json" with { type: "json" };
@@ -72,4 +73,20 @@ test("citation check does nothing when no other source clearly fits, when the se
 test("citation check keeps a list tidy when two numbers collapse into one", () => {
   const r = verifyCitations("The complaint must be made in writing within one month of the date the cause of action arises [1, 2].", S);
   assert.equal(r.text, "The complaint must be made in writing within one month of the date the cause of action arises [1, 2].");   // [2] already cited and fits; [1] only moves to a source not already cited
+});
+
+test("bare short names with a number are section lookups: IPC 420, 302 IPC, BNS 318; years are not", () => {
+  assert.deepEqual(extractLookups("IPC 420 cheating punishment"), ["420 IPC"]);
+  assert.deepEqual(extractLookups("what is 302 IPC"), ["302 IPC"]);
+  assert.deepEqual(extractLookups("BNS 318 and BNSS 482"), ["318 BNS", "482 BNSS"]);
+  assert.deepEqual(extractLookups("the BNS 2023 replaced the IPC"), []);
+  assert.deepEqual(extractLookups("What does section 138 of the NI Act say?"), ["138 NI Act"]);   // the older patterns still work
+});
+test("the statutory rewrite tells the model to keep the user's own Acts, numbers and each part of the question", () => { assert.match(STATUTORY_ADDENDUM, /own query/); assert.match(STATUTORY_ADDENDUM, /IPC 420/); });
+test("hybrid merge: keyword hits boost but never outrank meaning/exact matches; at most two keyword-only ones go last", () => {
+  const sem = [["a", "b", "c", "d"]], kw = [["x", "d", "y", "z"]];
+  const out = mergeHybrid(sem, kw, 6, []);
+  assert.deepEqual(out.slice(-2), ["x", "y"]); assert.equal(out.indexOf("d") < out.indexOf("x"), true); assert.equal(out.includes("z"), false);
+  assert.deepEqual(mergeHybrid(sem, kw, 6, ["e"])[0], "e");           // exact lookups stay first
+  assert.deepEqual(mergeHybrid([["a", "b"]], [], 5), ["a", "b"]);       // no keyword lists: the plain merge
 });
