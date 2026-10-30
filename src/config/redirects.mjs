@@ -17,6 +17,7 @@ const REMOVED = [
 export const REDIRECTS = [
   // an Act with a section in the query -> the section in the path; an old "Acts" tab -> Search
   { source: "/workspace/browse/acts/:act", has: [{ type: "query", key: "section", value: "(?<section>.+)" }], destination: "/law/:act/:section" },
+  { source: "/workspace/browse/old-to-new", destination: "/library/old-to-new" },
   { source: "/workspace/browse", has: [{ type: "query", key: "tab", value: "acts" }], destination: "/search" },
   { source: "/workspace/browse/acts/:act", destination: "/law/:act" },
   { source: "/workspace/browse/judgments/:court/:year/:case", destination: "/judgments/:court/:year/:case" },

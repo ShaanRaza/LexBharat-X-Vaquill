@@ -3,7 +3,8 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import data from "../../config/law-mapping.json" with { type: "json" };
 import repealed from "../../config/repealed-acts.json" with { type: "json" };
-import { lookup, presentation, rowLinks, rowsFor, UNVERIFIED_LABEL, PAIRS } from "./lawMapping.mjs";
+import common from "../../config/old-to-new-common.json" with { type: "json" };
+import { lookup, presentation, rowLinks, rowsFor, UNVERIFIED_LABEL, PAIRS, isChecked, checkedCount, commonGroups } from "./lawMapping.mjs";
 
 test("old -> new: 302 IPC finds BNS 103(1)", () => {
   const r = lookup(data, "302 IPC");
@@ -50,7 +51,7 @@ test("a section is linked only when it is confirmed to be in our data; confirmed
     assert.equal(l.new !== null, r.new_in_data === true, `${r.new_law} ${r.new_section} new link`);
   }
   const l = rowLinks({ ...data.rows[1], old_in_data: true, new_in_data: false }, data);
-  assert.equal(l.old, "/workspace/browse/acts/IND_REP_659_1860?section=s302");
+  assert.equal(l.old, "/law/IND_REP_659_1860/s302");
   assert.equal(l.new, null);
 });
 test("data file format: required fields, valid values, no duplicate old sections", () => {
@@ -76,4 +77,16 @@ test("Act ids agree with repealed-acts.json and exist in the Acts list", () => {
     assert.equal(data.laws[o].actId && repealed[data.laws[o].actId].newActId, data.laws[n].actId);
     assert.ok(acts.has(data.laws[o].actId) && acts.has(data.laws[n].actId));
   }
+});
+test("the first-screen list: every named section is in the file and checked against our data", () => {
+  const groups = commonGroups(data, common);
+  assert.equal(groups.length, common.groups.length, "a listed group has no row in law-mapping.json");
+  assert.equal(groups.flatMap((g) => g.rows).length, common.groups.flatMap((g) => g.rows).length);
+  for (const g of groups) for (const r of g.rows) assert.ok(isChecked(r) && r.status === "verified", `${g.label}: ${r.old_law} ${r.old_section}`);
+  assert.deepEqual(groups.map((g) => g.label), ["Murder", "Theft", "Cheating", "Arrest", "Bail", "FIR", "Confessions"]);
+  assert.ok(groups.flatMap((g) => g.rows).length < 15, "a short list, not the whole table");
+});
+test("checked-against-our-data count follows the linkable flag", () => {
+  assert.equal(checkedCount([{ linkable: true }, { linkable: false }, { old_in_data: true, new_in_data: true }, {}]), 2);
+  for (const [o] of PAIRS) { const rows = rowsFor(data, o); assert.ok(checkedCount(rows) > 0 && checkedCount(rows) <= rows.length); }
 });

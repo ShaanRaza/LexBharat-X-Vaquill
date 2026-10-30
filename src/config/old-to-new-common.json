@@ -1,0 +1,12 @@
+{
+ "_note": "The short list shown first on the Old law to new law page. Each entry names old sections that exist in law-mapping.json; a test checks they do and that each is checked against our data.",
+ "groups": [
+  { "label": "Murder", "rows": [["ipc", "302"]] },
+  { "label": "Theft", "rows": [["ipc", "379"]] },
+  { "label": "Cheating", "rows": [["ipc", "420"]] },
+  { "label": "Arrest", "rows": [["crpc", "41"]] },
+  { "label": "Bail", "rows": [["crpc", "437"], ["crpc", "438"], ["crpc", "439"]] },
+  { "label": "FIR", "rows": [["crpc", "154"]] },
+  { "label": "Confessions", "rows": [["crpc", "164"]] }
+ ]
+}
