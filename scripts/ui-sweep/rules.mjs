@@ -11,5 +11,7 @@ export const RAW_ON_PAGE = {
   "[object Object]": /\[object Object\]/,
   "unfilled template {{ }} or ${ }": /\{\{|\$\{/,
   "percent-encoded text %20": /%20/,
+  "a heading run into the start of its text (\" . \u2014 ...\")": /\S \. [\u2014\u2013] ?\S/,
+  "a data placeholder shown as text: (no heading in our data)": /\(no heading in our data\)/,
   "underscore_joined_words": /\b[A-Za-z]{3,}_[A-Za-z]{3,}_[A-Za-z]{2,}\b/,
 };

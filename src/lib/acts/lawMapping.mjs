@@ -1,5 +1,6 @@
 // Old law <-> new law lookup (IPC/BNS, CrPC/BNSS, Evidence Act/BSA). PURE logic over src/config/law-mapping.json (passed in, so tests can use their own): no database, no styling.
 import { parseSectionLookup } from "./searchQuery.mjs";
+import { cleanHeading } from "../text/clean.mjs";
 
 export const UNVERIFIED_LABEL = "mapping not yet verified";
 export const PAIRS = [["ipc", "bns"], ["crpc", "bnss"], ["evidence", "bsa"]];
@@ -56,3 +57,7 @@ export const checkedCount = (rows) => rows.filter(isChecked).length;
 export function commonGroups(data, config) {
   return config.groups.map((g) => ({ label: g.label, rows: g.rows.flatMap(([law, sec]) => data.rows.filter((r) => r.old_law === law && r.old_section === sec)) })).filter((g) => g.rows.length);
 }
+
+// Section titles in law-mapping.json are the dataset's heading field as it is, so everything the page prints as a title goes through displayTitle (the shared cleanHeading: run-on text, footnote marks,
+// footnotes and the builder's "(no heading in our data)" placeholder are removed). null means "no usable title": the page says so.
+export const displayTitle = (raw) => cleanHeading(raw);

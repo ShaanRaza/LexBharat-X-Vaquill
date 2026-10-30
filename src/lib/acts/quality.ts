@@ -40,9 +40,11 @@ export function sectionFlagList(s: Pick<AssembledSection, "status" | "flags">): 
 
 export const CHAPTER_NOTE = "Chapter labels appear only when they pass automatic checks.";
 
-export const INDIA_CODE_HOME = "https://www.indiacode.nic.in/";
-/** Link to the official source: the Act's own India Code page when the dataset gives one, otherwise the India Code home page. */
-export const officialSourceUrl = (sourceUrl: string | null | undefined) => (sourceUrl && /^https:\/\/www\.indiacode\.nic\.in\//.test(sourceUrl) ? sourceUrl : INDIA_CODE_HOME);
+import { INDIA_CODE_HOME as LIVE_HOME, liveIndiaCodeUrl } from "../docs/docType.mjs";
+export const INDIA_CODE_HOME = LIVE_HOME;
+/** Link to the official source: India Code's search for the Act when `actTitle` is given (the dataset's own address is the old India Code site, which no longer opens), otherwise the stored address, otherwise the India Code home page.
+ *  Without a title the stored address is kept so that sourceInfo (docs/docType.mjs), which knows the title, can turn it into the search link. */
+export const officialSourceUrl = (sourceUrl: string | null | undefined, actTitle?: string | null) => (sourceUrl && /^https:\/\/(?:www\.)?indiacode\.(?:nic|gov)\.in\//.test(sourceUrl) ? (actTitle ? liveIndiaCodeUrl(sourceUrl, actTitle) : sourceUrl) : INDIA_CODE_HOME);
 
 export const PROVENANCE = {
   dataset: "open-india-law (Vaquill AI), compiled from India Code, the Government of India's official repository",

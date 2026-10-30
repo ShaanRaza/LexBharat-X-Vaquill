@@ -5,7 +5,7 @@ import { Badge, Button, Notice, Panel } from "@/components/kit";
 import SearchField from "@/components/workspace/SearchField";
 import common from "@/config/old-to-new-common.json";
 import mapping from "@/config/law-mapping.json";
-import { PAIRS, checkedCount, commonGroups, lookup, presentation, rowLinks, rowsFor, type LawKey, type MappingData, type MappingRow } from "@/lib/acts/lawMapping.mjs";
+import { PAIRS, checkedCount, commonGroups, displayTitle, lookup, presentation, rowLinks, rowsFor, type LawKey, type MappingData, type MappingRow } from "@/lib/acts/lawMapping.mjs";
 
 // "Old law to new law": a search box, the most common sections first, and the whole table per pair only on request. Presentation only: the data is src/config/law-mapping.json and every decision
 // (what is shown as fact, what links, what is counted as checked) is made by src/lib/acts/lawMapping.mjs. Colours, fonts, sizes and radii come from the shared tokens through the kit components.
@@ -18,14 +18,20 @@ function Sec({ law, section, href }: { law: LawKey; section: string; href: strin
   return href ? <Link href={href} className="font-medium text-primary hover:underline">{text}</Link> : <span className="font-medium">{text}</span>;
 }
 
+/** A section's title as the page prints it; the data holds raw headings, so it always goes through displayTitle. */
+function Title({ raw }: { raw: string }) {
+  const t = displayTitle(raw);
+  return <p className={`text-ui-sm ${t ? "" : "text-muted"}`}>{t ?? "Title not available"}</p>;
+}
+
 function Row({ row }: { row: MappingRow }) {
   const p = presentation(row), links = rowLinks(row, data);
   return (
     <Panel as="li" className={p.fact ? "" : "bg-sunken/60 text-muted"}>
       <div className="grid gap-2 sm:grid-cols-[1fr_auto_1fr] sm:items-start sm:gap-4">
-        <div className="min-w-0 break-words"><Sec law={row.old_law} section={row.old_section} href={links.old} /><p className="text-ui-sm">{row.old_title}</p></div>
+        <div className="min-w-0 break-words"><Sec law={row.old_law} section={row.old_section} href={links.old} /><Title raw={row.old_title} /></div>
         <span aria-hidden className="text-ui-base sm:pt-0.5">→</span>
-        <div className="min-w-0 break-words"><Sec law={row.new_law} section={row.new_section} href={links.new} /><p className="text-ui-sm">{row.new_title}</p></div>
+        <div className="min-w-0 break-words"><Sec law={row.new_law} section={row.new_section} href={links.new} /><Title raw={row.new_title} /></div>
       </div>
       {(p.label || p.whatChanged) && (
         <div className="mt-2 flex flex-wrap items-center gap-2">

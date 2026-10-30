@@ -45,12 +45,17 @@ export function toDisplayBlocks(raw, { lines = false } = {}) {
   return blocks;
 }
 
-/** Heading text for display (null when the words cannot be recovered, or when it holds Hindi or lost characters: those cannot be verified, see HINDI_PIECE_MIN in reassemble.mjs). */
+// The dataset's heading field is often the title plus the first words of the section's text ("Rioting . \u2014 Whenever force or violence ..."; Evidence Act: "Admission defined. --An admission is ..."),
+// carries footnote marks ("[3] [Text]"), and for some sections holds a footnote instead of a title ("Subs. by Act 26 of 1955 ..."). Real dashes inside a title ("... \u2014if offence be not committed") stay.
+const NOT_A_TITLE = /^(?:Subs\.|Ins\.|Certain words|The Original words|See now|Amendment of Act\b|Illustrations? \()|\b(?:omitted by|rep\.? by|amended by|w\.e\.f\.|ibid)\b/;
+/** Heading text for display (null when the words cannot be recovered, when it holds Hindi or lost characters: those cannot be verified, see HINDI_PIECE_MIN in reassemble.mjs, or when it is a footnote or placeholder, not a title). */
 export function cleanHeading(s) {
-  if (!s) return null;
+  if (!s || /^\(no heading/i.test(String(s).trim())) return null;
   if (/\uFFFD/.test(s) || (s.match(/[\u0900-\u097F]/g) ?? []).length >= 4) return null;
-  const c = collapseLetterSpacing(stripMarkdown(s).replace(/^#{1,6}\s*/, ""));
-  return c.ambiguous ? null : c.text.trim() || null;
+  const head = stripMarkdown(s).replace(/\[\d{1,2}\]/g, "").replace(/[\[\]]/g, "").split(/\s*[.;]\s*(?:[\u2014\u2013]|--)/)[0].replace(/\s+(?=["\u201d]$)/, "").replace(/[\s.\u2014\u2013-]+$/, "");
+  const c = collapseLetterSpacing(head.replace(/^#{1,6}\s*/, ""));
+  const t = c.ambiguous ? "" : c.text.trim();
+  return !t || NOT_A_TITLE.test(t) ? null : t;
 }
 
 

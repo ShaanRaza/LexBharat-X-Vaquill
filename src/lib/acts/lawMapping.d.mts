@@ -12,3 +12,4 @@ export function lookup(data: MappingData, raw: string): { kind: "old" | "new" | 
 export function isChecked(row: Pick<MappingRow, "old_in_data" | "new_in_data" | "linkable">): boolean;
 export function checkedCount(rows: MappingRow[]): number;
 export function commonGroups(data: MappingData, config: { groups: { label: string; rows: string[][] }[] }): { label: string; rows: MappingRow[] }[];
+export function displayTitle(raw: string | null | undefined): string | null;

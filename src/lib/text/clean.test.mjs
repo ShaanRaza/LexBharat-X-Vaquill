@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { cleanParts, cleanPlain, previewText, stripJunk, tidySpacing, vocabOf } from "./clean.mjs";
+import { cleanHeading, cleanParts, cleanPlain, previewText, stripJunk, tidySpacing, vocabOf } from "./clean.mjs";
 
 // samples are real patterns found by scripts/audit/junk-scan-*.mjs (docs/audit-junk-*.json)
 test("picture placeholders and stray halves of them never reach a reader", () => {
@@ -57,4 +57,13 @@ test("half an emphasis pair and runs of dashes are not shown", () => {
   assert.equal(cleanPlain("holder ... ibid_ , (w.e.f. 6-2-2003). liable"), "holder ... ibid, (w.e.f. 6-2-2003). liable");
   assert.equal(cleanPlain("_ibid_, again and snake_case_name stay"), "ibid, again and snake_case_name stay");
   assert.equal(cleanPlain("New Delhi ------for\n-----\nINFORMATION"), "New Delhi — for\n\nINFORMATION");
+});
+
+test("cleanHeading: the title only, never the run-on text, footnote marks, footnotes or placeholders", () => {
+  assert.equal(cleanHeading("Uttering words, etc., with deliberate intent to wound religious feelings. — Whoever, with the"), "Uttering words, etc., with deliberate intent to wound religious feelings");
+  assert.equal(cleanHeading("Rioting . — Whenever force or violence is used"), "Rioting");
+  assert.equal(cleanHeading("Admission defined. --An admission is a statement,[1] [oral or documentary"), "Admission defined");
+  assert.equal(cleanHeading("Presumption as to electronic records and[6] [electronic signatures]. -- (1) In any"), "Presumption as to electronic records and electronic signatures");
+  assert.equal(cleanHeading("Abetment of offence punishable with imprisonment—if offence be not committed"), "Abetment of offence punishable with imprisonment—if offence be not committed");
+  for (const junk of ["(no heading in our data)", 'Subs. by Act 26 of 1955, s. 117 and the Sch., for "transportation for life"', 'The word "the" rep by Act 12 of 1891, s. 2', "Certain words omitted by s. 3 and the Sch., ibid", "The Original words have successively been amended by Act 12 of 1891"]) assert.equal(cleanHeading(junk), null, junk);
 });
