@@ -23,6 +23,8 @@ import { expandQuery } from "@/lib/acts/searchBoost.mjs";
 import synonyms from "@/config/search-synonyms.json";
 import tuningConfig from "@/config/chat-tuning.json";
 import { citationOf, retrieveSources, type ChatSource } from "@/lib/chat/retrieve";
+import { conceptHint } from "@/lib/chat/concepts.mjs";
+import { MAPPING_ADDENDUM, citeFinder, mappingNote, missingMentions, pairsOf } from "@/lib/chat/concordance.mjs";
 import { askNoticeFor, docNoticeFor } from "@/lib/acts/meaning.mjs";
 import { aiFailure, aiReason } from "@/lib/ai/notice.mjs";
 import { docChatSources, searchAttached } from "@/lib/vault/search";
@@ -105,12 +107,14 @@ export async function POST(req: Request) {
         // 1. query rewrite: one cheap call -> 2-3 search queries. Skipped, with a note, if the model is busy (it is also in the per-minute budget).
         const tune = tuningFlags(tuningConfig, process.env);   // quality switches under evaluation (src/config/chat-tuning.json)
         let extra: string[] = [];
-        try { const rp = buildRewritePrompt({ question: message, history, docContext: docSrc[0]?.text, statutory: tune.statutoryRewrite }); extra = parseRewrite((await completeAi("queryRewrite", { system: rp.system, messages: rp.messages, json: true })).text, message); }
+        try { const rp = buildRewritePrompt({ question: message, history, docContext: docSrc[0]?.text, statutory: tune.statutoryRewrite, hint: conceptHint(message) }); extra = parseRewrite((await completeAi("queryRewrite", { system: rp.system, messages: rp.messages, json: true })).text, message); }
         catch (e) { send({ type: "note", text: `Search help was skipped because ${aiReason(e)}, so the sections found may be less complete.` }); }
         // 2. retrieve for the question and each rewritten query, merged
         const ret0 = await retrieveSources(message, history, extra, undefined, undefined, { hybrid: tune.hybridSearch, currentLaw: tune.currentLaw });
         // one numbering for everything the model may cite: the user's document passages first, then the Act sections
         const ret = { ...ret0, sources: [...docSrc, ...ret0.sources.map((x) => ({ ...x, n: x.n + docSrc.length }))] };
+        const pairs = [...pairsOf(ret.sources), ...ret0.pairs.filter((p) => p.self.n === undefined)];   // old law <-> new law pairs in play (the numbering above shifted by the document passages, so the pairs of the sections are made again)
+        const mapNote = mappingNote(pairs);
         const cites = ret.sources.map(citationOf);
         send({ type: "sources", sources: cites, searchMode: ret.searchMode, queries: [message, ...extra].slice(0, 4), meaning: ret.meaning });
         { const mn = askNoticeFor(ret.meaning); if (mn) send({ type: "note", text: mn }); }   // some searches fell back to exact words (already logged and counted): say so
@@ -128,7 +132,7 @@ export async function POST(req: Request) {
         }
 
         // 3. the answer, streamed. If the model fails AFTER some text, the partial answer is kept and marked as cut off.
-        const prompt = buildChatPrompt({ question: message, history, sources: ret.sources, answerRules: tune.currentLaw, gaps: ret.gaps });
+        const prompt = buildChatPrompt({ question: message, history, sources: ret.sources, answerRules: tune.currentLaw, gaps: ret.gaps, mapping: mapNote ? MAPPING_ADDENDUM(mapNote) : "" });
         let answer = lead ? `${lead}\n\n` : "", model = aiModelFor("chat"), cutOff = false;
         if (lead) send({ type: "delta", text: answer });
         try {
@@ -140,7 +144,11 @@ export async function POST(req: Request) {
         const aligned = alignCitations(ensureCitations(answer.trim(), ret.sources), ret.sources);
         const clean = sanitizeCitations(tune.citationCheck ? verifyCitations(aligned, ret.sources).text : aligned, ret.sources.length);
         // shaping that needs no model: the answer first, "Related provisions" only if they apply (switch currentLaw), a citation shown once per sentence (switch citationCheck)
-        if (tune.currentLaw) clean.text = relatedOnlyIfApplicable(answerFirst(clean.text), ret.sources.map((x) => ({ n: x.n, number: x.number, heading: x.heading, text: x.text })), expandQuery(message, synonyms.rules).text);
+        if (tune.currentLaw) clean.text = relatedOnlyIfApplicable(answerFirst(clean.text, ret.sources), ret.sources.map((x) => ({ n: x.n, number: x.number, heading: x.heading, text: x.text })), expandQuery(message, synonyms.rules).text);
+        if (tune.currentLaw && !detectNotFound(clean.text)) {   // the answer names BOTH laws: when it rests on a section of the old or the new code and leaves out the counterpart, the confirmed counterpart is added from the table (never from memory)
+          const cited = new Set(citedNumbers(clean.text)), add = missingMentions(clean.text, pairs.filter((p) => p.self.n === undefined || cited.has(p.self.n)), citeFinder(ret.sources));
+          if (add.length) clean.text = `${clean.text}\n\n${add.map((a) => a.line).join("\n")}`;
+        }
         if (tune.citationCheck) clean.text = dedupeCitations(clean.text);
         if (clean.text !== answer) send({ type: "replace", text: clean.text });
         if (cutOff) {

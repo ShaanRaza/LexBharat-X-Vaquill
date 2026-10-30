@@ -2,6 +2,6 @@
   "about": "Switches for the Ask quality changes under evaluation (docs/eval/RESULTS.md). A switch is turned on only after it has raised the end-to-end score (docs/eval/RESULTS.md): (b) is on since fix-b. Each can be forced for a run with an environment variable: CHAT_TUNING_HYBRID_SEARCH, CHAT_TUNING_STATUTORY_REWRITE, CHAT_TUNING_CURRENT_LAW, CHAT_TUNING_CITATION_CHECK (1 or 0). Fix (b) = hybridSearch + statutoryRewrite together; (c) = currentLaw (current law first + answer rules: answer first, related provisions only if they apply); (d) = citationCheck.",
   "hybridSearch": true,
   "statutoryRewrite": true,
-  "currentLaw": false,
+  "currentLaw": true,
   "citationCheck": false
 }

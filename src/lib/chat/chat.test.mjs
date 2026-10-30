@@ -78,9 +78,9 @@ test("detectNotFound: the model's 'I couldn't find it' reply with no citation, a
   assert.equal(detectNotFound("I couldn't find the Arnesh Kumar judgment in the Acts I searched; judgments are not included [1][2][3]."), true);   // short "found nothing" reply that tagged sources
   assert.equal(detectNotFound("Under Section 138 the punishment is two years."), false);
 });
-test("parseRewrite keeps up to 3 clean, different queries and survives bad output; buildRewritePrompt carries the earlier question", () => {
+test("parseRewrite keeps up to 4 clean, different queries and survives bad output; buildRewritePrompt carries the earlier question", () => {
   const q = "Can a minor enter a contract?";
-  assert.deepEqual(parseRewrite('{"queries":["competency to contract age of majority minor","Indian Contract Act section 11","  Indian Contract Act section 11 ","can a minor enter a contract?","x","Indian Contract Act section 10","one more"]}', q), ["competency to contract age of majority minor", "Indian Contract Act section 11", "Indian Contract Act section 10"]);
+  assert.deepEqual(parseRewrite('{"queries":["competency to contract age of majority minor","Indian Contract Act section 11","  Indian Contract Act section 11 ","can a minor enter a contract?","x","Indian Contract Act section 10","one more"]}', q), ["competency to contract age of majority minor", "Indian Contract Act section 11", "Indian Contract Act section 10", "one more"]);
   assert.deepEqual(parseRewrite('```json\n{"queries":["a b c"]}\n```', q), ["a b c"]);
   assert.deepEqual(parseRewrite("no json here", q), []); assert.deepEqual(parseRewrite('{"queries":"nope"}', q), []); assert.deepEqual(parseRewrite('{"queries":[1,null,{}]}', q), []);
   assert.equal(parseRewrite(JSON.stringify({ queries: ["y".repeat(300)] }), q)[0].length, 120);

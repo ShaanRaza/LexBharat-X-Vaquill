@@ -2,10 +2,11 @@
 import { rrf } from "../acts/fusion.mjs";
 
 export const REWRITE_SYSTEM = `You turn a question about Indian law into search queries for a database of Indian Central and State Acts. Reply with JSON only: {"queries": [string, string, string]}.
-- 2 or 3 queries, each under 120 characters.
+- 2 to 4 queries, each under 120 characters.
 - Query 1: the question restated with the legal terms an Act would use, for example "competency to contract age of majority minor agreement void".
 - The other queries: the Acts and sections most likely to answer it, written like "Indian Contract Act section 11" or "Negotiable Instruments Act section 138 notice demand payment". Name an Act and section only if you are fairly sure; otherwise use legal terms.
 - If the question is about an offence, a right or a procedure, make one of the queries about closely related provisions on the same subject in other forms or other Acts (for example the electronic-transfer equivalent of a cheque offence, or the penalty and cognizance sections).
+- If the question touches MORE THAN ONE Act or legal issue (for example a contract AND a crime, a limitation period AND arbitration, a consumer complaint AND a real-estate law), write ONE query for EACH Act or issue, each naming the likely Act and section, and do not mix two Acts in one query. A question about a single Act keeps its 2 or 3 queries.
 - If the question names a State or Union Territory, keep its name in the queries.
 - Do not answer the question. Indian law only.`;
 
@@ -16,12 +17,13 @@ export const STATUTORY_ADDENDUM = `
 - Prefer the CURRENT criminal laws: the Bharatiya Nyaya Sanhita (BNS, replaced the Indian Penal Code), the Bharatiya Nagarik Suraksha Sanhita (BNSS, replaced the Code of Criminal Procedure) and the Bharatiya Sakshya Adhiniyam (BSA, replaced the Indian Evidence Act). If the question names an old section (IPC 302, CrPC 438, Evidence Act 65B), make one query for the equivalent section of the new law, for example "Bharatiya Nyaya Sanhita section 103 punishment for murder", when you know it.
 - If the question describes a situation and not a law, name the heading the provision would carry, for example "tenant default in payment of rent forfeiture determination of lease".`;
 
-export function buildRewritePrompt({ question, history = [], docContext = "", statutory = false }) {
+export function buildRewritePrompt({ question, history = [], docContext = "", statutory = false, hint = "" }) {
   const prev = [...history].reverse().find((m) => m.role === "user");
-  return { system: statutory ? REWRITE_SYSTEM + STATUTORY_ADDENDUM : REWRITE_SYSTEM, messages: [{ role: "user", content: `${prev ? `Previous question in this chat: ${prev.content.slice(0, 300)}\n` : ""}${docContext ? `The user attached their own document; a relevant passage reads: ${docContext.slice(0, 400)}\nWrite the queries for the law that bears on that passage and the question.\n` : ""}Question: ${question}` }] };
+  return { system: statutory ? REWRITE_SYSTEM + STATUTORY_ADDENDUM : REWRITE_SYSTEM, messages: [{ role: "user", content: `${prev ? `Previous question in this chat: ${prev.content.slice(0, 300)}\n` : ""}${docContext ? `The user attached their own document; a relevant passage reads: ${docContext.slice(0, 400)}\nWrite the queries for the law that bears on that passage and the question.\n` : ""}${hint ? `${hint}\n` : ""}Question: ${question}` }] };
 }
 
-/** The model's JSON -> up to 3 clean queries (trimmed, at most 120 characters, no duplicates, none equal to the question itself). Unreadable output gives []. */
+export const MAX_QUERIES = 4;
+/** The model's JSON -> up to 4 clean queries (trimmed, at most 120 characters, no duplicates, none equal to the question itself). Unreadable output gives []. */
 export function parseRewrite(raw, question = "") {
   let j = null;
   try { j = JSON.parse(String(raw).replace(/^```(?:json)?\s*|\s*```$/g, "").trim()); } catch { const m = /\{[\s\S]*\}/.exec(String(raw)); if (m) { try { j = JSON.parse(m[0]); } catch { /* none */ } } }
@@ -32,7 +34,7 @@ export function parseRewrite(raw, question = "") {
     const t = q.replace(/\s+/g, " ").trim().slice(0, 120);
     if (t.length < 3 || seen.has(t.toLowerCase())) continue;
     seen.add(t.toLowerCase()); out.push(t);
-    if (out.length === 3) break;
+    if (out.length === MAX_QUERIES) break;
   }
   return out;
 }
