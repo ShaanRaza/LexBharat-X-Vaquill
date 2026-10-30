@@ -1,5 +1,5 @@
 {
- "_note": "One shared old-law to new-law table. Used by the Old law to new law page and by src/lib/acts/lawMapping.mjs. Format and how to add rows: see src/config/README-law-mapping.md. A row is verified only if this repo itself states the mapping; the repo states Act-to-Act pairs only (the laws block), no section-to-section pairs, so every row below is unverified.",
+ "_note": "One shared old-law to new-law table. Used by the Old law to new law page and by src/lib/acts/lawMapping.mjs. Format and how to add rows: see src/config/README-law-mapping.md. A row is verified only if both sections were found in our Acts data and their titles and subject correspond (checked 2026-10-30); each row's source says exactly what was checked. Rows with a section missing or a damaged record stay unverified. Verified here does not mean checked against the official government comparison table.",
  "inForceFrom": "2024-07-01",
  "laws": {
   "ipc": {
@@ -65,8 +65,10 @@
    "new_law": "bns",
    "new_section": "61(2)",
    "new_title": "Criminal conspiracy",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: IPC s120B \"Punishment of criminal conspiracy\" and BNS s61(2) \"Criminal conspiracy\" are both in our Acts data and their titles and subject correspond. BNS sub-section (2) found: punishment for a party to a criminal conspiracy. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "ipc",
@@ -75,8 +77,10 @@
    "new_law": "bns",
    "new_section": "103(1)",
    "new_title": "Punishment for murder",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: IPC s302 \"Punishment for murder\" and BNS s103(1) \"Punishment for murder\" are both in our Acts data and their titles and subject correspond. BNS sub-section (1) found: punishment for murder. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "ipc",
@@ -85,8 +89,10 @@
    "new_law": "bns",
    "new_section": "105",
    "new_title": "Punishment for culpable homicide not amounting to murder",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: IPC s304 \"Punishment for culpable homicide not amounting to murder\" and BNS s105 \"Punishment for culpable homicide not amounting to murder\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "ipc",
@@ -95,8 +101,10 @@
    "new_law": "bns",
    "new_section": "106(1)",
    "new_title": "Causing death by negligence",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: IPC s304A \"Causing death by negligence\" and BNS s106(1) \"Causing death by negligence\" are both in our Acts data and their titles and subject correspond. BNS sub-section (1) found: causing death by rash or negligent act. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "ipc",
@@ -105,8 +113,10 @@
    "new_law": "bns",
    "new_section": "80",
    "new_title": "Dowry death",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: IPC s304B \"Dowry death\" and BNS s80 \"Dowry death\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "ipc",
@@ -115,8 +125,10 @@
    "new_law": "bns",
    "new_section": "109",
    "new_title": "Attempt to murder",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: IPC s307 \"Attempt to murder\" and BNS s109 \"Attempt to murder\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "ipc",
@@ -125,8 +137,10 @@
    "new_law": "bns",
    "new_section": "115(2)",
    "new_title": "Voluntarily causing hurt",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: IPC s323 \"Punishment for voluntarily causing hurt\" and BNS s115(2) \"Voluntarily causing hurt\" are both in our Acts data and their titles and subject correspond. BNS sub-section (2) found: punishment for voluntarily causing hurt. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "ipc",
@@ -135,8 +149,10 @@
    "new_law": "bns",
    "new_section": "74",
    "new_title": "Assault or criminal force to woman with intent to outrage her modesty",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: IPC s354 \"Assault or criminal force to woman with intent to outrage her modesty\" and BNS s74 \"Assault or criminal force to woman with intent to outrage her modesty\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "ipc",
@@ -145,8 +161,10 @@
    "new_law": "bns",
    "new_section": "64",
    "new_title": "Punishment for rape",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: IPC s376 \"Punishment for rape\" and BNS s64 \"Punishment for rape\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "ipc",
@@ -155,8 +173,10 @@
    "new_law": "bns",
    "new_section": "303(2)",
    "new_title": "Theft",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: IPC s379 \"Punishment for theft\" and BNS s303(2) \"Theft\" are both in our Acts data and their titles and subject correspond. BNS sub-section (2) found: punishment for theft. Our IPC s379 record has no heading field, but its text begins \"379. Punishment for theft\". Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "ipc",
@@ -165,8 +185,10 @@
    "new_law": "bns",
    "new_section": "316(2)",
    "new_title": "Criminal breach of trust",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: IPC s406 \"Punishment for criminal breach of trust\" and BNS s316(2) \"Criminal breach of trust\" are both in our Acts data and their titles and subject correspond. BNS sub-section (2) found: punishment for criminal breach of trust. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "ipc",
@@ -175,8 +197,10 @@
    "new_law": "bns",
    "new_section": "318(4)",
    "new_title": "Cheating and dishonestly inducing delivery of property",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: IPC s420 \"Cheating and dishonestly inducing delivery of property\" and BNS s318(4) \"Cheating and dishonestly inducing delivery of property\" are both in our Acts data and their titles and subject correspond. BNS sub-section (4) found: cheating and dishonestly inducing delivery of property. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "ipc",
@@ -185,8 +209,10 @@
    "new_law": "bns",
    "new_section": "85",
    "new_title": "Husband or relative of husband of a woman subjecting her to cruelty",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: IPC s498A \"Husband or relative of husband of a woman subjecting her to cruelty\" and BNS s85 \"Husband or relative of husband of a woman subjecting her to cruelty\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "ipc",
@@ -195,8 +221,10 @@
    "new_law": "bns",
    "new_section": "356",
    "new_title": "Defamation",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: IPC s499 \"Defamation\" and BNS s356 \"Defamation\" are both in our Acts data and their titles and subject correspond. Our IPC s499 record starts with the chapter index but the full section text follows it (data flag: possibly_incomplete). Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "ipc",
@@ -205,8 +233,10 @@
    "new_law": "bns",
    "new_section": "351",
    "new_title": "Criminal intimidation",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: IPC s506 \"Punishment for criminal intimidation\" and BNS s351 \"Criminal intimidation\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "ipc",
@@ -215,8 +245,10 @@
    "new_law": "bns",
    "new_section": "79",
    "new_title": "Word, gesture or act intended to insult the modesty of a woman",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: IPC s509 \"Word, gesture or act intended to insult the modesty of a woman\" and BNS s79 \"Word, gesture or act intended to insult the modesty of a woman\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "crpc",
@@ -225,8 +257,10 @@
    "new_law": "bnss",
    "new_section": "35",
    "new_title": "When police may arrest without warrant",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: CrPC s41 \"When police may arrest without warrant\" and BNSS s35 \"When police may arrest without warrant\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "crpc",
@@ -235,8 +269,10 @@
    "new_law": "bnss",
    "new_section": "144",
    "new_title": "Order for maintenance of wives, children and parents",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: CrPC s125 \"Order for maintenance of wives, children and parents\" and BNSS s144 \"Order for maintenance of wives, children and parents\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "crpc",
@@ -245,8 +281,10 @@
    "new_law": "bnss",
    "new_section": "173",
    "new_title": "Information in cognizable cases",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: CrPC s154 \"Information in cognizable cases\" and BNSS s173 \"Information in cognizable cases\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "crpc",
@@ -255,8 +293,10 @@
    "new_law": "bnss",
    "new_section": "175",
    "new_title": "Police officer's power to investigate cognizable case",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: CrPC s156 \"Police officer's power to investigate cognizable case\" and BNSS s175 \"Police officer's power to investigate cognizable case\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "crpc",
@@ -265,8 +305,10 @@
    "new_law": "bnss",
    "new_section": "183",
    "new_title": "Recording of confessions and statements",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: CrPC s164 \"Recording of confessions and statements\" and BNSS s183 \"Recording of confessions and statements\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "crpc",
@@ -275,8 +317,10 @@
    "new_law": "bnss",
    "new_section": "187",
    "new_title": "Procedure when investigation cannot be completed in twenty-four hours",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: CrPC s167 \"Procedure when investigation cannot be completed in twenty-four hours\" and BNSS s187 \"Procedure when investigation cannot be completed in twenty-four hours\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "crpc",
@@ -285,8 +329,10 @@
    "new_law": "bnss",
    "new_section": "193",
    "new_title": "Report of police officer on completion of investigation",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: CrPC s173 \"Report of police officer on completion of investigation\" and BNSS s193 \"Report of police officer on completion of investigation\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "crpc",
@@ -296,7 +342,9 @@
    "new_section": "223",
    "new_title": "Examination of complainant",
    "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "old_in_data": false,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: CrPC s200 is NOT in our CrPC record (IND_state_6796 has no section 200; the data does not flag it as a known missing section either). BNSS s223 \"Examination of complainant\" is present and its title matches. Section pairing not confirmed. Other CrPC copies in the data (IND_state_13624, IND_state_21613) do hold s200, but the SSD with the full dataset was not connected, so the central Act was not re-checked there."
   },
   {
    "old_law": "crpc",
@@ -305,8 +353,10 @@
    "new_law": "bnss",
    "new_section": "480",
    "new_title": "When bail may be taken in case of non-bailable offence",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: CrPC s437 \"When bail may be taken in case of non-bailable offence\" and BNSS s480 \"When bail may be taken in case of non-bailable offence\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "crpc",
@@ -315,8 +365,10 @@
    "new_law": "bnss",
    "new_section": "482",
    "new_title": "Direction for grant of bail to person apprehending arrest",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: CrPC s438 \"Direction for grant of bail to person apprehending arrest\" and BNSS s482 \"Direction for grant of bail to person apprehending arrest\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "crpc",
@@ -325,8 +377,10 @@
    "new_law": "bnss",
    "new_section": "483",
    "new_title": "Special powers of High Court or Court of Session regarding bail",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: CrPC s439 \"Special powers of High Court or Court of Session regarding bail\" and BNSS s483 \"Special powers of High Court or Court of Session regarding bail\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "crpc",
@@ -336,7 +390,9 @@
    "new_section": "528",
    "new_title": "Saving of inherent powers of High Court",
    "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "old_in_data": false,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: CrPC s482 is NOT in our CrPC record (IND_state_6796 has no section 482; the data does not flag it as a known missing section either). BNSS s528 \"Saving of inherent powers of High Court\" is present and its title matches. Section pairing not confirmed. Other CrPC copies in the data (IND_state_13624, IND_state_21613) do hold s482, but the SSD with the full dataset was not connected, so the central Act was not re-checked there."
   },
   {
    "old_law": "evidence",
@@ -346,7 +402,9 @@
    "new_section": "2",
    "new_title": "Definitions",
    "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: Evidence Act s3 \"Interpretation-clause\" is present. BSA s2 is present as a record but is damaged: its heading field holds a Statement-of-Objects sentence, the text begins with that paragraph, then \"2. Definitions\", and it stops part-way at clause (e) (data flag: possibly_incomplete). The section number and subject correspond, but the record is not reliable enough to call verified."
   },
   {
    "old_law": "evidence",
@@ -355,8 +413,10 @@
    "new_law": "bsa",
    "new_section": "39",
    "new_title": "Opinions of experts",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: Evidence Act s45 \"Opinions of experts\" and BSA s39 \"Opinions of experts\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "evidence",
@@ -365,8 +425,10 @@
    "new_law": "bsa",
    "new_section": "63",
    "new_title": "Admissibility of electronic records",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: Evidence Act s65B \"Admissibility of electronic records\" and BSA s63 \"Admissibility of electronic records\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "evidence",
@@ -375,8 +437,10 @@
    "new_law": "bsa",
    "new_section": "104",
    "new_title": "Burden of proof",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: Evidence Act s101 \"Burden of proof\" and BSA s104 \"Burden of proof\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "evidence",
@@ -385,8 +449,10 @@
    "new_law": "bsa",
    "new_section": "109",
    "new_title": "Burden of proving fact especially within knowledge",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: Evidence Act s106 \"Burden of proving fact especially within knowledge\" and BSA s109 \"Burden of proving fact especially within knowledge\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   },
   {
    "old_law": "evidence",
@@ -395,8 +461,10 @@
    "new_law": "bsa",
    "new_section": "119",
    "new_title": "Court may presume existence of certain facts",
-   "status": "unverified",
-   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+   "status": "verified",
+   "old_in_data": true,
+   "new_in_data": true,
+   "source": "Checked against our data on 2026-10-30: Evidence Act s114 \"Court may presume existence of certain facts\" and BSA s119 \"Court may presume existence of certain facts\" are both in our Acts data and their titles and subject correspond. Checked for presence and matching subject only, not against the official comparison table."
   }
  ]
 }

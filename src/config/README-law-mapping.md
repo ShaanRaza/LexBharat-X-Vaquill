@@ -11,11 +11,11 @@ The one table behind the "Old law to new law" page (`/workspace/browse/old-to-ne
 | `old_law`, `new_law` | keys from `laws` (`ipc`→`bns`, `crpc`→`bnss`, `evidence`→`bsa`) |
 | `old_section`, `new_section` | text exactly as cited, e.g. `"304B"`, `"103(1)"`. Lookup uses the number before any `(...)` |
 | `old_title`, `new_title` | section headings |
-| `status` | `verified` only if this repo itself states the mapping and `source` names where; otherwise `unverified` |
+| `status` | `verified` only if (a) this repo itself states the mapping and `source` names where, or (b) both sections were found in our Acts data and their titles and subject correspond, and `source` starts "Checked against our data on <date>:"; otherwise `unverified`. Neither means checked against the official government comparison table |
 | `source` | where the row came from (a repo path for verified rows) |
 | `what_changed` | optional plain-language note; the page shows it only if present. Never fill it from memory |
-| `old_in_data`, `new_in_data` | optional `true` once someone has checked that section exists in our Act data; the page links the section only then. Absent means unknown, so no link |
+| `old_in_data`, `new_in_data` | `true` once someone has checked that section exists in our Act data, `false` if it was looked for and is not there; the page links the section only when `true`. Absent means unknown, so no link |
 
 To add a row: append an object with every required field, no duplicate (`old_law`, `old_section`), and run `npm run test:extract`. Do not mark a row `verified` from memory.
 
-Current state: the repo states Act-to-Act pairs only, so all section rows are `unverified` (title and section numbers recalled, not checked against the Acts data).
+Current state (checked 2026-10-30 against the Neon Acts data): 34 rows, 31 verified, 3 unverified (CrPC 200 and 482 are missing from our CrPC record; BSA 2 is a damaged record). Each row's `source` says what was found. The SSD copy of the full dataset was not checked.
