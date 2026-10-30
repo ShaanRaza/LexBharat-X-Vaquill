@@ -8,13 +8,13 @@
 
 | Area | Gap | Count | Impact | Fix | Cost |
 |---|---|---:|---|---|---|
-| Judgments | No judgment text on the site: Supreme Court shows ~900 characters (opening text) for 32,946 of 37,014 cases; High Courts none | 37,014 SC + 14.2M HC case records | **High** | Text is in the dataset (SSD). Needs a place to store and search it (R2 / bigger database) and embeddings | paid / free-tier tricks |
-| Judgments | High Court lists and search are **not live** (R2 not set up): production shows counts by year only | 25 High Courts, 14.2M records | **High** | Host the exported files (R2 free tier 10 GB, or compress) | free to small |
+| Judgments | No judgment text on the site: Supreme Court shows ~900 characters (opening text) for 32,946 of 37,014 cases; High Courts none | 37,014 SC + 16,024,477 HC case records | **High** | Text is in the dataset (SSD). Needs a place to store and search it (R2 / bigger database) and embeddings | paid / free-tier tricks |
+| Judgments | High Court lists and search are **not live** (R2 not set up): production shows counts by year only | 25 High Courts, 16,024,477 records | **High** | Host the exported files (R2 free tier 10 GB, or compress) | free to small |
 | Acts | Central Acts missing or only a stub: Customs Act 1962 (3 of 184 sections), Arms Act (0), Protection of Human Rights Act (0), SC/ST Atrocities Act (1), Child and Adolescent Labour Act (3), Employees' Compensation Act, Indian Trusts Act, Whistle Blowers Protection Act, Income-tax Act 2025 and other 2025 Acts | 103 Central in-force stubs (11 with 0 sections) + at least 8 missing important Acts | **High** | India Code PDFs, same method as W7b | needs permission / manual download |
 | Acts | Status wrong or contradictory: CrPC 1973 shown in force (repealed by BNSS from 1 July 2024); 4 labour Acts appear both repealed and in force; 6 State-filed IPC, 31 CrPC and 4 Evidence Act copies shown in force | ~45 records | **High** | Override table (config), no new data | free |
 | Acts | Confident missing section numbers still open | 706 in 256 Central Acts (+3,600 in 1,196 State Acts) | Medium | PDFs from India Code | needs permission |
 | Acts | Schedules, Forms, Appendices, Rules not loaded except CPC, Limitation, Stamp (Sch. I), Constitution | all other Acts | **High** (CrPC/BNSS schedules, Companies Act schedules, CPC forms) | PDFs | needs permission |
-| Acts | Regulator instruments are titles only on the site; 912 more (Law Commission, State GST) not even listed | 11,240 (+912) | Medium | Text is in the dataset; needs storage | free to small |
+| Acts | Regulator text is loaded (W10): 12,152 instruments, 111,596 sections, of which 104,547 have text; the 7,049 garbled sections have none | 12,152 / 111,596 | Medium | Text for the 7,049 garbled sections would need a re-read of the source | free to small |
 | Acts | State Acts: garbled text and incomplete sections | 1,819 garbled, 27,621 possibly incomplete | Low to Medium | re-extract from `source_url` PDFs (sites block automation) | needs permission |
 | Search | Not searchable by meaning: judgments, regulators, 22 Central + 1,994 State sections; Hindi not searchable by keyword | see section 4 | Medium | small jobs | free |
 | Judgments | Tribunals (15 forums, 813,168 matters, PDFs without text) not loaded at all | 813,168 | Medium | OCR job | paid |
@@ -26,7 +26,7 @@
 |---|---:|---:|---:|---:|---:|
 | Central | 1,590 (incl. the Constitution; 21 are State-filed copies we re-labelled Central) | 1,488 | 102 | 880 | 710 |
 | State and Union Territory | 8,523 | 7,395 | 1,128 | 8,523 | 0 |
-| Regulator instruments (static list, not in the database) | 11,240 (10 bodies) | 9,541 have sections in the dataset but **none is shown on the site** | 1,699 | 10,862 | 378 superseded |
+| Regulator instruments (static list, not in the database; as of 2026-10-25, before W10) | 11,240 (10 bodies) | 9,541 have sections in the dataset but **none is shown on the site** | 1,699 | 10,862 | 378 superseded |
 
 Central: 41,600 sections in the base data plus 1,987 units we added (1,701 new, 286 replace wrong text). State: 169,953 sections. Regulators: 89,698 sections in the dataset, not loaded.
 
@@ -330,34 +330,34 @@ The dataset text of s.138 contains four oddities. We compared it against the on-
 - Text we hold: only the first ~900 characters of the English report, kept as `preview.json` per year: **32,946 of 37,014 (89.0%)**; 1,422 cases have no clean start and 2,646 more failed the quality check. The full text (12.8M judgments in the dataset) is on the SSD but not in the app. **What this blocks:** searching inside judgments; "which cases cite section 138"; reading a holding; citing a paragraph; chat or drafting over case law; counting how often a section is applied; verifying a case is still good law. Statute links work only on those 900 characters (5,525 judgments, 16.8%).
 - Impact: **High**. Fix: the dataset has the full text; storing and embedding 37,014 judgments (about 20 to 40 passages each) is a large job against the free Neon limit, so it needs R2 plus either a bigger vector store or paid Voyage rate; first step free: serve full text from R2 without embeddings and keyword-search only the SC.
 
-### 3.2 High Courts (25 courts, 14.2M case records)
+### 3.2 High Courts (25 courts, 16,024,477 case records)
 Years missing since 2000 and sudden drops are listed; "sparse" years (under 50 cases) are in the data but suspiciously thin. Judge field: only Bombay (84.5%), Gujarat (64.1%) and Orissa (44.5%) are exported; for the other 22 courts the judge field is 0% (unreliable in the dataset, so left out). Citation: 0% for every High Court (cite by case number).
 
-| Court | Cases | Years | Years missing since 2000 | Sudden drops (year to year) | Cases without a year | Case number | Judges | Disposition | Parties |
+| Court | Cases (as of 30 Oct 2026, after the W10 merge) | Years | Years missing since 2000 | Sudden drops (year to year) | Cases without a year | Case number | Judges | Disposition | Parties |
 |---|---:|---|---|---|---:|---:|---:|---:|---:|
-| allahabad | 1,556,323 | 1973–2025 | 2000,2002,2006 | 2023→2024 (287,015→89,832) | 2 | 63.3% | 0.0% | 99.4% | 69.5% |
-| andhra pradesh | 261,773 | 1962–2026 | – | – | 5 | 98.6% | 0.0% | 99.5% | 90.4% |
+| allahabad | 1,617,619 | 1973–2025 | 2000,2002,2006 | 2023→2024 (287,015→89,832) | 2 | 63.3% | 0.0% | 99.4% | 69.5% |
+| andhra pradesh | 261,778 | 1962–2026 | – | – | 5 | 98.6% | 0.0% | 99.5% | 90.4% |
 | bombay | 1,578,864 | 1908–2025 | – | 2019→2020 (96,634→32,718) | 0 | 99.0% | 84.5% | 99.3% | 92.6% |
 | calcutta | 340,418 | 1950–2025 | – | – | 0 | 43.2% | 0.0% | 98.9% | 95.1% |
-| chhattisgarh | 509,786 | 1963–2025 | – | – | 1 | 85.8% | 0.0% | 99.9% | 43.6% |
-| delhi | 330,400 | 1957–2026 | – | 2008→2009 (2,388→33); 2020→2021 (13,312→4,518) | 1 | 70.9% | 0.0% | 85.0% | 77.8% |
-| gauhati | 286,466 | 1962–2026 | – | – | 1 | 75.3% | 0.0% | 94.3% | 81.4% |
-| gujarat | 405,840 | 1982–2025 | – | 2008→2009 (10,284→2); 2015→2016 (8,818→1); 2022→2023 (67,118→4,573); 2023→2024 (4,573→1,732) | 0 | 99.6% | 64.1% | 99.8% | 87.5% |
+| chhattisgarh | 509,787 | 1963–2025 | – | – | 1 | 85.8% | 0.0% | 99.9% | 43.6% |
+| delhi | 334,989 | 1957–2026 | – | 2008→2009 (2,388→33); 2020→2021 (13,312→4,518) | 1 | 70.9% | 0.0% | 85.0% | 77.8% |
+| gauhati | 286,467 | 1962–2026 | – | – | 1 | 75.3% | 0.0% | 94.3% | 81.4% |
+| gujarat | 406,131 | 1982–2025 | – | 2008→2009 (10,284→2); 2015→2016 (8,818→1); 2022→2023 (67,118→4,573); 2023→2024 (4,573→1,732) | 0 | 99.6% | 64.1% | 99.8% | 87.5% |
 | jammu and kashmir and ladakh | 100,285 | 1956–2025 | 2002 | – | 0 | 97.0% | 0.0% | 98.4% | 58.5% |
 | himachal pradesh | 254,825 | 1942–2025 | – | – | 0 | 98.9% | 0.0% | 98.8% | 90.1% |
 | jharkhand | 420,729 | 1947–2025 | – | – | 0 | 99.8% | 0.0% | 99.7% | 78.6% |
-| karnataka | 686,152 | 1968–2025 | – | 2012→2013 (29,925→8,927) | 4 | 97.2% | 0.0% | 99.8% | 95.0% |
-| kerala | 1,018,714 | 1950–2024 | – | – | 1 | 100.0% | 0.0% | 100.0% | 95.0% |
-| madhya pradesh | 646,344 | 1990–2024 | 2001,2006 | 2023→2024 (121,100→12,153) | 23 | 87.2% | 0.0% | 100.0% | 88.5% |
-| madras | 1,498,010 | 1910–2025 | – | 2011→2012 (20,512→38) | 2 | 98.5% | 0.0% | 99.6% | 88.0% |
+| karnataka | 735,556 | 1968–2025 | – | 2012→2013 (29,925→8,927) | 4 | 97.2% | 0.0% | 99.8% | 95.0% |
+| kerala | 1,018,715 | 1950–2024 | – | – | 1 | 100.0% | 0.0% | 100.0% | 95.0% |
+| madhya pradesh | 662,318 | 1990–2024 | 2001,2006 | 2023→2024 (121,100→12,153) | 23 | 87.2% | 0.0% | 100.0% | 88.5% |
+| madras | 1,506,085 | 1910–2025 | – | 2011→2012 (20,512→38) | 2 | 98.5% | 0.0% | 99.6% | 88.0% |
 | manipur | 16,763 | 2016–2025 | – | 2019→2020 (2,523→883) | 0 | 99.6% | 0.0% | 99.6% | 73.6% |
 | meghalaya | 10,827 | 2010–2025 | – | – | 0 | 98.9% | 0.0% | 100.0% | 87.5% |
-| orissa | 685,646 | 1941–2025 | – | – | 2 | 99.8% | 44.5% | 99.5% | 80.9% |
-| patna | 1,614,936 | 1924–2026 | – | – | 3 | 100.0% | 0.0% | 98.3% | 81.9% |
-| punjab and haryana | 1,133,710 | 1945–2024 | – | 2011→2012 (67,506→52); 2022→2023 (111,864→6,305) | 0 | 52.4% | 0.0% | 99.9% | 97.0% |
+| orissa | 685,648 | 1941–2025 | – | – | 2 | 99.8% | 44.5% | 99.5% | 80.9% |
+| patna | 1,614,939 | 1924–2026 | – | – | 3 | 100.0% | 0.0% | 98.3% | 81.9% |
+| punjab and haryana | 1,362,064 | 1945–2024 | – | 2011→2012 (67,506→52); 2022→2023 (111,864→6,305) | 0 | 52.4% | 0.0% | 99.9% | 97.0% |
 | rajasthan | 1,056,767 | 1989–2025 | – | – | 0 | 95.6% | 0.0% | 99.7% | 51.2% |
 | sikkim | 2,219 | 2000–2025 | – | – | 0 | 90.9% | 0.0% | 99.8% | 87.8% |
-| telangana | 1,005,127 | 1952–2025 | – | – | 20 | 96.1% | 0.0% | 99.8% | 94.5% |
+| telangana | 1,005,147 | 1952–2025 | – | – | 20 | 96.1% | 0.0% | 99.8% | 94.5% |
 | tripura | 30,062 | 1981–2025 | 2000,2001,2003,2004,2005,2012 | – | 0 | 83.3% | 0.0% | 99.6% | 79.7% |
 | uttarakhand | 205,475 | 1950–2025 | – | 2006→2007 (8,984→3,306) | 0 | 91.2% | 0.0% | 99.5% | 90.0% |
 
@@ -373,7 +373,7 @@ The dataset holds 15 forums, **813,168 matters** (CAT 162,439 + 181,429 case-inf
 | Supreme Court case lists, filters, search, case page metadata | yes (the 37,014 records are static JSON in the repo) | |
 | Supreme Court opening text (900 characters), statute links on case pages | no (needs `JUDGMENTS_DATA_DIR`, not set on Vercel) | yes |
 | High Court case lists and search, year pages | **no** (R2 not set up: production shows counts by year and "Case lists for this court are not available yet") | yes (12 GB on disk) |
-| Regulator instruments (titles list) | list yes; **text no** (not in the database or the Act-text store) | text only in the dataset |
+| Regulator instruments (list and text) | **yes** (W10: 12,152 instruments; 104,547 of 111,596 sections have text; `REG_DATABASE_URL` is set on Vercel) | |
 | Tribunal decisions | no | not loaded anywhere |
 
 ## 4. SEARCH AND AI COVERAGE
@@ -385,8 +385,8 @@ The dataset holds 15 forums, **813,168 matters** (CAT 162,439 + 181,429 case-inf
 | Smart search, State | 167,959 of 169,953 (**98.8%**) | 1,819 garbled and 175 others without a vector |
 | Smart search, units we filled (Orders, Rules, Articles, Constitution, filled sections) | **1,987 of 1,987 (100%)** | none |
 | Vectors | 76,701 Central + 462,198 State + 3,206 supplement passages | |
-| Regulators (11,240 instruments, 89,698 sections) | titles only | not embedded, not searchable by text |
-| Judgments (37,014 SC + 14.2M HC) | by party, title, case number | not embedded, not full-text searchable |
+| Regulators (12,152 instruments, 111,596 sections) | text searchable by keyword and by meaning for the 104,547 sections with text (515,473 chunk vectors, W10) | 7,049 garbled sections have no text |
+| Judgments (37,014 SC + 16,024,477 HC) | by party, title, case number | not embedded, not full-text searchable |
 | Tribunal decisions | no | not loaded |
 
 286 base sections replaced by our text and 11 State-filed copies hidden behind Central versions keep their old vectors in the database; they are ignored at query time (tested), so this is waste, not a leak.

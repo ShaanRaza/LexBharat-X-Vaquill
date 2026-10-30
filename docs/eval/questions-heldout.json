@@ -1,0 +1,296 @@
+{
+ "about": "20 held-out questions for the Oct 30 answer-quality work (multi-Act, old law vs new law, plain language). Written BEFORE any code change and never used for tuning. Ids 201-220. Expected sections are drafts, not checked by a lawyer; every expected section exists in our data and each anchor was found in its text.",
+ "reviewStatus": "draft, not reviewed by a lawyer",
+ "heldOut": true,
+ "questions": [
+  {
+   "id": 201,
+   "kind": "two-act",
+   "question": "I bought a flat and the builder has not handed over possession on time. Can I go to the consumer court and also ask for my money back under the real estate law?",
+   "golds": [
+    {
+     "act": "The Consumer Protection Act, 2019",
+     "section": "35",
+     "anchor": "complaint"
+    },
+    {
+     "act": "The Real Estate (Regulation and Development) Act",
+     "section": "18",
+     "anchor": "possession"
+    }
+   ]
+  },
+  {
+   "id": 202,
+   "kind": "two-act",
+   "question": "Is a gift of a house to my daughter valid if it is only written on plain paper, and does it need registration?",
+   "golds": [
+    {
+     "act": "The Transfer of Property Act, 1882",
+     "section": "123",
+     "anchor": "gift"
+    },
+    {
+     "act": "The Registration Act, 1908",
+     "section": "17",
+     "anchor": "gift"
+    }
+   ]
+  },
+  {
+   "id": 203,
+   "kind": "two-act",
+   "question": "My employer sacked me without notice and has not paid my gratuity after five years. What are my rights?",
+   "golds": [
+    {
+     "act": "The Payment of Gratuity Act, 1972",
+     "section": "4",
+     "anchor": "gratuity"
+    },
+    {
+     "act": "The Industrial Disputes Act, 1947",
+     "section": "25F",
+     "anchor": "retrenchment"
+    }
+   ]
+  },
+  {
+   "id": 204,
+   "kind": "two-act",
+   "question": "After an arrest, how long can the police keep a person before a magistrate sees him, and must he be told why he was arrested?",
+   "golds": [
+    {
+     "act": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "section": "58",
+     "anchor": "twenty-four hours"
+    },
+    {
+     "act": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "section": "47",
+     "anchor": "grounds of arrest"
+    }
+   ]
+  },
+  {
+   "id": 205,
+   "kind": "two-act",
+   "question": "Can I get a divorce on the ground of cruelty, and can I or my spouse claim maintenance while the case is going on?",
+   "golds": [
+    {
+     "act": "The Hindu Marriage Act, 1955",
+     "section": "13",
+     "anchor": "cruelty"
+    },
+    {
+     "act": "The Hindu Marriage Act, 1955",
+     "section": "24",
+     "anchor": "maintenance"
+    }
+   ]
+  },
+  {
+   "id": 206,
+   "kind": "two-act",
+   "question": "A shop sold me a defective mobile phone. Does the law say goods must be fit for use, and where can I complain?",
+   "golds": [
+    {
+     "act": "The Sale of Goods Act, 1930",
+     "section": "16",
+     "anchor": "implied"
+    },
+    {
+     "act": "The Consumer Protection Act, 2019",
+     "section": "35",
+     "anchor": "complaint"
+    }
+   ]
+  },
+  {
+   "id": 207,
+   "kind": "two-act",
+   "question": "Someone forged my late father's will. Is that a crime, and how must a valid will be signed?",
+   "golds": [
+    {
+     "act": "The Bharatiya Nyaya Sanhita, 2023",
+     "section": "336",
+     "anchor": "forgery"
+    },
+    {
+     "act": "The Indian Succession Act, 1925",
+     "section": "63",
+     "anchor": "execution of unprivileged wills"
+    }
+   ]
+  },
+  {
+   "id": 208,
+   "kind": "old-new",
+   "question": "What is the punishment for rape under IPC section 376?",
+   "golds": [
+    {
+     "act": "The Bharatiya Nyaya Sanhita, 2023",
+     "section": "64",
+     "anchor": "rape"
+    }
+   ],
+   "oldLaw": "376",
+   "review": "Answer should name the current BNS/BNSS/BSA section and the old law it replaced."
+  },
+  {
+   "id": 209,
+   "kind": "old-new",
+   "question": "What does section 111 of the BNS say about organised crime, and was there such a section in the IPC?",
+   "golds": [
+    {
+     "act": "The Bharatiya Nyaya Sanhita, 2023",
+     "section": "111",
+     "anchor": "organised crime"
+    }
+   ],
+   "oldLaw": null,
+   "review": "BNS s.111 (organised crime) is new: there is no IPC section for it; the answer must say so."
+  },
+  {
+   "id": 210,
+   "kind": "old-new",
+   "question": "Under the old CrPC how was an FIR registered, and which BNSS section covers it now?",
+   "golds": [
+    {
+     "act": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "section": "173",
+     "anchor": "information"
+    }
+   ],
+   "oldLaw": "154",
+   "review": "Answer should name the current BNS/BNSS/BSA section and the old law it replaced."
+  },
+  {
+   "id": 211,
+   "kind": "old-new",
+   "question": "What is the punishment for criminal breach of trust under IPC 406?",
+   "golds": [
+    {
+     "act": "The Bharatiya Nyaya Sanhita, 2023",
+     "section": "316",
+     "anchor": "criminal breach of trust"
+    }
+   ],
+   "oldLaw": "406",
+   "review": "Answer should name the current BNS/BNSS/BSA section and the old law it replaced."
+  },
+  {
+   "id": 212,
+   "kind": "old-new",
+   "question": "What is the BNS offence of causing death by negligence, and which IPC section was it earlier?",
+   "golds": [
+    {
+     "act": "The Bharatiya Nyaya Sanhita, 2023",
+     "section": "106",
+     "anchor": "negligence"
+    }
+   ],
+   "oldLaw": "304A",
+   "review": "Answer should name the current BNS/BNSS/BSA section and the old law it replaced."
+  },
+  {
+   "id": 213,
+   "kind": "old-new",
+   "question": "Is dowry death still an offence, and under which section?",
+   "golds": [
+    {
+     "act": "The Bharatiya Nyaya Sanhita, 2023",
+     "section": "80",
+     "anchor": "dowry"
+    }
+   ],
+   "oldLaw": "304B",
+   "review": "Answer should name the current BNS/BNSS/BSA section and the old law it replaced."
+  },
+  {
+   "id": 214,
+   "kind": "old-new",
+   "question": "How do I prove an email as evidence in court under the Evidence Act section 65B?",
+   "golds": [
+    {
+     "act": "The Bharatiya Sakshya Adhiniyam, 2023",
+     "section": "63",
+     "anchor": "electronic"
+    }
+   ],
+   "oldLaw": "65B",
+   "review": "Answer should name the current BNS/BNSS/BSA section and the old law it replaced."
+  },
+  {
+   "id": 215,
+   "kind": "plain",
+   "question": "My boss has not paid my salary for two months after I resigned. Where can I complain?",
+   "golds": [
+    {
+     "act": "The Payment of Wages Act, 1936",
+     "section": "15",
+     "anchor": "claims"
+    }
+   ]
+  },
+  {
+   "id": 216,
+   "kind": "plain",
+   "question": "My ex-husband refuses to let me meet our child. Where do I go to get custody?",
+   "golds": [
+    {
+     "act": "The Guardians and Wards Act, 1890",
+     "section": "25",
+     "anchor": "custody"
+    }
+   ]
+  },
+  {
+   "id": 217,
+   "kind": "plain",
+   "question": "The police arrested my brother and did not tell us anything for two days. Is that allowed?",
+   "golds": [
+    {
+     "act": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "section": "48",
+     "anchor": "friend"
+    }
+   ]
+  },
+  {
+   "id": 218,
+   "kind": "plain",
+   "question": "My son took over my house and now ignores me and my wife. Can we cancel the transfer?",
+   "golds": [
+    {
+     "act": "The Maintenance and Welfare of Parents and Senior Citizens Act, 2007",
+     "section": "23",
+     "anchor": "transfer"
+    }
+   ]
+  },
+  {
+   "id": 219,
+   "kind": "plain",
+   "question": "Someone made a fake profile with my photos to cheat my friends. What can I do?",
+   "golds": [
+    {
+     "act": "The Information Technology Act, 2000",
+     "section": "66C",
+     "anchor": "identity theft"
+    }
+   ]
+  },
+  {
+   "id": 220,
+   "kind": "plain",
+   "question": "A man keeps passing comments and making gestures at me in the street. What can I do?",
+   "golds": [
+    {
+     "act": "The Bharatiya Nyaya Sanhita, 2023",
+     "section": "79",
+     "anchor": "modesty"
+    }
+   ]
+  }
+ ]
+}

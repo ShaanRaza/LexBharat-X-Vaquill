@@ -188,3 +188,14 @@ test("optional facts that are not given are left out, required and 'placeholder'
   assert.equal(cleanSectionText("Made on [date of signing] at [Place]. See [1] and [END DATE]."), "Made on [DATE OF SIGNING] at [PLACE]. See [1] and [END DATE].");
   assert.equal(placeholderFor("Notice period for ending the agreement, in days (optional)"), "[NOTICE PERIOD FOR ENDING THE AGREEMENT]");
 });
+
+// ---- the class: every screen that shows a finished draft offers the downloads where the draft is shown ----
+import fsExport from "node:fs";
+test("class: the 'draft is ready' screen, the editor and a finished review all offer .docx and PDF downloads", () => {
+  for (const f of ["src/components/workspace/drafting/DraftForm.tsx", "src/components/workspace/drafting/DraftEditor.tsx", "src/components/workspace/review/ReviewRunView.tsx"]) {
+    const t = fsExport.readFileSync(f, "utf8");
+    assert.match(t, /export\?format=/, `${f}: no export link`);
+    assert.match(t, /Download \.docx/, `${f}: no .docx download`);
+    assert.match(t, /Download PDF/, `${f}: no PDF download`);
+  }
+});

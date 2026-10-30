@@ -1,0 +1,1486 @@
+{
+ "label": "c-current-law-main",
+ "at": "2026-10-30T14:39:17.961Z",
+ "rows": [
+  {
+   "id": 1,
+   "kind": null,
+   "question": "What is the notice period before filing a cheque bounce complaint?",
+   "gold": [
+    "IND_central_2189|s138"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 30.8,
+   "nSources": 13,
+   "queries": [
+    "What is the notice period before filing a cheque bounce complaint?",
+    "dishonour of cheque for insufficiency of funds notice period demand payment",
+    "Negotiable Instruments Act section 138 notice drawer within thirty days",
+    "Negotiable Instruments Act section 138 cause of action complaint limitation"
+   ],
+   "meaning": {
+    "used": 4,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Negotiable Instruments Act, 1881 s138",
+    "The Negotiable Instruments Act, 1881 s106",
+    "The Negotiable Instruments Act, 1881 s94",
+    "The Presidency-Towns Insolvency Act, 1909 s2",
+    "The Negotiable Instruments Act, 1881 s?"
+   ],
+   "answer": "The notice period before filing a cheque bounce complaint is fifteen days of the receipt of the notice demanding payment, as provided under Section 138 of the Negotiable Instruments Act, 1881 [1].\n\nConditions and time limits:\n- The cheque must be presented to the bank within a period of six months from the date on which it is drawn or within the period of its validity, whichever is earlier, according to Section 138 of the Negotiable Instruments Act, 1881 [1].\n- The payee or the holder in due course must make a demand for payment by giving a notice in writing to the drawer within thirty days of the receipt of information from the bank regarding the return of the cheque as unpaid, under Section 138 of the Negotiable Instruments Act, 1881 [1].\n- The drawer of the cheque fails to make the payment within fifteen days of the receipt of the said notice, as stated in Section 138 of the Negotiable Instruments Act, 1881 [1].\n\nRelated provisions:\n- Section 142 of the Negotiable Instruments Act, 1881 covers cognizance of offences and requires the complaint to be made within one month of the date on which the cause of action arises under clause (c) of the proviso to section 138 [8].\n\nI couldn't",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Negotiable Instruments Act, 1881",
+     "s": "138"
+    },
+    {
+     "n": 2,
+     "t": "The Negotiable Instruments Act, 1881",
+     "s": "106"
+    },
+    {
+     "n": 3,
+     "t": "The Negotiable Instruments Act, 1881",
+     "s": "94"
+    },
+    {
+     "n": 4,
+     "t": "The Presidency-Towns Insolvency Act, 1909",
+     "s": "2"
+    },
+    {
+     "n": 5,
+     "t": "The Negotiable Instruments Act, 1881",
+     "s": null
+    },
+    {
+     "n": 6,
+     "t": "The Payment and Settlement Systems Act, 2007",
+     "s": "25"
+    },
+    {
+     "n": 7,
+     "t": "The Negotiable Instruments Act, 1881",
+     "s": "98"
+    },
+    {
+     "n": 8,
+     "t": "The Negotiable Instruments Act, 1881",
+     "s": "142"
+    },
+    {
+     "n": 9,
+     "t": "The Companies Act, 1956 No. 1 of 1956",
+     "s": "1"
+    },
+    {
+     "n": 10,
+     "t": "The Tripura Panchayat Act,1993.",
+     "s": "3"
+    },
+    {
+     "n": 11,
+     "t": "YOGENDRA PRATAP SINGH versus SAVITRI PANDEY & ANR.",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "KAMLESH KUMAR versus STATE OF BIHAR & ANR.",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "C.C. ALAVI HAJI versus PALAPETTY MUHAMMED AND ANR",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 7,
+   "kind": null,
+   "question": "What is presumed about consideration for a negotiable instrument?",
+   "gold": [
+    "IND_central_2189|s118"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 26,
+   "nSources": 13,
+   "queries": [
+    "What is presumed about consideration for a negotiable instrument?",
+    "presumption as to consideration for negotiable instruments",
+    "Negotiable Instruments Act section 118 presumption as to consideration"
+   ],
+   "meaning": {
+    "used": 3,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Negotiable Instruments Act, 1881 s118",
+    "The Negotiable Instruments Act, 1881 s43",
+    "The Negotiable Instruments Act, 1881 s58",
+    "The Negotiable Instruments Act, 1881 s139",
+    "The Negotiable Instruments Act, 1881 s120"
+   ],
+   "answer": "Until the contrary is proved, it shall be presumed that every negotiable instrument was made or drawn for consideration, and that every such instrument, when it has been accepted, indorsed, negotiated, or transferred, was accepted, indorsed, negotiated, or transferred for consideration, under Section 118 of the Negotiable Instruments Act, 1881 [1]. As explained in the Supreme Court judgment in K.P.O. Moideenkutty Hajee versus Pappu Manjooran and Anr., this presumption imposes a duty on the court to raise a presumption in favour of the holder that the instrument was made for consideration, thereby shifting the burden of proof to the defendant to establish that the promissory note is not supported by consideration [11].\n\nRelated provisions:\n- Section 43 of the Negotiable Instruments Act, 1881, which covers a negotiable instrument made, drawn, accepted, indorsed or transferred without consideration, or for a consideration which fails [2].\n- Section 58 of the Negotiable Instruments Act, 1881, which covers an instrument obtained by unlawful means or for unlawful consideration [3].",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Negotiable Instruments Act, 1881",
+     "s": "118"
+    },
+    {
+     "n": 2,
+     "t": "The Negotiable Instruments Act, 1881",
+     "s": "43"
+    },
+    {
+     "n": 3,
+     "t": "The Negotiable Instruments Act, 1881",
+     "s": "58"
+    },
+    {
+     "n": 4,
+     "t": "The Negotiable Instruments Act, 1881",
+     "s": "139"
+    },
+    {
+     "n": 5,
+     "t": "The Negotiable Instruments Act, 1881",
+     "s": "120"
+    },
+    {
+     "n": 6,
+     "t": "The Warehousing (Development and Regulation) Act, 2007",
+     "s": "22"
+    },
+    {
+     "n": 7,
+     "t": "The Negotiable Instruments Act, 1881",
+     "s": "12"
+    },
+    {
+     "n": 8,
+     "t": "The Indian Stamp Act, 1899",
+     "s": "A62"
+    },
+    {
+     "n": 9,
+     "t": "The Portuguese Code of Civil Procedure, 1939",
+     "s": "2"
+    },
+    {
+     "n": 10,
+     "t": "The Bharatiya Nyaya Sanhita, 2023 (Draft stage of translated version)",
+     "s": null
+    },
+    {
+     "n": 11,
+     "t": "K.P.O. MOIDEENKUTTY HAJEE versus PAPPU MANJOORAN AND ANR.",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "U. PONNAPPA MOOTHAN SONS, PALGHAT versus CATHOLIC SYRIAN BANK LTD. AND OTHERS",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "BHARAT BARREL AND DRUM MANUFACTURING CO. versus AMIN CHAND PEYARELAL",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 10,
+   "kind": null,
+   "question": "When can a contract be avoided if consent was obtained by coercion or misrepresentation?",
+   "gold": [
+    "IND_central_2187|s19A",
+    "IND_central_2187|s019"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 43.4,
+   "nSources": 13,
+   "queries": [
+    "When can a contract be avoided if consent was obtained by coercion or misrepresentation?",
+    "coercion undue influence fraud misrepresentation voidable contracts consent",
+    "Indian Contract Act section 19 voidability of agreements without free consent",
+    "Indian Contract Act section 15 coercion definition"
+   ],
+   "meaning": {
+    "used": 4,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Indian Contract Act, 1872 s19",
+    "The Indian Contract Act, 1872 s15",
+    "The Indian Contract Act, 1872 s14",
+    "The Indian Contract Act, 1872 s19A",
+    "The Indian Contract Act, 1872 s16"
+   ],
+   "answer": "A contract can be avoided when consent to the agreement is caused by coercion or misrepresentation, making it a contract voidable at the option of the party whose consent was so caused under Section 19 of the Indian Contract Act, 1872 [1] [2]. However, such a contract is not voidable if the consent was caused by misrepresentation or by fraudulent silence and the party whose consent was so caused had the means of discovering the truth with ordinary diligence, as provided in the exception to Section 19 of the Indian Contract Act, 1872 [1]. Furthermore, a fraud or misrepresentation that did not cause the consent of the party does not render the contract voidable under the explanation to Section 19 of the Indian Contract Act, 1872 [1].\n\nRelated provisions:\n- Section 14 of the Indian Contract Act, 1872 defines \"Free consent\" as consent not caused by coercion, undue influence, fraud, misrepresentation, or mistake [3].\n\nI couldn't find any specific time limits or procedural conditions for avoiding the contract in the sources I searched.",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Indian Contract Act, 1872",
+     "s": "19"
+    },
+    {
+     "n": 2,
+     "t": "The Indian Contract Act, 1872",
+     "s": "15"
+    },
+    {
+     "n": 3,
+     "t": "The Indian Contract Act, 1872",
+     "s": "14"
+    },
+    {
+     "n": 4,
+     "t": "The Indian Contract Act, 1872",
+     "s": "19A"
+    },
+    {
+     "n": 5,
+     "t": "The Indian Contract Act, 1872",
+     "s": "16"
+    },
+    {
+     "n": 6,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "28"
+    },
+    {
+     "n": 7,
+     "t": "The Portuguese Civil Code, 1867",
+     "s": "3"
+    },
+    {
+     "n": 8,
+     "t": "The Indian Contract Act, 1872",
+     "s": "238"
+    },
+    {
+     "n": 9,
+     "t": "The Information Technology Act, 2000",
+     "s": "71"
+    },
+    {
+     "n": 10,
+     "t": "The Indian Partnership Act, 1932",
+     "s": "52"
+    },
+    {
+     "n": 11,
+     "t": "M/S N. N. GLOBAL MERCANTILE PRIVATE LIMITED versus M/S INDO UNIQUE FLAME LTD. & ORS.",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "UNION OF INDIA AND ORS. versus R.P. YADAV ETC.",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "M/S. N.N. GLOBAL MERCANTILE PVT. LTD. versus M/S. INDO UNIQUE FLAME LTD. & OTHERS",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 12,
+   "kind": null,
+   "question": "Who is competent to enter into a contract?",
+   "gold": [
+    "IND_central_2187|s011"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 33,
+   "nSources": 13,
+   "queries": [
+    "Who is competent to enter into a contract?",
+    "competency to contract age of majority soundness of mind disqualified by law",
+    "Indian Contract Act section 11",
+    "capacity of parties to contract unsound mind minor"
+   ],
+   "meaning": {
+    "used": 3,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Indian Contract Act, 1872 s11",
+    "The Indian Contract Act, 1872 s12",
+    "The Indian Contract Act, 1872 s183",
+    "The Code of Civil Procedure, 1908 sO32",
+    "The Company Secretaries Act, 1980 s8"
+   ],
+   "answer": "Every person is competent to contract who is of the age of majority according to the law to which they are subject, is of sound mind, and is not disqualified from contracting by any law to which they are subject under Section 11 of the Indian Contract Act, 1872 [1][12].\n\nRelated provisions:\n- Section 10 of the Indian Contract Act, 1872, stating that \"All agreements are contracts if they are made by the free consent of parties competent to contract, for a lawful consideration and with a lawful object, and are not hereby expressly declared to be void\" [7].",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Indian Contract Act, 1872",
+     "s": "11"
+    },
+    {
+     "n": 2,
+     "t": "The Indian Contract Act, 1872",
+     "s": "12"
+    },
+    {
+     "n": 3,
+     "t": "The Indian Contract Act, 1872",
+     "s": "183"
+    },
+    {
+     "n": 4,
+     "t": "The Code of Civil Procedure, 1908",
+     "s": "O32"
+    },
+    {
+     "n": 5,
+     "t": "The Company Secretaries Act, 1980",
+     "s": "8"
+    },
+    {
+     "n": 6,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "36"
+    },
+    {
+     "n": 7,
+     "t": "The Indian Contract Act, 1872",
+     "s": "10"
+    },
+    {
+     "n": 8,
+     "t": "The Chartered Accountants Act, 1949",
+     "s": "8"
+    },
+    {
+     "n": 9,
+     "t": "The Rajasthan State Bus Terminal Development Authority Act, 2015",
+     "s": "15"
+    },
+    {
+     "n": 10,
+     "t": "The Income-tax Act, 1961",
+     "s": "1"
+    },
+    {
+     "n": 11,
+     "t": "M/S. KAILASH NATH ASSOCIATES versus DELHI DEVELOPMENT AUTHORITY & ANR.",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "M/S N. N. GLOBAL MERCANTILE PRIVATE LIMITED versus M/S INDO UNIQUE FLAME LTD. & ORS.",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "IN RE: INTERPLAY BETWEEN ARBITRATION AGREEMENTS UNDER THE ARBITRATION AND CONCILIATION ACT 1996 AND THE INDIAN STAMP ACT 1899",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 18,
+   "kind": null,
+   "question": "What is the punishment for murder?",
+   "gold": [
+    "IND_central_20062|s103"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 31.3,
+   "nSources": 13,
+   "queries": [
+    "What is the punishment for murder?",
+    "punishment for murder capital offense life imprisonment death penalty",
+    "Bharatiya Nyaya Sanhita section 103 punishment for murder"
+   ],
+   "meaning": {
+    "used": 3,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Nyaya Sanhita, 2023 s103",
+    "The Bharatiya Nyaya Sanhita, 2023 s104",
+    "The Bharatiya Nyaya Sanhita, 2023 s105",
+    "The Bharatiya Nyaya Sanhita, 2023 s109",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s531"
+   ],
+   "answer": "Whoever commits murder shall be punished with death or imprisonment for life, and shall also be liable to fine, according to Section 103 of the Bharatiya Nyaya Sanhita, 2023. [1]\n\nRelated provisions:\n- Section 104 of the Bharatiya Nyaya Sanhita, 2023, on \"Punishment for murder by life-convict\", stating that whoever, being under sentence of imprisonment for life, commits murder, shall be punished with death or with imprisonment for life, which shall mean the remainder of that person's natural life [2].\n- Section 101 of the Bharatiya Nyaya Sanhita, 2023, on \"Murder\", defining when culpable homicide is murder [6].\n- Section 105 of the Bharatiya Nyaya Sanhita, 2023, on \"Punishment for culpable homicide not amounting to murder\" [3].",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "103"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "104"
+    },
+    {
+     "n": 3,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "105"
+    },
+    {
+     "n": 4,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "109"
+    },
+    {
+     "n": 5,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "531"
+    },
+    {
+     "n": 6,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "101"
+    },
+    {
+     "n": 7,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "66"
+    },
+    {
+     "n": 8,
+     "t": "The Geneva Conventions Act, 1960",
+     "s": "3"
+    },
+    {
+     "n": 9,
+     "t": "The Indian Penal Code 1860",
+     "s": "302"
+    },
+    {
+     "n": 10,
+     "t": "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)",
+     "s": "303"
+    },
+    {
+     "n": 11,
+     "t": "STATE THROUGH SUPERINTENDENT OF POLICE, CBI/SIT ETC. versus NALINI AND ORS. ETC. ETC.",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "BHARATKUMAR RAMESHCHANDRA BAROT versus STATE OF GUJARAT",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "FIROZ KHAN AKBARKHAN versus THE STATE OF MAHARASHTRA",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 19,
+   "kind": null,
+   "question": "What is the punishment for theft?",
+   "gold": [
+    "IND_central_20062|s303"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 28.8,
+   "nSources": 12,
+   "queries": [
+    "What is the punishment for theft?",
+    "theft punishment Bharatiya Nyaya Sanhita",
+    "Bharatiya Nyaya Sanhita section 303 theft",
+    "Indian Penal Code section 379 theft"
+   ],
+   "meaning": {
+    "used": 4,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Nyaya Sanhita, 2023 s303",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s2",
+    "The Bharatiya Nyaya Sanhita, 2023 s305",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s359",
+    "The Bharatiya Nyaya Sanhita, 2023 s306"
+   ],
+   "answer": "Whoever commits theft shall be punished with imprisonment of either description for a term which may extend to three years, or with fine, or with both, under sub-section (2) of Section 303 of the Bharatiya Nyaya Sanhita, 2023 [1] (previously Section 379 of the Indian Penal Code, 1860) [9]. For a second or subsequent conviction, the punishment shall be rigorous imprisonment for a term not less than one year and up to five years, along with fine [1].\n\nConditions and time limits:\n- For first-time convictions of theft where the stolen property's value is less than five thousand rupees, upon returning the property's value or restoring the stolen property, the punishment shall be community service under Section 303 of the Bharatiya Nyaya Sanhita, 2023 [1].\n\nRelated provisions:\n- Section 305 of the Bharatiya Nyaya Sanhita, 2023 covers theft in a dwelling house, transport, place of worship, or government property, punishable with imprisonment up to seven years and fine [3].\n- Section 306 of the Bharatiya Nyaya Sanhita, 2023 covers theft by a clerk or servant of property in master's possession, punishable with imprisonment up to seven years and fine [5].\n- Section 307 of the Bharatiya Nyaya",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "303"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "2"
+    },
+    {
+     "n": 3,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "305"
+    },
+    {
+     "n": 4,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "359"
+    },
+    {
+     "n": 5,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "306"
+    },
+    {
+     "n": 6,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "307"
+    },
+    {
+     "n": 7,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "283"
+    },
+    {
+     "n": 8,
+     "t": "The Information Technology Act, 2000 (Central Act 21 of 2000)",
+     "s": "66C"
+    },
+    {
+     "n": 9,
+     "t": "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)",
+     "s": "379"
+    },
+    {
+     "n": 10,
+     "t": "RUCHIR RASTOGI versus PANKAJ RASTOGI AND OTHERS ETC.",
+     "s": null
+    },
+    {
+     "n": 11,
+     "t": "GANESAN versus STATE REP. BY STATION HOUSE OFFICER",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "S.K. SHUKLA AND ORS. versus STATE OF U.P. AND ORS",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 22,
+   "kind": null,
+   "question": "What is the punishment for defamation?",
+   "gold": [
+    "IND_central_20062|s356"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": false,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 33.2,
+   "nSources": 12,
+   "queries": [
+    "What is the punishment for defamation?",
+    "punishment for defamation criminal defamation imputation concerning any person",
+    "Bharatiya Nyaya Sanhita section 356 defamation",
+    "Indian Penal Code section 500 punishment for defamation"
+   ],
+   "meaning": {
+    "used": 4,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Nyaya Sanhita, 2023 s356",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s531",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s359",
+    "The Bharatiya Nyaya Sanhita, 2023 (Draft stage of translated version) s?",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s222"
+   ],
+   "answer": "Whoever defames another shall be punished with simple imprisonment for a term which may extend to two years, or with fine, or with both, or with community service under Section 356 of the Bharatiya Nyaya Sanhita, 2023 [1] (which replaced Section 500 of the Indian Penal Code, 1860 [9]).\n\nRelated provisions:\n- Section 356 of the Bharatiya Nyaya Sanhita, 2023 covers the printing or engraving of matter, knowing or having good reason to believe it is defamatory, with punishment up to two years simple imprisonment, fine, or both [1].\n- Section 356 of the Bharatiya Nyaya Sanhita, 2023 also covers the sale or offering for sale of any printed or engraved substance containing defamatory matter, knowing it contains such matter, with punishment up to two years simple imprisonment, fine, or both [1].\n- Section 222 of the Bharatiya Nagarik Suraksha Sanhita, 2023 covers the prosecution for defamation, requiring a complaint by an aggrieved person or, under specific circumstances or for public servants, a complaint by the Public Prosecutor before a Court of Session [5].\n\nI couldn't find any specific time limit or condition for filing a general defamation complaint in the sources, other than the six",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "356"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "531"
+    },
+    {
+     "n": 3,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "359"
+    },
+    {
+     "n": 4,
+     "t": "The Bharatiya Nyaya Sanhita, 2023 (Draft stage of translated version)",
+     "s": null
+    },
+    {
+     "n": 5,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "222"
+    },
+    {
+     "n": 6,
+     "t": "The CrPC 1973",
+     "s": "320"
+    },
+    {
+     "n": 7,
+     "t": "The Protection of Children from Sexual Offences Act, 2012",
+     "s": "22"
+    },
+    {
+     "n": 8,
+     "t": "The CrPC 1973",
+     "s": "199"
+    },
+    {
+     "n": 9,
+     "t": "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)",
+     "s": "500"
+    },
+    {
+     "n": 10,
+     "t": "SUBRAMANIAN SWAMY versus UNION OF INDIA, MINISTRY OF LAW & ORS.",
+     "s": null
+    },
+    {
+     "n": 11,
+     "t": "KANWAL LAL versus STATE OF PUNJAB",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "JAIDEEP BOSE versus M/S BID AND HAMMER AUCTIONEERS PRIVATE LIMITED",
+     "s": null
+    }
+   ],
+   "score": 2
+  },
+  {
+   "id": 25,
+   "kind": null,
+   "question": "When can a person accused of a non-bailable offence be released on bail?",
+   "gold": [
+    "IND_state_6796|s437"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 9,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 41.7,
+   "nSources": 13,
+   "queries": [
+    "When can a person accused of a non-bailable offence be released on bail?",
+    "person accused of non bailable offence release on bail conditions",
+    "Bharatiya Nagarik Suraksha Sanhita section 480 bail in case of non bailable offence",
+    "Code of Criminal Procedure section 437 bail in non bailable cases"
+   ],
+   "meaning": {
+    "used": 4,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s480",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s482",
+    "The CrPC 1973 s437",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s478",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s2"
+   ],
+   "answer": "A person accused or suspected of a non-bailable offence may be released on bail by an officer in charge of a police station or by a court other than the High Court or Court of Session, unless there appear reasonable grounds for believing that they have been guilty of an offence punishable with death or imprisonment for life, or unless they are barred due to previous convictions as specified, though courts may direct release for children, women, the sick or infirm, or for other special reasons under Section 480 of the Bharatiya Nagarik Suraksha Sanhita, 2023 [1] (previously Section 437 of the Code of Criminal Procedure, 1973 [9]).\n\nConditions and time limits:\n- The person must execute a bond for their appearance [1].\n- If released under sub-section (1) for an offence punishable with imprisonment of seven years or more or under Chapter VI, Chapter VII, or Chapter XVII of the Bharatiya Nyaya Sanhita, 2023, the court must impose conditions that the person shall attend in accordance with the bond, shall not commit a similar offence, and shall not directly or indirectly make any inducement, threat, or promise to any person acquainted with the facts of the case or tamper with evidence [1]",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "480"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "482"
+    },
+    {
+     "n": 3,
+     "t": "The CrPC 1973",
+     "s": "437"
+    },
+    {
+     "n": 4,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "478"
+    },
+    {
+     "n": 5,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "2"
+    },
+    {
+     "n": 6,
+     "t": "The Prevention of Money-Laundering Act, 2002",
+     "s": "45"
+    },
+    {
+     "n": 7,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "83"
+    },
+    {
+     "n": 8,
+     "t": "The Criminal Procedure Code CrPC 1973",
+     "s": null
+    },
+    {
+     "n": 9,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "437"
+    },
+    {
+     "n": 10,
+     "t": "The Code of Criminal Procedure Act",
+     "s": "437"
+    },
+    {
+     "n": 11,
+     "t": "GURCHARAN SINGH & ORS. versus STATE (DELHI ADMINISTRATION)",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "BASHIR AND OTHERS versus STATE OF HARYANA",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "SATENDER KUMAR ANTIL versus CENTRAL BUREAU OF INVESTIGATION & ANR.",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 30,
+   "kind": null,
+   "question": "On what grounds can an arbitral award be set aside and within what time?",
+   "gold": [
+    "IND_central_1978|s034"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "check",
+   "error": null,
+   "secs": 27.3,
+   "nSources": 13,
+   "queries": [
+    "On what grounds can an arbitral award be set aside and within what time?",
+    "application for setting aside arbitral award grounds limitation period",
+    "Arbitration and Conciliation Act section 34 application for setting aside arbitral award",
+    "Arbitration and Conciliation Act section 34 time limit for filing set aside application"
+   ],
+   "meaning": {
+    "used": 4,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Arbitration and Conciliation Act, 1996 s34",
+    "The Limitation Act, 1963 sA119",
+    "The Limitation Act, 1963 s119",
+    "The Arbitration and Conciliation Act, 1996 s36",
+    "The Arbitration and Conciliation Act, 1996 s16"
+   ],
+   "answer": "An arbitral award may be set aside by the Court only on the grounds specified in sub-sections (2) and (2A) of Section 34 of the Arbitration and Conciliation Act, 1996, as discussed in the Supreme Court judgments Batliboi Environmental Engineers Limited versus Hindustan Petroleum Corporation Limited and Another and State of Goa versus M/s. Western Builders [1][11][12].\n\nConditions and time limits:\n- An application for setting aside may not be made after three months have elapsed from the date on which the party making that application had received the arbitral award or, if a request had been made under section 33, from the date on which that request had been disposed of by the arbitral tribunal, under Section 34 of the Arbitration and Conciliation Act, 1996 [1].\n- If the Court is satisfied that the applicant was prevented by sufficient cause from making the application within the said period of three months, it may entertain the application within a further period of thirty days, but not thereafter, under Section 34 of the Arbitration and Conciliation Act, 1996 [1][11].\n- For the Union Territories of Jammu and Kashmir and Ladakh, the time limit is six months, and the further period ",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Arbitration and Conciliation Act, 1996",
+     "s": "34"
+    },
+    {
+     "n": 2,
+     "t": "The Limitation Act, 1963",
+     "s": "A119"
+    },
+    {
+     "n": 3,
+     "t": "The Limitation Act, 1963",
+     "s": "119"
+    },
+    {
+     "n": 4,
+     "t": "The Arbitration and Conciliation Act, 1996",
+     "s": "36"
+    },
+    {
+     "n": 5,
+     "t": "The Arbitration and Conciliation Act, 1996",
+     "s": "16"
+    },
+    {
+     "n": 6,
+     "t": "The Arbitration and Conciliation Act, 1996",
+     "s": "13"
+    },
+    {
+     "n": 7,
+     "t": "The Limitation Act, 1963",
+     "s": "A121"
+    },
+    {
+     "n": 8,
+     "t": "The Arbitration Act 1899, 9 of 1899, (Rep., Act 10 of 1940 )",
+     "s": "13"
+    },
+    {
+     "n": 9,
+     "t": "The Portuguese Civil Code, 1867",
+     "s": "2"
+    },
+    {
+     "n": 10,
+     "t": "The Companies Act, 1956 No. 1 of 1956",
+     "s": "1"
+    },
+    {
+     "n": 11,
+     "t": "BATLIBOI ENVIRONMENTAL ENGINEERS LIMITED versus HINDUSTAN PETROLEUM CORPORATION LIMITED AND ANOTHER",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "STATE OF GOA versus M/S. WESTERN BUILDERS",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "M/S CONSOLIDATED ENGG. ENTERPRISES versus PRINCIPAL SECY. IRRIGATION DEPTT. & ORS.",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 35,
+   "kind": null,
+   "question": "How is a sale of immovable property defined and completed?",
+   "gold": [
+    "IND_central_2338|s054"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 2,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 36.4,
+   "nSources": 13,
+   "queries": [
+    "How is a sale of immovable property defined and completed?"
+   ],
+   "meaning": {
+    "used": 1,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Income-tax Act, 1961 s65",
+    "The Transfer of Property Act, 1882 s54",
+    "The Transfer of Property Act, 1882 s58",
+    "The Income-tax Act, 1961 s57",
+    "The Code of Civil Procedure, 1908 sO21R94"
+   ],
+   "answer": "A sale is defined as a transfer of ownership in exchange for a price paid or promised or part-paid and part-promised, according to Section 54 of the Transfer of Property Act, 1882 [2]. \n\nIn order to constitute a sale, there must be a transfer of ownership from one person to another where all rights and interests possessed by a person are transferred with free consent for a price called consideration, as discussed in the Supreme Court judgment \"Lucknow Nagar Nigam & Others versus Kohli Brothers Colour Lab. Pvt. Ltd. & Others\" [11].\n\nRegarding how a sale is completed and made:\n- In the case of tangible immovable property of the value of one hundred rupees and upwards, or in the case of a reversion or other intangible thing, a transfer can be made only by a registered instrument, under Section 54 of the Transfer of Property Act, 1882 [2].\n- In the case of tangible immovable property of a value less than one hundred rupees, the transfer may be made either by a registered instrument or by delivery of the property, under Section 54 of the Transfer of Property Act, 1882 [2].\n- Delivery of tangible immovable property takes place when the seller places the buyer, or such person as he direct",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Income-tax Act, 1961",
+     "s": "65"
+    },
+    {
+     "n": 2,
+     "t": "The Transfer of Property Act, 1882",
+     "s": "54"
+    },
+    {
+     "n": 3,
+     "t": "The Transfer of Property Act, 1882",
+     "s": "58"
+    },
+    {
+     "n": 4,
+     "t": "The Income-tax Act, 1961",
+     "s": "57"
+    },
+    {
+     "n": 5,
+     "t": "The Code of Civil Procedure, 1908",
+     "s": "O21R94"
+    },
+    {
+     "n": 6,
+     "t": "The Transfer of Property Act, 1882",
+     "s": "69"
+    },
+    {
+     "n": 7,
+     "t": "The Indian Contract Act, 1872",
+     "s": "77"
+    },
+    {
+     "n": 8,
+     "t": "The Limitation Act, 1963",
+     "s": "A134"
+    },
+    {
+     "n": 9,
+     "t": "The Income-tax Act, 1961",
+     "s": "1"
+    },
+    {
+     "n": 10,
+     "t": "The Income-tax Act, 1961",
+     "s": "4"
+    },
+    {
+     "n": 11,
+     "t": "LUCKNOW NAGAR NIGAM & OTHERS versus KOHLI BROTHERS COLOUR LAB. PVT. LTD. & OTHERS",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "VENIGALLA KOTESWARAMMA versus MALEMPATI SURYAMBA & ORS.",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "M/S NEW INDIA SUGAR MILLS LTD. versus COMMISSIONER OF SALES TAX, BIHAR",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 41,
+   "kind": null,
+   "question": "What are the inherent powers of a civil court?",
+   "gold": [
+    "IND_central_2191|s151"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": true,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": false,
+   "notFound": true,
+   "check": "not_found",
+   "error": null,
+   "secs": 18.2,
+   "nSources": 13,
+   "queries": [
+    "What are the inherent powers of a civil court?",
+    "inherent powers of court saving of inherent powers of civil court",
+    "Code of Civil Procedure section 151",
+    "abuse of process of court civil procedure inherent jurisdiction"
+   ],
+   "meaning": {
+    "used": 3,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Code of Civil Procedure, 1908 s151",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s528",
+    "The Metro Railways (Construction of Works) Act, 1978 s16B",
+    "The Code of Civil Procedure, 1908 sO15AR6",
+    "The Industrial Employment (Standing Orders) Act, 1946 s11"
+   ],
+   "answer": "I couldn't find the comprehensive inherent powers of a civil court listed in the Acts I searched, but Section 151 of the Code of Civil Procedure, 1908 mentions that civil courts have inherent powers to make such orders as may be necessary for the ends of justice or to prevent abuse of the process of the Court [1].",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Code of Civil Procedure, 1908",
+     "s": "151"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "528"
+    },
+    {
+     "n": 3,
+     "t": "The Metro Railways (Construction of Works) Act, 1978",
+     "s": "16B"
+    },
+    {
+     "n": 4,
+     "t": "The Code of Civil Procedure, 1908",
+     "s": "O15AR6"
+    },
+    {
+     "n": 5,
+     "t": "The Industrial Employment (Standing Orders) Act, 1946",
+     "s": "11"
+    },
+    {
+     "n": 6,
+     "t": "The Industrial Employmnet (Standing Orders) Act, 1946",
+     "s": "11"
+    },
+    {
+     "n": 7,
+     "t": "The Bengal, Agra and Assam Civil Courts Act, 1887",
+     "s": "25"
+    },
+    {
+     "n": 8,
+     "t": "The Special Court (Trial of Offences Relating to Transactions in Securities) Act, 1992",
+     "s": "9A"
+    },
+    {
+     "n": 9,
+     "t": "The Criminal Procedure Code CrPC 1973",
+     "s": null
+    },
+    {
+     "n": 10,
+     "t": "The Portuguese Civil Code, 1867",
+     "s": "2"
+    },
+    {
+     "n": 11,
+     "t": "GOVT. OF NCT OF DELHI THROUGH ITS SECRETARY, LAND AND BUILDING DEPARTMENT & ANOTHER versus M/S K.L. RATHI STEELS LIMITED AND OTHERS",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "STATE OF MAHARASHTRA versus MAHARAU SRAWAN HATKAR",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "ENGINEERING EXPORT PROMOTION COUNCIL versus USHA ANAND AND ANOTHER",
+     "s": null
+    }
+   ],
+   "score": 2
+  },
+  {
+   "id": 45,
+   "kind": null,
+   "question": "What is the punishment for identity theft using a computer?",
+   "gold": [
+    "IND_central_1999|s66C"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 22.2,
+   "nSources": 13,
+   "queries": [
+    "What is the punishment for identity theft using a computer?",
+    "punishment for identity theft using computer resource information technology act",
+    "Information Technology Act section 66C punishment for identity theft",
+    "Bharatiya Nyaya Sanhita section 318 cheating by personation"
+   ],
+   "meaning": {
+    "used": 4,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Information Technology Act, 2000 s66C",
+    "The Bharatiya Nyaya Sanhita, 2023 s318",
+    "The INFORMATION TECHNOLOGY ACT, 2000 Amendment s66C",
+    "The Aadhaar (Targeted Delivery of Financial and Other Subsidies, Benefits and Services) Act, 2016. s37",
+    "The Information Technology Act, 2000 s66D"
+   ],
+   "answer": "The punishment for identity theft using a electronic signature, password, or any other unique identification feature of any other person is imprisonment of either description for a term which may extend to three years and a fine which may extend to rupees one lakh under Section 66C of the Information Technology Act, 2000 [1].\n\nRelated provisions:\n- Section 66D of the Information Technology Act, 2000, which covers punishment for cheating by personation by using computer resource [5].\n\nI couldn't find any relevant Supreme Court judgment excerpt in the sources specifically applying to this punishment, and only Supreme Court judgments are searched as short excerpts while High Court and tribunal decisions are not included yet.",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Information Technology Act, 2000",
+     "s": "66C"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "318"
+    },
+    {
+     "n": 3,
+     "t": "The INFORMATION TECHNOLOGY ACT, 2000 Amendment",
+     "s": "66C"
+    },
+    {
+     "n": 4,
+     "t": "The Aadhaar (Targeted Delivery of Financial and Other Subsidies, Benefits and Services) Act, 2016.",
+     "s": "37"
+    },
+    {
+     "n": 5,
+     "t": "The Information Technology Act, 2000",
+     "s": "66D"
+    },
+    {
+     "n": 6,
+     "t": "The Information Technology Act, 2000 (Central Act 21 of 2000)",
+     "s": "66C"
+    },
+    {
+     "n": 7,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "359"
+    },
+    {
+     "n": 8,
+     "t": "The Information TECHNOLOGY(AMENDMENT) Act, 2008",
+     "s": "66C"
+    },
+    {
+     "n": 9,
+     "t": "The Bharatiya Sakshya Adhiniyam, 2023 (Draft stage of the translated version)",
+     "s": "꯳"
+    },
+    {
+     "n": 10,
+     "t": "The Criminal Procedure Code CrPC 1973",
+     "s": null
+    },
+    {
+     "n": 11,
+     "t": "C.I.T., DELHI versus BHARTI HEXACOM LTD.",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "SHREYA SINGHAL versus UNION OF INDIA",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "STATE OF ANDHRA PRADESH versus NAGOTIVENKATARAMANA",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 51,
+   "kind": null,
+   "question": "What is theft punishment?",
+   "gold": [
+    "IND_central_20062|s303"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 29.9,
+   "nSources": 13,
+   "queries": [
+    "What is theft punishment?",
+    "punishment for theft",
+    "Bharatiya Nyaya Sanhita section 303 theft punishment"
+   ],
+   "meaning": {
+    "used": 3,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Nyaya Sanhita, 2023 s303",
+    "The Bharatiya Nyaya Sanhita, 2023 s328",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s359",
+    "The Information Technology Act, 2000 s66C",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s2"
+   ],
+   "answer": "Whoever commits theft shall be punished with imprisonment of either description for a term which may extend to three years, or with fine, or with both, and in case of a second or subsequent conviction, with rigorous imprisonment for a term not less than one year and up to five years along with fine, under Section 303 of the Bharatiya Nyaya Sanhita, 2023 [1]. For a first-time conviction where the value of the stolen property is less than five thousand rupees, upon the return or restoration of the property's value or the stolen property itself, the punishment shall be community service under Section 303 of the Bharatiya Nyaya Sanhita, 2023 [1].\n\nConditions and time limits:\n- The offender must intend to take dishonestly any movable property out of the possession of any person without that person's consent and move that property in order to such taking under Section 303 of the Bharatiya Nyaya Sanhita, 2023 [1].\n- For the community service alternative, the value of the stolen property must be less than five thousand rupees and it must be a first-time conviction accompanied by the return of the value of the property or restoration of the stolen property under Section 303 of the Bharatiya",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "303"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "328"
+    },
+    {
+     "n": 3,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "359"
+    },
+    {
+     "n": 4,
+     "t": "The Information Technology Act, 2000",
+     "s": "66C"
+    },
+    {
+     "n": 5,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "2"
+    },
+    {
+     "n": 6,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "307"
+    },
+    {
+     "n": 7,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "305"
+    },
+    {
+     "n": 8,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "306"
+    },
+    {
+     "n": 9,
+     "t": "The Indian Penal Code 1860",
+     "s": "379"
+    },
+    {
+     "n": 10,
+     "t": "The Information Technology Act, 2000 (Central Act 21 of 2000)",
+     "s": "66C"
+    },
+    {
+     "n": 11,
+     "t": "SHANTI LAL MEENA versus STATE OF NCT OF DELHI, CBI",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "STATE OF MADHYA PRADESH versus BABULAL",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "RUCHIR RASTOGI versus PANKAJ RASTOGI AND OTHERS ETC.",
+     "s": null
+    }
+   ],
+   "score": 3
+  }
+ ]
+}

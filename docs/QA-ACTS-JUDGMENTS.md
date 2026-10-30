@@ -1,5 +1,7 @@
 # End-user QA: Acts and Judgments (2026-10-20, local build with Phases 2 and 3)
 
+> Figures in this file are as of 2026-10-20 (the original export). The current figures are in `docs/DATA-GAPS.md`.
+
 Method: every check compares what the API or page returns with an independent recomputation from `/Volumes/LAWSSD/open-india-law` (DuckDB), not with the exported JSON the app reads.
 
 ## Passed

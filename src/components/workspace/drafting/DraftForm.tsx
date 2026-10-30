@@ -27,6 +27,7 @@ function Field({ f, value, error, onChange }: { f: TemplateField; value: string;
   );
 }
 
+const BTN = "inline-flex min-h-10 items-center rounded-button px-4 text-ui-base ring-1 ring-control-border hover:bg-accent focus-visible:outline-2";
 export default function DraftForm({ templateId }: { templateId: string }) {
   const router = useRouter(), { meta } = useDraftingMeta();
   const t = meta?.templates.find((x) => x.id === templateId);
@@ -73,7 +74,7 @@ export default function DraftForm({ templateId }: { templateId: string }) {
         <Notice tone="warn" role="note" compact className="mt-2"><p><strong className="font-medium text-foreground">Draft for review by a qualified lawyer. Not legal advice.</strong></p></Notice>
         <h1 className="mt-5 text-ui-title font-semibold">{phase === "done" ? "Your draft is ready" : "Writing your draft…"}</h1>
         <p className="mt-1 text-ui-base text-secondary">{t.title}</p>
-        {phase === "done" && draftId && <div className="mt-3 flex flex-wrap items-center gap-3"><button type="button" onClick={() => router.push(`/work/drafts/${draftId}`)} className="inline-flex min-h-10 items-center rounded-button bg-primary px-5 text-ui-base font-medium text-white hover:bg-primary-hover">Open the draft to edit and export</button>{failed > 0 && <Badge tone="warn">{failed} section{failed === 1 ? "" : "s"} not generated: retry in the editor</Badge>}{emailStatus && <Badge tone={emailStatus === "sent" ? "complete" : "warn"}>{emailStatus === "sent" ? "Email sent" : "Email could not be sent"}</Badge>}</div>}
+        {phase === "done" && draftId && <div className="mt-3 flex flex-wrap items-center gap-3"><button type="button" onClick={() => router.push(`/work/drafts/${draftId}`)} className="inline-flex min-h-10 items-center rounded-button bg-primary px-5 text-ui-base font-medium text-white hover:bg-primary-hover">Open the draft to edit</button><span role="group" aria-label="Download this draft" className="flex flex-wrap items-center gap-2"><a className={BTN} href={`/api/drafting/${draftId}/export?format=docx`}>Download .docx</a><a className={BTN} href={`/api/drafting/${draftId}/export?format=pdf`}>Download PDF</a></span>{failed > 0 && <Badge tone="warn">{failed} section{failed === 1 ? "" : "s"} not generated: retry in the editor</Badge>}{emailStatus && <Badge tone={emailStatus === "sent" ? "complete" : "warn"}>{emailStatus === "sent" ? "Email sent" : "Email could not be sent"}</Badge>}</div>}
         <div className="mt-5 grid gap-5 lg:grid-cols-[1fr_20rem]">
           <div className="space-y-4">
             <Panel as="section" aria-label="Progress">

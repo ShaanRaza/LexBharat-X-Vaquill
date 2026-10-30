@@ -1,5 +1,7 @@
 # Phases 2 and 3: judgments metadata, regulators, storage seam
 
+> Figures in this file are as of 2026-10-20 (the original export). The current figures are in `docs/DATA-GAPS.md`.
+
 Added 2026-10-20. Source for everything: open-india-law `v2026.08` (CC BY 4.0), exported from the local SSD into small processed files in `src/data/`. The raw dataset is never needed at runtime.
 
 ## Phase 2: judgments (metadata only)

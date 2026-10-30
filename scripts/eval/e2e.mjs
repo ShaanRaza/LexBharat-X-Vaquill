@@ -10,6 +10,7 @@ import { detectNotFound } from "../../src/lib/chat/prompt.mjs";
 import { openingHedge } from "../../src/lib/chat/shape.mjs";
 import { copyKey } from "../../src/lib/acts/semantic.mjs";
 const env = Object.fromEntries(fs.readFileSync(".env.local", "utf8").split("\n").filter((l) => l.includes("=")).map((l) => [l.slice(0, l.indexOf("=")), l.slice(l.indexOf("=") + 1).replace(/^["']|["']$/g, "")]));
+if (env.EVAL_GEMINI_API_KEY) env.GEMINI_API_KEY = env.EVAL_GEMINI_API_KEY;   // the evaluation judge uses its own free key when one is set, so a run does not use up the live app's daily quota (never printed)
 const arg = (k, d) => { const i = process.argv.indexOf(`--${k}`); return i > 0 ? process.argv[i + 1] : d; };
 const label = process.argv[2]; if (!label || label.startsWith("--")) { console.log("usage: node scripts/eval/e2e.mjs <label> [--base url] [--only ids] [--limit n]"); process.exit(1); }
 const BASE = arg("base", "http://localhost:3100"), PASSWORD = process.env.EVAL_ACCESS_PASSWORD ?? "throwaway-local-test-9";
@@ -19,7 +20,8 @@ const config = JSON.parse(fs.readFileSync("src/config/ai-models.json", "utf8"));
 const FREE = { ...config, tasks: { ...config.tasks, chat: { ...config.tasks.chat, model: "gemini:gemini-3.5-flash-lite", fallback: [], firstTokenMs: 0, budgetMs: 0, json: true, maxOutputTokens: 400, timeoutMs: 60000 } } };
 const db = neon(env.DATABASE_URL), norm = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 const SET = arg("set", "main"), CHECK = process.argv.includes("--check");   // --set hard = docs/eval/questions-hard.json (several expected sections, "expect: notfound", old-law notes)
-let qs = JSON.parse(fs.readFileSync(SET === "hard" ? "docs/eval/questions-hard.json" : "docs/eval/questions.json", "utf8")).questions;
+const SET_FILES = { main: "docs/eval/questions.json", hard: "docs/eval/questions-hard.json", heldout: "docs/eval/questions-heldout.json" };   // heldout = 20 questions written before the Oct 30 answer-quality work, never used for tuning
+let qs = JSON.parse(fs.readFileSync(SET_FILES[SET] ?? SET_FILES.main, "utf8")).questions;
 if (only?.length) qs = qs.filter((q) => only.includes(q.id)); if (LIMIT) qs = qs.slice(0, LIMIT);
 const done = fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, "utf8")) : { label, at: new Date().toISOString(), rows: [] };
 const jar = new Map();

@@ -44,32 +44,32 @@ A full run also rewrites `src/data/judgments/court-years.json` and `courts.meta.
 - **Citation:** blank for every High Court (0%). The detail page says "No reporter citation is available for this record" and the case number is the main identifier.
 - **Party names** are as extracted and can be truncated or contain fragments ("ITS GENERAL SECRETARY Through: None").
 
-## Field fill rates by court (share of exported cases showing the field)
+## Field fill rates by court (share of exported cases showing the field; case counts as of 30 Oct 2026, after the W10 merge: 16,024,477 in total; the percentages were measured before it)
 | Court | Cases | Case no. | Date | Disposition | Disposition chip | Parties | Judges | Pages |
 |---|---|---|---|---|---|---|---|---|
-| allahabad-high-court | 1,556,323 | 63.3% | 100.0% | 99.4% | 87.2% | 69.5% | 0.0% | 100.0% |
-| andhra-pradesh-high-court | 261,773 | 98.6% | 99.4% | 99.5% | 88.4% | 90.4% | 0.0% | 100.0% |
+| allahabad-high-court | 1,617,619 | 63.3% | 100.0% | 99.4% | 87.2% | 69.5% | 0.0% | 100.0% |
+| andhra-pradesh-high-court | 261,778 | 98.6% | 99.4% | 99.5% | 88.4% | 90.4% | 0.0% | 100.0% |
 | bombay-high-court | 1,578,864 | 99.0% | 99.5% | 99.3% | 94.5% | 92.6% | 84.5% | 100.0% |
 | calcutta-high-court | 340,418 | 43.2% | 99.2% | 98.9% | 98.6% | 95.1% | 0.0% | 100.0% |
-| chhattisgarh-high-court | 509,786 | 85.8% | 99.9% | 99.9% | 99.2% | 43.6% | 0.0% | 100.0% |
-| delhi-high-court | 330,400 | 70.9% | 99.9% | 85.0% | 84.9% | 77.8% | 0.0% | 100.0% |
-| gauhati-high-court | 286,466 | 75.3% | 99.6% | 94.3% | 93.8% | 81.4% | 0.0% | 100.0% |
-| gujarat-high-court | 405,840 | 99.6% | 100.0% | 99.8% | 87.6% | 87.5% | 64.1% | 100.0% |
+| chhattisgarh-high-court | 509,787 | 85.8% | 99.9% | 99.9% | 99.2% | 43.6% | 0.0% | 100.0% |
+| delhi-high-court | 334,989 | 70.9% | 99.9% | 85.0% | 84.9% | 77.8% | 0.0% | 100.0% |
+| gauhati-high-court | 286,467 | 75.3% | 99.6% | 94.3% | 93.8% | 81.4% | 0.0% | 100.0% |
+| gujarat-high-court | 406,131 | 99.6% | 100.0% | 99.8% | 87.6% | 87.5% | 64.1% | 100.0% |
 | high-court-of-jammu-and-kashmir-and-ladakh | 100,285 | 97.0% | 99.9% | 98.4% | 86.1% | 58.5% | 0.0% | 100.0% |
 | himachal-pradesh-high-court | 254,825 | 98.9% | 99.2% | 98.8% | 97.0% | 90.1% | 0.0% | 100.0% |
 | jharkhand-high-court | 420,729 | 99.8% | 99.7% | 99.7% | 76.1% | 78.6% | 0.0% | 100.0% |
-| karnataka-high-court | 686,152 | 97.2% | 99.8% | 99.8% | 98.3% | 95.0% | 0.0% | 100.0% |
-| kerala-high-court | 1,018,714 | 100.0% | 100.0% | 100.0% | 99.2% | 95.0% | 0.0% | 100.0% |
-| madhya-pradesh-high-court | 646,344 | 87.2% | 100.0% | 100.0% | 99.6% | 88.5% | 0.0% | 100.0% |
-| madras-high-court | 1,498,010 | 98.5% | 100.0% | 99.6% | 85.6% | 88.0% | 0.0% | 100.0% |
+| karnataka-high-court | 735,556 | 97.2% | 99.8% | 99.8% | 98.3% | 95.0% | 0.0% | 100.0% |
+| kerala-high-court | 1,018,715 | 100.0% | 100.0% | 100.0% | 99.2% | 95.0% | 0.0% | 100.0% |
+| madhya-pradesh-high-court | 662,318 | 87.2% | 100.0% | 100.0% | 99.6% | 88.5% | 0.0% | 100.0% |
+| madras-high-court | 1,506,085 | 98.5% | 100.0% | 99.6% | 85.6% | 88.0% | 0.0% | 100.0% |
 | manipur-high-court | 16,763 | 99.6% | 99.7% | 99.6% | 96.9% | 73.6% | 0.0% | 100.0% |
 | meghalaya-high-court | 10,827 | 98.9% | 100.0% | 100.0% | 99.6% | 87.5% | 0.0% | 100.0% |
-| orissa-high-court | 685,646 | 99.8% | 99.9% | 99.5% | 99.1% | 80.9% | 44.5% | 100.0% |
-| patna-high-court | 1,614,936 | 100.0% | 99.6% | 98.3% | 97.4% | 81.9% | 0.0% | 100.0% |
-| punjab-and-haryana-high-court | 1,133,710 | 52.4% | 99.8% | 99.9% | 99.8% | 97.0% | 0.0% | 100.0% |
+| orissa-high-court | 685,648 | 99.8% | 99.9% | 99.5% | 99.1% | 80.9% | 44.5% | 100.0% |
+| patna-high-court | 1,614,939 | 100.0% | 99.6% | 98.3% | 97.4% | 81.9% | 0.0% | 100.0% |
+| punjab-and-haryana-high-court | 1,362,064 | 52.4% | 99.8% | 99.9% | 99.8% | 97.0% | 0.0% | 100.0% |
 | rajasthan-high-court | 1,056,767 | 95.6% | 100.0% | 99.7% | 98.9% | 51.2% | 0.0% | 100.0% |
 | sikkim-high-court | 2,219 | 90.9% | 99.6% | 99.8% | 99.6% | 87.8% | 0.0% | 100.0% |
-| telangana-high-court | 1,005,127 | 96.1% | 99.9% | 99.8% | 88.5% | 94.5% | 0.0% | 100.0% |
+| telangana-high-court | 1,005,147 | 96.1% | 99.9% | 99.8% | 88.5% | 94.5% | 0.0% | 100.0% |
 | tripura-high-court | 30,062 | 83.3% | 99.7% | 99.6% | 99.3% | 79.7% | 0.0% | 100.0% |
 | uttarakhand-high-court | 205,475 | 91.2% | 99.9% | 99.5% | 99.3% | 90.0% | 0.0% | 100.0% |
 
@@ -117,11 +117,11 @@ The page ends with **Where each field comes from**: every field marked as record
 ### Supreme Court opening text (`export-sc-preview.sh`)
 Finding: one SC `case_id` holds several parallel documents (English plus Hindi, Punjabi, Gujarati and others; `language_code` tells them apart) and `chunk_index` repeats across them: only 602 of 37,014 cases have a clean 0..n-1 sequence, and offsets increase in only 70% of consecutive chunk pairs. So chunks cannot be ordered or joined, and "first chunk" is ambiguous.
 A safe document start exists for most cases: the single chunk with `language_code = 'en'` AND `char_start = 0` (exactly one in 35,592 cases; none in 1,422). Its first ~900 characters, minus the "Case:/Section:" header lines and `[TITLE]` markers, are the preview; it must be at least 200 characters and at least 85% of its words must look like words (OCR noise fails). Result: **32,946 of 37,014 cases (89.0%)** have a preview; the rest show "No clean English opening text". Previews are mostly the SCR headnote (parties, date, bench, subject, holding), with occasional OCR slips such as "BHARAT!", so the page labels them "as extracted". Hosted per year: `court=supreme-court-of-india/year=YYYY/preview.json` (`{caseId: text}`), next to the High Court pages, so production needs the upload.
-**High Courts: no preview.** About 1 KB for each of 15.7 million cases would be roughly 15 GB, and the first lines are court letterhead, not holdings.
+**High Courts: no preview.** About 1 KB for each of 16.0 million cases would be roughly 16 GB, and the first lines are court letterhead, not holdings.
 
 ### Cross-year Supreme Court search (`GET /api/judgments/search?q=`)
 A pre-built static index (`scripts/judgments/build-sc-index.py`, 5.5 MB, bundled; needs no SSD and no new dependency) matches words at the start of words in the case title (which carries both parties) and in the citation: "kesavananda", "state of punjab", "Sharma v Devi Lal", "[1985] 2 S.C.R. 224" all work, in a few milliseconds. Results whose title or citation contains the whole phrase come first; each group is newest first. The browse page shows these results above the court list.
-**Not built, and why:** search by topic or holding (needs full text, which cannot be ordered safely) and High Court name search (15.7 million records, no index). Options for a later decision: Postgres full-text search (needs a hosted Postgres and a driver), or a search service (Typesense, Meilisearch, OpenSearch). Both are new infrastructure.
+**Not built, and why:** search by topic or holding (needs full text, which cannot be ordered safely) and High Court name search (16.0 million records, no index). Options for a later decision: Postgres full-text search (needs a hosted Postgres and a driver), or a search service (Typesense, Meilisearch, OpenSearch). Both are new infrastructure.
 
 ### Acts referred to: not shown
 Judgments carry no act-reference field. The legislation files' `acts_referenced` links acts to acts. Linking a judgment to the acts it interprets would mean guessing from text we cannot order, so no chips are shown; the provenance panel says so.
