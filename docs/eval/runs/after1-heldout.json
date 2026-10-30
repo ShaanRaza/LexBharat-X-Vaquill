@@ -1,0 +1,2447 @@
+{
+ "label": "heldout-after",
+ "at": "2026-10-30T17:26:06.292Z",
+ "rows": [
+  {
+   "id": 201,
+   "kind": "two-act",
+   "question": "I bought a flat and the builder has not handed over possession on time. Can I go to the consumer court and also ask for my money back under the real estate law?",
+   "gold": [
+    "IND_central_15256|s016",
+    "IND_central_15256|s017",
+    "IND_central_15256|s002",
+    "IND_central_15256|s101",
+    "IND_central_15256|s019",
+    "IND_central_15256|s034",
+    "IND_central_15256|s035",
+    "IND_central_15256|s036",
+    "IND_central_15256|s037",
+    "IND_central_15256|s038",
+    "IND_central_15256|s039",
+    "IND_central_15256|s047",
+    "IND_central_15256|s048",
+    "IND_central_15256|s049",
+    "IND_central_15256|s058",
+    "IND_central_15256|s059",
+    "IND_central_15256|s062",
+    "IND_central_15256|s065",
+    "IND_central_15256|s069",
+    "IND_central_15256|s078",
+    "IND_central_15256|s092",
+    "IND_central_15256|s096",
+    "IND_state_4890|s001",
+    "IND_state_4890|s011",
+    "IND_state_4890|s014",
+    "IND_state_4890|s017",
+    "IND_state_4890|s17A",
+    "IND_state_4890|s018",
+    "IND_state_4890|s19A",
+    "IND_state_4890|s002",
+    "IND_state_4890|s022",
+    "IND_state_4890|s22B",
+    "IND_state_4890|s24A",
+    "IND_state_4890|s24B",
+    "IND_state_4890|s027",
+    "IND_state_4890|s28A",
+    "IND_central_2158|s010",
+    "IND_central_2158|s011",
+    "IND_central_2158|s013",
+    "IND_central_2158|s014",
+    "IND_central_2158|s017",
+    "IND_central_2158|s018",
+    "IND_central_2158|s019"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 3,
+   "cited": false,
+   "correct": false,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 34.5,
+   "nSources": 13,
+   "queries": [
+    "I bought a flat and the builder has not handed over possession on time. Can I go to the consumer court and also ask for my money back under the real estate law?",
+    "builder delay in handing over possession refund and compensation",
+    "Consumer Protection Act 2019 complaint by flat purchaser housing service deficiency",
+    "Real Estate Regulation and Development Act 2016 return of amount and interest builder default"
+   ],
+   "meaning": {
+    "used": 6,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Real Estate (Regulation and Development) Act, 2016. s18",
+    "The Real Estate (Regulation and Development) Act, 2016. s19",
+    "The Consumer Protection Act, 1986 s14",
+    "The Consumer Protection Act, 1986 s1",
+    "The Consumer Protection Act, 2019 s2"
+   ],
+   "answer": "- Yes, an allottee can seek a refund of the amount paid along with interest and compensation from the promoter under Section 18(1) and Section 19(4) of The Real Estate (Regulation and Development) Act, 2016 if the promoter fails to comply or is unable to give possession of the apartment in accordance with the terms of the agreement for sale or due to discontinuance of business [1][2].\n- Regarding approaching the consumer court, the failure of a developer to hand over possession within the contractually stipulated period amounts to a deficiency of service under Section 2(1)(g) of The Consumer Protection Act, 1986, and a consumer is not bound to accept possession after an inordinate delay and can seek a refund of the amount deposited with interest, as observed in the Supreme Court judgment of Pioneer Urban Land & Infrastructure Ltd. versus Govindan Raghavan [11], and further affirmed in Experion Developers Pvt. Ltd. versus Sushma Ashok Shiroor [12] and Wg. Cdr. Arifur Rahman Khan and Aleya Sultana and Ors. versus DLF Southern Homes Pvt. Ltd. and Ors. [13].\n\nConditions and time limits:\n- The allottee must wish to withdraw from the project due to the promoter's failure or inability to ",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Real Estate (Regulation and Development) Act, 2016.",
+     "s": "18"
+    },
+    {
+     "n": 2,
+     "t": "The Real Estate (Regulation and Development) Act, 2016.",
+     "s": "19"
+    },
+    {
+     "n": 3,
+     "t": "The Consumer Protection Act, 1986",
+     "s": "14"
+    },
+    {
+     "n": 4,
+     "t": "The Consumer Protection Act, 1986",
+     "s": "1"
+    },
+    {
+     "n": 5,
+     "t": "The Consumer Protection Act, 2019",
+     "s": "2"
+    },
+    {
+     "n": 6,
+     "t": "The Real Estate (Regulation and Development) Act, 2016.",
+     "s": "40"
+    },
+    {
+     "n": 7,
+     "t": "The Consumer Protection Act, 2019",
+     "s": "39"
+    },
+    {
+     "n": 8,
+     "t": "The Real Estate (Regulation and Development) Act, 2016.",
+     "s": "1"
+    },
+    {
+     "n": 9,
+     "t": "The Haryana Housing Board Act 1971 (as extended to Chandigarh)",
+     "s": "44"
+    },
+    {
+     "n": 10,
+     "t": "The Puducherry Municipalities Act, 1973",
+     "s": "237"
+    },
+    {
+     "n": 11,
+     "t": "PIONEER URBAN LAND & INFRASTRUCTURE LTD. versus GOVINDAN RAGHAVAN",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "EXPERION DEVELOPERS PVT. LTD versus SUSHMA ASHOK SHIROOR",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "WG. CDR. ARIFUR RAHMAN KHAN AND ALEYA SULTANA AND ORS. versus DLF SOUTHERN HOMES PVT LTD. (NOW KNOWN AS BEGUR OMR HOMES PVT. LTD.) AND ORS.",
+     "s": null
+    }
+   ],
+   "score": 1
+  },
+  {
+   "id": 202,
+   "kind": "two-act",
+   "question": "Is a gift of a house to my daughter valid if it is only written on plain paper, and does it need registration?",
+   "gold": [
+    "IND_central_2338|s035",
+    "IND_central_2338|s122",
+    "IND_central_2338|s123",
+    "IND_central_2338|s124",
+    "IND_central_2338|s125",
+    "IND_central_2338|s126",
+    "IND_central_2338|s127",
+    "IND_central_2338|s128",
+    "IND_central_2338|s129",
+    "IND_central_2190|s017",
+    "IND_central_2190|s018"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 2,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 19.9,
+   "nSources": 13,
+   "queries": [
+    "Is a gift of a house to my daughter valid if it is only written on plain paper, and does it need registration?",
+    "gift of immovable property house transfer without registered instrument valid",
+    "The Transfer of Property Act, 1882 section 122 gift of immovable property",
+    "The Registration Act, 1908 section 17 documents of immovable property compulsory registration"
+   ],
+   "meaning": {
+    "used": 6,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Transfer of Property Act, 1882 s122",
+    "The Registration Act, 1908 s17",
+    "The Transfer of Property Act, 1882 s123",
+    "The Registration Act, 1908 s18",
+    "The Transfer of Property Act, 1882 s129"
+   ],
+   "answer": "A gift of immovable property, such as a house, cannot be made through a writing on plain paper alone, because for the purpose of making a gift of immovable property, the transfer must be effected by a registered instrument signed by or on behalf of the donor and attested by at least two witnesses, as required by Section 123 of the Transfer of Property Act, 1882 [3]. Furthermore, under Section 17 of the Registration Act, 1908, instruments of gift of immovable property must be registered [2].\n\nConditions and time limits:\n- The acceptance of the gift must be made during the lifetime of the donor and while the donor is still capable of giving, as provided in Section 122 of the Transfer of Property Act, 1882 [1].\n- If the donee dies before acceptance, the gift is void, according to Section 122 of the Transfer of Property Act, 1882 [1].\n- The document relating to immovable property must contain a description sufficient to identify the property, as set out in Section 21 of the Registration Act, 1908 [7].\n\nRelated provisions:\n- Section 18 of the Registration Act, 1908 lists documents of which registration is optional [4].\n\nI couldn't find any specific provisions regarding gifts made under ",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Transfer of Property Act, 1882",
+     "s": "122"
+    },
+    {
+     "n": 2,
+     "t": "The Registration Act, 1908",
+     "s": "17"
+    },
+    {
+     "n": 3,
+     "t": "The Transfer of Property Act, 1882",
+     "s": "123"
+    },
+    {
+     "n": 4,
+     "t": "The Registration Act, 1908",
+     "s": "18"
+    },
+    {
+     "n": 5,
+     "t": "The Transfer of Property Act, 1882",
+     "s": "129"
+    },
+    {
+     "n": 6,
+     "t": "Registration Act 1864, 16 of 1864, (Rep., Act 20 of 1866)",
+     "s": "52"
+    },
+    {
+     "n": 7,
+     "t": "The Registration Act, 1908",
+     "s": "21"
+    },
+    {
+     "n": 8,
+     "t": "The Indian Succession Act, 1925",
+     "s": "191"
+    },
+    {
+     "n": 9,
+     "t": "The Income-tax Act, 1961",
+     "s": "1"
+    },
+    {
+     "n": 10,
+     "t": "The Portuguese Civil Code, 1867",
+     "s": "4"
+    },
+    {
+     "n": 11,
+     "t": "HAFEEZA BIBI & ORS. versus SHAIKH FARID (DEAD) BY LRS. & ORS",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "COMMISSIONER OF INCOME TAX, JAIPUR versus SIREHMAL NAWALAKHA",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "PHOOL PATTI AND ANR. versus RAM SINGH (DEAD) THROUGH LRS. & ANR.",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 203,
+   "kind": "two-act",
+   "question": "My employer sacked me without notice and has not paid my gratuity after five years. What are my rights?",
+   "gold": [
+    "IND_state_7791|s001",
+    "IND_state_7791|s011",
+    "IND_state_7791|s013",
+    "IND_state_7791|s002",
+    "IND_state_7791|s004",
+    "IND_state_7791|s04A",
+    "IND_state_7791|s005",
+    "IND_state_7791|s006",
+    "IND_state_7791|s007",
+    "IND_state_7791|s07B",
+    "IND_state_7791|s008",
+    "IND_state_7791|s009",
+    "IND_central_22042|s025",
+    "IND_central_22042|s25C",
+    "IND_central_22042|s25E",
+    "IND_central_22042|s25F",
+    "IND_central_22042|s25G",
+    "IND_central_22042|s25J",
+    "IND_central_22042|s25M",
+    "IND_central_22042|s25Q",
+    "IND_central_22042|s02A",
+    "IND_central_22042|s003"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 2,
+   "cited": true,
+   "correct": false,
+   "notFound": false,
+   "check": "check",
+   "error": null,
+   "secs": 22.6,
+   "nSources": 13,
+   "queries": [
+    "My employer sacked me without notice and has not paid my gratuity after five years. What are my rights?",
+    "termination of service without notice retrenchment compensation industrial disputes act",
+    "payment of gratuity eligibility continuous service of five years calculation",
+    "Industrial Disputes Act 1947 section 25F conditions precedent to retrenchment"
+   ],
+   "meaning": {
+    "used": 7,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Industrial Disputes Act, 1947 s25F",
+    "The Payment of Gratuity Act, 1972 s4",
+    "The Payment of Gratuity Act, 1972 s2",
+    "The Industrial Relations Code, 2020 s79",
+    "The Industrial Relations Code, 2020 s70"
+   ],
+   "answer": "Gratuity is payable to an employee on the termination of employment after rendering continuous service for not less than five years on superannuation, retirement, resignation, death, or disablement due to accident or disease, as provided under Section 4 of the Payment of Gratuity Act, 1972 [2]. When a workman is asked to leave forthwith, he has to be paid at the time when he is asked to go and cannot be asked to collect his dues afterwards, as noted in the Supreme Court judgment National Iron and Steel Co. Ltd. & Ors. versus The State of West Bengal & Anr. [11].\n\nConditions and time limits:\n- The employee must have rendered continuous service for not less than five years, except where termination is due to death or disablement [2].\n- The employer must arrange to pay the amount of gratuity within thirty days from the date it becomes payable under Section 7 of the Payment of Gratuity Act, 1972 [8].\n\nRelated provisions:\n- Section 7 of the Payment of Gratuity Act, 1972 covers the determination and payment of gratuity, including simple interest for delayed payments [8].\n\nI couldn't find provisions regarding being sacked without notice in the Payment of Gratuity Act, 1972, as notice requ",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Industrial Disputes Act, 1947",
+     "s": "25F"
+    },
+    {
+     "n": 2,
+     "t": "The Payment of Gratuity Act, 1972",
+     "s": "4"
+    },
+    {
+     "n": 3,
+     "t": "The Payment of Gratuity Act, 1972",
+     "s": "2"
+    },
+    {
+     "n": 4,
+     "t": "The Industrial Relations Code, 2020",
+     "s": "79"
+    },
+    {
+     "n": 5,
+     "t": "The Industrial Relations Code, 2020",
+     "s": "70"
+    },
+    {
+     "n": 6,
+     "t": "The Code on Social Security, 2020",
+     "s": "53"
+    },
+    {
+     "n": 7,
+     "t": "The Industrial Disputes Act, 1947",
+     "s": "25M"
+    },
+    {
+     "n": 8,
+     "t": "The Payment of Gratuity Act, 1972",
+     "s": "7"
+    },
+    {
+     "n": 9,
+     "t": "The Delhi Shops and Establishments Act,1954",
+     "s": "30"
+    },
+    {
+     "n": 10,
+     "t": "The United Provinces Industrial Dispute Act, 1947",
+     "s": "1"
+    },
+    {
+     "n": 11,
+     "t": "NATIONAL IRON AND STEEL CO. LTD. & ORS. versus THE STATE OF WEST BENGAL & ANR.",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "KRISHNA DISTRICT CO-OPERATIVE MARKETING SOCIETY LIMITED, VIJAYAWADA versus N.V. PURNACHANDRA RAO & ORS.",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "CALCUTTA INSURANCE CO. LTD. versus THEIR WORKMEN",
+     "s": null
+    }
+   ],
+   "score": 2
+  },
+  {
+   "id": 204,
+   "kind": "two-act",
+   "question": "After an arrest, how long can the police keep a person before a magistrate sees him, and must he be told why he was arrested?",
+   "gold": [
+    "IND_central_20099|s170",
+    "IND_central_20099|s172",
+    "IND_central_20099|s184",
+    "IND_central_20099|s187",
+    "IND_central_20099|s196",
+    "IND_central_20099|s039",
+    "IND_central_20099|s447",
+    "IND_central_20099|s058",
+    "IND_central_20099|s078",
+    "IND_central_20099|s047"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 2,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 20.3,
+   "nSources": 13,
+   "queries": [
+    "After an arrest, how long can the police keep a person before a magistrate sees him, and must he be told why he was arrested?",
+    "person arrested without warrant grounds of arrest information right and production before magistrate within twenty four ",
+    "Bharatiya Nagarik Suraksha Sanhita section 47 person arrested to be informed of grounds of arrest and of right to bail",
+    "Bharatiya Nagarik Suraksha Sanhita section 58 person arrested not to be detained more than twenty four hours"
+   ],
+   "meaning": {
+    "used": 5,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s47",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s58",
+    "The Constitution of India sA22",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s78",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s57"
+   ],
+   "answer": "An arrested person must be brought before a magistrate without unnecessary delay, and this delay shall not in any case exceed twenty-four hours excluding the journey time from the place of arrest to the magistrate's court, under Section 57, Section 58, and Section 78 of the Bharatiya Nagarik Suraksha Sanhita, 2023, as well as Article 22(2) of the Constitution of India, Section 381 of the New Delhi Municipal Council Act, 1994, and previously Section 57 and Section 76 of the Code of Criminal Procedure, 1973 [2][3][4][5][6][9][10]. Furthermore, every police officer or other person arresting someone without a warrant must forthwith communicate full particulars of the offence or other grounds for the arrest, under Section 47 of the Bharatiya Nagarik Suraksha Sanhita, 2023, and previously Section 50 of the Code of Criminal Procedure, 1973 [1][8].\n\nRelated provisions:\n- Section 57 of the Bharatiya Nagarik Suraksha Sanhita, 2023 (Person arrested to be taken before Magistrate or officer in charge of police station) covers taking or sending the arrested person before a magistrate or police station officer without unnecessary delay [5].\n- Section 187 of the Bharatiya Nagarik Suraksha Sanhita,",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "47"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "58"
+    },
+    {
+     "n": 3,
+     "t": "The Constitution of India",
+     "s": "A22"
+    },
+    {
+     "n": 4,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "78"
+    },
+    {
+     "n": 5,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "57"
+    },
+    {
+     "n": 6,
+     "t": "The New Delhi Municipal Council Act, 1994",
+     "s": "381"
+    },
+    {
+     "n": 7,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "187"
+    },
+    {
+     "n": 8,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "50"
+    },
+    {
+     "n": 9,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "57"
+    },
+    {
+     "n": 10,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "76"
+    },
+    {
+     "n": 11,
+     "t": "JOGINDER KUMAR versus STATE OF U.P. AND OTHERS",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "DILIP K. BASU versus STATE OF WEST BENGAL & ORS.",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "AHMED NOORMOHMED BHATTI versus STATE OF GUJARAT AND ORS.",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 205,
+   "kind": "two-act",
+   "question": "Can I get a divorce on the ground of cruelty, and can I or my spouse claim maintenance while the case is going on?",
+   "gold": [
+    "IND_central_1560|s013",
+    "IND_central_1560|s023",
+    "IND_central_1560|s23A",
+    "IND_central_1560|s026",
+    "IND_central_1560|s024",
+    "IND_central_1560|s025"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 19.9,
+   "nSources": 13,
+   "queries": [
+    "Can I get a divorce on the ground of cruelty, and can I or my spouse claim maintenance while the case is going on?",
+    "Hindu Marriage Act section 13 divorce ground of cruelty",
+    "Hindu Marriage Act section 24 maintenance pendente lite and expenses of proceedings",
+    "Protection of Women from Domestic Violence Act section 20 monetary reliefs maintenance"
+   ],
+   "meaning": {
+    "used": 6,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Hindu Marriage Act, 1955 s13",
+    "The Hindu Marriage Act, 1955 s24",
+    "The Protection of Women from Domestic Violence Act, 2005 s20",
+    "The Protection of Women from Domestic Violence s20",
+    "The Divorce Act, 1869 s22"
+   ],
+   "answer": "You can seek a divorce on the ground of cruelty, and either spouse can claim maintenance while the case is pending under Section 13(1)(ia) of the Hindu Marriage Act, 1955, Section 27(1)(d) of the Special Marriage Act, 1954, and Section 24 of the Hindu Marriage Act, 1955 [1][2][7]. \n\n- Conditions and time limits:\n- Under Section 24 of the Hindu Marriage Act, 1955, the applicant (either the wife or the husband) must show that she or he has no independent income sufficient for her or his support and the necessary expenses of the proceeding [2].\n- The application for the payment of expenses and monthly maintenance during the proceeding shall, as far as possible, be disposed of within sixty days from the date of service of notice on the wife or the husband [2].\n\nI couldn't find any other specific procedural time limits for the disposal of a divorce petition based on cruelty in the Acts I searched. Regarding Supreme Court judgments, the excerpt in Vikas Kanaujia versus Sarita mentions a suit filed under Section 9 of the Hindu Marriage Act [11], Manish Jain versus Akanksha Jain discusses an award of interim maintenance pendente lite under Section 24 of the Hindu Marriage Act and Section 2",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Hindu Marriage Act, 1955",
+     "s": "13"
+    },
+    {
+     "n": 2,
+     "t": "The Hindu Marriage Act, 1955",
+     "s": "24"
+    },
+    {
+     "n": 3,
+     "t": "The Protection of Women from Domestic Violence Act, 2005",
+     "s": "20"
+    },
+    {
+     "n": 4,
+     "t": "The Protection of Women from Domestic Violence",
+     "s": "20"
+    },
+    {
+     "n": 5,
+     "t": "The Divorce Act, 1869",
+     "s": "22"
+    },
+    {
+     "n": 6,
+     "t": "The Protection of Women from Domestic Violence Act, 2005",
+     "s": "9"
+    },
+    {
+     "n": 7,
+     "t": "The Special Marriage Act, 1954",
+     "s": "27"
+    },
+    {
+     "n": 8,
+     "t": "The Divorce Act, 1869",
+     "s": "52"
+    },
+    {
+     "n": 9,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "144"
+    },
+    {
+     "n": 10,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "145"
+    },
+    {
+     "n": 11,
+     "t": "VIKAS KANAUJIA versus SARITA",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "MANISH JAIN versus AKANKSHA JAIN",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "PRADEEP BHARDWAJ versus PRIYA",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 206,
+   "kind": "two-act",
+   "question": "A shop sold me a defective mobile phone. Does the law say goods must be fit for use, and where can I complain?",
+   "gold": [
+    "IND_central_2390|s013",
+    "IND_central_2390|s014",
+    "IND_central_2390|s015",
+    "IND_central_2390|s016",
+    "IND_central_2390|s017",
+    "IND_central_2390|s036",
+    "IND_central_2390|s005",
+    "IND_central_2390|s062",
+    "IND_central_2390|s023",
+    "IND_central_15256|s101",
+    "IND_central_15256|s019",
+    "IND_central_15256|s034",
+    "IND_central_15256|s035",
+    "IND_central_15256|s036",
+    "IND_central_15256|s037",
+    "IND_central_15256|s038",
+    "IND_central_15256|s039",
+    "IND_central_15256|s047",
+    "IND_central_15256|s048",
+    "IND_central_15256|s049",
+    "IND_central_15256|s058",
+    "IND_central_15256|s059",
+    "IND_central_15256|s062",
+    "IND_central_15256|s065",
+    "IND_central_15256|s069",
+    "IND_central_15256|s078",
+    "IND_central_15256|s092",
+    "IND_central_15256|s096",
+    "IND_central_15256|s016",
+    "IND_central_15256|s017",
+    "IND_central_15256|s002",
+    "IND_state_4890|s001",
+    "IND_state_4890|s011",
+    "IND_state_4890|s014",
+    "IND_state_4890|s017",
+    "IND_state_4890|s17A",
+    "IND_state_4890|s018",
+    "IND_state_4890|s19A",
+    "IND_state_4890|s002",
+    "IND_state_4890|s022",
+    "IND_state_4890|s22B",
+    "IND_state_4890|s24A",
+    "IND_state_4890|s24B",
+    "IND_state_4890|s027",
+    "IND_state_4890|s28A"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": false,
+   "rank": null,
+   "cited": false,
+   "correct": false,
+   "notFound": false,
+   "check": "check",
+   "error": null,
+   "secs": 34.4,
+   "nSources": 13,
+   "queries": [
+    "A shop sold me a defective mobile phone. Does the law say goods must be fit for use, and where can I complain?",
+    "goods bought must be merchantable quality and fit for purpose consumer protection",
+    "Consumer Protection Act 2019 section 35 jurisdiction of district commission",
+    "Consumer Protection Act 2019 remedy for defective goods"
+   ],
+   "meaning": {
+    "used": 5,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Consumer Protection Act, 2019 s35",
+    "The Consumer Protection Act, 1986 s1",
+    "The Consumer Protection Act, 2019 s2",
+    "The Consumer Protection Act, 2019 s39",
+    "The Consumer Protection Act, 1986 s14"
+   ],
+   "answer": "The admissibility of the complaint shall ordinarily be decided within twenty-one days from the date on which the complaint was filed, under Section 36 of the Consumer Protection Act, 2019 [9]. \n\nConditions and time limits:\n- The complaint may be filed with a District Commission electronically or in the manner prescribed, accompanied by the prescribed fee, under Section 35 of the Consumer Protection Act, 2019 [1].\n- The issue of admissibility shall ordinarily be decided within twenty-one days from the date of filing, and if not decided within that period, it shall be deemed to have been admitted under Section 36 of the Consumer Protection Act, 2019 [9].\n\nRelated provisions:\n- Section 36 of the Consumer Protection Act, 2019 covers the proceedings before the District Commission on receipt of a complaint [9].\n\nI couldn't find an explicit statement in the searched Acts that goods must be \"fit for use,\" but the Consumer Protection Act defines a \"defect\" as any fault, imperfection, or shortcoming in quality, quantity, potency, purity, or standard required by law or contract under Section 2 of the Consumer Protection Act, 1986 [2] and Section 2 of the Consumer Protection Act, 2019 [3].",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Consumer Protection Act, 2019",
+     "s": "35"
+    },
+    {
+     "n": 2,
+     "t": "The Consumer Protection Act, 1986",
+     "s": "1"
+    },
+    {
+     "n": 3,
+     "t": "The Consumer Protection Act, 2019",
+     "s": "2"
+    },
+    {
+     "n": 4,
+     "t": "The Consumer Protection Act, 2019",
+     "s": "39"
+    },
+    {
+     "n": 5,
+     "t": "The Consumer Protection Act, 1986",
+     "s": "14"
+    },
+    {
+     "n": 6,
+     "t": "The Consumer Protection Act, 2019",
+     "s": "83"
+    },
+    {
+     "n": 7,
+     "t": "The Consumer Protection Act, 2019",
+     "s": "85"
+    },
+    {
+     "n": 8,
+     "t": "The Bureau of Indian Standards Act, 2016.",
+     "s": "31"
+    },
+    {
+     "n": 9,
+     "t": "The Consumer Protection Act, 2019",
+     "s": "36"
+    },
+    {
+     "n": 10,
+     "t": "The Consumer Protection Act, 2019",
+     "s": "65"
+    },
+    {
+     "n": 11,
+     "t": "U.P. POWER CORPORATION LTD. AND ORS. versus ANIS AHMED",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "THE CHAIRMAN-CUM-MANAGING DIRECTOR, RAJASTHAN FINANCIAL CORPORATION AND ANR. versus COMMANDER S.C. JAIN (RETD.) & ANR.",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "BIRLA TECHNOLOGIES LTD. versus NEUTRAL GLASS AND ALLIED INDUSTRIES LTD.",
+     "s": null
+    }
+   ],
+   "score": 0
+  },
+  {
+   "id": 207,
+   "kind": "two-act",
+   "question": "Someone forged my late father's will. Is that a crime, and how must a valid will be signed?",
+   "gold": [
+    "IND_central_20062|s111",
+    "IND_central_20062|s335",
+    "IND_central_20062|s336",
+    "IND_central_20062|s337",
+    "IND_central_20062|s338",
+    "IND_central_20062|s340",
+    "IND_central_20062|s341",
+    "IND_central_2385|s063"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 2,
+   "cited": true,
+   "correct": false,
+   "notFound": false,
+   "check": "partial",
+   "error": null,
+   "secs": 23.3,
+   "nSources": 13,
+   "queries": [
+    "Someone forged my late father's will. Is that a crime, and how must a valid will be signed?",
+    "forgery of valuable security, will or electronic record punishment Bharatiya Nyaya Sanhita",
+    "Bharatiya Nyaya Sanhita section 336 forgery",
+    "Indian Succession Act section 63 execution of unprivileged wills signature and attestation"
+   ],
+   "meaning": {
+    "used": 6,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Nyaya Sanhita, 2023 s336",
+    "The Indian Succession Act, 1925 s63",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s531",
+    "The Bharatiya Nyaya Sanhita, 2023 s338",
+    "The Bharatiya Nyaya Sanhita, 2023 s341"
+   ],
+   "answer": "Forgery of a will is a crime punishable under Section 338 of the Bharatiya Nyaya Sanhita, 2023, which replaced Section 467 of the Indian Penal Code, 1860 [4][9].\n\nA valid unprivileged will must be executed according to the following rules under Section 63 of the Indian Succession Act, 1925: [2]\n- The testator shall sign or shall affix his mark to the will, or it shall be signed by some other person in his presence and by his direction [2].\n- The signature or mark of the testator, or the signature of the person signing for him, shall be so placed that it shall appear that it was intended thereby to give effect to the writing as a will [2].\n- The will shall be attested by two or more witnesses, each of whom has seen the testator sign or affix his mark to the will or has seen some other person sign the will, in the presence and by the direction of the testator, or has received from the testator a personal acknowledgment of his signature or mark, or of the signature of such other person [2].\n- Each of the witnesses shall sign the will in the presence of the testator, but it shall not be necessary that more than one witness be present at the same time, and no particular form of attestat",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "336"
+    },
+    {
+     "n": 2,
+     "t": "The Indian Succession Act, 1925",
+     "s": "63"
+    },
+    {
+     "n": 3,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "531"
+    },
+    {
+     "n": 4,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "338"
+    },
+    {
+     "n": 5,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "341"
+    },
+    {
+     "n": 6,
+     "t": "The Bharatiya Sakshya Adhiniyam, 2023",
+     "s": "103"
+    },
+    {
+     "n": 7,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "337"
+    },
+    {
+     "n": 8,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "359"
+    },
+    {
+     "n": 9,
+     "t": "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)",
+     "s": "463"
+    },
+    {
+     "n": 10,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "484"
+    },
+    {
+     "n": 11,
+     "t": "LAKSHMI CHAND KHAJURIA & ORS. versus SMT. ISHROO DEVI",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "N. KAMALAM (DEAD) AND ANR. versus AYYASAMY AND ANR.",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "RAJ KUMARI AND OTHERS versus SURINDER PAL SHARMA",
+     "s": null
+    }
+   ],
+   "score": 2
+  },
+  {
+   "id": 208,
+   "kind": "old-new",
+   "question": "What is the punishment for rape under IPC section 376?",
+   "gold": [
+    "IND_central_20062|s038",
+    "IND_central_20062|s063",
+    "IND_central_20062|s064",
+    "IND_central_20062|s065",
+    "IND_central_20062|s067",
+    "IND_central_20062|s069",
+    "IND_central_20062|s070"
+   ],
+   "goldFound": true,
+   "oldMention": true,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 49.2,
+   "nSources": 12,
+   "queries": [
+    "What is the punishment for rape under IPC section 376?",
+    "punishment for rape sexual assault",
+    "Bharatiya Nyaya Sanhita section 64 punishment for rape",
+    "Indian Penal Code section 376 punishment for rape"
+   ],
+   "meaning": {
+    "used": 4,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Nyaya Sanhita, 2023 s64",
+    "The Bharatiya Nyaya Sanhita, 2023 s65",
+    "The Bharatiya Nyaya Sanhita, 2023 s63",
+    "The Bharatiya Nyaya Sanhita, 2023 s70",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s531"
+   ],
+   "answer": "Section 376 of the Indian Penal Code, 1860 has been replaced by Section 64 of the Bharatiya Nyaya Sanhita, 2023, which is the current law. Under Section 64 of the Bharatiya Nyaya Sanhita, 2023, whoever commits rape shall be punished with rigorous imprisonment of either description for a term which shall not be less than ten years, but which may extend to imprisonment for life, and shall also be liable to fine [1]. \n\nWhen the offence is committed under specific aggravated circumstances set out in sub-section (2)—such as by a police officer within their station limits or custody, a public servant in custody, a member of the armed forces in a deployed area, a member of management or staff of a jail, hospital, or women's/children's institution, a relative, guardian, teacher, or person in trust or authority, during communal violence, on a pregnant woman, on a woman incapable of giving consent, by a person in control or dominance, on a woman with mental or physical disability, causing grievous bodily harm or endangering life, or repeatedly on the same woman—the offender shall be punished with rigorous imprisonment for a term which shall not be less than ten years, but which may extend to",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "64"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "65"
+    },
+    {
+     "n": 3,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "63"
+    },
+    {
+     "n": 4,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "70"
+    },
+    {
+     "n": 5,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "531"
+    },
+    {
+     "n": 6,
+     "t": "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)",
+     "s": "376"
+    },
+    {
+     "n": 7,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "484"
+    },
+    {
+     "n": 8,
+     "t": "The Indian Penal Code",
+     "s": "375"
+    },
+    {
+     "n": 9,
+     "t": "The Indian Penal Code",
+     "s": "376D"
+    },
+    {
+     "n": 10,
+     "t": "SURESH KUMAR KOUSHAL AND ANOTHER versus NAZ FOUNDATION AND OTHERS",
+     "s": null
+    },
+    {
+     "n": 11,
+     "t": "PUSHPANJALI SAHU versus STATE OF ORISSA & ANR.",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "PRIYA PATEL versus STATE OF M.P. AND ANR.",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 209,
+   "kind": "old-new",
+   "question": "What does section 111 of the BNS say about organised crime, and was there such a section in the IPC?",
+   "gold": [
+    "IND_central_20062|s111",
+    "IND_central_20062|s112",
+    "IND_central_20062|s004"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": false,
+   "notFound": false,
+   "check": "check",
+   "error": null,
+   "secs": 16.8,
+   "nSources": 10,
+   "queries": [
+    "What does section 111 of the BNS say about organised crime, and was there such a section in the IPC?",
+    "Bharatiya Nyaya Sanhita section 111 organised crime",
+    "Indian Penal Code equivalent to section 111 Bharatiya Nyaya Sanhita organised crime"
+   ],
+   "meaning": {
+    "used": 3,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Nyaya Sanhita, 2023 s111",
+    "The Bharatiya Nyaya Sanhita, 2023 s4",
+    "The Bharatiya Nyaya Sanhita, 2023 s112",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s531",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s33"
+   ],
+   "answer": "Section 111 of the Bharatiya Nyaya Sanhita, 2023 defines organised crime as any continuing unlawful activity including kidnapping, robbery, vehicle theft, extortion, land grabbing, contract killing, economic offence, cyber-crimes, trafficking of persons, drugs, weapons or illicit goods or services, human trafficking for prostitution or ransom, by any person or a group of persons acting in concert, singly or jointly, either as a member of an organised crime syndicate or on behalf of such syndicate, by use of violence, threat of violence, intimidation, coercion, or by any other unlawful means to obtain direct or indirect material benefit including a financial benefit [1].\n\nRelated provisions:\n- Section 33 of the Bharatiya Nagarik Suraksha Sanhita, 2023, which requires the public to give information of certain offences including sections 111 to 113 [5].\n\nI couldn't find whether there was such a section in the Indian Penal Code in the Acts I searched.\n\nThe old law this replaced: section 39 of the Code of Criminal Procedure, 1973 (Public to give information of certain offences).",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "111"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "4"
+    },
+    {
+     "n": 3,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "112"
+    },
+    {
+     "n": 4,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "531"
+    },
+    {
+     "n": 5,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "33"
+    },
+    {
+     "n": 6,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "484"
+    },
+    {
+     "n": 7,
+     "t": "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)",
+     "s": "53"
+    },
+    {
+     "n": 8,
+     "t": "DHARMENDRA KIRTHAL versus STATE OF U.P. AND ANOTHER",
+     "s": null
+    },
+    {
+     "n": 9,
+     "t": "NIKESH TARACHAND SHAH versus UNION OF INDIA & ANR.",
+     "s": null
+    },
+    {
+     "n": 10,
+     "t": "TOFAN SINGH versus STATE OF TAMIL NADU",
+     "s": null
+    }
+   ],
+   "score": 2
+  },
+  {
+   "id": 210,
+   "kind": "old-new",
+   "question": "Under the old CrPC how was an FIR registered, and which BNSS section covers it now?",
+   "gold": [
+    "IND_central_20099|s119",
+    "IND_central_20099|s001",
+    "IND_central_20099|s152",
+    "IND_central_20099|s153",
+    "IND_central_20099|s164",
+    "IND_central_20099|s166",
+    "IND_central_20099|s169",
+    "IND_central_20099|s173",
+    "IND_central_20099|s174",
+    "IND_central_20099|s176",
+    "IND_central_20099|s179",
+    "IND_central_20099|s183",
+    "IND_central_20099|s184",
+    "IND_central_20099|s187",
+    "IND_central_20099|s192",
+    "IND_central_20099|s193",
+    "IND_central_20099|s194",
+    "IND_central_20099|s002",
+    "IND_central_20099|s210",
+    "IND_central_20099|s230",
+    "IND_central_20099|s033",
+    "IND_central_20099|s034",
+    "IND_central_20099|s035",
+    "IND_central_20099|s036",
+    "IND_central_20099|s048",
+    "IND_central_20099|s514",
+    "IND_central_20099|s531",
+    "IND_central_20099|s126",
+    "IND_central_20099|s127",
+    "IND_central_20099|s128",
+    "IND_central_20099|s129",
+    "IND_central_20099|s130",
+    "IND_central_20099|s132",
+    "IND_central_20099|s135",
+    "IND_central_20099|s141",
+    "IND_central_20099|s356",
+    "IND_central_20099|s367",
+    "IND_central_20099|s368",
+    "IND_central_20099|s080",
+    "IND_central_20099|s082",
+    "IND_central_20099|s083",
+    "IND_central_20099|s097",
+    "IND_central_20099|s273"
+   ],
+   "goldFound": true,
+   "oldMention": true,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 27.9,
+   "nSources": 13,
+   "queries": [
+    "Under the old CrPC how was an FIR registered, and which BNSS section covers it now?",
+    "information in cognizable cases first information report Code of Criminal Procedure",
+    "Bharatiya Nagarik Suraksha Sanhita section 173 information in cognizable cases",
+    "Code of Criminal Procedure section 154 information in cognizable cases"
+   ],
+   "meaning": {
+    "used": 5,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s173",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s174",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s531",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s175",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s1"
+   ],
+   "answer": "Under the old law, every information relating to the commission of a cognizable offence, if given orally to an officer in charge of a police station, was reduced to writing by him or under his direction, read over to the informant, and signed by the person giving it, while information given in writing was also signed, and the substance was entered in a police station book under Section 154 of the Code of Criminal Procedure, 1973 (Act 2 of 1974) [7]. This is covered now by Section 173 of the Bharatiya Nagarik Suraksha Sanhita, 2023 [1], which replaced Section 154 of the Code of Criminal Procedure, 1973 [7].\n\nConditions and time limits:\n- Electronic communications taken on record must be signed within three days by the person giving it under Section 173 of the Bharatiya Nagarik Suraksha Sanhita, 2023 [1].\n- For certain offences against women under the Bharatiya Nyaya Sanhita, 2023, the information must be recorded by a woman police officer or any woman officer under Section 173 of the Bharatiya Nagarik Suraksha Sanhita, 2023 [1].\n- For temporarily or permanently mentally or physically disabled persons against whom certain offences are alleged under the Bharatiya Nyaya Sanhita, 2023, ",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "173"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "174"
+    },
+    {
+     "n": 3,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "531"
+    },
+    {
+     "n": 4,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "175"
+    },
+    {
+     "n": 5,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "1"
+    },
+    {
+     "n": 6,
+     "t": "The Police Act, 1861",
+     "s": "4"
+    },
+    {
+     "n": 7,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "154"
+    },
+    {
+     "n": 8,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "155"
+    },
+    {
+     "n": 9,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "484"
+    },
+    {
+     "n": 10,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "156"
+    },
+    {
+     "n": 11,
+     "t": "LALITA KUMARI versus GOVT. OF U.P. AND ORS.",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "MOHAMMAD AFZAL MOHAMMAD SHARIF versus THE STATE OF MAHARASHTRA AND OTHERS",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "SHAILESH KUMAR versus STATE OF U.P. (NOW STATE OF UTTARAKHAND)",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 211,
+   "kind": "old-new",
+   "question": "What is the punishment for criminal breach of trust under IPC 406?",
+   "gold": [
+    "IND_central_20062|s111",
+    "IND_central_20062|s303",
+    "IND_central_20062|s316",
+    "IND_central_20062|s317"
+   ],
+   "goldFound": true,
+   "oldMention": true,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "check",
+   "error": null,
+   "secs": 40.3,
+   "nSources": 11,
+   "queries": [
+    "What is the punishment for criminal breach of trust under IPC 406?",
+    "criminal breach of trust punishment Indian Penal Code section 406",
+    "Bharatiya Nyaya Sanhita section 316 criminal breach of trust punishment",
+    "punishment for criminal breach of trust IPC 406"
+   ],
+   "meaning": {
+    "used": 4,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Nyaya Sanhita, 2023 s316",
+    "The Bharatiya Nyaya Sanhita, 2023 s357",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s531",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s359",
+    "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023) s406"
+   ],
+   "answer": "Section 316 of the Bharatiya Nyaya Sanhita, 2023, which is the current law in force from 1 July 2024 and has replaced Section 406 of the Indian Penal Code, 1860 (previously Section 406 of the Indian Penal Code), provides that whoever commits criminal breach of trust shall be punished with imprisonment of either description for a term which may extend to five years, or with fine, or with both [1][5]. \n\nRelated provisions:\n- Section 316(3) of the Bharatiya Nyaya Sanhita, 2023, which covers whoever, being entrusted with property as a carrier, wharfinger or warehouse-keeper, commits criminal breach of trust in respect of such property [1].\n- Section 316(4) of the Bharatiya Nyaya Sanhita, 2023, which covers whoever, being a clerk or servant or employed as a clerk or servant, and being in any manner entrusted in such capacity with property, commits criminal breach of trust [1].\n- Section 316(5) of the Bharatiya Nyaya Sanhita, 2023, which covers criminal breach of trust by a public servant or in the way of business as a banker, merchant, factor, broker, attorney or agent [1].\n\nI couldn't find any relevant Supreme Court judgment excerpt among the sources that applies to the punishment unde",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "316"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "357"
+    },
+    {
+     "n": 3,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "531"
+    },
+    {
+     "n": 4,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "359"
+    },
+    {
+     "n": 5,
+     "t": "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)",
+     "s": "406"
+    },
+    {
+     "n": 6,
+     "t": "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)",
+     "s": "405"
+    },
+    {
+     "n": 7,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "484"
+    },
+    {
+     "n": 8,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "320"
+    },
+    {
+     "n": 9,
+     "t": "MITESH KUMAR J. SHA versus THE STATE OF KARNATAKA & ORS.",
+     "s": null
+    },
+    {
+     "n": 10,
+     "t": "SADHUPATI NAGESWARA RAO versus STATE OF ANDHRA PRADESH",
+     "s": null
+    },
+    {
+     "n": 11,
+     "t": "ASOKE BASAK versus STATE OF MAHARASHTRA AND ORS.",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 212,
+   "kind": "old-new",
+   "question": "What is the BNS offence of causing death by negligence, and which IPC section was it earlier?",
+   "gold": [
+    "IND_central_20062|s165",
+    "IND_central_20062|s019",
+    "IND_central_20062|s106"
+   ],
+   "goldFound": true,
+   "oldMention": true,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 24.9,
+   "nSources": 13,
+   "queries": [
+    "What is the BNS offence of causing death by negligence, and which IPC section was it earlier?",
+    "Bharatiya Nyaya Sanhita section 106 causing death by negligence",
+    "Indian Penal Code section 304A causing death by negligence",
+    "causing death by negligence rash or negligent act not amounting to culpable homicide"
+   ],
+   "meaning": {
+    "used": 4,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Nyaya Sanhita, 2023 s106",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s531",
+    "The Bharatiya Nyaya Sanhita, 2023 s102",
+    "The Bharatiya Nyaya Sanhita, 2023 s289",
+    "The Bharatiya Nyaya Sanhita, 2023 s100"
+   ],
+   "answer": "Section 106 of the Bharatiya Nyaya Sanhita, 2023 is the current law in force, and it replaced Section 304A of the Indian Penal Code, 1860, which is the old law [1][8].\n\n- Whoever causes the death of any person by doing any rash or negligent act not amounting to culpable homicide, shall be punished with imprisonment of either description for a term which may extend to five years, and shall also be liable to fine [1].\n- If the rash or negligent act is done by a registered medical practitioner while performing a medical procedure, the punishment is imprisonment of either description for a term which may extend to two years, and also a fine [1].\n- If someone causes the death of any person by rash and negligent driving of a vehicle not amounting to culpable homicide, and escapes without reporting it to a police officer or a Magistrate soon after the incident, the punishment is imprisonment of either description for a term which may extend to ten years, and also a fine [1].",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "106"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "531"
+    },
+    {
+     "n": 3,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "102"
+    },
+    {
+     "n": 4,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "289"
+    },
+    {
+     "n": 5,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "100"
+    },
+    {
+     "n": 6,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "287"
+    },
+    {
+     "n": 7,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "359"
+    },
+    {
+     "n": 8,
+     "t": "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)",
+     "s": "304A"
+    },
+    {
+     "n": 9,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "484"
+    },
+    {
+     "n": 10,
+     "t": "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)",
+     "s": "301"
+    },
+    {
+     "n": 11,
+     "t": "MAHADEV PRASAD KAUSHIK versus STATE OF U.P. & ANR.",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "ARVIND KUMAR versus STATE OF NCT, DELHI",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "M/S. GUJARAT MACHINERY MANUFACTURERS LTD. versus COLLECTOR, CENTRAL EXCISE, BARODA.",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 213,
+   "kind": "old-new",
+   "question": "Is dowry death still an offence, and under which section?",
+   "gold": [
+    "IND_central_20062|s080"
+   ],
+   "goldFound": true,
+   "oldMention": true,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 28.1,
+   "nSources": 13,
+   "queries": [
+    "Is dowry death still an offence, and under which section?",
+    "dowry death definition punishment ingredients of offence",
+    "Bharatiya Nyaya Sanhita section 80 dowry death",
+    "Indian Penal Code section 304B dowry death"
+   ],
+   "meaning": {
+    "used": 5,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Nyaya Sanhita, 2023 s80",
+    "The Bharatiya Sakshya Adhiniyam, 2023 s118",
+    "The Bharatiya Nyaya Sanhita, 2023 (Draft stage of translated version) s?",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s531",
+    "The Bharatiya Sakshya Adhiniyam, 2023 s117"
+   ],
+   "answer": "Yes, dowry death is still an offence under Section 80 of the Bharatiya Nyaya Sanhita, 2023, which is the current law (in force from 1 July 2024), having replaced Section 304B of the Indian Penal Code, 1860, the old law [1][9].\n\nConditions and time limits:\n- The death of the woman must be caused by burns or bodily injury or occur otherwise than under normal circumstances [1][9].\n- The death must occur within seven years of her marriage [1][9].\n- It must be shown that soon before her death she was subjected to cruelty or harassment by her husband or any relative of her husband for, or in connection with, any demand for dowry [1][9].\n\nRelated provisions:\n- Section 118 of the Bharatiya Sakshya Adhiniyam, 2023, which is the current law (in force from 1 July 2024) and replaced Section 113B of the Indian Evidence Act, 1872, covers the presumption as to dowry death [2][6][10].",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "80"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Sakshya Adhiniyam, 2023",
+     "s": "118"
+    },
+    {
+     "n": 3,
+     "t": "The Bharatiya Nyaya Sanhita, 2023 (Draft stage of translated version)",
+     "s": null
+    },
+    {
+     "n": 4,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "531"
+    },
+    {
+     "n": 5,
+     "t": "The Bharatiya Sakshya Adhiniyam, 2023",
+     "s": "117"
+    },
+    {
+     "n": 6,
+     "t": "The Ndian Evidence Act, 1872",
+     "s": "113B"
+    },
+    {
+     "n": 7,
+     "t": "The INDIAN BARE ACTS Indian Evidence Act, 1872",
+     "s": "113B"
+    },
+    {
+     "n": 8,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "359"
+    },
+    {
+     "n": 9,
+     "t": "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)",
+     "s": "304B"
+    },
+    {
+     "n": 10,
+     "t": "The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)",
+     "s": "113B"
+    },
+    {
+     "n": 11,
+     "t": "STREE ATYACHAR VIRODHI PARISHAD ETC. ETC. versus DILIP NATHUMAL CHORDIA & ANR.",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "SONI DEVRAJBHAI BABUBHAI versus STATE OF GUJARAT AND ORS.",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "SATBIR SINGH & ANOTHER versus STATE OF HARYANA",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 214,
+   "kind": "old-new",
+   "question": "How do I prove an email as evidence in court under the Evidence Act section 65B?",
+   "gold": [
+    "IND_central_20063|s136",
+    "IND_central_20063|s170",
+    "IND_central_20063|s085",
+    "IND_central_20063|s001",
+    "IND_central_20063|s015",
+    "IND_central_20063|s028",
+    "IND_central_20063|s029",
+    "IND_central_20063|s031",
+    "IND_central_20063|s032",
+    "IND_central_20063|s033",
+    "IND_central_20063|s086",
+    "IND_central_20063|s087",
+    "IND_central_20063|s002",
+    "IND_central_20063|s039",
+    "IND_central_20063|s004",
+    "IND_central_20063|s041",
+    "IND_central_20063|s057",
+    "IND_central_20063|s062",
+    "IND_central_20063|s063",
+    "IND_central_20063|s066",
+    "IND_central_20063|s081",
+    "IND_central_20063|s090",
+    "IND_central_20063|s093"
+   ],
+   "goldFound": true,
+   "oldMention": true,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 55.2,
+   "nSources": 9,
+   "queries": [
+    "How do I prove an email as evidence in court under the Evidence Act section 65B?",
+    "admissibility of electronic record certificate electronic mail Bharatiya Sakshya Adhiniyam section 63",
+    "Bharatiya Sakshya Adhiniyam section 63 admissibility of electronic records",
+    "Indian Evidence Act section 65B electronic record admissibility certificate"
+   ],
+   "meaning": {
+    "used": 5,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Sakshya Adhiniyam, 2023 s63",
+    "The Bharatiya Sakshya Adhiniyam, 2023 s4",
+    "The Bharatiya Sakshya Adhiniyam, 2023 s93",
+    "The Bharatiya Sakshya Adhiniyam, 2023 s62",
+    "The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023) s65B"
+   ],
+   "answer": "Section 63 of the Bharatiya Sakshya Adhiniyam, 2023 is the current law in force, which replaced section 65B of the Indian Evidence Act, 1872 [1][5].\n\n- Any information contained in an electronic record which is printed on paper, stored, recorded, or copied in optical, magnetic media, semiconductor memory, or otherwise stored in any electronic form (computer output) is deemed a document and is admissible in proceedings without further proof or production of the original, provided the conditions in the section are satisfied [1].\n- A certificate must be submitted along with the electronic record at each instance it is submitted for admission, identifying the electronic record, describing how it was produced, giving particulars of the device to show it was produced by a computer or communication device, and dealing with the matters mentioned in the conditions of sub-section (2) [1].\n- The certificate must be signed by a person in charge of the computer or communication device or the management of the relevant activities, and an expert, stating the matter to the best of their knowledge and belief [1].\n\nConditions and time limits:\n- The computer output must have been produced by the comp",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Sakshya Adhiniyam, 2023",
+     "s": "63"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Sakshya Adhiniyam, 2023",
+     "s": "4"
+    },
+    {
+     "n": 3,
+     "t": "The Bharatiya Sakshya Adhiniyam, 2023",
+     "s": "93"
+    },
+    {
+     "n": 4,
+     "t": "The Bharatiya Sakshya Adhiniyam, 2023",
+     "s": "62"
+    },
+    {
+     "n": 5,
+     "t": "The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)",
+     "s": "65B"
+    },
+    {
+     "n": 6,
+     "t": "The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)",
+     "s": "90A"
+    },
+    {
+     "n": 7,
+     "t": "SONU@AMAR versus STATE OF HARYANA",
+     "s": null
+    },
+    {
+     "n": 8,
+     "t": "ANVAR P.V. versus P.K. BASHEER AND ORS.",
+     "s": null
+    },
+    {
+     "n": 9,
+     "t": "SUNDAR @ SUNDARRAJAN versus STATE BY INSPECTOR OF POLICE",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 215,
+   "kind": "plain",
+   "question": "My boss has not paid my salary for two months after I resigned. Where can I complain?",
+   "gold": [
+    "IND_REP_2130_1936|s015",
+    "IND_REP_2130_1936|s016",
+    "IND_state_7792|s015",
+    "IND_state_7792|s016"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 35.5,
+   "nSources": 13,
+   "queries": [
+    "My boss has not paid my salary for two months after I resigned. Where can I complain?",
+    "employee unpaid salary recovery after resignation complaint",
+    "The Payment of Wages Act, 1936 section 15 claims arising out of deductions or delay in payment",
+    "Industrial Disputes Act, 1947 recovery of money due from employer"
+   ],
+   "meaning": {
+    "used": 5,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Payment of Wages Act, 1936 s15",
+    "The Bihar Shops & Establishments Act, 1953 s28",
+    "The Code on Wages, 2019 s17",
+    "The Working Journalists and other Newspaper Employees (Conditions of Service) and Miscellaneous Provisions Act, 1955 s17",
+    "The Code on Wages, 2019 s45"
+   ],
+   "answer": "You can make an application to the authority appointed under Section 15 of the Payment of Wages Act, 1936, or file an application before the authority appointed under Section 45 of the Code on Wages, 2019 [1][5]. If you are employed in an establishment in Bihar or Jharkhand, you may make an application to the prescribed authority under Section 28 of the Bihar Shops & Establishments Act, 1953 or Section 28 of the Jharkhand Shops and Establishment Laws, respectively [2][6]. If your employment is covered under the Industrial Disputes Act, 1947, a question as to the amount of money due or benefit can be decided by a Labour Court under Section 33C(2) of the Industrial Disputes Act, 1947 [9].\n\nConditions and time limits:\n- Under Section 15(2) of the Payment of Wages Act, 1936, the application must be presented within twelve months from the date on which the payment of the wages was due to be made, though it may be admitted after twelve months if the applicant satisfies the authority of sufficient cause for the delay [1].\n- Under Section 45(6) of the Code on Wages, 2019, the application may be filed within a period of three years from the date on which the claim arises, subject to the aut",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Payment of Wages Act, 1936",
+     "s": "15"
+    },
+    {
+     "n": 2,
+     "t": "The Bihar Shops & Establishments Act, 1953",
+     "s": "28"
+    },
+    {
+     "n": 3,
+     "t": "The Code on Wages, 2019",
+     "s": "17"
+    },
+    {
+     "n": 4,
+     "t": "The Working Journalists and other Newspaper Employees (Conditions of Service) and Miscellaneous Provisions Act, 1955",
+     "s": "17"
+    },
+    {
+     "n": 5,
+     "t": "The Code on Wages, 2019",
+     "s": "45"
+    },
+    {
+     "n": 6,
+     "t": "The Jharkhand Shops and Establishment Laws",
+     "s": "28"
+    },
+    {
+     "n": 7,
+     "t": "The Andhra Pradesh Shops and Establishments Act, 1988.",
+     "s": "51"
+    },
+    {
+     "n": 8,
+     "t": "The Payment of Wages Act, 1936",
+     "s": "7"
+    },
+    {
+     "n": 9,
+     "t": "The Industrial Disputes Act, 1947",
+     "s": "33C"
+    },
+    {
+     "n": 10,
+     "t": "The Industrial Disputes Act, 1947",
+     "s": "251"
+    },
+    {
+     "n": 11,
+     "t": "KRISHAN PRASAD GUPTA versus CONTROLLER, PRINTING AND STATIONERY",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "MANAGEMENT OF THE FEDERATION OF INDIAN CHAMBERS OF COMMERCE AND INDUSTRY versus THEIR WORKMAN, SHRI R. K. MITTAL",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "A. SATYANARAYANA REDDY AND OTHERS versus PRESIDING OFFICER, LABOUR COURT AND OTHERS",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 216,
+   "kind": "plain",
+   "question": "My ex-husband refuses to let me meet our child. Where do I go to get custody?",
+   "gold": [
+    "IND_central_2318|s050",
+    "IND_central_2318|s011",
+    "IND_central_2318|s012",
+    "IND_central_2318|s002",
+    "IND_central_2318|s024",
+    "IND_central_2318|s025",
+    "IND_central_2318|s045"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 3,
+   "cited": false,
+   "correct": false,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 28,
+   "nSources": 13,
+   "queries": [
+    "My ex-husband refuses to let me meet our child. Where do I go to get custody?",
+    "custody of minor child application to court guardian and wards act",
+    "The Guardians and Wards Act 1890 section 9 jurisdiction",
+    "application for custody or visitation of child hindu minority and guardianship act"
+   ],
+   "meaning": {
+    "used": 6,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Guardians and Wards Act, 1890 s9",
+    "The Protection of Women from Domestic Violence Act, 2005 s21",
+    "The Guardians and Wards Act, 1890 s2",
+    "The Guardians and Wards Act, 1890 s7",
+    "The Guardians and Wards Act, 1890 s26"
+   ],
+   "answer": "To get custody of a child, an application with respect to the guardianship of the person of the minor shall be made to the District Court having jurisdiction in the place where the minor ordinarily resides, under Section 9 of the Guardians and Wards Act, 1890 [1]. \n\nAlternatively, a Magistrate may, at any stage of hearing of an application for a protection order or for any other relief under the Protection of Women from Domestic Violence Act, 2005, grant temporary custody of any child or children to the aggrieved person or the person making an application on her behalf, and specify, if necessary, the arrangements for the visit of such child or children by the respondent, under Section 21 of the Protection of Women from Domestic Violence Act, 2005 [2]. If the Magistrate is of the opinion that any visit of the respondent may be harmful to the interests of the child or children, the Magistrate shall refuse to allow such visit, under Section 21 of the Protection of Women from Domestic Violence Act, 2005 [2].\n\nRegarding Supreme Court judgments, excerpts from \"Yashita Sahu versus State of Rajasthan & Ors.\" [11], \"Arathi Sandi versus Bandi Jagadrakshaka Rao and Ors.\" [12], and \"Lahari Sak",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Guardians and Wards Act, 1890",
+     "s": "9"
+    },
+    {
+     "n": 2,
+     "t": "The Protection of Women from Domestic Violence Act, 2005",
+     "s": "21"
+    },
+    {
+     "n": 3,
+     "t": "The Guardians and Wards Act, 1890",
+     "s": "2"
+    },
+    {
+     "n": 4,
+     "t": "The Guardians and Wards Act, 1890",
+     "s": "7"
+    },
+    {
+     "n": 5,
+     "t": "The Guardians and Wards Act, 1890",
+     "s": "26"
+    },
+    {
+     "n": 6,
+     "t": "The Hindu Minority and Guardianship Act, 1956",
+     "s": "9"
+    },
+    {
+     "n": 7,
+     "t": "The Hindu Minority and Guardianship Act, 1956",
+     "s": "1"
+    },
+    {
+     "n": 8,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "58"
+    },
+    {
+     "n": 9,
+     "t": "The Uttar Pradesh Municipal Corporation Act, 1959",
+     "s": "1"
+    },
+    {
+     "n": 10,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "187"
+    },
+    {
+     "n": 11,
+     "t": "YASHITA SAHU versus STATE OF RAJASTHAN & ORS.",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "ARATHI SANDI versus BANDI JAGADRAKSHAKA RAO AND ORS.",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "LAHARI SAKHAMURI versus SOBHAN KODALI",
+     "s": null
+    }
+   ],
+   "score": 1
+  },
+  {
+   "id": 217,
+   "kind": "plain",
+   "question": "The police arrested my brother and did not tell us anything for two days. Is that allowed?",
+   "gold": [
+    "IND_central_20099|s036",
+    "IND_central_20099|s048",
+    "IND_central_20099|s356",
+    "IND_central_20099|s369",
+    "IND_central_20099|s374",
+    "IND_central_20099|s378"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 4,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 35,
+   "nSources": 11,
+   "queries": [
+    "The police arrested my brother and did not tell us anything for two days. Is that allowed?",
+    "arrested person right to be informed of grounds of arrest and of right to bail",
+    "Bharatiya Nagarik Suraksha Sanhita section 47 obligation of person making arrest to inform about arrest and place of det",
+    "Bharatiya Nagarik Suraksha Sanhita section 58 person arrested not to be detained more than twenty four hours"
+   ],
+   "meaning": {
+    "used": 5,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s47",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s58",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s187",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s48",
+    "The CrPC 1973 s50"
+   ],
+   "answer": "The police must forthwith communicate full particulars of the offence or other grounds of arrest and give information regarding the arrest and the place where the arrested person is held to a relative, friend, or nominated person under Section 47 and Section 48 of the Bharatiya Nagarik Suraksha Sanhita, 2023 (which replaced Section 50 and Section 50A of the Code of Criminal Procedure, 1973, respectively) [1][4][5][10].\n\nConditions and time limits:\n- The communication of grounds of arrest must be made forthwith upon an arrest without warrant under Section 47 of the Bharatiya Nagarik Suraksha Sanhita, 2023 (previously Section 50 of the Code of Criminal Procedure, 1973) [1][5].\n- The information regarding the arrest and place of holding must be given forthwith to a relative, friend, or other nominated person under Section 48 of the Bharatiya Nagarik Suraksha Sanhita, 2023 (previously Section 50A of the Code of Criminal Procedure, 1973) [4][10].\n- The police officer must inform the arrested person of these rights as soon as the person is brought to the police station under Section 48 of the Bharatiya Nagarik Suraksha Sanhita, 2023 (previously Section 50A of the Code of Criminal Procedu",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "47"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "58"
+    },
+    {
+     "n": 3,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "187"
+    },
+    {
+     "n": 4,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "48"
+    },
+    {
+     "n": 5,
+     "t": "The CrPC 1973",
+     "s": "50"
+    },
+    {
+     "n": 6,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "40"
+    },
+    {
+     "n": 7,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "39"
+    },
+    {
+     "n": 8,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "57"
+    },
+    {
+     "n": 9,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "167"
+    },
+    {
+     "n": 10,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "50A"
+    },
+    {
+     "n": 11,
+     "t": "PRAKASH CORPORATES versus DEE VEE PROJECTS LIMITED",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 218,
+   "kind": "plain",
+   "question": "My son took over my house and now ignores me and my wife. Can we cancel the transfer?",
+   "gold": [
+    "IND_central_2033|s023"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 2,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 39.1,
+   "nSources": 13,
+   "queries": [
+    "My son took over my house and now ignores me and my wife. Can we cancel the transfer?",
+    "transfer of property maintenance and welfare of parents and senior citizens act",
+    "The Transfer of Property Act, 1882 section 126 gift revocation on fraud coercion or undue influence",
+    "Maintenance and Welfare of Parents and Senior Citizens Act, 2007 section 23 transfer by senior citizen to be void"
+   ],
+   "meaning": {
+    "used": 5,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Transfer of Property Act, 1882 s126",
+    "The Maintenance and Welfare of Parents and Senior Citizens Act, 2007 s23",
+    "The Maintenance and Welfare of Parents and Senior Citizens Act, 2007 s11",
+    "The Maintenance and Welfare of Parents and Senior Citizens Act, 2007 s1",
+    "The Maintenance and Welfare of Parents and Senior Citizens Act, 2007 s2"
+   ],
+   "answer": "Yes, a senior citizen who has transferred property by way of gift or otherwise subject to the condition that the transferee shall provide basic amenities and basic physical needs, and where the transferee refuses or fails to provide them, may at their option have the transfer declared void by the Tribunal under Section 23 of the Maintenance and Welfare of Parents and Senior Citizens Act, 2007 [2][11]. \n\nAs expounded in the Supreme Court judgment of Urmila Dixit versus Sunil Sharan Dixit and Ors., attracting the application of Section 23(1) requires two conditions: (a) the transfer must have been made subject to the condition that the transferee shall provide the basic amenities and basic physical needs to the transferor, and (b) the transferee refuses or fails to provide such amenities and physical needs [11]. Furthermore, a donor and donee may agree that a gift shall be suspended or revoked on the happening of any specified event not depending on the donor's will under Section 126 of the Transfer of Property Act, 1882 [1].",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Transfer of Property Act, 1882",
+     "s": "126"
+    },
+    {
+     "n": 2,
+     "t": "The Maintenance and Welfare of Parents and Senior Citizens Act, 2007",
+     "s": "23"
+    },
+    {
+     "n": 3,
+     "t": "The Maintenance and Welfare of Parents and Senior Citizens Act, 2007",
+     "s": "11"
+    },
+    {
+     "n": 4,
+     "t": "The Maintenance and Welfare of Parents and Senior Citizens Act, 2007",
+     "s": "1"
+    },
+    {
+     "n": 5,
+     "t": "The Maintenance and Welfare of Parents and Senior Citizens Act, 2007",
+     "s": "2"
+    },
+    {
+     "n": 6,
+     "t": "The Central Provinces Tenancy Act, 1898",
+     "s": "71"
+    },
+    {
+     "n": 7,
+     "t": "The Transfer of Property Act, 1882",
+     "s": "123"
+    },
+    {
+     "n": 8,
+     "t": "The Central Provinces Tenancy Act, 1898",
+     "s": "47"
+    },
+    {
+     "n": 9,
+     "t": "The Criminal Procedure Code CrPC 1973",
+     "s": null
+    },
+    {
+     "n": 10,
+     "t": "The Punjab Excise Act, 1914(Bare Act )",
+     "s": "2"
+    },
+    {
+     "n": 11,
+     "t": "URMILA DIXIT versus SUNIL SHARAN DIXIT AND ORS.",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "SUBBEGOWDA (DEAD) BY LR. versus THIMMEGOWDA (DEAD) BY LRS.",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "SMT. S. VANITHA versus THE DEPUTY COMMISSIONER, BENGALURU URBAN DISTRICT & ORS.",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 219,
+   "kind": "plain",
+   "question": "Someone made a fake profile with my photos to cheat my friends. What can I do?",
+   "gold": [
+    "IND_central_1999|s66C"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": false,
+   "notFound": false,
+   "check": "check",
+   "error": null,
+   "secs": 24.8,
+   "nSources": 10,
+   "queries": [
+    "Someone made a fake profile with my photos to cheat my friends. What can I do?",
+    "identity theft impersonation using computer resource cheating friends online profile",
+    "Information Technology Act 2000 section 66C punishment for identity theft",
+    "Information Technology Act 2000 section 66D punishment for cheating by personation by using computer resource"
+   ],
+   "meaning": {
+    "used": 7,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Information Technology Act, 2000 s66C",
+    "The Information Technology Act, 2000 s66D",
+    "The Bharatiya Nyaya Sanhita, 2023 s318",
+    "The INFORMATION TECHNOLOGY ACT, 2000 Amendment s66D",
+    "The Information Technology Act, 2000 (Central Act 21 of 2000) s66D"
+   ],
+   "answer": "Whoever, by means of any communication device or computer resource cheats by personating, shall be punished with imprisonment of either description for a term which may extend to three years and shall also be liable to fine which may extend to one lakh rupees under Section 66D of the Information Technology Act, 2000 [2].\n\nWhoever fraudulently or dishonestly makes use of the electronic signature, password or any other unique identification feature of any other person shall be punished with imprisonment of either description for a term which may extend to three years and shall also be liable to fine which may extend to rupees one lakh under Section 66C of the Information Technology Act, 2000 [1].\n\nI couldn't find any relevant Supreme Court judgment excerpt in the sources, and only Supreme Court judgments are searched (as short excerpts) while High Court and tribunal decisions are not included yet.",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Information Technology Act, 2000",
+     "s": "66C"
+    },
+    {
+     "n": 2,
+     "t": "The Information Technology Act, 2000",
+     "s": "66D"
+    },
+    {
+     "n": 3,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "318"
+    },
+    {
+     "n": 4,
+     "t": "The INFORMATION TECHNOLOGY ACT, 2000 Amendment",
+     "s": "66D"
+    },
+    {
+     "n": 5,
+     "t": "The Information Technology Act, 2000 (Central Act 21 of 2000)",
+     "s": "66D"
+    },
+    {
+     "n": 6,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "359"
+    },
+    {
+     "n": 7,
+     "t": "The Bharatiya Nyaya Sanhita, 2023 (Draft stage of translated version)",
+     "s": null
+    },
+    {
+     "n": 8,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "531"
+    },
+    {
+     "n": 9,
+     "t": "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)",
+     "s": "420"
+    },
+    {
+     "n": 10,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "320"
+    }
+   ],
+   "score": 2
+  },
+  {
+   "id": 220,
+   "kind": "plain",
+   "question": "A man keeps passing comments and making gestures at me in the street. What can I do?",
+   "gold": [
+    "IND_central_20062|s074",
+    "IND_central_20062|s079"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 5,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 22.8,
+   "nSources": 11,
+   "queries": [
+    "A man keeps passing comments and making gestures at me in the street. What can I do?"
+   ],
+   "meaning": {
+    "used": 1,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Nyaya Sanhita, 2023 s75",
+    "The Delhi Police Act, 1978 s92",
+    "The Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013 s1",
+    "The Delhi Police Act, 1978 s47",
+    "The Bharatiya Nyaya Sanhita, 2023 s79"
+   ],
+   "answer": "Section 79 of the Bharatiya Nyaya Sanhita, 2023 provides that whoever, intending to insult the modesty of any woman, utters any words, makes any sound or gesture, or exhibits any object in any form, intending that such word or sound shall be heard, or that such gesture or object shall be seen, by such woman, or intrudes upon the privacy of such woman, shall be punished with simple imprisonment for a term which may extend to three years, and also with fine [5]. This provision is the current law (in force from 1 July 2024); it replaced section 509 of the Indian Penal Code, 1860 [10]. \n\nAdditionally, Section 92 of the Delhi Police Act, 1978 states that no person shall wilfully push, press, hustle or obstruct any passenger in a street or public place or by violent movements, menacing gestures, wanton personal annoyance, screaming, shouting, wilfully frightening horses or cattle or otherwise, disturb the public peace or order [2]. Furthermore, Section 47 of the Delhi Police Act, 1978 empowers the Commissioner of Police to direct a person to remove himself outside Delhi or any part thereof if it appears that such person has been habitually passing indecent remarks on women and girls, or ",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "75"
+    },
+    {
+     "n": 2,
+     "t": "The Delhi Police Act, 1978",
+     "s": "92"
+    },
+    {
+     "n": 3,
+     "t": "The Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+     "s": "1"
+    },
+    {
+     "n": 4,
+     "t": "The Delhi Police Act, 1978",
+     "s": "47"
+    },
+    {
+     "n": 5,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "79"
+    },
+    {
+     "n": 6,
+     "t": "The Calcutta Metro Railway (Operation and Maintenance) Temporary Provisions Act, 1985",
+     "s": "10"
+    },
+    {
+     "n": 7,
+     "t": "The Cantonments Act, 2006",
+     "s": "289"
+    },
+    {
+     "n": 8,
+     "t": "The Immoral Traffic (Prevention) Act, 1956",
+     "s": "8"
+    },
+    {
+     "n": 9,
+     "t": "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)",
+     "s": "354A"
+    },
+    {
+     "n": 10,
+     "t": "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)",
+     "s": "509"
+    },
+    {
+     "n": 11,
+     "t": "UNION OF INDIA AND OTHERS versus DILIP PAUL",
+     "s": null
+    }
+   ],
+   "score": 3
+  }
+ ]
+}
