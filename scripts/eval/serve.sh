@@ -8,5 +8,5 @@ export SUPABASE_URL= SUPABASE_SECRET_KEY=
 export EMBED_CACHE_FILE=docs/eval/.cache/embed.json EMBED_MIN_INTERVAL_MS=21000
 # the evaluation's own free Gemini key (EVAL_GEMINI_API_KEY in .env.local) when there is one, so runs do not use the live key's daily quota; never printed
 EK=$(grep '^EVAL_GEMINI_API_KEY=' .env.local 2>/dev/null | head -1 | cut -d= -f2- | tr -d "\"' ")
-[ -n "$EK" ] && [ -z "$EVAL_USE_LIVE_KEY" ] && export GEMINI_API_KEY="$EK"   # EVAL_USE_LIVE_KEY=1: use the live key instead (when the evaluation key's daily quota is used up)
+[ -n "$EK" ] && export GEMINI_API_KEY="$EK"
 exec npx next dev --port 3100

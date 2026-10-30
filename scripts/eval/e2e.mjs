@@ -10,7 +10,7 @@ import { detectNotFound } from "../../src/lib/chat/prompt.mjs";
 import { openingHedge } from "../../src/lib/chat/shape.mjs";
 import { copyKey } from "../../src/lib/acts/semantic.mjs";
 const env = Object.fromEntries(fs.readFileSync(".env.local", "utf8").split("\n").filter((l) => l.includes("=")).map((l) => [l.slice(0, l.indexOf("=")), l.slice(l.indexOf("=") + 1).replace(/^["']|["']$/g, "")]));
-if (env.EVAL_GEMINI_API_KEY && !process.env.EVAL_USE_LIVE_KEY) env.GEMINI_API_KEY = env.EVAL_GEMINI_API_KEY;   // the evaluation judge uses its own free key when one is set, so a run does not use up the live app's daily quota (never printed)
+if (env.EVAL_GEMINI_API_KEY) env.GEMINI_API_KEY = env.EVAL_GEMINI_API_KEY;   // the evaluation judge uses its own free key when one is set, so a run does not use up the live app's daily quota (never printed)
 const arg = (k, d) => { const i = process.argv.indexOf(`--${k}`); return i > 0 ? process.argv[i + 1] : d; };
 const label = process.argv[2]; if (!label || label.startsWith("--")) { console.log("usage: node scripts/eval/e2e.mjs <label> [--base url] [--only ids] [--limit n]"); process.exit(1); }
 const BASE = arg("base", "http://localhost:3100"), PASSWORD = process.env.EVAL_ACCESS_PASSWORD ?? "throwaway-local-test-9";
