@@ -124,3 +124,6 @@ export function missingMentions(answer, pairs, citeOf = () => "") {
 export function citeFinder(sources) {
   return (p) => { const s = sources.find((x) => x.kind !== "judgment" && x.kind !== "doc" && x.number != null && actSide(x.actTitle)?.law === p.law && baseNumber(x.number) === baseNumber(p.number)); return s ? `[${s.n}]` : ""; };
 }
+
+/** The Act record our data files the law under (src/config/law-mapping.json `laws`): where a counterpart is looked up first, so the canonical filing is used and not a State copy of the same Act. */
+export const actIdFor = (law) => data.laws[law]?.actId ?? null;

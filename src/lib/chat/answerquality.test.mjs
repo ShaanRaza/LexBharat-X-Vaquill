@@ -3,7 +3,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import { ensureActShare, namesAct } from "./share.mjs";
-import { counterparts, counterpartsOfLookup, lookupFor, mappingNote, MAPPING_ADDENDUM, mentions, missingMentions, pairsOf, pairsOfNamed, usableTitle, citeFinder, actSide } from "./concordance.mjs";
+import { actIdFor, counterparts, counterpartsOfLookup, lookupFor, mappingNote, MAPPING_ADDENDUM, mentions, missingMentions, pairsOf, pairsOfNamed, usableTitle, citeFinder, actSide } from "./concordance.mjs";
 import { conceptHint, conceptMatches, conceptQueries } from "./concepts.mjs";
 import { buildRewritePrompt, REWRITE_SYSTEM } from "./rewrite.mjs";
 import { answerFirst, sentences } from "./shape.mjs";
@@ -118,4 +118,9 @@ test("a concept query is added only for an Act no search query already names, an
   assert.deepEqual(conceptQueries("When can a person accused of a non-bailable offence be released on bail after arrest?", 2, []), []);   // criminal procedure is a hint for the rewrite only
   assert.ok(conceptMatches("accused arrested by the police and released on bail").some((c) => c.hintOnly));
   assert.ok(conceptMatches("How do I prove the whatsapp messages in court as evidence?").some((c) => c.id === "evidence-electronic"));
+});
+
+test("a counterpart is looked up under the canonical filing of its Act (law-mapping.json `laws`), not a State copy of it", () => {
+  assert.equal(actIdFor("crpc"), map.laws.crpc.actId); assert.equal(actIdFor("bns"), map.laws.bns.actId); assert.equal(actIdFor("nope"), null);
+  for (const l of ["ipc", "crpc", "evidence", "bns", "bnss", "bsa"]) assert.ok(actIdFor(l), l);
 });

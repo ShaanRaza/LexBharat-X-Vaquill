@@ -15,3 +15,4 @@ export function counterpartsOfLookup(lookup: string): Counterpart[];
 export function pairsOfNamed(lookups: string[], have?: Set<string>): Pair[];
 export function lookupLaw(lookup: string): { law: string; number: string } | null;
 export function citeFinder(sources: { kind?: string; actTitle: string; number: string | null; n?: number }[]): (p: Counterpart) => string;
+export const actIdFor: (law: string) => string | null;

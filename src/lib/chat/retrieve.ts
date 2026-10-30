@@ -52,7 +52,7 @@ const keyOf = (h: SectionHit) => `${h.actId}|${h.sectionKey}`;
 import { narrowToExact } from "./exact.mjs";
 import { conceptQueries } from "./concepts.mjs";
 import { ensureActShare } from "./share.mjs";
-import { actSide, counterparts, counterpartsOfLookup, lookupFor, pairsOf, pairsOfNamed, type Pair } from "./concordance.mjs";
+import { actIdFor, actSide, counterparts, counterpartsOfLookup, lookupFor, pairsOf, pairsOfNamed, type Pair } from "./concordance.mjs";
 import { currentLawFirst } from "./currentlaw.mjs";
 import { dedupeCopies } from "@/lib/acts/dedupe.mjs";
 import { officialSourceUrl } from "@/lib/acts/quality";
@@ -78,14 +78,14 @@ export async function retrieveSources(question: string, history: { role: string;
     if (r.available && r.mode === "lookup") { mode = "lookup"; for (const h of r.results.filter(usable).slice(0, take)) { hits.set(keyOf(h), h); if (!first.includes(keyOf(h))) first.push(keyOf(h)); if (named.has(l.toLowerCase()) && !exact.includes(keyOf(h))) exact.push(keyOf(h)); } }
   }
   // old law <-> new law: a section the question names in one of the six criminal codes brings its confirmed counterpart (confirmed by both Government tables, src/config/law-mapping.json): "IPC 302" also finds BNS 103, "BNS 103" also finds IPC 302
-  const fetchCounter = async (l: string, take: number) => {
+  const fetchCounter = async (l: string, take: number, actId: string | null = null) => {
     const r = await searchSections(l, 1, 3, { surface: "ask" });
     if (!r.available || r.mode !== "lookup") return [] as string[];
     const got: string[] = [];
-    for (const h of r.results.filter(usable).slice(0, take)) { hits.set(keyOf(h), h); got.push(keyOf(h)); }
+    for (const h of [...r.results.filter(usable)].sort((x, y) => Number(y.actId === actId) - Number(x.actId === actId)).slice(0, take)) { hits.set(keyOf(h), h); got.push(keyOf(h)); }   // the canonical filing of the Act first
     return got;
   };
-  for (const l of [...named].slice(0, 3)) for (const p of counterpartsOfLookup(l).slice(0, 2)) for (const key of await fetchCounter(lookupFor(p), 1)) { if (!first.includes(key)) first.push(key); counterKeys.push(key); }
+  for (const l of [...named].slice(0, 3)) for (const p of counterpartsOfLookup(l).slice(0, 2)) for (const key of await fetchCounter(lookupFor(p), 1, actIdFor(p.law))) { if (!first.includes(key)) first.push(key); counterKeys.push(key); }
   // the search queries: the question, the rewrite's queries (one per Act or issue it names), and up to two that name the Act the question's everyday words point to (src/config/concept-acts.json)
   const conceptQs = conceptQueries(question, 2, [retrievalQuery(question, history), ...extraQueries]);
   const queries = [retrievalQuery(question, history), ...extraQueries, ...conceptQs];
@@ -116,7 +116,7 @@ export async function retrieveSources(question: string, history: { role: string;
     const h = hits.get(key); if (!h || !actSide(h.actTitle)) continue;
     const p = counterparts({ actTitle: h.actTitle, number: h.number }).find((x) => !keys.some((o) => { const g = hits.get(o); return g && actSide(g.actTitle)?.law === x.law && String(g.number).toUpperCase() === x.number.replace(/\(.*$/, "").toUpperCase(); }));
     if (!p) continue;
-    const got = await fetchCounter(lookupFor(p), 1); if (!got.length) continue;
+    const got = await fetchCounter(lookupFor(p), 1, actIdFor(p.law)); if (!got.length) continue;
     const at = keys.indexOf(key); keys = [...keys.slice(0, at + 1), ...got.filter((g) => !keys.includes(g)), ...keys.slice(at + 1)]; cp.push(...got); counterKeys.push(...got);
   }
   const protectedKeys = new Set([...first, ...counterKeys]);
