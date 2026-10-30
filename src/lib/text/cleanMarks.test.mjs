@@ -19,8 +19,10 @@ test("picture placeholders go: comment, markdown image, img tag, [image]", () =>
   assert.equal(c("Signed [image] by the Clerk"), "Signed by the Clerk");
 });
 test("HTML tags go, block tags become line breaks, entities become the real character", () => {
-  assert.equal(c("<p>Rights &amp; duties</p><p>of the &quot;State&quot;</p>"), "Rights & duties\nof the \"State\"\n");
+  assert.equal(c("<p>Rights &amp; duties</p><p>of the &quot;State&quot;</p>"), "Rights & duties\n\nof the \"State\"\n\n");
   assert.equal(c("line one<br/>line two"), "line one\nline two");
+  assert.equal(c("<div>A</div><div>B</div>"), "A\n\nB\n\n");
+  assert.equal(c("<ul><li>one</li><li>two</li></ul>"), "one\ntwo\n\n");
   assert.equal(c("it&#8217;s &lt; 5 years&nbsp;old"), "it’s < 5 years old");
   assert.equal(c("<b>Note</b>: x"), "Note: x");
 });

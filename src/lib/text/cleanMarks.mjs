@@ -14,7 +14,8 @@ const BLOCK_TAGS = "p|div|tr|li|ul|ol|table|thead|tbody|h[1-6]|blockquote|sectio
 const INLINE_TAGS = "span|b|i|u|em|strong|sup|sub|a|font|small|big|tt|td|th|img|head|body|html";
 const KNOWN_TAG = `(?:${BLOCK_TAGS}|${INLINE_TAGS})`;
 const TAG_RE = new RegExp(`</?${KNOWN_TAG}(?:\\s[^<>]*)?/?>`, "gi");
-// a line break where a block ends: </p> </div> </li> ... and <br> <hr>; an opening block tag adds nothing
+// where a block ends: </p> and </div> give a blank line (a paragraph break); other closing blocks (</li> </tr> </h1> ...) and <br> <hr> give one line break; an opening block tag adds nothing
+const PARAGRAPH_END_RE = /^<\/(?:p|div)\b/i;
 const BLOCK_TAG_RE = new RegExp(`^(?:</(?:${BLOCK_TAGS})\\b|<(?:br|hr)\\b)`, "i");
 
 const SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹";
@@ -41,7 +42,7 @@ export const CLEAN_RULES = [
   inline("picture_placeholder", String.raw`<!--\s*image\s*-->|<img\b[^<>]*>|!\[[^\]\n]*\]\([^)\n]*\)|\[(?:image|picture|photo|logo|graphic|illustration)(?:\s*[:\-][^\]\n]{0,80})?\]`, "gi"),
   // HTML comments, then tags (block tags become a line break, the rest are dropped)
   { kind: "html_tag", re: /<!--[\s\S]*?-->/g, to: () => "" },
-  { kind: "html_tag", re: TAG_RE, to: (m) => (BLOCK_TAG_RE.test(m) ? "\n" : /^<\/?t[dh]\b/i.test(m) ? " " : "") },
+  { kind: "html_tag", re: TAG_RE, to: (m) => (PARAGRAPH_END_RE.test(m) ? "\n\n" : BLOCK_TAG_RE.test(m) ? "\n" : /^<\/?t[dh]\b/i.test(m) ? " " : "") },
   // amendment notes: a whole footnote line ("1. Subs. by ...") and a bracketed note ("[Subs. by ...]"). Only the abbreviations Subs./Ins./Rep. are footnote style;
   // "Omitted by" / "Repealed by" can be a real status line, so they are in AMBIGUOUS_RULES.
   { kind: "amendment_note", re: /^[ \t]*\d{1,3}\.[ \t]+(?:Subs|Ins|Rep)\.(?=[^\n]*\bby\b)[^\n]*(?:\n|$)/gm, to: () => "" },
