@@ -18,6 +18,7 @@ export function ProvenanceNote({ sectionStatusLabel }: { sectionStatusLabel?: st
   return (
     <Notice title="Where this text comes from" role="note">
       <p>Source dataset: <a className="underline" href={PROVENANCE.datasetUrl} target="_blank" rel="noopener noreferrer">{PROVENANCE.dataset}</a>. Snapshot {PROVENANCE.snapshot}. Licence: {PROVENANCE.licence}.</p>
+      <p>Data sources and permissions: the Act text comes from open-india-law (CC BY 4.0) and from India Code, whose text is republished with written permission.</p>
       <p>The text was extracted by machine from official documents. It can contain errors, gaps or scrambled characters, so every section shows a quality flag{sectionStatusLabel ? <> (this section: <strong className="font-medium text-foreground">{sectionStatusLabel}</strong>)</> : null}. {" "}{CHAPTER_NOTE} Not legal advice; check the official source.</p>
     </Notice>
   );

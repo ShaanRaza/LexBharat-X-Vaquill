@@ -43,7 +43,7 @@ All names are in [`.env.example`](.env.example), with a comment for each. Secret
 ## Data and licences
 
 - Legal data: [open-india-law](https://huggingface.co/datasets/vaquill/open-india-law) by Vaquill AI, compiled from India Code and regulator websites, **CC BY 4.0** (credited on every page that uses it). Source judgment PDFs: eCourts and the Supreme Court of India, published on the AWS Open Data Registry by Dattam Labs (CC BY 4.0).
-- `content/supplement/` holds section text copied by hand from India Code's Act PDFs to fill gaps in the dataset. **Permission to republish that text has not been confirmed** (`docs/INDIA-CODE-PERMISSION-EMAIL.md`); keep this repository private until it is.
+- `content/supplement/` holds section text copied by hand from India Code's Act PDFs to fill gaps in the dataset. Written permission to republish the India Code text has been received (details in [`docs/PERMISSIONS.md`](docs/PERMISSIONS.md)). Each row keeps its "Source: India Code, copied <date>" label.
 - Fonts: Geist, Geist Mono, Source Serif 4, IBM Plex Sans Devanagari (SIL Open Font License). See [`NOTICE.md`](NOTICE.md).
 
 ## Where to read more

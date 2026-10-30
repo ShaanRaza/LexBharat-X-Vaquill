@@ -36,7 +36,7 @@ const ADD = `
 - Section numbers are reused by other text: the Code of Civil Procedure, 1908 holds Order and rule text under numbers 11 and 20; the NI Act's numbers run past 148 because amending text is filed under it.
 
 ## Can gaps be filled from India Code later? (terms check, no India Code text fetched)
-**Finding: not confirmed. Do not copy from India Code until written permission or an explicit licence is found.**
+**Finding at the time (2026-10-24): not confirmed. Update: written permission to republish the India Code text has since been received; see `docs/PERMISSIONS.md`.**
 - India Code's disclaimer page (https://www.indiacode.nic.in/disclaimer.jsp?locale=en) is reachable in a browser but returned **HTTP 403 Forbidden** to this tool, and so did the home page: the site refuses automated requests. Its text could therefore not be read here. A search describes it as an accuracy disclaimer only (content provided "as is"; the English version of an Act controls if versions differ), not a licence for reuse.
 - I found **no page on indiacode.nic.in that grants or forbids reuse or bulk copying**. Government of India sites often carry a separate website-policies page (https://igod.gov.in/website_policies, which failed here with a certificate error) and some publish under the Government Open Data License - India (GODL-India), which allows use, adaptation and publication with attribution; but nothing I could reach says India Code content is under GODL-India.
 - The open-india-law dataset we use says it was compiled from India Code under CC BY 4.0, which is the compiler's claim about its own compilation, not India Code's licence.

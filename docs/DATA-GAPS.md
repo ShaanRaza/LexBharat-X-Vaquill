@@ -361,7 +361,7 @@ The dataset holds 15 forums, **813,168 matters** (CAT 162,439 + 181,429 case-inf
 
 ## 5. Top 20 fix list
 
-Effort: S small, M medium, L large. Cost: free, paid, permission (India Code or a download only you can do). **Now ₹0** = can start today with what we hold.
+Effort: S small, M medium, L large. Cost: free, paid, permission (a download only you can do; written permission to republish India Code text has been received, see `docs/PERMISSIONS.md`, but check its limits before relying on it for new Acts). **Now ₹0** = can start today with what we hold.
 
 | # | Fix | Effort | Cost | Now ₹0? |
 |---:|---|---|---|---|

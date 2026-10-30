@@ -1,6 +1,8 @@
-# Draft email: permission to reuse India Code text (not sent)
+# Draft email: permission to reuse India Code text (historical draft)
 
-Nothing has been sent. Edit the square brackets, find the current contact address (the "Contact us" page of India Code, or the Legislative Department, Ministry of Law and Justice, at legislative.gov.in; NIC runs the portal) and send it yourself. Keep a copy of any reply: a written yes is what unlocks `content/supplement/`, and a written "how" is what would allow an automated fetch later.
+> **Status: written permission has since been received. See `docs/PERMISSIONS.md`. This draft is kept for history only; the reply itself is not stored in this repository.**
+
+Original note: nothing had been sent when this was written. Edit the square brackets, find the current contact address (the "Contact us" page of India Code, or the Legislative Department, Ministry of Law and Justice, at legislative.gov.in; NIC runs the portal) and send it yourself. Keep a copy of any reply: a written yes is what unlocks `content/supplement/`, and a written "how" is what would allow an automated fetch later.
 
 **To:** [India Code / Legislative Department / NIC contact address]
 **Subject:** Request for permission to reuse India Code text in a non-commercial legal research tool, with attribution

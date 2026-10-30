@@ -20,5 +20,5 @@ qa/us-map-after.jpg
 public/data/
 src/content/templates.generated.json
 
-# India Code Act PDFs used to fill content/supplement (reuse terms not confirmed; the list is in content/supplement/pdfs/SOURCES.md)
+# India Code Act PDFs used to fill content/supplement (the PDFs are not committed; the list is in content/supplement/pdfs/SOURCES.md; permissions: docs/PERMISSIONS.md)
 content/supplement/pdfs/*.pdf

@@ -4,7 +4,7 @@
 
 Each `.txt` file here is one section that is missing or wrong in our data. Everything else is built: when a file is filled and loaded, the section appears on its Act page with "Source: India Code, copied <date>", and Search, smart search, Chat, Drafting and Review all find and use it.
 
-**Only copy text you are allowed to use** (see `docs/INDIA-CODE-PERMISSION-EMAIL.md`). Until you have permission, leave the text areas empty: nothing is loaded from an empty file.
+**Only copy text you are allowed to use.** Written permission to republish the India Code text has been received (see `docs/PERMISSIONS.md`; check its "Any limits" column before copying more). A file with an empty text area is skipped: nothing is loaded from it.
 
 ## The 3 steps
 1. **Open a file** (for example `contract-section-028.txt`). Fill in three lines: `Source URL:` (the web address you copied the text from), `Date copied:` (like `2026-10-24`) and, if you like, `Heading:` (the short title of the section). Leave the other lines as they are.
