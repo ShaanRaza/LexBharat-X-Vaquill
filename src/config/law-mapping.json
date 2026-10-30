@@ -1,0 +1,402 @@
+{
+ "_note": "One shared old-law to new-law table. Used by the Old law to new law page and by src/lib/acts/lawMapping.mjs. Format and how to add rows: see src/config/README-law-mapping.md. A row is verified only if this repo itself states the mapping; the repo states Act-to-Act pairs only (the laws block), no section-to-section pairs, so every row below is unverified.",
+ "inForceFrom": "2024-07-01",
+ "laws": {
+  "ipc": {
+   "label": "IPC",
+   "name": "Indian Penal Code, 1860",
+   "actId": "IND_REP_659_1860",
+   "kind": "old",
+   "replacedBy": "bns",
+   "status": "verified",
+   "source": "src/config/repealed-acts.json: pairs this Act with its replacement as a whole; src/config/status-overrides.json gives 1 July 2024 as the date in force"
+  },
+  "crpc": {
+   "label": "CrPC",
+   "name": "Code of Criminal Procedure, 1973",
+   "actId": "IND_state_6796",
+   "kind": "old",
+   "replacedBy": "bnss",
+   "status": "verified",
+   "source": "src/config/repealed-acts.json: pairs this Act with its replacement as a whole; src/config/status-overrides.json gives 1 July 2024 as the date in force"
+  },
+  "evidence": {
+   "label": "Evidence Act",
+   "name": "Indian Evidence Act, 1872",
+   "actId": "IND_REP_971_1872",
+   "kind": "old",
+   "replacedBy": "bsa",
+   "status": "verified",
+   "source": "src/config/repealed-acts.json: pairs this Act with its replacement as a whole; src/config/status-overrides.json gives 1 July 2024 as the date in force"
+  },
+  "bns": {
+   "label": "BNS",
+   "name": "Bharatiya Nyaya Sanhita, 2023",
+   "actId": "IND_central_20062",
+   "kind": "new",
+   "replaces": "ipc",
+   "status": "verified",
+   "source": "src/config/repealed-acts.json: pairs this Act with its replacement as a whole; src/config/status-overrides.json gives 1 July 2024 as the date in force"
+  },
+  "bnss": {
+   "label": "BNSS",
+   "name": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+   "actId": "IND_central_20099",
+   "kind": "new",
+   "replaces": "crpc",
+   "status": "verified",
+   "source": "src/config/repealed-acts.json: pairs this Act with its replacement as a whole; src/config/status-overrides.json gives 1 July 2024 as the date in force"
+  },
+  "bsa": {
+   "label": "BSA",
+   "name": "Bharatiya Sakshya Adhiniyam, 2023",
+   "actId": "IND_central_20063",
+   "kind": "new",
+   "replaces": "evidence",
+   "status": "verified",
+   "source": "src/config/repealed-acts.json: pairs this Act with its replacement as a whole; src/config/status-overrides.json gives 1 July 2024 as the date in force"
+  }
+ },
+ "rows": [
+  {
+   "old_law": "ipc",
+   "old_section": "120B",
+   "old_title": "Punishment of criminal conspiracy",
+   "new_law": "bns",
+   "new_section": "61(2)",
+   "new_title": "Criminal conspiracy",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "ipc",
+   "old_section": "302",
+   "old_title": "Punishment for murder",
+   "new_law": "bns",
+   "new_section": "103(1)",
+   "new_title": "Punishment for murder",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "ipc",
+   "old_section": "304",
+   "old_title": "Punishment for culpable homicide not amounting to murder",
+   "new_law": "bns",
+   "new_section": "105",
+   "new_title": "Punishment for culpable homicide not amounting to murder",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "ipc",
+   "old_section": "304A",
+   "old_title": "Causing death by negligence",
+   "new_law": "bns",
+   "new_section": "106(1)",
+   "new_title": "Causing death by negligence",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "ipc",
+   "old_section": "304B",
+   "old_title": "Dowry death",
+   "new_law": "bns",
+   "new_section": "80",
+   "new_title": "Dowry death",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "ipc",
+   "old_section": "307",
+   "old_title": "Attempt to murder",
+   "new_law": "bns",
+   "new_section": "109",
+   "new_title": "Attempt to murder",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "ipc",
+   "old_section": "323",
+   "old_title": "Punishment for voluntarily causing hurt",
+   "new_law": "bns",
+   "new_section": "115(2)",
+   "new_title": "Voluntarily causing hurt",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "ipc",
+   "old_section": "354",
+   "old_title": "Assault or criminal force to woman with intent to outrage her modesty",
+   "new_law": "bns",
+   "new_section": "74",
+   "new_title": "Assault or criminal force to woman with intent to outrage her modesty",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "ipc",
+   "old_section": "376",
+   "old_title": "Punishment for rape",
+   "new_law": "bns",
+   "new_section": "64",
+   "new_title": "Punishment for rape",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "ipc",
+   "old_section": "379",
+   "old_title": "Punishment for theft",
+   "new_law": "bns",
+   "new_section": "303(2)",
+   "new_title": "Theft",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "ipc",
+   "old_section": "406",
+   "old_title": "Punishment for criminal breach of trust",
+   "new_law": "bns",
+   "new_section": "316(2)",
+   "new_title": "Criminal breach of trust",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "ipc",
+   "old_section": "420",
+   "old_title": "Cheating and dishonestly inducing delivery of property",
+   "new_law": "bns",
+   "new_section": "318(4)",
+   "new_title": "Cheating and dishonestly inducing delivery of property",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "ipc",
+   "old_section": "498A",
+   "old_title": "Husband or relative of husband of a woman subjecting her to cruelty",
+   "new_law": "bns",
+   "new_section": "85",
+   "new_title": "Husband or relative of husband of a woman subjecting her to cruelty",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "ipc",
+   "old_section": "499",
+   "old_title": "Defamation",
+   "new_law": "bns",
+   "new_section": "356",
+   "new_title": "Defamation",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "ipc",
+   "old_section": "506",
+   "old_title": "Punishment for criminal intimidation",
+   "new_law": "bns",
+   "new_section": "351",
+   "new_title": "Criminal intimidation",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "ipc",
+   "old_section": "509",
+   "old_title": "Word, gesture or act intended to insult the modesty of a woman",
+   "new_law": "bns",
+   "new_section": "79",
+   "new_title": "Word, gesture or act intended to insult the modesty of a woman",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "crpc",
+   "old_section": "41",
+   "old_title": "When police may arrest without warrant",
+   "new_law": "bnss",
+   "new_section": "35",
+   "new_title": "When police may arrest without warrant",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "crpc",
+   "old_section": "125",
+   "old_title": "Order for maintenance of wives, children and parents",
+   "new_law": "bnss",
+   "new_section": "144",
+   "new_title": "Order for maintenance of wives, children and parents",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "crpc",
+   "old_section": "154",
+   "old_title": "Information in cognizable cases",
+   "new_law": "bnss",
+   "new_section": "173",
+   "new_title": "Information in cognizable cases",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "crpc",
+   "old_section": "156",
+   "old_title": "Police officer's power to investigate cognizable case",
+   "new_law": "bnss",
+   "new_section": "175",
+   "new_title": "Police officer's power to investigate cognizable case",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "crpc",
+   "old_section": "164",
+   "old_title": "Recording of confessions and statements",
+   "new_law": "bnss",
+   "new_section": "183",
+   "new_title": "Recording of confessions and statements",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "crpc",
+   "old_section": "167",
+   "old_title": "Procedure when investigation cannot be completed in twenty-four hours",
+   "new_law": "bnss",
+   "new_section": "187",
+   "new_title": "Procedure when investigation cannot be completed in twenty-four hours",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "crpc",
+   "old_section": "173",
+   "old_title": "Report of police officer on completion of investigation",
+   "new_law": "bnss",
+   "new_section": "193",
+   "new_title": "Report of police officer on completion of investigation",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "crpc",
+   "old_section": "200",
+   "old_title": "Examination of complainant",
+   "new_law": "bnss",
+   "new_section": "223",
+   "new_title": "Examination of complainant",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "crpc",
+   "old_section": "437",
+   "old_title": "When bail may be taken in case of non-bailable offence",
+   "new_law": "bnss",
+   "new_section": "480",
+   "new_title": "When bail may be taken in case of non-bailable offence",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "crpc",
+   "old_section": "438",
+   "old_title": "Direction for grant of bail to person apprehending arrest",
+   "new_law": "bnss",
+   "new_section": "482",
+   "new_title": "Direction for grant of bail to person apprehending arrest",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "crpc",
+   "old_section": "439",
+   "old_title": "Special powers of High Court or Court of Session regarding bail",
+   "new_law": "bnss",
+   "new_section": "483",
+   "new_title": "Special powers of High Court or Court of Session regarding bail",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "crpc",
+   "old_section": "482",
+   "old_title": "Saving of inherent powers of High Court",
+   "new_law": "bnss",
+   "new_section": "528",
+   "new_title": "Saving of inherent powers of High Court",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "evidence",
+   "old_section": "3",
+   "old_title": "Interpretation clause",
+   "new_law": "bsa",
+   "new_section": "2",
+   "new_title": "Definitions",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "evidence",
+   "old_section": "45",
+   "old_title": "Opinions of experts",
+   "new_law": "bsa",
+   "new_section": "39",
+   "new_title": "Opinions of experts",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "evidence",
+   "old_section": "65B",
+   "old_title": "Admissibility of electronic records",
+   "new_law": "bsa",
+   "new_section": "63",
+   "new_title": "Admissibility of electronic records",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "evidence",
+   "old_section": "101",
+   "old_title": "Burden of proof",
+   "new_law": "bsa",
+   "new_section": "104",
+   "new_title": "Burden of proof",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "evidence",
+   "old_section": "106",
+   "old_title": "Burden of proving fact especially within knowledge",
+   "new_law": "bsa",
+   "new_section": "109",
+   "new_title": "Burden of proving fact especially within knowledge",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  },
+  {
+   "old_law": "evidence",
+   "old_section": "114",
+   "old_title": "Court may presume existence of certain facts",
+   "new_law": "bsa",
+   "new_section": "119",
+   "new_title": "Court may presume existence of certain facts",
+   "status": "unverified",
+   "source": "Recalled from general knowledge by the assistant that drafted this file; no document in this repo or the Acts data was used to check it."
+  }
+ ]
+}

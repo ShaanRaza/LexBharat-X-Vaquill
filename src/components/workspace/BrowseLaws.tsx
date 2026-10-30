@@ -140,6 +140,7 @@ export default function BrowseLaws({ initialTab }: { initialTab: "judgments" | "
         </div>
       ) : (
         <div role="tabpanel" className="mt-6">
+          <p className="mb-4 text-ui-base"><Link href="/workspace/browse/old-to-new" className="font-medium text-primary hover:underline">Old law to new law</Link> <span className="text-secondary">: how IPC, CrPC and the Evidence Act map to BNS, BNSS and BSA</span></p>
           {q.trim().length >= 2 && <SectionSearchResults q={q.trim()} />}
           {q.trim().length >= 2 && <h2 className="mt-8 text-ui-lead font-semibold">Acts whose title matches</h2>}
           <div className="mt-2 flex flex-wrap items-end gap-3">
