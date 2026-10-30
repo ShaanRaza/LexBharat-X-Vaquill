@@ -7,6 +7,8 @@ import { chooseMode, distinctSections, highlightQuery, rankSections } from "./se
 import { embedQuery, voyageConfigured } from "./embed";
 import { regulatoryStore } from "./vectorStore";
 import { regConfigured, regQuery } from "./regDb";
+import { fellBackBecause, type SemanticInfo } from "./meaning.mjs";
+import { meaningFellBack, meaningUsed } from "./meaningLog";
 import { MARK_CLOSE, MARK_OPEN, MAX_RESULTS, type SearchOutcome, type SectionHit } from "./searchStore";
 
 export const REG_TSV = `(setweight(to_tsvector('english', coalesce(s.heading, '')), 'A') || setweight(to_tsvector('english', left(coalesce(s.body, ''), 600000)), 'B'))`;
@@ -73,11 +75,12 @@ async function semanticRegulators(q: string, page: number, pageSize: number): Pr
 async function searchRegulatorsRaw(q: string, page: number, pageSize: number, opts: { exact?: boolean } = {}): Promise<SearchOutcome> {
   if (!regConfigured()) return { available: false, reason: "not_configured", message: "Regulator text search is not available yet." };
   const chosen = chooseMode(q, { exact: !!opts.exact, hindi: hasDevanagari(q), semanticReady: regSemanticReady() });
+  let sem: SemanticInfo = { used: false, ...(chosen.reason ? { reason: chosen.reason } : {}) };
   if (chosen.mode === "semantic" && hasSearchableChars(q)) {
-    try { return await semanticRegulators(q, page, pageSize); } catch { /* fall back to keyword search */ }
-  }
+    try { const r = await semanticRegulators(q, page, pageSize); meaningUsed("regulators"); return r; } catch (e) { sem = fellBackBecause(meaningFellBack("regulators", e)); }   // keyword search answers, and the reader is told
+  } else if (chosen.reason === "semantic_unavailable") sem = fellBackBecause(meaningFellBack("regulators", new Error("no voyage key")));
   const out = await textRegulators(q, page, pageSize);
-  return out.available ? { ...out, semantic: { used: false, ...(chosen.reason ? { reason: chosen.reason } : {}) } } : out;
+  return out.available ? { ...out, semantic: sem } : out;
 }
 
 export async function searchRegulators(q: string, page: number, pageSize: number, opts: { exact?: boolean } = {}): Promise<SearchOutcome> { return tidyTitles(await searchRegulatorsRaw(q, page, pageSize, opts)); }

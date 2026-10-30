@@ -41,7 +41,7 @@ async function ask(message) {
     let i; while ((i = buf.indexOf("\n")) >= 0) {
       const line = buf.slice(0, i).trim(); buf = buf.slice(i + 1); if (!line) continue;
       let ev; try { ev = JSON.parse(line); } catch { continue; }
-      if (ev.type === "start") out.chatId = ev.chatId; else if (ev.type === "sources") { out.sources = ev.sources; out.queries = ev.queries ?? []; out.mode = ev.searchMode; }
+      if (ev.type === "start") out.chatId = ev.chatId; else if (ev.type === "sources") { out.sources = ev.sources; out.queries = ev.queries ?? []; out.mode = ev.searchMode; out.meaning = ev.meaning ?? null; }
       else if (ev.type === "delta") out.text += ev.text; else if (ev.type === "replace") out.text = ev.text; else if (ev.type === "check") out.check = { label: ev.label }; else if (ev.type === "note") out.notes.push(ev.text); else if (ev.type === "error") out.error = ev.code;
     }
   }
@@ -88,7 +88,7 @@ for (const q of qs) {
   const seenKeys = new Set(), dupSources = (a.sources ?? []).some((src) => { const k = copyKey(src.actTitle, src.number); if (!k) return false; if (seenKeys.has(k)) return true; seenKeys.add(k); return false; });
   const hedgeFirst = !notfoundQ && !!openingHedge(a.text ?? "");
   const correct = notfoundQ ? nf : judged && !openedNotFound && mentions && !forbidden.length && !dupCites && !hedgeFirst;
-  const row = { id: q.id, kind: q.kind ?? null, question: q.question, gold: [...goldKeys], goldFound: notfoundQ || perGold.every((r) => r.length > 0), oldMention, openedNotFound, dupCites, dupSources, hedgeFirst, mentions: q.mustMention ? mentions : null, forbidden: q.forbid ? forbidden : null, retrieved: notfoundQ ? nf : rank >= 0, rank: rank >= 0 && !notfoundQ ? rank + 1 : null, cited: notfoundQ ? nf : cited, correct, notFound: nf, check: a.check?.label ?? null, error: a.error ?? null, secs: +secs.toFixed(1), nSources: a.sources?.length ?? 0, queries: a.queries, topSources: (a.sources ?? []).slice(0, 5).map((s) => `${s.actTitle} s${s.number ?? "?"}`), answer: (a.text ?? "").slice(0, 1200), sources: (a.sources ?? []).map((src) => ({ n: src.n, t: src.actTitle, s: src.number ?? null })) };
+  const row = { id: q.id, kind: q.kind ?? null, question: q.question, gold: [...goldKeys], goldFound: notfoundQ || perGold.every((r) => r.length > 0), oldMention, openedNotFound, dupCites, dupSources, hedgeFirst, mentions: q.mustMention ? mentions : null, forbidden: q.forbid ? forbidden : null, retrieved: notfoundQ ? nf : rank >= 0, rank: rank >= 0 && !notfoundQ ? rank + 1 : null, cited: notfoundQ ? nf : cited, correct, notFound: nf, check: a.check?.label ?? null, error: a.error ?? null, secs: +secs.toFixed(1), nSources: a.sources?.length ?? 0, queries: a.queries, meaning: a.meaning ?? null, topSources: (a.sources ?? []).slice(0, 5).map((s) => `${s.actTitle} s${s.number ?? "?"}`), answer: (a.text ?? "").slice(0, 1200), sources: (a.sources ?? []).map((src) => ({ n: src.n, t: src.actTitle, s: src.number ?? null })) };
   row.score = (row.retrieved ? 1 : 0) + (row.cited ? 1 : 0) + (correct ? 1 : 0);   // a question that must be "not found" scores 3 only if the answer says so
   done.rows.push(row); fs.writeFileSync(OUT, JSON.stringify(done, null, 1));
   console.log(`q${q.id} ${row.score}/3 retrieved=${row.retrieved}${row.rank ? `@${row.rank}` : ""} cited=${cited} correct=${correct}${nf ? " NOTFOUND" : ""}${a.error ? " ERR " + a.error : ""} ${secs.toFixed(0)}s`);
@@ -100,5 +100,7 @@ if (!CHECK) {
   const kinds = [...new Set(rows.map((r) => r.kind).filter(Boolean))];
   for (const k of kinds) { const rs = rows.filter((r) => r.kind === k); console.log(`  ${k}: ${rs.reduce((s, r) => s + r.score, 0)}/${3 * rs.length}`); }
   const flag = (k) => rows.filter((r) => r[k]).length; console.log(`  answer quality: duplicate citation in a sentence ${flag("dupCites")}, same section twice among the sources ${flag("dupSources")}, hedge before the answer ${flag("hedgeFirst")}, opened with "couldn't find" ${flag("openedNotFound")}, cited a section that does not apply ${rows.filter((r) => r.forbidden?.length).length}`);
+  { const m = rows.filter((r) => r.meaning), used = m.reduce((a, r) => a + r.meaning.used, 0), fell = m.reduce((a, r) => a + r.meaning.fellBack, 0), jf = m.filter((r) => r.meaning.judgmentsFailed).length;   // search by meaning vs exact-word fallback (src/lib/acts/meaning.mjs)
+    console.log(`  search by meaning: ${used} searches used vectors, ${fell} fell back to exact words${used + fell ? ` (${(100 * fell / (used + fell)).toFixed(1)}%)` : ""}; Supreme Court passages failed on ${jf} question(s); ${m.filter((r) => r.meaning.fellBack).length} of ${m.length} questions had at least one fallback`); }
   const old = rows.filter((r) => r.oldMention !== null); if (old.length) console.log(`  answers that name the old section as the old law: ${old.filter((r) => r.oldMention).length}/${old.length}`);
 }

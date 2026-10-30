@@ -38,10 +38,11 @@ async function callVoyage(inputs: string[], dim: number): Promise<number[][]> {
   return callVoyageRaw(inputs, dim, apiKey);
 }
 async function callVoyageRaw(inputs: string[], dim: number, apiKey: string): Promise<number[][]> {
+  // a network failure is reported as "voyage unreachable" (a timeout keeps its own name): the cause (src/lib/acts/meaning.mjs) must name Voyage, never the vector database
   const r = await fetch(VOYAGE_URL, {
     method: "POST", headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" }, cache: "no-store", signal: AbortSignal.timeout(10000),
     body: JSON.stringify({ input: inputs, model: VOYAGE_MODEL, input_type: "query", output_dimension: dim }),
-  });
+  }).catch((e: Error) => { throw e?.name === "TimeoutError" || e?.name === "AbortError" ? e : new Error("voyage unreachable"); });
   if (!r.ok) throw new Error(`voyage ${r.status}`);
   const j = (await r.json()) as { data?: { index: number; embedding: number[] }[]; usage?: { total_tokens?: number } };
   const vecs = (j.data ?? []).sort((a, b) => a.index - b.index).map((d) => d.embedding);

@@ -7,7 +7,7 @@ export const OLD_WORDING = [/Browse Laws/, /\bWorkspace\b/, /Legal Data (&|and|&
 /** Things that must never be printed on a finished page: source junk (the display layer's residue list) and programming leftovers. */
 export const RAW_ON_PAGE = {
   ...Object.fromEntries(Object.entries(RESIDUE).filter(([k]) => !/runs of spaces|space before punctuation/.test(k))),   // rendered innerText collapses spaces; layout spacing is not source junk
-  "undefined / null / NaN as text": /(?:^|[\s>(])(?:undefined|NaN|null)(?:$|[\s<.,;:)])/,
+  "undefined / null / NaN as text": /(?:^|[\s>(])(?:undefined|NaN|null(?! and void))(?:$|[\s<.,;:)])/,
   "[object Object]": /\[object Object\]/,
   "unfilled template {{ }} or ${ }": /\{\{|\$\{/,
   "percent-encoded text %20": /%20/,

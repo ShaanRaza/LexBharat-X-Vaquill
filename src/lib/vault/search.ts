@@ -1,6 +1,7 @@
 // Finds the passages of the attached documents that answer a question. LOGIC ONLY. Meaning search (Voyage query vector against the stored 256-d vectors) plus keyword ranking, merged; if the query
 // vector cannot be made (Voyage busy) or a document has no vectors yet, keyword ranking alone is used. Only documents of this browser are ever searched.
 import { embedQuery } from "@/lib/acts/embed";
+import { meaningFellBack, meaningUsed } from "@/lib/acts/meaningLog";
 import type { ChatSource } from "@/lib/chat/retrieve";
 import { lexicalRank } from "./lexical.mjs";
 import { chunksOf, getDocs, matchChunks, scanPageNumbers, type Passage, type VaultDoc } from "./store";
@@ -15,7 +16,7 @@ export async function searchAttached(bid: string, docIds: string[], question: st
   let mode: "meaning+keywords" | "keywords" = "keywords";
   const allEmbedded = docs.every((d) => d.chunkCount > 0 && d.embeddedCount >= d.chunkCount);
   if (!opts.keywordsOnly && docs.some((d) => d.embeddedCount > 0)) {   // keywordsOnly: no query embedding is made (the free Voyage plan allows 3 a minute)
-    try { const v = await embedQuery(question); for (const m of (await matchChunks(bid, ids, v, 6)).filter((x) => x.similarity > 0.15)) put(m, "meaning"); mode = "meaning+keywords"; } catch { /* keyword ranking below */ }
+    try { const v = await embedQuery(question); for (const m of (await matchChunks(bid, ids, v, 6)).filter((x) => x.similarity > 0.15)) put(m, "meaning"); mode = "meaning+keywords"; meaningUsed("vault"); } catch (e) { meaningFellBack("vault", e); /* keyword ranking below; the Ask route tells the reader */ }
   }
   const all = await chunksOf(bid, ids);
   for (const p of lexicalRank(question, all, mode === "meaning+keywords" && allEmbedded ? 3 : 6)) put(p, "keywords");

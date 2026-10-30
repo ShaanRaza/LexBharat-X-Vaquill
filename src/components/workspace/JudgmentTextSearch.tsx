@@ -1,12 +1,13 @@
 "use client";
 import Link from "next/link";
+import { noticeFor, type SemanticInfo } from "@/lib/acts/meaning.mjs";
 import { useEffect, useState } from "react";
 import { Badge, Highlight, Notice, Panel, Toggle } from "@/components/kit";
 
 // Search INSIDE Supreme Court judgment text (GET /api/judgments/search-text): by meaning (default) or by words. Presentation and fetching only; the search lives in src/lib/judgments/scText.ts.
 // Colours, sizes and radii come from the tokens through Tailwind names and the shared kit.
 type Hit = { caseId: string; year: number; title: string; citation: string | null; decisionDate: string | null; disposition: string | null; chunk: number; page: number | null; passage: string; count: number | null };
-type Resp = { available: boolean; message?: string; results: Hit[]; total: number; page: number; pageSize: number; hasMore: boolean; mode?: "meaning" | "words"; modes?: { meaning: boolean; words: boolean }; note?: string };
+type Resp = { available: boolean; message?: string; results: Hit[]; total: number; page: number; pageSize: number; hasMore: boolean; mode?: "meaning" | "words"; modes?: { meaning: boolean; words: boolean }; note?: string; semantic?: SemanticInfo };
 
 export default function JudgmentTextSearch({ q }: { q: string }) {
   const [mode, setMode] = useState<"meaning" | "words">("meaning"), [page, setPage] = useState(1), [data, setData] = useState<Resp | null>(null), [err, setErr] = useState(""), [retry, setRetry] = useState(0);
@@ -31,6 +32,7 @@ export default function JudgmentTextSearch({ q }: { q: string }) {
       {!data && !err && <div className="mt-3 space-y-2" aria-busy="true">{[0, 1].map((i) => <div key={i} className="console-skel h-20 rounded-card bg-accent" />)}</div>}
       {data?.available && (
         <>
+          {noticeFor(data.semantic) && <Notice tone="warn" role="status" compact className="mt-2"><p>{noticeFor(data.semantic)}</p></Notice>}
           {data.note && <p className="mt-1 text-ui-sm text-muted">{data.note}</p>}
           <ul className="mt-3 space-y-2">
             {data.results.map((h) => (

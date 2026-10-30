@@ -68,7 +68,7 @@ Also seen: running heads in judgments ("SUPREME COURT REPORTS", 10,633 judgments
 
 ## Browser sweep (`npm run ui-sweep`), Oct 29, 2026
 
-Run before every push. It starts its own server (`scripts/ui-sweep/serve.sh`, port 3300: no AI keys, no Supabase, nothing written, no model quota; Ask is answered from a canned stream with real sections) and opens 25 page types in Chrome at 1280 px and 375 px: Desk, Ask (empty; with an answer and the cited panel, on a phone the bottom sheet opened), Search (Laws, Judgments, Your documents), Library (overview, Acts, Constitution, Regulators, Judgments, a court), a law page, an Act, a regulator document, a judgment, Work (Drafts, Reviews, Vault), Terms, Privacy, Security, the password page, the error page, the 404 page. It also opens 3 addresses of every kind of link found (69 of 853) to see that none leads to an error.
+Run before every push. It starts its own server (`scripts/ui-sweep/serve.sh`, port 3300: no AI keys, no Supabase, nothing written, no model quota; Ask is answered from a canned stream with real sections) and opens 27 page types in Chrome at 1280 px and 375 px: Desk, Ask (empty; with an answer and the cited panel, on a phone the bottom sheet opened), Search (Laws, Judgments, Your documents, and Laws and Judgments with meaning search busy: the fallback notice must be on the page), Library (overview, Acts, Constitution, Regulators, Judgments, a court), a law page, an Act, a regulator document, a judgment, Work (Drafts, Reviews, Vault), Terms, Privacy, Security, the password page, the error page, the 404 page. It also opens 3 addresses of every kind of link found (69 of 853) to see that none leads to an error.
 Checks: **hidden** (under the header or the tab bar: at the top, at the bottom, after keyboard focus, sticky columns), **hscroll**, **raw** (the display layer's residue list plus programming leftovers, and per-page rules: a regulator document must not mention India Code or say "Section"; a case name must not end in "versus"), **wording** (old design, developer wording, "placeholder"), **clickable** (pointer cursor on a non-control, links to nowhere, nameless buttons, links to error pages), **console** (console errors, failed requests, broken images). A self-test page with one planted defect per check runs first: if the sweep stops seeing one it fails before looking at the app. Exceptions go in `scripts/ui-sweep/allow.json`, each with a reason. Screenshots: `.ui-sweep/<viewport>/<page>.png` (not committed).
 
 ### What the first runs found (all fixed in shared code; each class now has a check)
@@ -82,3 +82,45 @@ Checks: **hidden** (under the header or the tab bar: at the top, at the bottom, 
 | E developer wording on a user page ("restart the dev server" on the error page) | 1 | reworded; "dev server" and "placeholder" added to the old-wording list (`scripts/ui-sweep/rules.mjs`, shared with the unit audit) | `ui-audit.test.mjs`; sweep wording check |
 
 Not fixed, listed in `allow.json` or here: Terms, Privacy and Security still say "recreated placeholder" (Phase 7 replaces them); on a phone the tab rows (Search, Library) scroll sideways and the first or last tab can show cut off (by design, no hint that more is there); `2 texts still show junk` in `clean-check` (garbled OCR); the Vault page showed "not set up" because the sweep server has no storage.
+
+## Search by meaning: stored vectors, and silent fallback (Oct 30, 2026)
+
+Re-run the checks with `npm run verify-vectors` (read-only; one Voyage request) and `node scripts/eval/vector-share.mjs`.
+
+### Do the stored vectors match the query embedding?
+Yes. Queries: voyage-4, 256 dimensions, input_type "query" (`src/lib/acts/embed.ts`: `VOYAGE_MODEL`, `EMBED_DIM`; the store asks for its own size, `vectorStore.ts`: `NEON_DIM = 256`). Stored: every table is `halfvec(256)` (`scripts/verify/dims.mjs`: central about 77k rows, state 462k, supplement 3k, regulatory 515k, Supreme Court 366k). They were made by the dataset's voyage-4 at 1024-d, truncated to 256 and renormalised (`export-*-vectors.mjs`, `load-qdrant-vectors.mjs`: Matryoshka, the same as asking for 256), and the gap-fillers by voyage-4 at 256 (`embed-missing.mjs`, `load-supplement.mjs`). Measured (`scripts/verify/model-check.mjs`: 3 stored passages per corpus re-embedded with voyage-4/256 and compared with the stored vector): cosine 0.93-0.95 central, 0.99 state, 0.89-0.98 regulatory, 0.87-0.90 Supreme Court, against 0.12-0.46 for random stored vectors. A different model or size would sit at the random level. The lower Supreme Court and regulatory figures are most likely chunk text that is not byte-identical to the dataset's own chunks (not checked chunk by chunk); either way they are far above the random level.
+
+### Vector search alone gives the right sections (`scripts/verify/vector-only.mjs`: the app's own embedding and stores, no keywords, synonyms, boosts or lookups)
+| Query | Expected | Rank |
+|---|---|---|
+| punishment for stealing | BNS 303 / IPC 379 | IPC 379 at 2, BNS 303 at 5 (a draft-stage BNS record at 1) |
+| notice after cheque bounces | NI Act 138 | 5 (s.106, 93, 85, 30 above it: all NI notice and drawer sections) |
+| time limit for filing a consumer complaint | Consumer Protection Act limitation | 1 |
+| bail for a non-bailable offence | CrPC 437 / BNSS 480 | 2 |
+| cruelty by husband or his relatives | IPC 498A / BNS 85 | IPC 498A at 1, BNS 85 at 3 |
+| insider trading disclosure obligations of promoters (regulators) | SEBI PIT Regulations | 1 |
+| right to privacy is a fundamental right under Article 21 (Supreme Court) | the privacy judgment | 2017_INSC_801 at 1 |
+Expected section in the top 3: 5 of 6 (the miss is NI Act s.138, at 5, behind four other NI Act notice and drawer sections); top 10: 6 of 6. The privacy question is judged by eye. Raw vector hits repeat a section filed under several Act records; the app folds those (`dedupeCopies`). The ranking the reader sees adds keyword lift, synonyms and current-law-first on top of this.
+
+### Quick-find does not use vectors
+`useQuickFind.ts` and `useDesk.ts` always ask `/api/acts/search` for `exact=1`; `quickLaws.ts` is exact SQL. (The class test checks this.)
+
+### What fell back silently (found)
+| Where | Before | Class cause |
+|---|---|---|
+| Search, Acts | `catch` set a reason; a muted line of text; no log, no count; **the response was cached by the CDN for 5 minutes (stale 1 hour) like a normal one**, so one Voyage 429 was served to everyone searching that query | each path caught the error its own way |
+| Search, Regulators | `catch {}`: no reason, no note, no log | same |
+| Search, Supreme Court text | error shown, no log; no fallback to words although the word index exists | same |
+| Ask retrieval (sections, case passages) | silent; the answer was built on keyword results with no word to the reader | same |
+| Ask, your own documents | silent `catch` | same |
+Not a fallback: Ask's second keyword pass (`exact: true`) is by design.
+
+### Fix, once
+`src/lib/acts/meaning.mjs` (pure: why it failed, what the reader is told, whether it may be cached, the stats), `meaningLog.ts` (a `[meaning-fallback]` log line per fallback: surface, cause, safe detail, never the query or a key; counters in `usage_daily` as `meaning_search` / `meaning_fallback`, no schema change; in-process counters). Every search path calls `meaningUsed` or `meaningFellBack`. The reader sees "Showing exact-word results — meaning search is busy." (Search, all tabs; Ask says the sections were found by exact words only); a fallback answer is `Cache-Control: no-store`. A failure of one vector database out of several is logged as `[meaning-partial]`. /admin (Insights) has a panel per surface: searches, fell back, share, causes. The selftest shows the counts since the instance started and, with `?meaning=1`, runs a live check (one Voyage request: query size, every store answers). Evaluation rows now record `meaning` (used / fell back) and the run summary prints it.
+Also fixed on the way: the selftest showed 0 ms for every stage (the time was read before the stage ran), and an error from Voyage's network was classed as a database error.
+
+### Checks
+`src/lib/acts/meaning.test.mjs`: causes, safe log detail, notice, cache rule, stats, and four class checks that fail if a file runs a meaning search without logging a fallback, if a search route can cache a fallback, if a screen shows meaning results without the notice, or if Ask drops the fallback (a mutation test confirmed the first one catches the regulator bug). The sweep opens Search Laws and Judgments in the fallback state at both widths and fails if the notice is not on the page.
+
+### Production
+Nothing was logged before today, so there is no count of past fallbacks in Vercel's logs or anywhere else. The count starts when this is deployed; /admin shows it.

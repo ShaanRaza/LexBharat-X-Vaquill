@@ -66,3 +66,7 @@ The expected section must be within the first 3 results (rank 1 for the bare loo
 Two intermediate runs are in `docs/eval/runs/search-after.json` and `search-after2.json` (9/10 with one different failure each); the final is `search-after3.json`.
 
 The final confirmation run is 85 questions (51 main + 34 hard); 84 are scored (q130 is not scored until Hindu Succession Act s.6 is loaded).
+
+## How often the evaluation used vectors (Oct 30)
+
+Until now the rows did not record whether a retrieval used search by meaning or fell back to keywords. Method for the stored runs (`node scripts/eval/vector-share.mjs`): the evaluation server caches every query vector Voyage returns (`docs/eval/.cache/embed.json`) and nothing when Voyage fails, so a search query meant for vectors with no cached vector must have fallen back. Result over the 7 stored runs (190 questions, 690 queries meant for vectors): **690 have a vector, 0 are certain fallbacks.** This is an upper bound, not a measurement: the cache fills across runs, so a query that failed in one run and succeeded in a later one is counted as used. (The oldest runs embedded the query as typed; the synonym expansion came later, so both keys are tried.) From now on each row has `meaning` ({used, fellBack, judgmentsFailed} per question) and the run summary prints the share, so the next baseline gives the exact figure.

@@ -7,6 +7,7 @@
 // Limit: 30 searches per minute per caller address, counted in Supabase so it holds across server instances (src/lib/limits/counters.ts), so the embedding key cannot be run up through this endpoint.
 import { normalizeQuery, hasDevanagari } from "@/lib/acts/searchQuery.mjs";
 import { clientKey } from "@/lib/acts/semantic.mjs";
+import { cacheControlFor } from "@/lib/acts/meaning.mjs";
 import { rateCheck } from "@/lib/limits/counters";
 import { searchSections, PAGE_SIZE, searchRegulators } from "@/lib/legal-data";
 
@@ -30,5 +31,5 @@ export async function GET(req: Request) {
   if (!r.available) return Response.json({ searchAvailable: false, reason: r.reason, message: r.message, results: [], total: 0, page, pageSize: PAGE_SIZE, hasMore: false }, { headers: { "Cache-Control": "no-store" } });
   const scope = regulators ? (r.mode === "semantic" ? "meaning of regulator instruments (English)" : "text of regulator instruments (English)") : r.mode === "semantic" ? "meaning of Central and State Acts (English)" : "text of Central and State Acts (English)";
   return Response.json({ searchAvailable: true, scope, hindiNotSearchable: hasDevanagari(q), ...r },
-    { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=3600" } });
+    { headers: { "Cache-Control": cacheControlFor(r.semantic) } });   // a keyword answer that stands in for a failed meaning search is never cached by the CDN
 }

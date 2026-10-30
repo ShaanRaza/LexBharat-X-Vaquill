@@ -47,6 +47,16 @@ function askStream(t) {
   return lines.map((l) => JSON.stringify(l)).join("\n") + "\n";
 }
 
+// Search when meaning search is busy: the real keyword answer from the server with its `semantic` field set the way the server sets it after a Voyage 429, so the page must show the notice (src/lib/acts/meaning.mjs).
+const FALLBACK_TEXT = "Showing exact-word results — meaning search is busy.";
+const asFallback = (apiPath, fetchAs) => async (p) => {
+  await p.route(apiPath, async (r) => {
+    const u = new URL(r.request().url()); fetchAs(u);
+    const res = await r.fetch({ url: u.toString() }), j = await res.json();
+    await r.fulfill({ response: res, json: { ...j, semantic: { used: false, reason: "semantic_error", cause: "rate_limited" } } });
+  });
+};
+const seesNotice = async (p) => { await p.getByText(FALLBACK_TEXT).first().waitFor({ timeout: 15000 }).catch(() => { throw new Error(`the fallback notice "${FALLBACK_TEXT}" is not on the page`); }); };
 const CASE_TITLE_DANGLING = [/\b(?:versus|vs\.?|v\.)[ \t]*[.,]?[ \t]*$/m, "a case name ends with a dangling \"versus\""];
 const pages = (t) => [
   { id: "desk", url: "/" },
@@ -60,7 +70,9 @@ const pages = (t) => [
     await p.waitForTimeout(600);
   } },
   { id: "search-laws", url: "/search?q=notice%20after%20cheque%20bounces", wait: 4000 },
+  { id: "search-laws-fallback", url: "/search?q=notice%20after%20cheque%20bounces", before: asFallback("**/api/acts/search*", (u) => u.searchParams.set("exact", "1")), prep: seesNotice },
   { id: "search-judgments", url: "/search?q=bail&tab=judgments", wait: 4000, forbid: [CASE_TITLE_DANGLING] },
+  { id: "search-judgments-fallback", url: "/search?q=right%20to%20privacy&tab=judgments", before: asFallback("**/api/judgments/search-text*", (u) => u.searchParams.set("mode", "words")), prep: seesNotice },
   { id: "search-documents", url: "/search?tab=documents" },
   { id: "library-overview", url: "/library" },
   { id: "library-acts", url: "/library?tab=acts" },
@@ -178,6 +190,7 @@ async function main() {
         page.on("response", (r) => { const u = r.url(); if (u.startsWith(BASE) && r.status() >= 400 && !/\/_next\/|favicon/.test(u) && !(pg.allowStatus ?? []).includes(r.status()) && !/\/api\/(usage|chat$)/.test(u)) logs.push("request failed " + r.status() + " " + u.replace(BASE, "").slice(0, 100)); });
         const add = (kind, detail) => findings.push({ page: pg.id, viewport: vp.id, kind, detail });
         try {
+          if (pg.before) await pg.before(page, vp);
           const res = await page.goto(BASE + pg.url, { waitUntil: "load", timeout: 60000 });
           if (res && res.status() >= 400 && !(pg.allowStatus ?? []).includes(res.status())) add("console", "page answered " + res.status());
           await page.addStyleTag({ content: "nextjs-portal{display:none!important}" }).catch(() => null);

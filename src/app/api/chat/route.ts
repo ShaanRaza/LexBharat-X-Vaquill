@@ -23,6 +23,7 @@ import { expandQuery } from "@/lib/acts/searchBoost.mjs";
 import synonyms from "@/config/search-synonyms.json";
 import tuningConfig from "@/config/chat-tuning.json";
 import { citationOf, retrieveSources, type ChatSource } from "@/lib/chat/retrieve";
+import { askNoticeFor } from "@/lib/acts/meaning.mjs";
 import { docChatSources, searchAttached } from "@/lib/vault/search";
 import { getDocs } from "@/lib/vault/store";
 import { vaultConfigured } from "@/lib/vault/supabase";
@@ -110,7 +111,8 @@ export async function POST(req: Request) {
         // one numbering for everything the model may cite: the user's document passages first, then the Act sections
         const ret = { ...ret0, sources: [...docSrc, ...ret0.sources.map((x) => ({ ...x, n: x.n + docSrc.length }))] };
         const cites = ret.sources.map(citationOf);
-        send({ type: "sources", sources: cites, searchMode: ret.searchMode, queries: [message, ...extra].slice(0, 4) });
+        send({ type: "sources", sources: cites, searchMode: ret.searchMode, queries: [message, ...extra].slice(0, 4), meaning: ret.meaning });
+        { const mn = askNoticeFor(ret.meaning); if (mn) send({ type: "note", text: mn }); }   // some searches fell back to exact words (already logged and counted): say so
         // sections the question names that the library does not hold (or holds only as scrambled text): say so plainly, link the Act on India Code, never answer from memory, and log it for the next downloads
         const absent: AbsentNote[] = ret.gaps.map((g) => gapNotice(g, g.url)), lead = gapLead(ret.gaps), logIt = docIds.length === 0;   // nothing is logged for a question that had a Vault document attached
         if (logIt) for (const g of ret.gaps.filter((x) => x.kind !== "nosuch")) logGap({ kind: g.kind === "unreliable" ? "unreliable_section" : "missing_section", question: message, act: g.actTitle, section: g.number, actId: g.actId });

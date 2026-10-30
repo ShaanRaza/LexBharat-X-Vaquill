@@ -1,6 +1,7 @@
 "use client";
 import { sourceInfo, unitWord } from "@/lib/docs/docType.mjs";
 import Link from "next/link";
+import { noticeFor, type SemanticInfo } from "@/lib/acts/meaning.mjs";
 import { useEffect, useState } from "react";
 import { Badge, Highlight, Notice, Panel, RepealedNote, Toggle } from "@/components/kit";
 import { departmentLabel } from "@/lib/acts/departments.mjs";
@@ -10,7 +11,7 @@ import { cleanLabel } from "@/lib/text/clean.mjs";
 // Results of the Acts-tab search box over Central and State Acts (GET /api/acts/search): by meaning by default, exact words on request. Presentation and fetching only; the search itself lives in
 // src/lib/acts/searchStore.ts. Colours, sizes and radii come from the tokens through Tailwind names and the shared kit.
 type Hit = { flags: string[]; actId: string; actTitle: string; year: number | null; category: string; state: string | null; sourceUrl: string | null; sectionKey: string; number: string | null; heading: string | null; chapter: string | null; status: keyof typeof STATUS_INFO; snippet: string; via: "text" | "lookup" | "semantic"; department?: string | null; copies?: number };
-type Resp = { searchAvailable: boolean; message?: string; results: Hit[]; total: number; totalCapped?: boolean; page: number; pageSize: number; hasMore: boolean; mode?: "text" | "lookup" | "semantic"; note?: string; missing?: { actTitle: string; number: string; sourceUrl: string | null; beyond?: number | null } };
+type Resp = { searchAvailable: boolean; message?: string; results: Hit[]; total: number; totalCapped?: boolean; page: number; pageSize: number; hasMore: boolean; mode?: "text" | "lookup" | "semantic"; note?: string; semantic?: SemanticInfo; missing?: { actTitle: string; number: string; sourceUrl: string | null; beyond?: number | null } };
 const label = (v: string) => v.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 
 export type SectionFilters = { jurisdiction?: "central" | "state"; status?: "in_force" | "repealed" };
@@ -41,6 +42,7 @@ export default function SectionSearchResults({ q, scope: fixedScope, exact: exac
       {data && !data.searchAvailable && <Notice tone="info" role="status" className="mt-3"><p><strong className="font-medium text-foreground">Section search is not available yet.</strong> {data.message ?? ""} Searching act titles below still works.</p></Notice>}
       {data?.searchAvailable && (
         <>
+          {noticeFor(data.semantic) && <Notice tone="warn" role="status" compact className="mt-2"><p>{noticeFor(data.semantic)}</p></Notice>}
           {data.note && <p className="mt-1 text-ui-sm text-muted">{data.note}</p>}
           {data.mode === "semantic" && <button type="button" onClick={() => { setExact(true); setPage(1); }} className="mt-1 text-ui-sm font-medium text-primary underline">Search exact words instead</button>}
           {exact && data.mode === "text" && <button type="button" onClick={() => { setExact(false); setPage(1); }} className="mt-1 text-ui-sm font-medium text-primary underline">Search by meaning instead</button>}

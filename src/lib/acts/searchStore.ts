@@ -14,6 +14,8 @@ import replacedLaws from "@/config/replaced-laws.json";
 import { chooseMode, distinctSections, highlightQuery, rankSections, statesIn } from "./semantic.mjs";
 import { embedMany, embedQuery, voyageConfigured } from "./embed";
 import { vectorStores, vectorConfigured } from "./vectorStore";
+import { fellBackBecause, type SemanticInfo } from "./meaning.mjs";
+import { meaningFellBack, meaningPartial, meaningUsed, type Surface } from "./meaningLog";
 
 /** The same weighted text-search vector the view act_sections_v builds for a hand-filled section (heading weighs more than the body). */
 const SUPP_TSV = `(setweight(to_tsvector('english', coalesce(x.heading, '')), 'A') || setweight(to_tsvector('english', left(x.body, 600000)), 'B'))`;
@@ -40,8 +42,8 @@ const passes = (f: SearchFilters, m: { central: boolean; actStatus: string }) =>
 export type SearchOutcome =
   | { available: false; reason: "not_configured" | "unreachable"; message: string }
   | { available: true; results: SectionHit[]; total: number; totalCapped: boolean; page: number; pageSize: number; hasMore: boolean; mode: "text" | "lookup" | "semantic"; note: string;
-      /** How the query was searched: used=true for search by meaning; otherwise why keyword search ran instead (exact_requested, quoted_phrase, hindi, semantic_unavailable, semantic_error). */
-      semantic?: { used: boolean; reason?: string };
+      /** How the query was searched: used=true for search by meaning; otherwise why keyword search ran instead (exact_requested, quoted_phrase, hindi, semantic_unavailable, semantic_error) and, for the last two, the cause (src/lib/acts/meaning.mjs). */
+      semantic?: SemanticInfo;
       /** Set when the asked-for section number is confidently missing from our data (gaps.mjs): the UI shows the notice and the India Code link. */
       missing?: { actTitle: string; actId: string; number: string; sourceUrl: string | null; /** the number is above the Act's last section: there is no such section (the highest number it has) */ beyond?: number | null } };
 
@@ -175,7 +177,9 @@ async function semanticSearch(q: string, page: number, pageSize: number, filters
   const { text: qx } = expandQuery(q, synonyms.rules), tokens = contentTokens(q), kwP = keywordKeys(contentWords(qx), 30).catch(() => [] as string[]);
   const vec = (dim: number) => (vectors.has(dim) ? vectors.get(dim)! : vectors.set(dim, embedQuery(qx, dim)).get(dim)!);
   const settled = await Promise.allSettled(stores.map(async (st) => st.nearest(await vec(st.dim), SEM_CHUNKS)));
-  if (!settled.some((r) => r.status === "fulfilled")) throw new Error("no vector store answered");
+  if (!settled.some((r) => r.status === "fulfilled")) throw (settled.find((r): r is PromiseRejectedResult => r.status === "rejected")?.reason ?? new Error("no vector store answered"));   // the real cause (Voyage 429, a database error ...), not a generic one
+  const failed = settled.flatMap((r, i) => (r.status === "rejected" ? [stores[i].corpus] : []));
+  if (failed.length) meaningPartial("acts", failed);   // some corpora answered and some did not: the results lack those Acts, so it is logged
   // sections whose text was replaced by a hand-filled one: their old vectors describe the wrong text, so only the supplement store's vectors count for them
   const replaced = await replacedKeys();
   const near = settled.flatMap((r, i) => (r.status === "fulfilled" ? r.value.filter((h) => stores[i].corpus === "supplement" || !replaced.has(`${h.actId}|${h.sectionKey}`)) : []))
@@ -210,14 +214,10 @@ async function semanticSearch(q: string, page: number, pageSize: number, filters
   return { ...base, results };
 }
 
-const FALLBACK_NOTE: Record<string, string> = {
-  semantic_unavailable: "Search by meaning is not set up here, so this is a keyword search.",
-  semantic_error: "Search by meaning is not responding right now, so this is a keyword search.",
-};
 
 /** Section lookups ("138 NI Act") and quoted phrases use keyword search. Everything else is searched by meaning when it is set up (VOYAGE_API_KEY and VECTOR_DATABASE_URL),
  *  and falls back to keyword search, with a short note, when it is not or when it fails. `exact` forces keyword search. */
-async function searchMain(q: string, page = 1, pageSize = PAGE_SIZE, opts: { exact?: boolean; filters?: SearchFilters } = {}): Promise<SearchOutcome> {
+async function searchMain(q: string, page = 1, pageSize = PAGE_SIZE, opts: { exact?: boolean; filters?: SearchFilters; surface?: Surface } = {}): Promise<SearchOutcome> {
   const filters = opts.filters ?? {};
   if (!dbConfigured()) return { available: false, reason: "not_configured", message: "Section search is not available yet." };
   try {
@@ -228,14 +228,14 @@ async function searchMain(q: string, page = 1, pageSize = PAGE_SIZE, opts: { exa
   }
   if (hasDevanagari(q) && hasSearchableChars(q)) return hindiSearch(q, page, pageSize);
   const chosen = chooseMode(q, { exact: !!opts.exact, hindi: hasDevanagari(q), semanticReady: semanticReady() });
-  let reason: string | null = chosen.reason;
+  const surface = opts.surface ?? "acts";
+  let sem: SemanticInfo = { used: false, ...(chosen.reason ? { reason: chosen.reason } : {}) };
   if (chosen.mode === "semantic" && hasSearchableChars(q)) {
-    try { return await semanticSearch(q, page, pageSize, filters); } catch { reason = "semantic_error"; }
-  }
+    try { const r = await semanticSearch(q, page, pageSize, filters); meaningUsed(surface); return r; } catch (e) { sem = fellBackBecause(meaningFellBack(surface, e)); }
+  } else if (chosen.reason === "semantic_unavailable") sem = fellBackBecause(meaningFellBack(surface, new Error("no voyage key")));   // asked for by default but not set up: counted, logged once
   const out = await textSearch(q, page, pageSize, filters);
   if (!out.available) return out;
-  const note = reason && FALLBACK_NOTE[reason] ? `${FALLBACK_NOTE[reason]} ${out.note}` : out.note;
-  return { ...out, note, semantic: { used: false, ...(reason ? { reason } : {}) } };
+  return { ...out, semantic: sem };   // the reader is told by the UI from `semantic` (noticeFor), not by a sentence glued to the note
 }
 
 /** Embeds several queries in one Voyage request ahead of searching them (see embedMany). Section lookups need no embedding and are skipped. */
@@ -246,7 +246,7 @@ export async function primeSemanticQueries(queries: string[]): Promise<void> {
 }
 
 /** A section named inside a longer query ("IPC 420 cheating punishment", "what does section 138 of the NI Act say") is an exact lookup: those hits come first on page 1, ahead of everything found by meaning. */
-async function searchSectionsRaw(q: string, page = 1, pageSize = PAGE_SIZE, opts: { exact?: boolean; filters?: SearchFilters } = {}): Promise<SearchOutcome> {
+async function searchSectionsRaw(q: string, page = 1, pageSize = PAGE_SIZE, opts: { exact?: boolean; filters?: SearchFilters; surface?: Surface } = {}): Promise<SearchOutcome> {
   const out = await searchMain(q, page, pageSize, opts);
   if (!out.available || page !== 1 || out.mode === "lookup") return out;
   const named: SectionHit[] = [];
@@ -255,7 +255,7 @@ async function searchSectionsRaw(q: string, page = 1, pageSize = PAGE_SIZE, opts
   // a named section of a repealed law: its replacement is found from the old section's own heading ("Cheating and dishonestly inducing ...") and leads
   for (const h of [...named]) {
     const pair = h.actStatus !== "in_force" && h.heading ? pairFor(h.actTitle, replacedLaws.pairs) : null; if (!pair) continue;
-    const r = await searchMain(h.heading!, 1, 15, { filters: opts.filters }).catch(() => null);
+    const r = await searchMain(h.heading!, 1, 15, { filters: opts.filters, surface: opts.surface }).catch(() => null);
     const next = r && r.available ? r.results.find((x) => x.actStatus === "in_force" && x.actTitle.toLowerCase().trim().startsWith(pair.new)) : null;
     if (next && !named.some((x) => x.actId === next.actId && x.sectionKey === next.sectionKey)) named.unshift(next);
   }
@@ -266,4 +266,4 @@ async function searchSectionsRaw(q: string, page = 1, pageSize = PAGE_SIZE, opts
 
 /** Titles leave this module display-ready (src/lib/docs/docType.mjs: capitals, acronyms, glued digits, fallbacks); the data keeps the raw ones. */
 export const tidyTitles = (o: SearchOutcome): SearchOutcome => !o.available ? o : { ...o, results: dedupeCopies(o.results.map((h) => ({ ...h, actTitle: displayTitle(h.actTitle, h) }))), ...(o.missing ? { missing: { ...o.missing, actTitle: displayTitle(o.missing.actTitle, o.missing) } } : {}) };
-export async function searchSections(q: string, page = 1, pageSize = PAGE_SIZE, opts: { exact?: boolean; filters?: SearchFilters } = {}): Promise<SearchOutcome> { return tidyTitles(await searchSectionsRaw(q, page, pageSize, opts)); }
+export async function searchSections(q: string, page = 1, pageSize = PAGE_SIZE, opts: { exact?: boolean; filters?: SearchFilters; surface?: Surface } = {}): Promise<SearchOutcome> { return tidyTitles(await searchSectionsRaw(q, page, pageSize, opts)); }

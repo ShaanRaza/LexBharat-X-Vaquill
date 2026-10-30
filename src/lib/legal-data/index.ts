@@ -64,3 +64,6 @@ export async function sectionPresence(actId: string, numbers: string[]): Promise
   if (plain.length) for (const r of await query<{ number: number }>(`SELECT m.number FROM act_missing_sections m WHERE m.act_id = $1 AND m.number = ANY($2::int[]) AND NOT EXISTS (SELECT 1 FROM act_sections_supplement x WHERE x.act_id = m.act_id AND x.number = m.number::text)`, [actId, plain]).catch(() => [])) missing.add(r.number);
   return { found, missing };
 }
+
+/** Live check of search by meaning for the selftest (one Voyage request, every vector store must answer). */
+export { probeMeaning } from "@/lib/acts/meaningProbe";

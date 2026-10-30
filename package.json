@@ -19,7 +19,8 @@
     "qa:sweep": "node scripts/judgments/qa-sweep.mjs",
     "qa:live": "node --experimental-websocket scripts/judgments/qa-live.mjs",
     "index:hc-search": "node --max-old-space-size=6000 scripts/judgments/build-hc-search-index.mjs",
-    "ui-sweep": "node scripts/ui-sweep/sweep.mjs"
+    "ui-sweep": "node scripts/ui-sweep/sweep.mjs",
+    "verify-vectors": "node scripts/verify/dims.mjs && node scripts/verify/model-check.mjs && node scripts/verify/vector-only.mjs"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.0",

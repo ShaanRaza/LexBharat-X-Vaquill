@@ -1,0 +1,14 @@
+export const FALLBACK_NOTICE: string;
+export const UNAVAILABLE_NOTICE: string;
+export type MeaningCause = "rate_limited" | "timeout" | "voyage_down" | "voyage_refused" | "voyage_bad_answer" | "vector_store" | "not_configured" | "other";
+export type SemanticInfo = { used: boolean; reason?: string; cause?: MeaningCause };
+export function causeOf(err: unknown): MeaningCause;
+export const CAUSES: MeaningCause[];
+export const CAUSE_LABEL: Record<MeaningCause, string>;
+export function safeDetail(err: unknown): string;
+export function fellBackBecause(cause: MeaningCause): SemanticInfo;
+export function isFallback(semantic?: SemanticInfo | null): boolean;
+export function noticeFor(semantic?: SemanticInfo | null): string;
+export function cacheControlFor(semantic?: SemanticInfo | null, shared?: string): string;
+export function meaningStats(rows: { metric: string; key: string; n: number }[]): { surface: string; searches: number; fellBack: number; pct: number; causes: Record<string, number> }[];
+export function askNoticeFor(meaning?: { used: number; fellBack: number; judgmentsFailed?: boolean } | null): string;

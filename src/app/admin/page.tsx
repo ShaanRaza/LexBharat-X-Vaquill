@@ -10,11 +10,13 @@ import { adminMessages, adminData, adminGaps, insightsConfigured } from "@/lib/i
 import config from "@/config/ai-models.json";
 import { creditStatus } from "@/lib/ai/guard.mjs";
 import { byDay, ratio, topGaps } from "@/lib/insights/rules.mjs";
+import { CAUSE_LABEL, meaningStats } from "@/lib/acts/meaning.mjs";
 
 export const metadata: Metadata = { title: "Insights | LexBharat", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
 
 const FEATURE_NAMES: Record<string, string> = { chat: "Ask answers", draft: "Drafts", review: "Reviews" };
+const SURFACE_NAMES: Record<string, string> = { acts: "Search: Acts", regulators: "Search: Regulators", judgments: "Search: Judgment text", ask: "Ask: sections", ask_judgments: "Ask: Supreme Court passages", vault: "Ask: your documents" };
 const th = "px-3 py-2 text-left font-medium";
 const td = "px-3 py-2 align-top";
 const when = (iso: string) => new Date(iso).toLocaleString("en-IN", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit", timeZone: "Asia/Kolkata" });
@@ -36,6 +38,7 @@ export default async function InsightsPage() {
   const credit = config.spendGuard?.provider ? await creditStatus({ config, env: process.env as Record<string, string | undefined>, force: true }) : null;
   const msgs = await adminMessages().catch(() => ({ error: "failed" as const, rows: [] }));
   const gapData = await adminGaps(30).catch(() => ({ error: "failed" as const, rows: [] })), gaps = topGaps(gapData.rows);   // sections testers hit that we do not hold, and "not found" questions: these drive the next downloads
+  const meaning = meaningStats(d.usage.filter((x) => x.metric === "meaning_search" || x.metric === "meaning_fallback"));
   const days = byDay(d.usage), pages: Record<string, number> = {}, templates: Record<string, number> = {};
   for (const x of days) { for (const [k, v] of Object.entries(x.visitsByPage)) pages[k] = (pages[k] ?? 0) + v; for (const [k, v] of Object.entries(x.draftsByTemplate)) templates[k] = (templates[k] ?? 0) + v; }
   const tot = (f: (x: (typeof days)[number]) => number) => days.reduce((s, x) => s + f(x), 0), answers = tot((x) => x.answers), ms = tot((x) => x.answerMs);
@@ -55,6 +58,20 @@ export default async function InsightsPage() {
               {days.length === 0 && <tr><td colSpan={10} className="px-3 py-4 text-muted">Nothing counted yet.</td></tr>}
               {days.map((x) => <tr key={x.day} className="border-t border-border/70"><th scope="row" className={`${td} whitespace-nowrap font-medium`}>{x.day}</th><td className={td}>{x.visits}</td><td className={td}>{x.chats}</td><td className={td}>{x.drafts}</td><td className={td}>{x.reviews}</td><td className={td}>{x.uploads}</td><td className={td}>{x.scans}</td><td className={td}>{x.limits}</td><td className={td}>{x.busy}</td><td className={td}>{x.avgAnswerSec ?? "–"}</td></tr>)}
               {days.length > 0 && <tr className="border-t-2 border-border bg-accent/50 font-medium"><th scope="row" className={td}>Total</th><td className={td}>{tot((x) => x.visits)}</td><td className={td}>{tot((x) => x.chats)}</td><td className={td}>{tot((x) => x.drafts)}</td><td className={td}>{tot((x) => x.reviews)}</td><td className={td}>{tot((x) => x.uploads)}</td><td className={td}>{tot((x) => x.scans)}</td><td className={td}>{tot((x) => x.limits)}</td><td className={td}>{tot((x) => x.busy)}</td><td className={td}>{answers ? Math.round(ms / answers / 100) / 10 : "–"}</td></tr>}
+            </tbody>
+          </table>
+        </div>
+      </Panel>
+
+      <Panel className="mt-5 p-0">
+        <h2 className="px-card pt-card text-ui-lead font-semibold">Search by meaning: how often it fell back to exact words</h2>
+        <p className="px-card pt-1 text-ui-sm text-secondary">Last 30 days, all server instances. A fallback means Voyage (the meaning search) or a vector database did not answer, so keyword results were shown with a notice. Counting started when this was added; nothing before is known. Searches that were never meant to use meaning (section lookups, quoted phrases, exact words) are not counted.</p>
+        <div className="mt-2 overflow-x-auto" tabIndex={0} role="region" aria-label="Meaning search fallbacks, scrollable table">
+          <table className="w-full min-w-[560px] border-collapse text-ui-sm">
+            <thead className="bg-accent text-secondary"><tr>{["Where", "Searches", "Fell back", "Share", "Why"].map((h) => <th key={h} scope="col" className={th}>{h}</th>)}</tr></thead>
+            <tbody>
+              {meaning.length === 0 && <tr><td colSpan={5} className="px-3 py-4 text-muted">Nothing counted yet.</td></tr>}
+              {meaning.map((m) => <tr key={m.surface} className="border-t border-border/70"><th scope="row" className={`${td} text-left font-medium`}>{SURFACE_NAMES[m.surface] ?? m.surface}</th><td className={td}>{m.searches}</td><td className={td}>{m.fellBack}</td><td className={td}>{m.fellBack ? <Badge tone={m.pct >= 5 ? "warn" : "info"}>{m.pct}%</Badge> : "0%"}</td><td className={`${td} text-secondary`}>{Object.entries(m.causes).sort((x, y) => y[1] - x[1]).map(([c, n]) => `${CAUSE_LABEL[c as keyof typeof CAUSE_LABEL] ?? c} ${n}`).join(", ") || "—"}</td></tr>)}
             </tbody>
           </table>
         </div>
