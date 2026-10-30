@@ -12,6 +12,7 @@ import { spawn } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { OLD_WORDING, RAW_ON_PAGE } from "./rules.mjs";
+import { noticeFor } from "../../src/lib/acts/meaning.mjs";
 
 const BASE = process.env.SWEEP_BASE ?? "http://localhost:3300", PASSWORD = "throwaway-local-test-9", OUT = ".ui-sweep";
 const VIEWPORTS = [{ id: "desktop-1280", width: 1280, height: 800, mobile: false }, { id: "phone-375", width: 375, height: 812, mobile: true }];
@@ -48,12 +49,12 @@ function askStream(t) {
 }
 
 // Search when meaning search is busy: the real keyword answer from the server with its `semantic` field set the way the server sets it after a Voyage 429, so the page must show the notice (src/lib/acts/meaning.mjs).
-const FALLBACK_TEXT = "Showing exact-word results — meaning search is busy.";
+const FALLBACK_SEMANTIC = { used: false, reason: "semantic_error", cause: "rate_limited" }, FALLBACK_TEXT = noticeFor(FALLBACK_SEMANTIC);   // names its cause: "... has reached its request limit for now."
 const asFallback = (apiPath, fetchAs) => async (p) => {
   await p.route(apiPath, async (r) => {
     const u = new URL(r.request().url()); fetchAs(u);
     const res = await r.fetch({ url: u.toString() }), j = await res.json();
-    await r.fulfill({ response: res, json: { ...j, semantic: { used: false, reason: "semantic_error", cause: "rate_limited" } } });
+    await r.fulfill({ response: res, json: { ...j, semantic: FALLBACK_SEMANTIC } });
   });
 };
 const seesNotice = async (p) => { await p.getByText(FALLBACK_TEXT).first().waitFor({ timeout: 15000 }).catch(() => { throw new Error(`the fallback notice "${FALLBACK_TEXT}" is not on the page`); }); };

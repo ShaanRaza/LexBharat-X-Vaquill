@@ -1,5 +1,6 @@
 // POST {sectionId} -> writes ONE section again (for a section that was "Not generated, retry"), in the same context as the draft (same facts, same retrieved law). Returns the text and editor nodes.
 import { dbConfigured } from "@/lib/app-db";
+import { aiFailure } from "@/lib/ai/notice.mjs";
 import { AiError, aiConfigured } from "@/lib/ai";
 import { rateCheck } from "@/lib/limits/counters";
 import { getTemplate } from "@/lib/drafting/catalog";
@@ -27,5 +28,5 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
     // a notice numbers its paragraphs straight through, so the retried section starts after the numbered items of the sections before it
     const before = template.style === "notice" ? d.sections.slice(0, d.sections.findIndex((s) => s.id === section.id)).filter((s) => s.status === "ok").reduce((a, s) => a + countNumbered(s.text), 0) : null;
     return json({ ok: true, text: r.text, nodes: textToNodes(r.text, before === null ? null : before + 1), renumber: template.style === "notice" });
-  } catch (e) { return json({ error: e instanceof AiError && ["rate_limit", "unavailable", "timeout"].includes(e.kind) ? "Busy, try again in a minute." : "The model could not write this section. Try again." }, 503); }
+  } catch (e) { return json({ error: e instanceof AiError && ["rate_limit", "unavailable", "timeout", "auth", "not_configured"].includes(e.kind) ? aiFailure(e).message : "The model could not write this section. Try again." }, 503); }
 }

@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
-import { askNoticeFor, causeOf, cacheControlFor, fellBackBecause, FALLBACK_NOTICE, isFallback, meaningStats, noticeFor, safeDetail, UNAVAILABLE_NOTICE } from "./meaning.mjs";
+import { askNoticeFor, causeOf, cacheControlFor, docNoticeFor, fellBackBecause, FALLBACK_NOTICE, isFallback, meaningStats, noticeFor, safeDetail, UNAVAILABLE_NOTICE, whyFor, CAUSES } from "./meaning.mjs";
 
 const err = (name, message) => Object.assign(new Error(message), { name });
 
@@ -35,9 +35,13 @@ test("safeDetail never carries a connection string, a key or a query", () => {
 
 test("what the reader is told, and when", () => {
   assert.equal(FALLBACK_NOTICE, "Showing exact-word results — meaning search is busy.");
-  const busy = fellBackBecause("rate_limited");
-  assert.deepEqual(busy, { used: false, reason: "semantic_error", cause: "rate_limited" });
-  assert.equal(noticeFor(busy), FALLBACK_NOTICE);
+  const limit = fellBackBecause("rate_limited");
+  assert.deepEqual(limit, { used: false, reason: "semantic_error", cause: "rate_limited" });
+  assert.equal(noticeFor(limit), "Showing exact-word results — meaning search has reached its request limit for now.");
+  assert.equal(noticeFor(fellBackBecause("voyage_down")), FALLBACK_NOTICE);   // busy
+  assert.equal(noticeFor(fellBackBecause("vector_store")), FALLBACK_NOTICE);
+  assert.match(noticeFor(fellBackBecause("timeout")), /took too long/);
+  assert.match(noticeFor(fellBackBecause("voyage_refused")), /refused by its provider/);
   assert.equal(noticeFor(fellBackBecause("not_configured")), UNAVAILABLE_NOTICE);
   // nothing to say when meaning search was used, or exact words / a quoted phrase / Hindi were what the reader asked for
   for (const s of [{ used: true }, { used: false, reason: "exact_requested" }, { used: false, reason: "quoted_phrase" }, { used: false, reason: "hindi" }, undefined, null]) { assert.equal(noticeFor(s), ""); assert.equal(isFallback(s), false); }
@@ -56,7 +60,8 @@ test("Ask is told when some searches behind an answer fell back", () => {
   assert.equal(askNoticeFor({ used: 3, fellBack: 0, judgmentsFailed: false }), "");
   assert.match(askNoticeFor({ used: 2, fellBack: 1 }), /some of the sections.*exact words/);
   assert.match(askNoticeFor({ used: 0, fellBack: 2 }), /all of the sections.*exact words/);
-  assert.match(askNoticeFor({ used: 3, fellBack: 0, judgmentsFailed: true }), /Supreme Court passages were left out/);
+  assert.match(askNoticeFor({ used: 3, fellBack: 0, judgmentsFailed: true, judgmentsCause: "voyage_down" }), /Meaning search is busy, so the Supreme Court passages were left out/);
+  assert.match(askNoticeFor({ used: 3, fellBack: 0, judgmentsFailed: true, judgmentsCause: "voyage_down", judgmentsRecovered: true }), /found by exact words only/);
   assert.equal(askNoticeFor(null), "");
 });
 
@@ -110,4 +115,24 @@ test("class: Ask passes its fallback to the reader and to the eval", () => {
   assert.match(chat, /askNoticeFor\(/);
   assert.match(chat, /meaning: ret\.meaning/);
   assert.match(e2e, /out\.meaning = ev\.meaning/);
+});
+
+test("every cause is named in words, in one of three families, on every surface", () => {
+  for (const c of CAUSES) {
+    const w = whyFor(c);
+    assert.ok(["limit", "not_set_up", "busy"].includes(w.family), c);
+    assert.ok(w.clause.startsWith("meaning search"), c);
+    assert.match(askNoticeFor({ used: 0, fellBack: 1, cause: c }), new RegExp(w.clause.replace(/[()]/g, "\\$&"), "i"), `ask ${c}`);
+    assert.match(docNoticeFor(c), new RegExp(w.clause.replace(/[()]/g, "\\$&"), "i"), `vault ${c}`);
+  }
+  assert.equal(whyFor("rate_limited").family, "limit");
+  assert.equal(whyFor("not_configured").family, "not_set_up");
+  assert.equal(whyFor("timeout").family, "busy");
+  assert.match(askNoticeFor({ used: 0, fellBack: 1, cause: "rate_limited" }), /^Meaning search has reached its request limit for now, so all of the sections/);
+});
+
+test("Ask says both things when the sections and the Supreme Court passages both fell back", () => {
+  const m = { used: 0, fellBack: 1, cause: "rate_limited", judgmentsFailed: true, judgmentsCause: "rate_limited", judgmentsRecovered: true };
+  assert.match(askNoticeFor(m), /request limit.*all of the sections.*exact words only.*Supreme Court passages were found by exact words only and may be less relevant for the same reason/);
+  assert.match(askNoticeFor({ ...m, judgmentsCause: "timeout", judgmentsRecovered: false }), /took too long, so the Supreme Court passages were left out/);
 });

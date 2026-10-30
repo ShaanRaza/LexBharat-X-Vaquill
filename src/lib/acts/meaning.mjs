@@ -2,7 +2,7 @@
 // ONE place decides three things for every search surface (Acts, regulators, Supreme Court judgments, Ask, Vault): why it failed (causeOf), what the reader is told (FALLBACK_NOTICE) and whether the answer may be cached (cacheControlFor).
 // The server side that counts and logs a fallback is src/lib/acts/meaningLog.ts; src/lib/acts/meaning.test.mjs fails if a search path that embeds a query does not use it.
 
-/** The words shown to the reader when "By meaning" was asked for (or is the default) and exact-word results were shown instead. */
+/** The words shown to the reader when "By meaning" was asked for (or is the default) and exact-word results were shown instead, for the cause "busy". Other causes say their own reason: see whyFor. */
 export const FALLBACK_NOTICE = "Showing exact-word results — meaning search is busy.";
 /** When search by meaning is not set up at all (no Voyage key or no vector database). */
 export const UNAVAILABLE_NOTICE = "Search by meaning is not set up here, so this is a keyword search.";
@@ -29,16 +29,36 @@ export const safeDetail = (err) => { const m = String(err?.message ?? err ?? "")
 export const fellBackBecause = (cause) => ({ used: false, reason: cause === "not_configured" ? "semantic_unavailable" : "semantic_error", cause });
 /** True when a result is a keyword search that stands in for a meaning search that failed (not one the reader asked for, such as exact words or a quoted phrase). */
 export const isFallback = (semantic) => !!semantic && semantic.used === false && (semantic.reason === "semantic_error" || semantic.reason === "semantic_unavailable");
-/** What to tell the reader about a result, or "" when nothing needs saying. */
-export const noticeFor = (semantic) => (!isFallback(semantic) ? "" : semantic.reason === "semantic_unavailable" ? UNAVAILABLE_NOTICE : FALLBACK_NOTICE);
+/** The reader-facing reason for each cause, in three families: the limit was reached (Voyage answered 429), it is not set up or the provider refused the key or plan, or it is busy (slow, down, unreachable, a wrong answer). */
+export function whyFor(cause) {
+  switch (cause) {
+    case "rate_limited": return { family: "limit", clause: "meaning search has reached its request limit for now", short: "its request limit is reached" };
+    case "not_configured": return { family: "not_set_up", clause: "meaning search is not set up here", short: "it is not set up here" };
+    case "voyage_refused": return { family: "not_set_up", clause: "meaning search was refused by its provider (check the key or plan)", short: "its provider refused the request" };
+    case "timeout": return { family: "busy", clause: "meaning search took too long", short: "it took too long" };
+    default: return { family: "busy", clause: "meaning search is busy", short: "it is busy" };
+  }
+}
+/** What to tell the reader about a result, or "" when nothing needs saying. The text names the real cause. */
+export const noticeFor = (semantic) => {
+  if (!isFallback(semantic)) return "";
+  if (semantic.reason === "semantic_unavailable" || semantic.cause === "not_configured") return UNAVAILABLE_NOTICE;
+  return `Showing exact-word results — ${whyFor(semantic.cause).clause}.`;
+};
 
-/** Ask: what to tell the reader when some of the searches behind an answer fell back to exact words. meaning = { used, fellBack, judgmentsFailed } from src/lib/chat/retrieve.ts. */
+/** Ask: what to tell the reader when some of the searches behind an answer fell back to exact words. meaning = { used, fellBack, cause, judgmentsFailed, judgmentsCause, judgmentsRecovered } from src/lib/chat/retrieve.ts. */
 export function askNoticeFor(meaning) {
   if (!meaning) return "";
-  if (meaning.fellBack > 0) return `Meaning search is busy, so ${meaning.used > 0 ? "some of" : "all of"} the sections below were found by exact words only and may be less complete.`;
-  if (meaning.judgmentsFailed) return "Meaning search is busy, so Supreme Court passages were left out of this answer.";
-  return "";
+  const cap = (t) => t.charAt(0).toUpperCase() + t.slice(1), parts = [];
+  if (meaning.fellBack > 0) parts.push(`${cap(whyFor(meaning.cause).clause)}, so ${meaning.used > 0 ? "some of" : "all of"} the sections below were found by exact words only and may be less complete.`);
+  if (meaning.judgmentsFailed) {
+    const same = meaning.fellBack > 0 && meaning.judgmentsCause === meaning.cause, tail = meaning.judgmentsRecovered ? "were found by exact words only and may be less relevant" : "were left out of this answer";
+    parts.push(same ? `The Supreme Court passages ${tail} for the same reason.` : `${cap(whyFor(meaning.judgmentsCause).clause)}, so the Supreme Court passages ${tail}.`);
+  }
+  return parts.join(" ");
 }
+/** Vault: what to tell the reader when an attached document was searched by keywords because meaning search failed (cause from meaningFellBack("vault", e)). */
+export const docNoticeFor = (cause) => `Your document was searched by keywords because ${whyFor(cause).clause}.`;
 
 /** Cache-Control for a search response. A keyword answer that stands in for a failed meaning search must NOT be kept by the CDN, or one busy moment is served to everyone for minutes. */
 export function cacheControlFor(semantic, shared = "public, s-maxage=300, stale-while-revalidate=3600") {

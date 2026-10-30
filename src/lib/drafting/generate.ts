@@ -2,6 +2,7 @@
 // Rules enforced here, not just asked of the model: retrieved law only; missing facts become placeholders; a failed section is isolated (the rest is kept); references to law that were not
 // retrieved and amounts that were never given are flagged.
 import { sectionBodies } from "@/lib/legal-data";
+import { aiReason } from "@/lib/ai/notice.mjs";
 import { AiError, aiModelFor, completeAi, streamAi } from "@/lib/ai";
 import { retrieveSources, citationOf, type ChatSource } from "@/lib/chat/retrieve";
 import { findStatuteMentions, resolveMention } from "@/lib/chat/citations.mjs";
@@ -38,7 +39,7 @@ async function sourcesFor(template: Template, values: Record<string, string>, ex
   // a template with no fixed law (the general notice) gets its search queries from what the user says the matter is about
   if (!forced.length) {
     const topic = [values.subject, values.facts?.slice(0, 300), extra.slice(0, 200)].filter(Boolean).join(" — ");
-    if (topic) { try { const rp = buildRewritePrompt({ question: topic }); queries.push(...parseRewrite((await completeAi("queryRewrite", { system: rp.system, messages: rp.messages, json: true })).text, topic)); } catch { note = "Search help was skipped because the model is busy, so fewer sections may have been found."; } }
+    if (topic) { try { const rp = buildRewritePrompt({ question: topic }); queries.push(...parseRewrite((await completeAi("queryRewrite", { system: rp.system, messages: rp.messages, json: true })).text, topic)); } catch (e) { note = `Search help was skipped because ${aiReason(e)}, so fewer sections may have been found.`; } }
   }
   const question = `${template.title}${values.subject ? `: ${values.subject}` : ""}`;
   const ret = await retrieveSources(question, [], queries, 8, forced);

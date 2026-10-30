@@ -1,0 +1,10 @@
+export const FILLER: Set<string>;
+export function looseTerms(q: string, max?: number): string[];
+export const wantsStrict: (q: string) => boolean;
+export function looseTsQuery(q: string, opts?: { min?: number }): string;
+export const LOOSE_NOTE: string;
+export const LOOSE_BELOW: number;
+export const LOOSE_NOTE_FEW: string;
+export const SENTENCE_WORDS: number;
+export function looseTermsFor(q: string, strictCount: number, opts?: { expand?: (q: string) => string; sentence?: boolean }): string[] | null;
+export function atLeastTwo(terms: string[], maxTerms?: number): string;

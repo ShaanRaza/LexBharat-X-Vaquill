@@ -9,6 +9,9 @@ import { regulatoryStore } from "./vectorStore";
 import { regConfigured, regQuery } from "./regDb";
 import { fellBackBecause, type SemanticInfo } from "./meaning.mjs";
 import { meaningFellBack, meaningUsed } from "./meaningLog";
+import { LOOSE_BELOW, LOOSE_NOTE, LOOSE_NOTE_FEW, atLeastTwo, looseTermsFor } from "./looseQuery.mjs";
+import { expandQuery } from "./searchBoost.mjs";
+import synonyms from "@/config/search-synonyms.json";
 import { MARK_CLOSE, MARK_OPEN, MAX_RESULTS, type SearchOutcome, type SectionHit } from "./searchStore";
 
 export const REG_TSV = `(setweight(to_tsvector('english', coalesce(s.heading, '')), 'A') || setweight(to_tsvector('english', left(coalesce(s.body, ''), 600000)), 'B'))`;
@@ -16,6 +19,18 @@ export const regAvailable = () => regConfigured();
 const NOTE = "Searches the text of regulator instruments (RBI, SEBI, MCA, DGFT, TRAI, IRDAI and others), Law Commission reports and tribunal-filed instruments, in English. Words are matched by stem; put a phrase in quotes for an exact phrase.";
 
 async function textRegulators(q: string, page: number, pageSize: number): Promise<SearchOutcome> {
+  const strict = await textRegulatorsOnce(q, page, pageSize, null);
+  if (!strict.available || page !== 1) return strict;
+  const terms = looseTermsFor(q, strict.results.length, { expand: (x) => expandQuery(x, synonyms.rules).text });   // loosened like the Acts; the 200 best candidates are ranked in full (see textRegulatorsOnce)   // see looseQuery.mjs: every word was required and few or odd sections matched
+  if (!terms) return strict;
+  const loose = await textRegulatorsOnce(atLeastTwo(terms), page, pageSize, terms.slice(0, 8));
+  if (!loose.available || !loose.results.length) return strict;
+  const few = strict.results.length < LOOSE_BELOW;
+  return { ...loose, ...(few ? { loose: true, note: strict.results.length ? LOOSE_NOTE_FEW : LOOSE_NOTE } : { note: strict.note }), total: Math.max(loose.total, strict.total) };
+}
+
+async function textRegulatorsOnce(q: string, page: number, pageSize: number, terms: string[] | null): Promise<SearchOutcome> {
+  const loose = !!terms;
   if (!regConfigured()) return { available: false, reason: "not_configured", message: "Regulator text search is not available yet." };
   const empty = (note: string): SearchOutcome => ({ available: true, results: [], total: 0, totalCapped: false, page, pageSize, hasMore: false, mode: "text", note });
   if (!hasSearchableChars(q)) return empty("The search has no letters or numbers to look for.");
@@ -23,19 +38,24 @@ async function textRegulators(q: string, page: number, pageSize: number): Promis
   if (offset >= MAX_RESULTS) return empty(`Only the first ${MAX_RESULTS} matches can be paged through. Narrow the search.`);
   try {
     const rows = await regQuery<Omit<SectionHit, "via"> & { total: string | number }>(
-      `WITH q AS (SELECT websearch_to_tsquery('english', $1) AS tq),
-            m AS MATERIALIZED (SELECT s.act_id, s.section_key, ts_rank_cd(${REG_TSV}, q.tq, 32) * (CASE WHEN a.act_status = 'in_force' THEN 1 ELSE 0.75 END) AS rank
+      `WITH q AS (SELECT ${loose ? "to_tsquery('english', $1)" : "websearch_to_tsquery('english', $1)"} AS tq),
+${loose ? `            -- loose: ranking all of the thousands of matches would mean building the text-search vector of every instrument, so the 200 whose HEADINGS hold most of the words are ranked in full
+            cand AS MATERIALIZED (SELECT s.act_id, s.section_key, (SELECT count(*) FROM unnest($4::text[]) t WHERE to_tsvector('english', coalesce(s.heading, '')) @@ to_tsquery('english', t)) AS hm
+                                  FROM reg_sections s, q WHERE ${REG_TSV} @@ q.tq ORDER BY hm DESC, s.act_id, s.section_key LIMIT 200),
+            m AS MATERIALIZED (SELECT s.act_id, s.section_key, ts_rank_cd(${REG_TSV}, q.tq, 32) * (CASE WHEN a.act_status = 'in_force' THEN 1 ELSE 0.75 END) * power(1 + c.hm, 2) AS rank
+                               FROM cand c JOIN reg_sections s ON s.act_id = c.act_id AND s.section_key = c.section_key JOIN reg_acts a ON a.act_id = s.act_id, q),
+` : `            m AS MATERIALIZED (SELECT s.act_id, s.section_key, ts_rank_cd(${REG_TSV}, q.tq, 32) * (CASE WHEN a.act_status = 'in_force' THEN 1 ELSE 0.75 END) AS rank
                                FROM reg_sections s JOIN reg_acts a ON a.act_id = s.act_id, q WHERE ${REG_TSV} @@ q.tq ORDER BY ts_rank_cd(${REG_TSV}, q.tq, 32) DESC LIMIT ${MAX_RESULTS + 1}),
-            p AS (SELECT *, (SELECT count(*) FROM m) AS total FROM m ORDER BY rank DESC, act_id, section_key OFFSET $2 LIMIT $3)
+`}            p AS (SELECT *, (SELECT count(*) FROM m) AS total FROM m ORDER BY rank DESC, act_id, section_key OFFSET $2 LIMIT $3)
        SELECT s.act_id AS "actId", a.title AS "actTitle", a.year, 'regulatory' AS category, NULL::text AS state, a.department, a.act_status AS "actStatus", a.source_url AS "sourceUrl",
               s.section_key AS "sectionKey", s.number, s.heading, s.chapter, s.status, s.flags, p.total,
               ts_headline('english', left(s.body, 20000), q.tq, 'MaxFragments=2, MaxWords=26, MinWords=10, ShortWord=2, FragmentDelimiter=" … ", StartSel=${MARK_OPEN}, StopSel=${MARK_CLOSE}') AS snippet
-       FROM p JOIN reg_sections s USING (act_id, section_key) JOIN reg_acts a ON a.act_id = s.act_id, q ORDER BY p.rank DESC, s.act_id, s.ord`, [q, offset, pageSize], 15000);
+       FROM p JOIN reg_sections s USING (act_id, section_key) JOIN reg_acts a ON a.act_id = s.act_id, q ORDER BY p.rank DESC, s.act_id, s.ord`, loose ? [q, offset, pageSize, terms] : [q, offset, pageSize], loose ? 9000 : 15000);
     const total = rows.length ? Number(rows[0].total) : 0, capped = total > MAX_RESULTS;
     const results = rows.map(({ total: _t, ...r }): SectionHit => ({ ...r, snippet: cleanPlain(r.snippet ?? ""), via: "text" }));
     if (!rows.length && page === 1) return empty("No regulator section matches. Try fewer or different words, or put an exact phrase in quotes.");
     return { available: true, results, total: Math.min(total, MAX_RESULTS), totalCapped: capped, page, pageSize, hasMore: offset + results.length < Math.min(total, MAX_RESULTS), mode: "text", note: NOTE };
-  } catch {
+  } catch (e) {
     return { available: false, reason: "unreachable", message: "Regulator text search could not be reached. Please try again in a moment." };
   }
 }

@@ -2,21 +2,22 @@
 // vector cannot be made (Voyage busy) or a document has no vectors yet, keyword ranking alone is used. Only documents of this browser are ever searched.
 import { embedQuery } from "@/lib/acts/embed";
 import { meaningFellBack, meaningUsed } from "@/lib/acts/meaningLog";
+import type { MeaningCause } from "@/lib/acts/meaning.mjs";
 import type { ChatSource } from "@/lib/chat/retrieve";
 import { lexicalRank } from "./lexical.mjs";
 import { chunksOf, getDocs, matchChunks, scanPageNumbers, type Passage, type VaultDoc } from "./store";
 
 export type DocPassage = Passage & { docName: string; via: "meaning" | "keywords"; /** the page was read from a scan */ scan?: boolean };
 
-export async function searchAttached(bid: string, docIds: string[], question: string, k = 8, opts: { keywordsOnly?: boolean } = {}): Promise<{ passages: DocPassage[]; docs: VaultDoc[]; mode: "meaning+keywords" | "keywords" }> {
+export async function searchAttached(bid: string, docIds: string[], question: string, k = 8, opts: { keywordsOnly?: boolean } = {}): Promise<{ passages: DocPassage[]; docs: VaultDoc[]; mode: "meaning+keywords" | "keywords"; /** why meaning search could not be used, when it was tried and failed */ cause?: MeaningCause }> {
   const docs = await getDocs(bid, docIds), ids = docs.map((d) => d.id);
   if (!ids.length) return { passages: [], docs, mode: "keywords" };
   const name = new Map(docs.map((d) => [d.id, d.name])), picked = new Map<string, DocPassage>();
   const put = (p: Passage, via: DocPassage["via"]) => { if (!picked.has(p.id)) picked.set(p.id, { ...p, docName: name.get(p.docId) ?? "document", via }); };
-  let mode: "meaning+keywords" | "keywords" = "keywords";
+  let mode: "meaning+keywords" | "keywords" = "keywords", cause: MeaningCause | undefined;
   const allEmbedded = docs.every((d) => d.chunkCount > 0 && d.embeddedCount >= d.chunkCount);
   if (!opts.keywordsOnly && docs.some((d) => d.embeddedCount > 0)) {   // keywordsOnly: no query embedding is made (the free Voyage plan allows 3 a minute)
-    try { const v = await embedQuery(question); for (const m of (await matchChunks(bid, ids, v, 6)).filter((x) => x.similarity > 0.15)) put(m, "meaning"); mode = "meaning+keywords"; meaningUsed("vault"); } catch (e) { meaningFellBack("vault", e); /* keyword ranking below; the Ask route tells the reader */ }
+    try { const v = await embedQuery(question); for (const m of (await matchChunks(bid, ids, v, 6)).filter((x) => x.similarity > 0.15)) put(m, "meaning"); mode = "meaning+keywords"; meaningUsed("vault"); } catch (e) { cause = meaningFellBack("vault", e); /* keyword ranking below; the Ask route tells the reader, naming the cause */ }
   }
   const all = await chunksOf(bid, ids);
   for (const p of lexicalRank(question, all, mode === "meaning+keywords" && allEmbedded ? 3 : 6)) put(p, "keywords");
@@ -24,7 +25,7 @@ export async function searchAttached(bid: string, docIds: string[], question: st
   const scanned = new Map<string, Set<number>>();
   for (const d of docs.filter((x) => x.scanned)) scanned.set(d.id, new Set(await scanPageNumbers(bid, d.id)));
   for (const p of passages) if (p.page && scanned.get(p.docId)?.has(p.page)) p.scan = true;
-  return { passages, docs, mode };
+  return { passages, docs, mode, ...(cause ? { cause } : {}) };
 }
 
 /** The passages as chat sources numbered from 1, in the shape the chat prompt, citations and answer check already use. */

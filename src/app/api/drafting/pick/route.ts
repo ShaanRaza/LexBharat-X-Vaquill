@@ -1,4 +1,5 @@
 // POST /api/drafting/pick {text} -> the closest template for a sentence describing what the user needs: { templateId, why, fit }.
+import { aiFailure } from "@/lib/ai/notice.mjs";
 import { AiError, aiConfigured, completeAi } from "@/lib/ai";
 import { rateCheck } from "@/lib/limits/counters";
 import { TEMPLATES } from "@/lib/drafting/catalog";
@@ -20,5 +21,5 @@ export async function POST(req: Request) {
     const p = buildPickPrompt(TEMPLATES, text);
     const pick = parsePick((await completeAi("templatePick", { system: p.system, messages: p.messages, json: true })).text, TEMPLATES);
     return pick ? json(pick) : json({ error: "I could not match that to a template. Pick one from the list." }, 422);
-  } catch (e) { return json({ error: e instanceof AiError && e.kind !== "bad_request" ? "Busy, try again in a minute." : "Something went wrong. Pick a template from the list." }, 503); }
+  } catch (e) { return json({ error: e instanceof AiError && e.kind !== "bad_request" ? aiFailure(e).message : "Something went wrong. Pick a template from the list." }, 503); }
 }

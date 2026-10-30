@@ -23,7 +23,8 @@ import { expandQuery } from "@/lib/acts/searchBoost.mjs";
 import synonyms from "@/config/search-synonyms.json";
 import tuningConfig from "@/config/chat-tuning.json";
 import { citationOf, retrieveSources, type ChatSource } from "@/lib/chat/retrieve";
-import { askNoticeFor } from "@/lib/acts/meaning.mjs";
+import { askNoticeFor, docNoticeFor } from "@/lib/acts/meaning.mjs";
+import { aiFailure, aiReason } from "@/lib/ai/notice.mjs";
 import { docChatSources, searchAttached } from "@/lib/vault/search";
 import { getDocs } from "@/lib/vault/store";
 import { vaultConfigured } from "@/lib/vault/supabase";
@@ -99,13 +100,13 @@ export async function POST(req: Request) {
           const dr = await searchAttached(bid, docIds, message);
           docSrc = docChatSources(dr.passages);
           if (dr.docs.some((d) => d.embeddedCount < d.chunkCount) && dr.mode === "keywords") send({ type: "note", text: "Your document is still being prepared for meaning search, so it was searched by keywords only." });
-          else if (dr.mode === "keywords") send({ type: "note", text: "Your document was searched by keywords because the meaning search was busy." });
+          else if (dr.mode === "keywords" && dr.cause) send({ type: "note", text: docNoticeFor(dr.cause) });
         }
         // 1. query rewrite: one cheap call -> 2-3 search queries. Skipped, with a note, if the model is busy (it is also in the per-minute budget).
         const tune = tuningFlags(tuningConfig, process.env);   // quality switches under evaluation (src/config/chat-tuning.json)
         let extra: string[] = [];
         try { const rp = buildRewritePrompt({ question: message, history, docContext: docSrc[0]?.text, statutory: tune.statutoryRewrite }); extra = parseRewrite((await completeAi("queryRewrite", { system: rp.system, messages: rp.messages, json: true })).text, message); }
-        catch { send({ type: "note", text: "Search help was skipped because the model is busy, so the sections found may be less complete." }); }
+        catch (e) { send({ type: "note", text: `Search help was skipped because ${aiReason(e)}, so the sections found may be less complete.` }); }
         // 2. retrieve for the question and each rewritten query, merged
         const ret0 = await retrieveSources(message, history, extra, undefined, undefined, { hybrid: tune.hybridSearch, currentLaw: tune.currentLaw });
         // one numbering for everything the model may cite: the user's document passages first, then the Act sections
@@ -171,11 +172,9 @@ export async function POST(req: Request) {
         finish(await addMessage(chatId, { role: "assistant", content: clean.text, citations: cites, check, model }));
       } catch (e) {
         await rollback();
-        const ai = e instanceof AiError ? e : null;
-        const busy = ai && (ai.kind === "rate_limit" || ai.kind === "unavailable" || ai.kind === "timeout");
-        if (busy) bump("model_busy", "chat");
-        send({ type: "error", code: busy ? "busy" : ai?.kind === "blocked" ? "blocked" : "failed",
-          message: busy ? "Busy, try again in a minute." : ai?.kind === "blocked" ? "The model declined to answer this question. Try rewording it." : "Something went wrong and your question was not counted. Please try again." });
+        const f = aiFailure(e, { counted: "question" });
+        if (f.busy) bump("model_busy", "chat");
+        send({ type: "error", code: f.code, message: f.message });
         try { controller.close(); } catch { /* already closed */ }
       }
     },

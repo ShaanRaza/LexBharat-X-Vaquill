@@ -15,6 +15,7 @@ import { chooseMode, distinctSections, highlightQuery, rankSections, statesIn } 
 import { embedMany, embedQuery, voyageConfigured } from "./embed";
 import { vectorStores, vectorConfigured } from "./vectorStore";
 import { fellBackBecause, type SemanticInfo } from "./meaning.mjs";
+import { LOOSE_BELOW, LOOSE_NOTE, LOOSE_NOTE_FEW, looseTermsFor } from "./looseQuery.mjs";
 import { meaningFellBack, meaningPartial, meaningUsed, type Surface } from "./meaningLog";
 
 /** The same weighted text-search vector the view act_sections_v builds for a hand-filled section (heading weighs more than the body). */
@@ -44,6 +45,8 @@ export type SearchOutcome =
   | { available: true; results: SectionHit[]; total: number; totalCapped: boolean; page: number; pageSize: number; hasMore: boolean; mode: "text" | "lookup" | "semantic"; note: string;
       /** How the query was searched: used=true for search by meaning; otherwise why keyword search ran instead (exact_requested, quoted_phrase, hindi, semantic_unavailable, semantic_error) and, for the last two, the cause (src/lib/acts/meaning.mjs). */
       semantic?: SemanticInfo;
+      /** Set when no result had all the words and these match only some of them (looseQuery.mjs). */
+      loose?: boolean;
       /** Set when the asked-for section number is confidently missing from our data (gaps.mjs): the UI shows the notice and the India Code link. */
       missing?: { actTitle: string; actId: string; number: string; sourceUrl: string | null; /** the number is above the Act's last section: there is no such section (the highest number it has) */ beyond?: number | null } };
 
@@ -88,14 +91,29 @@ async function lookupHits(q: string, page: number, pageSize: number, filters: Se
   return { available: true, results: slice, total: all.length, totalCapped: false, page, pageSize, hasMore: page * pageSize < all.length, mode: "lookup", note: `Lookup: ${unitLabel(lk.number)?.toLowerCase() ?? `section ${lk.number}`} of the Act matching "${lk.actPhrase}".` };
 }
 
-async function textSearch(q: string, page: number, pageSize: number, filters: SearchFilters = {}): Promise<SearchOutcome> {
+async function textSearch(q: string, page: number, pageSize: number, filters: SearchFilters = {}, opts: { loose?: boolean } = {}): Promise<SearchOutcome> {
+  const strict = await textSearchOnce(q, page, pageSize, filters, null);
+  if (opts.loose === false || !strict.available || page !== 1) return strict;
+  // A sentence-style question usually has a word no section contains: with every word required, nothing, or only a few odd sections, is found. So the search is repeated requiring none of the words,
+  // ranked by how many of them (and their statutory synonyms) a section holds (looseQuery.mjs looseTermsFor decides when).
+  const terms = looseTermsFor(q, strict.results.length, { expand: (x) => expandQuery(x, synonyms.rules).text });
+  if (!terms) return strict;
+  const loose = await textSearchOnce(terms.join(" | "), page, pageSize, filters, terms);
+  if (!loose.available || !loose.results.length) return strict;
+  const few = strict.results.length < LOOSE_BELOW;
+  return { ...loose, ...(few ? { loose: true, note: strict.results.length ? LOOSE_NOTE_FEW : LOOSE_NOTE } : { note: strict.note }), total: Math.max(loose.total, strict.total) };
+}
+
+/** One keyword pass. terms = null: every word required (websearch_to_tsquery). terms = [..]: q is the OR query of these words and a section ranks higher the more of them it holds. */
+async function textSearchOnce(q: string, page: number, pageSize: number, filters: SearchFilters, terms: string[] | null): Promise<SearchOutcome> {
+  const loose = !!terms;
   try {
     const empty = (note: string): SearchOutcome => ({ available: true, results: [], total: 0, totalCapped: false, page, pageSize, hasMore: false, mode: "text", note });
     if (!hasSearchableChars(q)) return empty("The search has no letters or numbers to look for.");
     const offset = (page - 1) * pageSize;
     if (offset >= MAX_RESULTS) return empty(`Only the first ${MAX_RESULTS} matches can be paged through. Narrow the search.`);
     const rows = await query<Omit<SectionHit, "via"> & { total: string | number }>(
-      `WITH q AS (SELECT websearch_to_tsquery('english', $1) AS tq),
+      `WITH q AS (SELECT ${loose ? "to_tsquery('english', $1)" : "websearch_to_tsquery('english', $1)"} AS tq),
             c AS MATERIALIZED (SELECT u.act_id, u.section_key, u.base FROM (
                 -- the open-india-law rows use their GIN index directly (not through the view, which would lose it); the few hand-filled sections are searched on the fly
                 SELECT s.act_id, s.section_key, ts_rank_cd(s.tsv, q.tq, 32) AS base FROM act_sections s, q WHERE s.tsv @@ q.tq
@@ -104,11 +122,11 @@ async function textSearch(q: string, page: number, pageSize: number, filters: Se
                 UNION ALL
                 SELECT x.act_id, x.section_key, ts_rank_cd(${SUPP_TSV}, q.tq, 32) FROM act_sections_supplement x, q WHERE ${SUPP_TSV} @@ q.tq
               ) u ORDER BY u.base DESC, u.act_id, u.section_key LIMIT ${MAX_RESULTS + 1}),
-            m AS MATERIALIZED (SELECT c.act_id, c.section_key, c.base * ${RANK_BOOST} AS rank FROM c JOIN act_sections_v s USING (act_id, section_key) JOIN acts a ON a.act_id = s.act_id, q${filterSql(filters) ? ` WHERE ${filterSql(filters)}` : ""}),
+            m AS MATERIALIZED (SELECT c.act_id, c.section_key, c.base * ${RANK_BOOST}${loose ? " * power((SELECT count(*) FROM unnest($4::text[]) t WHERE s.tsv @@ to_tsquery('english', t)), 2)" : ""} AS rank FROM c JOIN act_sections_v s USING (act_id, section_key) JOIN acts a ON a.act_id = s.act_id, q${filterSql(filters) ? ` WHERE ${filterSql(filters)}` : ""}),
             p AS (SELECT *, (SELECT count(*) FROM m) AS total FROM m ORDER BY rank DESC, act_id, section_key OFFSET $2 LIMIT $3)
        SELECT ${COLS}, p.total,
               ts_headline('english', left(s.body, 20000), q.tq, 'MaxFragments=2, MaxWords=26, MinWords=10, ShortWord=2, FragmentDelimiter=" … ", StartSel=${MARK_OPEN}, StopSel=${MARK_CLOSE}') AS snippet
-       FROM p JOIN act_sections_v s USING (act_id, section_key) JOIN acts a ON a.act_id = s.act_id, q ORDER BY p.rank DESC, s.act_id, s.ord`, [q, offset, pageSize], 15000);
+       FROM p JOIN act_sections_v s USING (act_id, section_key) JOIN acts a ON a.act_id = s.act_id, q ORDER BY p.rank DESC, s.act_id, s.ord`, loose ? [q, offset, pageSize, terms] : [q, offset, pageSize], 15000);
     const total = rows.length ? Number(rows[0].total) : 0, capped = total > MAX_RESULTS;
     const results = rows.map(({ total: _t, ...r }): SectionHit => ({ ...r, snippet: tidy(r.snippet ?? ""), via: "text" }));
     if (!rows.length && page === 1) {
@@ -217,7 +235,7 @@ async function semanticSearch(q: string, page: number, pageSize: number, filters
 
 /** Section lookups ("138 NI Act") and quoted phrases use keyword search. Everything else is searched by meaning when it is set up (VOYAGE_API_KEY and VECTOR_DATABASE_URL),
  *  and falls back to keyword search, with a short note, when it is not or when it fails. `exact` forces keyword search. */
-async function searchMain(q: string, page = 1, pageSize = PAGE_SIZE, opts: { exact?: boolean; filters?: SearchFilters; surface?: Surface } = {}): Promise<SearchOutcome> {
+async function searchMain(q: string, page = 1, pageSize = PAGE_SIZE, opts: { exact?: boolean; filters?: SearchFilters; surface?: Surface; loose?: boolean } = {}): Promise<SearchOutcome> {
   const filters = opts.filters ?? {};
   if (!dbConfigured()) return { available: false, reason: "not_configured", message: "Section search is not available yet." };
   try {
@@ -233,7 +251,7 @@ async function searchMain(q: string, page = 1, pageSize = PAGE_SIZE, opts: { exa
   if (chosen.mode === "semantic" && hasSearchableChars(q)) {
     try { const r = await semanticSearch(q, page, pageSize, filters); meaningUsed(surface); return r; } catch (e) { sem = fellBackBecause(meaningFellBack(surface, e)); }
   } else if (chosen.reason === "semantic_unavailable") sem = fellBackBecause(meaningFellBack(surface, new Error("no voyage key")));   // asked for by default but not set up: counted, logged once
-  const out = await textSearch(q, page, pageSize, filters);
+  const out = await textSearch(q, page, pageSize, filters, { loose: opts.loose });
   if (!out.available) return out;
   return { ...out, semantic: sem };   // the reader is told by the UI from `semantic` (noticeFor), not by a sentence glued to the note
 }
@@ -246,7 +264,7 @@ export async function primeSemanticQueries(queries: string[]): Promise<void> {
 }
 
 /** A section named inside a longer query ("IPC 420 cheating punishment", "what does section 138 of the NI Act say") is an exact lookup: those hits come first on page 1, ahead of everything found by meaning. */
-async function searchSectionsRaw(q: string, page = 1, pageSize = PAGE_SIZE, opts: { exact?: boolean; filters?: SearchFilters; surface?: Surface } = {}): Promise<SearchOutcome> {
+async function searchSectionsRaw(q: string, page = 1, pageSize = PAGE_SIZE, opts: { exact?: boolean; filters?: SearchFilters; surface?: Surface; loose?: boolean } = {}): Promise<SearchOutcome> {
   const out = await searchMain(q, page, pageSize, opts);
   if (!out.available || page !== 1 || out.mode === "lookup") return out;
   const named: SectionHit[] = [];
@@ -266,4 +284,4 @@ async function searchSectionsRaw(q: string, page = 1, pageSize = PAGE_SIZE, opts
 
 /** Titles leave this module display-ready (src/lib/docs/docType.mjs: capitals, acronyms, glued digits, fallbacks); the data keeps the raw ones. */
 export const tidyTitles = (o: SearchOutcome): SearchOutcome => !o.available ? o : { ...o, results: dedupeCopies(o.results.map((h) => ({ ...h, actTitle: displayTitle(h.actTitle, h) }))), ...(o.missing ? { missing: { ...o.missing, actTitle: displayTitle(o.missing.actTitle, o.missing) } } : {}) };
-export async function searchSections(q: string, page = 1, pageSize = PAGE_SIZE, opts: { exact?: boolean; filters?: SearchFilters; surface?: Surface } = {}): Promise<SearchOutcome> { return tidyTitles(await searchSectionsRaw(q, page, pageSize, opts)); }
+export async function searchSections(q: string, page = 1, pageSize = PAGE_SIZE, opts: { exact?: boolean; filters?: SearchFilters; surface?: Surface; loose?: boolean } = {}): Promise<SearchOutcome> { return tidyTitles(await searchSectionsRaw(q, page, pageSize, opts)); }

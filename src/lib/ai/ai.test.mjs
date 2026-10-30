@@ -209,3 +209,25 @@ test("spend guard: below the minimum credit the paid model is skipped and the fr
   resetGuardCache(); const c = await creditStatus({ config: cfg(), env: e, fetchImpl: async () => keyResp(0.1) });
   assert.equal(c.tripped, true); assert.equal(c.remaining, 0.1);
 });
+
+// ---- what the reader is told when an AI call fails: the real cause, from one place (notice.mjs) ----
+import { aiFailure, aiReason } from "./notice.mjs";
+import fsNotice from "node:fs";
+test("a failed AI call names its cause: limit reached, busy, or not set up", () => {
+  const mk = (kind) => new AiError(kind, "x");
+  assert.equal(aiFailure(mk("rate_limit"), { counted: "question" }).code, "limit");
+  assert.match(aiFailure(mk("rate_limit"), { counted: "question" }).message, /request limit.*not counted/);
+  assert.equal(aiFailure(mk("unavailable")).code, "busy");
+  assert.match(aiFailure(mk("timeout")).message, /took too long/);
+  assert.equal(aiFailure(mk("auth")).code, "not_set_up");
+  assert.equal(aiFailure(mk("not_configured")).family, "not_set_up");
+  assert.equal(aiFailure(mk("blocked")).code, "blocked");
+  assert.equal(aiFailure(new Error("boom")).code, "failed");
+  assert.equal(aiFailure(mk("rate_limit")).busy && aiFailure(mk("auth")).busy, false);
+  assert.equal(aiReason(mk("rate_limit")), "the AI model has reached its request limit");
+});
+test("class: no route writes its own 'busy' sentence; they all use aiFailure / the meaning notices", () => {
+  const walk = (d) => fsNotice.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(`${d}/${e.name}`) : [`${d}/${e.name}`]));
+  const bad = walk("src").filter((f) => /\.(ts|tsx)$/.test(f)).filter((f) => /Busy, try again|meaning search was busy|model is busy, so/.test(fsNotice.readFileSync(f, "utf8")));
+  assert.deepEqual(bad, []);
+});

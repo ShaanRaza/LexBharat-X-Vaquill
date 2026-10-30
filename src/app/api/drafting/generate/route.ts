@@ -3,6 +3,7 @@
 //   {type:"saved", draftId, warnings} {type:"email", status} {type:"done"} | {type:"error", code, message}
 // Limits per browser (src/config/drafting-limits.json). The email address, if given and Resend is set up, is used once to send the "ready" message and is never stored.
 import { dbConfigured } from "@/lib/app-db";
+import { aiFailure } from "@/lib/ai/notice.mjs";
 import { AiError, aiConfigured } from "@/lib/ai";
 import limitConfig from "@/config/drafting-limits.json";
 import { evaluateLimits, readLimits } from "@/lib/chat/limits.mjs";
@@ -60,9 +61,9 @@ export async function POST(req: Request) {
         send({ type: "done" }); controller.close();
       } catch (e) {
         if (counted) await uncountDraft(bid, countId).catch(() => null);
-        const busy = e instanceof AiError && ["rate_limit", "unavailable", "timeout"].includes(e.kind);
-        if (busy) bump("model_busy", "drafting");
-        send({ type: "error", code: busy ? "busy" : "failed", message: busy ? "Busy, try again in a minute. Your draft was not counted." : "Something went wrong and your draft was not counted. Please try again." });
+        const f = aiFailure(e, { counted: "draft" });
+        if (f.busy) bump("model_busy", "drafting");
+        send({ type: "error", code: f.code, message: f.message });
         try { controller.close(); } catch { /* already closed */ }
       }
     },

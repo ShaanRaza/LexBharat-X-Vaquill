@@ -7,13 +7,17 @@ import { extractLookups } from "./lookups.mjs";
 import { retrievalQuery, MAX_SOURCES } from "./prompt.mjs";
 import { mergeHybrid, mergeRanked } from "./rewrite.mjs";
 import { previewOf } from "./format.mjs";
-import { scCase, scSemanticConfigured, searchJudgmentsByMeaning } from "@/lib/legal-data";
+import { scCase, scKeywordConfigured, scSemanticConfigured, searchJudgmentsByMeaning, searchJudgmentsByWords } from "@/lib/legal-data";
 import { isFallback, type MeaningCause } from "@/lib/acts/meaning.mjs";
 import { meaningFellBack, meaningUsed } from "@/lib/acts/meaningLog";
 
 /** Supreme Court judgment passages close in meaning to the question (at most 3, only clearly relevant ones), as sources of kind "judgment". Empty when the SC projects are not set up or anything fails. */
-export async function judgmentSources(question: string, startN: number, onFail?: (cause: MeaningCause) => void): Promise<ChatSource[]> {
+export async function judgmentSources(question: string, startN: number, onFail?: (cause: MeaningCause, recovered: boolean) => void): Promise<ChatSource[]> {
   if (!scSemanticConfigured()) return [];
+  const asSource = async (h: { caseId: string; chunk: number; page: number | null; text: string }, n: number): Promise<ChatSource | null> => {
+    const m = await scCase(h.caseId); if (!m) return null;
+    return { n, kind: "judgment", caseId: h.caseId, caseYear: m.year, passage: h.chunk, page: h.page, actId: "", sectionKey: "", actTitle: m.c.title, label: m.c.citation ?? null, year: m.year, category: "judgment", state: null, inForce: true, sourceUrl: null, number: null, heading: null, status: "ok", text: h.text, via: "judgment" };
+  };
   try {
     const hits = (await searchJudgmentsByMeaning(question, 6)).filter((h) => h.score >= 0.4).slice(0, 3), out: ChatSource[] = [];
     for (const h of hits) {
@@ -22,7 +26,14 @@ export async function judgmentSources(question: string, startN: number, onFail?:
     }
     meaningUsed("ask_judgments");
     return out;
-  } catch (e) { onFail?.(meaningFellBack("ask_judgments", e)); return []; }   // logged and counted; the answer simply has no case-law passages, and the reader is told
+  } catch (e) {
+    const cause = meaningFellBack("ask_judgments", e);   // logged and counted
+    // the fallback is the judgments' own word index (loosened for a sentence-style question), 3 passages at most; only when that finds nothing does the answer go without case law, and the reader is told which
+    const out: ChatSource[] = [];
+    if (scKeywordConfigured()) try { for (const h of (await searchJudgmentsByWords(question, 3, { cap: 12 })).hits) { const s = await asSource(h, startN + out.length); if (s) out.push(s); } } catch { /* nothing more to try */ }
+    onFail?.(cause, out.length > 0);
+    return out;
+  }
 }
 
 export type ChatSource = {
@@ -34,7 +45,7 @@ export type ChatSource = {
 /** A section the question names that the library does not hold (or holds only as scrambled text), with where to read it. */
 export type LibraryGap = Gap & { actId: string; url: string };
 /** How the searches behind one answer ran: `used` searches by meaning answered, `fellBack` fell back to exact words (cause = the last one's), and whether the Supreme Court passages failed. Exact-word and lookup searches that were never meant to use meaning are not counted. */
-export type MeaningUse = { used: number; fellBack: number; cause: MeaningCause | null; judgmentsFailed: boolean };
+export type MeaningUse = { used: number; fellBack: number; cause: MeaningCause | null; judgmentsFailed: boolean; /** why the Supreme Court passages could not be found by meaning, and whether exact words found some instead */ judgmentsCause: MeaningCause | null; judgmentsRecovered: boolean };
 export type Retrieval = { gaps: LibraryGap[]; sources: ChatSource[]; searchMode: "semantic" | "text" | "lookup" | "none"; note: string; queries: string[]; meaning: MeaningUse; /** keys ("actId|sectionKey") found by exact lookup: sections the question or the caller named */ exactKeys: string[] };
 
 const keyOf = (h: SectionHit) => `${h.actId}|${h.sectionKey}`;
@@ -48,7 +59,7 @@ import replaced from "@/config/replaced-laws.json";
 export async function retrieveSources(question: string, history: { role: string; content: string }[] = [], extraQueries: string[] = [], k = MAX_SOURCES, forced: string[] = [], opts: { hybrid?: boolean; currentLaw?: boolean } = {}): Promise<Retrieval> {
   const hits = new Map<string, SectionHit>(), first: string[] = [], lists: string[][] = [], gaps: LibraryGap[] = [];
   let mode: Retrieval["searchMode"] = "none", note = "";
-  const meaning: MeaningUse = { used: 0, fellBack: 0, cause: null, judgmentsFailed: false };
+  const meaning: MeaningUse = { used: 0, fellBack: 0, cause: null, judgmentsFailed: false, judgmentsCause: null, judgmentsRecovered: false };
   const usable = (h: SectionHit) => h.status !== "garbled";
   // exact lookups: sections named in the question (2 hits each), then sections the rewritten queries name, such as "Indian Contract Act section 11" (1 hit each; the model's guess is only a lead:
   // what gets cited is the section text that comes back)
@@ -77,7 +88,7 @@ export async function retrieveSources(question: string, history: { role: string;
   // hybrid (switch): also keyword-search every query. Keyword hits only boost sections the search by meaning found and add at most two of their own at the end (mergeHybrid), so a vague word match can not outrank them
   const kwLists: string[][] = [];
   if (opts.hybrid) {
-    const kw = await Promise.all(queries.map((q) => searchSections(q, 1, 12, { exact: true })));
+    const kw = await Promise.all(queries.map((q) => searchSections(q, 1, 12, { exact: true, loose: false })));
     for (const r of kw) { if (!r.available) continue; const own = r.results.filter(usable).slice(0, 8); own.forEach((h) => { if (!hits.has(keyOf(h))) hits.set(keyOf(h), h); }); if (own.length) kwLists.push(own.map(keyOf)); }
   }
   const merge = (n: number) => (opts.hybrid ? mergeHybrid(lists, kwLists, n, first) : mergeRanked(lists, n, first));
@@ -98,7 +109,7 @@ export async function retrieveSources(question: string, history: { role: string;
     sources.push({ n: sources.length + 1, actId: h.actId, sectionKey: h.sectionKey, actTitle: h.actTitle, year: h.year, category: h.category, state: h.state, inForce: h.actStatus === "in_force", sourceUrl: h.sourceUrl,
       number: h.number, heading: h.heading, status: h.status, text, via: h.via, ...((h as SectionHit & { replacedBy?: string }).replacedBy ? { replacedBy: (h as SectionHit & { replacedBy?: string }).replacedBy } : {}) });
   }
-  sources.push(...(await judgmentSources(retrievalQuery(question, history), sources.length + 1, () => { meaning.judgmentsFailed = true; })));
+  sources.push(...(await judgmentSources(retrievalQuery(question, history), sources.length + 1, (cause, recovered) => { meaning.judgmentsFailed = true; meaning.judgmentsCause = cause; meaning.judgmentsRecovered = recovered; })));
   return { gaps, sources, searchMode: mode, note, queries, meaning, exactKeys: first };
 }
 

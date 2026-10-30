@@ -11,4 +11,6 @@ export function isFallback(semantic?: SemanticInfo | null): boolean;
 export function noticeFor(semantic?: SemanticInfo | null): string;
 export function cacheControlFor(semantic?: SemanticInfo | null, shared?: string): string;
 export function meaningStats(rows: { metric: string; key: string; n: number }[]): { surface: string; searches: number; fellBack: number; pct: number; causes: Record<string, number> }[];
-export function askNoticeFor(meaning?: { used: number; fellBack: number; judgmentsFailed?: boolean } | null): string;
+export function whyFor(cause?: MeaningCause | null): { family: "limit" | "not_set_up" | "busy"; clause: string; short: string };
+export function askNoticeFor(meaning?: { used: number; fellBack: number; cause?: MeaningCause | null; judgmentsFailed?: boolean; judgmentsCause?: MeaningCause | null; judgmentsRecovered?: boolean } | null): string;
+export function docNoticeFor(cause?: MeaningCause | null): string;
