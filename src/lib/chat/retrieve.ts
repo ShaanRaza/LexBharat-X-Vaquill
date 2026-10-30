@@ -87,7 +87,7 @@ export async function retrieveSources(question: string, history: { role: string;
   };
   for (const l of [...named].slice(0, 3)) for (const p of counterpartsOfLookup(l).slice(0, 2)) for (const key of await fetchCounter(lookupFor(p), 1)) { if (!first.includes(key)) first.push(key); counterKeys.push(key); }
   // the search queries: the question, the rewrite's queries (one per Act or issue it names), and up to two that name the Act the question's everyday words point to (src/config/concept-acts.json)
-  const conceptQs = conceptQueries(question, 2).filter((q) => !extraQueries.some((e) => e.toLowerCase() === q.toLowerCase()));
+  const conceptQs = conceptQueries(question, 2, [retrievalQuery(question, history), ...extraQueries]);
   const queries = [retrievalQuery(question, history), ...extraQueries, ...conceptQs];
   await primeSemanticQueries(queries);   // one Voyage request for all of them
   const results = await Promise.all(queries.map((q) => searchSections(q, 1, 12, { surface: "ask" }))), listQueries: string[] = [];

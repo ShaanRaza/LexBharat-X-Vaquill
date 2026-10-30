@@ -20,7 +20,7 @@ export function meaningUsed(surface: Surface): void {
 }
 /** A search by meaning failed (or is not set up) and keyword search answered instead. Returns the cause so the caller can put it in the result. */
 export function meaningFellBack(surface: Surface, err: unknown): MeaningCause {
-  const cause = causeOf(err), detail = safeDetail(err);
+  const cause = causeOf(err), detail = safeDetail(err); if (process.env.DEBUG_MEANING) console.error("[dbg]", String((err as Error)?.stack ?? err).slice(0, 600));
   counters.searches[surface] = (counters.searches[surface] ?? 0) + 1;
   counters.fellBack[`${surface}:${cause}`] = (counters.fellBack[`${surface}:${cause}`] ?? 0) + 1;
   counters.last = { at: new Date().toISOString(), surface, cause, detail };

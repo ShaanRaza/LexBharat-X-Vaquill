@@ -110,3 +110,12 @@ test("class: no concept hint, mapping row or code path is keyed to a question nu
   const questions = [...JSON.parse(fs.readFileSync("docs/eval/questions-hard.json", "utf8")).questions, ...JSON.parse(fs.readFileSync("docs/eval/questions-heldout.json", "utf8")).questions, ...JSON.parse(fs.readFileSync("docs/eval/questions.json", "utf8")).questions];
   for (const f of files) { const t = fs.readFileSync(f, "utf8").toLowerCase(); for (const q of questions) assert.ok(!t.includes(String(q.question).toLowerCase().slice(0, 40)), `${f} contains the wording of question ${q.id}`); }
 });
+
+test("a concept query is added only for an Act no search query already names, and never for a hint-only concept", () => {
+  const q = "My husband beats me. What law protects me?", act = /Protection of Women from Domestic Violence Act/;
+  assert.ok(conceptQueries(q, 2, [q]).some((x) => act.test(x)));
+  assert.deepEqual(conceptQueries(q, 2, [q, "Protection of Women from Domestic Violence Act 2005 section 18 protection orders"]).filter((x) => act.test(x)), []);   // the rewrite already named it
+  assert.deepEqual(conceptQueries("When can a person accused of a non-bailable offence be released on bail after arrest?", 2, []), []);   // criminal procedure is a hint for the rewrite only
+  assert.ok(conceptMatches("accused arrested by the police and released on bail").some((c) => c.hintOnly));
+  assert.ok(conceptMatches("How do I prove the whatsapp messages in court as evidence?").some((c) => c.id === "evidence-electronic"));
+});
