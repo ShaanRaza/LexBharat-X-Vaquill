@@ -24,6 +24,7 @@ import synonyms from "@/config/search-synonyms.json";
 import tuningConfig from "@/config/chat-tuning.json";
 import { citationOf, retrieveSources, type ChatSource } from "@/lib/chat/retrieve";
 import { conceptHint } from "@/lib/chat/concepts.mjs";
+import { enforceForeign, foreignLaw } from "@/lib/chat/foreign.mjs";
 import { MAPPING_ADDENDUM, citeFinder, mappingNote, missingMentions, pairsOf } from "@/lib/chat/concordance.mjs";
 import { askNoticeFor, docNoticeFor } from "@/lib/acts/meaning.mjs";
 import { aiFailure, aiReason } from "@/lib/ai/notice.mjs";
@@ -114,7 +115,8 @@ export async function POST(req: Request) {
         // one numbering for everything the model may cite: the user's document passages first, then the Act sections
         const ret = { ...ret0, sources: [...docSrc, ...ret0.sources.map((x) => ({ ...x, n: x.n + docSrc.length }))] };
         const pairs = [...pairsOf(ret.sources), ...ret0.pairs.filter((p) => p.self.n === undefined)];   // old law <-> new law pairs in play (the numbering above shifted by the document passages, so the pairs of the sections are made again)
-        const mapNote = mappingNote(pairs);
+        const foreign = foreignLaw(message);   // a question about a foreign court, case or statute: see src/lib/chat/foreign.mjs
+        const mapNote = foreign ? null : mappingNote(pairs);   // a foreign-law question has no old-law / new-law pair to name
         const cites = ret.sources.map(citationOf);
         send({ type: "sources", sources: cites, searchMode: ret.searchMode, queries: [message, ...extra].slice(0, 4), meaning: ret.meaning });
         { const mn = askNoticeFor(ret.meaning); if (mn) send({ type: "note", text: mn }); }   // some searches fell back to exact words (already logged and counted): say so
@@ -132,7 +134,7 @@ export async function POST(req: Request) {
         }
 
         // 3. the answer, streamed. If the model fails AFTER some text, the partial answer is kept and marked as cut off.
-        const prompt = buildChatPrompt({ question: message, history, sources: ret.sources, answerRules: tune.currentLaw, gaps: ret.gaps, mapping: mapNote ? MAPPING_ADDENDUM(mapNote) : "" });
+        const prompt = buildChatPrompt({ question: message, history, sources: ret.sources, answerRules: tune.currentLaw, gaps: ret.gaps, mapping: mapNote ? MAPPING_ADDENDUM(mapNote) : "", foreign: !!foreign });
         let answer = lead ? `${lead}\n\n` : "", model = aiModelFor("chat"), cutOff = false;
         if (lead) send({ type: "delta", text: answer });
         try {
@@ -150,6 +152,7 @@ export async function POST(req: Request) {
           if (add.length) clean.text = `${clean.text}\n\n${add.map((a) => a.line).join("\n")}`;
         }
         if (tune.citationCheck) clean.text = dedupeCitations(clean.text);
+        if (foreign) clean.text = enforceForeign(clean.text, foreign, ret.sources);   // "I couldn't find this in the sources" first; at most one related Indian provision; the foreign law itself is never described
         if (clean.text !== answer) send({ type: "replace", text: clean.text });
         if (cutOff) {
           const check: CheckResult = { label: "check", unsupported: [], cutOff: true, ...(absent.length ? { absent } : {}) };

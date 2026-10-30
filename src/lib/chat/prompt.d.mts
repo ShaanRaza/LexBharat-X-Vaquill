@@ -4,7 +4,7 @@ export const JUDGMENT_ADDENDUM: string;
 export const SOURCE_CHARS: number, MAX_SOURCES: number, HISTORY_TURNS: number, SYSTEM_PROMPT: string, CHECK_SYSTEM: string;
 export function sourceBlock(s: PromptSource): string;
 export const ANSWER_RULES: string;
-export function buildChatPrompt(o: { question: string; history?: { role: "user" | "assistant"; content: string }[]; sources: PromptSource[]; answerRules?: boolean; mapping?: string; gaps?: { kind: "missing" | "unreliable" | "mentioned" | "nosuch"; number: string; actTitle: string; max?: number }[] }): { system: string; messages: { role: "user" | "assistant"; content: string }[] };
+export function buildChatPrompt(o: { question: string; history?: { role: "user" | "assistant"; content: string }[]; sources: PromptSource[]; answerRules?: boolean; mapping?: string; foreign?: boolean; gaps?: { kind: "missing" | "unreliable" | "mentioned" | "nosuch"; number: string; actTitle: string; max?: number }[] }): { system: string; messages: { role: "user" | "assistant"; content: string }[] };
 export function retrievalQuery(question: string, history?: { role: string; content: string }[]): string;
 export function buildCheckPrompt(o: { question: string; answer: string; sources: PromptSource[]; answerRules?: boolean; gaps?: { kind: "missing" | "unreliable" | "mentioned" | "nosuch"; number: string; actTitle: string; max?: number }[] }): { system: string; messages: { role: "user" | "assistant"; content: string }[] };
 export type CheckLabel = "supported" | "partial" | "check" | "not_found";
