@@ -19,6 +19,7 @@ import { officialSourceUrl } from "@/lib/acts/quality";
 import { tuningFlags } from "@/lib/chat/tuning.mjs";
 import { verifyCitations } from "@/lib/chat/verify.mjs";
 import { answerFirst, dedupeCitations, relatedOnlyIfApplicable } from "@/lib/chat/shape.mjs";
+import { fixIndiaCodeLinks } from "@/lib/docs/docType.mjs";
 import { expandQuery } from "@/lib/acts/searchBoost.mjs";
 import synonyms from "@/config/search-synonyms.json";
 import tuningConfig from "@/config/chat-tuning.json";
@@ -141,6 +142,7 @@ export async function POST(req: Request) {
         // shaping that needs no model: the answer first, "Related provisions" only if they apply (switch currentLaw), a citation shown once per sentence (switch citationCheck)
         if (tune.currentLaw) clean.text = relatedOnlyIfApplicable(answerFirst(clean.text), ret.sources.map((x) => ({ n: x.n, number: x.number, heading: x.heading, text: x.text })), expandQuery(message, synonyms.rules).text);
         if (tune.citationCheck) clean.text = dedupeCitations(clean.text);
+        clean.text = fixIndiaCodeLinks(clean.text);   // the model may write the old India Code address (India Code's old site), which no longer opens
         if (clean.text !== answer) send({ type: "replace", text: clean.text });
         if (cutOff) {
           const check: CheckResult = { label: "check", unsupported: [], cutOff: true, ...(absent.length ? { absent } : {}) };
@@ -152,7 +154,7 @@ export async function POST(req: Request) {
         // "Section N of <Act>" in the answer that is none of the sources found: if the library does not hold it, say so with a link (the model must not be the source of it)
         for (const m of unretrievedMentions(clean.text, ret.sources)) {
           const r = await searchSections(`${m.number} ${m.act}`, 1, 3).catch(() => null);
-          if (r && r.available && r.mode === "lookup" && r.missing) { const g = { kind: "mentioned" as const, number: r.missing.number, actTitle: r.missing.actTitle }; absent.push(gapNotice(g, officialSourceUrl(r.missing.sourceUrl))); if (logIt) logGap({ kind: "missing_section", question: message, act: g.actTitle, section: g.number, actId: r.missing.actId }); }
+          if (r && r.available && r.mode === "lookup" && r.missing) { const g = { kind: "mentioned" as const, number: r.missing.number, actTitle: r.missing.actTitle }; absent.push(gapNotice(g, officialSourceUrl(r.missing.sourceUrl, r.missing.actTitle))); if (logIt) logGap({ kind: "missing_section", question: message, act: g.actTitle, section: g.number, actId: r.missing.actId }); }
         }
         let check: CheckResult;
         if (detectNotFound(clean.text)) { check = { label: "not_found", unsupported: [] }; logNotFound(); }

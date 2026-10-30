@@ -14,7 +14,7 @@ export function gapSentence(g) {
   return `${what} isn't in our library yet.`;
 }
 /** What the screen shows next to the sentence: the same words plus where to read it. */
-export const gapNotice = (g, url) => ({ kind: g.kind, text: gapSentence(g), url: url ?? null, label: `Read ${unitWord(g.number, { title: g.actTitle })} of ${theAct(g.actTitle)} on India Code` });
+export const gapNotice = (g, url) => ({ kind: g.kind, text: gapSentence(g), url: url ?? null, label: `Read ${unitWord(g.number, { title: g.actTitle })} of ${theAct(g.actTitle)} on India Code (search for this Act)` });
 
 /** The opening lines of an answer when the question names sections we lack (kinds "missing" and "unreliable"). */
 export const gapLead = (gaps) => gaps.filter((g) => g.kind !== "mentioned").map(gapSentence).join(" ");

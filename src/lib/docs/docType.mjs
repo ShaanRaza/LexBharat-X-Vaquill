@@ -5,7 +5,7 @@ import acronyms from "../../config/acronyms.json" with { type: "json" };
 import { departmentLabel, isRegulatorId } from "../acts/departments.mjs";
 import { unitLabel } from "../acts/unitLabel.mjs";
 
-const INDIA_CODE = /^https:\/\/(?:www\.)?indiacode\.(?:nic|gov)\.in\//;
+export const INDIA_CODE = /^https:\/\/(?:www\.)?indiacode\.(?:nic|gov)\.in\//;
 export const INDIA_CODE_HOME = "https://indiacode.gov.in/";
 // India Code moved from www.indiacode.nic.in to indiacode.gov.in. The old pages (handle/123456789/<id>, repealed-act.jsp ...) no longer open, the new site names an Act by an id we do not hold, and
 // our stored source_url is still the old address (10,100 of 10,113 Acts). So an old address becomes the new site's search for the Act's title, which always opens; its home page when there is no title.
@@ -16,6 +16,8 @@ export function indiaCodeSearchUrl(title) {
   const q = String(title ?? "").replace(/\([^)]*\)/g, " ").replace(/,?\s*\d+ of \d{4}\b/g, " ").replace(/\s+/g, " ").replace(/[\s,]+$/, "").trim();
   return q ? `${INDIA_CODE_ACTS}?query=${encodeURIComponent(q)}` : INDIA_CODE_HOME;
 }
+/** Model or stored TEXT that may contain the old India Code address (an answer, a draft, a note): every old address in it becomes the new site's home page (the text names no Act we could search for), and a bare "indiacode.nic.in" the new host. */
+export const fixIndiaCodeLinks = (text) => String(text ?? "").replace(/https?:\/\/(?:www\.)?indiacode\.nic\.in(?:\/[^\s)\]>"'<]*)?/gi, (m) => INDIA_CODE_HOME + (m.match(/[.,;:!?]+$/)?.[0] ?? "")).replace(/\b(?:www\.)?indiacode\.nic\.in\b/gi, "indiacode.gov.in");
 /** An address that opens: the old India Code address becomes the new site's search for `title` (or its home page); every other address is returned as it is. */
 export const liveIndiaCodeUrl = (url, title) => (typeof url === "string" && OLD_INDIA_CODE.test(url) ? indiaCodeSearchUrl(title) : url);
 

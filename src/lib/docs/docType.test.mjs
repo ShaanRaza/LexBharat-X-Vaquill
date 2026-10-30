@@ -1,4 +1,4 @@
-import { indiaCodeSearchUrl, liveIndiaCodeUrl } from "./docType.mjs";
+import { fixIndiaCodeLinks, indiaCodeSearchUrl, liveIndiaCodeUrl } from "./docType.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { caseTitle, displayTitle, docTypeOf, libraryHome, sourceInfo, unitWord, unitsWord } from "./docType.mjs";
@@ -63,4 +63,11 @@ test("India Code moved to indiacode.gov.in: no stored old address is ever handed
   }
   assert.equal(liveIndiaCodeUrl("https://indiacode.gov.in/act/63b87434", "x"), "https://indiacode.gov.in/act/63b87434");   // a new-site address is kept
   assert.equal(liveIndiaCodeUrl("https://rbi.org.in/x", "x"), "https://rbi.org.in/x");
+});
+
+test("fixIndiaCodeLinks: the old address in any text becomes the new site; everything else is untouched", () => {
+  assert.equal(fixIndiaCodeLinks("Read it at https://www.indiacode.nic.in/handle/123456789/20062?view_type=browse."), "Read it at https://indiacode.gov.in/.");
+  assert.equal(fixIndiaCodeLinks("[text](http://indiacode.nic.in/x) and www.indiacode.nic.in"), "[text](https://indiacode.gov.in/) and indiacode.gov.in");
+  assert.equal(fixIndiaCodeLinks("Already https://indiacode.gov.in/act/abc and https://rbi.org.in/x are kept."), "Already https://indiacode.gov.in/act/abc and https://rbi.org.in/x are kept.");
+  assert.equal(fixIndiaCodeLinks(null), "");
 });

@@ -209,3 +209,10 @@ test("spend guard: below the minimum credit the paid model is skipped and the fr
   resetGuardCache(); const c = await creditStatus({ config: cfg(), env: e, fetchImpl: async () => keyResp(0.1) });
   assert.equal(c.tripped, true); assert.equal(c.remaining, 0.1);
 });
+
+test("a model's text never carries the old India Code address; the OCR of a user's scan is left alone", async () => {
+  const body = "See https://www.indiacode.nic.in/handle/123456789/20062?view_type=browse and indiacode.nic.in for the text.";
+  const run = (task) => completeTask(task, { messages: [{ role: "user", content: "q" }] }, { config: { tasks: { [task]: solo.tasks.chat } }, env, fetchImpl: fakeFetch(okResponse([gem({ candidates: [{ content: { parts: [{ text: body }] } }] })])) });
+  for (const task of ["chat", "drafting", "review"]) { const r = await run(task); assert.ok(!/indiacode\.nic\.in/.test(r.text), task); assert.match(r.text, /indiacode\.gov\.in/); }
+  assert.match((await run("ocr")).text, /indiacode\.nic\.in/);
+});

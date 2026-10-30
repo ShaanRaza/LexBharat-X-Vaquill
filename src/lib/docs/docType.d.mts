@@ -1,6 +1,8 @@
 export type DocRef = { title?: string | null; category?: string | null; department?: string | null; actId?: string | null; year?: number | null };
 export type DocType = { type: "constitution" | "act" | "rules" | "regulations" | "instrument"; unit: string; units: string };
 export const INDIA_CODE_HOME: string;
+export const INDIA_CODE: RegExp;
+export function fixIndiaCodeLinks(text: string | null | undefined): string;
 export function indiaCodeSearchUrl(title: string | null | undefined): string;
 export function liveIndiaCodeUrl(url: string, title?: string | null): string;
 export function liveIndiaCodeUrl(url: string | null | undefined, title?: string | null): string | null | undefined;

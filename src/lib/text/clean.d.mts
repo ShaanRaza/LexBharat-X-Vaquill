@@ -11,3 +11,4 @@ export function cleanPlain(raw: string | null | undefined, vocab?: Set<string>):
 export function previewText(raw: string | null | undefined, max?: number): string;
 export { amendParts, vocabOf } from "./amend.mjs";
 export function cleanLabel(s: string | null | undefined): string;
+export function stripTrailingHeadings(raw: string | null | undefined): string;

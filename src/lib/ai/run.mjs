@@ -2,6 +2,7 @@
 import { AiError, isRetryable, providerConfigured, resolveTask } from "./models.mjs";
 import { STREAMERS } from "./providers.mjs";
 import { creditStatus } from "./guard.mjs";
+import { fixIndiaCodeLinks } from "../docs/docType.mjs";
 
 // A model that has produced no text within `firstTokenMs` is given up on (treated as a timeout), so a slow model falls back to the next one instead of leaving the user waiting.
 const asAiError = (e) => (e instanceof AiError ? e : e?.name === "AbortError" || e?.name === "TimeoutError" ? new AiError("timeout", "The model took too long to answer.") : e);
@@ -48,5 +49,6 @@ export async function* streamTask(task, input, { config, env, fetchImpl }) {
 export async function completeTask(task, input, ctx) {
   let text = "", usage = null, model = null;
   for await (const ev of streamTask(task, input, ctx)) { if (ev.type === "text") text += ev.text; else if (ev.type === "done") { usage = ev.usage; model = ev.model; } }
-  return { text, usage, model };
+  // a model may write the old India Code address (India Code's old site), which no longer opens; the OCR of a user's own scan is their text and is left as it is
+  return { text: task === "ocr" ? text : fixIndiaCodeLinks(text), usage, model };
 }
