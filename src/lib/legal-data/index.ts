@@ -4,6 +4,7 @@
 // existing stores, kept under the same names so they can be replaced one by one. src/lib/legal-data/boundary.test.mjs fails if code outside the data folders touches a legal-data table directly.
 //
 // NOT part of this module: the app's OWN tables (saved chats, drafts, reviews, usage) use the database connection helper in src/lib/acts/db.ts. If the legal data moves to another database, keep that connection.
+import { effectiveStatus } from "../acts/contentsList.mjs";
 import { query, dbConfigured } from "@/lib/acts/db";
 import { getCaseText } from "@/lib/judgments/scText";
 import { actsTextDir } from "@/lib/acts/sectionText";
@@ -46,7 +47,7 @@ export type SectionDetail = { title: string; number: string | null; heading: str
 /** One section with its Act's title (cut to 20,000 characters), or null. Throws only when the source itself fails. */
 export async function sectionDetail(actId: string, sectionKey: string): Promise<SectionDetail | null> {
   const rows = await query<SectionDetail>(`SELECT a.title, s.number, s.heading, s.status, left(s.body, 20000) AS body FROM act_sections_v s JOIN acts a ON a.act_id = s.act_id WHERE s.act_id = $1 AND s.section_key = $2`, [actId, sectionKey]);
-  return rows[0] ? { ...rows[0], title: displayTitle(rows[0].title, { title: rows[0].title }) } : null;
+  return rows[0] ? { ...rows[0], status: effectiveStatus(rows[0].status, rows[0]), title: displayTitle(rows[0].title, { title: rows[0].title }) } : null;
 }
 
 /** An excerpt (one passage) of a Supreme Court judgment, or null when the text is not held. */

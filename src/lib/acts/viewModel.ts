@@ -4,6 +4,7 @@ import { toDisplayBlocks, cleanHeading, type DisplayBlock } from "./cleanText.mj
 import type { SectionRecord } from "./sectionRecord.mjs";
 import { unitLabel, parseUnitNumber } from "./unitLabel.mjs";
 import { resolveSectionKey } from "./sectionKey.mjs";
+import { effectiveStatus } from "./contentsList.mjs";
 import type { ScheduleTable } from "./scheduleTable.mjs";
 import { STATUS_INFO, MISSING_INFO, sectionFlagList, officialSourceUrl, type FlagInfo, type Tone } from "./quality";
 
@@ -66,7 +67,8 @@ export function selectedKey(rows: { key: string }[], wanted: string | undefined)
   return resolveSectionKey(rows.map((r) => r.key), wanted) ?? undefined;
 }
 
-export function buildActTextView(sections: ListedSection[], sourceUrl: string | null | undefined, wantedKey: string | undefined, missing: number[] = [], gaps?: ScheduleGaps): ActTextView {
+export function buildActTextView(listed: ListedSection[], sourceUrl: string | null | undefined, wantedKey: string | undefined, missing: number[] = [], gaps?: ScheduleGaps): ActTextView {
+  const sections = listed.map((s) => ({ ...s, status: effectiveStatus(s.status, s) as ListedSection["status"] }));   // a table of contents filed as a section is never "no problems detected"
   const rows = rowsFor(sections, missing, gaps), keys = rows.map((r) => ({ key: keyOf(r) }));
   const list: SectionListItem[] = rows.map((r) => r.kind === "gap"
     ? { supplemented: false, key: keyOf(r), label: r.label, heading: null, status: "missing", tone: "info", statusLabel: "Not printed in the source PDF", noNumber: false, missing: true }

@@ -6,7 +6,7 @@ import { buildChatPrompt } from "./prompt.mjs";
 const NI = "The Negotiable Instruments Act, 1881";
 test("the sentence says plainly that the section isn't in the library", () => {
   assert.equal(gapSentence({ kind: "missing", number: "138", actTitle: NI }), "Section 138 of the Negotiable Instruments Act, 1881 isn't in our library yet.");
-  assert.match(gapSentence({ kind: "unreliable", number: "9", actTitle: NI }), /scrambled.*cannot quote/);
+  assert.match(gapSentence({ kind: "unreliable", number: "9", actTitle: NI }), /not usable.*cannot quote/);
   assert.match(gapSentence({ kind: "mentioned", number: "9", actTitle: NI }), /The answer mentions Section 9 .* isn't in our library yet\./);
 });
 test("a section above the Act's last one does not exist, which is different from missing", () => {
