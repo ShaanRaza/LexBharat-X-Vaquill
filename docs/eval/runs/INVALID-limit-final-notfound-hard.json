@@ -1,0 +1,406 @@
+{
+ "label": "final-notfound-hard",
+ "at": "2026-10-31T06:11:02.628Z",
+ "rows": [
+  {
+   "id": 125,
+   "kind": "notfound",
+   "question": "What is the penalty under the Zorgian Space Resources Act, 2040?",
+   "gold": [],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": false,
+   "rank": null,
+   "cited": false,
+   "correct": false,
+   "notFound": false,
+   "check": null,
+   "error": "limit",
+   "secs": 97.1,
+   "nSources": 9,
+   "queries": [
+    "What is the penalty under the Zorgian Space Resources Act, 2040?"
+   ],
+   "meaning": {
+    "used": 1,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Indian Antarctic Act, 2022 s44",
+    "The Indian Antarctic Act, 2022 s41",
+    "The Indian Antarctic Act, 2022 s42",
+    "The Coal Bearing Areas (Acquisition and Development) Act, 1957 s23",
+    "The Pension Fund Regulatory and Development Authority Act, 2013 s32"
+   ],
+   "answer": "",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Indian Antarctic Act, 2022",
+     "s": "44"
+    },
+    {
+     "n": 2,
+     "t": "The Indian Antarctic Act, 2022",
+     "s": "41"
+    },
+    {
+     "n": 3,
+     "t": "The Indian Antarctic Act, 2022",
+     "s": "42"
+    },
+    {
+     "n": 4,
+     "t": "The Coal Bearing Areas (Acquisition and Development) Act, 1957",
+     "s": "23"
+    },
+    {
+     "n": 5,
+     "t": "The Pension Fund Regulatory and Development Authority Act, 2013",
+     "s": "32"
+    },
+    {
+     "n": 6,
+     "t": "The Tripura Land Revenue and Land Reforms Act, 1960",
+     "s": "193"
+    },
+    {
+     "n": 7,
+     "t": "The Manipur Municipalities Act, 1994",
+     "s": "225"
+    },
+    {
+     "n": 8,
+     "t": "The Pre Conception Pre Natal Diagnostic Techniques Act 1994",
+     "s": "25"
+    },
+    {
+     "n": 9,
+     "t": "ZAVERBHAI AMAIDAS versus THE STATE OF BOMBAY",
+     "s": null
+    }
+   ],
+   "score": 0
+  },
+  {
+   "id": 126,
+   "kind": "notfound",
+   "question": "What did the US Supreme Court decide in Miranda v. Arizona about police questioning?",
+   "gold": [],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": false,
+   "rank": null,
+   "cited": false,
+   "correct": false,
+   "notFound": false,
+   "check": null,
+   "error": "limit",
+   "secs": 87.9,
+   "nSources": 13,
+   "queries": [
+    "What did the US Supreme Court decide in Miranda v. Arizona about police questioning?"
+   ],
+   "meaning": {
+    "used": 1,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s182",
+    "Police Act 1861, 13 of 1861, (Rep., Act 8 of 1868) s11",
+    "Police Act 1861, 13 of 1861, (Rep., Act 8 of 1868) s57",
+    "The Madras District Police Act, 1859 s8",
+    "Police Act 1861, 13 of 1861, (Rep., Act 8 of 1868) s56"
+   ],
+   "answer": "",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "182"
+    },
+    {
+     "n": 2,
+     "t": "Police Act 1861, 13 of 1861, (Rep., Act 8 of 1868)",
+     "s": "11"
+    },
+    {
+     "n": 3,
+     "t": "Police Act 1861, 13 of 1861, (Rep., Act 8 of 1868)",
+     "s": "57"
+    },
+    {
+     "n": 4,
+     "t": "The Madras District Police Act, 1859",
+     "s": "8"
+    },
+    {
+     "n": 5,
+     "t": "Police Act 1861, 13 of 1861, (Rep., Act 8 of 1868)",
+     "s": "56"
+    },
+    {
+     "n": 6,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "183"
+    },
+    {
+     "n": 7,
+     "t": "The Bharatiya Sakshya Adhiniyam, 2023",
+     "s": "23"
+    },
+    {
+     "n": 8,
+     "t": "Police Act 1861, 13 of 1861, (Rep., Act 8 of 1868)",
+     "s": "58"
+    },
+    {
+     "n": 9,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "163"
+    },
+    {
+     "n": 10,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "164"
+    },
+    {
+     "n": 11,
+     "t": "STATE (N.C.T. OF DELHI) versus NAVJOT SANDHU@AFSAN GURU",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "STATE OF PUNJAB. versus BALBIR SINGH AND ORS. ETC. ETC.",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "SUNDEEP KUMAR BAFNA versus STATE OF MAHARASHTRA & ANR.",
+     "s": null
+    }
+   ],
+   "score": 0
+  },
+  {
+   "id": 127,
+   "kind": "notfound",
+   "question": "What is the minimum wage for a skilled worker in Karnataka this month?",
+   "gold": [],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": false,
+   "rank": null,
+   "cited": false,
+   "correct": false,
+   "notFound": false,
+   "check": null,
+   "error": "limit",
+   "secs": 87.1,
+   "nSources": 11,
+   "queries": [
+    "What is the minimum wage for a skilled worker in Karnataka this month?"
+   ],
+   "meaning": {
+    "used": 1,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Karnataka Daily Wage Employees Welfare Act, 2012 s11",
+    "The Karnataka Tax on Professions, Trades, Callings and Employments Act, 1976 s4",
+    "The Karnataka Daily Wage Employees Welfare Act, 2012 s10",
+    "The Karnataka Payment of Subsistence Allowance Act, 1988. s2",
+    "The Karnataka Labour Welfare Fund Act, 1965 s1"
+   ],
+   "answer": "",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Karnataka Daily Wage Employees Welfare Act, 2012",
+     "s": "11"
+    },
+    {
+     "n": 2,
+     "t": "The Karnataka Tax on Professions, Trades, Callings and Employments Act, 1976",
+     "s": "4"
+    },
+    {
+     "n": 3,
+     "t": "The Karnataka Daily Wage Employees Welfare Act, 2012",
+     "s": "10"
+    },
+    {
+     "n": 4,
+     "t": "The Karnataka Payment of Subsistence Allowance Act, 1988.",
+     "s": "2"
+    },
+    {
+     "n": 5,
+     "t": "The Karnataka Labour Welfare Fund Act, 1965",
+     "s": "1"
+    },
+    {
+     "n": 6,
+     "t": "The Karnataka Tax on Professions, Trades, Callings and Employments Act, 1976",
+     "s": "10"
+    },
+    {
+     "n": 7,
+     "t": "The Karnataka Daily Wage Employees Welfare Act, 2012",
+     "s": "4"
+    },
+    {
+     "n": 8,
+     "t": "The Karnataka Daily Wage Employees Welfare Act, 2012",
+     "s": "1"
+    },
+    {
+     "n": 9,
+     "t": "AIRFREIGHT LTD. versus STATE OF KARNATAKA AND ORS.",
+     "s": null
+    },
+    {
+     "n": 10,
+     "t": "STATE OF KARNATAKA AND ORS. versus AMEERBI AND ORS.",
+     "s": null
+    },
+    {
+     "n": 11,
+     "t": "STATE OF KARNATAKA AND ORS. versus P.M. BHASKARA GOWDA AND ORS.",
+     "s": null
+    }
+   ],
+   "score": 0
+  },
+  {
+   "id": 128,
+   "kind": "notfound",
+   "question": "What is the current RBI repo rate?",
+   "gold": [],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": false,
+   "rank": null,
+   "cited": false,
+   "correct": false,
+   "notFound": false,
+   "check": null,
+   "error": "limit",
+   "secs": 85.1,
+   "nSources": 11,
+   "queries": [
+    "What is the current RBI repo rate?"
+   ],
+   "meaning": {
+    "used": 1,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Reserve Bank of India Act, 1934 s8",
+    "The Reserve Bank of India Act, 1934 s5",
+    "The Reserve Bank of India Act, 1934 s49",
+    "The Reserve Bank of India Act, 1934 s11",
+    "The Reserve Bank of India Act, 1934 s4"
+   ],
+   "answer": "",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Reserve Bank of India Act, 1934",
+     "s": "8"
+    },
+    {
+     "n": 2,
+     "t": "The Reserve Bank of India Act, 1934",
+     "s": "5"
+    },
+    {
+     "n": 3,
+     "t": "The Reserve Bank of India Act, 1934",
+     "s": "49"
+    },
+    {
+     "n": 4,
+     "t": "The Reserve Bank of India Act, 1934",
+     "s": "11"
+    },
+    {
+     "n": 5,
+     "t": "The Reserve Bank of India Act, 1934",
+     "s": "4"
+    },
+    {
+     "n": 6,
+     "t": "The Reserve Bank of India Act, 1934",
+     "s": "2"
+    },
+    {
+     "n": 7,
+     "t": "The Reserve Bank of India Act, 1934",
+     "s": "9"
+    },
+    {
+     "n": 8,
+     "t": "The Reserve Bank of India Act, 1934",
+     "s": "7"
+    },
+    {
+     "n": 9,
+     "t": "CANARA BANK versus P.R.N. UPADHYAYA AND ORS.",
+     "s": null
+    },
+    {
+     "n": 10,
+     "t": "INTERNET AND MOBILE ASSOCIATION OF INDIA versus RESERVE BANK OF INDIA",
+     "s": null
+    },
+    {
+     "n": 11,
+     "t": "N.M. VEERAPPA versus CANARA BANK",
+     "s": null
+    }
+   ],
+   "score": 0
+  }
+ ]
+}
