@@ -68,13 +68,13 @@ export default function AnswerView({ text, sources, check, pending, queries, not
       </div>
       {!pending && check?.cutOff && <Notice tone="warn" role="note" compact className="mt-3"><p><strong className="font-medium text-foreground">The answer was cut off.</strong> Try again.</p></Notice>}
       {!pending && check?.absent?.map((a, i) => (   // a section the library does not hold: the plain sentence is in the answer; here is where to read it
-        <Notice key={i} tone="info" role="note" compact className="mt-3"><p>{a.kind === "mentioned" ? `${a.text} ` : ""}{a.url && <> <a href={a.url} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline decoration-primary/40 hover:decoration-primary">{a.label} ›</a></>}</p></Notice>
+        <Notice key={i} tone="info" role="note" compact className="mt-3"><p>{a.kind === "mentioned" ? `${a.text} ` : ""}{a.url && <> <a href={a.url} title={a.actTitle || undefined} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline decoration-primary/40 hover:decoration-primary">{a.label} ›</a></>}</p></Notice>
       ))}
       {!pending && check && !check.cutOff && (
         <div className="mt-3 space-y-2">
           <p className="flex flex-wrap items-center gap-2">
             <Badge tone={CHECK[check.label].tone} title={CHECK[check.label].explain}>{CHECK[check.label].text}</Badge>
-            <span className="text-ui-sm text-muted">{check.unavailable ? "The automatic check could not run." : CHECK[check.label].explain}</span>
+            {!(check.label === "not_found" && check.absent?.length) && <span className="text-ui-sm text-muted">{check.unavailable ? "The automatic check could not run." : CHECK[check.label].explain}</span>}   {/* a missing section is already said once, above: the label stays, its explanation would say it a third time */}
           </p>
           {check.unsupported.length > 0 && (
             <Notice tone="warn" role="note" compact title="Not backed by the sources">

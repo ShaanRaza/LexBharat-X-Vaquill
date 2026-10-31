@@ -60,6 +60,14 @@ const WORDS = acronyms.words, SMALL = new Set(acronyms.smallWords);
 const isAllLower = (s) => !/[A-Z]/.test(s), upperShare = (s) => { const l = s.match(/[A-Za-z]/g) ?? []; return l.length ? (s.match(/[A-Z]/g) ?? []).length / l.length : 0; };
 const titleCase = (w, i) => { const k = w.toLowerCase(); if (WORDS[k]) return WORDS[k]; if (i > 0 && SMALL.has(k)) return k; return k.charAt(0).toUpperCase() + k.slice(1); };
 
+/** The name people use for an Act in a sentence: no "The", no year, no number, no repeal note. "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)" -> "Indian Penal Code"; "The Negotiable Instruments Act, 1881" -> "Negotiable Instruments Act".
+ *  The full title belongs in a hover text or on the Act's own page. */
+export function shortActName(title) {
+  const full = String(title ?? "").trim();
+  const t = full.replace(/\s*\((?:Rep\b|Repealed)[^)]*\)\s*$/i, "").replace(/\s*\(\d+ of \d{4}\)\s*$/, "").replace(/,?\s*\d+\s+of\s+\d{4}\s*$/i, "").replace(/,?\s*\d{4}\s*$/, "").replace(/[,\s]+$/, "").replace(/^the\s+/i, "").trim();
+  return t || full;
+}
+
 /** A title ready to print. Undoes URL encoding and underscores, separates glued letters and digits ("Advisory022026" -> "Advisory 02/2026", "01July2017" -> "01 July 2017"), puts all-lower or ALL-CAPITAL titles in title case, and writes
  *  acronyms in capitals everywhere (RBI, CGST, MoEFCC). Mixed-case titles keep their own capitals except for acronyms. When the data has no usable title: "<regulator> instrument (<year>)" or "Untitled". */
 export function displayTitle(title, doc = {}) {

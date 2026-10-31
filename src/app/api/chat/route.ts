@@ -11,7 +11,7 @@ import { evaluateLimits, readLimits } from "@/lib/chat/limits.mjs";
 import { alignCitations, citedNumbers, ensureCitations, sanitizeCitations } from "@/lib/chat/citations.mjs";
 import { buildChatPrompt, buildCheckPrompt, detectNotFound, parseCheck } from "@/lib/chat/prompt.mjs";
 import { buildRewritePrompt, parseRewrite } from "@/lib/chat/rewrite.mjs";
-import { gapLead, gapNotice, unretrievedMentions } from "@/lib/chat/gaps.mjs";
+import { gapLead, gapNotice, gapKey, uniqueGaps, dropGapRepeats, unretrievedMentions } from "@/lib/chat/gaps.mjs";
 import { extractLookups } from "@/lib/chat/lookups.mjs";
 import { logGap } from "@/lib/insights/server";
 import { searchSections } from "@/lib/legal-data";
@@ -115,11 +115,11 @@ export async function POST(req: Request) {
         send({ type: "sources", sources: cites, searchMode: ret.searchMode, queries: [message, ...extra].slice(0, 4), meaning: ret.meaning });
         { const mn = askNoticeFor(ret.meaning); if (mn) send({ type: "note", text: mn }); }   // some searches fell back to exact words (already logged and counted): say so
         // sections the question names that the library does not hold (or holds only as scrambled text): say so plainly, link the Act on India Code, never answer from memory, and log it for the next downloads
-        const absent: AbsentNote[] = ret.gaps.map((g) => gapNotice(g, g.url)), lead = gapLead(ret.gaps), logIt = docIds.length === 0;   // nothing is logged for a question that had a Vault document attached
+        const absent: AbsentNote[] = uniqueGaps(ret.gaps).map((g) => gapNotice(g, g.url)), lead = gapLead(ret.gaps), logIt = docIds.length === 0;   // nothing is logged for a question that had a Vault document attached
         if (logIt) for (const g of ret.gaps.filter((x) => x.kind !== "nosuch")) logGap({ kind: g.kind === "unreliable" ? "unreliable_section" : "missing_section", question: message, act: g.actTitle, section: g.number, actId: g.actId });
         const logNotFound = () => { if (logIt && !ret.gaps.some((x) => x.kind !== "nosuch")) { const l = extractLookups(message)[0]; logGap({ kind: "not_found", question: message, act: l ? l.replace(/^\S+\s+/, "") : null, section: l ? l.split(" ")[0] : null }); } };
         if (!ret.sources.length) {
-          const text = lead ? `${lead}\n\nI couldn't find other sections in the Acts I searched that answer this question. You can read the section on India Code (link below).` : "I couldn't find any sections in the Acts I searched that relate to this question. This tool searches Indian Central and State Acts and short excerpts of Supreme Court judgments; High Court and tribunal decisions are not included yet. Try describing the situation in other words, or name the Act and section.";
+          const text = lead ? lead : "I couldn't find any sections in the Acts I searched that relate to this question. This tool searches Indian Central and State Acts and short excerpts of Supreme Court judgments; High Court and tribunal decisions are not included yet. Try describing the situation in other words, or name the Act and section.";
           send({ type: "delta", text });
           logNotFound();
           const check: CheckResult = { label: "not_found", unsupported: [], ...(absent.length ? { absent } : {}) };
@@ -142,7 +142,7 @@ export async function POST(req: Request) {
         // shaping that needs no model: the answer first, "Related provisions" only if they apply (switch currentLaw), a citation shown once per sentence (switch citationCheck)
         if (tune.currentLaw) clean.text = relatedOnlyIfApplicable(answerFirst(clean.text), ret.sources.map((x) => ({ n: x.n, number: x.number, heading: x.heading, text: x.text })), expandQuery(message, synonyms.rules).text);
         if (tune.citationCheck) clean.text = dedupeCitations(clean.text);
-        clean.text = fixIndiaCodeLinks(clean.text);   // the model may write the old India Code address (India Code's old site), which no longer opens
+        clean.text = dropGapRepeats(fixIndiaCodeLinks(clean.text), ret.gaps);   // the opening sentence says a section is not held, once: the model must not say it again   // the model may write the old India Code address (India Code's old site), which no longer opens
         if (clean.text !== answer) send({ type: "replace", text: clean.text });
         if (cutOff) {
           const check: CheckResult = { label: "check", unsupported: [], cutOff: true, ...(absent.length ? { absent } : {}) };
@@ -154,7 +154,7 @@ export async function POST(req: Request) {
         // "Section N of <Act>" in the answer that is none of the sources found: if the library does not hold it, say so with a link (the model must not be the source of it)
         for (const m of unretrievedMentions(clean.text, ret.sources)) {
           const r = await searchSections(`${m.number} ${m.act}`, 1, 3).catch(() => null);
-          if (r && r.available && r.mode === "lookup" && r.missing) { const g = { kind: "mentioned" as const, number: r.missing.number, actTitle: r.missing.actTitle }; absent.push(gapNotice(g, officialSourceUrl(r.missing.sourceUrl, r.missing.actTitle))); if (logIt) logGap({ kind: "missing_section", question: message, act: g.actTitle, section: g.number, actId: r.missing.actId }); }
+          if (r && r.available && r.mode === "lookup" && r.missing) { const g = { kind: "mentioned" as const, number: r.missing.number, actTitle: r.missing.actTitle }; if (absent.some((a) => gapKey({ ...g, actTitle: a.actTitle ?? "", number: g.number }) === gapKey(g))) continue; absent.push(gapNotice(g, officialSourceUrl(r.missing.sourceUrl, r.missing.actTitle))); if (logIt) logGap({ kind: "missing_section", question: message, act: g.actTitle, section: g.number, actId: r.missing.actId }); }
         }
         let check: CheckResult;
         if (detectNotFound(clean.text)) { check = { label: "not_found", unsupported: [] }; logNotFound(); }

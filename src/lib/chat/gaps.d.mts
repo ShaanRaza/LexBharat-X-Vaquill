@@ -1,7 +1,10 @@
 export type GapKind = "missing" | "unreliable" | "mentioned" | "nosuch";
 export type Gap = { kind: GapKind; number: string; actTitle: string; max?: number };
 export function gapSentence(g: Gap): string;
-export function gapNotice(g: Gap, url?: string | null): { kind: GapKind; text: string; url: string | null; label: string };
+export function gapNotice(g: Gap, url?: string | null): { kind: GapKind; text: string; url: string | null; actTitle: string; label: string };
 export function gapLead(gaps: Gap[]): string;
 export function missingAddendum(gaps: Gap[]): string;
 export function unretrievedMentions(text: string, sources: { n: number; number?: string | null; actTitle: string; actId?: string }[]): { number: string; act: string }[];
+export function gapKey(g: Gap): string;
+export function uniqueGaps<G extends Gap>(gaps: G[]): G[];
+export function dropGapRepeats(text: string, gaps: Gap[]): string;
