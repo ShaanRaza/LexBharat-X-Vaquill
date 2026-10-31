@@ -16,6 +16,9 @@ export function foreignLaw(question) {
 }
 
 export const FOREIGN_FIRST = "I couldn't find this in the sources.";
+export const FOREIGN_NOTE = "Our sources are Indian Acts and Indian Supreme Court judgments, so they do not cover the foreign law or case you asked about.";
+/** True for the answer enforceForeign produces: a "not found" answer even though its related-provision paragraph cites a section. */
+export const isForeignNotFound = (answer) => String(answer).trim().startsWith(`${FOREIGN_FIRST} ${FOREIGN_NOTE}`);
 export const RELATED_LABEL = "Related Indian provision (not an answer to your question):";
 
 /** Added to the system prompt for a foreign-law question. */
@@ -46,6 +49,6 @@ export function enforceForeign(answer, info, sources = []) {
     const names = info.terms.some((t) => new RegExp(`\\b${esc(t)}\\b`, t.length <= 3 ? "" : "i").test(rel));   // the foreign thing's own words, whole words (a 2-3 letter term such as "US" only as written)
     if (!cited.some((s) => s.kind !== "judgment" && s.kind !== "doc") || names || rel.length > 600) rel = null;
   }
-  const first = `${FOREIGN_FIRST} Our sources are Indian Acts and Indian Supreme Court judgments, so they do not cover the foreign law or case you asked about.`;
+  const first = `${FOREIGN_FIRST} ${FOREIGN_NOTE}`;
   return rel ? `${first}\n\n${RELATED_LABEL} ${rel}` : first;
 }

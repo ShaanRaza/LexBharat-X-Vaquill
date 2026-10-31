@@ -2,7 +2,7 @@
 import { unitWord } from "../docs/docType.mjs";
 import { REPLACED_ADDENDUM } from "./currentlaw.mjs";
 import { missingAddendum } from "./gaps.mjs";
-import { FOREIGN_ADDENDUM } from "./foreign.mjs";
+import { FOREIGN_ADDENDUM, isForeignNotFound } from "./foreign.mjs";
 export const SOURCE_CHARS = 9000, MAX_SOURCES = 10, HISTORY_TURNS = 4;
 
 export const SYSTEM_PROMPT = `You are LexBharat's research assistant for Indian law. You answer ONLY from the numbered sources given with the question. The sources are sections of Indian Acts (Central and State) and, for some questions, short excerpts of Supreme Court judgments (each labelled as a Supreme Court judgment). You have no other information: no other case law, no news.
@@ -94,6 +94,7 @@ export const CHECK_LABELS = { supported: "Supported", partial: "Partly supported
 /** True when the answer is the model's "I couldn't find it" reply: it says so and cites no source. (No model call is needed for these.) */
 export function detectNotFound(answer) {
   const t = String(answer).trim();
+  if (isForeignNotFound(t)) return true;   // the foreign-law answer: not found, then at most one labelled related Indian provision (which cites a section)
   const says = /(couldn[’']t find|could not find|can[’']?not find|no (relevant )?(information|sections?) (was|were)? ?found|not included)/i.test(t);
   // a short reply that says it found nothing, even if it tagged sources, states no law; a long one that cites sources and mentions a gap is for the checker to judge
   return says && (!/\[\d/.test(t) || (t.split(/\s+/).length < 70 && /^(i )?(couldn[’']t|could not|can[’']?not)/i.test(t)));

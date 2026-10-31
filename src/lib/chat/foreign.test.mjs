@@ -58,3 +58,11 @@ test("comparison and mixed questions that name an Indian side are answered from 
 test("an Indian-sounding Act name does not hide a question about the same-named foreign Act", () => {
   for (const q of ["What does the UK Companies Act 2006 require of directors?", "What does the US Copyright Act say about fair use?", "What does the Singapore Companies Act say about directors?", "What did the US Supreme Court decide in Miranda v Arizona?"]) assert.ok(foreignLaw(q), q);
 });
+test("class: a foreign-law answer is 'not found' even when its related-provision paragraph cites a section (Oct 31 run: q126 scored 0 for this)", () => {
+  const info = foreignLaw("What did the US Supreme Court decide in Miranda v. Arizona about police questioning?"), sources = [{ n: 7 }];
+  const long = `${RELATED_LABEL} Section 182 of the Bharatiya Nagarik Suraksha Sanhita, 2023 states that no police officer or other person in authority shall offer or make any inducement, threat, or promise as mentioned in section 22 of the Bharatiya Sakshya Adhiniyam, 2023, but no police officer or other person shall prevent any person from making any statement of their own free will in the course of an investigation [7].`;
+  const out = enforceForeign(`x\n\n${long}`, info, sources);
+  assert.ok(out.includes("[7]") && out.split(/\s+/).length > 70);
+  assert.equal(detectNotFound(out), true);
+  assert.equal(detectNotFound("I couldn't find the exact section, but section 5 says the penalty is two years [1]. " + "word ".repeat(80)), false);   // an ordinary long cited answer is still the checker's job
+});
