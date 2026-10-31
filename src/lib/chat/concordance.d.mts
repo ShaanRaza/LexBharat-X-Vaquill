@@ -9,7 +9,7 @@ export function pairsOf(sources: { kind?: string; actTitle: string; number: stri
 export function mappingNote(pairs: Pair[]): string | null;
 export const MAPPING_ADDENDUM: (note: string) => string;
 export function mentions(text: string, p: Counterpart): boolean;
-export function missingMentions(answer: string, pairs: Pair[], citeOf?: (p: Counterpart) => string): { partner: Counterpart; line: string }[];
+export function missingMentions(answer: string, pairs: Pair[], citeOf?: (p: Counterpart) => string): { partner: Counterpart; partners: Counterpart[]; line: string }[];
 export function usableTitle(t: string | null | undefined): string | null;
 export function counterpartsOfLookup(lookup: string): Counterpart[];
 export function pairsOfNamed(lookups: string[], have?: Set<string>): Pair[];

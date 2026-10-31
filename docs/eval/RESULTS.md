@@ -94,3 +94,17 @@ Same scorer, same questions as the baseline `base-oct30-*`, free Gemini only (ev
 Mapping review lists: `docs/MAPPING-REVIEW.md` (regenerated Oct 31 by `scripts/concord/review-lists.py`: 1,230 rows, 1,083 pairing-confirmed, 919 linkable, 827 strictly verified).
 
 Foreign-law detection (Oct 31): comparison and mixed questions that also name an Indian side ("How does the DPDP Act differ from GDPR?") are answered from our sources and are not replaced by the safeguard; the rule lives in `src/config/foreign-law.json` (`indian` cues), tested with 12 mixed questions and 4 same-named foreign Acts.
+
+### After merging `origin/reskin` and `reskin-fix3` f64013c (Oct 31, evaluation key only, one run each)
+
+| Run (code) | Main (13) | Not found (q125-128) |
+|---|---|---|
+| `final-*` (before the merge) | 39/39 | 12/12 |
+| `merged-*` (after the merge) | 37/39 (q22 3→2, q25 3→2) | 12/12 |
+| `m2-*` (after the one-line-per-section fix below) | **36/39** (q22 2, q25 1) | 12/12 |
+
+**q22 cause and fix (a general rule).** After the merge the answer to "punishment for defamation" got extra lines "The old law this replaced: section 499 … / section 501 …" beside the model's own sentence "replaced section 500". They came from `missingMentions` (`src/lib/chat/concordance.mjs`), which added every confirmed old section the answer did not name, one line each. Fix: ONE line per section and Act, built from all its confirmed counterparts ("Section 356 of the Bharatiya Nyaya Sanhita, 2023 replaces sections 499, 500, 501 and 502 of the Indian Penal Code, 1860."), including those the answer already names; nothing is added when the answer already names the full set. Tests: BNS 356 (one-to-many, with and without the model naming one), BNS 115, BSA 63, BNSS 173, IPC 302 and CrPC 154 (both directions), plus a class test over nine sections. The fix did not change q22's score (2/3 again): the answer in `m2-main` states the right punishment (simple imprisonment up to two years, fine, community service, BNS 356) and has no extra old-law lines, and the judge still marked it wrong. The judge is the same free model and sees the first 7,000 characters of the section; I could not find a defect in the answer, so q22 looks like judge variation (it was judged right in `final-main`), but this is not proven.
+
+**q25 (possible noise, nothing tuned for it).** In `m2-main` the expected section (CrPC s437, the State-filed copy named in `questions.json`) was not among the sources (retrieved false, 1/3) because the query rewrite produced a different fourth query ("… section 478 maximum period for which undertrial prisoner can be detained") instead of one naming CrPC 437; in `final-main` and `merged-main` it was retrieved at rank 8 and 7. The rewrite is model-sensitive (one run each). The scorer also accepts only that one filing of the CrPC. Marked as possible noise.
+
+Main is below 38/39 on the merged code, so nothing was pushed from this run.

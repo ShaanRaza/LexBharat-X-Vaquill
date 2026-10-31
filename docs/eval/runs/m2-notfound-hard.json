@@ -1,0 +1,447 @@
+{
+ "label": "m2-notfound-hard",
+ "at": "2026-10-31T07:57:02.041Z",
+ "rows": [
+  {
+   "id": 125,
+   "kind": "notfound",
+   "question": "What is the penalty under the Zorgian Space Resources Act, 2040?",
+   "gold": [],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": null,
+   "cited": true,
+   "correct": true,
+   "notFound": true,
+   "check": "not_found",
+   "error": null,
+   "secs": 8.2,
+   "nSources": 11,
+   "queries": [
+    "What is the penalty under the Zorgian Space Resources Act, 2040?",
+    "Zorgian Space Resources Act 2040 penalty offence punishment",
+    "Zorgian Space Resources Act 2040 section penalty"
+   ],
+   "meaning": {
+    "used": 3,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Indian Antarctic Act, 2022 s41",
+    "The Indian Antarctic Act, 2022 s44",
+    "The Indian Antarctic Act, 2022 s42",
+    "The Coal Bearing Areas (Acquisition and Development) Act, 1957 s23",
+    "The Pension Fund Regulatory and Development Authority Act, 2013 s32"
+   ],
+   "answer": "I couldn't find the Zorgian Space Resources Act, 2040 in the Acts I searched.",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Indian Antarctic Act, 2022",
+     "s": "41"
+    },
+    {
+     "n": 2,
+     "t": "The Indian Antarctic Act, 2022",
+     "s": "44"
+    },
+    {
+     "n": 3,
+     "t": "The Indian Antarctic Act, 2022",
+     "s": "42"
+    },
+    {
+     "n": 4,
+     "t": "The Coal Bearing Areas (Acquisition and Development) Act, 1957",
+     "s": "23"
+    },
+    {
+     "n": 5,
+     "t": "The Pension Fund Regulatory and Development Authority Act, 2013",
+     "s": "32"
+    },
+    {
+     "n": 6,
+     "t": "The Pre Conception Pre Natal Diagnostic Techniques Act 1994",
+     "s": "25"
+    },
+    {
+     "n": 7,
+     "t": "The Offshore Areas Mineral (Development and Regulation) Act, 2002",
+     "s": "30"
+    },
+    {
+     "n": 8,
+     "t": "The Manipur Municipalities Act, 1994",
+     "s": "135"
+    },
+    {
+     "n": 9,
+     "t": "The Tripura Land Revenue and Land Reforms Act, 1960",
+     "s": "193"
+    },
+    {
+     "n": 10,
+     "t": "The Recycling of Ships Act, 2019",
+     "s": "32"
+    },
+    {
+     "n": 11,
+     "t": "ZAVERBHAI AMAIDAS versus THE STATE OF BOMBAY",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 126,
+   "kind": "notfound",
+   "question": "What did the US Supreme Court decide in Miranda v. Arizona about police questioning?",
+   "gold": [],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": null,
+   "cited": true,
+   "correct": true,
+   "notFound": true,
+   "check": "not_found",
+   "error": null,
+   "secs": 11.9,
+   "nSources": 13,
+   "queries": [
+    "What did the US Supreme Court decide in Miranda v. Arizona about police questioning?",
+    "constitutional right against self-incrimination custodial interrogation safeguards",
+    "Constitution of India article 20 right against self-incrimination",
+    "The Bharatiya Nagarik Suraksha Sanhita 2023 statement of accused and police interrogation"
+   ],
+   "meaning": {
+    "used": 4,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Constitution of India sA20",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s182",
+    "The Apprentices Act, 1961 s29",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s340",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s354"
+   ],
+   "answer": "I couldn't find this in the sources. Our sources are Indian Acts and Indian Supreme Court judgments, so they do not cover the foreign law or case you asked about.\n\nRelated Indian provision (not an answer to your question): Section 183 of the Bharatiya Nagarik Suraksha Sanhita, 2023 provides that a Magistrate shall, before recording any confession, explain to the person making it that they are not bound to make a confession and that, if they do so, it may be used as evidence against them [6].",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Constitution of India",
+     "s": "A20"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "182"
+    },
+    {
+     "n": 3,
+     "t": "The Apprentices Act, 1961",
+     "s": "29"
+    },
+    {
+     "n": 4,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "340"
+    },
+    {
+     "n": 5,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "354"
+    },
+    {
+     "n": 6,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "183"
+    },
+    {
+     "n": 7,
+     "t": "The Constitution of India",
+     "s": "A22"
+    },
+    {
+     "n": 8,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "163"
+    },
+    {
+     "n": 9,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "303"
+    },
+    {
+     "n": 10,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "316"
+    },
+    {
+     "n": 11,
+     "t": "STATE (N.C.T. OF DELHI) versus NAVJOT SANDHU@AFSAN GURU",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "STATE OF PUNJAB. versus BALBIR SINGH AND ORS. ETC. ETC.",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "SUNDEEP KUMAR BAFNA versus STATE OF MAHARASHTRA & ANR.",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 127,
+   "kind": "notfound",
+   "question": "What is the minimum wage for a skilled worker in Karnataka this month?",
+   "gold": [],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": null,
+   "cited": true,
+   "correct": true,
+   "notFound": true,
+   "check": "not_found",
+   "error": null,
+   "secs": 11.4,
+   "nSources": 13,
+   "queries": [
+    "What is the minimum wage for a skilled worker in Karnataka this month?",
+    "minimum rate of wages fixation revision skilled worker Karnataka",
+    "Minimum Wages Act section 3 fixation of minimum rates of wages",
+    "Minimum Wages Act section 5 procedure for revising minimum wages"
+   ],
+   "meaning": {
+    "used": 4,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Minimum Wages Act, 1948 s3",
+    "The Minimum Wages Act, 1948 s5",
+    "The Karnataka Daily Wage Employees Welfare Act, 2012 s11",
+    "The Mimimum Wates Act, 1948 s5",
+    "The Minimum Wages Act, 1948 with Delhi Amendment s5"
+   ],
+   "answer": "I couldn't find the minimum wage for a skilled worker in Karnataka this month in the Acts I searched.",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Minimum Wages Act, 1948",
+     "s": "3"
+    },
+    {
+     "n": 2,
+     "t": "The Minimum Wages Act, 1948",
+     "s": "5"
+    },
+    {
+     "n": 3,
+     "t": "The Karnataka Daily Wage Employees Welfare Act, 2012",
+     "s": "11"
+    },
+    {
+     "n": 4,
+     "t": "The Mimimum Wates Act, 1948",
+     "s": "5"
+    },
+    {
+     "n": 5,
+     "t": "The Minimum Wages Act, 1948 with Delhi Amendment",
+     "s": "5"
+    },
+    {
+     "n": 6,
+     "t": "The Minimum Wages Act, 1948, 11 of 1948 (Rep., Act 29 of 2019)",
+     "s": "12"
+    },
+    {
+     "n": 7,
+     "t": "The Minimum Wages Act, 1948",
+     "s": "31"
+    },
+    {
+     "n": 8,
+     "t": "The Code on Wages, 2019",
+     "s": "5"
+    },
+    {
+     "n": 9,
+     "t": "The Puducherry Municipalities Act, 1973",
+     "s": "54"
+    },
+    {
+     "n": 10,
+     "t": "The Minimum Wages Act, 194",
+     "s": "30"
+    },
+    {
+     "n": 11,
+     "t": "AIRFREIGHT LTD. versus STATE OF KARNATAKA AND ORS.",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "STATE OF KARNATAKA AND ORS. versus AMEERBI AND ORS.",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "STATE OF KARNATAKA AND ORS. versus P.M. BHASKARA GOWDA AND ORS.",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 128,
+   "kind": "notfound",
+   "question": "What is the current RBI repo rate?",
+   "gold": [],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": null,
+   "cited": true,
+   "correct": true,
+   "notFound": true,
+   "check": "not_found",
+   "error": null,
+   "secs": 11.1,
+   "nSources": 13,
+   "queries": [
+    "What is the current RBI repo rate?",
+    "RBI repo rate current monetary policy interest rate",
+    "Reserve Bank of India Act repo rate policy rate determination",
+    "Banking Regulation Act central bank monetary policy measures"
+   ],
+   "meaning": {
+    "used": 4,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Reserve Bank of India Act, 1934 s8",
+    "The Reserve Bank of India Act, 1934 s5",
+    "The Banking Regulation Act, 1949 s21",
+    "The Reserve Bank of India Act, 1934 s49",
+    "The Reserve Bank of India Act, 1934 s11"
+   ],
+   "answer": "I couldn't find the current RBI repo rate in the Acts I searched.",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Reserve Bank of India Act, 1934",
+     "s": "8"
+    },
+    {
+     "n": 2,
+     "t": "The Reserve Bank of India Act, 1934",
+     "s": "5"
+    },
+    {
+     "n": 3,
+     "t": "The Banking Regulation Act, 1949",
+     "s": "21"
+    },
+    {
+     "n": 4,
+     "t": "The Reserve Bank of India Act, 1934",
+     "s": "49"
+    },
+    {
+     "n": 5,
+     "t": "The Reserve Bank of India Act, 1934",
+     "s": "11"
+    },
+    {
+     "n": 6,
+     "t": "The Reserve Bank of India Act, 1934",
+     "s": "4"
+    },
+    {
+     "n": 7,
+     "t": "The Reserve Bank of India Act, 1934",
+     "s": "45JA"
+    },
+    {
+     "n": 8,
+     "t": "The Reserve Bank of India Act, 1934",
+     "s": "6"
+    },
+    {
+     "n": 9,
+     "t": "The Assam Veterinary Council Act, 1979",
+     "s": "7"
+    },
+    {
+     "n": 10,
+     "t": "The Banking Regulation Act, 1949",
+     "s": "12B"
+    },
+    {
+     "n": 11,
+     "t": "CANARA BANK versus P.R.N. UPADHYAYA AND ORS.",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "INTERNET AND MOBILE ASSOCIATION OF INDIA versus RESERVE BANK OF INDIA",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "N.M. VEERAPPA versus CANARA BANK",
+     "s": null
+    }
+   ],
+   "score": 3
+  }
+ ]
+}
