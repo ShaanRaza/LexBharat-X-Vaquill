@@ -1,0 +1,120 @@
+{
+ "label": "fix3-q41-r2",
+ "at": "2026-10-31T10:30:16.585Z",
+ "rows": [
+  {
+   "id": 41,
+   "kind": null,
+   "question": "What are the inherent powers of a civil court?",
+   "gold": [
+    "IND_central_2191|s151"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 12,
+   "nSources": 13,
+   "queries": [
+    "What are the inherent powers of a civil court?",
+    "inherent powers of court saving of inherent powers of civil court abuse of process",
+    "Code of Civil Procedure section 151"
+   ],
+   "meaning": {
+    "used": 2,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Code of Civil Procedure, 1908 s151",
+    "The Metro Railways (Construction of Works) Act, 1978 s16B",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s528",
+    "The Code of Civil Procedure, 1908 sO15AR6",
+    "The Industrial Employment (Standing Orders) Act, 1946 s11"
+   ],
+   "answer": "Nothing in the Code of Civil Procedure, 1908 shall be deemed to limit or otherwise affect the inherent power of the Court to make such orders as may be necessary for the ends of justice or to prevent abuse of the process of the Court under Section 151 of the Code of Civil Procedure, 1908 [1].\n\nRelated provisions:\n- Section 16B of the Metro Railways (Construction of Works) Act, 1978, which provides that the competent authority and the appellate authority may exercise powers of the nature referred to in section 151 of the Code of Civil Procedure, 1908 to the same extent and for the same purposes as such powers are exercisable by civil courts [2].\n- Section 11 of the Industrial Employment (Standing Orders) Act, 1946, which provides that every Certifying Officer and appellate authority shall have all the powers of a Civil Court for the purposes of receiving evidence, administering oaths, enforcing the attendance of witnesses, and compelling the discovery and production of documents [5][8].\n\nI couldn't find any other specific details about the inherent powers of a civil court beyond these provisions in the Acts I searched.",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Code of Civil Procedure, 1908",
+     "s": "151"
+    },
+    {
+     "n": 2,
+     "t": "The Metro Railways (Construction of Works) Act, 1978",
+     "s": "16B"
+    },
+    {
+     "n": 3,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "528"
+    },
+    {
+     "n": 4,
+     "t": "The Code of Civil Procedure, 1908",
+     "s": "O15AR6"
+    },
+    {
+     "n": 5,
+     "t": "The Industrial Employment (Standing Orders) Act, 1946",
+     "s": "11"
+    },
+    {
+     "n": 6,
+     "t": "The CrPC 1973",
+     "s": "482"
+    },
+    {
+     "n": 7,
+     "t": "The Code of Civil Procedure, 1908",
+     "s": "O6R16"
+    },
+    {
+     "n": 8,
+     "t": "The Industrial Employmnet (Standing Orders) Act, 1946",
+     "s": "11"
+    },
+    {
+     "n": 9,
+     "t": "The Criminal Procedure Code CrPC 1973",
+     "s": null
+    },
+    {
+     "n": 10,
+     "t": "The Portuguese Civil Code, 1867",
+     "s": "2"
+    },
+    {
+     "n": 11,
+     "t": "GOVT. OF NCT OF DELHI THROUGH ITS SECRETARY, LAND AND BUILDING DEPARTMENT & ANOTHER versus M/S K.L. RATHI STEELS LIMITED AND OTHERS",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "STATE OF MAHARASHTRA versus MAHARAU SRAWAN HATKAR",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "ENGINEERING EXPORT PROMOTION COUNCIL versus USHA ANAND AND ANOTHER",
+     "s": null
+    }
+   ],
+   "score": 3
+  }
+ ]
+}

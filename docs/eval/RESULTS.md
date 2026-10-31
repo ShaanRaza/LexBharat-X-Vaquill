@@ -137,3 +137,9 @@ Old and new scores side by side (all 18 stored runs re-scored without calling an
 | heldout-before, heldout-after, after1-heldout, final-heldout | 39, 49, 49, 48 | same | none |
 
 The baseline main run (37) is not changed by the new scorer, so the comparison with the baseline stays fair: main is 37 → 38 on the merged code with the new scorer (39 before the merge; the repeats above show the 1-point differences are noise). Not found: 12/12.
+
+### After merging `origin/reskin-fix3` 286024f (Oct 31, evaluation key only, one run each)
+
+Main (13) **38/39**, not found (q125-q128) **12/12**, with the current scorer (`scripts/eval/gold.mjs`). The one lost point is q41 (3→2): in this run the model opened with "I couldn't find the inherent powers of a civil court …" although CPC s.151 was among the sources. Re-runs of q41 alone: 2, 3, 3. q41 has varied before (see (b2) above); one run each, so a one-point difference is noise. In the first q41 run the stored answer began with "Related provisions:" without a direct sentence before it; not investigated further. Files: `fix3-main.json`, `fix3-notfound-hard.json`, `fix3-q41-r1..3.json`.
+
+Merge clashes resolved as general fixes (both sides kept): the prompt builder takes `mapping`, `foreign` and `held`; the retrieval carries `pairs` and `namedKeys`; the route runs the foreign-law enforcement before the chip tidy, the held-section claim remover (skipped for a foreign answer, test added) and the gap-repeat filter. ui-sweep check 5b counted every "on India Code" link on a page, including the per-card "Open on India Code" of a result flagged "Possibly incomplete"; it now counts only the missing-section link ("Read … on India Code").

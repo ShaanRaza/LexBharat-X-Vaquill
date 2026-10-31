@@ -1,0 +1,115 @@
+{
+ "label": "fix3-q41-r1",
+ "at": "2026-10-31T10:29:50.907Z",
+ "rows": [
+  {
+   "id": 41,
+   "kind": null,
+   "question": "What are the inherent powers of a civil court?",
+   "gold": [
+    "IND_central_2191|s151"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": true,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": false,
+   "notFound": true,
+   "check": "not_found",
+   "error": null,
+   "secs": 10.1,
+   "nSources": 12,
+   "queries": [
+    "What are the inherent powers of a civil court?",
+    "inherent powers of court savings of inherent powers of civil court",
+    "Code of Civil Procedure section 151"
+   ],
+   "meaning": {
+    "used": 2,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Code of Civil Procedure, 1908 s151",
+    "The Metro Railways (Construction of Works) Act, 1978 s16B",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s528",
+    "The Industrial Employment (Standing Orders) Act, 1946 s11",
+    "The Industrial Employmnet (Standing Orders) Act, 1946 s11"
+   ],
+   "answer": "I couldn't find the inherent powers of a civil court in the Acts I searched, as the sources only mention that Section 151 of the Code of Civil Procedure, 1908 preserves the inherent power of the Court to make such orders as may be necessary for the ends of justice or to prevent abuse of the process of the Court [1].",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Code of Civil Procedure, 1908",
+     "s": "151"
+    },
+    {
+     "n": 2,
+     "t": "The Metro Railways (Construction of Works) Act, 1978",
+     "s": "16B"
+    },
+    {
+     "n": 3,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "528"
+    },
+    {
+     "n": 4,
+     "t": "The Industrial Employment (Standing Orders) Act, 1946",
+     "s": "11"
+    },
+    {
+     "n": 5,
+     "t": "The Industrial Employmnet (Standing Orders) Act, 1946",
+     "s": "11"
+    },
+    {
+     "n": 6,
+     "t": "The Special Court (Trial of Offences Relating to Transactions in Securities) Act, 1992",
+     "s": "9A"
+    },
+    {
+     "n": 7,
+     "t": "The Code of Civil Procedure, 1908",
+     "s": "O15AR6"
+    },
+    {
+     "n": 8,
+     "t": "The Criminal Procedure Code CrPC 1973",
+     "s": null
+    },
+    {
+     "n": 9,
+     "t": "The Portuguese Civil Code, 1867",
+     "s": "2"
+    },
+    {
+     "n": 10,
+     "t": "GOVT. OF NCT OF DELHI THROUGH ITS SECRETARY, LAND AND BUILDING DEPARTMENT & ANOTHER versus M/S K.L. RATHI STEELS LIMITED AND OTHERS",
+     "s": null
+    },
+    {
+     "n": 11,
+     "t": "STATE OF MAHARASHTRA versus MAHARAU SRAWAN HATKAR",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "ENGINEERING EXPORT PROMOTION COUNCIL versus USHA ANAND AND ANOTHER",
+     "s": null
+    }
+   ],
+   "score": 2
+  }
+ ]
+}
