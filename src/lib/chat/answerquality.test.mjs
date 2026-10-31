@@ -73,7 +73,7 @@ test("the answer names BOTH laws: the counterpart is added from the table when t
   assert.deepEqual(pairs.map((x) => x.partner.number), ["302"]);
   const bare = "Murder is punished with death or imprisonment for life [1].";
   const add = missingMentions(bare, pairs, citeFinder(sources));
-  assert.equal(add.length, 1); assert.match(add[0].line, /old law this replaced: section 302 of the Indian Penal Code, 1860 \(Punishment for murder\) \[2\]/);
+  assert.equal(add.length, 1); assert.match(add[0].line, /Section 103 of the Bharatiya Nyaya Sanhita, 2023 replaces section 302 \[2\] of the Indian Penal Code, 1860 \(Punishment for murder\)/);
   assert.equal(missingMentions("Section 103 of the Bharatiya Nyaya Sanhita, 2023 replaced Section 302 of the Indian Penal Code [1].", pairs).length, 0);
   assert.equal(mentions("previously IPC 302", pairs[0].partner), true); assert.equal(mentions("IPC section 304", pairs[0].partner), false);
   const sys = buildChatPrompt({ question: "q", sources: sources.map((s) => ({ ...s, text: "t", year: 2023, inForce: true })), mapping: MAPPING_ADDENDUM(mappingNote(pairs)) }).system;
@@ -123,4 +123,36 @@ test("a concept query is added only for an Act no search query already names, an
 test("a counterpart is looked up under the canonical filing of its Act (law-mapping.json `laws`), not a State copy of it", () => {
   assert.equal(actIdFor("crpc"), map.laws.crpc.actId); assert.equal(actIdFor("bns"), map.laws.bns.actId); assert.equal(actIdFor("nope"), null);
   for (const l of ["ipc", "crpc", "evidence", "bns", "bnss", "bsa"]) assert.ok(actIdFor(l), l);
+});
+
+// ---- ONE line per section, built from ALL its confirmed counterparts (Oct 31: q22 got separate "old law" lines for IPC 499 and 501 next to the model's own "replaced section 500") ----
+const BNS = "The Bharatiya Nyaya Sanhita, 2023", BNSS = "The Bharatiya Nagarik Suraksha Sanhita, 2023", BSA = "The Bharatiya Sakshya Adhiniyam, 2023", IPC = "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)", CRPC = "The Code of Criminal Procedure, 1973";
+const pairsFor = (actTitle, number) => pairsOf([{ n: 1, actTitle, number, heading: "x" }]);
+test("one-to-many: BNS 356 gets ONE line naming every IPC section it replaces, even when the answer names one of them", () => {
+  const pairs = pairsFor(BNS, "356"); assert.deepEqual(pairs.map((x) => x.partner.number).sort(), ["499", "500", "501", "502"]);
+  for (const answer of ["Defamation is punished with simple imprisonment up to two years [1].", "Section 356 BNS (which replaced section 500 of the Indian Penal Code) punishes defamation [1]."]) {
+    const add = missingMentions(answer, pairs);
+    assert.equal(add.length, 1, answer); assert.match(add[0].line, /Section 356 of the Bharatiya Nyaya Sanhita, 2023 replaces sections 499, 500, 501 and 502 of the Indian Penal Code, 1860\./);
+  }
+  assert.equal(missingMentions("BNS 356 replaces IPC sections 499, 500, 501 and 502 [1].", pairs).length, 0);   // the full set is already named
+});
+test("one-to-one, both directions and other codes: BSA 63, BNSS 173, IPC 302 and CrPC 154 each get one line", () => {
+  const a = missingMentions("Electronic records are admissible [1].", pairsFor(BSA, "63")); assert.equal(a.length, 1); assert.match(a[0].line, /Section 63 of the Bharatiya Sakshya Adhiniyam, 2023 replaces section 65B of the Indian Evidence Act, 1872/);
+  const b = missingMentions("A police officer records the information [1].", pairsFor(BNSS, "173")); assert.equal(b.length, 1); assert.match(b[0].line, /Section 173 .* replaces section 154 of the Code of Criminal Procedure, 1973/);
+  const c = missingMentions("Murder is punished with death [1].", pairsFor(IPC, "302")); assert.equal(c.length, 1); assert.match(c[0].line, /Section 302 of the Indian Penal Code, 1860 is replaced by section 103\(1\) of the Bharatiya Nyaya Sanhita, 2023 .*in force from 1 July 2024/);
+  const d = missingMentions("The FIR is recorded [1].", pairsFor(CRPC, "154")); assert.equal(d.length, 1); assert.match(d[0].line, /is replaced by section 173 of the Bharatiya Nagarik Suraksha Sanhita/);
+});
+test("another one-to-many: BNS 115 (hurt) lists both IPC sections; the model naming only one still gets the single full line", () => {
+  const pairs = pairsFor(BNS, "115"); assert.equal(pairs.length, 2);
+  const add = missingMentions("Section 115 BNS, previously IPC section 323, punishes voluntarily causing hurt [1].", pairs);
+  assert.equal(add.length, 1); assert.match(add[0].line, /replaces sections (?:321 and 323|323 and 321) of the Indian Penal Code, 1860/);
+});
+test("class: for every confirmed row, at most one line per section and Act, naming every confirmed counterpart exactly once", () => {
+  const sample = [[BNS, "103"], [BNS, "351"], [BNS, "356"], [BNSS, "480"], [BSA, "63"], [IPC, "420"], [IPC, "499"], [CRPC, "437"], [BNS, "318"]];
+  for (const [t, n] of sample) {
+    const pairs = pairsFor(t, n); if (!pairs.length) continue;
+    const add = missingMentions("An answer that names neither law [1].", pairs), law = new Set(pairs.map((x) => x.partner.law));
+    assert.equal(add.length, Math.min(2, law.size), `${t} ${n}`);
+    for (const x of add) for (const p of pairs.filter((q) => q.partner.law === x.partner.law)) assert.equal(x.line.split(`${p.partner.number}`).length - 1 >= 1, true, `${t} ${n}: ${p.partner.number} missing from ${x.line}`);
+  }
 });

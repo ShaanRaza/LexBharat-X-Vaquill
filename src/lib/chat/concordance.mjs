@@ -108,14 +108,21 @@ export function mentions(text, p) {
   const num = esc(baseNumber(p.number)), names = [p.short, p.name.replace(/,\s*\d{4}$/, ""), p.lookup].map(esc).join("|");
   return new RegExp(`(?:(?:${names})[^.\\n]{0,40}?\\b(?:sections?|s\\.|sec\\.)?\\s*${num}\\b|\\b(?:sections?|s\\.|sec\\.)\\s*${num}\\b[^.\\n]{0,60}?(?:${names}))`, "i").test(text);
 }
-/** The lines to add when an answer does not name both laws. `pairs` = pairsOf(sources) for the sections the answer rests on; `citeOf(p)` gives "[n]" for a counterpart that is among the sources. At most 2 lines, each from the table. */
+const listNums = (xs) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}`);
+/** The lines to add when an answer does not name both laws: ONE line per section the answer rests on, built from ALL its confirmed counterparts (e.g. "Section 356 of the Bharatiya Nyaya Sanhita, 2023 replaces sections 499, 500, 501 and 502 of the Indian Penal Code, 1860."),
+ *  including any the answer already names, so the model's own sentence is never followed by extra one-by-one lines. Nothing is added when the answer already names every counterpart. `pairs` = pairsOf(sources) for the sections the answer rests on;
+ *  `citeOf(p)` gives "[n]" for a counterpart that is among the sources. At most 2 lines, each from the table. */
 export function missingMentions(answer, pairs, citeOf = () => "") {
+  const groups = new Map();
+  for (const { self, partner: p } of pairs) { const k = `${self.law}|${self.number}|${p.law}`; (groups.get(k) ?? groups.set(k, { self, list: [] }).get(k)).list.push(p); }
   const out = [];
-  for (const { partner: p } of pairs) {
+  for (const { self, list } of groups.values()) {
     if (out.length >= 2) break;
-    if (mentions(answer, p)) continue;
-    const c = citeOf(p), gap = p.textInData === false ? " Its text is not in our data yet." : "";
-    out.push({ partner: p, line: p.side === "old" ? `The old law this replaced: ${sectionText(p)}${c ? ` ${c}` : ""}.${gap}` : `The current law (in force from ${EFFECTIVE}): ${sectionText(p)}${c ? ` ${c}` : ""}.${gap}` });
+    if (list.every((p) => mentions(answer, p))) continue;
+    const nums = list.map((p) => `${p.number}${citeOf(p) ? ` ${citeOf(p)}` : ""}`), side = list[0].side, one = list.length === 1;
+    const gap = list.filter((p) => p.textInData === false).map((p) => `${p.short} section ${p.number}`), note = gap.length ? ` The text of ${listNums(gap)} is not in our data yet.` : "";
+    const theirs = `${one ? "section" : "sections"} ${listNums(nums)} of the ${list[0].name}${one && list[0].title ? ` (${list[0].title})` : ""}`;
+    out.push({ partner: list[0], partners: list, line: side === "old" ? `Section ${self.number} of the ${self.name} replaces ${theirs}.${note}` : `Section ${self.number} of the ${self.name} is replaced by ${theirs} (the current law, in force from ${EFFECTIVE}).${note}` });
   }
   return out;
 }
