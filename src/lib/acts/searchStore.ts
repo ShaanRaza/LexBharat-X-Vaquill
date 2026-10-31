@@ -12,7 +12,7 @@ import { currentLawFirst, pairFor } from "./currentLaw.mjs";
 import { extractLookups } from "./lookups.mjs";
 import synonyms from "@/config/search-synonyms.json";
 import replacedLaws from "@/config/replaced-laws.json";
-import { chooseMode, distinctSections, highlightQuery, rankSections, statesIn } from "./semantic.mjs";
+import { chooseMode, distinctSections, highlightQuery, rankSections, splitStates, statesIn } from "./semantic.mjs";
 import { embedMany, embedQuery, voyageConfigured } from "./embed";
 import { vectorStores, vectorConfigured } from "./vectorStore";
 import { fellBackBecause, type SemanticInfo } from "./meaning.mjs";
@@ -46,7 +46,7 @@ export type SearchOutcome =
       /** How the query was searched: used=true for search by meaning; otherwise why keyword search ran instead (exact_requested, quoted_phrase, hindi, semantic_unavailable, semantic_error) and, for the last two, the cause (src/lib/acts/meaning.mjs). */
       semantic?: SemanticInfo;
       /** Set when the asked-for section number is confidently missing from our data (gaps.mjs): the UI shows the notice and the India Code link. */
-      missing?: { actTitle: string; actId: string; number: string; sourceUrl: string | null; /** "central" when the Act asked for is a central Act (a state copy of the same name is then never used in its place) */ category?: string; /** the number is above the Act's last section: there is no such section (the highest number it has) */ beyond?: number | null } };
+      missing?: { actTitle: string; actId: string; number: string; sourceUrl: string | null; /** "central" when the Act asked for is a central Act (a state copy of the same name is then never used in its place) */ category?: string; /** the state slug when the copy asked for is a state's */ state?: string | null; /** the number is above the Act's last section: there is no such section (the highest number it has) */ beyond?: number | null } };
 
 /** First readable words of a section for a lookup result: skips markdown headings and all-capitals heading lines that lead some sections. */
 /** A snippet is shown to readers: the shared display layer cleans it (the highlight marks are private-use characters and pass through). */
@@ -60,13 +60,22 @@ export const searchAvailable = () => dbConfigured();
 async function lookupHits(q: string, page: number, pageSize: number, filters: SearchFilters = {}): Promise<SearchOutcome | null> {
   const lk = parseSectionLookup(q);
   if (!lk) return null;
-  const m = actMatcher(lk.actPhrase);
-  const where = m.titlePrefix ? `lower(a.title) LIKE $1 || '%'` : m.words.map((_, i) => `a.title ILIKE '%' || $${i + 1} || '%'`).join(" AND ");
-  const params: unknown[] = m.titlePrefix ? [m.titlePrefix] : m.words;
+  // A question that names a state ("Section 34 of the Madhya Pradesh Indian Penal Code") is about THAT state's copy: the state is taken out of the Act phrase and the Act must be filed under it.
+  // Without a copy of that name under that state (an Act whose own title holds the state name), the whole phrase is matched as before.
+  const named = splitStates(lk.actPhrase);
+  let m = actMatcher(lk.actPhrase), where = m.titlePrefix ? `lower(a.title) LIKE $1 || '%'` : m.words.map((_, i) => `a.title ILIKE '%' || $${i + 1} || '%'`).join(" AND ");
+  let params: unknown[] = m.titlePrefix ? [m.titlePrefix] : m.words, stateSql = "";
+  if (named.states.size && named.rest) {
+    const m2 = actMatcher(named.rest, { noAlias: true });
+    if (m2.words.length) {
+      const where2 = m2.words.map((_, i) => `a.title ILIKE '%' || $${i + 1} || '%'`).join(" AND "), st = `a.state IN (${[...named.states].map((x) => `'${x.replace(/[^a-z-]/g, "")}'`).join(",")})`;
+      if ((await query(`SELECT 1 FROM acts a WHERE ${where2} AND ${st} LIMIT 1`, m2.words).catch(() => [])).length) { m = m2; where = `${where2} AND ${st}`; params = m2.words; stateSql = st; }
+    }
+  }
   if (!params.length) return null;
   // A question that names a central Act ("Indian Penal Code") is about the central Act. A state or UT copy is used only when the question names that state, or the caller asks for state laws:
   // otherwise a copy whose text is a contents list or a state version would be shown (and cited) in place of "this section is not in our library".
-  const wantsState = filters.jurisdiction === "state" || statesIn(q).size > 0;
+  const wantsState = !!stateSql || filters.jurisdiction === "state" || statesIn(q).size > 0;
   const centralOnly = !wantsState && filters.jurisdiction !== "central" && (await query(`SELECT 1 FROM acts a WHERE ${where} AND a.category = 'central' LIMIT 1`, params).catch(() => [])).length > 0;
   const only = centralOnly ? " AND a.category = 'central'" : "";
   const rows = await query<Omit<SectionHit, "snippet" | "via"> & { body: string | null }>(
@@ -76,12 +85,12 @@ async function lookupHits(q: string, page: number, pageSize: number, filters: Se
   if (!rows.length) {
     const num = /^\d{1,4}$/.test(lk.number) ? Number(lk.number) : null;
     if (num === null) return null;
-    const gone = await query<{ actId: string; actTitle: string; sourceUrl: string | null; category: string }>(
-      `SELECT a.act_id AS "actId", a.title AS "actTitle", a.source_url AS "sourceUrl", a.category FROM acts a JOIN act_missing_sections m ON m.act_id = a.act_id WHERE ${where}${only} AND m.number = $${params.length + 1}
+    const gone = await query<{ actId: string; actTitle: string; sourceUrl: string | null; category: string; state: string | null }>(
+      `SELECT a.act_id AS "actId", a.title AS "actTitle", a.source_url AS "sourceUrl", a.category, a.state FROM acts a JOIN act_missing_sections m ON m.act_id = a.act_id WHERE ${where}${only} AND m.number = $${params.length + 1}
        ORDER BY (a.category = 'central') DESC, (a.act_status = 'in_force') DESC, length(a.title) LIMIT 1`, [...params, num]).catch(() => []);
     // not recorded as missing: still, an Act we hold whose numbers do not include this one is "not in our library", never a section to answer from memory
-    const held = gone.length ? gone : await query<{ actId: string; actTitle: string; sourceUrl: string | null; category: string }>(
-      `SELECT a.act_id AS "actId", a.title AS "actTitle", a.source_url AS "sourceUrl", a.category FROM acts a WHERE ${where}${only} AND EXISTS (SELECT 1 FROM act_sections_v s WHERE s.act_id = a.act_id AND s.number ~ '^[0-9]')
+    const held = gone.length ? gone : await query<{ actId: string; actTitle: string; sourceUrl: string | null; category: string; state: string | null }>(
+      `SELECT a.act_id AS "actId", a.title AS "actTitle", a.source_url AS "sourceUrl", a.category, a.state FROM acts a WHERE ${where}${only} AND EXISTS (SELECT 1 FROM act_sections_v s WHERE s.act_id = a.act_id AND s.number ~ '^[0-9]')
        ORDER BY (a.category = 'central') DESC, (a.act_status = 'in_force') DESC, length(a.title) LIMIT 1`, params).catch(() => []);
     if (!held.length) return null;
     // a number above the Act's last section is not "missing": there is no such section. The last section is the reference count for well-known Acts, else the highest number we hold (only when the number is far above it)

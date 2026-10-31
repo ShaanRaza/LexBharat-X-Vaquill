@@ -64,7 +64,7 @@ const titleCase = (w, i) => { const k = w.toLowerCase(); if (WORDS[k]) return WO
  *  The full title belongs in a hover text or on the Act's own page. */
 export function shortActName(title) {
   const full = String(title ?? "").trim();
-  const t = full.replace(/\s*\((?:Rep\b|Repealed)[^)]*\)\s*$/i, "").replace(/\s*\(\d+ of \d{4}\)\s*$/, "").replace(/,?\s*\d+\s+of\s+\d{4}\s*$/i, "").replace(/,?\s*\d{4}\s*$/, "").replace(/[,\s]+$/, "").replace(/^the\s+/i, "").trim();
+  const t = full.replace(/\s*\((?:Rep\b|Repealed)[^)]*\)\s*$/i, "").replace(/\s*\(\d+ of \d{4}\)\s*$/, "").replace(/,?\s*\d+\s+of\s+\d{4}\s*$/i, "").replace(/[,\s-]*\d{4}\s*$/, "").replace(/[,\s-]+$/, "").replace(/^the\s+/i, "").trim();
   return t || full;
 }
 

@@ -81,6 +81,14 @@ export function statesIn(q) {
   return out;
 }
 
+/** An Act phrase with the states it names taken out: "Madhya Pradesh Indian Penal Code" -> { states: Set("madhya-pradesh"), rest: "Indian Penal Code" }. Used so that a question naming a state looks for THAT state's copy. */
+export function splitStates(phrase) {
+  let rest = ` ${String(phrase ?? "")} `;
+  const states = new Set();
+  for (const [slug, names] of Object.entries(STATE_NAMES)) for (const n of names) { const re = new RegExp(`(?<![A-Za-z])${n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?![A-Za-z])`, "i"); if (re.test(rest)) { states.add(slug); rest = rest.replace(re, " "); } }
+  return { states, rest: rest.replace(/\b(?:state|of)\b\s*$/i, "").replace(/\s+/g, " ").trim() };
+}
+
 /** Identity of "the same section of the same Act" across filings: Act title (case, "The", punctuation and a trailing year removed) + section number. The dataset files one Act many times
  *  (CrPC 1973 under 8 states, the Factories Act under 14); those copies share this key. Blocks without a section number are never merged (null). */
 export function copyKey(title, number) {

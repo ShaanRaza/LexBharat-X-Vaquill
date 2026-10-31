@@ -1,5 +1,5 @@
 export type GapKind = "missing" | "unreliable" | "mentioned" | "nosuch";
-export type Gap = { kind: GapKind; number: string; actTitle: string; max?: number };
+export type Gap = { kind: GapKind; number: string; actTitle: string; /** a state slug when the copy asked for is a state's ("madhya-pradesh") */ state?: string | null; max?: number };
 export function gapSentence(g: Gap): string;
 export function gapNotice(g: Gap, url?: string | null): { kind: GapKind; text: string; url: string | null; actTitle: string; label: string };
 export function gapLead(gaps: Gap[]): string;
@@ -8,3 +8,6 @@ export function unretrievedMentions(text: string, sources: { n: number; number?:
 export function gapKey(g: Gap): string;
 export function uniqueGaps<G extends Gap>(gaps: G[]): G[];
 export function dropGapRepeats(text: string, gaps: Gap[]): string;
+export type Held = { n: number; number: string; actTitle: string; state?: string | null };
+export function heldAddendum(held: Held[]): string;
+export function dropNotFoundClaims(text: string, held: Held[]): string;

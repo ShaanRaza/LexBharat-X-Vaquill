@@ -35,7 +35,7 @@ export type ChatSource = {
 export type LibraryGap = Gap & { actId: string; url: string };
 /** How the searches behind one answer ran: `used` searches by meaning answered, `fellBack` fell back to exact words (cause = the last one's), and whether the Supreme Court passages failed. Exact-word and lookup searches that were never meant to use meaning are not counted. */
 export type MeaningUse = { used: number; fellBack: number; cause: MeaningCause | null; judgmentsFailed: boolean };
-export type Retrieval = { gaps: LibraryGap[]; sources: ChatSource[]; searchMode: "semantic" | "text" | "lookup" | "none"; note: string; queries: string[]; meaning: MeaningUse; /** keys ("actId|sectionKey") found by exact lookup: sections the question or the caller named */ exactKeys: string[] };
+export type Retrieval = { gaps: LibraryGap[]; sources: ChatSource[]; searchMode: "semantic" | "text" | "lookup" | "none"; note: string; queries: string[]; meaning: MeaningUse; /** keys ("actId|sectionKey") found by exact lookup: sections the question or the caller named */ exactKeys: string[]; /** keys of the sections the QUESTION itself names ("Section 34 of the Madhya Pradesh Indian Penal Code") that the library holds and the answer may use */ namedKeys: string[] };
 
 const keyOf = (h: SectionHit) => `${h.actId}|${h.sectionKey}`;
 import { narrowToExact } from "./exact.mjs";
@@ -62,8 +62,8 @@ export async function retrieveSources(question: string, history: { role: string;
     const r = await searchSections(l, 1, 3, { surface: "ask" });
     if (r.available && r.mode === "lookup" && named.has(l.toLowerCase())) { const c = r.missing ? (r.missing.category === "central" ? r.missing.actTitle : null) : (r.results[0]?.category === "central" ? r.results[0].actTitle : null); if (c) centralActs.push({ category: "central", actTitle: c }); }
     if (r.available && r.mode === "lookup" && named.has(l.toLowerCase())) {   // a section the QUESTION names (not one the rewrite guessed): not held, or held only as scrambled text -> say so
-      if (r.missing) gaps.push({ kind: r.missing.beyond ? "nosuch" : "missing", ...(r.missing.beyond ? { max: r.missing.beyond } : {}), number: r.missing.number, actTitle: r.missing.actTitle, actId: r.missing.actId, url: officialSourceUrl(r.missing.sourceUrl, r.missing.actTitle) });
-      else if (r.results.length && r.results.every((h) => !usable(h))) gaps.push({ kind: "unreliable", number: r.results[0].number ?? l, actTitle: r.results[0].actTitle, actId: r.results[0].actId, url: officialSourceUrl(r.results[0].sourceUrl, r.results[0].actTitle) });
+      if (r.missing) gaps.push({ kind: r.missing.beyond ? "nosuch" : "missing", ...(r.missing.beyond ? { max: r.missing.beyond } : {}), number: r.missing.number, actTitle: r.missing.actTitle, state: r.missing.state ?? null, actId: r.missing.actId, url: officialSourceUrl(r.missing.sourceUrl, r.missing.actTitle) });
+      else if (r.results.length && r.results.every((h) => !usable(h))) gaps.push({ kind: "unreliable", number: r.results[0].number ?? l, actTitle: r.results[0].actTitle, state: r.results[0].state ?? null, actId: r.results[0].actId, url: officialSourceUrl(r.results[0].sourceUrl, r.results[0].actTitle) });
     }
     if (r.available && r.mode === "lookup") { mode = "lookup"; for (const h of r.results.filter(usable).slice(0, take)) { hits.set(keyOf(h), h); if (!first.includes(keyOf(h))) first.push(keyOf(h)); if (named.has(l.toLowerCase()) && !exact.includes(keyOf(h))) exact.push(keyOf(h)); } }
   }
@@ -95,7 +95,7 @@ export async function retrieveSources(question: string, history: { role: string;
   if (exact.length) picked = narrowToExact(picked, [...exact, ...first.filter((k) => !exact.includes(k))], keyOf);
   // current law first (switch): a repealed section and its replacement together -> the replacement leads and the old one is marked replaced
   if (opts.currentLaw) picked = currentLawFirst(picked, pool, replaced.pairs, { k, keyOf });
-  if (!picked.length) return { gaps, sources: [], searchMode: mode, note, queries, meaning, exactKeys: [] };
+  if (!picked.length) return { gaps, sources: [], searchMode: mode, note, queries, meaning, exactKeys: [], namedKeys: [] };
   const body = await sectionBodies(picked.map((h) => ({ actId: h.actId, sectionKey: h.sectionKey })), 9000);
   const sources: ChatSource[] = [];
   for (const h of picked) {
@@ -105,7 +105,7 @@ export async function retrieveSources(question: string, history: { role: string;
       number: h.number, heading: h.heading, status: h.status, text, via: h.via, ...((h as SectionHit & { replacedBy?: string }).replacedBy ? { replacedBy: (h as SectionHit & { replacedBy?: string }).replacedBy } : {}) });
   }
   sources.push(...(await judgmentSources(retrievalQuery(question, history), sources.length + 1, () => { meaning.judgmentsFailed = true; })));
-  return { gaps, sources, searchMode: mode, note, queries, meaning, exactKeys: first };
+  return { gaps, sources, searchMode: mode, note, queries, meaning, exactKeys: first, namedKeys: exact };
 }
 
 /** What is stored and sent to the browser for a source: no section text. */

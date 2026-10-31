@@ -94,6 +94,12 @@ const pages = (t) => [
   { id: "search-missing-section", url: "/search?q=375%20indian%20penal%20code", wait: 4000 },   // Search says it once with one link too (same wording as Ask)
   { id: "law-contents-list", url: "/law/IND_state_15289/s375" },
   { id: "law-quote-marks", url: "/law/IND_state_15289/s010" },   // the source prints its quotation marks as long and double bars: curly quotes on screen (src/lib/text/clean.mjs fixQuoteMarks)
+  { id: "ask-recent-questions", url: "/library", before: async (p) => {
+    await p.route((u) => u.pathname === "/api/chat" && u.searchParams.get("questions") === "1", (r) => r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ configured: true, questions: [{ id: 2, chatId: "11111111-2222-4333-8444-555555555555", question: "What does Section 34 of the Indian Penal Code say?", at: new Date().toISOString() }, { id: 1, chatId: "11111111-2222-4333-8444-555555555555", question: "Can a minor enter into a contract?", at: new Date().toISOString() }] }) }));
+  }, prep: async (p) => {   // from another page back to Ask by the menu: the questions asked on this browser are listed
+    await p.locator('a[href="/ask"]:visible').first().click(); await p.getByText("Your recent questions").first().waitFor({ timeout: 15000 }).catch(() => { throw new Error("the recent questions are not shown when returning to Ask from another page"); });
+    const n = await p.locator("[data-recent-questions] li").count(); if (n < 2) throw new Error("only " + n + " of 2 recent questions are listed");
+  } },
   { id: "search-laws", url: "/search?q=notice%20after%20cheque%20bounces", wait: 4000 },
   { id: "search-laws-fallback", url: "/search?q=notice%20after%20cheque%20bounces", before: asFallback("**/api/acts/search*", (u) => u.searchParams.set("exact", "1")), prep: seesNotice },
   { id: "search-judgments", url: "/search?q=bail&tab=judgments", wait: 4000, forbid: [CASE_TITLE_DANGLING] },

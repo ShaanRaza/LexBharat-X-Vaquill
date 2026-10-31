@@ -35,6 +35,11 @@ export async function deleteChat(browserId: string, chatId: string): Promise<boo
 export async function listChats(browserId: string, limit = 50): Promise<ChatSummary[]> {
   return query<ChatSummary>(`SELECT id, title, updated_at AS "updatedAt" FROM chats WHERE browser_id = $1 ORDER BY updated_at DESC LIMIT ${Math.floor(limit)}`, [browserId]);
 }
+/** This browser's recent QUESTIONS (not conversations): each question asked, newest first, with the conversation it belongs to. Reads what is already saved; stores nothing new. */
+export type RecentQuestion = { id: number; chatId: string; question: string; at: string };
+export async function listQuestions(browserId: string, limit = 8): Promise<RecentQuestion[]> {
+  return query<RecentQuestion>(`SELECT m.id, m.chat_id AS "chatId", m.content AS question, m.created_at AS "at" FROM chat_messages m JOIN chats c ON c.id = m.chat_id WHERE c.browser_id = $1 AND m.role = 'user' ORDER BY m.created_at DESC LIMIT ${Math.floor(limit)}`, [browserId]);
+}
 export async function getChat(browserId: string, chatId: string): Promise<{ id: string; title: string; messages: StoredMessage[] } | null> {
   const c = await query<{ id: string; title: string }>("SELECT id, title FROM chats WHERE id = $1 AND browser_id = $2", [chatId, browserId]);
   if (!c.length) return null;

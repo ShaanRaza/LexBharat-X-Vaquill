@@ -119,8 +119,8 @@ export default function ChatApp({ chatId: initialId }: { chatId?: string }) {
           <div className="pt-6">
             <h1 className="text-ui-title font-semibold">Ask about Indian law</h1>
             <p className="mt-2 text-ui-body text-secondary">Answers come only from sections of Indian Central and State Acts, with a numbered link to each section used.</p>
-            <ul className="mt-5 flex flex-wrap gap-2">{EXAMPLES.map((x) => <li key={x}><button type="button" onClick={() => ask(x)} disabled={busy} className="rounded-chip bg-surface px-3 py-1.5 text-ui-base text-foreground ring-1 ring-control-border hover:bg-accent">{x}</button></li>)}</ul>
             <RecentQuestions />
+            <ul className="mt-5 flex flex-wrap gap-2">{EXAMPLES.map((x) => <li key={x}><button type="button" onClick={() => ask(x)} disabled={busy} className="rounded-chip bg-surface px-3 py-1.5 text-ui-base text-foreground ring-1 ring-control-border hover:bg-accent">{x}</button></li>)}</ul>
           </div>
         )}
         {msgs.map((m, i) => m.role === "user"

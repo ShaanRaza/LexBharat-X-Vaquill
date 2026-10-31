@@ -12,7 +12,7 @@ import { alignCitations, citedNumbers, ensureCitations, sanitizeCitations } from
 import { buildChatPrompt, buildCheckPrompt, detectNotFound, parseCheck } from "@/lib/chat/prompt.mjs";
 import { buildRewritePrompt, parseRewrite } from "@/lib/chat/rewrite.mjs";
 import { tidyChips } from "@/lib/chat/citations.mjs";
-import { gapLead, gapNotice, gapKey, uniqueGaps, dropGapRepeats, unretrievedMentions } from "@/lib/chat/gaps.mjs";
+import { dropNotFoundClaims, gapLead, gapNotice, gapKey, uniqueGaps, dropGapRepeats, unretrievedMentions } from "@/lib/chat/gaps.mjs";
 import { extractLookups } from "@/lib/chat/lookups.mjs";
 import { logGap } from "@/lib/insights/server";
 import { searchSections } from "@/lib/legal-data";
@@ -30,7 +30,7 @@ import { docChatSources, searchAttached } from "@/lib/vault/search";
 import { getDocs } from "@/lib/vault/store";
 import { vaultConfigured } from "@/lib/vault/supabase";
 import { bump } from "@/lib/insights/server";
-import { addMessage, chatTitle, countQuestion, createChat, deleteChat, deleteMessage, isChatId, listChats, ownsChat, recentTurns, uncountQuestion, usageFor, type AbsentNote, type CheckResult } from "@/lib/chat/store";
+import { addMessage, chatTitle, countQuestion, createChat, deleteChat, deleteMessage, isChatId, listChats, listQuestions, ownsChat, recentTurns, uncountQuestion, usageFor, type AbsentNote, type CheckResult } from "@/lib/chat/store";
 
 export const maxDuration = 60;
 const noStore = { "Cache-Control": "no-store" };
@@ -43,6 +43,10 @@ export async function GET(req: Request) {
   const bid = bidOf(req);
   if (!bid) return json({ error: "No browser id." }, 400);
   if (!dbConfigured()) return json({ chats: [], configured: false });
+  // ?questions=1: this browser's recent questions (the Ask page shows them); it reads nothing but the saved chats and never depends on the usage counters
+  if (new URL(req.url).searchParams.get("questions") === "1") {
+    try { return json({ configured: true, questions: await listQuestions(bid, 8) }); } catch { return json({ questions: [], configured: true, error: "Could not load your questions." }, 503); }
+  }
   try {
     const [chats, used] = await Promise.all([listChats(bid), usageFor(bid)]);
     const l = limits();
@@ -129,7 +133,9 @@ export async function POST(req: Request) {
         }
 
         // 3. the answer, streamed. If the model fails AFTER some text, the partial answer is kept and marked as cut off.
-        const prompt = buildChatPrompt({ question: message, history, sources: ret.sources, answerRules: tune.currentLaw, gaps: ret.gaps });
+        // sections the question itself names that the library holds (a State's copy included, when the question names the State): the answer says so, never "not found"
+        const held = ret.sources.filter((x) => ret.namedKeys.includes(`${x.actId}|${x.sectionKey}`)).map((x) => ({ n: x.n, number: x.number ?? "", actTitle: x.actTitle, state: x.category === "central" ? null : x.state }));
+        const prompt = buildChatPrompt({ question: message, history, sources: ret.sources, answerRules: tune.currentLaw, gaps: ret.gaps, held });
         let answer = lead ? `${lead}\n\n` : "", model = aiModelFor("chat"), cutOff = false;
         if (lead) send({ type: "delta", text: answer });
         try {
@@ -145,7 +151,7 @@ export async function POST(req: Request) {
         // shaping that needs no model: the answer first, "Related provisions" only if they apply (switch currentLaw), a citation shown once per sentence (switch citationCheck)
         if (tune.currentLaw) clean.text = relatedOnlyIfApplicable(answerFirst(clean.text), ret.sources.map((x) => ({ n: x.n, number: x.number, heading: x.heading, text: x.text })), expandQuery(message, synonyms.rules).text);
         if (tune.citationCheck) clean.text = dedupeCitations(clean.text);
-        clean.text = tidyChips(clean.text);   // a chip on a line of its own belongs to the sentence before it
+        clean.text = dropNotFoundClaims(tidyChips(clean.text), lead ? [] : held);   // a held section is never reported as not found (with a missing-section opening there is nothing held to claim)   // a chip on a line of its own belongs to the sentence before it
         clean.text = dropGapRepeats(lead ? `${lead}\n\n${fixIndiaCodeLinks(clean.text)}` : fixIndiaCodeLinks(clean.text), ret.gaps).trim();   // the opening sentence says a section is not held, once: the model must not say it again   // the model may write the old India Code address (India Code's old site), which no longer opens
         const onlyLead = !!lead && clean.text === lead.trim();   // nothing but "this section isn't in our library": one sentence, one link, one label
         if (clean.text !== answer.trim()) send({ type: "replace", text: clean.text });
@@ -168,7 +174,7 @@ export async function POST(req: Request) {
           if (r && r.available && r.mode === "lookup" && r.missing) { const g = { kind: "mentioned" as const, number: r.missing.number, actTitle: r.missing.actTitle }; if (absent.some((a) => gapKey({ ...g, actTitle: a.actTitle ?? "", number: g.number }) === gapKey(g))) continue; absent.push(gapNotice(g, officialSourceUrl(r.missing.sourceUrl, r.missing.actTitle))); if (logIt) logGap({ kind: "missing_section", question: message, act: g.actTitle, section: g.number, actId: r.missing.actId }); }
         }
         let check: CheckResult;
-        if (detectNotFound(clean.text)) { check = { label: "not_found", unsupported: [] }; logNotFound(); }
+        if (!held.length && detectNotFound(clean.text)) { check = { label: "not_found", unsupported: [] }; logNotFound(); }
         else {
           try {
             const cp = buildCheckPrompt({ question: message, answer: clean.text, sources: ret.sources });
