@@ -47,3 +47,14 @@ test("class: the chat route enforces the rule on every foreign-law answer", () =
   const r = fs.readFileSync("src/app/api/chat/route.ts", "utf8");
   assert.match(r, /foreignLaw\(message\)/); assert.match(r, /enforceForeign\(clean\.text, foreign/); assert.match(r, /foreign: !!foreign/);
 });
+test("comparison and mixed questions that name an Indian side are answered from our sources, the foreign law only as context (12 examples, with and without the word India)", () => {
+  for (const q of [
+    "How does India's DPDP Act differ from GDPR?", "Is Indian defamation law based on English law?", "Which US cases has the Indian Supreme Court cited on privacy?",
+    "How does the DPDP Act differ from GDPR?", "Compare the Consumer Protection Act 2019 with the UK Consumer Rights Act 2015", "Is the Information Technology Act similar to the US Patriot Act?",
+    "Which English cases did the Supreme Court follow on negligence?", "What does Section 124A say and how does it compare to the First Amendment?", "Does our contract law follow the English rule in Hadley v Baxendale?",
+    "Is section 302 BNS borrowed from UK law?", "Who is liable under the POSH Act and how does it differ from Title VII?", "Is Article 21 of the Constitution wider than the US due process clause?",
+  ]) assert.equal(foreignLaw(q), null, q);
+});
+test("an Indian-sounding Act name does not hide a question about the same-named foreign Act", () => {
+  for (const q of ["What does the UK Companies Act 2006 require of directors?", "What does the US Copyright Act say about fair use?", "What does the Singapore Companies Act say about directors?", "What did the US Supreme Court decide in Miranda v Arizona?"]) assert.ok(foreignLaw(q), q);
+});
