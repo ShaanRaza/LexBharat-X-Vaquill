@@ -88,6 +88,7 @@ const pages = (t) => [
     await p.getByText("isn't in our library yet").first().waitFor({ timeout: 15000 }); await p.waitForTimeout(600);
   } },
   { id: "law-contents-list", url: "/law/IND_state_15289/s375" },
+  { id: "law-quote-marks", url: "/law/IND_state_15289/s010" },   // the source prints its quotation marks as long and double bars: curly quotes on screen (src/lib/text/clean.mjs fixQuoteMarks)
   { id: "search-laws", url: "/search?q=notice%20after%20cheque%20bounces", wait: 4000 },
   { id: "search-laws-fallback", url: "/search?q=notice%20after%20cheque%20bounces", before: asFallback("**/api/acts/search*", (u) => u.searchParams.set("exact", "1")), prep: seesNotice },
   { id: "search-judgments", url: "/search?q=bail&tab=judgments", wait: 4000, forbid: [CASE_TITLE_DANGLING] },
@@ -184,7 +185,7 @@ body{margin:0;font:16px sans-serif} header{position:fixed;top:0;left:0;right:0;h
 main{padding:70px 16px 0} .wide{width:2000px;height:10px;background:red} aside{position:sticky;top:20px;height:1400px;background:#eee;width:200px}
 .pt{cursor:pointer} p.last{margin:0 0 -30px}</style></head><body><header>bar</header><main>
 <h1>Planted defects</h1><div class="wide">wide</div>
-<p>==> picture 3 omitted <==  and 4[some amended words] and &amp; and \\n and undefined</p><p>Browse Laws & Judgments in the Workspace</p>
+<p>==> picture 3 omitted <==  and \u2015Man\u2016 and 4[some amended words] and &amp; and \\n and undefined</p><p>Browse Laws & Judgments in the Workspace</p>
 <a href="https://www.indiacode.nic.in/handle/123/456">old address</a><article><div class="font-reading"><p>The section text.</p><h3>OF FRAUDULENT DEEDS AND DISPOSITIONS OF PROPERTY</h3></div></article>
 <p>Section 375 of the Indian Penal Code isn't in our library yet.</p><article><span>No problems detected</span><div class="font-reading"><p>375. Rape. 376. Punishment for rape. 376A. Punishment for causing death or resulting in persistent vegetative state of victim. 376B. Sexual intercourse by husband upon his wife during separation.</p></div></article><span class="pt">looks clickable</span> <a href="#">goes nowhere</a> <a href="/nope-sweep-selftest">dead</a>
 <aside>tall sticky column</aside><div style="height:1200px"></div><p class="last">last words under the bar</p></main><nav class="bar">tabs</nav></body></html>`;

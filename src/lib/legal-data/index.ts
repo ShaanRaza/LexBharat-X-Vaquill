@@ -4,7 +4,7 @@
 // existing stores, kept under the same names so they can be replaced one by one. src/lib/legal-data/boundary.test.mjs fails if code outside the data folders touches a legal-data table directly.
 //
 // NOT part of this module: the app's OWN tables (saved chats, drafts, reviews, usage) use the database connection helper in src/lib/acts/db.ts. If the legal data moves to another database, keep that connection.
-import { effectiveStatus } from "../acts/contentsList.mjs";
+import { effectiveStatus, looksLikeContentsList, listEntries, confirmedByHeadings, STATUS_CONFIRM } from "../acts/contentsList.mjs";
 import { query, dbConfigured } from "@/lib/acts/db";
 import { getCaseText } from "@/lib/judgments/scText";
 import { actsTextDir } from "@/lib/acts/sectionText";
@@ -43,11 +43,19 @@ export async function sectionBodies(refs: SectionRef[], maxChars: number): Promi
   return out;
 }
 
+/** True when `text`, filed under `number` of the Act, is only that Act's table of contents: the shape test, then the entries checked against the Act's own section titles (one query). The default (strict) test is the chat's: real law text, Schedule lists included, never passes it. */
+export async function isContentsListOf(actId: string, number: string | null, text: string, opts?: { min?: number; share?: number }): Promise<boolean> {
+  if (!dbConfigured() || !looksLikeContentsList(text, number)) return false;
+  const nums = listEntries(text).slice(1, 9).map((e) => e.number.toUpperCase());
+  const rows = await query<{ number: string; heading: string | null }>(`SELECT upper(number) AS number, heading FROM act_sections_v WHERE act_id = $1 AND upper(number) = ANY($2::text[])`, [actId, nums]).catch(() => []);
+  const at = new Map(rows.map((r) => [r.number, r.heading]));
+  return confirmedByHeadings(text, (n) => at.get(String(n).toUpperCase()), opts);
+}
 export type SectionDetail = { title: string; number: string | null; heading: string | null; status: string; body: string | null };
 /** One section with its Act's title (cut to 20,000 characters), or null. Throws only when the source itself fails. */
 export async function sectionDetail(actId: string, sectionKey: string): Promise<SectionDetail | null> {
   const rows = await query<SectionDetail>(`SELECT a.title, s.number, s.heading, s.status, left(s.body, 20000) AS body FROM act_sections_v s JOIN acts a ON a.act_id = s.act_id WHERE s.act_id = $1 AND s.section_key = $2`, [actId, sectionKey]);
-  return rows[0] ? { ...rows[0], status: effectiveStatus(rows[0].status, rows[0]), title: displayTitle(rows[0].title, { title: rows[0].title }) } : null;
+  return rows[0] ? { ...rows[0], status: rows[0].status === "complete" && (await isContentsListOf(actId, rows[0].number, rows[0].body ?? "", STATUS_CONFIRM)) ? "possibly_incomplete" : effectiveStatus(rows[0].status, { heading: rows[0].heading }), title: displayTitle(rows[0].title, { title: rows[0].title }) } : null;
 }
 
 /** An excerpt (one passage) of a Supreme Court judgment, or null when the text is not held. */

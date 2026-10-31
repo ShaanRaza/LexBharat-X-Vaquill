@@ -3,6 +3,7 @@ export function stripMarkdown(s: string): string;
 export type DisplayBlock = { type: "heading" | "p"; text: string };
 export function toDisplayBlocks(raw: string, opts?: { lines?: boolean }): DisplayBlock[];
 export function cleanHeading(s: string | null | undefined): string | null;
+export function fixQuoteMarks(s: string | null | undefined): string;
 export function stripJunk(raw: string | null | undefined): string;
 export function tidySpacing(s: string): string;
 export type CleanPart = { t: "text"; v: string } | { t: "mark"; n: number };

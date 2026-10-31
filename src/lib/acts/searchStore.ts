@@ -271,5 +271,5 @@ async function searchSectionsRaw(q: string, page = 1, pageSize = PAGE_SIZE, opts
 }
 
 /** Titles leave this module display-ready (src/lib/docs/docType.mjs: capitals, acronyms, glued digits, fallbacks); the data keeps the raw ones. */
-export const tidyTitles = (o: SearchOutcome): SearchOutcome => !o.available ? o : { ...o, results: dedupeCopies(o.results.map((h) => ({ ...h, actTitle: displayTitle(h.actTitle, h), status: effectiveStatus(h.status, { heading: h.heading, body: h.snippet }) as SectionHit["status"] }))), ...(o.missing ? { missing: { ...o.missing, actTitle: displayTitle(o.missing.actTitle, o.missing) } } : {}) };
+export const tidyTitles = (o: SearchOutcome): SearchOutcome => !o.available ? o : { ...o, results: dedupeCopies(o.results.map((h) => ({ ...h, actTitle: displayTitle(h.actTitle, h), status: effectiveStatus(h.status, { heading: h.heading }) as SectionHit["status"] }))), ...(o.missing ? { missing: { ...o.missing, actTitle: displayTitle(o.missing.actTitle, o.missing) } } : {}) };
 export async function searchSections(q: string, page = 1, pageSize = PAGE_SIZE, opts: { exact?: boolean; filters?: SearchFilters; surface?: Surface } = {}): Promise<SearchOutcome> { return tidyTitles(await searchSectionsRaw(q, page, pageSize, opts)); }

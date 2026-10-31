@@ -87,7 +87,7 @@ const NOT_A_TITLE = /^(?:Subs\.|Ins\.|Certain words|The Original words|See now|A
 export function cleanHeading(s) {
   if (!s || /^\(no heading/i.test(String(s).trim())) return null;
   if (/\uFFFD/.test(s) || (s.match(/[\u0900-\u097F]/g) ?? []).length >= 4) return null;
-  const head = stripMarkdown(s).replace(/\[\d{1,2}\]/g, "").replace(/[\[\]]/g, "").split(/\s*[.;]\s*(?:[\u2014\u2013]|--)/)[0].replace(/\s+(?=["\u201d]$)/, "").replace(/[\s.\u2014\u2013-]+$/, "");
+  const head = stripMarkdown(fixQuoteMarks(s)).replace(/\[\d{1,2}\]/g, "").replace(/[\[\]]/g, "").split(/\s*[.;]\s*(?:[\u2014\u2013]|--)/)[0].replace(/\s+(?=["\u201d]$)/, "").replace(/[\s.\u2014\u2013-]+$/, "");
   const c = collapseLetterSpacing(head.replace(/^#{1,6}\s*/, ""));
   const t = c.ambiguous ? "" : c.text.trim();
   return !t || NOT_A_TITLE.test(t) ? null : t;
@@ -95,17 +95,40 @@ export function cleanHeading(s) {
 
 
 // ---- the shared display layer
+// Some source PDFs print a quotation mark with a font that the extraction turns into \u2015 (a long bar, also used as a plain dash) before the quoted words and \u2016 (a double bar) after them:
+// "\u2015Man\u2016.\u2015Woman\u2016". Shown as they are, the closing mark reads as "ll" ("Manll"). The display layer turns a \u2015...\u2016 pair into curly quotes and a lone \u2016 into a closing quote.
+// A \u2015 with no \u2016 after it stays a dash. The stored text is never changed.
+const OPENERS = /[\s(\[\u201c\u2018"']/, CLOSERS = /[\u2016\u201d"]/, REACH = 160;
+export function fixQuoteMarks(s) {
+  const t = String(s ?? "");
+  if (!t.includes("\u2016")) return t;
+  const out = [...t];
+  let open = -1;
+  for (let i = 0; i < out.length; i++) {
+    const c = out[i];
+    if (c === "\u2015") {
+      const prev = t[i - 1], before = t[i - 2], next = t[i + 1] ?? "";
+      const startsQuote = /[A-Za-z0-9(\u201c]/.test(next) && (i === 0 || OPENERS.test(prev) || (/[.,;:]/.test(prev) && !!before && CLOSERS.test(before)));   // ".\u2015The" after a heading is a dash; ". \u2015Woman" after a closing quote is not
+      if (startsQuote) open = i;
+    } else if (c === "\n") open = -1;
+    else if (c === "\u2016") {
+      if (open >= 0 && i - open <= REACH) out[open] = "\u201c";
+      out[i] = "\u201d"; open = -1;
+    }
+  }
+  return out.join("");
+}
 const ENTITIES = { amp: "&", nbsp: " ", lt: "<", gt: ">", quot: '"', apos: "'", "#39": "'", "#8217": "\u2019", "#8211": "\u2013" };
 /** Extraction junk that is never text: picture placeholders, HTML, control characters, runs of lost characters, literal backslash escapes. */
 export function stripJunk(raw) {
-  return String(raw ?? "")
+  return fixQuoteMarks(String(raw ?? "")
     .replace(/\*{0,2}={2,}>[^<\n]{0,160}?<={2,}\*{0,2}/g, " ")          // "**==> picture [174 x 68] intentionally omitted <==**"
     .replace(/={2,}>|<={2,}/g, " ")                                        // a marker whose other half is missing
     .replace(/<br\s*\/?>/gi, "\n").replace(/<\/?(?:b|i|u|p|span|div|font|table|tr|td|th|li|ul|ol|a|sup|sub|em|strong|h[1-6])(?:\s[^<>]{0,40})?\/?>/gi, "")
     .replace(/&(#?[a-z0-9]{2,6});/gi, (m, k) => ENTITIES[k.toLowerCase()] ?? m)
     .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, "")
     .replace(/(?:\s*\uFFFD){2,}/g, " ").replace(/^[ \t]*\uFFFD+[ \t]*$/gm, "")   // "� � �", also across line breaks, and a line of nothing but lost characters
-    .replace(/(?<![A-Za-z])\\[nrt](?![A-Za-z])/g, " ");                   // a literal \n left by the extraction (not inside a word: "\nvolving" is OCR for "involving" and is left alone)
+    .replace(/(?<![A-Za-z])\\[nrt](?![A-Za-z])/g, " "));                  // a literal \n left by the extraction (not inside a word: "\nvolving" is OCR for "involving" and is left alone)
 }
 /** Spacing the extraction broke: "( a )" -> "(a)", "word ." -> "word.", runs of spaces and tabs -> one space (line breaks are kept). */
 export function tidySpacing(s) {

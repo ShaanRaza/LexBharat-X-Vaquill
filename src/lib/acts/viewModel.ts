@@ -68,7 +68,8 @@ export function selectedKey(rows: { key: string }[], wanted: string | undefined)
 }
 
 export function buildActTextView(listed: ListedSection[], sourceUrl: string | null | undefined, wantedKey: string | undefined, missing: number[] = [], gaps?: ScheduleGaps): ActTextView {
-  const sections = listed.map((s) => ({ ...s, status: effectiveStatus(s.status, s) as ListedSection["status"] }));   // a table of contents filed as a section is never "no problems detected"
+  const headingAt = new Map(listed.map((s) => [String(s.number).toUpperCase(), s.heading]));   // the Act's own section titles: what a contents list is checked against
+  const sections = listed.map((s) => ({ ...s, status: effectiveStatus(s.status, s, (n) => headingAt.get(String(n).toUpperCase())) as ListedSection["status"] }));   // a table of contents filed as a section is never "no problems detected"
   const rows = rowsFor(sections, missing, gaps), keys = rows.map((r) => ({ key: keyOf(r) }));
   const list: SectionListItem[] = rows.map((r) => r.kind === "gap"
     ? { supplemented: false, key: keyOf(r), label: r.label, heading: null, status: "missing", tone: "info", statusLabel: "Not printed in the source PDF", noNumber: false, missing: true }

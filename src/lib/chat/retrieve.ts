@@ -2,7 +2,7 @@
 //   1. exact section lookups named in the question ("section 138 of the NI Act") come first;
 //   2. the question and up to 3 rewritten search queries are each searched with the Acts search (by meaning over Central + State Acts, keyword fallback, lookups for "<Act> section N");
 //   3. the lists are merged (a section found by several queries rises) and de-duplicated, then each section's text is loaded.
-import { primeSemanticQueries, searchSections, sectionBodies, type SectionHit } from "@/lib/legal-data";
+import { primeSemanticQueries, searchSections, sectionBodies, isContentsListOf, type SectionHit } from "@/lib/legal-data";
 import { extractLookups } from "./lookups.mjs";
 import { retrievalQuery, MAX_SOURCES } from "./prompt.mjs";
 import { mergeHybrid, mergeRanked } from "./rewrite.mjs";
@@ -42,7 +42,6 @@ import { narrowToExact } from "./exact.mjs";
 import { currentLawFirst } from "./currentlaw.mjs";
 import { dedupeCopies } from "@/lib/acts/dedupe.mjs";
 import { officialSourceUrl } from "@/lib/acts/quality";
-import { isContentsList } from "../acts/contentsList.mjs";
 import type { Gap } from "./gaps.mjs";
 import replaced from "@/config/replaced-laws.json";
 
@@ -50,7 +49,7 @@ export async function retrieveSources(question: string, history: { role: string;
   const hits = new Map<string, SectionHit>(), first: string[] = [], lists: string[][] = [], gaps: LibraryGap[] = [];
   let mode: Retrieval["searchMode"] = "none", note = "";
   const meaning: MeaningUse = { used: 0, fellBack: 0, cause: null, judgmentsFailed: false };
-  const usable = (h: SectionHit) => h.status !== "garbled" && !isContentsList({ heading: h.heading, body: h.snippet });   // a table of contents filed as a section is not the law: never cited, and said to be unreadable when it is all there is
+  const usable = (h: SectionHit) => h.status !== "garbled";
   // exact lookups: sections named in the question (2 hits each), then sections the rewritten queries name, such as "Indian Contract Act section 11" (1 hit each; the model's guess is only a lead:
   // what gets cited is the section text that comes back)
   const named = new Set([...forced, ...extractLookups(question)].map((l) => l.toLowerCase()));
@@ -95,7 +94,7 @@ export async function retrieveSources(question: string, history: { role: string;
   const sources: ChatSource[] = [];
   for (const h of picked) {
     const text = body.get(keyOf(h))?.body.trim();
-    if (!text || isContentsList({ heading: h.heading, body: text })) continue;   // (semantic hits are checked here, on the whole text)
+    if (!text || (await isContentsListOf(h.actId, h.number, text))) continue;   // an Act's table of contents filed as a section is not the law: never cited (real law text, Schedule lists included, never matches)
     sources.push({ n: sources.length + 1, actId: h.actId, sectionKey: h.sectionKey, actTitle: h.actTitle, year: h.year, category: h.category, state: h.state, inForce: h.actStatus === "in_force", sourceUrl: h.sourceUrl,
       number: h.number, heading: h.heading, status: h.status, text, via: h.via, ...((h as SectionHit & { replacedBy?: string }).replacedBy ? { replacedBy: (h as SectionHit & { replacedBy?: string }).replacedBy } : {}) });
   }

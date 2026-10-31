@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { cleanHeading, stripTrailingHeadings, toDisplayBlocks, cleanParts, cleanPlain, previewText, stripJunk, tidySpacing, vocabOf } from "./clean.mjs";
+import { fixQuoteMarks, cleanHeading, stripTrailingHeadings, toDisplayBlocks, cleanParts, cleanPlain, previewText, stripJunk, tidySpacing, vocabOf } from "./clean.mjs";
 
 // samples are real patterns found by scripts/audit/junk-scan-*.mjs (docs/audit-junk-*.json)
 test("picture placeholders and stray halves of them never reach a reader", () => {
@@ -95,4 +95,35 @@ test("a section's text loses the next chapter's heading stuck to its end (IPC 42
     "Text with no heading at all.",
   ]) assert.equal(stripTrailingHeadings(keep), keep, keep);
   assert.equal(stripTrailingHeadings(null), "");
+});
+
+// The source PDFs' quotation marks: ― before, ‖ after ("Manll" on screen). Display layer only; a ― without a closing mark is a dash.
+const BAR = "―", DBAR = "‖";
+test("quote marks 1: a definition and its title", () => {
+  assert.equal(fixQuoteMarks(`10. ${BAR}Man${DBAR}.${BAR}Woman${DBAR} .—The word "man" denotes a male human being`), `10. “Man”.“Woman” .—The word "man" denotes a male human being`);
+  assert.equal(cleanHeading(`${BAR}Man${DBAR}.${BAR}Woman${DBAR}`), "“Man”.“Woman”");
+});
+test("quote marks 2: a lone closing mark becomes a closing quote", () => {
+  assert.equal(fixQuoteMarks(`the word man${DBAR} denotes a male`), "the word man” denotes a male");
+});
+test("quote marks 3: a dash is a dash, also next to real pairs", () => {
+  assert.equal(fixQuoteMarks("Funds of the Board .―The funds of the Board shall be applied"), "Funds of the Board .―The funds of the Board shall be applied");   // no closing mark at all
+  assert.equal(fixQuoteMarks(`Short title.${BAR}In this Act, ${BAR}appropriate Government${DBAR} means the Central Government.`), `Short title.${BAR}In this Act, “appropriate Government” means the Central Government.`);   // the dash after the title stays
+});
+test("quote marks 4: several pairs, inside brackets and next to each other", () => {
+  assert.equal(fixQuoteMarks(`(${BAR}the Board${DBAR}) and ${BAR}High Court${DBAR} includes ${BAR}Tribunal${DBAR}`), "(“the Board”) and “High Court” includes “Tribunal”");
+});
+test("quote marks 5: a sentence that ends in the mark", () => {
+  assert.equal(fixQuoteMarks(`an authority called ${BAR}the Board${DBAR}.`), "an authority called “the Board”.");
+  assert.equal(fixQuoteMarks(`called ${BAR}the Board${DBAR}`), "called “the Board”");
+});
+test("quote marks 6: an opening mark with no closing one within a line stays, and text with no closing mark is untouched", () => {
+  assert.equal(fixQuoteMarks(`${BAR}word\nnext line${DBAR}`), `${BAR}word\nnext line”`);
+  assert.equal(fixQuoteMarks("plain text with no marks"), "plain text with no marks");
+  assert.equal(fixQuoteMarks(null), "");
+});
+test("quote marks 7: the whole display layer applies it (reading text, plain text, nothing left over)", () => {
+  const raw = `2. Definitions.${BAR}In this section ${BAR}document${DBAR} includes maps.`;
+  assert.ok(!/[‖]/.test(cleanPlain(raw)) && cleanPlain(raw).includes("“document”"));
+  assert.ok(toDisplayBlocks(raw).every((b) => !b.text.includes(DBAR)));
 });
