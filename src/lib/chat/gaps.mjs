@@ -9,7 +9,7 @@ const theAct = (title) => `the ${String(title).replace(/^the\s+/i, "")}`;
 export function gapSentence(g) {
   const what = `${unitWord(g.number, { title: g.actTitle })} of ${theAct(g.actTitle)}`;
   if (g.kind === "nosuch") return `${what} doesn't exist: the Act's sections end at ${g.max}.`;
-  if (g.kind === "unreliable") return `${what} is in our library, but its text came out scrambled from the source, so we cannot quote it.`;
+  if (g.kind === "unreliable") return `${what} is in our library, but its text is not usable (it came out scrambled from the source, or is only a list of section headings), so we cannot quote it.`;
   if (g.kind === "mentioned") return `The answer mentions ${what}, which isn't in our library yet.`;
   return `${what} isn't in our library yet.`;
 }

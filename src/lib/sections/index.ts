@@ -1,5 +1,6 @@
 // Section-text seam for GET /api/acts/<id>/sections. Serves from Neon (DATABASE_URL) or the local files (ACTS_TEXT_DATA_DIR); otherwise { available: false }.
 // Chunk order is a documented rule, not ground truth, so every section carries flags (docs/ACTS-TEXT-W1A.md). Garbled text is never returned.
+import { effectiveStatus } from "../acts/contentsList.mjs";
 import { query, dbConfigured } from "@/lib/acts/db";
 import { getActText } from "@/lib/acts/sectionText";
 import { toSectionRecord } from "@/lib/acts/sectionRecord.mjs";
@@ -13,7 +14,7 @@ const store: SectionsStore = {
     if (dbConfigured()) {
       try {
         const rows = await query<{ number: string | null; heading: string | null; body: string | null; status: string; flags: string[] }>(`SELECT number, heading, body, status, flags FROM act_sections_v WHERE act_id = $1 ORDER BY ord, (flags @> ARRAY['supplement']), length(number), number`, [actId]);
-        if (rows.length) return { available: true, sections: rows.map((r) => ({ sectionNumber: r.number, title: r.heading ?? undefined, text: r.status === "garbled" ? "" : r.body ?? "", status: r.status, flags: r.flags })) };
+        if (rows.length) { const headingAt = new Map(rows.map((r) => [String(r.number).toUpperCase(), r.heading])); return { available: true, sections: rows.map((r) => ({ sectionNumber: r.number, title: r.heading ?? undefined, text: r.status === "garbled" ? "" : r.body ?? "", status: effectiveStatus(r.status, r, (n) => headingAt.get(String(n).toUpperCase())), flags: r.flags })) }; }
       } catch { /* fall through to files */ }
     }
     const t = await getActText(actId);

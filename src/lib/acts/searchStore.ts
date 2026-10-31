@@ -1,4 +1,5 @@
 // Keyword search over Act section text in Neon (Postgres full-text search, 'english' config). LOGIC ONLY: no styling. The caller (route handler) validates input.
+import { effectiveStatus } from "./contentsList.mjs";
 import { query, dbConfigured } from "./db";
 import { actMatcher, hasDevanagari, hasSearchableChars, parseSectionLookup } from "./searchQuery.mjs";
 import { unitLabel } from "./unitLabel.mjs";
@@ -66,19 +67,24 @@ async function lookupHits(q: string, page: number, pageSize: number, filters: Se
   const where = m.titlePrefix ? `lower(a.title) LIKE $1 || '%'` : m.words.map((_, i) => `a.title ILIKE '%' || $${i + 1} || '%'`).join(" AND ");
   const params: unknown[] = m.titlePrefix ? [m.titlePrefix] : m.words;
   if (!params.length) return null;
+  // A question that names a central Act ("Indian Penal Code") is about the central Act. A state or UT copy is used only when the question names that state, or the caller asks for state laws:
+  // otherwise a copy whose text is a contents list or a state version would be shown (and cited) in place of "this section is not in our library".
+  const wantsState = filters.jurisdiction === "state" || statesIn(q).size > 0;
+  const centralOnly = !wantsState && filters.jurisdiction !== "central" && (await query(`SELECT 1 FROM acts a WHERE ${where} AND a.category = 'central' LIMIT 1`, params).catch(() => [])).length > 0;
+  const only = centralOnly ? " AND a.category = 'central'" : "";
   const rows = await query<Omit<SectionHit, "snippet" | "via"> & { body: string | null }>(
     `SELECT ${COLS}, left(s.body, 400) AS body FROM acts a JOIN act_sections_v s ON s.act_id = a.act_id
-     WHERE ${where} AND upper(s.number) = ANY($${params.length + 1}::text[])${filterSql(filters) ? ` AND ${filterSql(filters)}` : ""}
+     WHERE ${where}${only} AND upper(s.number) = ANY($${params.length + 1}::text[])${filterSql(filters) ? ` AND ${filterSql(filters)}` : ""}
      ORDER BY (a.category = 'central') DESC, (a.act_status = 'in_force') DESC, length(a.title), s.ord LIMIT 24`, [...params, (lk.numbers ?? [lk.number]).map((n: string) => n.toUpperCase())]);
   if (!rows.length) {
     const num = /^\d{1,4}$/.test(lk.number) ? Number(lk.number) : null;
     if (num === null) return null;
     const gone = await query<{ actId: string; actTitle: string; sourceUrl: string | null }>(
-      `SELECT a.act_id AS "actId", a.title AS "actTitle", a.source_url AS "sourceUrl" FROM acts a JOIN act_missing_sections m ON m.act_id = a.act_id WHERE ${where} AND m.number = $${params.length + 1}
+      `SELECT a.act_id AS "actId", a.title AS "actTitle", a.source_url AS "sourceUrl" FROM acts a JOIN act_missing_sections m ON m.act_id = a.act_id WHERE ${where}${only} AND m.number = $${params.length + 1}
        ORDER BY (a.category = 'central') DESC, (a.act_status = 'in_force') DESC, length(a.title) LIMIT 1`, [...params, num]).catch(() => []);
     // not recorded as missing: still, an Act we hold whose numbers do not include this one is "not in our library", never a section to answer from memory
     const held = gone.length ? gone : await query<{ actId: string; actTitle: string; sourceUrl: string | null }>(
-      `SELECT a.act_id AS "actId", a.title AS "actTitle", a.source_url AS "sourceUrl" FROM acts a WHERE ${where} AND EXISTS (SELECT 1 FROM act_sections_v s WHERE s.act_id = a.act_id AND s.number ~ '^[0-9]')
+      `SELECT a.act_id AS "actId", a.title AS "actTitle", a.source_url AS "sourceUrl" FROM acts a WHERE ${where}${only} AND EXISTS (SELECT 1 FROM act_sections_v s WHERE s.act_id = a.act_id AND s.number ~ '^[0-9]')
        ORDER BY (a.category = 'central') DESC, (a.act_status = 'in_force') DESC, length(a.title) LIMIT 1`, params).catch(() => []);
     if (!held.length) return null;
     // a number above the Act's last section is not "missing": there is no such section. The last section is the reference count for well-known Acts, else the highest number we hold (only when the number is far above it)
@@ -283,5 +289,5 @@ async function searchSectionsRaw(q: string, page = 1, pageSize = PAGE_SIZE, opts
 }
 
 /** Titles leave this module display-ready (src/lib/docs/docType.mjs: capitals, acronyms, glued digits, fallbacks); the data keeps the raw ones. */
-export const tidyTitles = (o: SearchOutcome): SearchOutcome => !o.available ? o : { ...o, results: dedupeCopies(o.results.map((h) => ({ ...h, actTitle: displayTitle(h.actTitle, h) }))), ...(o.missing ? { missing: { ...o.missing, actTitle: displayTitle(o.missing.actTitle, o.missing) } } : {}) };
+export const tidyTitles = (o: SearchOutcome): SearchOutcome => !o.available ? o : { ...o, results: dedupeCopies(o.results.map((h) => ({ ...h, actTitle: displayTitle(h.actTitle, h), status: effectiveStatus(h.status, { heading: h.heading }) as SectionHit["status"] }))), ...(o.missing ? { missing: { ...o.missing, actTitle: displayTitle(o.missing.actTitle, o.missing) } } : {}) };
 export async function searchSections(q: string, page = 1, pageSize = PAGE_SIZE, opts: { exact?: boolean; filters?: SearchFilters; surface?: Surface; loose?: boolean } = {}): Promise<SearchOutcome> { return tidyTitles(await searchSectionsRaw(q, page, pageSize, opts)); }

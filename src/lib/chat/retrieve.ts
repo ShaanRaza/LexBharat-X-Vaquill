@@ -2,7 +2,7 @@
 //   1. exact section lookups named in the question ("section 138 of the NI Act") come first;
 //   2. the question and up to 3 rewritten search queries are each searched with the Acts search (by meaning over Central + State Acts, keyword fallback, lookups for "<Act> section N");
 //   3. the lists are merged (a section found by several queries rises) and de-duplicated, then each section's text is loaded.
-import { primeSemanticQueries, searchSections, sectionBodies, type SectionHit } from "@/lib/legal-data";
+import { primeSemanticQueries, searchSections, sectionBodies, isContentsListOf, type SectionHit } from "@/lib/legal-data";
 import { extractLookups } from "./lookups.mjs";
 import { retrievalQuery, MAX_SOURCES } from "./prompt.mjs";
 import { mergeHybrid, mergeRanked } from "./rewrite.mjs";
@@ -133,7 +133,7 @@ export async function retrieveSources(question: string, history: { role: string;
   const sources: ChatSource[] = [];
   for (const h of picked) {
     const text = body.get(keyOf(h))?.body.trim();
-    if (!text) continue;
+    if (!text || (await isContentsListOf(h.actId, h.number, text))) continue;   // an Act's table of contents filed as a section is not the law: never cited (real law text, Schedule lists included, never matches)
     sources.push({ n: sources.length + 1, actId: h.actId, sectionKey: h.sectionKey, actTitle: h.actTitle, year: h.year, category: h.category, state: h.state, inForce: h.actStatus === "in_force", sourceUrl: h.sourceUrl,
       number: h.number, heading: h.heading, status: h.status, text, via: h.via, ...((h as SectionHit & { replacedBy?: string }).replacedBy ? { replacedBy: (h as SectionHit & { replacedBy?: string }).replacedBy } : {}) });
   }
