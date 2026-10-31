@@ -9,6 +9,7 @@ import { completeTask } from "../../src/lib/ai/run.mjs";
 import { detectNotFound } from "../../src/lib/chat/prompt.mjs";
 import { openingHedge } from "../../src/lib/chat/shape.mjs";
 import { copyKey } from "../../src/lib/acts/semantic.mjs";
+import { widenGold, satisfies } from "./gold.mjs";
 const env = Object.fromEntries(fs.readFileSync(".env.local", "utf8").split("\n").filter((l) => l.includes("=")).map((l) => [l.slice(0, l.indexOf("=")), l.slice(l.indexOf("=") + 1).replace(/^["']|["']$/g, "")]));
 { // evaluation runs use ONLY an evaluation key (EVAL_GEMINI_API_KEY_2 first, then EVAL_GEMINI_API_KEY), never the live GEMINI_API_KEY: the live site depends on its quota. Never printed.
   const ek = env.EVAL_GEMINI_API_KEY_2 || env.EVAL_GEMINI_API_KEY;
@@ -69,13 +70,13 @@ for (const q of qs) {
   const perGold = [];   // one entry per expected section: its matching rows in Neon
   const FIND = `SELECT s.act_id, s.section_key, s.number, a.title, s.body FROM acts a JOIN act_sections_v s ON s.act_id = a.act_id WHERE a.category = 'central' AND lower(a.title) LIKE lower($1) || '%' AND s.body IS NOT NULL AND regexp_replace(lower(s.body), '[^a-z0-9]+', ' ', 'g') LIKE '%' || $2 || '%'`;
   // a spec is one expectation; its `alts` are other accepted sections (any one counts), so its rows are the union
-  for (const g of specs) perGold.push((await Promise.all([g, ...(g.alts ?? [])].map((x) => db.query(FIND, [x.act.replace(/,.*$/, ""), norm(x.anchor)])))).flat());
+  for (const g of specs) perGold.push((await Promise.all([g, ...(g.alts ?? [])].map(async (x) => widenGold(db, await db.query(FIND, [x.act.replace(/,.*$/, ""), norm(x.anchor)]), norm(x.anchor))))).flat());   // any filing of the same Act's section counts (scripts/eval/gold.mjs)
   const golds = perGold.flat(), goldKeys = new Set(golds.map((g) => `${g.act_id}|${g.section_key}`));
   if (CHECK) { console.log(`q${q.id}: ${notfoundQ ? "(not-found question)" : perGold.map((r, i) => `${specs[i].act.slice(0, 28)} s${specs[i].section ?? "?"} -> ${r.length} match${r.length === 1 ? "" : "es"}${r[0] ? " [" + r.slice(0, 3).map((x) => x.number).join(",") + "]" : ""}`).join(" | ")}`); continue; }
   const t0 = Date.now(); let a = null;
   for (let k = 0; k < 3; k++) { a = await ask(q.question); if (!a.error) break; console.log(`  q${q.id}: ${a.error}, retrying`); await new Promise((res) => setTimeout(res, 20000)); }
   const secs = (Date.now() - t0) / 1000;
-  const matches = perGold.map((rows) => { const keys = new Set(rows.map((g) => `${g.act_id}|${g.section_key}`)); return (a.sources ?? []).map((src, i) => [src, i]).filter(([src]) => keys.has(`${src.actId}|${src.sectionKey}`)); });   // sources that satisfy each expectation
+  const matches = perGold.map((rows) => (a.sources ?? []).map((src, i) => [src, i]).filter(([src]) => satisfies(src, rows)));   // sources that satisfy each expectation
   const ranks = matches.map((m) => (m.length ? m[0][1] : -1));
   const rank = ranks.length && ranks.every((r) => r >= 0) ? Math.max(...ranks) : -1;   // every expectation must be shown; rank = the worst one
   const cites = (n) => new RegExp(`\\[${n}\\]`).test(a.text ?? "");
@@ -87,7 +88,7 @@ for (const q of qs) {
   const mentions = (q.mustMention ?? []).every((re) => new RegExp(re, "i").test(a.text ?? ""));
   const citedSources = (a.sources ?? []).filter((src) => cites(src.n));
   const forbidden = (q.forbid ?? []).flatMap((f) => citedSources.filter((src) => src.actTitle?.toLowerCase().startsWith(f.act.toLowerCase()) && f.numbers.includes(String(src.number))).map((src) => `${src.actTitle} s${src.number}`));
-  const refs = perGold.map((rows, i) => (matches[i][0] ? rows.find((g) => g.act_id === matches[i][0][0].actId && g.section_key === matches[i][0][0].sectionKey) : null) ?? rows[0]).filter(Boolean);
+  const refs = perGold.map((rows, i) => (matches[i][0] ? rows.find((g) => g.body && g.act_id === matches[i][0][0].actId && g.section_key === matches[i][0][0].sectionKey) : null) ?? rows[0]).filter(Boolean);
   const judged = notfoundQ ? nf : a.error || !golds.length || nf || !a.text ? false : await judge(refs, q.question, a.text);
   // answer-quality checks that need no judge (class 6): the same citation twice in one sentence, the same section twice among the sources, a hedge before the answer
   const dupCites = (a.text ?? "").split(/\n|(?<=[.;:!?])\s+/).some((seg) => { const m = [...seg.matchAll(/\[(\d{1,2})\]/g)].map((x) => x[1]); return new Set(m).size !== m.length; });

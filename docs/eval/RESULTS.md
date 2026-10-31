@@ -108,3 +108,32 @@ Foreign-law detection (Oct 31): comparison and mixed questions that also name an
 **q25 (possible noise, nothing tuned for it).** In `m2-main` the expected section (CrPC s437, the State-filed copy named in `questions.json`) was not among the sources (retrieved false, 1/3) because the query rewrite produced a different fourth query ("… section 478 maximum period for which undertrial prisoner can be detained") instead of one naming CrPC 437; in `final-main` and `merged-main` it was retrieved at rank 8 and 7. The rewrite is model-sensitive (one run each). The scorer also accepts only that one filing of the CrPC. Marked as possible noise.
 
 Main is below 38/39 on the merged code, so nothing was pushed from this run.
+
+### Is the main-set drop real? Repeats and a fairer scorer (Oct 31, evaluation key only)
+
+**Repeats of q22 and q25, three runs each, same scorer and judge** (the merged code = commit 65c603c; the pre-merge code = 0e7ccf8, run from a separate worktree; only the server differs):
+
+| | q22 run 1 / 2 / 3 | q25 run 1 / 2 / 3 | q22 + q25 per run |
+|---|---|---|---|
+| Pre-merge code (0e7ccf8) | 2 / 2 / 2 | 3 / 3 / 3 | 5 / 5 / 5 |
+| Merged code (65c603c) | 2 / 3 / 2 | 3 / 2 / 3 | 5 / 5 / 5 |
+
+q22 is 2/3 on both code versions in 8 of 9 runs (the judge marks a correct answer wrong; the single 3/3 before the merge in `final-main` was the outlier) and q25 flips between 3 and 2 with the judge on the merged code. Same average on both: **the drop is noise, not an effect of the merge.** (Decision rule agreed with the owner: both swing the same way, so noise.)
+
+**Scorer change (a general rule for all questions).** The expected section was matched only by the exact Central filing (`a.category = 'central'`, one `act_id|section_key`). The database holds about 15 filings of the Code of Criminal Procedure (State re-publications of the same Central Act), so a retrieval of another filing of CrPC s.437 (titled "The CRPC 1973") counted as "not retrieved" (q25: 1/3 in `m2-main` although the right provision was among the sources). Now any filing of the same Act's section satisfies an expectation: same section number, the question's anchor sentence in its text, and an Act title with the same year or no year (`scripts/eval/gold.mjs`, shared by the live scorer `e2e.mjs` and the re-scorer `rescore.mjs`; a different Act such as BNSS never counts because its year differs). A re-score can only add, never remove. Tests: `scripts/eval/gold.test.mjs`.
+
+Old and new scores side by side (all 18 stored runs re-scored without calling any model; the stored files themselves are unchanged; only runs where something changed are marked):
+
+| Run | Old | New | Changed |
+|---|---|---|---|
+| base-oct30-main | 37 | 37 | none |
+| c-current-law-main | 37 | 37 | none |
+| after-main / after1-main | 33 / 33 | 35 / 35 | q25 1→3 |
+| after2-main | 36 | 37 | q25 1→2 |
+| final-main (before the merge) | 39 | 39 | none |
+| merged-main | 37 | 37 | none |
+| **m2-main (merged code + one-line fix)** | 36 | **38** | q25 1→3 |
+| base-oct30-hard, c-current-law-hard, after-hard, after1-hard, after2-hard, after2c-hard | 78, 71, 81, 81, 37 (20 q), 53 (20 q) | same | none |
+| heldout-before, heldout-after, after1-heldout, final-heldout | 39, 49, 49, 48 | same | none |
+
+The baseline main run (37) is not changed by the new scorer, so the comparison with the baseline stays fair: main is 37 → 38 on the merged code with the new scorer (39 before the merge; the repeats above show the 1-point differences are noise). Not found: 12/12.

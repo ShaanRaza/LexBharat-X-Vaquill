@@ -1,0 +1,221 @@
+{
+ "label": "rep-pre-r3",
+ "at": "2026-10-31T08:31:02.879Z",
+ "rows": [
+  {
+   "id": 22,
+   "kind": null,
+   "question": "What is the punishment for defamation?",
+   "gold": [
+    "IND_central_20062|s356"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": false,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 19.2,
+   "nSources": 10,
+   "queries": [
+    "What is the punishment for defamation?",
+    "punishment for defamation criminal imputation intending to harm reputation",
+    "Bharatiya Nyaya Sanhita section 356 punishment for defamation",
+    "Indian Penal Code section 500 punishment for defamation"
+   ],
+   "meaning": {
+    "used": 4,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Nyaya Sanhita, 2023 s356",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s531",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s359",
+    "The Bharatiya Nyaya Sanhita, 2023 (Draft stage of translated version) s?",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s222"
+   ],
+   "answer": "The punishment for defamation under Section 356 of the Bharatiya Nyaya Sanhita, 2023 (which replaced Section 500 of the Indian Penal Code, 1860) is simple imprisonment for a term which may extend to two years, or with fine, or with both, or with community service [1][7]. \n\nRelated provisions:\n- Section 356 of the Bharatiya Nyaya Sanhita, 2023 covers \"whoever prints or engraves any matter, knowing or having good reason to believe that such matter is defamatory of any person, shall be punished with simple imprisonment for a term which may extend to two years, or with fine, or with both\" (previously Section 501 of the Indian Penal Code, 1860) [1][7].\n- Section 356 of the Bharatiya Nyaya Sanhita, 2023 covers \"whoever sells or offers for sale any printed or engraved substance containing defamatory matter, knowing that it contains such matter, shall be punished with simple imprisonment for a term which may extend to two years, or with fine, or with both\" (previously Section 502 of the Indian Penal Code, 1860) [1][7].\n- Section 222 of the Bharatiya Nagarik Suraksha Sanhita, 2023 covers \"prosecution for defamation\" and states that no court shall take cognizance of an offence punishable und",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "356"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "531"
+    },
+    {
+     "n": 3,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "359"
+    },
+    {
+     "n": 4,
+     "t": "The Bharatiya Nyaya Sanhita, 2023 (Draft stage of translated version)",
+     "s": null
+    },
+    {
+     "n": 5,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "222"
+    },
+    {
+     "n": 6,
+     "t": "The CrPC 1973",
+     "s": "320"
+    },
+    {
+     "n": 7,
+     "t": "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)",
+     "s": "499"
+    },
+    {
+     "n": 8,
+     "t": "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)",
+     "s": "500"
+    },
+    {
+     "n": 9,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "484"
+    },
+    {
+     "n": 10,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "320"
+    }
+   ],
+   "score": 2
+  },
+  {
+   "id": 25,
+   "kind": null,
+   "question": "When can a person accused of a non-bailable offence be released on bail?",
+   "gold": [
+    "IND_state_6796|s437",
+    "IND_state_15247|s437",
+    "IND_state_15269|s437",
+    "IND_state_15272|s437",
+    "IND_state_15273|s437",
+    "IND_state_18547|s437",
+    "IND_state_10833|s437",
+    "IND_state_12831|s437",
+    "IND_state_13624|s437",
+    "IND_state_15381|s437",
+    "IND_state_17271|s437",
+    "IND_state_21498|s437",
+    "IND_state_9180|s437",
+    "IND_state_12824|s437",
+    "IND_state_18232|s437",
+    "IND_state_21613|s437"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 3,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 44.5,
+   "nSources": 10,
+   "queries": [
+    "When can a person accused of a non-bailable offence be released on bail?",
+    "accused of non-bailable offence released on bail when conditions",
+    "Bharatiya Nagarik Suraksha Sanhita section 480 bail in case of non-bailable offence",
+    "Code of Criminal Procedure section 437 bail in non-bailable cases"
+   ],
+   "meaning": {
+    "used": 4,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s480",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s482",
+    "The CrPC 1973 s437",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s478",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s2"
+   ],
+   "answer": "A person accused of a non-bailable offence may be released on bail when arrested or detained without warrant by an officer in charge of a police station, or when they appear or are brought before a Court other than the High Court or Court of Session, provided there are no reasonable grounds for believing they have been guilty of an offence punishable with death or imprisonment for life, and they do not fall under specified prior conviction restrictions [1]. (This provision under Section 480 of the Bharatiya Nagarik Suraksha Sanhita, 2023 replaced the old law under Section 437 of the Code of Criminal Procedure, 1973 [3][7].)\n\nConditions and time limits:\n- The person or an indigent person unable to furnish surety may be discharged on executing a bond, or released on bail upon executing a bond with conditions where applicable [1][4].\n- For offences punishable with imprisonment extending to seven years or more or under specific chapters of the Bharatiya Nyaya Sanhita, 2023, the Court must impose mandatory conditions including attending court, not committing similar offences, and not tampering with evidence or threatening persons acquainted with the facts [1].\n- If the trial of a person",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "480"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "482"
+    },
+    {
+     "n": 3,
+     "t": "The CrPC 1973",
+     "s": "437"
+    },
+    {
+     "n": 4,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "478"
+    },
+    {
+     "n": 5,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "2"
+    },
+    {
+     "n": 6,
+     "t": "The Prevention of Money-Laundering Act, 2002",
+     "s": "45"
+    },
+    {
+     "n": 7,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "437"
+    },
+    {
+     "n": 8,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "438"
+    },
+    {
+     "n": 9,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "436"
+    },
+    {
+     "n": 10,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "2"
+    }
+   ],
+   "score": 3
+  }
+ ]
+}

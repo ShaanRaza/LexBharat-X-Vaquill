@@ -1,0 +1,251 @@
+{
+ "label": "rep-merged-r2",
+ "at": "2026-10-31T08:22:26.323Z",
+ "rows": [
+  {
+   "id": 22,
+   "kind": null,
+   "question": "What is the punishment for defamation?",
+   "gold": [
+    "IND_central_20062|s356"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 1,
+   "cited": true,
+   "correct": true,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 38.4,
+   "nSources": 13,
+   "queries": [
+    "What is the punishment for defamation?",
+    "punishment for defamation criminal offence imputation",
+    "Bharatiya Nyaya Sanhita section 356 defamation",
+    "Indian Penal Code section 500 punishment for defamation"
+   ],
+   "meaning": {
+    "used": 4,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Nyaya Sanhita, 2023 s356",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s359",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s531",
+    "The Bharatiya Nyaya Sanhita, 2023 (Draft stage of translated version) s?",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s222"
+   ],
+   "answer": "Whoever defames another shall be punished with simple imprisonment for a term which may extend to two years, or with fine, or with both, or with community service under Section 356 of the Bharatiya Nyaya Sanhita, 2023 (which replaced Section 500 of the Indian Penal Code, 1860). [1]\n\nRelated provisions:\n- Section 356 of the Bharatiya Nyaya Sanhita, 2023 covers defamation, printing or engraving defamatory matter, and the sale of printed or engraved substances containing defamatory matter, each punishable with simple imprisonment for a term extending to two years, or with fine, or with both [1].\n- Section 222 of the Bharatiya Nagarik Suraksha Sanhita, 2023 covers prosecution for defamation upon a complaint made by some person aggrieved by the offence, or by the Public Prosecutor before a Court of Session in respect of public servants for conduct in the discharge of their public functions [5].\n- Section 359 of the Bharatiya Nagarik Suraksha Sanhita, 2023 (which replaced Section 320 of the Code of Criminal Procedure, 1973) specifies that defamation under Section 356(2) may be compounded by the person defamed [2].\n\nSection 356 of the Bharatiya Nyaya Sanhita, 2023 replaces sections 499 [7",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "356"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "359"
+    },
+    {
+     "n": 3,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "531"
+    },
+    {
+     "n": 4,
+     "t": "The Bharatiya Nyaya Sanhita, 2023 (Draft stage of translated version)",
+     "s": null
+    },
+    {
+     "n": 5,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "222"
+    },
+    {
+     "n": 6,
+     "t": "The Bharatiya Nyaya Sanhita, 2023",
+     "s": "351"
+    },
+    {
+     "n": 7,
+     "t": "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)",
+     "s": "499"
+    },
+    {
+     "n": 8,
+     "t": "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)",
+     "s": "500"
+    },
+    {
+     "n": 9,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "320"
+    },
+    {
+     "n": 10,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "484"
+    },
+    {
+     "n": 11,
+     "t": "SUBRAMANIAN SWAMY versus UNION OF INDIA, MINISTRY OF LAW & ORS.",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "KANWAL LAL versus STATE OF PUNJAB",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "JAIDEEP BOSE versus M/S BID AND HAMMER AUCTIONEERS PRIVATE LIMITED",
+     "s": null
+    }
+   ],
+   "score": 3
+  },
+  {
+   "id": 25,
+   "kind": null,
+   "question": "When can a person accused of a non-bailable offence be released on bail?",
+   "gold": [
+    "IND_state_6796|s437",
+    "IND_state_10833|s437",
+    "IND_state_15247|s437",
+    "IND_state_9180|s437",
+    "IND_state_12824|s437",
+    "IND_state_13624|s437",
+    "IND_state_15269|s437",
+    "IND_state_15272|s437",
+    "IND_state_15273|s437",
+    "IND_state_17271|s437",
+    "IND_state_21498|s437",
+    "IND_state_21613|s437",
+    "IND_state_12831|s437",
+    "IND_state_15381|s437",
+    "IND_state_18232|s437",
+    "IND_state_18547|s437"
+   ],
+   "goldFound": true,
+   "oldMention": null,
+   "openedNotFound": false,
+   "dupCites": false,
+   "dupSources": false,
+   "hedgeFirst": false,
+   "mentions": null,
+   "forbidden": null,
+   "retrieved": true,
+   "rank": 3,
+   "cited": true,
+   "correct": false,
+   "notFound": false,
+   "check": "supported",
+   "error": null,
+   "secs": 29.4,
+   "nSources": 13,
+   "queries": [
+    "When can a person accused of a non-bailable offence be released on bail?",
+    "non bailable offence when bail may be granted in case of person accused",
+    "Bharatiya Nagarik Suraksha Sanhita section 480 bail in case of non bailable offence",
+    "Code of Criminal Procedure section 437 when bail may be taken in case of non bailable offence"
+   ],
+   "meaning": {
+    "used": 4,
+    "fellBack": 0,
+    "cause": null,
+    "judgmentsFailed": false,
+    "judgmentsCause": null,
+    "judgmentsRecovered": false
+   },
+   "topSources": [
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s480",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s482",
+    "The CrPC 1973 s437",
+    "The Bharatiya Nagarik Suraksha Sanhita, 2023 s478",
+    "The Prevention of Money-Laundering Act, 2002 s45"
+   ],
+   "answer": "A person accused of a non-bailable offence may be released on bail when arrested or detained without a warrant by a police station officer in charge, or when they appear or are brought before a court other than the High Court or Court of Session, provided there are no reasonable grounds for believing they are guilty of an offence punishable with death or imprisonment for life, and they do not fall under prior conviction restrictions for certain major offences under Section 480 of the Bharatiya Nagarik Suraksha Sanhita, 2023 (which replaced Section 437 of the Code of Criminal Procedure, 1973) [1][3][8].\n\nConditions and time limits:\n- The court may direct the release of a person accused of an offence punishable with death or life imprisonment, or with prior convictions, if that person is a child, a woman, sick, or infirm under Section 480 of the Bharatiya Nagarik Suraksha Sanhita, 2023 [1].\n- The court may direct release for a person with prior convictions if satisfied it is just and proper for any other special reason under Section 480 of the Bharatiya Nagarik Suraksha Sanhita, 2023 [1].\n- The accused must give an undertaking to comply with court directions if bail is granted when t",
+   "sources": [
+    {
+     "n": 1,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "480"
+    },
+    {
+     "n": 2,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "482"
+    },
+    {
+     "n": 3,
+     "t": "The CrPC 1973",
+     "s": "437"
+    },
+    {
+     "n": 4,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "478"
+    },
+    {
+     "n": 5,
+     "t": "The Prevention of Money-Laundering Act, 2002",
+     "s": "45"
+    },
+    {
+     "n": 6,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "83"
+    },
+    {
+     "n": 7,
+     "t": "The Bharatiya Nagarik Suraksha Sanhita, 2023",
+     "s": "47"
+    },
+    {
+     "n": 8,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "437"
+    },
+    {
+     "n": 9,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "438"
+    },
+    {
+     "n": 10,
+     "t": "The Code of Criminal Procedure, 1973",
+     "s": "436"
+    },
+    {
+     "n": 11,
+     "t": "GURCHARAN SINGH & ORS. versus STATE (DELHI ADMINISTRATION)",
+     "s": null
+    },
+    {
+     "n": 12,
+     "t": "BASHIR AND OTHERS versus STATE OF HARYANA",
+     "s": null
+    },
+    {
+     "n": 13,
+     "t": "SATENDER KUMAR ANTIL versus CENTRAL BUREAU OF INVESTIGATION & ANR.",
+     "s": null
+    }
+   ],
+   "score": 2
+  }
+ ]
+}
