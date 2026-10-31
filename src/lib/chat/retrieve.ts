@@ -42,6 +42,7 @@ import { narrowToExact } from "./exact.mjs";
 import { currentLawFirst } from "./currentlaw.mjs";
 import { dedupeCopies } from "@/lib/acts/dedupe.mjs";
 import { officialSourceUrl } from "@/lib/acts/quality";
+import { effectiveStatus } from "../acts/contentsList.mjs";
 import { centralNames, withoutStateCopies } from "./centralOnly.mjs";
 import { statesIn } from "../acts/semantic.mjs";
 import type { Gap } from "./gaps.mjs";
@@ -102,7 +103,7 @@ export async function retrieveSources(question: string, history: { role: string;
     const text = body.get(keyOf(h))?.body.trim();
     if (!text || (await isContentsListOf(h.actId, h.number, text))) continue;   // an Act's table of contents filed as a section is not the law: never cited (real law text, Schedule lists included, never matches)
     sources.push({ n: sources.length + 1, actId: h.actId, sectionKey: h.sectionKey, actTitle: h.actTitle, year: h.year, category: h.category, state: h.state, inForce: h.actStatus === "in_force", sourceUrl: h.sourceUrl,
-      number: h.number, heading: h.heading, status: h.status, text, via: h.via, ...((h as SectionHit & { replacedBy?: string }).replacedBy ? { replacedBy: (h as SectionHit & { replacedBy?: string }).replacedBy } : {}) });
+      number: h.number, heading: h.heading, status: effectiveStatus(h.status, { body: text }), text, via: h.via, ...((h as SectionHit & { replacedBy?: string }).replacedBy ? { replacedBy: (h as SectionHit & { replacedBy?: string }).replacedBy } : {}) });
   }
   sources.push(...(await judgmentSources(retrievalQuery(question, history), sources.length + 1, () => { meaning.judgmentsFailed = true; })));
   return { gaps, sources, searchMode: mode, note, queries, meaning, exactKeys: first, namedKeys: exact };

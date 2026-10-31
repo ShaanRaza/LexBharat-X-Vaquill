@@ -11,6 +11,7 @@
 //   statecopy  an answer says a central Act's section is not held, yet lists a state/UT copy of that Act among its sources
 //   chipalone  a citation chip on a line of its own, or stuck to the end of a "not in our library" sentence
 //   gapboxes   a missing-section answer ("Not found in the Acts" + link) that also shows "Check sources", "Not covered ..." or "Also searched"
+//   junkflag   a section whose text is scan junk (src/lib/acts/scanJunk.mjs) is shown as "No problems detected"
 //   listflag   a section whose text is only a table of contents ("375. Rape. 376. Punishment ...") is shown as "No problems detected"
 //   lookup     (API) asking for a section that a central Act lacks returns a state copy instead of "not in our library"
 //   console    errors in the browser console, failed requests, broken images
@@ -21,6 +22,7 @@ import { spawn } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { OLD_WORDING, RAW_ON_PAGE } from "./rules.mjs";
+import { looksLikeScanJunk } from "../../src/lib/acts/scanJunk.mjs";
 
 const BASE = process.env.SWEEP_BASE ?? "http://localhost:3300", PASSWORD = "throwaway-local-test-9", OUT = ".ui-sweep";
 const VIEWPORTS = [{ id: "desktop-1280", width: 1280, height: 800, mobile: false }, { id: "phone-375", width: 375, height: 812, mobile: true }];
@@ -92,6 +94,7 @@ const pages = (t) => [
     await p.getByText("isn't in our library yet").first().waitFor({ timeout: 15000 }); await p.waitForTimeout(600);
   } },
   { id: "search-missing-section", url: "/search?q=375%20indian%20penal%20code", wait: 4000 },   // Search says it once with one link too (same wording as Ask)
+  { id: "law-scan-junk", url: "/law/IND_state_19134/s130" },   // scan junk: its label must be "Possibly incomplete" (src/lib/acts/scanJunk.mjs)
   { id: "law-contents-list", url: "/law/IND_state_15289/s375" },
   { id: "law-quote-marks", url: "/law/IND_state_15289/s010" },   // the source prints its quotation marks as long and double bars: curly quotes on screen (src/lib/text/clean.mjs fixQuoteMarks)
   { id: "ask-recent-questions", url: "/library", before: async (p) => {
@@ -216,9 +219,15 @@ async function selfTest(browser) {
   const ctx = await browser.newContext({ viewport: { width: 375, height: 700 } }), page = await ctx.newPage();
   await page.route("**/__sweep-selftest", (r) => r.fulfill({ status: 200, contentType: "text/html", body: SELFTEST_HTML }));
   await page.goto(BASE + "/__sweep-selftest"); const got = new Set((await page.evaluate(PAGE_CHECK, { raw, old })).map((f) => f.kind)); await ctx.close();
+  if (!junkLabelled([{ text: PLANTED_JUNK, noProblems: true }]).length) throw new Error("self-test: the sweep did not see planted scan junk shown as \"No problems detected\", so its junkflag check is not working");
   const missing = ["hscroll", "hidden", "raw", "wording", "clickable", "oldlink", "tailhead", "gaplink", "gaprepeat", "statecopy", "chipalone", "gapboxes", "listflag"].filter((k) => !got.has(k));
   if (missing.length) throw new Error("self-test: the sweep did not see a planted " + missing.join(", ") + " defect, so its checks are not working");
 }
+
+// Scan junk labelled "No problems detected": the page's section text is judged with the same rule the app uses (Node side), and a planted example must be seen or the sweep fails before looking at the app.
+const PLANTED_JUNK = "18. (1) Wherc h c landlord obtains dclivery of possession of any premises from ~ h c tenant in pursuance of an ordcr of the court, such landlord shall within thrce months rcstore the tcnant to possession of thc prcmises, and if hc fails to do so the Controllcr shall dircct that thc tenant be rcinstated.";
+const junkLabelled = (sections) => sections.filter((x) => x.noProblems && looksLikeScanJunk(x.text));
+const SECTIONS_ON_PAGE = () => [...document.querySelectorAll("article .font-reading")].map((b) => ({ text: (b.innerText || "").slice(0, 6000), noProblems: /No problems detected/.test((b.closest("article") || b).innerText || "") }));
 
 const isAllowed = (pageId, vp, f) => allow.some((a) => (a.page === "*" || a.page === pageId) && (!a.viewport || a.viewport === vp) && a.kind === f.kind && (!a.match || String(f.detail).toLowerCase().includes(a.match.toLowerCase())));
 
@@ -258,6 +267,7 @@ async function main() {
           const imgs = await page.evaluate(() => [...document.images].filter((i) => i.complete && i.naturalWidth === 0 && i.getBoundingClientRect().width > 0).map((i) => i.currentSrc.slice(0, 80)));
           for (const i of imgs) add("console", "broken image " + i);
           const res2 = await page.evaluate(PAGE_CHECK, { raw, old });
+          for (const x of junkLabelled(await page.evaluate(SECTIONS_ON_PAGE))) add("junkflag", "scan junk shown as \"No problems detected\": " + x.text.replace(/\s+/g, " ").slice(0, 80));
           for (const f of res2) { if (f.kind === "_links") for (const h of f.detail) { if (!links.has(h)) links.set(h, `${pg.id}@${vp.id}`); } else add(f.kind, f.detail); }
           if (pg.forbid) { const txt = await page.evaluate(() => (document.querySelector("main") || document.body).innerText); for (const [re, why] of pg.forbid) { const m = re.exec(txt); if (m) add("raw", why + ": ..." + txt.slice(Math.max(0, m.index - 30), m.index + 40).replace(/\s+/g, " ") + "..."); } }
           for (const l of logs) add("console", l);

@@ -4,6 +4,7 @@
 //   shape      three or more "number. heading." entries that count up one by one and make up most of the text, the first entry carrying the section's own number, none naming an enactment or running long;
 //   confirmed  the entries are the headings of that Act's own sections: the section after it really is titled like the second entry (headingOf(number) is the Act's own section list).
 // Without the Act's headings to confirm against, a block is never called a contents list. A section whose TITLE is the list ("Rape. 376. Punishment ...") is flagged by the title alone.
+import { looksLikeScanJunk } from "./scanJunk.mjs";
 const ENTRY = /(?:^|\s)(\d{1,3}[A-Z]{0,2})\.\s+([A-Z][^.]{1,160}\.)/g;
 const letters = (s) => String(s ?? "").toLowerCase().replace(/[^a-z]/g, "");
 
@@ -52,5 +53,5 @@ export function headingIsContentsList(heading, headingOf) {
 export const STATUS_CONFIRM = { min: 1, share: 0.2 };
 export const isContentsList = ({ body, heading, number } = {}, headingOf) => headingIsContentsList(heading, headingOf) || (looksLikeContentsList(body, number) && confirmedByHeadings(body, headingOf, STATUS_CONFIRM));
 
-/** The status to show: a contents list is never "complete". Anything else keeps the status it has. */
-export const effectiveStatus = (status, section, headingOf) => (status === "complete" && isContentsList(section, headingOf) ? "possibly_incomplete" : status);
+/** The status to show: a contents list, or text that came out of the scan as broken words (scanJunk.mjs), is never "complete". Anything else keeps the status it has. Only the LABEL changes: nothing is hidden or removed. */
+export const effectiveStatus = (status, section, headingOf) => (status === "complete" && (isContentsList(section, headingOf) || looksLikeScanJunk(section?.body)) ? "possibly_incomplete" : status);
