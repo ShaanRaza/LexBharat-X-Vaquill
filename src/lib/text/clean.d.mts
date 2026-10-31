@@ -13,3 +13,5 @@ export function previewText(raw: string | null | undefined, max?: number): strin
 export { amendParts, vocabOf } from "./amend.mjs";
 export function cleanLabel(s: string | null | undefined): string;
 export function stripTrailingHeadings(raw: string | null | undefined): string;
+
+export function joinHeading(label: string, heading: string | null | undefined, sep?: string): string;

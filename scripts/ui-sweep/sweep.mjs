@@ -8,6 +8,9 @@
 //   tailhead   a section's text ends with a heading line (the next chapter's title stuck to it)
 //   gaplink    the page says a section is not in our library but has no "Read ... on India Code" link
 //   gaprepeat  a missing section is said more than once (the sentence, "I couldn't find", a note) or its India Code link is shown more than once
+//   statecopy  an answer says a central Act's section is not held, yet lists a state/UT copy of that Act among its sources
+//   chipalone  a citation chip on a line of its own, or stuck to the end of a "not in our library" sentence
+//   gapboxes   a missing-section answer ("Not found in the Acts" + link) that also shows "Check sources", "Not covered ..." or "Also searched"
 //   listflag   a section whose text is only a table of contents ("375. Rape. 376. Punishment ...") is shown as "No problems detected"
 //   lookup     (API) asking for a section that a central Act lacks returns a state copy instead of "not in our library"
 //   console    errors in the browser console, failed requests, broken images
@@ -172,6 +175,15 @@ const IN_PAGE = String.raw`(args) => {
   // 5b. said once, linked once: the sentence, one link, and no second telling ("I couldn't find ...") on the page
   { const says = (all.match(/in our library yet/g) || []).length, links = [...document.querySelectorAll("a[href]")].filter((a) => /on India Code/i.test(a.textContent)).length, again = /I couldn'?t find|is missing from our source data/.test(all);
     if (says > 1 || links > 1 || (says >= 1 && again)) out.push({ kind: "gaprepeat", detail: "a missing section is said " + says + " time(s), linked " + links + " time(s)" + (again ? ", and followed by a second telling (\"I couldn't find\" / \"missing from our source data\")" : "") }); }
+  // 5c. a missing central Act section is not answered from a state copy; no stray chips; nothing but sentence, link and label
+  { const m = /Section\s+\S+\s+of the ([A-Z][^.]{2,80}?)\s+(?:isn't|is not) in our library yet/.exec(all);
+    if (m) {
+      const act = m[1].replace(/[.*+?^$()|[\]{}\\]/g, "\\$&");
+      for (const li of document.querySelectorAll("article li")) { const t = li.innerText || ""; if (new RegExp(act + "[^\\n]*\u00b7\\s*[a-z]", "i").test(t)) out.push({ kind: "statecopy", detail: "says " + m[1] + " is not held, but lists a state copy: " + t.replace(/\s+/g, " ").slice(0, 80) }); }
+      for (const p of document.querySelectorAll("article p")) { const t = (p.innerText || "").trim(); if (/in our library yet\.?\s*\d{1,3}$/.test(t)) out.push({ kind: "chipalone", detail: "a chip is stuck to the sentence: " + t.slice(-50) }); }
+      if (/Not found in the Acts/.test(all)) for (const [re, what] of [[/Check sources/, "the red Check sources label"], [/Not covered by the sections found/, "the Not covered box"], [/Not backed by the sources/, "the Not backed box"], [/Also searched/, "the Also searched list"]]) if (re.test(all)) out.push({ kind: "gapboxes", detail: "a missing-section answer also shows " + what });
+    } }
+  for (const p of document.querySelectorAll("article p")) { const t = (p.innerText || "").trim(); if (/^\d{1,3}(\s+\d{1,3})*$/.test(t) && p.querySelector("button, a")) out.push({ kind: "chipalone", detail: "a citation chip alone on a line: " + t }); }
   // 6. text that is only a table of contents must not be labelled "No problems detected"
   const looksList = (t) => { const m = [...t.matchAll(/(?:^|\s)(\d{1,3}[A-Z]{0,2})\.\s+[A-Z][^.]{1,160}\./g)]; if (m.length < 3 || m.reduce((n, x) => n + x[0].length, 0) / t.length <= 0.6) return false; const n = m.map((x) => parseInt(x[1], 10)); let g = 0; for (let i = 1; i < n.length; i++) if (n[i] - n[i - 1] === 1 || n[i] === n[i - 1]) g++; return g / (n.length - 1) >= 0.7; };
   for (const body of document.querySelectorAll("article .font-reading")) { const t = (body.innerText || "").replace(/\s+/g, " ").trim(); if (looksList(t) && /No problems detected/.test((body.closest("article") || body).innerText || "")) out.push({ kind: "listflag", detail: "a table of contents is shown as a section's text with \"No problems detected\": " + t.slice(0, 70) }); }
@@ -192,13 +204,13 @@ main{padding:70px 16px 0} .wide{width:2000px;height:10px;background:red} aside{p
 <h1>Planted defects</h1><div class="wide">wide</div>
 <p>==> picture 3 omitted <==  and \u2015Man\u2016 and 4[some amended words] and &amp; and \\n and undefined</p><p>Browse Laws & Judgments in the Workspace</p>
 <a href="https://www.indiacode.nic.in/handle/123/456">old address</a><article><div class="font-reading"><p>The section text.</p><h3>OF FRAUDULENT DEEDS AND DISPOSITIONS OF PROPERTY</h3></div></article>
-<p>Section 375 of the Indian Penal Code isn't in our library yet. I couldn't find other sections in the Acts I searched.</p><article><span>No problems detected</span><div class="font-reading"><p>375. Rape. 376. Punishment for rape. 376A. Punishment for causing death or resulting in persistent vegetative state of victim. 376B. Sexual intercourse by husband upon his wife during separation.</p></div></article><span class="pt">looks clickable</span> <a href="#">goes nowhere</a> <a href="/nope-sweep-selftest">dead</a>
+<p>Section 375 of the Indian Penal Code isn't in our library yet. I couldn't find other sections in the Acts I searched.</p><article><div><p>Section 34 of the Indian Penal Code isn't in our library yet. <button>1</button></p><p><button>1</button></p></div><ul><li>The Indian Penal Code \u00b7 madhya pradesh<br>Section 34</li></ul><span>Not found in the Acts</span><span>Check sources</span></article><article><span>No problems detected</span><div class="font-reading"><p>375. Rape. 376. Punishment for rape. 376A. Punishment for causing death or resulting in persistent vegetative state of victim. 376B. Sexual intercourse by husband upon his wife during separation.</p></div></article><span class="pt">looks clickable</span> <a href="#">goes nowhere</a> <a href="/nope-sweep-selftest">dead</a>
 <aside>tall sticky column</aside><div style="height:1200px"></div><p class="last">last words under the bar</p></main><nav class="bar">tabs</nav></body></html>`;
 async function selfTest(browser) {
   const ctx = await browser.newContext({ viewport: { width: 375, height: 700 } }), page = await ctx.newPage();
   await page.route("**/__sweep-selftest", (r) => r.fulfill({ status: 200, contentType: "text/html", body: SELFTEST_HTML }));
   await page.goto(BASE + "/__sweep-selftest"); const got = new Set((await page.evaluate(PAGE_CHECK, { raw, old })).map((f) => f.kind)); await ctx.close();
-  const missing = ["hscroll", "hidden", "raw", "wording", "clickable", "oldlink", "tailhead", "gaplink", "gaprepeat", "listflag"].filter((k) => !got.has(k));
+  const missing = ["hscroll", "hidden", "raw", "wording", "clickable", "oldlink", "tailhead", "gaplink", "gaprepeat", "statecopy", "chipalone", "gapboxes", "listflag"].filter((k) => !got.has(k));
   if (missing.length) throw new Error("self-test: the sweep did not see a planted " + missing.join(", ") + " defect, so its checks are not working");
 }
 

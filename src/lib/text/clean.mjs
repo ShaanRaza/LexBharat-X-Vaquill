@@ -21,7 +21,9 @@ export function stripMarkdown(s) {
   return s
     .replace(/\(\s*_([A-Za-z0-9ivxIVX]+)_\s*\)/g, "($1)")
     .replace(/\*\*/g, "")
+    .replace(/^[ \t]*`{3,}[^\n]*$/gm, "")                                   // an empty code fence the scan produced ("```" lines around a list)
     .replace(/`([^`\n]*)`/g, "$1")
+    .replace(/(?<=[A-Za-z])`(?=[a-z])/g, "\u2019").replace(/`/g, "")         // a backtick inside a word is the scan's apostrophe; any other lone backtick is a scanning mark and is not shown
     .replace(/^[ \t]*>[ \t]?/gm, "")
     .replace(/(?<![A-Za-z0-9])_([^_\n]+)_(?![A-Za-z0-9])/g, "$1")
     .replace(/(?<=[A-Za-z0-9])_(?=[\s,.;:)\]]|$)/gm, "").replace(/(^|[\s(\[])_(?=[A-Za-z0-9])/gm, "$1")   // one half of an emphasis pair left behind when a snippet or the source cut the text in the middle
@@ -148,4 +150,6 @@ export function previewText(raw, max = 140) {
 }
 
 /** A heading, chapter or preview taken from the data, ready to print: cleaned, on one line, "" when there is nothing. */
+/** "Section 34" + " — " + heading, but only when the cleaned heading has words: a heading that cleans to nothing (a lone scanning mark) leaves no dangling dash. */
+export const joinHeading = (label, heading, sep = " \u2014 ") => { const h = cleanLabel(heading); return h ? `${label}${sep}${h}` : label; };
 export const cleanLabel = (s) => (s ? cleanPlain(String(s)).replace(/\s+/g, " ").trim() : "");

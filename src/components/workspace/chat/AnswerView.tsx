@@ -4,10 +4,10 @@ import { SCAN_LABEL } from "@/lib/vault/scan.mjs";
 import Link from "next/link";
 import { Badge, CitationChip, Notice, RepealedNote } from "@/components/kit";
 import CitedText, { hrefOf, sourceLabel } from "@/components/workspace/CitedText";
-import { citedNumbers, displayNumbers } from "@/lib/chat/citations.mjs";
+import { citedNumbers, displayNumbers, tidyChips } from "@/lib/chat/citations.mjs";
 import { toBlocks } from "@/lib/chat/format.mjs";
 import type { Citation, CheckResult } from "@/lib/chat/store";
-import { cleanLabel } from "@/lib/text/clean.mjs";
+import { cleanLabel, joinHeading } from "@/lib/text/clean.mjs";
 
 // One assistant answer: text with numbered citation chips and linked statute names, the answer-check label, and the list of sources used. Presentation only; the logic is in src/lib/chat.
 // The four honest labels (src/lib/chat/prompt.mjs CHECK_LABELS): complete and backed / some claims unbacked / incomplete or only partly covered / nothing found.
@@ -46,7 +46,7 @@ function SourceRow({ c, onPick, activeN, shown }: { c: Citation; onPick?: (n: nu
         <Link href={hrefOf(c)} className="font-medium text-primary hover:underline">{c.actTitle}</Link>
         <span className="text-muted">{c.state ? ` · ${c.state.replace(/-/g, " ")}` : ""}</span> <RepealedNote actId={c.actId} />
         <p className="text-secondary">
-          {c.number ? `${unitWord(c.number, { title: c.actTitle, category: c.category })}${c.heading ? ` — ${cleanLabel(c.heading)}` : ""}` : <>Unnumbered text{c.preview ? <span className="text-muted"> — {cleanLabel(c.preview)}</span> : null}</>}
+          {c.number ? joinHeading(unitWord(c.number, { title: c.actTitle, category: c.category }), c.heading) : <>Unnumbered text{c.preview ? <span className="text-muted"> — {cleanLabel(c.preview)}</span> : null}</>}
           {c.status === "possibly_incomplete" && <Badge tone="warn" className="ml-2" title="Our copy of this section may be missing text">Possibly incomplete</Badge>}
         </p>
       </div>
@@ -55,6 +55,8 @@ function SourceRow({ c, onPick, activeN, shown }: { c: Citation; onPick?: (n: nu
 }
 
 export default function AnswerView({ text, sources, check, pending, queries, note, onPick, activeN }: { text: string; sources: Citation[]; check?: CheckResult | null; pending?: boolean; queries?: string[]; note?: string; onPick?: (n: number) => void; activeN?: number }) {
+  const bare = !!check?.absent?.length && check.label === "not_found";   // a section we do not hold, and nothing else to say: one sentence, one link, one label (no other boxes)
+  text = tidyChips(text);   // a chip on a line of its own belongs to the sentence before it (also for answers saved before this was fixed)
   const blocks = toBlocks(text), nums = new Set(citedNumbers(text)), shown = displayNumbers(text, sources), byShown = (a: Citation, b: Citation) => (shown.get(a.n) ?? 0) - (shown.get(b.n) ?? 0);   // the numbers printed run 1, 2, 3... in the order the answer uses them
   const cited = sources.filter((x) => nums.has(x.n) && x.kind !== "doc").sort(byShown), citedDocs = sources.filter((x) => nums.has(x.n) && x.kind === "doc").sort(byShown), others = sources.filter((x) => !nums.has(x.n)).sort(byShown);
   return (
@@ -76,12 +78,12 @@ export default function AnswerView({ text, sources, check, pending, queries, not
             <Badge tone={CHECK[check.label].tone} title={CHECK[check.label].explain}>{CHECK[check.label].text}</Badge>
             {!(check.label === "not_found" && check.absent?.length) && <span className="text-ui-sm text-muted">{check.unavailable ? "The automatic check could not run." : CHECK[check.label].explain}</span>}   {/* a missing section is already said once, above: the label stays, its explanation would say it a third time */}
           </p>
-          {check.unsupported.length > 0 && (
+          {!bare && check.unsupported.length > 0 && (
             <Notice tone="warn" role="note" compact title="Not backed by the sources">
               <ul className="list-disc space-y-0.5 pl-5">{check.unsupported.map((u, i) => <li key={i}>{u}</li>)}</ul>
             </Notice>
           )}
-          {(check.missing?.length ?? 0) > 0 && (
+          {!bare && (check.missing?.length ?? 0) > 0 && (
             <Notice tone="warn" role="note" compact title="Not covered by the sections found">
               <ul className="list-disc space-y-0.5 pl-5">{check.missing!.map((u, i) => <li key={i}>{u}</li>)}</ul>
             </Notice>

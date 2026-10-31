@@ -7,7 +7,7 @@ import { Badge, Highlight, Notice, Panel, RepealedNote, Toggle } from "@/compone
 import { departmentLabel } from "@/lib/acts/departments.mjs";
 import { STATUS_INFO, INCOMPLETE_NOTICE, officialSourceUrl } from "@/lib/acts/quality";
 import { gapSentence } from "@/lib/chat/gaps.mjs";
-import { cleanLabel } from "@/lib/text/clean.mjs";
+import { cleanLabel, joinHeading } from "@/lib/text/clean.mjs";
 
 // Results of the Acts-tab search box over Central and State Acts (GET /api/acts/search): by meaning by default, exact words on request. Presentation and fetching only; the search itself lives in
 // src/lib/acts/searchStore.ts. Colours, sizes and radii come from the tokens through Tailwind names and the shared kit.
@@ -56,7 +56,7 @@ export default function SectionSearchResults({ q, scope: fixedScope, exact: exac
             {data.results.map((h) => (
               <Panel as="li" key={`${h.actId}-${h.sectionKey}`} className="px-card py-4">
                 <Link href={`/law/${h.actId}/${encodeURIComponent(h.sectionKey)}`} className="text-ui-body font-medium text-primary hover:underline">
-                  {h.number ? unitWord(h.number, { title: h.actTitle, category: h.category, department: h.department, actId: h.actId }) : "Text block"}{h.heading ? ` — ${cleanLabel(h.heading)}` : ""}
+                  {joinHeading(h.number ? unitWord(h.number, { title: h.actTitle, category: h.category, department: h.department, actId: h.actId }) : "Text block", h.heading)}
                 </Link>
                 <p className="mt-0.5 text-ui-sm text-secondary">{h.actTitle}{h.chapter ? ` · ${cleanLabel(h.chapter)}` : ""} <RepealedNote actId={h.actId} /></p>
                 {h.snippet && <p className="mt-2 text-ui-base leading-relaxed text-foreground"><Highlight snippet={h.snippet} /></p>}

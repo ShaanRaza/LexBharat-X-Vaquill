@@ -155,3 +155,13 @@ test("the prompt no longer tells the model that judgments do not exist when it i
   }
   assert.ok(withJ.includes("SUPREME COURT JUDGMENT: short excerpts") && !base.includes("short excerpts of reported judgments"));   // the extra rules are added only when an excerpt is among the sources
 });
+
+import { tidyChips } from "./citations.mjs";
+test("tidyChips: a chip alone on a line joins the sentence before it; repeats collapse; a leading lone chip is dropped", () => {
+  assert.equal(tidyChips("Section 34 deals with common intention [1].\n\n[1]\n\nMore text."), "Section 34 deals with common intention [1].\n\nMore text.");
+  assert.equal(tidyChips("It applies to all.\n[2]"), "It applies to all. [2]");
+  assert.equal(tidyChips("Text [1] [1] again [2]."), "Text [1] again [2].");
+  assert.equal(tidyChips("[1]\nFirst line."), "First line.");
+  assert.equal(tidyChips("Only chips: [1] [2]\n[2] [3]"), "Only chips: [1] [2] [3]");
+  assert.equal(tidyChips("No chips here."), "No chips here.");
+});

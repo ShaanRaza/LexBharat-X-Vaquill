@@ -11,6 +11,7 @@ import { evaluateLimits, readLimits } from "@/lib/chat/limits.mjs";
 import { alignCitations, citedNumbers, ensureCitations, sanitizeCitations } from "@/lib/chat/citations.mjs";
 import { buildChatPrompt, buildCheckPrompt, detectNotFound, parseCheck } from "@/lib/chat/prompt.mjs";
 import { buildRewritePrompt, parseRewrite } from "@/lib/chat/rewrite.mjs";
+import { tidyChips } from "@/lib/chat/citations.mjs";
 import { gapLead, gapNotice, gapKey, uniqueGaps, dropGapRepeats, unretrievedMentions } from "@/lib/chat/gaps.mjs";
 import { extractLookups } from "@/lib/chat/lookups.mjs";
 import { logGap } from "@/lib/insights/server";
@@ -137,13 +138,23 @@ export async function POST(req: Request) {
           }
         } catch (e) { if (answer.trim() === lead.trim()) throw e; cutOff = true; }
         if (answer.trim() === lead.trim()) throw new AiError("unavailable", "The model returned no answer.");
-        const aligned = alignCitations(ensureCitations(answer.trim(), ret.sources), ret.sources);
+        // The opening sentence is ours (gaps.mjs), not the model's: citation shaping touches only what the model wrote, so no chip is ever attached to the opening sentence ("Section 34 of the Indian Penal Code isn't in our library yet. [1]")
+        const modelPart = (lead ? answer.slice(answer.indexOf(lead) + lead.length) : answer).trim();
+        const aligned = alignCitations(ensureCitations(modelPart, ret.sources), ret.sources);
         const clean = sanitizeCitations(tune.citationCheck ? verifyCitations(aligned, ret.sources).text : aligned, ret.sources.length);
         // shaping that needs no model: the answer first, "Related provisions" only if they apply (switch currentLaw), a citation shown once per sentence (switch citationCheck)
         if (tune.currentLaw) clean.text = relatedOnlyIfApplicable(answerFirst(clean.text), ret.sources.map((x) => ({ n: x.n, number: x.number, heading: x.heading, text: x.text })), expandQuery(message, synonyms.rules).text);
         if (tune.citationCheck) clean.text = dedupeCitations(clean.text);
-        clean.text = dropGapRepeats(fixIndiaCodeLinks(clean.text), ret.gaps);   // the opening sentence says a section is not held, once: the model must not say it again   // the model may write the old India Code address (India Code's old site), which no longer opens
-        if (clean.text !== answer) send({ type: "replace", text: clean.text });
+        clean.text = tidyChips(clean.text);   // a chip on a line of its own belongs to the sentence before it
+        clean.text = dropGapRepeats(lead ? `${lead}\n\n${fixIndiaCodeLinks(clean.text)}` : fixIndiaCodeLinks(clean.text), ret.gaps).trim();   // the opening sentence says a section is not held, once: the model must not say it again   // the model may write the old India Code address (India Code's old site), which no longer opens
+        const onlyLead = !!lead && clean.text === lead.trim();   // nothing but "this section isn't in our library": one sentence, one link, one label
+        if (clean.text !== answer.trim()) send({ type: "replace", text: clean.text });
+        if (onlyLead && !cutOff) {
+          send({ type: "sources", sources: [] });   // the sections found along the way are not part of this answer
+          const check: CheckResult = { label: "not_found", unsupported: [], absent };
+          logNotFound(); send({ type: "check", ...check });
+          finish(await addMessage(chatId, { role: "assistant", content: clean.text, citations: [], check, model })); return;
+        }
         if (cutOff) {
           const check: CheckResult = { label: "check", unsupported: [], cutOff: true, ...(absent.length ? { absent } : {}) };
           send({ type: "cutoff" });

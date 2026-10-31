@@ -42,6 +42,8 @@ import { narrowToExact } from "./exact.mjs";
 import { currentLawFirst } from "./currentlaw.mjs";
 import { dedupeCopies } from "@/lib/acts/dedupe.mjs";
 import { officialSourceUrl } from "@/lib/acts/quality";
+import { centralNames, withoutStateCopies } from "./centralOnly.mjs";
+import { statesIn } from "../acts/semantic.mjs";
 import type { Gap } from "./gaps.mjs";
 import replaced from "@/config/replaced-laws.json";
 
@@ -49,6 +51,7 @@ export async function retrieveSources(question: string, history: { role: string;
   const hits = new Map<string, SectionHit>(), first: string[] = [], lists: string[][] = [], gaps: LibraryGap[] = [];
   let mode: Retrieval["searchMode"] = "none", note = "";
   const meaning: MeaningUse = { used: 0, fellBack: 0, cause: null, judgmentsFailed: false };
+  const centralActs: { category?: string | null; actTitle?: string | null }[] = [];   // the central Acts the question names: a state or UT copy of the same name is never cited in their place (centralOnly.mjs)
   const usable = (h: SectionHit) => h.status !== "garbled";
   // exact lookups: sections named in the question (2 hits each), then sections the rewritten queries name, such as "Indian Contract Act section 11" (1 hit each; the model's guess is only a lead:
   // what gets cited is the section text that comes back)
@@ -57,6 +60,7 @@ export async function retrieveSources(question: string, history: { role: string;
   const seenLookup = new Set<string>(), exact: string[] = [];   // exact: units the question itself names ("Order 7 Rule 11", "section 138 of the NI Act")
   for (const [l, take] of wanted.filter(([l]) => !seenLookup.has(l.toLowerCase()) && !!seenLookup.add(l.toLowerCase())).slice(0, Math.max(5, forced.length))) {
     const r = await searchSections(l, 1, 3, { surface: "ask" });
+    if (r.available && r.mode === "lookup" && named.has(l.toLowerCase())) { const c = r.missing ? (r.missing.category === "central" ? r.missing.actTitle : null) : (r.results[0]?.category === "central" ? r.results[0].actTitle : null); if (c) centralActs.push({ category: "central", actTitle: c }); }
     if (r.available && r.mode === "lookup" && named.has(l.toLowerCase())) {   // a section the QUESTION names (not one the rewrite guessed): not held, or held only as scrambled text -> say so
       if (r.missing) gaps.push({ kind: r.missing.beyond ? "nosuch" : "missing", ...(r.missing.beyond ? { max: r.missing.beyond } : {}), number: r.missing.number, actTitle: r.missing.actTitle, actId: r.missing.actId, url: officialSourceUrl(r.missing.sourceUrl, r.missing.actTitle) });
       else if (r.results.length && r.results.every((h) => !usable(h))) gaps.push({ kind: "unreliable", number: r.results[0].number ?? l, actTitle: r.results[0].actTitle, actId: r.results[0].actId, url: officialSourceUrl(r.results[0].sourceUrl, r.results[0].actTitle) });
@@ -85,6 +89,8 @@ export async function retrieveSources(question: string, history: { role: string;
   let picked = merge(k).map((key) => hits.get(key)!).filter(Boolean);
   // The question names an exact provision: that unit goes first and sources from unrelated Acts are dropped (a few neighbours from the same Act stay), so the answer check is not confused by noise.
   // (sections the rewrite named, such as the new-law section for an old one, stay with the exact ones)
+  // When the question names a central Act, a state or UT copy of the same name (the Madhya Pradesh "Indian Penal Code") is a different text: it is not cited as that Act, and nothing from it is shown, unless the question names the state.
+  picked = withoutStateCopies(picked, centralNames(centralActs), statesIn(question).size > 0);
   picked = dedupeCopies(picked);   // the same section filed under two Act records is one source, never two
   if (exact.length) picked = narrowToExact(picked, [...exact, ...first.filter((k) => !exact.includes(k))], keyOf);
   // current law first (switch): a repealed section and its replacement together -> the replacement leads and the old one is marked replaced

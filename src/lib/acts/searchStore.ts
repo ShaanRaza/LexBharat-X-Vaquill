@@ -46,7 +46,7 @@ export type SearchOutcome =
       /** How the query was searched: used=true for search by meaning; otherwise why keyword search ran instead (exact_requested, quoted_phrase, hindi, semantic_unavailable, semantic_error) and, for the last two, the cause (src/lib/acts/meaning.mjs). */
       semantic?: SemanticInfo;
       /** Set when the asked-for section number is confidently missing from our data (gaps.mjs): the UI shows the notice and the India Code link. */
-      missing?: { actTitle: string; actId: string; number: string; sourceUrl: string | null; /** the number is above the Act's last section: there is no such section (the highest number it has) */ beyond?: number | null } };
+      missing?: { actTitle: string; actId: string; number: string; sourceUrl: string | null; /** "central" when the Act asked for is a central Act (a state copy of the same name is then never used in its place) */ category?: string; /** the number is above the Act's last section: there is no such section (the highest number it has) */ beyond?: number | null } };
 
 /** First readable words of a section for a lookup result: skips markdown headings and all-capitals heading lines that lead some sections. */
 /** A snippet is shown to readers: the shared display layer cleans it (the highlight marks are private-use characters and pass through). */
@@ -76,12 +76,12 @@ async function lookupHits(q: string, page: number, pageSize: number, filters: Se
   if (!rows.length) {
     const num = /^\d{1,4}$/.test(lk.number) ? Number(lk.number) : null;
     if (num === null) return null;
-    const gone = await query<{ actId: string; actTitle: string; sourceUrl: string | null }>(
-      `SELECT a.act_id AS "actId", a.title AS "actTitle", a.source_url AS "sourceUrl" FROM acts a JOIN act_missing_sections m ON m.act_id = a.act_id WHERE ${where}${only} AND m.number = $${params.length + 1}
+    const gone = await query<{ actId: string; actTitle: string; sourceUrl: string | null; category: string }>(
+      `SELECT a.act_id AS "actId", a.title AS "actTitle", a.source_url AS "sourceUrl", a.category FROM acts a JOIN act_missing_sections m ON m.act_id = a.act_id WHERE ${where}${only} AND m.number = $${params.length + 1}
        ORDER BY (a.category = 'central') DESC, (a.act_status = 'in_force') DESC, length(a.title) LIMIT 1`, [...params, num]).catch(() => []);
     // not recorded as missing: still, an Act we hold whose numbers do not include this one is "not in our library", never a section to answer from memory
-    const held = gone.length ? gone : await query<{ actId: string; actTitle: string; sourceUrl: string | null }>(
-      `SELECT a.act_id AS "actId", a.title AS "actTitle", a.source_url AS "sourceUrl" FROM acts a WHERE ${where}${only} AND EXISTS (SELECT 1 FROM act_sections_v s WHERE s.act_id = a.act_id AND s.number ~ '^[0-9]')
+    const held = gone.length ? gone : await query<{ actId: string; actTitle: string; sourceUrl: string | null; category: string }>(
+      `SELECT a.act_id AS "actId", a.title AS "actTitle", a.source_url AS "sourceUrl", a.category FROM acts a WHERE ${where}${only} AND EXISTS (SELECT 1 FROM act_sections_v s WHERE s.act_id = a.act_id AND s.number ~ '^[0-9]')
        ORDER BY (a.category = 'central') DESC, (a.act_status = 'in_force') DESC, length(a.title) LIMIT 1`, params).catch(() => []);
     if (!held.length) return null;
     // a number above the Act's last section is not "missing": there is no such section. The last section is the reference count for well-known Acts, else the highest number we hold (only when the number is far above it)
