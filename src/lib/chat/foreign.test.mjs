@@ -66,3 +66,8 @@ test("class: a foreign-law answer is 'not found' even when its related-provision
   assert.equal(detectNotFound(out), true);
   assert.equal(detectNotFound("I couldn't find the exact section, but section 5 says the penalty is two years [1]. " + "word ".repeat(80)), false);   // an ordinary long cited answer is still the checker's job
 });
+test("class: a foreign-law answer is never touched by the held-section 'not found' claim remover (it would delete the required first sentence)", () => {
+  const r = fs.readFileSync("src/app/api/chat/route.ts", "utf8");
+  assert.match(r, /tidyChips\(foreign \? clean\.text : dropNotFoundClaims\(/);
+  assert.ok(r.indexOf("enforceForeign(clean.text, foreign") < r.indexOf("dropGapRepeats("));
+});
