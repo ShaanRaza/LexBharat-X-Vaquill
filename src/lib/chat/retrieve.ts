@@ -72,8 +72,8 @@ export async function retrieveSources(question: string, history: { role: string;
   for (const [l, take] of wanted.filter(([l]) => !seenLookup.has(l.toLowerCase()) && !!seenLookup.add(l.toLowerCase())).slice(0, Math.max(5, forced.length))) {
     const r = await searchSections(l, 1, 3, { surface: "ask" });
     if (r.available && r.mode === "lookup" && named.has(l.toLowerCase())) {   // a section the QUESTION names (not one the rewrite guessed): not held, or held only as scrambled text -> say so
-      if (r.missing) { namedMissing.push(l); gaps.push({ kind: r.missing.beyond ? "nosuch" : "missing", ...(r.missing.beyond ? { max: r.missing.beyond } : {}), number: r.missing.number, actTitle: r.missing.actTitle, actId: r.missing.actId, url: officialSourceUrl(r.missing.sourceUrl) }); }
-      else if (r.results.length && r.results.every((h) => !usable(h))) { namedMissing.push(l); gaps.push({ kind: "unreliable", number: r.results[0].number ?? l, actTitle: r.results[0].actTitle, actId: r.results[0].actId, url: officialSourceUrl(r.results[0].sourceUrl) }); }
+      if (r.missing) { namedMissing.push(l); gaps.push({ kind: r.missing.beyond ? "nosuch" : "missing", ...(r.missing.beyond ? { max: r.missing.beyond } : {}), number: r.missing.number, actTitle: r.missing.actTitle, actId: r.missing.actId, url: officialSourceUrl(r.missing.sourceUrl, r.missing.actTitle) }); }
+      else if (r.results.length && r.results.every((h) => !usable(h))) { namedMissing.push(l); gaps.push({ kind: "unreliable", number: r.results[0].number ?? l, actTitle: r.results[0].actTitle, actId: r.results[0].actId, url: officialSourceUrl(r.results[0].sourceUrl, r.results[0].actTitle) }); }
     }
     if (r.available && r.mode === "lookup") { mode = "lookup"; for (const h of r.results.filter(usable).slice(0, take)) { hits.set(keyOf(h), h); if (!first.includes(keyOf(h))) first.push(keyOf(h)); if (named.has(l.toLowerCase()) && !exact.includes(keyOf(h))) exact.push(keyOf(h)); } }
   }

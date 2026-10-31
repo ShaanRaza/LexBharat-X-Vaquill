@@ -4,6 +4,8 @@
 //   raw        source junk or programming leftovers in the visible text (the display layer's residue list, scripts/ui-sweep/rules.mjs)
 //   wording    wording from the old design
 //   clickable  something that looks clickable but is not (pointer cursor on plain text), or a link that goes nowhere / to a page that errors
+//   oldlink    a link to the old India Code address (indiacode.nic.in), which no longer opens
+//   tailhead   a section's text ends with a heading line (the next chapter's title stuck to it)
 //   console    errors in the browser console, failed requests, broken images
 // Starts its own server (scripts/ui-sweep/serve.sh, port 3300, no AI keys, nothing written anywhere) unless one is already up. Ask is answered from a canned stream, so no model quota is used.
 // Exit code 1 if anything is found that is not listed in scripts/ui-sweep/allow.json (each entry needs a reason). Screenshots: .ui-sweep/<viewport>/<page>.png, report: .ui-sweep/report.json.
@@ -76,6 +78,9 @@ const pages = (t) => [
   { id: "search-judgments-fallback", url: "/search?q=right%20to%20privacy&tab=judgments", before: asFallback("**/api/judgments/search-text*", (u) => u.searchParams.set("mode", "words")), prep: seesNotice },
   { id: "search-documents", url: "/search?tab=documents" },
   { id: "library-overview", url: "/library" },
+  { id: "old-to-new", url: "/library/old-to-new" },
+  { id: "old-to-new-full-table", url: "/library/old-to-new", prep: async (p) => { await p.click("button[aria-expanded]"); await p.waitForSelector("button[aria-expanded=true]"); await p.waitForTimeout(400); } },
+  { id: "law-section-not-found", url: "/law/IND_central_20062/s9999" },
   { id: "library-acts", url: "/library?tab=acts" },
   { id: "library-constitution", url: "/library?tab=constitution" },
   { id: "library-regulators", url: "/library?tab=regulators" },
@@ -141,6 +146,8 @@ const IN_PAGE = String.raw`(args) => {
   for (const el of document.querySelectorAll("body *")) { if (!vis(el) || bad >= 5) continue; const cs = getComputedStyle(el); if (cs.cursor !== "pointer" || isCtl(el)) continue; if (el.querySelector("a[href], button, [role=button], [role=option]")) continue; if (el.closest("svg")) continue; if (cs.pointerEvents === "none") continue; bad++; out.push({ kind: "clickable", detail: "pointer cursor but not a control: " + label(el) }); }
   for (const a of document.querySelectorAll("a")) { const h = a.getAttribute("href"); if (vis(a) && (h === null || h === "" || h === "#")) out.push({ kind: "clickable", detail: "link that goes nowhere (href=" + JSON.stringify(h) + "): " + label(a) }); }
   for (const b of document.querySelectorAll("button:not([disabled])")) { if (vis(b) && !b.textContent.trim() && !b.getAttribute("aria-label") && !b.getAttribute("title")) out.push({ kind: "clickable", detail: "button with no name: " + label(b) }); }
+  for (const a of document.querySelectorAll("a[href]")) { if (/indiacode\.nic\.in/i.test(a.href)) out.push({ kind: "oldlink", detail: "link to the old India Code address: " + a.href.slice(0, 120) }); }
+  for (const body of document.querySelectorAll("article .font-reading")) { const last = [...body.children].filter((c) => (c.innerText || "").trim()).pop(); if (!last) continue; const t = (last.innerText || "").trim(), letters = t.replace(/[^A-Za-z]/g, ""); if (last.tagName === "H3" || (letters.length >= 6 && letters === letters.toUpperCase() && t.split(/\s+/).length >= 2 && !/[.;:,]$/.test(t) && !/^[(\d]/.test(t))) out.push({ kind: "tailhead", detail: "section text ends with a heading line: \"" + t.slice(0, 80) + "\"" }); }
   out.push({ kind: "_links", detail: [...new Set([...document.querySelectorAll("a[href]")].map((a) => a.getAttribute("href")).filter((h) => h && h.startsWith("/") && !h.startsWith("//")))] });
   return out;
 }`;
@@ -157,13 +164,13 @@ main{padding:70px 16px 0} .wide{width:2000px;height:10px;background:red} aside{p
 .pt{cursor:pointer} p.last{margin:0 0 -30px}</style></head><body><header>bar</header><main>
 <h1>Planted defects</h1><div class="wide">wide</div>
 <p>==> picture 3 omitted <==  and 4[some amended words] and &amp; and \\n and undefined</p><p>Browse Laws & Judgments in the Workspace</p>
-<span class="pt">looks clickable</span> <a href="#">goes nowhere</a> <a href="/nope-sweep-selftest">dead</a>
+<a href="https://www.indiacode.nic.in/handle/123/456">old address</a><article><div class="font-reading"><p>The section text.</p><h3>OF FRAUDULENT DEEDS AND DISPOSITIONS OF PROPERTY</h3></div></article><span class="pt">looks clickable</span> <a href="#">goes nowhere</a> <a href="/nope-sweep-selftest">dead</a>
 <aside>tall sticky column</aside><div style="height:1200px"></div><p class="last">last words under the bar</p></main><nav class="bar">tabs</nav></body></html>`;
 async function selfTest(browser) {
   const ctx = await browser.newContext({ viewport: { width: 375, height: 700 } }), page = await ctx.newPage();
   await page.route("**/__sweep-selftest", (r) => r.fulfill({ status: 200, contentType: "text/html", body: SELFTEST_HTML }));
   await page.goto(BASE + "/__sweep-selftest"); const got = new Set((await page.evaluate(PAGE_CHECK, { raw, old })).map((f) => f.kind)); await ctx.close();
-  const missing = ["hscroll", "hidden", "raw", "wording", "clickable"].filter((k) => !got.has(k));
+  const missing = ["hscroll", "hidden", "raw", "wording", "clickable", "oldlink", "tailhead"].filter((k) => !got.has(k));
   if (missing.length) throw new Error("self-test: the sweep did not see a planted " + missing.join(", ") + " defect, so its checks are not working");
 }
 

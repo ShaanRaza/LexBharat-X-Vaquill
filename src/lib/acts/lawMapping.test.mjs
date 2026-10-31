@@ -3,7 +3,8 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import data from "../../config/law-mapping.json" with { type: "json" };
 import repealed from "../../config/repealed-acts.json" with { type: "json" };
-import { lookup, presentation, rowLinks, rowsFor, UNVERIFIED_LABEL, PAIRS } from "./lawMapping.mjs";
+import common from "../../config/old-to-new-common.json" with { type: "json" };
+import { lookup, presentation, rowLinks, rowsFor, UNVERIFIED_LABEL, PAIRS, isChecked, checkedCount, commonGroups, displayTitle } from "./lawMapping.mjs";
 
 test("old -> new: 302 IPC finds BNS 103(1)", () => {
   const r = lookup(data, "302 IPC");
@@ -50,7 +51,7 @@ test("a section is linked only when it is confirmed to be in our data; confirmed
     assert.equal(l.new !== null, r.new_in_data === true, `${r.new_law} ${r.new_section} new link`);
   }
   const l = rowLinks({ ...data.rows[1], old_in_data: true, new_in_data: false }, data);
-  assert.equal(l.old, "/workspace/browse/acts/IND_REP_659_1860?section=s302");
+  assert.equal(l.old, "/law/IND_REP_659_1860/s302");
   assert.equal(l.new, null);
 });
 test("data file format: required fields, valid values, no duplicate old sections", () => {
@@ -76,4 +77,35 @@ test("Act ids agree with repealed-acts.json and exist in the Acts list", () => {
     assert.equal(data.laws[o].actId && repealed[data.laws[o].actId].newActId, data.laws[n].actId);
     assert.ok(acts.has(data.laws[o].actId) && acts.has(data.laws[n].actId));
   }
+});
+test("the first-screen list: every named section is in the file and checked against our data", () => {
+  const groups = commonGroups(data, common);
+  assert.equal(groups.length, common.groups.length, "a listed group has no row in law-mapping.json");
+  assert.equal(groups.flatMap((g) => g.rows).length, common.groups.flatMap((g) => g.rows).length);
+  for (const g of groups) for (const r of g.rows) assert.ok(isChecked(r) && r.status === "verified", `${g.label}: ${r.old_law} ${r.old_section}`);
+  assert.deepEqual(groups.map((g) => g.label), ["Murder", "Theft", "Cheating", "Arrest", "Bail", "FIR", "Confessions"]);
+  assert.ok(groups.flatMap((g) => g.rows).length < 15, "a short list, not the whole table");
+});
+test("checked-against-our-data count follows the linkable flag", () => {
+  assert.equal(checkedCount([{ linkable: true }, { linkable: false }, { old_in_data: true, new_in_data: true }, {}]), 2);
+  for (const [o] of PAIRS) { const rows = rowsFor(data, o); assert.ok(checkedCount(rows) > 0 && checkedCount(rows) <= rows.length); }
+});
+test("displayTitle: the heading without the first words of the text, and no footnotes or placeholders (whole file)", () => {
+  assert.equal(displayTitle("Rioting . \u2014 Whenever force or violence is used by an unlawful assembly"), "Rioting");
+  assert.equal(displayTitle("Permission to conduct prosecution . \u2014 (1) Any Magistrate inquiring"), "Permission to conduct prosecution");
+  assert.equal(displayTitle('"Electronic record ". \u2014 The words "electronic record" shall have'), '"Electronic record"');
+  assert.equal(displayTitle("Abetment of offence punishable with imprisonment\u2014if offence be not committed"), "Abetment of offence punishable with imprisonment\u2014if offence be not committed");
+  assert.equal(displayTitle("Punishment for murder"), "Punishment for murder");
+  assert.equal(displayTitle("Admission defined. --An admission is a statement,[1] [oral or documentary"), "Admission defined");
+  assert.equal(displayTitle("Presumption as to electronic records and[6] [electronic signatures]. -- (1) In any"), "Presumption as to electronic records and electronic signatures");
+  for (const junk of ["(no heading in our data)", "", null, undefined, 'Subs. by Act 26 of 1955, s. 117 and the Sch., for "transportation for life"', 'The word "the" rep by Act 12 of 1891, s. 2', "Certain words omitted by s. 3 and the Sch., ibid", "See now the Code of Criminal Procedure, 1973 (2 of 1974)"]) assert.equal(displayTitle(junk), null, String(junk));
+  let shown = 0, none = 0;
+  for (const r of data.rows) for (const k of ["old_title", "new_title"]) {
+    const t = displayTitle(r[k]);
+    if (t === null) { none++; continue; }
+    shown++;
+    assert.ok(!/ [.;] ?(?:[\u2014\u2013]|--)|\[|\]|[\u2014\u2013-]$|\(no heading|\bw\.e\.f\.|\bibid\b|^(Subs|Ins)\./.test(t), `${r.old_law} ${r.old_section} ${k}: ${t}`);
+    assert.ok(t.length <= 150, `title too long (${t.length}): ${r.old_law} ${r.old_section} ${k}`);
+  }
+  assert.ok(shown > none * 2, `most titles should be usable (${shown} shown, ${none} none)`);
 });

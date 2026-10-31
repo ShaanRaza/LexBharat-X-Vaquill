@@ -29,9 +29,44 @@ export function stripMarkdown(s) {
     .replace(/[ \t]+$/g, "");
 }
 
+// A section's stored text often runs on into the NEXT chapter's title, because the source file prints that title right after the section's last line: section 420 of the IPC ends with
+// "## _Of fraudulent deeds and dispositions of property_". Such a line belongs to no section. stripTrailingHeadings removes heading lines at the very END of a whole section's text, and only
+// a line that is clearly a heading: a markdown heading ("## ...") or an ALL-CAPITALS line, short, not numbered, not a sentence (no full stop, comma or colon at its end), and not one of the
+// headings that introduce text ("Illustrations", "Explanation", ...). A line followed by any text is never touched, nor is a section that would be left empty.
+const INTRODUCES_TEXT = /^(?:illustrations?|explanations?|exceptions?|provisos?|notes?|state amendments?|comments?|statement of objects and reasons|objects and reasons|schedule)\b/i;
+const ROMAN_CHAPTER = /^(?:chapter|part)\s+[ivxlc0-9]+[a-z]?\.?$/i;
+function isTrailingHeading(line) {
+  const md = /^#{1,6}\s/.test(line);
+  const bare = line.replace(/^#{1,6}\s*/, "").replace(/[*_`]+/g, "").replace(/^[-\s]+/, "").trim();
+  if (/^\[/.test(bare) || (/\]$/.test(bare) && !/^\d{1,2}\[/.test(bare))) return false;   // a bracketed reference or amendment note ("[See section 20]") is not a heading
+  const t = bare.replace(/^\d{1,2}\[+/, "").replace(/\]+$/, "").trim();
+  const roman = /^[IVXLC]+\.\s+(\S.*)$/.exec(t);
+  if (roman && roman[1] !== roman[1].toUpperCase()) return false;   // "VII. Nothing in ..." starts a clause; "II. CHARGES WITH TWO OR MORE HEADS" is a heading
+  if (t.length < 3 || t.length > 120 || /^[|(\d]/.test(t) || /[;:,]$/.test(t) || (/\.$/.test(t) && !ROMAN_CHAPTER.test(t))) return false;
+  if (INTRODUCES_TEXT.test(t)) return false;
+  const letters = t.replace(/[^A-Za-z]/g, "");
+  const caps = letters.length >= 3 && letters === letters.toUpperCase();
+  const words = t.split(/\s+/).length;
+  return md ? (words >= 2 || ROMAN_CHAPTER.test(t)) : caps && (words >= 2 || ROMAN_CHAPTER.test(t));
+}
+/** The section text without the next chapter's heading stuck to its end (see above). Text with no such heading is returned unchanged. */
+export function stripTrailingHeadings(raw) {
+  const text = String(raw ?? "");
+  const lines = text.split("\n");
+  let cut = lines.length, removed = 0;
+  while (cut > 0) {
+    const l = lines[cut - 1].trim();
+    if (!l) { cut--; continue; }
+    if (isTrailingHeading(l)) { cut--; removed++; continue; }
+    break;
+  }
+  return removed && cut > 0 ? lines.slice(0, cut).join("\n").replace(/\s+$/, "") : text;
+}
+
 /** Blocks for rendering one section's raw text: [{ type: "heading" | "p", text }]. Headings are lines written as markdown "## ..." in the source. */
 export function toDisplayBlocks(raw, { lines = false } = {}) {
   const blocks = [];
+  raw = stripTrailingHeadings(raw);
   // the dataset's text breaks paragraphs at a blank line (a single line break is only a wrap); the hand-filled units (content/supplement) put each clause, entry or list item on its own line
   for (const para of raw.split(lines ? /\n+/ : /\n{2,}/)) {
     const t = tidySpacing(stripJunk(para)).trim();   // junk first, so a paragraph that was only a picture placeholder disappears
@@ -45,12 +80,17 @@ export function toDisplayBlocks(raw, { lines = false } = {}) {
   return blocks;
 }
 
-/** Heading text for display (null when the words cannot be recovered, or when it holds Hindi or lost characters: those cannot be verified, see HINDI_PIECE_MIN in reassemble.mjs). */
+// The dataset's heading field is often the title plus the first words of the section's text ("Rioting . \u2014 Whenever force or violence ..."; Evidence Act: "Admission defined. --An admission is ..."),
+// carries footnote marks ("[3] [Text]"), and for some sections holds a footnote instead of a title ("Subs. by Act 26 of 1955 ..."). Real dashes inside a title ("... \u2014if offence be not committed") stay.
+const NOT_A_TITLE = /^(?:Subs\.|Ins\.|Certain words|The Original words|See now|Amendment of Act\b|Illustrations? \()|\b(?:omitted by|rep\.? by|amended by|w\.e\.f\.|ibid)\b/;
+/** Heading text for display (null when the words cannot be recovered, when it holds Hindi or lost characters: those cannot be verified, see HINDI_PIECE_MIN in reassemble.mjs, or when it is a footnote or placeholder, not a title). */
 export function cleanHeading(s) {
-  if (!s) return null;
+  if (!s || /^\(no heading/i.test(String(s).trim())) return null;
   if (/\uFFFD/.test(s) || (s.match(/[\u0900-\u097F]/g) ?? []).length >= 4) return null;
-  const c = collapseLetterSpacing(stripMarkdown(s).replace(/^#{1,6}\s*/, ""));
-  return c.ambiguous ? null : c.text.trim() || null;
+  const head = stripMarkdown(s).replace(/\[\d{1,2}\]/g, "").replace(/[\[\]]/g, "").split(/\s*[.;]\s*(?:[\u2014\u2013]|--)/)[0].replace(/\s+(?=["\u201d]$)/, "").replace(/[\s.\u2014\u2013-]+$/, "");
+  const c = collapseLetterSpacing(head.replace(/^#{1,6}\s*/, ""));
+  const t = c.ambiguous ? "" : c.text.trim();
+  return !t || NOT_A_TITLE.test(t) ? null : t;
 }
 
 

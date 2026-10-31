@@ -130,6 +130,8 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
                   {sel.next ? <Link className={buttonClass("secondary", "md", "text-primary")} href={href(header.actId, sel.next.key)}>{sel.next.label} →</Link> : <span />}
                 </nav>
               </Panel>
+            ) : view.notFound ? (
+              <Notice tone="warn" role="status" title="Section not found in our data"><p>This Act has no section with that number in our data. Choose a section from the list.</p></Notice>
             ) : (
               <Panel><p className="text-ui-base text-secondary">This Act has no text in the export.</p></Panel>
             )}

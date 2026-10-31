@@ -7,7 +7,7 @@
 import { query, dbConfigured } from "@/lib/acts/db";
 import { getCaseText } from "@/lib/judgments/scText";
 import { actsTextDir } from "@/lib/acts/sectionText";
-import { cleanPlain, vocabOf } from "@/lib/text/clean.mjs";
+import { cleanPlain, stripTrailingHeadings, vocabOf } from "@/lib/text/clean.mjs";
 import { displayTitle } from "@/lib/docs/docType.mjs";
 
 export { dbConfigured as legalDataConfigured } from "@/lib/acts/db";
@@ -38,7 +38,7 @@ export async function sectionBodies(refs: SectionRef[], maxChars: number): Promi
   const rows = await query<{ act_id: string; section_key: string; body: string | null; act_status: string; year: number | null; source_url: string | null }>(
     `SELECT s.act_id, s.section_key, left(s.body, $3) AS body, a.act_status, a.year, a.source_url FROM act_sections_v s JOIN acts a ON a.act_id = s.act_id JOIN unnest($1::text[], $2::text[]) AS k(a, sk) ON s.act_id = k.a AND s.section_key = k.sk`,
     [refs.map((r) => r.actId), refs.map((r) => r.sectionKey), maxChars]);
-  for (const r of rows) { const body = cleanPlain(r.body, vocabOf(String(r.body ?? "").split(/\n+/))); if (body) out.set(`${r.act_id}|${r.section_key}`, { body, actStatus: r.act_status, year: r.year, sourceUrl: r.source_url }); }   // display-clean: the model never reads picture placeholders or amendment numbers
+  for (const r of rows) { const whole = String(r.body ?? ""), full = whole.length < maxChars, body = cleanPlain(full ? stripTrailingHeadings(whole) : whole, vocabOf(whole.split(/\n+/))); /* the next chapter's heading is cut off only when we hold the section's real end, not a truncation */ if (body) out.set(`${r.act_id}|${r.section_key}`, { body, actStatus: r.act_status, year: r.year, sourceUrl: r.source_url }); }   // display-clean: the model never reads picture placeholders or amendment numbers
   return out;
 }
 

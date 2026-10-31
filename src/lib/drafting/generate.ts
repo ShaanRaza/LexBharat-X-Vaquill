@@ -4,6 +4,7 @@
 import { sectionBodies } from "@/lib/legal-data";
 import { aiReason } from "@/lib/ai/notice.mjs";
 import { AiError, aiModelFor, completeAi, streamAi } from "@/lib/ai";
+import { fixIndiaCodeLinks } from "@/lib/docs/docType.mjs";
 import { retrieveSources, citationOf, type ChatSource } from "@/lib/chat/retrieve";
 import { findStatuteMentions, resolveMention } from "@/lib/chat/citations.mjs";
 import { buildRewritePrompt, parseRewrite } from "@/lib/chat/rewrite.mjs";
@@ -58,7 +59,7 @@ export async function writeSection(o: { template: Template; sectionId: string; v
   const p = buildSectionPrompt({ template: o.template, section, values: o.values, extra: o.extra, sources: o.sources, previous: o.previous });
   let raw = "", model = aiModelFor("drafting");
   for await (const ev of streamAi("drafting", { system: p.system, messages: p.messages })) { if (ev.type === "text") { raw += ev.text; o.onDelta?.(ev.text); } else if (ev.type === "done") model = ev.model; }
-  const text = strip(cleanSectionText(raw));
+  const text = strip(cleanSectionText(fixIndiaCodeLinks(raw)));
   if (!text) throw new AiError("unavailable", "The model returned no text for this section.");
   return { text, model };
 }

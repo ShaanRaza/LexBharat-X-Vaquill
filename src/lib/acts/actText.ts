@@ -35,7 +35,7 @@ async function fromDatabase(actId: string, wanted: string | undefined): Promise<
     if (table.rows.length) return { available: true, origin: "database", view: { ...buildActTextView(secs, acts[0].sourceUrl, undefined, [], gapsOf(actId)), schedule: table }, officialUrl: officialSourceUrl(acts[0].sourceUrl) };
   }
   const missing = miss.map((m) => Number(m.number));
-  const hasTable = await tableUnits(actId), first = { ...buildActTextView(secs, acts[0].sourceUrl, wanted, missing, gapsOf(actId)) }; first.hasSchedule &&= hasTable; // decides which row is shown; its text is fetched next
+  const hasTable = await tableUnits(actId), first = { ...buildActTextView(secs, acts[0].sourceUrl, wanted === "schedule" ? undefined : wanted, missing, gapsOf(actId)) }; first.hasSchedule &&= hasTable; // decides which row is shown; its text is fetched next
   const sel = first.selected;
   if (!sel || sel.missing) return { available: true, origin: "database", view: first, officialUrl: officialSourceUrl(acts[0].sourceUrl) };
   const body = await query<{ body: string | null }>(`SELECT body FROM act_sections_v WHERE act_id = $1 AND section_key = $2`, [actId, sel.key]);
@@ -77,7 +77,7 @@ export async function loadActText(actId: string, wanted: string | undefined): Pr
   const t = await getActText(actId);
   if (t.available) {
     const recs = t.doc.sections.map((s, i) => toSectionRecord(s, i));
-    return { available: true, origin: "files", view: buildActTextView(recs, t.doc.sourceUrl, wanted, confidentMissing(recs, t.doc.title).numbers), officialUrl: officialSourceUrl(t.doc.sourceUrl) };
+    return { available: true, origin: "files", view: buildActTextView(recs, t.doc.sourceUrl, wanted === "schedule" ? undefined : wanted, confidentMissing(recs, t.doc.title).numbers), officialUrl: officialSourceUrl(t.doc.sourceUrl) };
   }
   if (dbConfigured() && t.reason === "not_configured") return { available: false, reason: "not_in_export", message: "Section text for this entry is not included yet (regulator instruments are excluded, or the Act is not in the loaded data)." };
   return t;

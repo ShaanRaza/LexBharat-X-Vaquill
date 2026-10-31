@@ -14,8 +14,8 @@ test("a section above the Act's last one does not exist, which is different from
   assert.match(gapLead([{ kind: "nosuch", number: "999", actTitle: NI, max: 148 }]), /doesn't exist/);
 });
 test("the notice carries the sentence, the link and a label", () => {
-  const n = gapNotice({ kind: "missing", number: "43", actTitle: "The Information Technology Act, 2000" }, "https://www.indiacode.nic.in/x");
-  assert.equal(n.url, "https://www.indiacode.nic.in/x"); assert.equal(n.label, "Read Section 43 of the Information Technology Act, 2000 on India Code"); assert.match(n.text, /isn't in our library yet/);
+  const n = gapNotice({ kind: "missing", number: "43", actTitle: "The Information Technology Act, 2000" }, "https://indiacode.gov.in/x");
+  assert.equal(n.url, "https://indiacode.gov.in/x"); assert.equal(n.label, "Read Section 43 of the Information Technology Act, 2000 on India Code (search for this Act)"); assert.match(n.text, /isn't in our library yet/);
 });
 test("the lead covers missing and unreliable sections, not mentions", () => {
   assert.equal(gapLead([{ kind: "missing", number: "1", actTitle: "A Act, 2000" }, { kind: "mentioned", number: "2", actTitle: "B Act, 2000" }]), "Section 1 of the A Act, 2000 isn't in our library yet.");

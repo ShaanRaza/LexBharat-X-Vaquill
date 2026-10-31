@@ -231,3 +231,9 @@ test("class: no route writes its own 'busy' sentence; they all use aiFailure / t
   const bad = walk("src").filter((f) => /\.(ts|tsx)$/.test(f)).filter((f) => /Busy, try again|meaning search was busy|model is busy, so/.test(fsNotice.readFileSync(f, "utf8")));
   assert.deepEqual(bad, []);
 });
+test("a model's text never carries the old India Code address; the OCR of a user's scan is left alone", async () => {
+  const body = "See https://www.indiacode.nic.in/handle/123456789/20062?view_type=browse and indiacode.nic.in for the text.";
+  const run = (task) => completeTask(task, { messages: [{ role: "user", content: "q" }] }, { config: { tasks: { [task]: solo.tasks.chat } }, env, fetchImpl: fakeFetch(okResponse([gem({ candidates: [{ content: { parts: [{ text: body }] } }] })])) });
+  for (const task of ["chat", "drafting", "review"]) { const r = await run(task); assert.ok(!/indiacode\.nic\.in/.test(r.text), task); assert.match(r.text, /indiacode\.gov\.in/); }
+  assert.match((await run("ocr")).text, /indiacode\.nic\.in/);
+});

@@ -5,8 +5,21 @@ import acronyms from "../../config/acronyms.json" with { type: "json" };
 import { departmentLabel, isRegulatorId } from "../acts/departments.mjs";
 import { unitLabel } from "../acts/unitLabel.mjs";
 
-const INDIA_CODE = /^https:\/\/(?:www\.)?indiacode\.(?:nic|gov)\.in\//;
-export const INDIA_CODE_HOME = "https://www.indiacode.nic.in/";
+export const INDIA_CODE = /^https:\/\/(?:www\.)?indiacode\.(?:nic|gov)\.in\//;
+export const INDIA_CODE_HOME = "https://indiacode.gov.in/";
+// India Code moved from www.indiacode.nic.in to indiacode.gov.in. The old pages (handle/123456789/<id>, repealed-act.jsp ...) no longer open, the new site names an Act by an id we do not hold, and
+// our stored source_url is still the old address (10,100 of 10,113 Acts). So an old address becomes the new site's search for the Act's title, which always opens; its home page when there is no title.
+const INDIA_CODE_ACTS = "https://indiacode.gov.in/collections/69a0c1fb-7b22-4481-b16a-1dc59b5d02e6";
+const OLD_INDIA_CODE = /^https:\/\/(?:www\.)?indiacode\.nic\.in\//;
+/** The new India Code's search for an Act by its title ("The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)" is searched as "The Indian Penal Code"). */
+export function indiaCodeSearchUrl(title) {
+  const q = String(title ?? "").replace(/\([^)]*\)/g, " ").replace(/,?\s*\d+ of \d{4}\b/g, " ").replace(/\s+/g, " ").replace(/[\s,]+$/, "").trim();
+  return q ? `${INDIA_CODE_ACTS}?query=${encodeURIComponent(q)}` : INDIA_CODE_HOME;
+}
+/** Model or stored TEXT that may contain the old India Code address (an answer, a draft, a note): every old address in it becomes the new site's home page (the text names no Act we could search for), and a bare "indiacode.nic.in" the new host. */
+export const fixIndiaCodeLinks = (text) => String(text ?? "").replace(/https?:\/\/(?:www\.)?indiacode\.nic\.in(?:\/[^\s)\]>"'<]*)?/gi, (m) => INDIA_CODE_HOME + (m.match(/[.,;:!?]+$/)?.[0] ?? "")).replace(/\b(?:www\.)?indiacode\.nic\.in\b/gi, "indiacode.gov.in");
+/** An address that opens: the old India Code address becomes the new site's search for `title` (or its home page); every other address is returned as it is. */
+export const liveIndiaCodeUrl = (url, title) => (typeof url === "string" && OLD_INDIA_CODE.test(url) ? indiaCodeSearchUrl(title) : url);
 
 /** { type, unit, units } for a document. type: "constitution" | "act" | "rules" | "regulations" | "instrument" (a regulator's circular, notification, order, advisory, direction). */
 export function docTypeOf(doc = {}) {
@@ -33,7 +46,7 @@ export function sourceInfo(doc = {}, url) {
   let u = typeof url === "string" ? url.trim() : "";
   const t = docTypeOf(doc), reg = t.type === "instrument" || t.type === "rules" || t.type === "regulations" ? !!(doc.department || doc.category === "regulatory" || isRegulatorId(doc.actId)) : false;
   if (reg && INDIA_CODE.test(u)) u = "";   // the data layer's default link is India Code; a regulator's own circular or rules are not published there
-  if (u && INDIA_CODE.test(u)) return { url: u, label: "India Code" };
+  if (u && INDIA_CODE.test(u)) { const live = liveIndiaCodeUrl(u, doc.title); return { url: live, label: live.startsWith(INDIA_CODE_ACTS) ? "India Code (search for this Act)" : "India Code" }; }
   if (reg) {
     if (/^https?:\/\//i.test(u)) { const dep = doc.department ? departmentLabel(doc.department) : null; let host = ""; try { host = new URL(u).hostname.replace(/^www\./, ""); } catch { /* unreadable */ } return { url: u, label: dep ? `${dep} website` : host || "the source" }; }
     return null;

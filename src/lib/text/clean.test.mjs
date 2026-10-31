@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { cleanParts, cleanPlain, previewText, stripJunk, tidySpacing, vocabOf } from "./clean.mjs";
+import { cleanHeading, stripTrailingHeadings, toDisplayBlocks, cleanParts, cleanPlain, previewText, stripJunk, tidySpacing, vocabOf } from "./clean.mjs";
 
 // samples are real patterns found by scripts/audit/junk-scan-*.mjs (docs/audit-junk-*.json)
 test("picture placeholders and stray halves of them never reach a reader", () => {
@@ -57,4 +57,42 @@ test("half an emphasis pair and runs of dashes are not shown", () => {
   assert.equal(cleanPlain("holder ... ibid_ , (w.e.f. 6-2-2003). liable"), "holder ... ibid, (w.e.f. 6-2-2003). liable");
   assert.equal(cleanPlain("_ibid_, again and snake_case_name stay"), "ibid, again and snake_case_name stay");
   assert.equal(cleanPlain("New Delhi ------for\n-----\nINFORMATION"), "New Delhi — for\n\nINFORMATION");
+});
+
+test("cleanHeading: the title only, never the run-on text, footnote marks, footnotes or placeholders", () => {
+  assert.equal(cleanHeading("Uttering words, etc., with deliberate intent to wound religious feelings. — Whoever, with the"), "Uttering words, etc., with deliberate intent to wound religious feelings");
+  assert.equal(cleanHeading("Rioting . — Whenever force or violence is used"), "Rioting");
+  assert.equal(cleanHeading("Admission defined. --An admission is a statement,[1] [oral or documentary"), "Admission defined");
+  assert.equal(cleanHeading("Presumption as to electronic records and[6] [electronic signatures]. -- (1) In any"), "Presumption as to electronic records and electronic signatures");
+  assert.equal(cleanHeading("Abetment of offence punishable with imprisonment—if offence be not committed"), "Abetment of offence punishable with imprisonment—if offence be not committed");
+  for (const junk of ["(no heading in our data)", 'Subs. by Act 26 of 1955, s. 117 and the Sch., for "transportation for life"', 'The word "the" rep by Act 12 of 1891, s. 2', "Certain words omitted by s. 3 and the Sch., ibid", "The Original words have successively been amended by Act 12 of 1891"]) assert.equal(cleanHeading(junk), null, junk);
+});
+
+test("a section's text loses the next chapter's heading stuck to its end (IPC 420), and nothing else", () => {
+  const body = "**420. Cheating and dishonestly inducing delivery of property** . **\u2014** Whoever cheats shall be punished with imprisonment of either description for a term which may extend to seven years, and shall also be liable to fine.\n\n## _Of fraudulent deeds and dispositions of property_\n";
+  assert.ok(stripTrailingHeadings(body).endsWith("and shall also be liable to fine."));
+  assert.deepEqual(toDisplayBlocks(body).map((b) => b.type), ["p"]);
+  assert.ok(!toDisplayBlocks(body).some((b) => /fraudulent deeds/i.test(b.text)));
+  for (const [raw, want] of [
+    ["Text of the section.\n\nOF FRAUDULENT FEEDS AND DISPOSITIONS OF PROPERTY", "Text of the section."],
+    ["Text.\n\n## **CHAPTER - IV**", "Text."],
+    ["Text.\n\n## THE SCHEDULE\n\n## OFFENCES TRIABLE BY A VILLAGE COURT\n", "Text."],        // several heading lines in a row
+    ["Text.\n\n## **Power to make rules**", "Text."],
+    ["Text.\n\n2[PART IIA\n\nUNIVERSAL SERVICE OBLIGATION FUND", "Text."],
+  ]) assert.equal(stripTrailingHeadings(raw), want, raw);
+  // real text is never cut: a heading with text after it, sentences, numbered clauses, notes that introduce text, a section that is only a heading, bracketed references
+  for (const keep of [
+    "Text.\n\n## CHAPTER IV\n\nThe first section of the next chapter shall apply.",
+    "Text.\n\nPUNISHMENT SHALL BE DEATH.",
+    "Text.\n\nPROVIDED THAT THE COURT MAY, IF IT THINKS FIT:",
+    "Text.\n\n## Illustrations",
+    "Text.\n\n## Explanation",
+    "Text.\n\n## [ _See_ section 20]",
+    "Text.\n\n## VII. Nothing",
+    "Text.\n\n1. THE FIRST SECTION OF THE ACT",
+    "Text.\n\nONE",
+    "## **CHAPTER - IV**",                       // nothing would be left: unchanged
+    "Text with no heading at all.",
+  ]) assert.equal(stripTrailingHeadings(keep), keep, keep);
+  assert.equal(stripTrailingHeadings(null), "");
 });

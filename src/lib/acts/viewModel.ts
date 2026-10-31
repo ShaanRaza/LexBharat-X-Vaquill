@@ -3,6 +3,7 @@
 import { toDisplayBlocks, cleanHeading, type DisplayBlock } from "./cleanText.mjs";
 import type { SectionRecord } from "./sectionRecord.mjs";
 import { unitLabel, parseUnitNumber } from "./unitLabel.mjs";
+import { resolveSectionKey } from "./sectionKey.mjs";
 import type { ScheduleTable } from "./scheduleTable.mjs";
 import { STATUS_INFO, MISSING_INFO, sectionFlagList, officialSourceUrl, type FlagInfo, type Tone } from "./quality";
 
@@ -34,6 +35,8 @@ export type ActTextView = {
   hasSchedule: boolean; schedule: ScheduleTable | null;
   list: SectionListItem[]; counts: { sections: number; complete: number; possibly_incomplete: number; garbled: number; missing: number; supplemented: number };
   selected: SectionView | null;
+  /** A section was asked for (?section=...) and this Act has no such section: nothing is selected and the page shows a short notice. */
+  notFound: boolean;
 };
 
 type Row = { kind: "section"; s: ListedSection; label: string } | { kind: "missing"; n: number; label: string } | { kind: "gap"; n: number; label: string; note: string };
@@ -57,12 +60,10 @@ function rowsFor(sections: ListedSection[], missing: number[], gaps?: ScheduleGa
 }
 const keyOf = (r: Row) => (r.kind === "missing" ? `m${r.n}` : r.kind === "gap" ? `g${r.n}` : r.s.sectionKey);
 
-/** The key that will be shown: the wanted one when it exists (a missing number can be asked for as "s016" or "m16"), otherwise the first section. */
+/** The key that will be shown. No section asked for: the first one. A section asked for: the stored key it means (s61, s061, 61 ... all find "s061"; a missing number can be asked for as "s016" or "m16"); undefined when the Act has no such section, so the page can say so instead of opening the first one. */
 export function selectedKey(rows: { key: string }[], wanted: string | undefined) {
-  if (wanted && rows.some((r) => r.key === wanted)) return wanted;
-  const m = /^s0*(\d+)$/i.exec(wanted ?? "");
-  if (m && rows.some((r) => r.key === `m${m[1]}`)) return `m${m[1]}`;
-  return rows[0]?.key;
+  if (!wanted?.trim()) return rows[0]?.key;
+  return resolveSectionKey(rows.map((r) => r.key), wanted) ?? undefined;
 }
 
 export function buildActTextView(sections: ListedSection[], sourceUrl: string | null | undefined, wantedKey: string | undefined, missing: number[] = [], gaps?: ScheduleGaps): ActTextView {
@@ -74,7 +75,7 @@ export function buildActTextView(sections: ListedSection[], sourceUrl: string | 
     : { group: r.s.flags.includes("supplement") ? r.s.chapter : null, supplemented: r.s.flags.includes("supplement"), key: keyOf(r), label: r.label, heading: cleanHeading(r.s.heading), status: r.s.status, tone: STATUS_INFO[r.s.status].tone, statusLabel: STATUS_INFO[r.s.status].label, noNumber: r.s.flags.includes("no_section_number"), missing: false });
   const counts = { sections: sections.length, complete: 0, possibly_incomplete: 0, garbled: 0, missing: missing.length, supplemented: 0 };
   for (const s of sections) { if (s.flags.includes("supplement")) counts.supplemented++; else counts[s.status]++; }
-  const key = selectedKey(keys, wantedKey), idx = rows.findIndex((r) => keyOf(r) === key);
+  const key = selectedKey(keys, wantedKey), notFound = !!wantedKey?.trim() && key === undefined, idx = rows.findIndex((r) => keyOf(r) === key);
   const r = idx >= 0 ? rows[idx] : undefined;
   const near = (i: number) => (i >= 0 && i < rows.length ? { key: keyOf(rows[i]), label: rows[i].label } : null);
   const selected: SectionView | null = !r ? null : r.kind === "gap"
@@ -83,5 +84,5 @@ export function buildActTextView(sections: ListedSection[], sourceUrl: string | 
     ? { key: keyOf(r), label: r.label, heading: null, chapter: null, status: "missing", statusInfo: MISSING_INFO, flags: [], missing: true, note: null, supplement: null, blocks: null, chunkCount: 0, prev: near(idx - 1), next: near(idx + 1) }
     : { key: keyOf(r), label: r.label, heading: cleanHeading(r.s.heading), chapter: r.s.chapter, status: r.s.status, statusInfo: STATUS_INFO[r.s.status], flags: sectionFlagList(r.s), missing: false, note: null, supplement: r.s.supplement ?? null,
         blocks: r.s.status === "garbled" || r.s.body == null ? null : toDisplayBlocks(r.s.body, { lines: r.s.flags.includes("supplement") }), chunkCount: r.s.chunkCount, prev: near(idx - 1), next: near(idx + 1) };
-  return { hasSectionNumbers: sections.some((x) => x.number), hasSchedule: sections.some((x) => /^A\d/.test(x.number ?? "")), schedule: null, sourceUrl: officialSourceUrl(sourceUrl), list, counts, selected };
+  return { hasSectionNumbers: sections.some((x) => x.number), hasSchedule: sections.some((x) => /^A\d/.test(x.number ?? "")), schedule: null, sourceUrl: officialSourceUrl(sourceUrl), list, counts, selected, notFound };
 }
