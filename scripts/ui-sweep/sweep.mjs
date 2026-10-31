@@ -88,6 +88,7 @@ const pages = (t) => [
     await p.fill("textarea", "What does Section 375 of the Indian Penal Code say?"); await p.keyboard.press("Enter");
     await p.getByText("isn't in our library yet").first().waitFor({ timeout: 15000 }); await p.waitForTimeout(600);
   } },
+  { id: "search-missing-section", url: "/search?q=375%20indian%20penal%20code", wait: 4000 },   // Search says it once with one link too (same wording as Ask)
   { id: "law-contents-list", url: "/law/IND_state_15289/s375" },
   { id: "law-quote-marks", url: "/law/IND_state_15289/s010" },   // the source prints its quotation marks as long and double bars: curly quotes on screen (src/lib/text/clean.mjs fixQuoteMarks)
   { id: "search-laws", url: "/search?q=notice%20after%20cheque%20bounces", wait: 4000 },
@@ -169,8 +170,8 @@ const IN_PAGE = String.raw`(args) => {
   // 5. a section we do not hold is said so in the answer: the way to read it on India Code must be on the page too
   if (/(?:isn't|is not) in our library yet|cannot quote it/.test(all) && ![...document.querySelectorAll("a[href]")].some((a) => /on India Code/i.test(a.textContent) && /^https?:/.test(a.getAttribute("href")))) out.push({ kind: "gaplink", detail: "the page says a section is not in our library, but has no \"Read ... on India Code\" link" });
   // 5b. said once, linked once: the sentence, one link, and no second telling ("I couldn't find ...") on the page
-  { const says = (all.match(/in our library yet/g) || []).length, links = [...document.querySelectorAll("a[href]")].filter((a) => /on India Code/i.test(a.textContent)).length, again = /I couldn'?t find/.test(all);
-    if (says > 1 || links > 1 || (says >= 1 && again)) out.push({ kind: "gaprepeat", detail: "a missing section is said " + says + " time(s), linked " + links + " time(s)" + (again ? ", and followed by \"I couldn't find\"" : "") }); }
+  { const says = (all.match(/in our library yet/g) || []).length, links = [...document.querySelectorAll("a[href]")].filter((a) => /on India Code/i.test(a.textContent)).length, again = /I couldn'?t find|is missing from our source data/.test(all);
+    if (says > 1 || links > 1 || (says >= 1 && again)) out.push({ kind: "gaprepeat", detail: "a missing section is said " + says + " time(s), linked " + links + " time(s)" + (again ? ", and followed by a second telling (\"I couldn't find\" / \"missing from our source data\")" : "") }); }
   // 6. text that is only a table of contents must not be labelled "No problems detected"
   const looksList = (t) => { const m = [...t.matchAll(/(?:^|\s)(\d{1,3}[A-Z]{0,2})\.\s+[A-Z][^.]{1,160}\./g)]; if (m.length < 3 || m.reduce((n, x) => n + x[0].length, 0) / t.length <= 0.6) return false; const n = m.map((x) => parseInt(x[1], 10)); let g = 0; for (let i = 1; i < n.length; i++) if (n[i] - n[i - 1] === 1 || n[i] === n[i - 1]) g++; return g / (n.length - 1) >= 0.7; };
   for (const body of document.querySelectorAll("article .font-reading")) { const t = (body.innerText || "").replace(/\s+/g, " ").trim(); if (looksList(t) && /No problems detected/.test((body.closest("article") || body).innerText || "")) out.push({ kind: "listflag", detail: "a table of contents is shown as a section's text with \"No problems detected\": " + t.slice(0, 70) }); }
