@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, IBM_Plex_Sans_Devanagari, Source_Serif_4 } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -8,6 +8,7 @@ import { RELEASE } from "@/lib/release";
 import AccessDevBanner from "@/components/AccessDevBanner";
 import VisitPing from "@/components/VisitPing";
 import { Analytics } from "@vercel/analytics/next";
+import brand from "@/config/brand-meta.json";
 
 // Fonts of the reskin (all free, OFL): Geist for text and UI, Geist Mono for small labels and code, Source Serif 4 for headings (self-hosted: weight 400 with its optical-size axis, copied from the design repo),
 // IBM Plex Sans Devanagari for Hindi. The Devanagari file is not preloaded and is only fetched when a page actually shows Devanagari text (the browser downloads it by unicode-range).
@@ -18,11 +19,17 @@ const serif = localFont({ src: "./fonts/source-serif-4-opsz-400.woff2", weight: 
 const serifStrong = Source_Serif_4({ subsets: ["latin"], weight: ["600"], variable: "--font-serif-strong", display: "swap" });
 const deva = IBM_Plex_Sans_Devanagari({ subsets: ["devanagari"], weight: ["400", "500"], variable: "--font-deva", display: "swap", preload: false });
 
+// Icons and share images are NOT listed here: Next reads them from the files src/app/icon.svg, favicon.ico, apple-icon.png, opengraph-image.png, twitter-image.png and manifest.webmanifest, all made by
+// scripts/reskin/make-icons.mjs from the design tokens and the logo (one place). Only text and the theme colour (from brand-meta.json, generated from the tokens) are set here.
+const TITLE = "LexBharat | Indian Acts and court judgments", DESCRIPTION = "LexBharat: browse Indian Acts and court judgment metadata, with the source credited on every page.";
 export const metadata: Metadata = {
-  title: "LexBharat | Indian Acts and court judgments",
-  description: "LexBharat: browse Indian Acts and court judgment metadata, with the source credited on every page.",
+  title: TITLE,
+  description: DESCRIPTION,
   robots: { index: false, follow: false },
+  openGraph: { title: TITLE, description: DESCRIPTION, siteName: brand.name, type: "website" },
+  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION },
 };
+export const viewport: Viewport = { themeColor: brand.themeColor };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

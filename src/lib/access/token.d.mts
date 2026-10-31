@@ -1,4 +1,5 @@
 export const ACCESS_COOKIE: string, BROWSER_COOKIE: string, ACCESS_TTL_MS: number;
+export const PUBLIC_ASSETS: string[];
 export function sha256Hex(s: string): Promise<string>;
 export function constantTimeEqual(a: string, b: string): boolean;
 export function passwordMatches(input: string | null | undefined, expected: string | null | undefined): Promise<boolean>;

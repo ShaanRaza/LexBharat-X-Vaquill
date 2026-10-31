@@ -51,13 +51,14 @@ export function accessState(env, nodeEnv) {
   return { state: "misconfigured", password: "", secret: "" };
 }
 
+/** Icons, the manifest and the share image: fetched by browsers, phones and link previews with no cookie, so they must never sit behind the password (scripts/reskin/make-icons.mjs makes them; src/lib/brand-assets.test.mjs checks the list). */
+export const PUBLIC_ASSETS = ["/favicon.ico", "/icon.svg", "/apple-icon.png", "/opengraph-image.png", "/twitter-image.png", "/manifest.webmanifest", "/robots.txt"];
 /** Paths that never need the password: the password page and its two API routes, framework and static files. Everything else is gated. */
 export function isPublicPath(pathname) {
-  return pathname === "/access" || pathname.startsWith("/api/access/") || pathname.startsWith("/_next/") || pathname.startsWith("/data/") || pathname.startsWith("/brand/")
-    || pathname === "/favicon.ico" || pathname === "/icon.svg" || pathname === "/robots.txt";
+  return pathname === "/access" || pathname.startsWith("/api/access/") || pathname.startsWith("/_next/") || pathname.startsWith("/data/") || pathname.startsWith("/brand/") || pathname.startsWith("/icons/") || PUBLIC_ASSETS.includes(pathname);
 }
 /** Static files (no cookie is set for these). */
-export const isStaticPath = (pathname) => pathname.startsWith("/_next/") || pathname.startsWith("/data/") || pathname.startsWith("/brand/") || pathname === "/favicon.ico" || pathname === "/icon.svg" || pathname === "/robots.txt";
+export const isStaticPath = (pathname) => pathname.startsWith("/_next/") || pathname.startsWith("/data/") || pathname.startsWith("/brand/") || pathname.startsWith("/icons/") || PUBLIC_ASSETS.includes(pathname);
 
 /** Only a path on this site: "/x", never "//host" or "https://host". */
 export const safeNext = (n) => (typeof n === "string" && /^\/(?!\/)[^\\\r\n]*$/.test(n) && !n.startsWith("/access") ? n : "/");

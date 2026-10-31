@@ -1,10 +1,75 @@
-// Writes src/app/icon.svg (the browser-tab icon): the pilcrow mark in the paper colour on a forest tile. Colours are READ from src/styles/tokens.css (--primary, --background) and the mark from
-// src/lib/brand.ts, so changing the tokens and re-running this keeps the icon in step. An SVG scales to the 32 and 16 px sizes a tab uses. Usage: node scripts/reskin/make-icons.mjs
+// ONE place that makes EVERY icon and metadata image of the site, so none can drift from the logo: browser-tab icon (SVG + a real .ico), iPhone home-screen icon, web-app manifest icons (also maskable), the
+// share image (Open Graph + Twitter) and the logo files in public/brand. Colours are READ from src/styles/tokens.css (--primary, --background, --dark, --surface); the mark and the wordmark come from src/lib/brand.ts
+// (the pilcrow logo). Nothing else holds a colour or a path for an icon. To reskin: change the tokens (or brand.ts) and run   node scripts/reskin/make-icons.mjs
+// `--check` writes nothing: it rebuilds the text files in memory and the image sizes, and fails if a committed file is out of step (src/lib/brand-assets.test.mjs runs it).
 import fs from "node:fs";
-const tokens = fs.readFileSync("src/styles/tokens.css", "utf8"), tok = (n) => new RegExp(`--${n}:\\s*(#[0-9a-fA-F]{3,8})`).exec(tokens)?.[1];
-const brand = fs.readFileSync("src/lib/brand.ts", "utf8"), mw = Number(/MARK = \{ w: ([\d.]+), h: ([\d.]+)/.exec(brand)?.[1]), mh = Number(/MARK = \{ w: [\d.]+, h: ([\d.]+)/.exec(brand)?.[1]);
-const paths = [...brand.matchAll(/paths: \[("[^"]+"), ("[^"]+")\]/g)][0]?.slice(1, 3).map((x) => JSON.parse(x));
-const bg = tok("primary"), fg = tok("background"); if (!bg || !fg || !mw || !mh || !paths) throw new Error("tokens or brand geometry not found");
-const size = 32, h = 19, s = h / mh, w = mw * s, tx = (size - w) / 2, ty = (size - h) / 2;
-fs.writeFileSync("src/app/icon.svg", `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}"><rect width="${size}" height="${size}" rx="7" fill="${bg}"/><g transform="translate(${tx.toFixed(2)} ${ty.toFixed(2)}) scale(${s.toFixed(4)})" fill="${fg}">${paths.map((d) => `<path d="${d}"/>`).join("")}</g></svg>\n`);
-console.log("wrote src/app/icon.svg", bg, fg);
+import path from "node:path";
+import sharp from "sharp";
+import { MARK, LOCKUP } from "../../src/lib/brand.ts";
+
+const CHECK = process.argv.includes("--check");
+const tokens = fs.readFileSync("src/styles/tokens.css", "utf8");
+const tok = (n) => { const v = new RegExp(`--${n}:\\s*(#[0-9a-fA-F]{3,8})`).exec(tokens)?.[1]; if (!v) throw new Error(`token --${n} not found in src/styles/tokens.css`); return v.length === 4 ? `#${[...v.slice(1)].map((c) => c + c).join("")}` : v; };
+const C = { primary: tok("primary"), paper: tok("background"), dark: tok("dark"), white: tok("surface") };
+const n2 = (x) => Number(x.toFixed(2));
+const fmt = (x) => String(n2(x));
+
+// the mark centred on a square tile of `size`, its height `ratio` of the tile (a tab icon, an app icon)
+function tile({ size = 32, radius = 7, bg = C.primary, fg = C.paper, ratio = 19 / 32 }) {
+  const h = size * ratio, s = h / MARK.h, w = MARK.w * s, tx = (size - w) / 2, ty = (size - h) / 2;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}"><rect width="${size}" height="${size}" rx="${radius}" fill="${bg}"/><g transform="translate(${tx.toFixed(2)} ${ty.toFixed(2)}) scale(${s.toFixed(4)})" fill="${fg}">${MARK.paths.map((d) => `<path d="${d}"/>`).join("")}</g></svg>\n`;
+}
+// the logo alone, in one colour, optionally on a tile (the files in public/brand)
+const markFile = ({ fg, bg }) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${bg ? "-8 -8 " + fmt(MARK.w + 16) + " " + fmt(MARK.h + 16) : "0 0 " + MARK.w + " " + MARK.h}" width="256" height="${fmt(256 * (bg ? (MARK.h + 16) / (MARK.w + 16) : MARK.h / MARK.w))}">${bg ? `<rect x="-8" y="-8" width="${fmt(MARK.w + 16)}" height="${fmt(MARK.h + 16)}" rx="10" fill="${bg}"/>` : ""}<g fill="${fg}">${MARK.paths.map((d) => `<path d="${d}"/>`).join("")}</g></svg>\n`;
+const lockupPaths = [...LOCKUP.mark, LOCKUP.lex, LOCKUP.bharat];
+const lockupFile = ({ fg, bg }) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${bg ? "-20 -20 " + fmt(LOCKUP.w + 40) + " " + fmt(LOCKUP.h + 40) : "0 0 " + LOCKUP.w + " " + LOCKUP.h}" width="600" height="${fmt(600 * (bg ? (LOCKUP.h + 40) / (LOCKUP.w + 40) : LOCKUP.h / LOCKUP.w))}">${bg ? `<rect x="-20" y="-20" width="${fmt(LOCKUP.w + 40)}" height="${fmt(LOCKUP.h + 40)}" fill="${bg}"/>` : ""}<g fill="${fg}">${lockupPaths.map((d) => `<path d="${d}"/>`).join("")}</g></svg>\n`;
+// the share image: the logo (mark + wordmark) in the paper colour centred on the primary colour, 1200 x 630
+const shareSvg = (() => { const W = 1200, H = 630, w = 640, s = w / LOCKUP.w, h = LOCKUP.h * s; return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}"><rect width="${W}" height="${H}" fill="${C.primary}"/><g transform="translate(${(W - w) / 2} ${n2((H - h) / 2)}) scale(${s.toFixed(4)})" fill="${C.paper}">${lockupPaths.map((d) => `<path d="${d}"/>`).join("")}</g></svg>\n`; })();
+
+const text = {   // path -> content (deterministic text, compared exactly by --check)
+  "src/app/icon.svg": tile({}),
+  "public/brand/lexbharat-mark-color.svg": markFile({ fg: C.primary }),
+  "public/brand/lexbharat-mark-black.svg": markFile({ fg: C.dark }),
+  "public/brand/lexbharat-mark-white.svg": markFile({ fg: C.white }),
+  "public/brand/lexbharat-mark-on-dark.svg": markFile({ fg: C.paper, bg: C.dark }),
+  "public/brand/lexbharat-mark-on-white.svg": markFile({ fg: C.primary, bg: C.white }),
+  "public/brand/lexbharat-lockup-color.svg": lockupFile({ fg: C.primary }),
+  "public/brand/lexbharat-lockup-white.svg": lockupFile({ fg: C.white, bg: C.dark }),
+  "src/config/brand-meta.json": JSON.stringify({ about: "GENERATED by scripts/reskin/make-icons.mjs from src/styles/tokens.css. Do not edit by hand.", name: "LexBharat", shortName: "LexBharat", themeColor: C.primary, backgroundColor: C.paper }, null, 2) + "\n",
+  "src/app/manifest.webmanifest": JSON.stringify({ name: "LexBharat", short_name: "LexBharat", description: "Indian Acts and court judgments, with the source credited on every page.", start_url: "/", display: "standalone", background_color: C.paper, theme_color: C.primary,
+    icons: [{ src: "/icons/icon-192.png", sizes: "192x192", type: "image/png" }, { src: "/icons/icon-512.png", sizes: "512x512", type: "image/png" }, { src: "/icons/icon-maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" }] }, null, 2) + "\n",
+};
+
+// raster images: [path, svg, size]; the .ico holds 16, 32 and 48 px PNGs
+const png = (svg, w, h = w) => sharp(Buffer.from(svg), { density: 384 }).resize(w, h).png({ compressionLevel: 9 }).toBuffer();
+async function ico() {
+  const sizes = [16, 32, 48], imgs = await Promise.all(sizes.map((s) => png(tile({ size: 32 }), s)));
+  const head = Buffer.alloc(6 + 16 * sizes.length); head.writeUInt16LE(0, 0); head.writeUInt16LE(1, 2); head.writeUInt16LE(sizes.length, 4);
+  let off = head.length; sizes.forEach((s, i) => { const o = 6 + 16 * i; head[o] = s; head[o + 1] = s; head.writeUInt16LE(1, o + 4); head.writeUInt16LE(32, o + 6); head.writeUInt32LE(imgs[i].length, o + 8); head.writeUInt32LE(off, o + 12); off += imgs[i].length; });
+  return Buffer.concat([head, ...imgs]);
+}
+const raster = {
+  "src/app/favicon.ico": [await ico(), null],
+  "src/app/apple-icon.png": [await png(tile({ size: 180, radius: 0 }), 180), [180, 180]],            // iOS rounds the corners itself
+  "public/icons/icon-192.png": [await png(tile({ size: 192, radius: 38 }), 192), [192, 192]],
+  "public/icons/icon-512.png": [await png(tile({ size: 512, radius: 100 }), 512), [512, 512]],
+  "public/icons/icon-maskable-512.png": [await png(tile({ size: 512, radius: 0, ratio: 0.5 }), 512), [512, 512]],   // the mark stays inside the 80 % safe circle
+  "src/app/opengraph-image.png": [await png(shareSvg, 1200, 630), [1200, 630]],
+  "src/app/twitter-image.png": [await png(shareSvg, 1200, 630), [1200, 630]],
+};
+
+const problems = [];
+if (CHECK) {
+  for (const [p, content] of Object.entries(text)) if (!fs.existsSync(p) || fs.readFileSync(p, "utf8") !== content) problems.push(`${p} is out of step with the tokens / logo`);
+  for (const [p, [buf, dim]] of Object.entries(raster)) {
+    if (!fs.existsSync(p)) { problems.push(`${p} is missing`); continue; }
+    if (dim) { const m = await sharp(p).metadata(); if (m.width !== dim[0] || m.height !== dim[1]) problems.push(`${p} is ${m.width}x${m.height}, expected ${dim[0]}x${dim[1]}`); }
+    else if (!fs.readFileSync(p).equals(buf)) problems.push(`${p} differs from the generated .ico`);
+  }
+  if (problems.length) { console.error(problems.join("\n")); process.exit(1); }
+  console.log("icons and brand files are in step with src/styles/tokens.css and src/lib/brand.ts");
+} else {
+  for (const [p, content] of Object.entries(text)) { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, content); }
+  for (const [p, [buf]] of Object.entries(raster)) { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, buf); }
+  console.log(`wrote ${Object.keys(text).length + Object.keys(raster).length} files`, C);
+}
