@@ -21,7 +21,7 @@ function attrText(node, name) {
 
 // Fields that hold text taken from the data (a section heading, a snippet, a quote, a preview, a body): shown to a reader only through the shared display layer (src/lib/text/clean.mjs) or a component that uses it.
 const SOURCE_TEXT = /\.(heading|snippet|preview|quote|body|chapter)\b/;
-const CLEANED = /cleanLabel|cleanPlain|cleanHeading|cleanParts|previewText|previewOf|DisplayText|Highlight|toBlocks|CitedText|StatuteText|displayTitle/;
+const CLEANED = /cleanLabel|joinHeading|cleanPlain|cleanHeading|cleanParts|previewText|previewOf|DisplayText|Highlight|toBlocks|CitedText|StatuteText|displayTitle/;
 
 export function scanFile(file) {
   const text = fs.readFileSync(file, "utf8"), sf = ts.createSourceFile(file, text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX), out = [];

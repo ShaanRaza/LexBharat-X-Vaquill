@@ -7,3 +7,4 @@ export function findStatuteMentions<T extends { n: number; number: string | null
 export function ensureCitations<T extends { n: number; number: string | null; actTitle: string }>(text: string, sources: T[]): string;
 export function alignCitations(text: string, sources: { n: number; number: string | null; actTitle: string }[]): string;
 export function displayNumbers(text: string, sources: { n: number }[]): Map<number, number>;
+export function tidyChips(text: string | null | undefined): string;

@@ -10,6 +10,7 @@ export function docTypeOf(doc?: DocRef): DocType;
 export function unitWord(number: string | number, doc?: DocRef): string;
 export function unitsWord(doc?: DocRef): string;
 export function sourceInfo(doc?: DocRef, url?: string | null): { url: string; label: string } | null;
+export function shortActName(title: string | null | undefined): string;
 export function displayTitle(title: string | null | undefined, doc?: DocRef): string;
 
 export function libraryHome(doc?: DocRef): { label: string; href: string };

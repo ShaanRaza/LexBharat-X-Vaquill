@@ -3,7 +3,7 @@ import { unitWord } from "@/lib/docs/docType.mjs";
 import Link from "next/link";
 import { Badge, CitationChip, Notice, Panel } from "@/components/kit";
 import type { BasisItem, Warnings } from "@/lib/drafting/store";
-import { cleanLabel } from "@/lib/text/clean.mjs";
+import { cleanLabel, joinHeading } from "@/lib/text/clean.mjs";
 
 // Panels shared by the generation view and the editor: the legal basis (only sections that were actually retrieved), the "check before you use it" list, and the warnings.
 export const sectionHref = (c: { actId: string; sectionKey: string }) => `/law/${c.actId}/${encodeURIComponent(c.sectionKey)}`;
@@ -16,7 +16,7 @@ export function LegalBasis({ basis, note }: { basis: BasisItem[]; note?: string 
       <CitationChip n={b.n} href={sectionHref(b)} label={label(b)} />
       <div className="min-w-0 text-ui-sm">
         <Link href={sectionHref(b)} className="font-medium text-primary hover:underline">{b.actTitle}</Link>{b.state ? <span className="text-muted"> · {b.state.replace(/-/g, " ")}</span> : null}
-        <p className="text-secondary">{b.number ? `${unitWord(b.number, { title: b.actTitle, category: b.category })}${b.heading ? ` — ${cleanLabel(b.heading)}` : ""}` : <>Unnumbered text{b.preview ? <span className="text-muted"> — {cleanLabel(b.preview)}</span> : null}</>}{b.status === "possibly_incomplete" && <Badge tone="warn" className="ml-2" title="Our copy of this section may be missing text">Possibly incomplete</Badge>}</p>
+        <p className="text-secondary">{b.number ? joinHeading(unitWord(b.number, { title: b.actTitle, category: b.category }), b.heading) : <>Unnumbered text{b.preview ? <span className="text-muted"> — {cleanLabel(b.preview)}</span> : null}</>}{b.status === "possibly_incomplete" && <Badge tone="warn" className="ml-2" title="Our copy of this section may be missing text">Possibly incomplete</Badge>}</p>
         {b.why && <p className="text-muted">{b.why}</p>}
       </div>
     </li>

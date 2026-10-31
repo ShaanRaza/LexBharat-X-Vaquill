@@ -7,7 +7,7 @@ export type Citation = { n: number; actId: string; sectionKey: string; actTitle:
   /** "doc": a passage of the user's own document (actId/sectionKey are then empty; actTitle holds the document name); absent: a section of an Act */
   kind?: "doc" | "judgment"; docId?: string; /** "judgment": a passage of a Supreme Court judgment (actTitle holds the case title, label its citation) */ caseId?: string; caseYear?: number; passage?: number; docName?: string; page?: number | null; label?: string | null; /** the page was read from a scan: shown as "Read from scan — check the original" */ scan?: boolean };
 /** a section the library does not hold that the question named or the answer mentioned: the plain sentence, where to read it, and what kind of gap it is */
-export type AbsentNote = { kind: "missing" | "unreliable" | "mentioned" | "nosuch"; text: string; url: string | null; label: string };
+export type AbsentNote = { kind: "missing" | "unreliable" | "mentioned" | "nosuch"; text: string; url: string | null; label: string; /** the Act's full title: shown as the link's hover text, the sentence uses the short name */ actTitle?: string };
 export type CheckResult = { label: "supported" | "partial" | "check" | "not_found"; unsupported: string[]; missing?: string[]; unavailable?: boolean; cutOff?: boolean; absent?: AbsentNote[] };
 export type StoredMessage = { id: number; role: "user" | "assistant"; content: string; citations: Citation[] | null; check: CheckResult | null; model: string | null; createdAt: string };
 export type ChatSummary = { id: string; title: string; updatedAt: string };
@@ -34,6 +34,11 @@ export async function deleteChat(browserId: string, chatId: string): Promise<boo
 }
 export async function listChats(browserId: string, limit = 50): Promise<ChatSummary[]> {
   return query<ChatSummary>(`SELECT id, title, updated_at AS "updatedAt" FROM chats WHERE browser_id = $1 ORDER BY updated_at DESC LIMIT ${Math.floor(limit)}`, [browserId]);
+}
+/** This browser's recent QUESTIONS (not conversations): each question asked, newest first, with the conversation it belongs to. Reads what is already saved; stores nothing new. */
+export type RecentQuestion = { id: number; chatId: string; question: string; at: string };
+export async function listQuestions(browserId: string, limit = 8): Promise<RecentQuestion[]> {
+  return query<RecentQuestion>(`SELECT m.id, m.chat_id AS "chatId", m.content AS question, m.created_at AS "at" FROM chat_messages m JOIN chats c ON c.id = m.chat_id WHERE c.browser_id = $1 AND m.role = 'user' ORDER BY m.created_at DESC LIMIT ${Math.floor(limit)}`, [browserId]);
 }
 export async function getChat(browserId: string, chatId: string): Promise<{ id: string; title: string; messages: StoredMessage[] } | null> {
   const c = await query<{ id: string; title: string }>("SELECT id, title FROM chats WHERE id = $1 AND browser_id = $2", [chatId, browserId]);

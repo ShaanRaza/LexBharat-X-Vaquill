@@ -108,3 +108,19 @@ export function displayNumbers(text, sources) {
   for (const s of sources) if (!map.has(s.n)) map.set(s.n, next++);
   return map;
 }
+
+/** A line that is only citation chips ("[1]") belongs to the sentence before it: the chips are appended there (once each); with nothing before it the line is dropped. A chip repeated straight after itself
+ *  ("[1] [1]") is shown once. Small models sometimes put the chip on a line of its own, which shows as a stray chip under the answer. */
+export function tidyChips(text) {
+  const lines = String(text ?? "").split("\n"), out = [];
+  const chipsOf = (s) => [...s.matchAll(/\[(\d{1,3})\]/g)].map((m) => m[1]);
+  for (const line of lines) {
+    if (line.trim() && /^\s*(?:\[\d{1,3}\]\s*)+$/.test(line)) {
+      let j = out.length - 1; while (j >= 0 && !out[j].trim()) j--;
+      if (j >= 0) { const have = new Set(chipsOf(out[j])); const add = [...new Set(chipsOf(line))].filter((n) => !have.has(n)); if (add.length) out[j] = `${out[j].replace(/\s+$/, "")} ${add.map((n) => `[${n}]`).join(" ")}`; }
+      continue;
+    }
+    out.push(line);
+  }
+  return out.join("\n").replace(/(\[\d{1,3}\])(?:\s*\1)+/g, "$1").replace(/\n{3,}/g, "\n\n");
+}

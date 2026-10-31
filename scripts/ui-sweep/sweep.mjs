@@ -7,6 +7,11 @@
 //   oldlink    a link to the old India Code address (indiacode.nic.in), which no longer opens
 //   tailhead   a section's text ends with a heading line (the next chapter's title stuck to it)
 //   gaplink    the page says a section is not in our library but has no "Read ... on India Code" link
+//   gaprepeat  a missing section is said more than once (the sentence, "I couldn't find", a note) or its India Code link is shown more than once
+//   statecopy  an answer says a central Act's section is not held, yet lists a state/UT copy of that Act among its sources
+//   chipalone  a citation chip on a line of its own, or stuck to the end of a "not in our library" sentence
+//   gapboxes   a missing-section answer ("Not found in the Acts" + link) that also shows "Check sources", "Not covered ..." or "Also searched"
+//   junkflag   a section whose text is scan junk (src/lib/acts/scanJunk.mjs) is shown as "No problems detected"
 //   listflag   a section whose text is only a table of contents ("375. Rape. 376. Punishment ...") is shown as "No problems detected"
 //   lookup     (API) asking for a section that a central Act lacks returns a state copy instead of "not in our library"
 //   console    errors in the browser console, failed requests, broken images
@@ -18,6 +23,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { OLD_WORDING, RAW_ON_PAGE } from "./rules.mjs";
 import { noticeFor } from "../../src/lib/acts/meaning.mjs";
+import { looksLikeScanJunk } from "../../src/lib/acts/scanJunk.mjs";
 
 const BASE = process.env.SWEEP_BASE ?? "http://localhost:3300", PASSWORD = "throwaway-local-test-9", OUT = ".ui-sweep";
 const VIEWPORTS = [{ id: "desktop-1280", width: 1280, height: 800, mobile: false }, { id: "phone-375", width: 375, height: 812, mobile: true }];
@@ -57,7 +63,7 @@ function askStream(t) {
 function askMissingStream() {
   const text = "Section 375 of the Indian Penal Code isn't in our library yet.";
   const url = "https://indiacode.gov.in/collections/69a0c1fb-7b22-4481-b16a-1dc59b5d02e6?query=Indian%20Penal%20Code";
-  const absent = [{ kind: "missing", text, url, label: "Read Section 375 of the Indian Penal Code on India Code (search for this Act)" }];
+  const absent = [{ kind: "missing", text, url, actTitle: "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)", label: "Read Section 375 of the Indian Penal Code on India Code (search for this Act)" }];
   return [{ type: "start", chatId: "11111111-2222-4333-8444-555555555556" }, { type: "sources", sources: [], queries: [] }, { type: "delta", text }, { type: "check", label: "not_found", unsupported: [], absent }, { type: "done", messageId: 2 }].map((l) => JSON.stringify(l)).join("\n") + "\n";
 }
 
@@ -88,8 +94,16 @@ const pages = (t) => [
     await p.fill("textarea", "What does Section 375 of the Indian Penal Code say?"); await p.keyboard.press("Enter");
     await p.getByText("isn't in our library yet").first().waitFor({ timeout: 15000 }); await p.waitForTimeout(600);
   } },
+  { id: "search-missing-section", url: "/search?q=375%20indian%20penal%20code", wait: 4000 },   // Search says it once with one link too (same wording as Ask)
+  { id: "law-scan-junk", url: "/law/IND_state_19134/s130" },   // scan junk: its label must be "Possibly incomplete" (src/lib/acts/scanJunk.mjs)
   { id: "law-contents-list", url: "/law/IND_state_15289/s375" },
   { id: "law-quote-marks", url: "/law/IND_state_15289/s010" },   // the source prints its quotation marks as long and double bars: curly quotes on screen (src/lib/text/clean.mjs fixQuoteMarks)
+  { id: "ask-recent-questions", url: "/library", before: async (p) => {
+    await p.route((u) => u.pathname === "/api/chat" && u.searchParams.get("questions") === "1", (r) => r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ configured: true, questions: [{ id: 2, chatId: "11111111-2222-4333-8444-555555555555", question: "What does Section 34 of the Indian Penal Code say?", at: new Date().toISOString() }, { id: 1, chatId: "11111111-2222-4333-8444-555555555555", question: "Can a minor enter into a contract?", at: new Date().toISOString() }] }) }));
+  }, prep: async (p) => {   // from another page back to Ask by the menu: the questions asked on this browser are listed
+    await p.locator('a[href="/ask"]:visible').first().click(); await p.getByText("Your recent questions").first().waitFor({ timeout: 15000 }).catch(() => { throw new Error("the recent questions are not shown when returning to Ask from another page"); });
+    const n = await p.locator("[data-recent-questions] li").count(); if (n < 2) throw new Error("only " + n + " of 2 recent questions are listed");
+  } },
   { id: "search-laws", url: "/search?q=notice%20after%20cheque%20bounces", wait: 4000 },
   { id: "search-laws-fallback", url: "/search?q=notice%20after%20cheque%20bounces", before: asFallback("**/api/acts/search*", (u) => u.searchParams.set("exact", "1")), prep: seesNotice },
   { id: "search-judgments", url: "/search?q=bail&tab=judgments", wait: 4000, forbid: [CASE_TITLE_DANGLING] },
@@ -168,6 +182,18 @@ const IN_PAGE = String.raw`(args) => {
   for (const body of document.querySelectorAll("article .font-reading")) { const last = [...body.children].filter((c) => (c.innerText || "").trim()).pop(); if (!last) continue; const t = (last.innerText || "").trim(), letters = t.replace(/[^A-Za-z]/g, ""); if (last.tagName === "H3" || (letters.length >= 6 && letters === letters.toUpperCase() && t.split(/\s+/).length >= 2 && !/[.;:,]$/.test(t) && !/^[(\d]/.test(t))) out.push({ kind: "tailhead", detail: "section text ends with a heading line: \"" + t.slice(0, 80) + "\"" }); }
   // 5. a section we do not hold is said so in the answer: the way to read it on India Code must be on the page too
   if (/(?:isn't|is not) in our library yet|cannot quote it/.test(all) && ![...document.querySelectorAll("a[href]")].some((a) => /on India Code/i.test(a.textContent) && /^https?:/.test(a.getAttribute("href")))) out.push({ kind: "gaplink", detail: "the page says a section is not in our library, but has no \"Read ... on India Code\" link" });
+  // 5b. said once, linked once: the sentence, one link, and no second telling ("I couldn't find ...") on the page
+  { const says = (all.match(/in our library yet/g) || []).length, links = [...document.querySelectorAll("a[href]")].filter((a) => /on India Code/i.test(a.textContent)).length, again = /I couldn'?t find|is missing from our source data/.test(all);
+    if (says > 1 || links > 1 || (says >= 1 && again)) out.push({ kind: "gaprepeat", detail: "a missing section is said " + says + " time(s), linked " + links + " time(s)" + (again ? ", and followed by a second telling (\"I couldn't find\" / \"missing from our source data\")" : "") }); }
+  // 5c. a missing central Act section is not answered from a state copy; no stray chips; nothing but sentence, link and label
+  { const m = /Section\s+\S+\s+of the ([A-Z][^.]{2,80}?)\s+(?:isn't|is not) in our library yet/.exec(all);
+    if (m) {
+      const act = m[1].replace(/[.*+?^$()|[\]{}\\]/g, "\\$&");
+      for (const li of document.querySelectorAll("article li")) { const t = li.innerText || ""; if (new RegExp(act + "[^\\n]*\u00b7\\s*[a-z]", "i").test(t)) out.push({ kind: "statecopy", detail: "says " + m[1] + " is not held, but lists a state copy: " + t.replace(/\s+/g, " ").slice(0, 80) }); }
+      for (const p of document.querySelectorAll("article p")) { const t = (p.innerText || "").trim(); if (/in our library yet\.?\s*\d{1,3}$/.test(t)) out.push({ kind: "chipalone", detail: "a chip is stuck to the sentence: " + t.slice(-50) }); }
+      if (/Not found in the Acts/.test(all)) for (const [re, what] of [[/Check sources/, "the red Check sources label"], [/Not covered by the sections found/, "the Not covered box"], [/Not backed by the sources/, "the Not backed box"], [/Also searched/, "the Also searched list"]]) if (re.test(all)) out.push({ kind: "gapboxes", detail: "a missing-section answer also shows " + what });
+    } }
+  for (const p of document.querySelectorAll("article p")) { const t = (p.innerText || "").trim(); if (/^\d{1,3}(\s+\d{1,3})*$/.test(t) && p.querySelector("button, a")) out.push({ kind: "chipalone", detail: "a citation chip alone on a line: " + t }); }
   // 6. text that is only a table of contents must not be labelled "No problems detected"
   const looksList = (t) => { const m = [...t.matchAll(/(?:^|\s)(\d{1,3}[A-Z]{0,2})\.\s+[A-Z][^.]{1,160}\./g)]; if (m.length < 3 || m.reduce((n, x) => n + x[0].length, 0) / t.length <= 0.6) return false; const n = m.map((x) => parseInt(x[1], 10)); let g = 0; for (let i = 1; i < n.length; i++) if (n[i] - n[i - 1] === 1 || n[i] === n[i - 1]) g++; return g / (n.length - 1) >= 0.7; };
   for (const body of document.querySelectorAll("article .font-reading")) { const t = (body.innerText || "").replace(/\s+/g, " ").trim(); if (looksList(t) && /No problems detected/.test((body.closest("article") || body).innerText || "")) out.push({ kind: "listflag", detail: "a table of contents is shown as a section's text with \"No problems detected\": " + t.slice(0, 70) }); }
@@ -188,15 +214,21 @@ main{padding:70px 16px 0} .wide{width:2000px;height:10px;background:red} aside{p
 <h1>Planted defects</h1><div class="wide">wide</div>
 <p>==> picture 3 omitted <==  and \u2015Man\u2016 and 4[some amended words] and &amp; and \\n and undefined</p><p>Browse Laws & Judgments in the Workspace</p>
 <a href="https://www.indiacode.nic.in/handle/123/456">old address</a><article><div class="font-reading"><p>The section text.</p><h3>OF FRAUDULENT DEEDS AND DISPOSITIONS OF PROPERTY</h3></div></article>
-<p>Section 375 of the Indian Penal Code isn't in our library yet.</p><article><span>No problems detected</span><div class="font-reading"><p>375. Rape. 376. Punishment for rape. 376A. Punishment for causing death or resulting in persistent vegetative state of victim. 376B. Sexual intercourse by husband upon his wife during separation.</p></div></article><span class="pt">looks clickable</span> <a href="#">goes nowhere</a> <a href="/nope-sweep-selftest">dead</a>
+<p>Section 375 of the Indian Penal Code isn't in our library yet. I couldn't find other sections in the Acts I searched.</p><article><div><p>Section 34 of the Indian Penal Code isn't in our library yet. <button>1</button></p><p><button>1</button></p></div><ul><li>The Indian Penal Code \u00b7 madhya pradesh<br>Section 34</li></ul><span>Not found in the Acts</span><span>Check sources</span></article><article><span>No problems detected</span><div class="font-reading"><p>375. Rape. 376. Punishment for rape. 376A. Punishment for causing death or resulting in persistent vegetative state of victim. 376B. Sexual intercourse by husband upon his wife during separation.</p></div></article><span class="pt">looks clickable</span> <a href="#">goes nowhere</a> <a href="/nope-sweep-selftest">dead</a>
 <aside>tall sticky column</aside><div style="height:1200px"></div><p class="last">last words under the bar</p></main><nav class="bar">tabs</nav></body></html>`;
 async function selfTest(browser) {
   const ctx = await browser.newContext({ viewport: { width: 375, height: 700 } }), page = await ctx.newPage();
   await page.route("**/__sweep-selftest", (r) => r.fulfill({ status: 200, contentType: "text/html", body: SELFTEST_HTML }));
   await page.goto(BASE + "/__sweep-selftest"); const got = new Set((await page.evaluate(PAGE_CHECK, { raw, old })).map((f) => f.kind)); await ctx.close();
-  const missing = ["hscroll", "hidden", "raw", "wording", "clickable", "oldlink", "tailhead", "gaplink", "listflag"].filter((k) => !got.has(k));
+  if (!junkLabelled([{ text: PLANTED_JUNK, noProblems: true }]).length) throw new Error("self-test: the sweep did not see planted scan junk shown as \"No problems detected\", so its junkflag check is not working");
+  const missing = ["hscroll", "hidden", "raw", "wording", "clickable", "oldlink", "tailhead", "gaplink", "gaprepeat", "statecopy", "chipalone", "gapboxes", "listflag"].filter((k) => !got.has(k));
   if (missing.length) throw new Error("self-test: the sweep did not see a planted " + missing.join(", ") + " defect, so its checks are not working");
 }
+
+// Scan junk labelled "No problems detected": the page's section text is judged with the same rule the app uses (Node side), and a planted example must be seen or the sweep fails before looking at the app.
+const PLANTED_JUNK = "18. (1) Wherc h c landlord obtains dclivery of possession of any premises from ~ h c tenant in pursuance of an ordcr of the court, such landlord shall within thrce months rcstore the tcnant to possession of thc prcmises, and if hc fails to do so the Controllcr shall dircct that thc tenant be rcinstated.";
+const junkLabelled = (sections) => sections.filter((x) => x.noProblems && looksLikeScanJunk(x.text));
+const SECTIONS_ON_PAGE = () => [...document.querySelectorAll("article .font-reading")].map((b) => ({ text: (b.innerText || "").slice(0, 6000), noProblems: /No problems detected/.test((b.closest("article") || b).innerText || "") }));
 
 const isAllowed = (pageId, vp, f) => allow.some((a) => (a.page === "*" || a.page === pageId) && (!a.viewport || a.viewport === vp) && a.kind === f.kind && (!a.match || String(f.detail).toLowerCase().includes(a.match.toLowerCase())));
 
@@ -236,6 +268,7 @@ async function main() {
           const imgs = await page.evaluate(() => [...document.images].filter((i) => i.complete && i.naturalWidth === 0 && i.getBoundingClientRect().width > 0).map((i) => i.currentSrc.slice(0, 80)));
           for (const i of imgs) add("console", "broken image " + i);
           const res2 = await page.evaluate(PAGE_CHECK, { raw, old });
+          for (const x of junkLabelled(await page.evaluate(SECTIONS_ON_PAGE))) add("junkflag", "scan junk shown as \"No problems detected\": " + x.text.replace(/\s+/g, " ").slice(0, 80));
           for (const f of res2) { if (f.kind === "_links") for (const h of f.detail) { if (!links.has(h)) links.set(h, `${pg.id}@${vp.id}`); } else add(f.kind, f.detail); }
           if (pg.forbid) { const txt = await page.evaluate(() => (document.querySelector("main") || document.body).innerText); for (const [re, why] of pg.forbid) { const m = re.exec(txt); if (m) add("raw", why + ": ..." + txt.slice(Math.max(0, m.index - 30), m.index + 40).replace(/\s+/g, " ") + "..."); } }
           for (const l of logs) add("console", l);

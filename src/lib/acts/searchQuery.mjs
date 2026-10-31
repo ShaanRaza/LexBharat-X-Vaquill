@@ -79,9 +79,9 @@ export function parseSectionLookup(q) {
 }
 
 /** An Act phrase -> how to find it: an exact title prefix (aliases) or the significant words that must all appear in the title. */
-export function actMatcher(actPhrase) {
+export function actMatcher(actPhrase, { noAlias = false } = {}) {   // noAlias: a state's copy is titled in its own way ("The INDIAN-PENAL-CODE-1860"), so its words are matched, not a title prefix
   const c = clean(actPhrase.replace(/^the\s+/i, ""));
-  const alias = ACT_ALIASES[c] ?? ACT_ALIASES[c.replace(/\s+act$/, " act")];
+  const alias = noAlias ? undefined : (ACT_ALIASES[c] ?? ACT_ALIASES[c.replace(/\s+act$/, " act")]);
   if (alias) return { titlePrefix: alias, words: [] };
   const words = c.split(" ").filter((w) => w && !STOP.has(w));
   return { titlePrefix: null, words };

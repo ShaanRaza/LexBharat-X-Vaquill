@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { fixQuoteMarks, cleanHeading, stripTrailingHeadings, toDisplayBlocks, cleanParts, cleanPlain, previewText, stripJunk, tidySpacing, vocabOf } from "./clean.mjs";
+import { joinHeading, fixQuoteMarks, cleanHeading, stripTrailingHeadings, toDisplayBlocks, cleanParts, cleanPlain, previewText, stripJunk, tidySpacing, vocabOf } from "./clean.mjs";
 
 // samples are real patterns found by scripts/audit/junk-scan-*.mjs (docs/audit-junk-*.json)
 test("picture placeholders and stray halves of them never reach a reader", () => {
@@ -126,4 +126,20 @@ test("quote marks 7: the whole display layer applies it (reading text, plain tex
   const raw = `2. Definitions.${BAR}In this section ${BAR}document${DBAR} includes maps.`;
   assert.ok(!/[‖]/.test(cleanPlain(raw)) && cleanPlain(raw).includes("“document”"));
   assert.ok(toDisplayBlocks(raw).every((b) => !b.text.includes(DBAR)));
+});
+
+test("backticks from the scan: a lone one is not shown, fences are removed, a pair is unwrapped, one inside a word is an apostrophe", () => {
+  assert.equal(cleanPlain("Section 34 — `"), "Section 34 —");
+  assert.equal(cleanHeading("`"), null);
+  assert.equal(cleanPlain("consisting of--\n```\n\n```\n(a) the Chief"), "consisting of--\n\n(a) the Chief");
+  assert.equal(cleanPlain("a lone ` mark"), "a lone mark");
+  assert.equal(cleanPlain("51. **Pedalry** **`on` member**"), "51. Pedalry on member");
+  assert.equal(cleanPlain("the Act and it`s end"), "the Act and it’s end");
+  assert.ok(!/`/.test(cleanPlain("x\n```json\ncode\n```\ny `z` and ` end")));
+});
+test("joinHeading leaves no dangling dash when the heading cleans to nothing", () => {
+  assert.equal(joinHeading("Section 34", "`"), "Section 34");
+  assert.equal(joinHeading("Section 34", null), "Section 34");
+  assert.equal(joinHeading("Section 34", "Acts done by several persons"), "Section 34 — Acts done by several persons");
+  assert.equal(joinHeading("Article 14", "―Equality‖", " · "), "Article 14 · “Equality”");
 });

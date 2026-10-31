@@ -8,7 +8,7 @@ import ScheduleTableView, { STAMP_NOTE } from "./ScheduleTableView";
 import DisplayText from "@/components/text/DisplayText";
 import { docTypeOf, libraryHome, sourceInfo, unitsWord, type DocRef } from "@/lib/docs/docType.mjs";
 import { vocabOf } from "@/lib/text/clean.mjs";
-import { cleanLabel } from "@/lib/text/clean.mjs";
+import { cleanLabel, joinHeading } from "@/lib/text/clean.mjs";
 
 // Presentation only: every value arrives ready-made from src/lib/acts/viewModel.ts. Colours, sizes and radii come from the shared tokens (Tailwind names + kit components).
 export type ActHeader = { actId: string; title: string; meta: string[]; officialUrl: string; /** what kind of document this is (src/lib/docs/docType.mjs): drives the unit name (Section, Article, Rule, Regulation, Paragraph) and where the source is */ doc?: DocRef };
@@ -69,7 +69,7 @@ export default function ActTextView({ header, state }: { header: ActHeader; stat
             <li>
               <Link href={href(header.actId, it.key)} aria-current={active ? "true" : undefined} className={`flex items-start gap-2 px-4 py-2 text-ui-base hover:bg-accent ${active ? "bg-accent font-medium" : ""}`}>
                 <StatusDot tone={it.tone} />
-                <span className="min-w-0"><span className="block truncate">{it.label}{it.heading ? ` · ${cleanLabel(it.heading)}` : ""}</span><span className="sr-only">{it.supplemented ? "Filled in from India Code" : it.statusLabel}</span></span>
+                <span className="min-w-0"><span className="block truncate">{joinHeading(it.label, it.heading, " · ")}</span><span className="sr-only">{it.supplemented ? "Filled in from India Code" : it.statusLabel}</span></span>
               </Link>
             </li>
             </Fragment>

@@ -11,7 +11,8 @@ import { evaluateLimits, readLimits } from "@/lib/chat/limits.mjs";
 import { alignCitations, citedNumbers, ensureCitations, sanitizeCitations } from "@/lib/chat/citations.mjs";
 import { buildChatPrompt, buildCheckPrompt, detectNotFound, parseCheck } from "@/lib/chat/prompt.mjs";
 import { buildRewritePrompt, parseRewrite } from "@/lib/chat/rewrite.mjs";
-import { gapLead, gapNotice, unretrievedMentions } from "@/lib/chat/gaps.mjs";
+import { tidyChips } from "@/lib/chat/citations.mjs";
+import { dropNotFoundClaims, gapLead, gapNotice, gapKey, uniqueGaps, dropGapRepeats, unretrievedMentions } from "@/lib/chat/gaps.mjs";
 import { extractLookups } from "@/lib/chat/lookups.mjs";
 import { logGap } from "@/lib/insights/server";
 import { searchSections } from "@/lib/legal-data";
@@ -33,7 +34,7 @@ import { docChatSources, searchAttached } from "@/lib/vault/search";
 import { getDocs } from "@/lib/vault/store";
 import { vaultConfigured } from "@/lib/vault/supabase";
 import { bump } from "@/lib/insights/server";
-import { addMessage, chatTitle, countQuestion, createChat, deleteChat, deleteMessage, isChatId, listChats, ownsChat, recentTurns, uncountQuestion, usageFor, type AbsentNote, type CheckResult } from "@/lib/chat/store";
+import { addMessage, chatTitle, countQuestion, createChat, deleteChat, deleteMessage, isChatId, listChats, listQuestions, ownsChat, recentTurns, uncountQuestion, usageFor, type AbsentNote, type CheckResult } from "@/lib/chat/store";
 
 export const maxDuration = 60;
 const noStore = { "Cache-Control": "no-store" };
@@ -46,6 +47,10 @@ export async function GET(req: Request) {
   const bid = bidOf(req);
   if (!bid) return json({ error: "No browser id." }, 400);
   if (!dbConfigured()) return json({ chats: [], configured: false });
+  // ?questions=1: this browser's recent questions (the Ask page shows them); it reads nothing but the saved chats and never depends on the usage counters
+  if (new URL(req.url).searchParams.get("questions") === "1") {
+    try { return json({ configured: true, questions: await listQuestions(bid, 8) }); } catch { return json({ questions: [], configured: true, error: "Could not load your questions." }, 503); }
+  }
   try {
     const [chats, used] = await Promise.all([listChats(bid), usageFor(bid)]);
     const l = limits();
@@ -122,11 +127,11 @@ export async function POST(req: Request) {
         send({ type: "sources", sources: cites, searchMode: ret.searchMode, queries: [message, ...extra].slice(0, 4), meaning: ret.meaning });
         { const mn = askNoticeFor(ret.meaning); if (mn) send({ type: "note", text: mn }); }   // some searches fell back to exact words (already logged and counted): say so
         // sections the question names that the library does not hold (or holds only as scrambled text): say so plainly, link the Act on India Code, never answer from memory, and log it for the next downloads
-        const absent: AbsentNote[] = ret.gaps.map((g) => gapNotice(g, g.url)), lead = gapLead(ret.gaps), logIt = docIds.length === 0;   // nothing is logged for a question that had a Vault document attached
+        const absent: AbsentNote[] = uniqueGaps(ret.gaps).map((g) => gapNotice(g, g.url)), lead = gapLead(ret.gaps), logIt = docIds.length === 0;   // nothing is logged for a question that had a Vault document attached
         if (logIt) for (const g of ret.gaps.filter((x) => x.kind !== "nosuch")) logGap({ kind: g.kind === "unreliable" ? "unreliable_section" : "missing_section", question: message, act: g.actTitle, section: g.number, actId: g.actId });
         const logNotFound = () => { if (logIt && !ret.gaps.some((x) => x.kind !== "nosuch")) { const l = extractLookups(message)[0]; logGap({ kind: "not_found", question: message, act: l ? l.replace(/^\S+\s+/, "") : null, section: l ? l.split(" ")[0] : null }); } };
         if (!ret.sources.length) {
-          const text = lead ? `${lead}\n\nI couldn't find other sections in the Acts I searched that answer this question. You can read the section on India Code (link below).` : "I couldn't find any sections in the Acts I searched that relate to this question. This tool searches Indian Central and State Acts and short excerpts of Supreme Court judgments; High Court and tribunal decisions are not included yet. Try describing the situation in other words, or name the Act and section.";
+          const text = lead ? lead : "I couldn't find any sections in the Acts I searched that relate to this question. This tool searches Indian Central and State Acts and short excerpts of Supreme Court judgments; High Court and tribunal decisions are not included yet. Try describing the situation in other words, or name the Act and section.";
           send({ type: "delta", text });
           logNotFound();
           const check: CheckResult = { label: "not_found", unsupported: [], ...(absent.length ? { absent } : {}) };
@@ -135,7 +140,9 @@ export async function POST(req: Request) {
         }
 
         // 3. the answer, streamed. If the model fails AFTER some text, the partial answer is kept and marked as cut off.
-        const prompt = buildChatPrompt({ question: message, history, sources: ret.sources, answerRules: tune.currentLaw, gaps: ret.gaps, mapping: mapNote ? MAPPING_ADDENDUM(mapNote) : "", foreign: !!foreign });
+        // sections the question itself names that the library holds (a State's copy included, when the question names the State): the answer says so, never "not found"
+        const held = ret.sources.filter((x) => ret.namedKeys.includes(`${x.actId}|${x.sectionKey}`)).map((x) => ({ n: x.n, number: x.number ?? "", actTitle: x.actTitle, state: x.category === "central" ? null : x.state }));
+        const prompt = buildChatPrompt({ question: message, history, sources: ret.sources, answerRules: tune.currentLaw, gaps: ret.gaps, held, mapping: mapNote ? MAPPING_ADDENDUM(mapNote) : "", foreign: !!foreign });
         let answer = lead ? `${lead}\n\n` : "", model = aiModelFor("chat"), cutOff = false;
         if (lead) send({ type: "delta", text: answer });
         try {
@@ -144,7 +151,9 @@ export async function POST(req: Request) {
           }
         } catch (e) { if (answer.trim() === lead.trim()) throw e; cutOff = true; }
         if (answer.trim() === lead.trim()) throw new AiError("unavailable", "The model returned no answer.");
-        const aligned = alignCitations(ensureCitations(answer.trim(), ret.sources), ret.sources);
+        // The opening sentence is ours (gaps.mjs), not the model's: citation shaping touches only what the model wrote, so no chip is ever attached to the opening sentence ("Section 34 of the Indian Penal Code isn't in our library yet. [1]")
+        const modelPart = (lead ? answer.slice(answer.indexOf(lead) + lead.length) : answer).trim();
+        const aligned = alignCitations(ensureCitations(modelPart, ret.sources), ret.sources);
         const clean = sanitizeCitations(tune.citationCheck ? verifyCitations(aligned, ret.sources).text : aligned, ret.sources.length);
         // shaping that needs no model: the answer first, "Related provisions" only if they apply (switch currentLaw), a citation shown once per sentence (switch citationCheck)
         if (tune.currentLaw) clean.text = relatedOnlyIfApplicable(answerFirst(clean.text, ret.sources), ret.sources.map((x) => ({ n: x.n, number: x.number, heading: x.heading, text: x.text })), expandQuery(message, synonyms.rules).text);
@@ -154,8 +163,16 @@ export async function POST(req: Request) {
         }
         if (tune.citationCheck) clean.text = dedupeCitations(clean.text);
         if (foreign) clean.text = enforceForeign(clean.text, foreign, ret.sources);   // "I couldn't find this in the sources" first; at most one related Indian provision; the foreign law itself is never described
-        clean.text = fixIndiaCodeLinks(clean.text);   // the model may write the old India Code address (India Code's old site), which no longer opens
-        if (clean.text !== answer) send({ type: "replace", text: clean.text });
+        clean.text = tidyChips(foreign ? clean.text : dropNotFoundClaims(clean.text, lead ? [] : held));   // a held section is never reported as not found (with a missing-section opening there is nothing held to claim)   // a chip on a line of its own belongs to the sentence before it
+        clean.text = dropGapRepeats(lead ? `${lead}\n\n${fixIndiaCodeLinks(clean.text)}` : fixIndiaCodeLinks(clean.text), ret.gaps).trim();   // the opening sentence says a section is not held, once: the model must not say it again   // the model may write the old India Code address (India Code's old site), which no longer opens
+        const onlyLead = !!lead && clean.text === lead.trim();   // nothing but "this section isn't in our library": one sentence, one link, one label
+        if (clean.text !== answer.trim()) send({ type: "replace", text: clean.text });
+        if (onlyLead && !cutOff) {
+          send({ type: "sources", sources: [] });   // the sections found along the way are not part of this answer
+          const check: CheckResult = { label: "not_found", unsupported: [], absent };
+          logNotFound(); send({ type: "check", ...check });
+          finish(await addMessage(chatId, { role: "assistant", content: clean.text, citations: [], check, model })); return;
+        }
         if (cutOff) {
           const check: CheckResult = { label: "check", unsupported: [], cutOff: true, ...(absent.length ? { absent } : {}) };
           send({ type: "cutoff" });
@@ -166,10 +183,10 @@ export async function POST(req: Request) {
         // "Section N of <Act>" in the answer that is none of the sources found: if the library does not hold it, say so with a link (the model must not be the source of it)
         for (const m of unretrievedMentions(clean.text, ret.sources)) {
           const r = await searchSections(`${m.number} ${m.act}`, 1, 3).catch(() => null);
-          if (r && r.available && r.mode === "lookup" && r.missing) { const g = { kind: "mentioned" as const, number: r.missing.number, actTitle: r.missing.actTitle }; absent.push(gapNotice(g, officialSourceUrl(r.missing.sourceUrl, r.missing.actTitle))); if (logIt) logGap({ kind: "missing_section", question: message, act: g.actTitle, section: g.number, actId: r.missing.actId }); }
+          if (r && r.available && r.mode === "lookup" && r.missing) { const g = { kind: "mentioned" as const, number: r.missing.number, actTitle: r.missing.actTitle }; if (absent.some((a) => gapKey({ ...g, actTitle: a.actTitle ?? "", number: g.number }) === gapKey(g))) continue; absent.push(gapNotice(g, officialSourceUrl(r.missing.sourceUrl, r.missing.actTitle))); if (logIt) logGap({ kind: "missing_section", question: message, act: g.actTitle, section: g.number, actId: r.missing.actId }); }
         }
         let check: CheckResult;
-        if (detectNotFound(clean.text)) { check = { label: "not_found", unsupported: [] }; logNotFound(); }
+        if (!held.length && detectNotFound(clean.text)) { check = { label: "not_found", unsupported: [] }; logNotFound(); }
         else {
           try {
             const cp = buildCheckPrompt({ question: message, answer: clean.text, sources: ret.sources });

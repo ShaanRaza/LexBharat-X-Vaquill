@@ -5,8 +5,9 @@ import { noticeFor, type SemanticInfo } from "@/lib/acts/meaning.mjs";
 import { useEffect, useState } from "react";
 import { Badge, Highlight, Notice, Panel, RepealedNote, Toggle } from "@/components/kit";
 import { departmentLabel } from "@/lib/acts/departments.mjs";
-import { STATUS_INFO, INCOMPLETE_NOTICE, MISSING_NOTICE, officialSourceUrl } from "@/lib/acts/quality";
-import { cleanLabel } from "@/lib/text/clean.mjs";
+import { STATUS_INFO, INCOMPLETE_NOTICE, officialSourceUrl } from "@/lib/acts/quality";
+import { gapSentence } from "@/lib/chat/gaps.mjs";
+import { cleanLabel, joinHeading } from "@/lib/text/clean.mjs";
 
 // Results of the Acts-tab search box over Central and State Acts (GET /api/acts/search): by meaning by default, exact words on request. Presentation and fetching only; the search itself lives in
 // src/lib/acts/searchStore.ts. Colours, sizes and radii come from the tokens through Tailwind names and the shared kit.
@@ -43,19 +44,19 @@ export default function SectionSearchResults({ q, scope: fixedScope, exact: exac
       {data?.searchAvailable && (
         <>
           {noticeFor(data.semantic) && <Notice tone="warn" role="status" compact className="mt-2"><p>{noticeFor(data.semantic)}</p></Notice>}
-          {data.note && <p className="mt-1 text-ui-sm text-muted">{data.note}</p>}
+          {data.note && !data.missing && <p className="mt-1 text-ui-sm text-muted">{data.note}</p>}   {/* a missing section is said once, in the notice below */}
           {data.mode === "semantic" && <button type="button" onClick={() => { setExact(true); setPage(1); }} className="mt-1 text-ui-sm font-medium text-primary underline">Search exact words instead</button>}
           {exact && data.mode === "text" && <button type="button" onClick={() => { setExact(false); setPage(1); }} className="mt-1 text-ui-sm font-medium text-primary underline">Search by meaning instead</button>}
-          {data.missing && (
+          {data.missing && (   // one sentence and one link, the same words as in Ask (src/lib/chat/gaps.mjs): short Act name, the full title on hover
             <Notice tone="warn" role="status" className="mt-3">
-              <p><strong className="font-medium text-foreground">{unitWord(data.missing.number, { title: data.missing.actTitle })} of {data.missing.actTitle}.</strong> {data.missing.beyond ? `There is no such ${unitWord("1", { title: data.missing.actTitle }).split(" ")[0].toLowerCase()}: it ends at ${data.missing.beyond}.` : MISSING_NOTICE.replace(" Read it on India Code.", "")} <a className="font-medium underline" href={officialSourceUrl(data.missing.sourceUrl)} target="_blank" rel="noopener noreferrer">Read it on India Code</a>.</p>
+              <p>{gapSentence({ kind: data.missing.beyond ? "nosuch" : "missing", number: data.missing.number, actTitle: data.missing.actTitle, max: data.missing.beyond ?? undefined })} <a className="font-medium underline" title={data.missing.actTitle} href={officialSourceUrl(data.missing.sourceUrl, data.missing.actTitle)} target="_blank" rel="noopener noreferrer">Read it on India Code (search for this Act)</a></p>
             </Notice>
           )}
           <ul className="mt-3 space-y-2">
             {data.results.map((h) => (
               <Panel as="li" key={`${h.actId}-${h.sectionKey}`} className="px-card py-4">
                 <Link href={`/law/${h.actId}/${encodeURIComponent(h.sectionKey)}`} className="text-ui-body font-medium text-primary hover:underline">
-                  {h.number ? unitWord(h.number, { title: h.actTitle, category: h.category, department: h.department, actId: h.actId }) : "Text block"}{h.heading ? ` — ${cleanLabel(h.heading)}` : ""}
+                  {joinHeading(h.number ? unitWord(h.number, { title: h.actTitle, category: h.category, department: h.department, actId: h.actId }) : "Text block", h.heading)}
                 </Link>
                 <p className="mt-0.5 text-ui-sm text-secondary">{h.actTitle}{h.chapter ? ` · ${cleanLabel(h.chapter)}` : ""} <RepealedNote actId={h.actId} /></p>
                 {h.snippet && <p className="mt-2 text-ui-base leading-relaxed text-foreground"><Highlight snippet={h.snippet} /></p>}
