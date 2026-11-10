@@ -4,9 +4,8 @@ export type CaseItem = {
   caseId: string; title: string; citation?: string; disposition?: string; decisionDate?: string;
   /** Supreme Court only. High Court rows never carry these (docs/JUDGMENTS-HC.md). */
   petitioner?: string; respondent?: string; benchStrength?: number; judges?: string[];
-  /** High Courts: the party title ("A KUMAR Vs THE STATE"), cleaned by cleanTitle() (displayTitle.mjs). Present only for courts named in HC_DISPLAY_TITLE_COURTS. */
-  displayTitle?: string;
-  /** High Courts: read from the title ("WP/933/2024" gives "933/2024"). */
+  /** High Courts: the registration form read from the source title ("WP/933/2024"). `title` is the case title cleaned by the A225 rule (displayTitle.ts),
+   *  present only for courts named in HC_TITLE_COURTS; otherwise only the case number shows. */
   caseNumber?: string;
   /** High Courts: the case number as recorded in the dataset. It disagrees with the title on about 36% of cases; exact search matches either. */
   caseNumberRecorded?: string;

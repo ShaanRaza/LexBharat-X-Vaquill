@@ -2,7 +2,7 @@
 // Builds the compact High Court search index from the exported case pages (scripts/judgments/export-judgments-hc.sh).
 // usage: node scripts/judgments/build-hc-search-index.mjs [DATA_DIR=../lexbharat-data/judgments-hc-v2] [--years 2020-2025] [--courts a,b]
 //
-// What each case contributes: its CASE NUMBER ("#933/2024", from the title and as recorded, so exact search matches either) and the YEAR in it ("@2024").
+// What each case contributes: its CASE NUMBER ("#933/2024", from caseNumber, the registration form read from the title, and caseNumberRecorded, so exact search matches either) and the YEAR in it ("@2024").
 // No words: party names are not searchable (docs/JUDGMENTS-HC.md). No text, no snippets. The guard (check-hc-output.mjs) fails on any word key in a shard.
 // Layout (written next to the case pages, served the same way: JUDGMENTS_DATA_DIR or JUDGMENTS_DATA_URL):
 //   <DATA_DIR>/search/meta.json            { version, courts[], segments[[year, courtIdx, startId, count]], shards, docs, built }
@@ -41,7 +41,8 @@ for (const sg of segs) {
     const rows = JSON.parse(readFileSync(f, "utf8"));
     for (const c of rows) {
       const id = sg.start + ord++;
-      for (const t of new Set([...caseKeys(c.caseNumber, c.caseNumberRecorded, c.title), ...caseYears(c.caseNumber, c.caseNumberRecorded, c.title)])) { const sk = sinks[shardOf(t)]; sk.buf.push(`${t}\t${id}\n`); postings++; }
+      // case numbers only: the title holds party names now, and a number inside a party name is not the case's number
+      for (const t of new Set([...caseKeys(c.caseNumber, c.caseNumberRecorded), ...caseYears(c.caseNumber, c.caseNumberRecorded)])) { const sk = sinks[shardOf(t)]; sk.buf.push(`${t}\t${id}\n`); postings++; }
       docs++;
     }
     for (let k = 0; k < SHARDS; k++) if (sinks[k].buf.length > 4000) flush(k);

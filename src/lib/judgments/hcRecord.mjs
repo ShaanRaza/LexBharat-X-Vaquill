@@ -42,32 +42,27 @@ const R1 = /^\s*([^/]{0,40}?)\s*\/\s*(\d{1,7})\s*\/\s*(\d{4})(?:\s|$)/;
 const R2 = /^([A-Za-z][A-Za-z0-9 .()&,-]{0,60}?)\s+(?:No\.?\s*)?(\d{1,7})\s*(?:\/|\s(?:of|OF|Of)\s)\s*(\d{4})$/;
 const noNone = (t) => { const x = String(t ?? "").replace(/\s*\bNone\s*$/, "").replace(/^None\s+/, "").replace(/\s+/g, " ").trim(); return x && x !== "None" ? x : null; };
 
-function parseReg(raw) {
-  const t = noNone(raw); if (!t) return { regForm: null, caseNumber: null };
-  let m = R1.exec(t);
-  if (m) { const type = m[1].trim(); return { regForm: `${type ? `${type}/` : ""}${m[2]}/${m[3]}`, caseNumber: `${Number(m[2])}/${m[3]}` }; }
-  m = R2.exec(t);
-  if (m) return { regForm: t, caseNumber: `${Number(m[2])}/${m[3]}` };
-  return { regForm: null, caseNumber: null };
+/** The case number read from the title: its registration form ("WP/933/2024 of A Vs B" gives "WP/933/2024"; "WRIT PETITION 609 of 1999" is kept whole), or
+ *  null when the title is in neither shape. The registration form is the case number, not the title (issue #1). */
+export function caseNumberOf(raw) {
+  const t = noNone(raw); if (!t) return null;
+  const m = R1.exec(t);
+  if (m) { const type = m[1].trim(); return `${type ? `${type}/` : ""}${m[2]}/${m[3]}`; }
+  return R2.test(t) ? t : null;
 }
-/** The case number read from the title ("WP/933/2024 of ..." gives "933/2024"), or null. */
-export const caseNumberOf = (raw) => parseReg(raw).caseNumber;
-/** The title cut to its registration form ("WP/933/2024"): the `title` field, and what the site shows while High Court titles are switched off. A title in
- *  any other shape may hold names, so it gives null. */
-export const regFormOf = (raw) => parseReg(raw).regForm;
-/** The party title ("A KUMAR Vs THE STATE"), cleaned by the port of core/display_title.py: the `displayTitle` field, shown only for switched-on courts. */
-export { cleanTitle } from "./displayTitle.mjs";
+/** The case title to show ("A KUMAR Vs THE STATE"), cleaned by the A225 rule (displayTitle.ts), or null. Shown only for courts in HC_TITLE_COURTS. */
+export { cleanTitle } from "./displayTitle.ts";
 
-/** true when a title is in the form regFormOf() writes: "WP(C)/19571/2019", "151/2022" or "WRIT PETITION 609 of 1999". */
+/** true when a value is in the form caseNumberOf() writes: "WP(C)/19571/2019", "151/2022" or "WRIT PETITION 609 of 1999". */
 export const isRegForm = (t) => /^(?:[^/]{1,40}\/)?\d{1,7}\/\d{4}$/.test(t) || R2.test(t);
 
 /** The only fields a High Court case row may carry, in the exported pages and on the site. No parties, judges, bench size or advocates. */
-export const HC_FIELDS = ["caseId", "title", "displayTitle", "caseNumber", "caseNumberRecorded", "decisionDate", "disposition", "dispositionLabel", "citation", "dateOfRegistration", "pages", "mainPage"];
+export const HC_FIELDS = ["caseId", "title", "caseNumber", "caseNumberRecorded", "decisionDate", "disposition", "dispositionLabel", "citation", "dateOfRegistration", "pages", "mainPage"];
 /** Keeps only HC_FIELDS (and drops null/undefined), so an older export that still holds petitioner, respondent or judges can never reach a page.
- *  displayTitle is kept only when `titles` is true (the court is switched on, see titlesOn). */
-export function pickHcFields(row, { titles = false } = {}) { const o = {}; for (const k of HC_FIELDS) if (row[k] !== null && row[k] !== undefined && (titles || k !== "displayTitle")) o[k] = row[k]; return o; }
+ *  `title` is kept only when `titles` is true (the court is listed in HC_TITLE_COURTS, see titlesOn); otherwise only the case number shows. */
+export function pickHcFields(row, { titles = false } = {}) { const o = {}; for (const k of HC_FIELDS) if (row[k] !== null && row[k] !== undefined && (titles || k !== "title")) o[k] = row[k]; return o; }
 
-/** The switch HC_DISPLAY_TITLE_COURTS: "none" or empty (the default: registration form only), "*" (every High Court), or court slugs separated by commas
+/** The switch HC_TITLE_COURTS: empty (the default: no High Court shows a title, only the case number), "*" (every High Court), or court slugs separated by commas
  *  ("bombay-high-court,kerala-high-court"; case and spaces do not matter). A value that names no High Court turns titles off everywhere and is reported
  *  in `bad`, so a typo can never switch a court on by accident. */
 export function parseTitleCourts(value) {

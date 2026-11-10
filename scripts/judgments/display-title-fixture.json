@@ -1,280 +1,502 @@
 {
- "_note": "High Court display-title cases, copied from tests/core/test_display_title.py in LexBharat-from-scratch (PR #217, merge 543e4ff) by scripts reading that file. Every name is invented there. The JS port (src/lib/judgments/displayTitle.mjs) must give the same answer on every case.",
+ "_note": "Shared title cases for the A225 rule. Python: core/display_title.py and tests/core/test_display_title.py in LexBharat-from-scratch (PR #217, merge 543e4ff), where every name is invented. TypeScript: src/lib/judgments/displayTitle.ts in LexBharat-X-Vaquill. Both test suites load this file; a case is {raw, court_type, expected (title or null), reason (explain_title's reason; null where the Python test checks only the title)}.",
  "source": "LexBharat-from-scratch 543e4ff:tests/core/test_display_title.py",
- "shown": [
-  [
-   "WP/1668/2008 of RAMESH KALE Vs THE STATE OF MAHARASHTRA",
-   "RAMESH KALE Vs THE STATE OF MAHARASHTRA"
-  ],
-  [
-   "CRL MP/17917/2025 of RAMAVATHI Vs THE INSPECTOR OF POLICE",
-   "RAMAVATHI Vs THE INSPECTOR OF POLICE"
-  ],
-  [
-   "W.P.(C)/2750/2017 of DELHI TRANSPORT CORPORATION Vs ANSHUMAN",
-   "DELHI TRANSPORT CORPORATION Vs ANSHUMAN"
-  ],
-  [
-   "/151/2022 of SYED AHMAD Vs STATE OF U.P.",
-   "SYED AHMAD Vs STATE OF U.P."
-  ],
-  [
-   "CW/9310/2021 of LEELARAM S/O SHRI HEERARM Vs SAWARMAL S/O SHRI RAMLAL",
-   "LEELARAM Vs SAWARMAL"
-  ],
-  [
-   "WP/9/2021 of SMT.BOURAWWA W/O.KANTAYYA MATHAPATI Vs SMT.DANAWWA D/O.KANTAYYA",
-   "SMT.BOURAWWA Vs SMT.DANAWWA"
-  ],
-  [
-   "CW/9527/2023 of PRAMOD SHARMA SON OF SHRI BABU LAL Vs STATE OF RAJASTHAN",
-   "PRAMOD SHARMA Vs STATE OF RAJASTHAN"
-  ],
-  [
-   "WP/1/2022 of ASHA MeherAge 72 years, Occ. Agriculture,R/o. Ambi, Tq. Bhoom Vs THE STATE",
-   "ASHA Meher Vs THE STATE"
-  ],
-  [
-   "HCP/15/2017 of M.BHAKYAM, AGED 25 YEARS, Vs THE STATE REP. BY ITS,",
-   "M.BHAKYAM Vs THE STATE REP. BY ITS"
-  ],
-  [
-   "WP(C)/2673/2023 of VIPINA SANTHOSH,  JUNIOR CLERK, Vs PIDAVOOR BANK",
-   "VIPINA SANTHOSH Vs PIDAVOOR BANK"
-  ],
-  [
-   "WP/7/2020 of RAMESH None Vs THE STATE None",
-   "RAMESH Vs THE STATE"
-  ],
-  [
-   "SUO MOTU Vs THE STATE",
-   "SUO MOTU Vs THE STATE"
-  ],
-  [
-   "COAP/32/2009 of NATIONAL AUTO LIMITED (IN LIQUIDATION) Vs",
-   "NATIONAL AUTO LIMITED (IN LIQUIDATION)"
-  ],
-  [
-   "WP/4146/2018 of M/s. Binny  Ltd., Vs The Chief Commercial manger,",
-   "M/s. Binny Ltd. Vs The Chief Commercial manger"
-  ],
-  [
-   "CRL.A/1/2012 of VASUDEVAN @ NANU Vs STATE OF KERALA",
-   "VASUDEVAN @ NANU Vs STATE OF KERALA"
-  ],
-  [
-   "CSD/626/2013 of NITMAN SOFTWARE PVT.LTD. Vs --",
-   "NITMAN SOFTWARE PVT.LTD."
-  ],
-  [
-   "WP/22792/2023 of SALONI KUMAR Vs INCOME TAX OFFICER, THROUGH",
-   "SALONI KUMAR Vs INCOME TAX OFFICER"
-  ],
-  [
-   "WP/4/2021 of CHERIAN Vs THE VILLAGE OFFICER",
-   "CHERIAN Vs THE VILLAGE OFFICER"
-  ],
-  [
-   "WP(C)/1/2012 of KODAKARA PANCHAYATH Vs THE HON'BLE OMBUDSMAN FOR LOCAL SELF",
-   "KODAKARA PANCHAYATH Vs THE HON'BLE OMBUDSMAN FOR LOCAL SELF"
-  ],
-  [
-   "WP/2/2021 of HABEED SYED Vs LEGAL AFFAIRS AND JUSTICE AND ANOTHER",
-   "HABEED SYED Vs LEGAL AFFAIRS AND JUSTICE AND ANOTHER"
-  ],
-  [
-   "WP/2/2020 of A Vs THE STATE OF KERALA, PUBLIC SERVICE COMMISSION",
-   "A Vs THE STATE OF KERALA, PUBLIC SERVICE COMMISSION"
-  ],
-  [
-   "WP/1/2022 of K.S. Vs STATE OF KERALA",
-   "K.S. Vs STATE OF KERALA"
-  ],
-  [
-   "CA/1/2022 of THE EXECUTIVE ENGINEER, MINOR IRRIGATION DIVISION Vs RAJU",
-   "THE EXECUTIVE ENGINEER, MINOR IRRIGATION DIVISION Vs RAJU"
-  ],
-  [
-   "CRP/60/2014 of P.G.MUREGESAN Vs ADVOCATES BAR ASSOCIATION",
-   "P.G.MUREGESAN Vs ADVOCATES BAR ASSOCIATION"
-  ],
-  [
-   "WP/3/2021 of RAMESH Vs THE STATE REP BY THE ADVOCATE GENERAL",
-   "RAMESH Vs THE STATE REP BY THE ADVOCATE GENERAL"
-  ],
-  [
-   "CP/136/2014 of M/s. RUPA VENTURES PRIVATE LIMITED Vs -",
-   "M/s. RUPA VENTURES PRIVATE LIMITED"
-  ],
-  [
-   "CRLP/6677/2019 of LANCY V. LOBO S/O JOHN Vs STATE OF U.P.",
-   "LANCY V. LOBO Vs STATE OF U.P."
-  ],
-  [
-   "WP/2882/2019 of ABHISHEK V. MAYEKAR Vs MAH. UNIVERSITY",
-   "ABHISHEK V. MAYEKAR Vs MAH. UNIVERSITY"
-  ],
-  [
-   "WP/5895/2014 of LAWYERS FOR JUSTICE (NON GOVERNMENT ORGANIZATION) Vs THE STATE",
-   "LAWYERS FOR JUSTICE (NON GOVERNMENT ORGANIZATION) Vs THE STATE"
-  ],
-  [
-   "CRLMP/4692/2018 of A KUMARI Vs THE STATE, DEPARTMENT OF HOME AFFAIRS, AND JUSTICE, SECRETARIAT",
-   "A KUMARI Vs THE STATE, DEPARTMENT OF HOME AFFAIRS, AND JUSTICE, SECRETARIAT"
-  ],
-  [
-   "WP(PIL)/1/2018 of IN RE - JUVENILE JUSTICE (CARE AND PROTECTION OF CHILDREN) ACT",
-   "IN RE - JUVENILE JUSTICE (CARE AND PROTECTION OF CHILDREN) ACT"
-  ],
-  [
-   "CA/9816/2024 of MADHAV Vs EX. ENGINEER, MEDIUM PROJECT LATUR NOW LATUR MINOR IRR",
-   "MADHAV Vs EX. ENGINEER, MEDIUM PROJECT LATUR NOW LATUR MINOR IRR"
-  ],
-  [
-   "CP/669/2013 of VIJAY JAIN Vs EURO DECOR PVT.LTD.CIN NO.U20200MH1997PTC109078",
-   "VIJAY JAIN Vs EURO DECOR PVT.LTD.CIN NO.U20200MH1997PTC109078"
-  ],
-  [
-   "COMS/594/2017 of SEATRADE GROUP N.V. Vs M. V. HANSA BREMEN, IMO NO. 8802088",
-   "SEATRADE GROUP N.V. Vs M. V. HANSA BREMEN, IMO NO. 8802088"
-  ],
-  [
-   "WP/1/2020 of A KUMAR versus B SINGH",
-   "A KUMAR versus B SINGH"
-  ],
-  [
-   "WP/1/2020 of A KUMAR v. B SINGH",
-   "A KUMAR v. B SINGH"
-  ],
-  [
-   "WP/1/2022 of SRISTI (MINOR) Vs STATE",
-   null
-  ]
- ],
- "fallback": [
-  [
-   "FIRST APPEAL 723 of 2004",
-   "no_parties"
-  ],
-  [
-   "None 14470 of 2021",
-   "no_parties"
-  ],
-  [
-   "CIVIL APPEAL 3073 of 2008",
-   "no_parties"
-  ],
-  [
-   "WRIT PETITION None",
-   "no_parties"
-  ],
-  [
-   "WRIT PETITION 4379",
-   "no_parties"
-  ],
-  [
-   "CIVIL APPEAL 4703/08",
-   "no_parties"
-  ],
-  [
-   "SECOND APPEAL 4377",
-   "no_parties"
-  ],
-  [
-   "WP/1/2020 of A Vs THE HON'BLE MR. JUSTICE R K AGRAWAL",
-   "judge_marker"
-  ],
-  [
-   "WP/1/2020 of A Vs JUSTICE R.K. AGRAWAL",
-   "judge_marker"
-  ],
-  [
-   "WP(MD)/14374/2017 of REV. M. VINCENT Vs JUSTICE.J.KANAKARAJ",
-   "judge_marker"
-  ],
-  [
-   "WP(C)/14/2002 of Justice Malay Sengupta Vs Government of Sikkim",
-   "judge_marker"
-  ],
-  [
-   "WP/2/2020 of A Vs SHRI JUSTICE S. R. TENDOLKAR",
-   "judge_marker"
-  ],
-  [
-   "WP/3/2021 of ARMY MAN Vs THE UNION, NO.G/2900880K HAV/GD MAHIPAL SINGH",
-   "pin_or_long_digits"
-  ],
-  [
-   "WP/1/2020 of A Vs [DIPAK MISRA, CJI]",
-   "judge_marker"
-  ],
-  [
-   "WP(C)/22431/2013 of ADV. P.ROY Vs THE TAHSILDAR",
-   "advocate_marker"
-  ],
-  [
-   "Bail Appl./2017/2022 of ADVOCATE PRAVEEN MOHAN Vs STATE OF KERALA",
-   "advocate_marker"
-  ],
-  [
-   "CRL.M.C./1373/2016 of SHAILENDER GOSWAMI Vs THE STANDING COUNSEL",
-   "advocate_marker"
-  ],
-  [
-   "WP/1/2022 of SRISTI (MINOR) Vs STATE OF U.P.",
-   "minor_marker"
-  ],
-  [
-   "WP/1/2022 of MINOR MEGHANA Vs VENKATESH",
-   "minor_marker"
-  ],
-  [
-   "CRLR/3418/2024 of X JUVENILE Vs STATE OF U.P.",
-   "minor_marker"
-  ],
-  [
-   "WP/6013/2024 of SUHAS SONONE THROUGH GUARDIAN BHASKAR Vs THE STATE",
-   "minor_marker"
-  ],
-  [
-   "CRL.A/1/2012 of VASUDEVAN, C.NO.7006 Vs STATE OF KERALA",
-   "pin_or_long_digits"
-  ],
-  [
-   "WP/1/2019 of DASHRATH (C-11609) Vs THE STATE",
-   "pin_or_long_digits"
-  ],
-  [
-   "WRIA/2217/2025 of NITIN RANA PNO NO 192550521 Vs STATE OF U.P.",
-   "pin_or_long_digits"
-  ],
-  [
-   "WP/1/2019 of A Vs THE STATE, PIN 440001",
-   "pin_or_long_digits"
-  ],
-  [
-   "WP/1/2019 of A�B Vs THE STATE",
-   "bad_characters"
-  ],
-  [
-   "",
-   "empty"
-  ],
-  [
-   "   ",
-   "empty"
-  ],
-  [
-   "WP/1/2020 of ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES Vs THE STATE",
-   "too_long"
-  ]
- ],
- "not_text": [
-  null,
-  12,
-  3.5,
-  [
-   "WP/1/2020 of A Vs B"
-  ]
+ "cases": [
+  {
+   "raw": "WP/1668/2008 of RAMESH KALE Vs THE STATE OF MAHARASHTRA",
+   "court_type": "high_court",
+   "expected": "RAMESH KALE Vs THE STATE OF MAHARASHTRA",
+   "reason": "ok"
+  },
+  {
+   "raw": "CRL MP/17917/2025 of RAMAVATHI Vs THE INSPECTOR OF POLICE",
+   "court_type": "high_court",
+   "expected": "RAMAVATHI Vs THE INSPECTOR OF POLICE",
+   "reason": "ok"
+  },
+  {
+   "raw": "W.P.(C)/2750/2017 of DELHI TRANSPORT CORPORATION Vs ANSHUMAN",
+   "court_type": "high_court",
+   "expected": "DELHI TRANSPORT CORPORATION Vs ANSHUMAN",
+   "reason": "ok"
+  },
+  {
+   "raw": "/151/2022 of SYED AHMAD Vs STATE OF U.P.",
+   "court_type": "high_court",
+   "expected": "SYED AHMAD Vs STATE OF U.P.",
+   "reason": "ok"
+  },
+  {
+   "raw": "CW/9310/2021 of LEELARAM S/O SHRI HEERARM Vs SAWARMAL S/O SHRI RAMLAL",
+   "court_type": "high_court",
+   "expected": "LEELARAM Vs SAWARMAL",
+   "reason": "ok"
+  },
+  {
+   "raw": "WP/9/2021 of SMT.BOURAWWA W/O.KANTAYYA MATHAPATI Vs SMT.DANAWWA D/O.KANTAYYA",
+   "court_type": "high_court",
+   "expected": "SMT.BOURAWWA Vs SMT.DANAWWA",
+   "reason": "ok"
+  },
+  {
+   "raw": "CW/9527/2023 of PRAMOD SHARMA SON OF SHRI BABU LAL Vs STATE OF RAJASTHAN",
+   "court_type": "high_court",
+   "expected": "PRAMOD SHARMA Vs STATE OF RAJASTHAN",
+   "reason": "ok"
+  },
+  {
+   "raw": "WP/1/2022 of ASHA MeherAge 72 years, Occ. Agriculture,R/o. Ambi, Tq. Bhoom Vs THE STATE",
+   "court_type": "high_court",
+   "expected": "ASHA Meher Vs THE STATE",
+   "reason": "ok"
+  },
+  {
+   "raw": "HCP/15/2017 of M.BHAKYAM, AGED 25 YEARS, Vs THE STATE REP. BY ITS,",
+   "court_type": "high_court",
+   "expected": "M.BHAKYAM Vs THE STATE REP. BY ITS",
+   "reason": "ok"
+  },
+  {
+   "raw": "WP(C)/2673/2023 of VIPINA SANTHOSH,  JUNIOR CLERK, Vs PIDAVOOR BANK",
+   "court_type": "high_court",
+   "expected": "VIPINA SANTHOSH Vs PIDAVOOR BANK",
+   "reason": "ok"
+  },
+  {
+   "raw": "WP/7/2020 of RAMESH None Vs THE STATE None",
+   "court_type": "high_court",
+   "expected": "RAMESH Vs THE STATE",
+   "reason": "ok"
+  },
+  {
+   "raw": "SUO MOTU Vs THE STATE",
+   "court_type": "high_court",
+   "expected": "SUO MOTU Vs THE STATE",
+   "reason": "ok"
+  },
+  {
+   "raw": "COAP/32/2009 of NATIONAL AUTO LIMITED (IN LIQUIDATION) Vs",
+   "court_type": "high_court",
+   "expected": "NATIONAL AUTO LIMITED (IN LIQUIDATION)",
+   "reason": "ok"
+  },
+  {
+   "raw": "WP/4146/2018 of M/s. Binny  Ltd., Vs The Chief Commercial manger,",
+   "court_type": "high_court",
+   "expected": "M/s. Binny Ltd. Vs The Chief Commercial manger",
+   "reason": "ok"
+  },
+  {
+   "raw": "CRL.A/1/2012 of VASUDEVAN @ NANU Vs STATE OF KERALA",
+   "court_type": "high_court",
+   "expected": "VASUDEVAN @ NANU Vs STATE OF KERALA",
+   "reason": "ok"
+  },
+  {
+   "raw": "CSD/626/2013 of NITMAN SOFTWARE PVT.LTD. Vs --",
+   "court_type": "high_court",
+   "expected": "NITMAN SOFTWARE PVT.LTD.",
+   "reason": "ok"
+  },
+  {
+   "raw": "WP/22792/2023 of SALONI KUMAR Vs INCOME TAX OFFICER, THROUGH",
+   "court_type": "high_court",
+   "expected": "SALONI KUMAR Vs INCOME TAX OFFICER",
+   "reason": "ok"
+  },
+  {
+   "raw": "WP/4/2021 of CHERIAN Vs THE VILLAGE OFFICER",
+   "court_type": "high_court",
+   "expected": "CHERIAN Vs THE VILLAGE OFFICER",
+   "reason": "ok"
+  },
+  {
+   "raw": "WP(C)/1/2012 of KODAKARA PANCHAYATH Vs THE HON'BLE OMBUDSMAN FOR LOCAL SELF",
+   "court_type": "high_court",
+   "expected": "KODAKARA PANCHAYATH Vs THE HON'BLE OMBUDSMAN FOR LOCAL SELF",
+   "reason": "ok"
+  },
+  {
+   "raw": "WP/2/2021 of HABEED SYED Vs LEGAL AFFAIRS AND JUSTICE AND ANOTHER",
+   "court_type": "high_court",
+   "expected": "HABEED SYED Vs LEGAL AFFAIRS AND JUSTICE AND ANOTHER",
+   "reason": "ok"
+  },
+  {
+   "raw": "WP/2/2020 of A Vs THE STATE OF KERALA, PUBLIC SERVICE COMMISSION",
+   "court_type": "high_court",
+   "expected": "A Vs THE STATE OF KERALA, PUBLIC SERVICE COMMISSION",
+   "reason": "ok"
+  },
+  {
+   "raw": "WP/1/2022 of K.S. Vs STATE OF KERALA",
+   "court_type": "high_court",
+   "expected": "K.S. Vs STATE OF KERALA",
+   "reason": "ok"
+  },
+  {
+   "raw": "CA/1/2022 of THE EXECUTIVE ENGINEER, MINOR IRRIGATION DIVISION Vs RAJU",
+   "court_type": "high_court",
+   "expected": "THE EXECUTIVE ENGINEER, MINOR IRRIGATION DIVISION Vs RAJU",
+   "reason": "ok"
+  },
+  {
+   "raw": "CRP/60/2014 of P.G.MUREGESAN Vs ADVOCATES BAR ASSOCIATION",
+   "court_type": "high_court",
+   "expected": "P.G.MUREGESAN Vs ADVOCATES BAR ASSOCIATION",
+   "reason": "ok"
+  },
+  {
+   "raw": "WP/3/2021 of RAMESH Vs THE STATE REP BY THE ADVOCATE GENERAL",
+   "court_type": "high_court",
+   "expected": "RAMESH Vs THE STATE REP BY THE ADVOCATE GENERAL",
+   "reason": "ok"
+  },
+  {
+   "raw": "CP/136/2014 of M/s. RUPA VENTURES PRIVATE LIMITED Vs -",
+   "court_type": "high_court",
+   "expected": "M/s. RUPA VENTURES PRIVATE LIMITED",
+   "reason": "ok"
+  },
+  {
+   "raw": "CRLP/6677/2019 of LANCY V. LOBO S/O JOHN Vs STATE OF U.P.",
+   "court_type": "high_court",
+   "expected": "LANCY V. LOBO Vs STATE OF U.P.",
+   "reason": "ok"
+  },
+  {
+   "raw": "WP/2882/2019 of ABHISHEK V. MAYEKAR Vs MAH. UNIVERSITY",
+   "court_type": "high_court",
+   "expected": "ABHISHEK V. MAYEKAR Vs MAH. UNIVERSITY",
+   "reason": "ok"
+  },
+  {
+   "raw": "WP/5895/2014 of LAWYERS FOR JUSTICE (NON GOVERNMENT ORGANIZATION) Vs THE STATE",
+   "court_type": "high_court",
+   "expected": "LAWYERS FOR JUSTICE (NON GOVERNMENT ORGANIZATION) Vs THE STATE",
+   "reason": "ok"
+  },
+  {
+   "raw": "CRLMP/4692/2018 of A KUMARI Vs THE STATE, DEPARTMENT OF HOME AFFAIRS, AND JUSTICE, SECRETARIAT",
+   "court_type": "high_court",
+   "expected": "A KUMARI Vs THE STATE, DEPARTMENT OF HOME AFFAIRS, AND JUSTICE, SECRETARIAT",
+   "reason": "ok"
+  },
+  {
+   "raw": "WP(PIL)/1/2018 of IN RE - JUVENILE JUSTICE (CARE AND PROTECTION OF CHILDREN) ACT",
+   "court_type": "high_court",
+   "expected": "IN RE - JUVENILE JUSTICE (CARE AND PROTECTION OF CHILDREN) ACT",
+   "reason": "ok"
+  },
+  {
+   "raw": "CA/9816/2024 of MADHAV Vs EX. ENGINEER, MEDIUM PROJECT LATUR NOW LATUR MINOR IRR",
+   "court_type": "high_court",
+   "expected": "MADHAV Vs EX. ENGINEER, MEDIUM PROJECT LATUR NOW LATUR MINOR IRR",
+   "reason": "ok"
+  },
+  {
+   "raw": "CP/669/2013 of VIJAY JAIN Vs EURO DECOR PVT.LTD.CIN NO.U20200MH1997PTC109078",
+   "court_type": "high_court",
+   "expected": "VIJAY JAIN Vs EURO DECOR PVT.LTD.CIN NO.U20200MH1997PTC109078",
+   "reason": "ok"
+  },
+  {
+   "raw": "COMS/594/2017 of SEATRADE GROUP N.V. Vs M. V. HANSA BREMEN, IMO NO. 8802088",
+   "court_type": "high_court",
+   "expected": "SEATRADE GROUP N.V. Vs M. V. HANSA BREMEN, IMO NO. 8802088",
+   "reason": "ok"
+  },
+  {
+   "raw": "FIRST APPEAL 723 of 2004",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "no_parties"
+  },
+  {
+   "raw": "None 14470 of 2021",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "no_parties"
+  },
+  {
+   "raw": "CIVIL APPEAL 3073 of 2008",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "no_parties"
+  },
+  {
+   "raw": "WRIT PETITION None",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "no_parties"
+  },
+  {
+   "raw": "WRIT PETITION 4379",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "no_parties"
+  },
+  {
+   "raw": "CIVIL APPEAL 4703/08",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "no_parties"
+  },
+  {
+   "raw": "SECOND APPEAL 4377",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "no_parties"
+  },
+  {
+   "raw": "WP/1/2020 of A Vs THE HON'BLE MR. JUSTICE R K AGRAWAL",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "judge_marker"
+  },
+  {
+   "raw": "WP/1/2020 of A Vs JUSTICE R.K. AGRAWAL",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "judge_marker"
+  },
+  {
+   "raw": "WP(MD)/14374/2017 of REV. M. VINCENT Vs JUSTICE.J.KANAKARAJ",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "judge_marker"
+  },
+  {
+   "raw": "WP(C)/14/2002 of Justice Malay Sengupta Vs Government of Sikkim",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "judge_marker"
+  },
+  {
+   "raw": "WP/2/2020 of A Vs SHRI JUSTICE S. R. TENDOLKAR",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "judge_marker"
+  },
+  {
+   "raw": "WP/3/2021 of ARMY MAN Vs THE UNION, NO.G/2900880K HAV/GD MAHIPAL SINGH",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "pin_or_long_digits"
+  },
+  {
+   "raw": "WP/1/2020 of A Vs [DIPAK MISRA, CJI]",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "judge_marker"
+  },
+  {
+   "raw": "WP(C)/22431/2013 of ADV. P.ROY Vs THE TAHSILDAR",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "advocate_marker"
+  },
+  {
+   "raw": "Bail Appl./2017/2022 of ADVOCATE PRAVEEN MOHAN Vs STATE OF KERALA",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "advocate_marker"
+  },
+  {
+   "raw": "CRL.M.C./1373/2016 of SHAILENDER GOSWAMI Vs THE STANDING COUNSEL",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "advocate_marker"
+  },
+  {
+   "raw": "WP/1/2022 of SRISTI (MINOR) Vs STATE OF U.P.",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "minor_marker"
+  },
+  {
+   "raw": "WP/1/2022 of MINOR MEGHANA Vs VENKATESH",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "minor_marker"
+  },
+  {
+   "raw": "CRLR/3418/2024 of X JUVENILE Vs STATE OF U.P.",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "minor_marker"
+  },
+  {
+   "raw": "WP/6013/2024 of SUHAS SONONE THROUGH GUARDIAN BHASKAR Vs THE STATE",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "minor_marker"
+  },
+  {
+   "raw": "CRL.A/1/2012 of VASUDEVAN, C.NO.7006 Vs STATE OF KERALA",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "pin_or_long_digits"
+  },
+  {
+   "raw": "WP/1/2019 of DASHRATH (C-11609) Vs THE STATE",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "pin_or_long_digits"
+  },
+  {
+   "raw": "WRIA/2217/2025 of NITIN RANA PNO NO 192550521 Vs STATE OF U.P.",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "pin_or_long_digits"
+  },
+  {
+   "raw": "WP/1/2019 of A Vs THE STATE, PIN 440001",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "pin_or_long_digits"
+  },
+  {
+   "raw": "WP/1/2019 of A�B Vs THE STATE",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "bad_characters"
+  },
+  {
+   "raw": "",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "empty"
+  },
+  {
+   "raw": "   ",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "empty"
+  },
+  {
+   "raw": null,
+   "court_type": "high_court",
+   "expected": null,
+   "reason": null
+  },
+  {
+   "raw": null,
+   "court_type": "supreme_court",
+   "expected": null,
+   "reason": null
+  },
+  {
+   "raw": 12,
+   "court_type": "high_court",
+   "expected": null,
+   "reason": null
+  },
+  {
+   "raw": 12,
+   "court_type": "supreme_court",
+   "expected": null,
+   "reason": null
+  },
+  {
+   "raw": 3.5,
+   "court_type": "high_court",
+   "expected": null,
+   "reason": null
+  },
+  {
+   "raw": 3.5,
+   "court_type": "supreme_court",
+   "expected": null,
+   "reason": null
+  },
+  {
+   "raw": [
+    "WP/1/2020 of A Vs B"
+   ],
+   "court_type": "high_court",
+   "expected": null,
+   "reason": null
+  },
+  {
+   "raw": [
+    "WP/1/2020 of A Vs B"
+   ],
+   "court_type": "supreme_court",
+   "expected": null,
+   "reason": null
+  },
+  {
+   "raw": "SANJAY GANDHI versus UNION OF INDIA AND ORS.",
+   "court_type": "supreme_court",
+   "expected": "SANJAY GANDHI versus UNION OF INDIA AND ORS.",
+   "reason": "ok"
+  },
+  {
+   "raw": "BIHAR STATE ASSOCIATION  versus BIHAR EDUCATION SERVICE ASSOCIATION & ORS",
+   "court_type": "supreme_court",
+   "expected": "BIHAR STATE ASSOCIATION versus BIHAR EDUCATION SERVICE ASSOCIATION & ORS",
+   "reason": "ok"
+  },
+  {
+   "raw": "IN RE. THE BILL TO AMEND S. 20 OF THE SEA CUSTOMS ACT, 1878 versus VS.",
+   "court_type": "supreme_court",
+   "expected": "IN RE. THE BILL TO AMEND S. 20 OF THE SEA CUSTOMS ACT, 1878",
+   "reason": "ok"
+  },
+  {
+   "raw": "THE ORIENTAL INVESTMENT CO. LTD. versus THE COMMISSIONER OF INCOME-TAX,  BOMBAY",
+   "court_type": "supreme_court",
+   "expected": "THE ORIENTAL INVESTMENT CO. LTD. versus THE COMMISSIONER OF INCOME-TAX, BOMBAY",
+   "reason": "ok"
+  },
+  {
+   "raw": "JUSTICE K. S. SHARMA (RETD.) versus UNION OF INDIA & ORS.",
+   "court_type": "supreme_court",
+   "expected": "JUSTICE K. S. SHARMA (RETD.) versus UNION OF INDIA & ORS.",
+   "reason": "ok"
+  },
+  {
+   "raw": "SUPREME COURT ADVOCATES-ON-RECORD  ASSOCIATION AND ANOTHER versus UNION OF INDIA",
+   "court_type": "supreme_court",
+   "expected": "SUPREME COURT ADVOCATES-ON-RECORD ASSOCIATION AND ANOTHER versus UNION OF INDIA",
+   "reason": "ok"
+  },
+  {
+   "raw": "STATE OF KARNATAKA versus STATE OF T. N. [DIPAK MISRA, CJI] 829 THE STATE",
+   "court_type": "supreme_court",
+   "expected": null,
+   "reason": "judge_marker"
+  },
+  {
+   "raw": "SHRI RAM DALMIA versus SHRI JUSTICE S. R. TENDOLKAR & OTHERS",
+   "court_type": "supreme_court",
+   "expected": null,
+   "reason": "judge_marker"
+  },
+  {
+   "raw": "ADMINISTRATOR, CORPORATION versus DATTATRAYA DAHANKAR, ADVOCATE AND ANR.",
+   "court_type": "supreme_court",
+   "expected": null,
+   "reason": "advocate_marker"
+  },
+  {
+   "raw": "WP/1/2020 of ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES ABC INDUSTRIES Vs THE STATE",
+   "court_type": "high_court",
+   "expected": null,
+   "reason": "too_long"
+  },
+  {
+   "raw": "WP/1/2020 of A KUMAR versus B SINGH",
+   "court_type": "high_court",
+   "expected": "A KUMAR versus B SINGH",
+   "reason": "ok"
+  },
+  {
+   "raw": "WP/1/2020 of A KUMAR v. B SINGH",
+   "court_type": "high_court",
+   "expected": "A KUMAR v. B SINGH",
+   "reason": "ok"
+  }
  ]
 }

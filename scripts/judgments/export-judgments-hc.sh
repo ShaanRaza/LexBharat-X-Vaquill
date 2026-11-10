@@ -8,9 +8,9 @@
 #   <OUT>/_quarantine/<slug>.json                            cases left out, with the reason (never mixed into browse output)
 #   <OUT>/_fields/<slug>.json                                fill rates per field, for docs/JUDGMENTS-HC.md
 #   <OUT>/_removed/<slug>.json                               counts of what was left out (parties, judges, title tails, ...), counts only
-# No person data: petitioner, respondent, judges, bench size and advocates are never exported. Each case carries `title`, its registration form
-# ("WP/933/2024"), and `displayTitle`, the party title cleaned by cleanTitle() (src/lib/judgments/displayTitle.mjs), or none when it cannot be cleaned.
-# The site shows displayTitle only for courts named in HC_DISPLAY_TITLE_COURTS (default: none).
+# No person data: petitioner, respondent, judges, bench size and advocates are never exported. `title` is the case title cleaned by the A225 rule
+# (src/lib/judgments/displayTitle.ts), or none when it cannot be cleaned; `caseNumber` is the registration form read from the title ("WP/933/2024").
+# The site shows a title only for courts named in HC_TITLE_COURTS (default empty: only the case number).
 # The guard (scripts/judgments/check-hc-output.mjs) runs at the end and the script fails on any hit. It does not check judgment text (none is exported here).
 # Rules live in export-judgments-hc.sql.
 # Rules (see docs/JUDGMENTS-HC.md): the court comes from the FILE (25 canonical slugs), never from the free-text `court` column (50 spellings); a row whose

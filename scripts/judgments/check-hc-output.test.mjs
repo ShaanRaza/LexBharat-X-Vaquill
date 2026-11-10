@@ -32,7 +32,7 @@ test("a clean export passes", () => {
 test("an injected fake name and address fails the guard, and the CLI exits 1 without printing the value", () => {
   const dir = exportDir({ "court=bombay-high-court/year=2024/page=2/data_0.json": [{ caseId: "HCBM010000992024", title: "WP/99/2024 of TESTA FAKENAME Vs STATE", disposition: "R/o 12 Fake Lane, Fakepur 411001" }] });
   const { hits } = checkDir(dir);
-  assert.ok(hits.some((h) => /title is not in registration form/.test(h.why)));
+  assert.ok(hits.some((h) => /title: not cleaned/.test(h.why)));
   assert.ok(hits.some((h) => /disposition: PIN code/.test(h.why)) && hits.some((h) => /disposition: relation/.test(h.why)));
   const r = spawnSync(process.execPath, [GUARD, dir], { encoding: "utf8" });
   assert.equal(r.status, 1);

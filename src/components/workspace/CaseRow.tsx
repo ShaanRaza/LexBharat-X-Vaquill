@@ -11,13 +11,14 @@ export const benchLabel = (n: number) => (n === 1 ? "Single judge" : n === 2 ? "
 /** Headline = the case reference ("WP/933/2024"), parties line = "A v. B". Many titles already read "WP/933/2024 of A Vs B": then the reference is cut out of the title so the parties are not printed twice. */
 export function heads(c: CaseItem): { heading: string; parties: string | null } {
   const parties = c.petitioner && c.respondent ? `${c.petitioner} v. ${c.respondent}` : null;
-  let heading = c.displayTitle ?? c.title ?? "";   // High Courts: the party title when the court is switched on, else the registration form
+  let heading = c.title ?? "";   // High Courts: the cleaned title only for courts in HC_TITLE_COURTS (hcData.ts); otherwise the case number below
   if (parties) {
     const cut = heading.indexOf(" of ");
     if (cut > 0 && cut <= 40 && c.petitioner && heading.toLowerCase().includes(c.petitioner.slice(0, 10).toLowerCase())) heading = heading.slice(0, cut);
     else if (c.petitioner && heading.toLowerCase().includes(c.petitioner.slice(0, 10).toLowerCase())) return { heading, parties: null };
   }
-  if (!heading) heading = c.caseNumber ? `Case ${c.caseNumber}` : `Case record ${c.caseId}`;
+  const num = c.caseNumber ?? c.caseNumberRecorded;
+  if (!heading) heading = num ? (/^\d/.test(num) ? `Case ${num}` : num) : `Case record ${c.caseId}`;
   else if (/^\d+\s*(of|\/)\s*\d{4}$/i.test(heading)) heading = `Case ${heading}`;
   return { heading, parties };
 }
@@ -37,7 +38,7 @@ export default function CaseRow({ c, href, court, courtName, year }: { c: CaseIt
         {c.citation && <span className="relative z-10 inline-flex items-center gap-1.5"><code className="font-mono text-fs-xs text-foreground">{c.citation}</code><CopyButton text={c.citation} label="Copy citation" /></span>}
         {(c.dispositionLabel ?? (sc ? c.disposition : undefined)) && <span className={chip}>{c.dispositionLabel ?? c.disposition}</span>}
         {sc && c.benchExtracted?.length ? <span className={chip} title="Counted from the bench read from the judgment text">{benchLabel(c.benchExtracted.length)} ◐</span> : null}
-        {c.caseNumber ?? c.caseNumberRecorded ? <span>Case no. {c.caseNumber ?? c.caseNumberRecorded}</span> : c.caseNumberExtracted ? <span title="From the judgment text">{c.caseNumberExtracted} ◐</span> : null}
+        {(c.caseNumber ?? c.caseNumberRecorded) && (sc || c.title) ? <span>Case no. {c.caseNumber ?? c.caseNumberRecorded}</span> : c.caseNumberExtracted ? <span title="From the judgment text">{c.caseNumberExtracted} ◐</span> : null}
         {c.pages ? <span>· {c.pages} {c.pages === 1 ? "page" : "pages"}</span> : null}
         <span className="font-mono">· {c.caseId}</span>
       </p>

@@ -24,8 +24,9 @@ const COURTS = [["bombay-high-court", 2025], ["delhi-high-court", 2019], ["keral
 for (const [court, year] of COURTS) {
   const pages = readdirSync(path.join(DATA, `court=${court}`, `year=${year}`)).filter((x) => x.startsWith("page="));
   const list = JSON.parse(readFileSync(path.join(DATA, `court=${court}`, `year=${year}`, pages[Math.floor(rnd() * pages.length)], "data_0.json"), "utf8"));
-  const cand = list.filter((r) => /^\d+\/\d{4}$/.test(r.caseNumber ?? ""));
-  const r = cand[Math.floor(rnd() * cand.length)], m = /(\d+)\/(\d{4})/.exec(r.caseNumber);
+  const NUM = /(?:^|\/)(\d+)\/(\d{4})$/;   // "933/2024" (older export) or the registration form "WP/933/2024"
+  const cand = list.filter((r) => NUM.test(r.caseNumber ?? ""));
+  const r = cand[Math.floor(rnd() * cand.length)], m = NUM.exec(r.caseNumber);
   targets[court] = { year, rec: r, key: `${Number(m[1])}/${m[2]}` };
 }
 

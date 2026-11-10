@@ -38,7 +38,8 @@ export default async function CasePage({ params, searchParams }: { params: Promi
   // Parties, judges and bench are Supreme Court only: High Court rows never carry them (docs/JUDGMENTS-HC.md), and the page does not show them even if a row did.
   const parties = sc && c.petitioner && c.respondent ? `${c.petitioner} v. ${c.respondent}` : null;
   const caseNo = c.caseNumber ?? c.caseNumberRecorded;
-  const heading = parties ?? c.displayTitle ?? c.title ?? (caseNo ? `Case ${caseNo}` : `Case record ${c.caseId}`);   // High Courts: the party title only when the court is switched on (hcData.ts)
+  // High Courts: the cleaned title only for courts in HC_TITLE_COURTS (hcData.ts); otherwise the case number is the heading
+  const heading = parties ?? c.title ?? (caseNo ? (/^\d/.test(caseNo) ? `Case ${caseNo}` : caseNo) : `Case record ${c.caseId}`);
   const date = longDate(c.decisionDate);
   const benchN = sc ? c.benchExtracted?.length : undefined;
   const benchWord = (n: number) => (n === 1 ? "Single judge" : n === 2 ? "Division bench" : `${n}-judge bench`);
@@ -49,7 +50,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
     ["Court", court.name],
     ["Decision date", date ?? `Not recorded (listed under ${year} from the record's year)`],
     ...(sc ? ([["Citation", c.citation ? <span key="c" className="inline-flex items-center gap-2"><code className="font-mono">{c.citation}</code><CopyButton text={c.citation} label="Copy citation" /></span> : "No citation recorded for this case"]] as [string, React.ReactNode][])
-           : ([["Reporter citation", "None in this dataset for High Courts. Cite by case number."], ["Case number", caseNo ?? "Not recorded"], ...(c.caseNumber && c.caseNumberRecorded && !caseKeys(c.caseNumberRecorded).includes(`#${c.caseNumber}`) ? [["Case number (as recorded)", `${c.caseNumberRecorded} (differs from the title)`]] : [])] as [string, React.ReactNode][])),
+           : ([["Reporter citation", "None in this dataset for High Courts. Cite by case number."], ["Case number", caseNo ?? "Not recorded"], ...(c.caseNumber && c.caseNumberRecorded && !caseKeys(c.caseNumberRecorded).some((k) => caseKeys(c.caseNumber).includes(k)) ? [["Case number (as recorded)", `${c.caseNumberRecorded} (differs from the title)`]] : [])] as [string, React.ReactNode][])),
     ...(sc ? ([["Case number", c.caseNumberExtracted ? <span key="cn">{c.caseNumberExtracted} <span className="text-ui-xs text-muted">◐ from the judgment text; the dataset has no Supreme Court case numbers</span></span> : "Not in the dataset, and not found in a clean form in the report heading"]] as [string, React.ReactNode][]) : []),
     ...(sc && c.benchExtracted?.length ? ([["Bench (from judgment text)", <span key="fb" className="flex flex-wrap items-center gap-1.5">{c.benchExtracted.map((j) => <span key={j} className="rounded-chip bg-accent px-2 py-0.5 text-ui-sm">{j}</span>)}<span className="text-ui-xs text-muted">◐ {c.benchExtracted.length} {c.benchExtracted.length === 1 ? "judge" : "judges"}, read from the judgment heading</span></span>]] as [string, React.ReactNode][]) : []),
     ["Disposition", c.dispositionLabel && c.disposition && c.dispositionLabel.toLowerCase() !== c.disposition.toLowerCase() ? `${c.dispositionLabel} (as recorded: ${c.disposition})` : (c.dispositionLabel ?? c.disposition ?? "Not recorded")],
@@ -59,7 +60,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
     ...(c.dateOfRegistration ? ([["Registered (as recorded)", c.dateOfRegistration]] as [string, React.ReactNode][]) : []),
     ["Record ID", <span key="id" className="font-mono">{c.caseId}</span>],
   ];
-  const prov = provenanceRows(slug, { parties: !!parties, displayTitle: !!c.displayTitle, judges: sc && !!c.judges?.length, bench: !!benchN, benchExtracted: sc && !!c.benchExtracted?.length, caseNumberRecorded: !!c.caseNumberRecorded, caseNumberExtracted: !!c.caseNumberExtracted, pages: !!c.pages, preview: !!preview, citation: !!c.citation, caseNumber: !!c.caseNumber, disposition: !!(c.disposition || c.dispositionLabel), date: !!c.decisionDate });
+  const prov = provenanceRows(slug, { parties: !!parties, title: !sc && !!c.title, judges: sc && !!c.judges?.length, bench: !!benchN, benchExtracted: sc && !!c.benchExtracted?.length, caseNumberRecorded: !!c.caseNumberRecorded, caseNumberExtracted: !!c.caseNumberExtracted, pages: !!c.pages, preview: !!preview, citation: !!c.citation, caseNumber: !!c.caseNumber, disposition: !!(c.disposition || c.dispositionLabel), date: !!c.decisionDate });
   const mark = { shown: "✓", partly: "◐", absent: "–" } as const;
   return (
     <BrowseShell>
