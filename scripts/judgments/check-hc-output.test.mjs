@@ -1,7 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
+import { after } from "node:test";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -17,7 +18,7 @@ test("shared fixture: clean rows pass, every injected name, address, judge and b
 
 /** A minimal export folder with one clean page; `extra` adds files to it. */
 function exportDir(extra = {}) {
-  const dir = mkdtempSync(path.join(tmpdir(), "hc-guard-"));
+  const dir = mkdtempSync(path.join(tmpdir(), "hc-guard-")); after(() => rmSync(dir, { recursive: true, force: true }));
   const files = { "court=bombay-high-court/year=2024/page=1/data_0.json": fixture.clean, "court=bombay-high-court/year=2024/facets.json": { disposition: [{ value: "Disposed of", slug: "disposed-of", count: 1 }] },
     "_manifest/bombay-high-court.json": [{ year: 2024, cases: 5, pages: 1 }], "search/shard=001.json": { "#933/2024": [0], "@2024": [0] }, ...extra };
   for (const [f, v] of Object.entries(files)) { mkdirSync(path.dirname(path.join(dir, f)), { recursive: true }); writeFileSync(path.join(dir, f), JSON.stringify(v)); }
