@@ -1,0 +1,19 @@
+{
+ "_note": "Shared fixture for the High Court person-field guard (scripts/judgments/check-hc-output.mjs here, core/pii_guard.py in LexBharat-from-scratch). Every name, address and PIN below is invented.",
+ "clean": [
+  {"caseId": "HCBM010000012024", "title": "WP/933/2024", "caseNumber": "933/2024", "caseNumberRecorded": "933 of 2024", "decisionDate": "2025-01-10", "disposition": "DISPOSED", "dispositionLabel": "Disposed of", "dateOfRegistration": "05-01-2024", "pages": 12},
+  {"caseId": "UPHC010000022022", "title": "151/2022", "caseNumber": "151/2022", "disposition": "DISMISSED"},
+  {"caseId": "PHHC010000032024", "title": "CIVIL APPEAL 100436 of 2024", "caseNumber": "100436/2024", "caseNumberRecorded": "100436 of 2024"},
+  {"caseId": "KLHC010000042019", "title": "WP(C)/19571/2019", "caseNumber": "19571/2019", "mainPage": 3},
+  {"caseId": "HCBM010000132020", "title": "WP/123456/2020", "caseNumber": "123456/2020", "caseNumberRecorded": "123456"},
+  {"caseId": "DLHC010000052014"}
+ ],
+ "dirty": [
+  {"row": {"caseId": "HCBM010000062024", "title": "WP/12/2024 of TESTA FAKENAME Vs STATE OF NOWHERE"}, "expect": ["title is not in registration form", "title: versus"]},
+  {"row": {"caseId": "HCBM010000072024", "title": "WP/13/2024", "petitioner": "TESTA FAKENAME", "respondent": "STATE OF NOWHERE"}, "expect": ["field \"petitioner\" is not allowed", "field \"respondent\" is not allowed"]},
+  {"row": {"caseId": "HCBM010000082024", "title": "WP/14/2024", "judges": ["HON. FAKE JUDGE"], "benchSize": 1}, "expect": ["field \"judges\" is not allowed", "field \"benchSize\" is not allowed"]},
+  {"row": {"caseId": "HCBM010000092024", "title": "WP/15/2024", "disposition": "TESTA FAKENAME S/o NOBODY, Age 45, Occ. Farmer, R/o Fakepur 411001"}, "expect": ["disposition: relation (S/o, W/o, D/o, R/o, C/o)", "disposition: age", "disposition: occupation", "disposition: PIN code"]},
+  {"row": {"caseId": "HCBM010000102024", "title": "WP/16/2024", "caseNumberRecorded": "16 of 2024 Adv. FAKE COUNSEL"}, "expect": ["caseNumberRecorded: advocate"]},
+  {"row": {"caseId": "HCBM010000112024", "title": "TESTA FAKENAME v. STATE"}, "expect": ["title is not in registration form", "title: versus"]}
+ ]
+}

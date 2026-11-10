@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 // Search smoke test: API checks over fetch, then page checks in headless Chrome (DevTools protocol, no dependencies; needs node --experimental-websocket on Node 20).
-// usage: node --experimental-websocket scripts/judgments/qa-search-smoke.mjs [--base http://localhost:3100] [--data ../lexbharat-data/judgments-hc] [--out scripts/judgments/qa-search-report.md] [--no-ui]
-// HC targets (a real party name and case number for Bombay, Delhi, Kerala, Madras) are drawn from the exported pages with a fixed seed, so they are real records.
+// usage: node --experimental-websocket scripts/judgments/qa-search-smoke.mjs [--base http://localhost:3100] [--data ../lexbharat-data/judgments-hc-v2] [--out scripts/judgments/qa-search-report.md] [--no-ui]
+// HC targets (a real case number for Bombay, Delhi, Kerala, Madras) are drawn from the exported pages with a fixed seed, so they are real records.
+// High Courts are searched by case number and year only: a party-name query must find nothing (docs/JUDGMENTS-HC.md).
 import { spawn } from "node:child_process";
 import { readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 
 const args = process.argv.slice(2), opt = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
-const BASE = opt("--base", "http://localhost:3100").replace(/\/$/, ""), DATA = opt("--data", "../lexbharat-data/judgments-hc"), OUT = opt("--out", "scripts/judgments/qa-search-report.md"), UI = !args.includes("--no-ui");
+const BASE = opt("--base", "http://localhost:3100").replace(/\/$/, ""), DATA = opt("--data", "../lexbharat-data/judgments-hc-v2"), OUT = opt("--out", "scripts/judgments/qa-search-report.md"), UI = !args.includes("--no-ui");
 const rows = []; const SC = "supreme-court-of-india";
 const enc = encodeURIComponent;
 async function api(p, ms = 20000) { const t = Date.now(); const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), ms); try { const r = await fetch(BASE + p, { signal: ctl.signal }); const text = await r.text(); let json = null; try { json = JSON.parse(text); } catch { /* not json */ } return { status: r.status, json, text, ms: Date.now() - t }; } catch (e) { return { status: 0, json: null, text: String(e), ms: Date.now() - t, error: String(e) }; } finally { clearTimeout(timer); } }
@@ -23,9 +24,9 @@ const COURTS = [["bombay-high-court", 2025], ["delhi-high-court", 2019], ["keral
 for (const [court, year] of COURTS) {
   const pages = readdirSync(path.join(DATA, `court=${court}`, `year=${year}`)).filter((x) => x.startsWith("page="));
   const list = JSON.parse(readFileSync(path.join(DATA, `court=${court}`, `year=${year}`, pages[Math.floor(rnd() * pages.length)], "data_0.json"), "utf8"));
-  const cand = list.filter((r) => r.petitioner && r.respondent && /^[A-Za-z .]+$/.test(r.petitioner) && /\d+\s*(?:\/|of)\s*\d{4}/i.test(r.caseNumber ?? ""));
-  const r = cand[Math.floor(rnd() * cand.length)], m = /(\d+)\s*(?:\/|of)\s*(\d{4})/i.exec(r.caseNumber);
-  targets[court] = { year, rec: r, party: (r.petitioner.match(/[A-Za-z]{4,}/g) ?? []).slice(0, 2).join(" "), key: `${Number(m[1])}/${m[2]}` };
+  const cand = list.filter((r) => /^\d+\/\d{4}$/.test(r.caseNumber ?? ""));
+  const r = cand[Math.floor(rnd() * cand.length)], m = /(\d+)\/(\d{4})/.exec(r.caseNumber);
+  targets[court] = { year, rec: r, key: `${Number(m[1])}/${m[2]}` };
 }
 
 // ---------------- API: Supreme Court
@@ -42,32 +43,35 @@ for (const [court, year] of COURTS) {
 // ---------------- API: High Courts
 for (const [court, t] of Object.entries(targets)) {
   const name = court.replace("-high-court", "").replace(/^./, (x) => x.toUpperCase());
-  const p1 = await page(`/api/judgments/search-hc?q=${enc(t.party)}&court=${court}&year=${t.year}&pageSize=50`), p2 = await page(`/api/judgments/search-hc?q=${enc(t.party)}&court=${court}&pageSize=50`);
-  rec("HC", `party name, ${name} (${t.year} page)`, t.party, p1.total, p1.results?.some((x) => x.caseId === t.rec.caseId) && p1.results.every((x) => has(blob(x), ...t.party.split(" "))), "target found, every hit holds the words");
-  rec("HC", `party name, ${name} (all years of the court)`, t.party, p2.total, p2.total >= p1.total && p2.total >= 1, "all-years total is at least the single-year total");
+  const p1 = await page(`/api/judgments/search-hc?q=${enc("state of")}&court=${court}&year=${t.year}&pageSize=50`);
+  rec("HC", `party-name query finds nothing, ${name}`, "state of", p1.total, p1.total === 0 && p1.results?.length === 0, "High Courts are not searched by party name");
+  const a = await page(`/api/judgments/search-hc?q=${enc(t.key)}&court=${court}&pageSize=50`);
+  rec("HC", `case number, ${name} (all years of the court)`, t.key, a.total, a.results?.some((x) => x.caseId === t.rec.caseId), "target found across all years");
+  const recd = t.rec.caseNumberRecorded && /(\d+)\s*(?:\/|of)\s*(\d{4})/i.exec(t.rec.caseNumberRecorded);
+  if (recd && `${Number(recd[1])}/${recd[2]}` !== t.key) { const rr = await page(`/api/judgments/search-hc?q=${enc(`${Number(recd[1])}/${recd[2]}`)}&court=${court}&year=${t.year}&pageSize=50`); rec("HC", `recorded case number also finds it, ${name}`, `${Number(recd[1])}/${recd[2]}`, rr.total, rr.results?.some((x) => x.caseId === t.rec.caseId), "exact search matches the recorded number too"); }
   const n = await page(`/api/judgments/search-hc?q=${enc(t.key)}&court=${court}&year=${t.year}&pageSize=50`), rx = new RegExp(`(?<!\\d)0*${t.key.split("/")[0]}\\s*(?:/|of)\\s*${t.key.split("/")[1]}(?!\\d)`, "i");
-  rec("HC", `case number, ${name} (${t.year} page)`, t.key, n.total, n.results?.some((x) => x.caseId === t.rec.caseId) && n.results.every((x) => rx.test(`${x.caseNumber ?? ""} ${x.title ?? ""}`)), "target found, every hit carries the number");
+  rec("HC", `case number, ${name} (${t.year} page)`, t.key, n.total, n.results?.some((x) => x.caseId === t.rec.caseId) && n.results.every((x) => rx.test(`${x.caseNumber ?? ""} ${x.caseNumberRecorded ?? ""} ${x.title ?? ""}`)), "target found, every hit carries the number (from the title or as recorded)");
 }
 
 // ---------------- year-page search (both courts): a common word, a case number, the literal year
 { const w = await page(`/api/judgments/list?court=${SC}&year=1990&search=state&pageSize=100`); rec("Year page SC", "common word", "state (1990)", w.total, w.total > 5 && w.results.every((c) => has(blob(c), "state")));
   const sc = await page(`/api/judgments/list?court=${SC}&year=2024&search=${enc("5491/2024")}&pageSize=20`); rec("Year page SC", "case number (from the judgment heading)", "5491/2024 (2024)", sc.total, sc.results?.some((c) => c.caseId === "2024_INSC_1046"), "Muskan Enterprises 2024_INSC_1046");
   const sy = await page(`/api/judgments/list?court=${SC}&year=2025&search=2024&pageSize=100`); rec("Year page SC", "literal year string on a 2025 page", "2024 (2025)", sy.total, sy.total > 0 && sy.results.every((c) => has(blob(c), "2024")), "every hit holds 2024 in its case number or citation");
-  const hw = await page(`/api/judgments/search-hc?q=state&court=bombay-high-court&year=2025&pageSize=20`); rec("Year page HC", "common word", "state (Bombay 2025)", hw.total, hw.total > 5 && hw.results.every((c) => has(blob(c), "state")));
-  const hn = await page(`/api/judgments/search-hc?q=${enc("933/2024")}&court=bombay-high-court&year=2025&pageSize=20`); rec("Year page HC", "case number", "933/2024 (Bombay 2025)", hn.total, hn.results?.some((c) => c.caseId === "HCBM030198422024") && hn.results.every((c) => c.year === 2025), "Gurukrupa Industries WP/933/2024 is listed on the 2025 page");
+  const hw = await page(`/api/judgments/search-hc?q=state&court=bombay-high-court&year=2025&pageSize=20`); rec("Year page HC", "a word finds nothing (no party-name search)", "state (Bombay 2025)", hw.total, hw.total === 0);
+  const hn = await page(`/api/judgments/search-hc?q=${enc("933/2024")}&court=bombay-high-court&year=2025&pageSize=20`); rec("Year page HC", "case number", "933/2024 (Bombay 2025)", hn.total, hn.results?.some((c) => c.caseId === "HCBM030198422024") && hn.results.every((c) => c.year === 2025), "WP/933/2024 is listed on the 2025 page");
   const hy = await page(`/api/judgments/search-hc?q=2024&court=bombay-high-court&year=2025&pageSize=50`); const rx = /(?<!\d)\d+\s*(?:\/|of)\s*2024(?!\d)/i;
-  rec("Year page HC", "literal year string on a 2025 page", "2024 (Bombay 2025)", hy.total, hy.total > 1000 && hy.results.every((c) => c.year === 2025 && rx.test(`${c.caseNumber ?? ""} ${c.title ?? ""}`)), "every hit is numbered x/2024 and listed under 2025"); }
+  rec("Year page HC", "literal year string on a 2025 page", "2024 (Bombay 2025)", hy.total, hy.total > 1000 && hy.results.every((c) => c.year === 2025 && rx.test(`${c.caseNumber ?? ""} ${c.caseNumberRecorded ?? ""} ${c.title ?? ""}`)), "every hit is numbered x/2024 and listed under 2025"); }
 
 // ---------------- the this-year / all-years toggle (API level; the page toggle is checked below)
-{ const y = await page(`/api/judgments/search-hc?q=gurukrupa&court=bombay-high-court&year=2025`), a = await page(`/api/judgments/search-hc?q=gurukrupa&court=bombay-high-court`);
-  rec("Toggle", "HC: this year vs all years", "gurukrupa (Bombay)", `${y.total} -> ${a.total}`, y.total === 1 && a.total > y.total);
+{ const y = await page(`/api/judgments/search-hc?q=${enc("933/2024")}&court=bombay-high-court&year=2025`), a = await page(`/api/judgments/search-hc?q=${enc("933/2024")}&court=bombay-high-court`);
+  rec("Toggle", "HC: this year vs all years", "933/2024 (Bombay)", `${y.total} -> ${a.total}`, y.total >= 1 && a.total >= y.total);
   const sy = await page(`/api/judgments/list?court=${SC}&year=1990&search=kesavananda`), sa = await page(`/api/judgments/search?q=kesavananda`);
   rec("Toggle", "SC: this year vs all years", "kesavananda (1990 vs all)", `${sy.total} -> ${sa.total}`, sy.total === 0 && sa.total >= 1); }
 
 // ---------------- result links
 { const picks = [];
   for (const [q, p] of [["kesavananda", "/api/judgments/search?q="], ["union of india", "/api/judgments/search?q="], ["muskan", "/api/judgments/search?q="], ["nazim", "/api/judgments/search?q="], ["state of punjab", "/api/judgments/search?q="]]) { const r = await page(`${p}${enc(q)}&pageSize=6`); const x = r.results?.[Math.floor(rnd() * Math.min(6, r.results.length))]; if (x) picks.push({ kind: "SC", id: x.caseId, url: `/workspace/browse/judgments/${SC}/${x.year}/${enc(x.caseId)}` }); }
-  for (const [court, t] of Object.entries(targets)) { const r = await page(`/api/judgments/search-hc?q=${enc(t.party)}&court=${court}&pageSize=6`); const x = r.results?.[0]; if (x) picks.push({ kind: "HC", id: x.caseId, url: `/workspace/browse/judgments/${x.court}/${x.year}/${enc(x.caseId)}?p=${x.mainPage}` }); }
+  for (const [court, t] of Object.entries(targets)) { const r = await page(`/api/judgments/search-hc?q=${enc(t.key)}&court=${court}&pageSize=6`); const x = r.results?.[0]; if (x) picks.push({ kind: "HC", id: x.caseId, url: `/workspace/browse/judgments/${x.court}/${x.year}/${enc(x.caseId)}?p=${x.mainPage}` }); }
   const r = await page(`/api/judgments/search-hc?q=${enc("6241/2019")}&pageSize=6`); for (const x of (r.results ?? []).slice(0, 2)) picks.push({ kind: "HC", id: x.caseId, url: `/workspace/browse/judgments/${x.court}/${x.year}/${enc(x.caseId)}?p=${x.mainPage}` });
   let ok = 0; const bad = [];
   for (const p of picks.slice(0, 10)) { const g = await api(p.url); const good = g.status === 200 && g.text.includes(p.id); ok += good; if (!good) bad.push(`${p.id} ${g.status}`); }
@@ -106,22 +110,22 @@ if (UI) {
     await type("#case-q", "insurance"); const s1 = await status(); rec("Page SC", "in-year search on the page", "insurance", num(s1), num(s1) >= 1 && /in 1990|match/.test(s1) && /1990/.test(s1), s1);
     await ev(`[...document.querySelectorAll('[role=group] button')].find(b=>/All years/.test(b.innerText))?.click()`); await new Promise((r) => setTimeout(r, 2500)); const s2 = await status();
     rec("Page SC", "this year / all years toggle", "insurance", `${num(s1)} -> ${num(s2)}`, num(s2) > num(s1) && /all years/.test(s2), s2);
-    await type("#case-q", "kesavananda"); const s3 = await status(); const row = await ev(`(document.querySelector('ul.mt-2 li a')||{}).getAttribute&&document.querySelector('ul.mt-2 li a').getAttribute('href')`);
+    await type("#case-q", "kesavananda"); const s3 = await status(); const row = await ev(`(document.querySelector('ul.mt-2.space-y-2 li a')||{}).getAttribute&&document.querySelector('ul.mt-2.space-y-2 li a').getAttribute('href')`);
     rec("Page SC", "Kesavananda across years from a 1990 page", "kesavananda (all years)", num(s3), num(s3) >= 1 && /1973_INSC_91/.test(row ?? ""), String(row));
     // HC year page: "2024" on a 2025 page, toggle
     await go(`${BASE}/workspace/browse/judgments/bombay-high-court?year=2025`);
-    await type("#case-q", "2024"); const h1 = await status(); const first = await ev(`(document.querySelector('ul.mt-2 li')||{}).innerText||''`);
+    await type("#case-q", "2024"); const h1 = await status(); const first = await ev(`(document.querySelector('ul.mt-2.space-y-2 li')||{}).innerText||''`);
     rec("Page HC", '"2024" on the Bombay 2025 page', "2024", num(h1), num(h1) > 1000 && /2024/.test(first) && /in 2025/.test(h1), `${h1} | first: ${first.replace(/\n/g, " ").slice(0, 70)}`);
-    await type("#case-q", "gurukrupa"); const h2 = await status(); await ev(`[...document.querySelectorAll('[role=group] button')].find(b=>/All years/.test(b.innerText))?.click()`); await new Promise((r) => setTimeout(r, 2500)); const h3 = await status();
-    rec("Page HC", "this year / all years toggle", "gurukrupa", `${num(h2)} -> ${num(h3)}`, num(h2) === 1 && num(h3) > 1, h3);
+    await type("#case-q", "933/2024"); const h2 = await status(); await ev(`[...document.querySelectorAll('[role=group] button')].find(b=>/All years/.test(b.innerText))?.click()`); await new Promise((r) => setTimeout(r, 2500)); const h3 = await status();
+    rec("Page HC", "this year / all years toggle", "933/2024", `${num(h2)} -> ${num(h3)}`, num(h2) >= 1 && num(h3) >= num(h2), h3);
     // court overview pages (no year chosen): same bar on both courts
-    for (const [court, q, expect] of [[SC, "kesavananda", /Supreme Court cases[\s\S]*1 case/], ["bombay-high-court", "gurukrupa", /High Court cases/]]) {
+    for (const [court, q, expect] of [[SC, "kesavananda", /Supreme Court cases[\s\S]*1 case/], ["bombay-high-court", "933/2024", /High Court cases/]]) {
       await go(`${BASE}/workspace/browse/judgments/${court}`); const r = await type("#court-q", q); const t = await ev(`document.querySelector('main').innerText`);
       rec(court === SC ? "Page SC" : "Page HC", "court page (year grid) has the same search bar", q, "-", r !== "NO INPUT" && expect.test(t) && !(await ev(`!!document.querySelector('[role=alert]')`))); }
     // browse page: garbage and long input in the real bar
     await go(`${BASE}/workspace/browse`);
     for (const [label, q] of [["special characters", "<>%$&"], ["random characters", "xqzjwvkp"]]) { await type("#browse-q", q); const t = await ev(`document.querySelector('main').innerText`);
-      rec("Page garbage", `${label} in the browse search bar`, q, "-", !(await ev(`!!document.querySelector('[role=alert]')`)) && !/undefined|NaN|\[object/.test(t) && /0 cases|No Supreme Court case matches|No High Court case matches|Type a name/.test(t), "graceful empty state, no error alert"); }
+      rec("Page garbage", `${label} in the browse search bar`, q, "-", !(await ev(`!!document.querySelector('[role=alert]')`)) && !/undefined|NaN|\[object/.test(t) && /0 cases|No Supreme Court case matches|No High Court case matches|searched by case number/.test(t), "graceful empty state, no error alert"); }
     const len = await type("#browse-q", "kumar ".repeat(100)); rec("Page garbage", "600-character paste in the search bar", "kumar kumar ...", len, len === 200 && !(await ev(`!!document.querySelector('[role=alert]')`)), "input clamps at 200 characters, no error");
     rec("Pages", "no uncaught script errors during the page checks", "-", errors.length, errors.length === 0, errors[0] ?? "");
   } catch (e) { rec("Pages", "page checks ran to the end", "-", "-", false, String(e).slice(0, 160)); }
