@@ -11,7 +11,7 @@ export const benchLabel = (n: number) => (n === 1 ? "Single judge" : n === 2 ? "
 /** Headline = the case reference ("WP/933/2024"), parties line = "A v. B". Many titles already read "WP/933/2024 of A Vs B": then the reference is cut out of the title so the parties are not printed twice. */
 export function heads(c: CaseItem): { heading: string; parties: string | null } {
   const parties = c.petitioner && c.respondent ? `${c.petitioner} v. ${c.respondent}` : null;
-  let heading = c.title ?? "";
+  let heading = c.displayTitle ?? c.title ?? "";   // High Courts: the party title when the court is switched on, else the registration form
   if (parties) {
     const cut = heading.indexOf(" of ");
     if (cut > 0 && cut <= 40 && c.petitioner && heading.toLowerCase().includes(c.petitioner.slice(0, 10).toLowerCase())) heading = heading.slice(0, cut);

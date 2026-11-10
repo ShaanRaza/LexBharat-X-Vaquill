@@ -9,7 +9,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { ALL_COURTS } from "@/data/workspaceBrowse";
-import { pickHcFields } from "./hcRecord.mjs";
+import { parseTitleCourts, pickHcFields, titlesOn } from "./hcRecord.mjs";
 import type { CaseItem, Facet } from "./types";
 
 export const HC_PAGE_SIZE = 100;
@@ -20,8 +20,12 @@ export function hcSourceKind(): "dir" | "url" | null {
   return null;
 }
 
-// Only the allowed High Court fields reach the site, even from an older export that still holds petitioner, respondent or judges.
-const clean = (r: Record<string, unknown>): CaseItem => pickHcFields(r) as unknown as CaseItem;
+// Only the allowed High Court fields reach the site, even from an older export that still holds petitioner, respondent or judges. The party title
+// (displayTitle) is kept only for courts named in HC_DISPLAY_TITLE_COURTS (default: none, so the registration form is shown). This is the one place the
+// switch is applied: lists, search results, the case page and the API all read pages through here.
+const clean = (r: Record<string, unknown>, court: string): CaseItem => pickHcFields(r, { titles: titlesOn(court, process.env.HC_DISPLAY_TITLE_COURTS) }) as unknown as CaseItem;
+const badSwitch = parseTitleCourts(process.env.HC_DISPLAY_TITLE_COURTS).bad;
+if (badSwitch.length) console.error(`HC_DISPLAY_TITLE_COURTS names no High Court (${badSwitch.join(", ")}): High Court titles stay off. Use court slugs such as bombay-high-court, "*" or "none".`);
 
 export type HcFilter = { kind: "disp"; key: string };
 export type HcFacets = { disposition: (Facet & { slug: string })[] };
@@ -49,7 +53,7 @@ const okCourtYear = (court: string, year: number) => ALL_COURTS.some((c) => c.sl
 export async function readHcPage(court: string, year: number, page: number, filter?: HcFilter): Promise<CaseItem[] | null> {
   if (!okCourtYear(court, year) || !Number.isInteger(page) || page < 1 || page > 100000 || (filter && (!SLUG.test(filter.key) || filter.kind !== "disp"))) return null;
   const rows = await readDataJson(`court=${court}/year=${year}/${filter ? `${filter.kind}=${filter.key}/` : ""}page=${page}/data_0.json`);
-  return Array.isArray(rows) ? (rows as Record<string, unknown>[]).map(clean) : null;
+  return Array.isArray(rows) ? (rows as Record<string, unknown>[]).map((r) => clean(r, court)) : null;
 }
 
 /** Opening-text previews of one Supreme Court year ({caseId: text}), or null (no source, or no previews for that year). */

@@ -38,7 +38,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
   // Parties, judges and bench are Supreme Court only: High Court rows never carry them (docs/JUDGMENTS-HC.md), and the page does not show them even if a row did.
   const parties = sc && c.petitioner && c.respondent ? `${c.petitioner} v. ${c.respondent}` : null;
   const caseNo = c.caseNumber ?? c.caseNumberRecorded;
-  const heading = parties ?? c.title ?? (caseNo ? `Case ${caseNo}` : `Case record ${c.caseId}`);
+  const heading = parties ?? c.displayTitle ?? c.title ?? (caseNo ? `Case ${caseNo}` : `Case record ${c.caseId}`);   // High Courts: the party title only when the court is switched on (hcData.ts)
   const date = longDate(c.decisionDate);
   const benchN = sc ? c.benchExtracted?.length : undefined;
   const benchWord = (n: number) => (n === 1 ? "Single judge" : n === 2 ? "Division bench" : `${n}-judge bench`);
@@ -59,7 +59,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
     ...(c.dateOfRegistration ? ([["Registered (as recorded)", c.dateOfRegistration]] as [string, React.ReactNode][]) : []),
     ["Record ID", <span key="id" className="font-mono">{c.caseId}</span>],
   ];
-  const prov = provenanceRows(slug, { parties: !!parties, judges: sc && !!c.judges?.length, bench: !!benchN, benchExtracted: sc && !!c.benchExtracted?.length, caseNumberRecorded: !!c.caseNumberRecorded, caseNumberExtracted: !!c.caseNumberExtracted, pages: !!c.pages, preview: !!preview, citation: !!c.citation, caseNumber: !!c.caseNumber, disposition: !!(c.disposition || c.dispositionLabel), date: !!c.decisionDate });
+  const prov = provenanceRows(slug, { parties: !!parties, displayTitle: !!c.displayTitle, judges: sc && !!c.judges?.length, bench: !!benchN, benchExtracted: sc && !!c.benchExtracted?.length, caseNumberRecorded: !!c.caseNumberRecorded, caseNumberExtracted: !!c.caseNumberExtracted, pages: !!c.pages, preview: !!preview, citation: !!c.citation, caseNumber: !!c.caseNumber, disposition: !!(c.disposition || c.dispositionLabel), date: !!c.decisionDate });
   const mark = { shown: "✓", partly: "◐", absent: "–" } as const;
   return (
     <BrowseShell>

@@ -9,7 +9,10 @@ SELECT case_id AS "caseId", any_value(nullif(trim(title),'')) AS title_raw, any_
   bool_or(nullif(trim(petitioner),'') IS NOT NULL OR nullif(trim(respondent),'') IS NOT NULL) AS had_parties, bool_or(len(judges) > 0) AS had_judges
 FROM read_parquet('__FILE__') GROUP BY case_id;
 
--- Title rules: the same as regTitle() in src/lib/judgments/hcRecord.mjs (hcRecord.test.mjs runs both on the same titles).
+-- Title rules: `title` (registration form) and `caseNumber` are the same as regFormOf() / caseNumberOf() in src/lib/judgments/hcRecord.mjs (hcRecord.test.mjs
+-- runs both on the same titles). The party title (displayTitle) cannot be cleaned here: its rules need look-ahead and look-behind, which DuckDB's regex
+-- engine lacks. So t0 goes out as titleRaw in the TEMP files only, and scripts/judgments/hc-display-titles.mjs turns it into displayTitle (or null) and
+-- removes titleRaw before any page is written. The guard fails if titleRaw ever reaches the output.
 -- t0: the source writes a missing number as the word None ("WRIT PETITION None", "None None"): strip it, collapse spaces; an empty result stays NULL.
 CREATE TEMP TABLE c0 AS
 SELECT *, nullif(nullif(trim(regexp_replace(regexp_replace(regexp_replace(title_raw, '\s*\bNone\s*$', ''), '^None\s+', ''), '\s+', ' ', 'g')), ''), 'None') AS t0 FROM g;
@@ -65,9 +68,9 @@ CREATE TEMP TABLE f AS SELECT *, lower(replace("dispositionLabel", ' ', '-')) AS
 CREATE TEMP TABLE fp AS
 SELECT year, 'disp' AS kind, disp_slug AS key,
   CAST(floor((row_number() OVER (PARTITION BY year, disp_slug ORDER BY "decisionDate" DESC NULLS LAST, "caseId") - 1) / 100) AS INTEGER) + 1 AS fpage,
-  page AS "mainPage", "caseId", title, "caseNumber", "caseNumberRecorded", "decisionDate", disposition, "dispositionLabel", citation, "dateOfRegistration", pages
+  page AS "mainPage", "caseId", title, t0 AS "titleRaw", "caseNumber", "caseNumberRecorded", "decisionDate", disposition, "dispositionLabel", citation, "dateOfRegistration", pages
 FROM f WHERE disp_slug IS NOT NULL;
-COPY (SELECT year, kind, key, fpage AS page, "mainPage", "caseId", title, "caseNumber", "caseNumberRecorded", "decisionDate", disposition, "dispositionLabel", citation, "dateOfRegistration", pages
+COPY (SELECT year, kind, key, fpage AS page, "mainPage", "caseId", title, "titleRaw", "caseNumber", "caseNumberRecorded", "decisionDate", disposition, "dispositionLabel", citation, "dateOfRegistration", pages
       FROM fp ORDER BY year, kind, key, fpage, "decisionDate" DESC NULLS LAST, "caseId") TO '__TMP__/__SLUG__.filtered.ndjson' (FORMAT JSON, ARRAY false);
 COPY (
   SELECT y.year,
@@ -87,5 +90,5 @@ COPY (SELECT count(*) AS cases,
     AND "caseNumber" <> coalesce(CAST(try_cast(regexp_extract("caseNumberRecorded", '^0*(\d{1,7})\s*(?:/|\s(?:of|OF|Of)\s)\s*(\d{4})', 1) AS BIGINT) AS VARCHAR) || '/' || regexp_extract("caseNumberRecorded", '^0*(\d{1,7})\s*(?:/|\s(?:of|OF|Of)\s)\s*(\d{4})', 2), '')) AS case_number_differs,
   (SELECT count(*) FROM r WHERE wrong_court) AS wrong_court_quarantined
   FROM p) TO '__OUT__/_removed/__SLUG__.json' (FORMAT JSON, ARRAY false);
-COPY (SELECT "caseId", title, "caseNumber", "caseNumberRecorded", "decisionDate", disposition, "dispositionLabel", citation, "dateOfRegistration", pages, year, page FROM p
+COPY (SELECT "caseId", title, t0 AS "titleRaw", "caseNumber", "caseNumberRecorded", "decisionDate", disposition, "dispositionLabel", citation, "dateOfRegistration", pages, year, page FROM p
       ORDER BY year, page, "decisionDate" DESC NULLS LAST, "caseId") TO '__TMP__/__SLUG__.ndjson' (FORMAT JSON, ARRAY false);

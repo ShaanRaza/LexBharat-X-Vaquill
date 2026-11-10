@@ -5,8 +5,14 @@
 // WHAT IT PROMISES, and nothing more:
 //   1. No person field: every case row carries only HC_FIELDS (src/lib/judgments/hcRecord.mjs). petitioner, respondent, judges, bench size, advocates and
 //      addresses are not allowed, and neither is a bench filter (bench=... folders, a "bench" facet).
-//   2. No names in the header: the title must be in its registration form ("WP/933/2024"), and no text field may hold a name pattern
-//      (" Vs ", " v. ", "versus", S/o W/o D/o R/o C/o, "Age 45", "Occ.", "advocate", "Adv.", a 6-digit PIN code).
+//   2. Titles may name the parties, but carry no ages, occupations, addresses, PIN codes, relations, advocates or judges:
+//      - `title` must be in its registration form ("WP/933/2024");
+//      - `displayTitle` (the party title, shown only for switched-on courts) may hold " Vs " and " v. ", and must pass every blocker of the port of
+//        core/display_title.py (judge marker, advocate, minor or guardian, id number or PIN or 6+ digits, mojibake, a relation / age / address / occupation
+//        marker left over, over 240 characters);
+//      - every other text field may hold none of: " Vs ", " v. ", "versus", S/o W/o D/o R/o C/o, "Age 45", "Occ.", "advocate", "Adv.", a 6-digit PIN code,
+//        a judge marker ("Hon'ble Mr. Justice", "[.. CJI]", "(J.)"), or an address word ("resident of", "residing", "permanent address", "at post", "post:");
+//      - the raw source title (titleRaw) must never reach the output.
 // WHAT IT DOES NOT CHECK: the judgment body. The High Court export holds no judgment text, but wherever judgment text is used (the opening text of a
 // Supreme Court case, Qdrant payloads and embeddings in LexBharat-from-scratch) it is kept as recorded and DOES contain names of parties and judges,
 // and sometimes addresses. Pattern rules cannot find every name in free text, so this guard does not try.
@@ -15,6 +21,7 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { JUDGE, displayTitleHits } from "../../src/lib/judgments/displayTitle.mjs";
 import { HC_FIELDS, isRegForm } from "../../src/lib/judgments/hcRecord.mjs";
 
 export const PATTERNS = [
@@ -24,6 +31,8 @@ export const PATTERNS = [
   ["occupation", /\bocc(?:\.|upation\b)/i],
   ["advocate", /\badvocates?\b|\badv\./i],
   ["PIN code", /(?<![\d/])[1-8]\d{5}(?![\d/])/],
+  ["judge marker", JUDGE],
+  ["address word", /\bresident\s+of\b|\bresiding\b|\bpermanent\s+address\b|\bat\s+post\b|\bpost\s*:/i],
 ];
 const CASE_NO = /(?<!\d)\d{1,7}\s*(?:\/|of)\s*\d{4}(?!\d)/gi;   // "100436 of 2024" is a case number, not a PIN code
 /** Name-pattern kinds found in one text value. */
@@ -36,14 +45,19 @@ export function rowHits(row) {
   for (const [k, v] of Object.entries(row)) {
     if (!HC_FIELDS.includes(k)) { out.push(`field "${k}" is not allowed`); continue; }
     if (k === "title" && v !== null && !isRegForm(v)) out.push(`title is not in registration form`);
-    if (typeof v === "string" && k !== "caseId") for (const h of textHits(v)) out.push(`${k}: ${h}`);
+    if (k === "displayTitle") { for (const h of typeof v === "string" ? displayTitleHits(v) : ["not text"]) out.push(`displayTitle: ${h}`); continue; }   // " Vs " allowed here only
+    // In the registration form, "(J)" right before the first slash is the case type ("Crl.A.(J)/12/2012", a jail appeal: 1,386 cases in Gauhati, Tripura
+    // and Meghalaya), not a judge. Everywhere else "(J)" stays a judge marker.
+    const text = k === "title" && typeof v === "string" ? v.replace(/\(\s*J\s*\)(?=\/)/, "") : v;
+    if (typeof text === "string" && k !== "caseId") for (const h of textHits(text)) out.push(`${k}: ${h}`);
   }
   return out;
 }
 
 const KEYS = { _manifest: ["year", "cases", "pages"], _quarantine: ["caseId", "reason", "decision_date_raw", "year_raw"],
   _fields: ["cases", "title", "case_number", "case_number_recorded", "decision_date", "disposition", "disposition_chip", "pages", "citation"],
-  _removed: ["cases", "parties_removed", "judges_removed", "title_tail_cut", "title_dropped", "case_number_differs", "wrong_court_quarantined"] };
+  _removed: ["cases", "parties_removed", "judges_removed", "title_tail_cut", "title_dropped", "case_number_differs", "wrong_court_quarantined",
+    "display_title_shown", "display_title_dropped", "display_title_dropped_reasons"] };
 const META = ["version", "built", "shards", "docs", "postings", "words", "courts", "segments", "scope"];
 const json = (f) => JSON.parse(readFileSync(f, "utf8"));
 const objHits = (o, allowed) => Object.entries(o).flatMap(([k, v]) => (!allowed.includes(k) ? [`field "${k}" is not allowed`] : typeof v === "string" ? textHits(v).map((h) => `${k}: ${h}`) : []));

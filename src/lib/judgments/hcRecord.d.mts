@@ -1,6 +1,10 @@
 export const HC_PREFIXES: Record<string, string>;
 export function courtOfId(id: string | null | undefined): string | null;
-export function regTitle(raw: string | null | undefined): { title: string | null; caseNumber: string | null };
 export function isRegForm(t: string): boolean;
 export const HC_FIELDS: string[];
-export function pickHcFields(row: Record<string, unknown>): Record<string, unknown>;
+export function pickHcFields(row: Record<string, unknown>, opts?: { titles?: boolean }): Record<string, unknown>;
+export function caseNumberOf(raw: string | null | undefined): string | null;
+export function regFormOf(raw: string | null | undefined): string | null;
+export function cleanTitle(raw: unknown): string | null;
+export function parseTitleCourts(value: string | null | undefined): { all: boolean; courts: Set<string>; bad: string[] };
+export function titlesOn(court: string, value: string | null | undefined): boolean;

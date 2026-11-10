@@ -8,7 +8,9 @@
 #   <OUT>/_quarantine/<slug>.json                            cases left out, with the reason (never mixed into browse output)
 #   <OUT>/_fields/<slug>.json                                fill rates per field, for docs/JUDGMENTS-HC.md
 #   <OUT>/_removed/<slug>.json                               counts of what was left out (parties, judges, title tails, ...), counts only
-# No person data: petitioner, respondent, judges, bench size and advocates are never exported; titles are cut to their registration form ("WP/933/2024").
+# No person data: petitioner, respondent, judges, bench size and advocates are never exported. Each case carries `title`, its registration form
+# ("WP/933/2024"), and `displayTitle`, the party title cleaned by cleanTitle() (src/lib/judgments/displayTitle.mjs), or none when it cannot be cleaned.
+# The site shows displayTitle only for courts named in HC_DISPLAY_TITLE_COURTS (default: none).
 # The guard (scripts/judgments/check-hc-output.mjs) runs at the end and the script fails on any hit. It does not check judgment text (none is exported here).
 # Rules live in export-judgments-hc.sql.
 # Rules (see docs/JUDGMENTS-HC.md): the court comes from the FILE (25 canonical slugs), never from the free-text `court` column (50 spellings); a row whose
@@ -32,6 +34,8 @@ for f in "$DIR"/in_*_judgments.parquet; do
   PX="$(node --input-type=module -e "import { HC_PREFIXES } from './src/lib/judgments/hcRecord.mjs'; console.log(Object.keys(HC_PREFIXES).filter((k) => HC_PREFIXES[k] === process.argv[1]).map((k) => \"'\" + k + \"'\").join(','))" "$s")"
   [ -n "$PX" ] || { echo "no CNR prefix known for $s (src/lib/judgments/hcRecord.mjs)" >&2; exit 1; }
   nice -n 10 duckdb -c "$(sed -e "s|__FILE__|$f|g" -e "s|__OUT__|$OUT|g" -e "s|__TMP__|$TMP|g" -e "s|__SLUG__|$s|g" -e "s|__YF__|$YF|g" -e "s|__YT__|$YT|g" -e "s|__PREFIXES__|$PX|g" scripts/judgments/export-judgments-hc.sql)"
+  # Party titles: cleaned in JS (the rules need look-around regex that DuckDB lacks); the raw title is removed here, before any page is written.
+  nice -n 10 node scripts/judgments/hc-display-titles.mjs "$OUT/_removed/$s.json" "$TMP/$s.ndjson" "$TMP/$s.filtered.ndjson"
   nice -n 10 python3 scripts/judgments/split_pages.py "$TMP/$s.ndjson" "$OUT/court=$s"; rm -f "$TMP/$s.ndjson"
   nice -n 10 python3 scripts/judgments/split_pages.py "$TMP/$s.filtered.ndjson" "$OUT/court=$s" --filtered; nice -n 10 python3 scripts/judgments/split_pages.py "$TMP/$s.facets.ndjson" "$OUT/court=$s" --facets; rm -f "$TMP/$s.filtered.ndjson" "$TMP/$s.facets.ndjson"
   DONE="$DONE${DONE:+,}$s"
