@@ -3,37 +3,45 @@
 # Layout (hive-style, one JSON array per file, 100 cases per page, newest year first is a UI matter):
 #   <OUT>/court=<slug>/year=<YYYY>/page=<N>/data_0.json      (written by split_pages.py) N starts at 1; cases sorted by decisionDate (nulls last), then caseId
 #   <OUT>/court=<slug>/year=<YYYY>/disp=<label-slug>/page=<N>/data_0.json   same cases filtered by disposition chip (rows add mainPage)
-#   <OUT>/court=<slug>/year=<YYYY>/bench=<single|division|larger>/page=<N>/data_0.json   same, filtered by bench class (3 courts only)
-#   <OUT>/court=<slug>/year=<YYYY>/facets.json                {disposition:[{value,slug,count}], bench:[{value,count}]}
+#   <OUT>/court=<slug>/year=<YYYY>/facets.json                {disposition:[{value,slug,count}]}
 #   <OUT>/_manifest/<slug>.json                              [{year, cases, pages}]
 #   <OUT>/_quarantine/<slug>.json                            cases left out, with the reason (never mixed into browse output)
 #   <OUT>/_fields/<slug>.json                                fill rates per field, for docs/JUDGMENTS-HC.md
-# Judges/bench size: exported only for courts in JUDGE_COURTS and only for cases whose judge entries are ALL name-like (the source field holds sentence fragments such as "therefore", "inter alia", "pass" in most courts).
+#   <OUT>/_removed/<slug>.json                               counts of what was left out (parties, judges, title tails, ...), counts only
+# No person data: petitioner, respondent, judges, bench size and advocates are never exported. `title` is the case title cleaned by the A225 rule
+# (src/lib/judgments/displayTitle.ts), or none when it cannot be cleaned; `caseNumber` is the registration form read from the title ("WP/933/2024").
+# The site shows a title only for courts named in HC_TITLE_COURTS (default empty: only the case number).
+# The guard (scripts/judgments/check-hc-output.mjs) runs at the end and the script fails on any hit. It does not check judgment text (none is exported here).
 # Rules live in export-judgments-hc.sql.
-# Rules (see docs/JUDGMENTS-HC.md): the court comes from the FILE (25 canonical slugs), never from the free-text `court` column (50 spellings).
+# Rules (see docs/JUDGMENTS-HC.md): the court comes from the FILE (25 canonical slugs), never from the free-text `court` column (50 spellings); a row whose
+# case-id prefix names another court is quarantined.
 # Year = year of decision_date when it parses and lies in 1900-01-01..2026-08-31 (the snapshot end); if decision_date is blank, the record's `year`
 # column when it is 1900..2026 (decisionDate stays null); anything else is quarantined. Never reads `text`; never orders or joins chunks.
 # Usage: [HC_COURTS=delhi-high-court,bombay-high-court] [HC_YEARS=2024-2025] scripts/judgments/export-judgments-hc.sh [DATASET_DIR] [OUT_DIR]
 set -euo pipefail
 cd "$(dirname "$0")/../.."
-DIR="${1:-/Volumes/LAWSSD/open-india-law}"; OUT="${2:-../lexbharat-data/judgments-hc}"
+DIR="${1:-/Volumes/LAWSSD/open-india-law}"; OUT="${2:-../lexbharat-data/judgments-hc-v2}"
 [ -d "$DIR" ] || { echo "Dataset folder not found: $DIR (is the SSD plugged in?)" >&2; exit 1; }
 slug() { case "$1" in jammu-and-kashmir) echo high-court-of-jammu-and-kashmir-and-ladakh;; punjab-and-haryana) echo punjab-and-haryana-high-court;; *) echo "$1-high-court";; esac; }
 YF=1900; YT=2026; if [ -n "${HC_YEARS:-}" ]; then YF="${HC_YEARS%-*}"; YT="${HC_YEARS#*-}"; fi
 TMP="$(mktemp -d)"; trap 'rm -rf "$TMP"' EXIT
-# Courts whose judge field passed the check in docs/JUDGMENTS-HC.md (>=80% of cases have only name-like entries; Patna excluded: names glued to "ORAL").
-JUDGE_COURTS="bombay-high-court gujarat-high-court orissa-high-court"
-mkdir -p "$OUT/_manifest" "$OUT/_quarantine" "$OUT/_fields"
+mkdir -p "$OUT/_manifest" "$OUT/_quarantine" "$OUT/_fields" "$OUT/_removed"; DONE=""
 for f in "$DIR"/in_*_judgments.parquet; do
   stem="$(basename "$f" _judgments.parquet)"; stem="${stem#in_}"; [ "$stem" = "supreme-court" ] && continue
   s="$(slug "$stem")"
   if [ -n "${HC_COURTS:-}" ] && [[ ",$HC_COURTS," != *",$s,"* ]]; then continue; fi
   echo "exporting $s" >&2; rm -rf "$OUT/court=$s"
-  JC=false; case " $JUDGE_COURTS " in *" $s "*) JC=true;; esac
-  duckdb -c "$(sed -e "s|__FILE__|$f|g" -e "s|__OUT__|$OUT|g" -e "s|__TMP__|$TMP|g" -e "s|__SLUG__|$s|g" -e "s|__YF__|$YF|g" -e "s|__YT__|$YT|g" -e "s|__JUDGES__|$JC|g" scripts/judgments/export-judgments-hc.sql)"
-  python3 scripts/judgments/split_pages.py "$TMP/$s.ndjson" "$OUT/court=$s"; rm -f "$TMP/$s.ndjson"
-  python3 scripts/judgments/split_pages.py "$TMP/$s.filtered.ndjson" "$OUT/court=$s" --filtered; python3 scripts/judgments/split_pages.py "$TMP/$s.facets.ndjson" "$OUT/court=$s" --facets; rm -f "$TMP/$s.filtered.ndjson" "$TMP/$s.facets.ndjson"
+  PX="$(node --input-type=module -e "import { HC_PREFIXES } from './src/lib/judgments/hcRecord.mjs'; console.log(Object.keys(HC_PREFIXES).filter((k) => HC_PREFIXES[k] === process.argv[1]).map((k) => \"'\" + k + \"'\").join(','))" "$s")"
+  [ -n "$PX" ] || { echo "no CNR prefix known for $s (src/lib/judgments/hcRecord.mjs)" >&2; exit 1; }
+  nice -n 10 duckdb -c "$(sed -e "s|__FILE__|$f|g" -e "s|__OUT__|$OUT|g" -e "s|__TMP__|$TMP|g" -e "s|__SLUG__|$s|g" -e "s|__YF__|$YF|g" -e "s|__YT__|$YT|g" -e "s|__PREFIXES__|$PX|g" scripts/judgments/export-judgments-hc.sql)"
+  # Party titles: cleaned in JS (the rules need look-around regex that DuckDB lacks); the raw title is removed here, before any page is written.
+  nice -n 10 node scripts/judgments/hc-display-titles.mjs "$OUT/_removed/$s.json" "$TMP/$s.ndjson" "$TMP/$s.filtered.ndjson"
+  nice -n 10 python3 scripts/judgments/split_pages.py "$TMP/$s.ndjson" "$OUT/court=$s"; rm -f "$TMP/$s.ndjson"
+  nice -n 10 python3 scripts/judgments/split_pages.py "$TMP/$s.filtered.ndjson" "$OUT/court=$s" --filtered; nice -n 10 python3 scripts/judgments/split_pages.py "$TMP/$s.facets.ndjson" "$OUT/court=$s" --facets; rm -f "$TMP/$s.filtered.ndjson" "$TMP/$s.facets.ndjson"
+  DONE="$DONE${DONE:+,}$s"
 done
+# The guard: fails (and so does this script) if any person field or name pattern reached the output of the courts just exported.
+nice -n 10 node scripts/judgments/check-hc-output.mjs "$OUT" --courts "$DONE"
 echo "done: $(find "$OUT" -name 'data_0.json' | wc -l | tr -d ' ') page files, $(du -sh "$OUT" | cut -f1)" >&2
 # A full run (no HC_COURTS / HC_YEARS filter) also refreshes the committed counts so they match the page files exactly:
 # src/data/judgments/court-years.json and courts.meta.json keep their Supreme Court rows and take High Court rows from the manifests/quarantine.

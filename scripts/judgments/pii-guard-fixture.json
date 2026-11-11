@@ -1,0 +1,239 @@
+{
+ "_note": "Shared fixture for the High Court person-field guard (scripts/judgments/check-hc-output.mjs here, core/pii_guard.py in LexBharat-from-scratch). Every name, address and number below is invented. `title` is the A225 title (may name the parties); `caseNumber` is the registration form.",
+ "clean": [
+  {
+   "caseId": "HCBM010000012024",
+   "title": "TESTA FAKENAME Vs THE STATE OF NOWHERE",
+   "caseNumber": "WP/933/2024",
+   "caseNumberRecorded": "933 of 2024",
+   "decisionDate": "2025-01-10",
+   "disposition": "DISPOSED",
+   "dispositionLabel": "Disposed of",
+   "dateOfRegistration": "05-01-2024",
+   "pages": 12
+  },
+  {
+   "caseId": "UPHC010000022022",
+   "caseNumber": "151/2022",
+   "disposition": "DISMISSED"
+  },
+  {
+   "caseId": "PHHC010000032024",
+   "caseNumber": "CIVIL APPEAL 100436 of 2024",
+   "caseNumberRecorded": "100436 of 2024"
+  },
+  {
+   "caseId": "KLHC010000042019",
+   "title": "A.B. FAKENAME v. UNION OF NOWHERE",
+   "caseNumber": "WP(C)/19571/2019",
+   "mainPage": 3
+  },
+  {
+   "caseId": "HCBM010000132020",
+   "caseNumber": "WP/123456/2020",
+   "caseNumberRecorded": "123456"
+  },
+  {
+   "caseId": "GAHC010000252012",
+   "caseNumber": "Crl.A.(J)/12/2012"
+  },
+  {
+   "caseId": "HCBM010000152017",
+   "title": "FAKE JAIN Vs FAKE DECOR PVT.LTD.CIN NO.U20200MH1997PTC109078",
+   "caseNumber": "CP/669/2013"
+  },
+  {
+   "caseId": "HCBM010000162021",
+   "title": "FAKE PERSON Vs THE STATE REP BY THE ADVOCATE GENERAL",
+   "caseNumber": "WP/3/2021"
+  },
+  {
+   "caseId": "DLHC010000052014"
+  }
+ ],
+ "dirty": [
+  {
+   "row": {
+    "caseId": "HCBM010000062024",
+    "title": "WP/12/2024 of TESTA FAKENAME Vs STATE OF NOWHERE"
+   },
+   "expect": [
+    "title: not cleaned (registration prefix or None left)"
+   ]
+  },
+  {
+   "row": {
+    "caseId": "HCBM010000072024",
+    "caseNumber": "WP/13/2024",
+    "petitioner": "TESTA FAKENAME",
+    "respondent": "STATE OF NOWHERE"
+   },
+   "expect": [
+    "field \"petitioner\" is not allowed",
+    "field \"respondent\" is not allowed"
+   ]
+  },
+  {
+   "row": {
+    "caseId": "HCBM010000082024",
+    "caseNumber": "WP/14/2024",
+    "judges": [
+     "HON. FAKE JUDGE"
+    ],
+    "benchSize": 1
+   },
+   "expect": [
+    "field \"judges\" is not allowed",
+    "field \"benchSize\" is not allowed"
+   ]
+  },
+  {
+   "row": {
+    "caseId": "HCBM010000172024",
+    "title": "TESTA FAKENAME S/O NOBODY Vs THE STATE"
+   },
+   "expect": [
+    "title: relation, age, address or occupation"
+   ]
+  },
+  {
+   "row": {
+    "caseId": "HCBM010000182024",
+    "title": "FAKE PERSON Vs THE HON'BLE MR. JUSTICE FAKE JUDGE"
+   },
+   "expect": [
+    "title: judge marker"
+   ]
+  },
+  {
+   "row": {
+    "caseId": "HCBM010000192024",
+    "title": "FAKE PERSON Vs THE STATE, PIN 411001"
+   },
+   "expect": [
+    "title: PIN or id number"
+   ]
+  },
+  {
+   "row": {
+    "caseId": "HCBM010000202024",
+    "title": "FAKE CHILD (MINOR) Vs THE STATE"
+   },
+   "expect": [
+    "title: minor or guardian"
+   ]
+  },
+  {
+   "row": {
+    "caseId": "HCBM010000212024",
+    "title": "ADV. FAKE COUNSEL Vs THE STATE"
+   },
+   "expect": [
+    "title: advocate"
+   ]
+  },
+  {
+   "row": {
+    "caseId": "HCBM010000262024",
+    "title": "FAKE PERSON, C.NO.7006 Vs THE STATE"
+   },
+   "expect": [
+    "title: PIN or id number"
+   ]
+  },
+  {
+   "row": {
+    "caseId": "HCBM010000092024",
+    "disposition": "TESTA FAKENAME S/o NOBODY, Age 45, Occ. Farmer, R/o Fakepur 411001"
+   },
+   "expect": [
+    "disposition: relation (S/o, W/o, D/o, R/o, C/o)",
+    "disposition: age",
+    "disposition: occupation",
+    "disposition: PIN code"
+   ]
+  },
+  {
+   "row": {
+    "caseId": "HCBM010000102024",
+    "caseNumberRecorded": "16 of 2024 Adv. FAKE COUNSEL"
+   },
+   "expect": [
+    "caseNumberRecorded: advocate"
+   ]
+  },
+  {
+   "row": {
+    "caseId": "HCBM010000272024",
+    "disposition": "DISPOSED, TESTA FAKENAME Vs STATE"
+   },
+   "expect": [
+    "disposition: versus"
+   ]
+  },
+  {
+   "row": {
+    "caseId": "HCBM010000232024",
+    "disposition": "DISPOSED, FAKE PERSON resident of Fakepur"
+   },
+   "expect": [
+    "disposition: address word"
+   ]
+  },
+  {
+   "row": {
+    "caseId": "HCBM010000242024",
+    "disposition": "DISMISSED [FAKE JUDGE, CJI]"
+   },
+   "expect": [
+    "disposition: judge marker"
+   ]
+  },
+  {
+   "row": {
+    "caseId": "HCBM010000282024",
+    "disposition": "DISPOSED, FAKE CHILD (MINOR)"
+   },
+   "expect": [
+    "disposition: minor or guardian"
+   ]
+  },
+  {
+   "row": {
+    "caseId": "HCBM010000292024",
+    "disposition": "DISPOSED, PRISONER C.NO.7006"
+   },
+   "expect": [
+    "disposition: prisoner or police number"
+   ]
+  },
+  {
+   "row": {
+    "caseId": "HCBM010000222024",
+    "titleRaw": "WP/22/2024 of TESTA FAKENAME Vs STATE"
+   },
+   "expect": [
+    "field \"titleRaw\" is not allowed"
+   ]
+  },
+  {
+   "row": {
+    "caseId": "HCBM010000302024",
+    "displayTitle": "TESTA FAKENAME Vs STATE"
+   },
+   "expect": [
+    "field \"displayTitle\" is not allowed"
+   ]
+  },
+  {
+   "row": {
+    "caseId": "HCBM010000112024",
+    "caseNumber": "TESTA FAKENAME v. STATE"
+   },
+   "expect": [
+    "caseNumber is not in registration form",
+    "caseNumber: versus"
+   ]
+  }
+ ]
+}

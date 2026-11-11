@@ -14,14 +14,12 @@ export async function GET(req: Request) {
   if (!(await store.courts()).some((c) => c.slug === court)) return bad("Unknown court: use one of the court slugs from /api/judgments/courts.");
   const summary = (await store.courts()).find((c) => c.slug === court);
   if (search && court !== "supreme-court-of-india") return bad("High Court search is served by /api/judgments/search-hc.");
-  const disposition = get("disposition"), bench = get("bench");
-  if (allYears && (search || disposition || bench)) return bad("years=all lists every year without filters; to search all years use /api/judgments/search or search-hc.");
+  const disposition = get("disposition");
+  if (allYears && (search || disposition)) return bad("years=all lists every year without filters; to search all years use /api/judgments/search or search-hc.");
   if (allYears && store.source !== "real") return bad("years=all needs the real judgments data.");
-  if ((disposition || bench) && !summary?.filterable) return bad("Filters are not available for this court yet.");
-  if (bench && court === "supreme-court-of-india") return bad("Bench size is not available for the Supreme Court.");
-  if (disposition && bench) return bad("Use one filter at a time: disposition or bench.");
-  if (bench && !["single", "division", "larger"].includes(bench)) return bad("bench must be single, division or larger.");
-  const { available, results, total, facets } = await store.list(court, { year, page, pageSize, search, disposition, bench });
+  if (get("bench")) return bad("The bench-size filter has been removed.");
+  if (disposition && !summary?.filterable) return bad("Filters are not available for this court yet.");
+  const { available, results, total, facets } = await store.list(court, { year, page, pageSize, search, disposition });
   return Response.json({ source: store.source, available, searchable: !!summary?.searchable, filterable: !!summary?.filterable, ...(facets ? { facets } : {}), court, ...(allYears ? { years: "all" } : { year }), results, total, page, pageSize, hasMore: (page - 1) * pageSize + pageSize < total,
     note: available ? "Case metadata from the open-india-law dataset (CC BY 4.0). No judgment text." : "Case lists are not available for this court yet." },
     { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=3600" } });

@@ -1,8 +1,8 @@
 // Shared by the High Court search index builder (scripts/judgments/build-hc-search-index.mjs) and the runtime search (src/lib/judgments/hcSearch.ts), so both sides
 // tokenise, hash and read case numbers in exactly the same way. Pure string code: no dependencies.
 //
-// What is indexed: the PARTY NAMES (petitioner and respondent, or the title when parties were not extracted) and the CASE NUMBER, as recorded in the dataset.
-// Never judgment text. Words are matched whole (word boundary); a typed word with no exact match falls back to words that start with it.
+// What is indexed: the CASE NUMBER (from the title and as recorded) and the YEAR in it. No party names (docs/JUDGMENTS-HC.md), never judgment text.
+// planQuery() still separates the words of a query (tokenize); the High Court search ignores them.
 export const SHARDS = 512;
 
 const STOP = new Set((

@@ -1,5 +1,5 @@
 // GET /api/judgments/search-hc?q=<words or case number>&court=<slug>&year=<yyyy>&page=&pageSize=
-// High Court cases across ALL years (and courts) by PARTY NAMES and CASE NUMBERS as recorded in the dataset, from a compact static index. Not full-text search of judgments.
+// High Court cases across ALL years (and courts) by CASE NUMBER (from the title or as recorded) or YEAR, from a compact static index. Not party names; not full-text search of judgments.
 // Newest first; a query that is a case number ("933/2024", "933 of 2024") returns exactly the cases with that number. Without the index: 200 with indexAvailable:false.
 import { ALL_COURTS } from "@/data/workspaceBrowse";
 import { getJudgmentsStore } from "@/lib/judgments";
@@ -14,7 +14,7 @@ export async function GET(req: Request) {
   if (court && (court === SC_SLUG || !ALL_COURTS.some((c) => c.slug === court))) return bad("court must be a High Court slug.");
   if (year !== undefined && (!Number.isInteger(year) || year < 1900 || year > 2026)) return bad("year must be an integer from 1900 to 2026.");
   if (![page, pageSize].every(Number.isInteger) || page < 1 || pageSize < 1 || pageSize > 50) return bad("page must be >= 1 and pageSize 1 to 50.");
-  const scope = "party names and case numbers as recorded in the dataset (not judgment text)";
+  const scope = "case numbers (from the case title and as recorded in the dataset) and case years; not party names, not judgment text";
   const store = getJudgmentsStore();
   const r = store.source === "mock" ? { indexAvailable: false, total: 0, results: [], note: "Search is not available in mock mode." } : await searchHighCourts({ q: text, court: court ?? undefined, year, page, pageSize });
   return Response.json({ source: store.source, scope: "high-courts", searched: scope, ...r, page, pageSize, hasMore: page * pageSize < r.total,

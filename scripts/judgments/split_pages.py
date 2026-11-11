@@ -2,7 +2,7 @@
 """Splits DuckDB NDJSON exports (already sorted) into hive-style files. Standard library only.
 usage: split_pages.py <ndjson> <out_court_dir> [--filtered | --facets]
   (default)   rows {year, page, ...case}                  -> year=<Y>/page=<N>/data_0.json
-  --filtered  rows {year, kind, key, page, ...case}       -> year=<Y>/<kind>=<key>/page=<N>/data_0.json   (kind: disp | bench)
+  --filtered  rows {year, kind, key, page, ...case}       -> year=<Y>/<kind>=<key>/page=<N>/data_0.json   (kind: disp)
   --facets    rows {year, disposition[], bench[]}         -> year=<Y>/facets.json
   --preview   rows {year, caseId, text}                   -> year=<Y>/preview.json   ({caseId: text} for the year)
 Null fields and empty lists are dropped to keep files small."""

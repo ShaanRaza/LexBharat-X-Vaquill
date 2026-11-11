@@ -76,11 +76,10 @@ export const jsonJudgmentsStore: JudgmentsStore = {
     if (hcSourceKind() === null) return { available: false, results: [], total: 0 };
     const yearTotal = byCourt.get(court)?.find((y) => y.year === q.year)?.cases ?? 0;
     const hf = await readHcFacets(court, q.year);
-    const facets = hf ? { disposition: hf.disposition.map(({ value, count }) => ({ value, count })), ...(hf.bench.length ? { bench: hf.bench } : {}) } : undefined;
-    // One filter at a time: each filtered list is its own set of pages written at export time (see docs/JUDGMENTS-HC.md).
+    const facets = hf ? { disposition: hf.disposition.map(({ value, count }) => ({ value, count })) } : undefined;
+    // The disposition filter: each filtered list is its own set of pages written at export time (see docs/JUDGMENTS-HC.md).
     let filter: HcFilter | undefined, total = yearTotal;
     if (q.disposition) { const f = hf?.disposition.find((d) => d.value === q.disposition); if (!f) return { available: true, results: [], total: 0, facets }; filter = { kind: "disp", key: f.slug }; total = f.count; }
-    else if (q.bench) { const f = hf?.bench.find((d) => d.value === q.bench); if (!f) return { available: true, results: [], total: 0, facets }; filter = { kind: "bench", key: f.value }; total = f.count; }
     const start = (q.page - 1) * q.pageSize, end = Math.min(start + q.pageSize, total);
     if (start >= total) return { available: true, results: [], total, facets };
     // A request spans at most two 100-case pages (pageSize <= 100).
@@ -101,11 +100,11 @@ export const jsonJudgmentsStore: JudgmentsStore = {
       source: "real", totalCases: TOTAL, courts: BASE_COURTS.length, listableCourts: hc ? BASE_COURTS.length : 1,
       caveats: [
         "Counts are distinct case records in the dataset, not official case totals. Coverage is uneven: several High Courts start around 2015.",
-        hc ? "Case lists are available for the Supreme Court and every High Court, by year, with a disposition filter (and a bench-size filter for Bombay, Gujarat and Orissa). Searching by party name or case number works for the Supreme Court and, when the High Court search index is available, for the High Courts. Judgment text is not searched and is not available yet."
+        hc ? "Case lists are available for the Supreme Court and every High Court, by year, with a disposition filter. Supreme Court cases can be searched by party name or case number; High Court cases by case number or year, when the High Court search index is available. Judgment text is not searched and is not available yet."
            : "Only Supreme Court cases can be listed so far. High Courts show counts by year. Judgment text is not available yet.",
         "Years follow the decision date where present. Records with no usable date or year are left out of the lists.",
-        "High Courts rarely carry a reporter citation, so the case number is the main identifier. Party names are as extracted from the judgment and can be incomplete or missing.",
-        "Judges and bench size are shown only for Bombay, Gujarat and Orissa and only when every name on the case checks out. Other courts' judge data is unreliable, so it is left out. Short text previews are not available yet.",
+        "High Courts rarely carry a reporter citation, so the case number is the main identifier. It is read from the case title; where the number recorded in the dataset differs, both are shown.",
+        "High Court parties, judges and bench size are not shown: the source fields hold personal data (names, ages, home addresses) and extraction noise. Short text previews are not available yet.",
       ],
       attribution: { text: "Data: open-india-law (Vaquill AI), built from public court judgments. Source acknowledgment: eCourts and the Supreme Court of India; source PDFs published by Dattam Labs (CC BY 4.0).", url: "https://huggingface.co/datasets/vaquill/open-india-law", licence: "CC BY 4.0", snapshot: "v2026.08" },
     };

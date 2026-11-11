@@ -2,6 +2,32 @@
 
 Added 2026-10-20. High Courts now have the same drill-down as the Supreme Court: year grid, paginated case list, case detail page. Metadata only: no judgment text. Source: open-india-law `v2026.08` (CC BY 4.0), read from the local SSD at export time only.
 
+## No person data for High Courts (2026-11-10, issue #1)
+High Court pages, lists, search and the exported data carry **no party fields, no judges, no bench size and no advocates**. The parties appear only inside the case title, cleaned by the A225 rule, and only for courts listed in `HC_TITLE_COURTS` (below); every other High Court shows the case number only. The source fields hold personal data: of the Bombay cases, 34,944 petitioner fields hold age, occupation and home address, 12,243 party fields hold advocate names, and two judges share one string in at least 16,929 single-bench cases (LexBharat-from-scratch `reports/data-audit/REPORT.md`, J1 and J2). What changed:
+- **Export** (`export-judgments-hc.sql`): petitioner, respondent, judges and bench size are not exported (they are read only to count what was removed, `_removed/<slug>.json`). The bench filter is gone. `title` is the case title **cleaned by the A225 rule** (`WP/933/2024 of A S/O X Vs B` becomes `A Vs B`), or none when it cannot be cleaned (below). The registration form is no longer the title: it is the case number. Output goes to a new folder, `../lexbharat-data/judgments-hc-v2`; the old `judgments-hc/` and `judgments-hc-gz/` are kept.
+- **Case number:** `caseNumber` is the **registration form** read from the source title (`WP/933/2024 of A Vs B` gives `WP/933/2024`; `WRIT PETITION 609 of 1999` is kept whole; any other shape gives none). `caseNumberRecorded` is the dataset's own value. Their numbers disagree on 5,399,317 of 15,656,461 cases (34.5%; Allahabad 974,534 of 1,556,323, Patna 1,004,402 of 1,614,936), so both are kept, the page shows the recorded one when it differs, and **exact search matches either**.
+- **Court:** still taken from the file; the case-id prefix matched the file's court on every one of the 15,656,526 records (0 quarantined for this reason). A row whose case-id prefix (CNR, for example `HCBM`) names another court is quarantined ("record id names another court"). The prefix map is `HC_PREFIXES` in `src/lib/judgments/hcRecord.mjs` (29 prefixes, 25 courts).
+- **Site:** the page reader (`hcData.ts`) keeps only the allowed fields (`HC_FIELDS` in `hcRecord.mjs`), so even an older export that still holds parties cannot reach a page. Case rows and pages show parties, judges and bench for the Supreme Court only.
+- **Search:** High Courts are searched by **case number or year only**. Party-name search is removed; a name query finds nothing.
+- **AWS merge** (`scripts/w10/hc-merge-aws.mjs`): reads only cnr, title, decision date, disposal nature and date of registration (never the PDF flag, judge, advocate fields, description or raw HTML), cleans titles and reads case numbers the same way, and skips rows whose CNR prefix names another court.
+
+### High Court case titles (2026-11-10, owner decision; LexBharat-from-scratch A224 to A226, PR #217)
+- **Rule:** `src/lib/judgments/displayTitle.ts` is the TypeScript port of `core/display_title.py` (merge `543e4ff`). It removes the registration prefix, "None" and extra spaces, and cuts a father's or husband's name (S/o, W/o, D/o, C/o, "son of"), an age, an address (R/o, "resident of", "at post"), an occupation ("Occ.", ", JUNIOR CLERK,") and a dangling "REP. BY"/"THROUGH". It gives **no title** (null) when a judge, an advocate, a minor or guardian, a prisoner/police/employee number, a PIN or any 6+ digit run, mojibake, or no party at all is left, or the title is over 240 characters. The separator is kept as recorded (" Vs ", " v. ", "versus"). A null title means the page shows the case number.
+- **One shared fixture:** `scripts/judgments/display-title-fixture.json`, 82 cases (69 High Court, 13 Supreme Court), each `{raw, court_type, expected, reason}`, read out of `tests/core/test_display_title.py`. The TypeScript tests (`src/lib/judgments/displayTitle.test.mjs`) and the Python original both pass every case. The same file is meant to sit next to `tests/core/test_display_title.py` in LexBharat-from-scratch and run there too (that change belongs to issue #213; not made from this branch). On a 50,000-title sample of all 25 courts, the Python and the TypeScript gave the **same output on every title** (98.94% shown; 426 no party, 75 minor, 24 number, 5 advocate).
+- **Not ported exactly:** JS `\w`, `\d` and `\b` are ASCII-only (Python's are Unicode), so a title with non-Latin letters or digits could split differently; none did in the sample. The case-sensitive "MeherAge 72" rule is a separate regex (Python uses an inline `(?-i:...)` group). The Supreme Court branch is ported but not used (Supreme Court titles here are unchanged). The switch is this repo's own (below), not a port of `DISPLAY_TITLE_COURTS`: a bad value turns titles off instead of refusing to start.
+- **Export:** DuckDB's regex engine has no look-ahead or look-behind, so the rule cannot run in SQL. The SQL passes the title (with "None" removed) as `titleRaw` into the temp files only; `scripts/judgments/hc-display-titles.mjs` writes `title` (or none), **removes `titleRaw` before any page is written**, and counts `title_shown`, `title_cleaned`, `title_dropped` and `title_dropped_reasons` in `_removed/<slug>.json`. A title that cannot be cleaned is null and counted; the guard is the hard fail behind it. On top of the Python rule (unchanged), the export (`exportTitle`, also used by `hc-merge-aws.mjs`) leaves out a title that says a party is "(IN JAIL)" (reason `in_jail`) and any title the guard's title check would flag (reason `guard_check`, e.g. a letter date "12/07/2017 Of" read as a registration prefix). These two are not in core/display_title.py yet. Node imports the `.ts` file directly (Node 24 strips the types; it prints a one-line "module type" warning because `package.json` does not declare `"type": "module"`).
+- **Switch:** `HC_TITLE_COURTS`. **Default empty: no High Court shows a title, only the case number.** `*` turns every High Court on; court slugs (`bombay-high-court,kerala-high-court`) turn those on. A value that names no High Court turns every court off and is logged at start. It is applied in one place, the page reader (`hcData.ts`): for a court that is not listed, `title` is removed before rows reach lists, search results, the case page or the API. For a listed court the heading is the cleaned title, with the case number below it.
+- **Trial, not the full export** (Bombay and Sikkim into a scratch folder, 10 Nov): Bombay 1,559,583 of 1,578,864 titles shown, 19,106 (1.21%) none (13,033 no party, 3,787 minor or guardian, 1,565 number, 546 advocate, 171 judge, 3 mojibake, 1 empty); Sikkim 2,167 shown, 52 none. Guard passed on 3.08M rows; no `titleRaw` in any file.
+- **Search** does not index titles: party-name search stays removed even for listed courts. Searching by the words in a title is a separate decision.
+- **Not caught:** the rule cannot tell that a title names a child or a victim the court did not anonymise when the title carries no marker. Counsel review is tracked in LexBharat-from-scratch#218 and must happen before any High Court is listed.
+
+### The guard, and what it does not promise
+`scripts/judgments/check-hc-output.mjs` runs at the end of every export and of the AWS merge, and fails the run on any hit. It promises only two things:
+1. **No person field** reaches the output: every row holds only `HC_FIELDS`, there is no `bench=` folder and no bench facet, and the search index has no word keys.
+2. **Titles may name the parties, but carry no ages, occupations, addresses, PIN codes, relations, advocates or judges.** `title` may hold " Vs " and " v. " and must pass every A225 blocker (judge, advocate, minor or guardian, prisoner/police/employee number, PIN or 6+ digits, mojibake, a relation/age/address/occupation marker left over, a registration prefix or "None" left over, over 240 characters); a null title passes. `caseNumber` must be in registration form. Every other text field may hold none of: " Vs ", " v. ", "versus", S/o W/o D/o R/o C/o, "Age 45", "Occ.", "advocate", "Adv.", a 6-digit PIN code, a judge marker, a minor or guardian, a prisoner or police number ("C.NO.7006", "(C-11609)", "PC 1155"), or an address word ("resident of", "residing", "permanent address", "at post", "post:"). The raw title (`titleRaw`) never reaches the output. One exception, measured: "(J)" before the first slash of a case number is the case type ("Crl.A.(J)", a jail appeal; 1,386 cases in Gauhati, Tripura and Meghalaya), not a judge.
+
+**It does not check the judgment body, and cannot.** It also cannot tell that a title names a child or a victim the court did not anonymise when the title carries no marker (LexBharat-from-scratch#218). The High Court export holds no judgment text. Wherever judgment text is used (Supreme Court opening text here; chunks, Qdrant payloads and embeddings in LexBharat-from-scratch) it is kept as recorded and **does contain the names of parties and judges, and sometimes addresses**. Pattern rules cannot find every name in free text. A hit is printed by file, field and kind only, never with the value. Tests: `node --test src/lib/judgments/hcRecord.test.mjs src/lib/judgments/displayTitle.test.mjs scripts/judgments/check-hc-output.test.mjs` (shared fixture `scripts/judgments/pii-guard-fixture.json`, all names invented; core/pii_guard.py in LexBharat-from-scratch, issue #213, uses the same fixture).
+
 ## Route scheme (stable)
 | URL | What |
 |---|---|
@@ -10,70 +36,69 @@ Added 2026-10-20. High Courts now have the same drill-down as the Supreme Court:
 | `/workspace/browse/judgments/<court-slug>/<YYYY>/<caseId>?p=<file page>&lp=<list page>` | Case detail. `p` is the 100-case export page that holds the case (High Courts need it; the Supreme Court ignores it). `lp` only restores the list page on "back". An unknown or mismatched case returns a real 404. |
 | `GET /api/judgments/courts` | Courts, counts, `listable`/`searchable` per court, stats, caveats, attribution |
 | `GET /api/judgments/years?court=` | Case count per decision year |
-| `GET /api/judgments/list?court=&year=&page=&pageSize=` | Paginated cases, newest first (1-100 per page). `available:false` only when no case source is configured. `disposition=` (a value from `facets.disposition`) filters the Supreme Court and every High Court; `bench=single|division|larger` filters Bombay, Gujarat and Orissa; only one filter at a time (422 otherwise). `search=` works for the Supreme Court only. The response carries `searchable`, `filterable` and `facets` (counts for the year). |
+| `GET /api/judgments/list?court=&year=&page=&pageSize=` | Paginated cases, newest first (1-100 per page). `available:false` only when no case source is configured. `disposition=` (a value from `facets.disposition`) filters the Supreme Court and every High Court. `bench=` answers 422 (the bench-size filter was removed). `search=` works for the Supreme Court only. The response carries `searchable`, `filterable` and `facets` (counts for the year). |
 | `GET /api/judgments/case?court=&year=&id=&p=` | One case |
 
 Court slugs are the 26 in `src/data/workspaceBrowse.ts`. A link without a correct `p` cannot find a High Court case (by design: no index of 15.6M ids); links produced by the list always carry it.
 
 ## Export shape (`scripts/judgments/export-judgments-hc.sh`)
 ```
-../lexbharat-data/judgments-hc/          (OUTSIDE the project, 327,974 files, 11.7 GB of JSON for the full snapshot, about 2.5 GB gzipped)
+../lexbharat-data/judgments-hc-v2/       (OUTSIDE the project; the older judgments-hc/ is kept, not used)
   court=<slug>/year=<YYYY>/page=<N>/data_0.json   JSON array, 100 cases per page, N from 1,
                                                    sorted by decisionDate DESC (undated last) then caseId
   court=<slug>/year=<YYYY>/disp=<label-slug>/page=<N>/data_0.json   the same cases filtered by disposition chip; each row adds mainPage
-  court=<slug>/year=<YYYY>/bench=<single|division|larger>/page=<N>/data_0.json   filtered by bench class (Bombay, Gujarat, Orissa only)
-  court=<slug>/year=<YYYY>/facets.json   {disposition:[{value,slug,count}], bench:[{value,count}]}
+  court=<slug>/year=<YYYY>/facets.json   {disposition:[{value,slug,count}]}
   _manifest/<slug>.json                  [{year, cases, pages}]
   _quarantine/<slug>.json                cases left out, with reason and raw values
   _fields/<slug>.json                    fill rates (source of the table below)
+  _removed/<slug>.json                   counts of what was left out (parties, judges, titles shown / cleaned / dropped by reason, titles with no case number, case-number disagreements, wrong-court ids)
 ```
-Case fields: `caseId, title, caseNumber, decisionDate (YYYY-MM-DD), disposition (as recorded), dispositionLabel (chip text), petitioner, respondent, citation, dateOfRegistration (as recorded), pages, judges + benchSize (three courts only)`. Null fields are omitted. The SQL is in `scripts/judgments/export-judgments-hc.sql`. `scripts/judgments/split_pages.py` (stdlib Python) writes the page files from a DuckDB NDJSON stream.
+Case fields (`HC_FIELDS`, nothing else): `caseId, title (cleaned by the A225 rule; served only for courts in HC_TITLE_COURTS), caseNumber (the registration form read from the title), caseNumberRecorded (as recorded), decisionDate (YYYY-MM-DD), disposition (as recorded), dispositionLabel (chip text), citation, dateOfRegistration (as recorded), pages`, plus `mainPage` on filtered lists. Null fields are omitted. The SQL is in `scripts/judgments/export-judgments-hc.sql`. `scripts/judgments/split_pages.py` (stdlib Python) writes the page files from a DuckDB NDJSON stream.
 
 A full run also rewrites `src/data/judgments/court-years.json` and `courts.meta.json` so counts equal the page files exactly (Supreme Court rows are kept). Filtered runs (`HC_COURTS`, `HC_YEARS`) do not touch them.
 
 ## Normalization and exclusions
-- **Court names:** the court comes from the source file (25 canonical slugs and display names), never from the free-text `court` column, which has 50 spellings across the files (for example Bombay: "Bombay High Court", "High Court of Bombay", "High Court of Mumbai", blank). Browse results are never split by spelling.
+- **Court names:** the court comes from the source file (25 canonical slugs and display names), never from the free-text `court` column, which has 50 spellings across the files (for example Bombay: "Bombay High Court", "High Court of Bombay", "High Court of Mumbai", blank). Browse results are never split by spelling. A row whose case-id prefix names another court is quarantined.
 - **Year:** the year of `decision_date` when it parses and lies in 1900-01-01..2026-08-31; if the date is blank, the record's `year` when 1900-2026 (the case then shows "No decision date recorded"); otherwise the case is quarantined.
 - **Quarantine:** 65 High Court cases (for example Kerala `KLHC010748912008`, date 2088-11-28; 47 unparseable dates and 18 out-of-range dates across many courts). They appear in no list; counts: valid 15,693,475 + quarantined 65 = 15,693,540.
-- **Titles:** the source writes a missing number as the word "None" ("WRIT PETITION None", "None None"); a trailing "None" is stripped and an empty result becomes no title (the UI then shows "Case <number>" or the record id). Titles are otherwise as extracted.
-- **Judges and bench size** are exported only for Bombay, Gujarat and Orissa, and only for a case whose every judge entry looks like a person's name (capital letters, dots, apostrophes, hyphens; no "CORAM", no names glued to "ORAL"). A case with any other entry gets no judges and no bench size, never a partial list. Why: in the other 22 courts the field is mostly sentence fragments ("therefore", "inter alia", "pass", city names). Patna fails even though most entries are capitals, because names come glued to "ORAL" ("SUDHIR SINGHORAL"). Bench size is the number of names (the source's bench strength always equals the length of that list, so it is only as good as the list). Share of cases that show judges: Bombay 84.5%, Gujarat 64.1%, Orissa 44.5%. Spot check against the comparison screenshot: the two Bombay cases visible there carry the same judge names and the same single/division bench.
+- **Titles and case numbers:** the source writes a missing number as the word "None" ("WRIT PETITION None", "None None"); it is stripped. The case number is the registration form: `TYPE/NUM/YEAR` ("WP(C)/19571/2019 of ... Vs ..." gives "WP(C)/19571/2019"; "/151/2022 of ..." with no type gives "151/2022"), or the whole title when it is only `TYPE NUM of YEAR` / `TYPE NUM/YEAR`; any other shape gives none (39,322 cases, 0.25%, in the export of 2026-11-10). The title is cleaned by the A225 rule (above).
+- **Judges and bench size (High Courts):** not exported, not shown (see "No person data" above).
 - **Supreme Court judges** are shown as the **authoring judge** (the dataset lists the judge who wrote the report, 100% name-like, not the full bench). The full bench is a separate extracted field, below. The dataset's own bench strength is not used for the Supreme Court: it would read "single judge" for 87% of cases.
-- **Party names** are shown only when both look like party names. Stripped first: a leading case reference ("WP(C)/19571/2019 of K.G.RAJU" becomes "K.G.RAJU") and trailing commas. A case is then left without parties (never half) if either value contains extraction junk: "picture [..] intentionally omitted", a leading `+ > $` or similar, an embedded case number such as 354/2024, a file name ending in .odt/.doc/.docx/.pdf, or more than 150 characters. Truncations such as "M/S ITD CEMINDIA (JV" cannot be detected and remain possible.
+- **Party names (High Courts):** not exported, not shown, not searched.
 - **Disposition chip:** the source has 498 spellings. A chip is shown only for the 20 common, unambiguous values (Allowed, Dismissed, Disposed of, Rejected, Bail granted/rejected, Closed, Withdrawn, Partly allowed, Quashed, Remanded, Acquitted, Convicted, Granted, Dismissed as infructuous/withdrawn/on merits), about 92% of cases. Everything else appears only as recorded text on the detail page.
 - **Pages:** the last page the extracted text reaches (max `page_end` over a case's chunks). Every case has it, and it never decreases along the text in 99.1% (Bombay) and 99.7% (Delhi) of cases checked; values above 2000 are dropped. It is the length of the extracted text, not an official page count.
 - **Citation:** blank for every High Court (0%). The detail page says "No reporter citation is available for this record" and the case number is the main identifier.
-- **Party names** are as extracted and can be truncated or contain fragments ("ITS GENERAL SECRETARY Through: None").
 
-## Field fill rates by court (share of exported cases showing the field)
-| Court | Cases | Case no. | Date | Disposition | Disposition chip | Parties | Judges | Pages |
+## Field fill rates by court (share of exported cases showing the field; export of 2026-11-10, before the AWS additions)
+| Court | Cases | Title | Case no. (title) | Case no. (recorded) | Date | Disposition | Disposition chip | Pages |
 |---|---|---|---|---|---|---|---|---|
-| allahabad-high-court | 1,556,323 | 63.3% | 100.0% | 99.4% | 87.2% | 69.5% | 0.0% | 100.0% |
-| andhra-pradesh-high-court | 261,773 | 98.6% | 99.4% | 99.5% | 88.4% | 90.4% | 0.0% | 100.0% |
-| bombay-high-court | 1,578,864 | 99.0% | 99.5% | 99.3% | 94.5% | 92.6% | 84.5% | 100.0% |
-| calcutta-high-court | 340,418 | 43.2% | 99.2% | 98.9% | 98.6% | 95.1% | 0.0% | 100.0% |
-| chhattisgarh-high-court | 509,786 | 85.8% | 99.9% | 99.9% | 99.2% | 43.6% | 0.0% | 100.0% |
-| delhi-high-court | 330,400 | 70.9% | 99.9% | 85.0% | 84.9% | 77.8% | 0.0% | 100.0% |
-| gauhati-high-court | 286,466 | 75.3% | 99.6% | 94.3% | 93.8% | 81.4% | 0.0% | 100.0% |
-| gujarat-high-court | 405,840 | 99.6% | 100.0% | 99.8% | 87.6% | 87.5% | 64.1% | 100.0% |
-| high-court-of-jammu-and-kashmir-and-ladakh | 100,285 | 97.0% | 99.9% | 98.4% | 86.1% | 58.5% | 0.0% | 100.0% |
-| himachal-pradesh-high-court | 254,825 | 98.9% | 99.2% | 98.8% | 97.0% | 90.1% | 0.0% | 100.0% |
-| jharkhand-high-court | 420,729 | 99.8% | 99.7% | 99.7% | 76.1% | 78.6% | 0.0% | 100.0% |
-| karnataka-high-court | 686,152 | 97.2% | 99.8% | 99.8% | 98.3% | 95.0% | 0.0% | 100.0% |
-| kerala-high-court | 1,018,714 | 100.0% | 100.0% | 100.0% | 99.2% | 95.0% | 0.0% | 100.0% |
-| madhya-pradesh-high-court | 646,344 | 87.2% | 100.0% | 100.0% | 99.6% | 88.5% | 0.0% | 100.0% |
-| madras-high-court | 1,498,010 | 98.5% | 100.0% | 99.6% | 85.6% | 88.0% | 0.0% | 100.0% |
-| manipur-high-court | 16,763 | 99.6% | 99.7% | 99.6% | 96.9% | 73.6% | 0.0% | 100.0% |
-| meghalaya-high-court | 10,827 | 98.9% | 100.0% | 100.0% | 99.6% | 87.5% | 0.0% | 100.0% |
-| orissa-high-court | 685,646 | 99.8% | 99.9% | 99.5% | 99.1% | 80.9% | 44.5% | 100.0% |
-| patna-high-court | 1,614,936 | 100.0% | 99.6% | 98.3% | 97.4% | 81.9% | 0.0% | 100.0% |
-| punjab-and-haryana-high-court | 1,133,710 | 52.4% | 99.8% | 99.9% | 99.8% | 97.0% | 0.0% | 100.0% |
-| rajasthan-high-court | 1,056,767 | 95.6% | 100.0% | 99.7% | 98.9% | 51.2% | 0.0% | 100.0% |
-| sikkim-high-court | 2,219 | 90.9% | 99.6% | 99.8% | 99.6% | 87.8% | 0.0% | 100.0% |
-| telangana-high-court | 1,005,127 | 96.1% | 99.9% | 99.8% | 88.5% | 94.5% | 0.0% | 100.0% |
-| tripura-high-court | 30,062 | 83.3% | 99.7% | 99.6% | 99.3% | 79.7% | 0.0% | 100.0% |
-| uttarakhand-high-court | 205,475 | 91.2% | 99.9% | 99.5% | 99.3% | 90.0% | 0.0% | 100.0% |
+| allahabad-high-court | 1,556,323 | 99.9% | 99.9% | 63.3% | 100.0% | 99.4% | 87.2% | 100.0% |
+| andhra-pradesh-high-court | 261,773 | 99.7% | 99.7% | 98.6% | 99.4% | 99.5% | 88.4% | 100.0% |
+| bombay-high-court | 1,578,864 | 99.7% | 99.7% | 99.0% | 99.5% | 99.3% | 94.5% | 100.0% |
+| calcutta-high-court | 340,418 | 97.7% | 97.7% | 43.2% | 99.2% | 98.9% | 98.6% | 100.0% |
+| chhattisgarh-high-court | 509,786 | 99.9% | 99.9% | 85.8% | 99.9% | 99.9% | 99.2% | 100.0% |
+| delhi-high-court | 330,400 | 98.6% | 98.6% | 70.9% | 99.9% | 85.0% | 84.9% | 100.0% |
+| gauhati-high-court | 286,466 | 99.2% | 99.2% | 75.3% | 99.6% | 94.3% | 93.8% | 100.0% |
+| gujarat-high-court | 405,840 | 99.9% | 99.9% | 99.6% | 100.0% | 99.8% | 87.6% | 100.0% |
+| high-court-of-jammu-and-kashmir-and-ladakh | 100,285 | 99.3% | 99.3% | 97.0% | 99.9% | 98.4% | 86.1% | 100.0% |
+| himachal-pradesh-high-court | 254,825 | 97.4% | 97.4% | 98.9% | 99.2% | 98.8% | 97.0% | 100.0% |
+| jharkhand-high-court | 420,729 | 99.9% | 99.9% | 99.8% | 99.7% | 99.7% | 76.1% | 100.0% |
+| karnataka-high-court | 686,152 | 99.9% | 99.9% | 97.2% | 99.8% | 99.8% | 98.3% | 100.0% |
+| kerala-high-court | 1,018,714 | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 99.2% | 100.0% |
+| madhya-pradesh-high-court | 646,344 | 100.0% | 100.0% | 87.2% | 100.0% | 100.0% | 99.6% | 100.0% |
+| madras-high-court | 1,498,010 | 99.9% | 99.9% | 98.5% | 100.0% | 99.6% | 85.6% | 100.0% |
+| manipur-high-court | 16,763 | 99.9% | 99.9% | 99.6% | 99.7% | 99.6% | 96.9% | 100.0% |
+| meghalaya-high-court | 10,827 | 100.0% | 100.0% | 98.9% | 100.0% | 100.0% | 99.6% | 100.0% |
+| orissa-high-court | 685,646 | 99.5% | 99.5% | 99.8% | 99.9% | 99.5% | 99.1% | 100.0% |
+| patna-high-court | 1,614,936 | 99.8% | 99.8% | 100.0% | 99.6% | 98.3% | 97.4% | 100.0% |
+| punjab-and-haryana-high-court | 1,133,710 | 99.8% | 99.8% | 52.4% | 99.8% | 99.9% | 99.8% | 100.0% |
+| rajasthan-high-court | 1,056,767 | 100.0% | 100.0% | 95.6% | 100.0% | 99.7% | 98.9% | 100.0% |
+| sikkim-high-court | 2,219 | 99.6% | 99.6% | 90.9% | 99.6% | 99.8% | 99.6% | 100.0% |
+| telangana-high-court | 1,005,127 | 99.9% | 99.9% | 96.1% | 99.9% | 99.8% | 88.5% | 100.0% |
+| tripura-high-court | 30,062 | 98.6% | 98.6% | 83.3% | 99.7% | 99.6% | 99.3% | 100.0% |
+| uttarakhand-high-court | 205,475 | 99.5% | 99.5% | 91.2% | 99.9% | 99.5% | 99.3% | 100.0% |
 
-Case number is the weakest identifier: Calcutta 43%, Punjab and Haryana 52%, Allahabad 63%, Delhi 71%. Delhi disposition is 85%. Judges: only the three gated courts are above 0%. Rajasthan has far more `case_id` values (1,056,767) than distinct case numbers (about 308,000), so its counts are records, not cases.
+The recorded case number is the weakest field (Calcutta 43%, Punjab and Haryana 52%, Allahabad 63%, Delhi 71%); the number read from the title fills most of those gaps. Delhi disposition is 85%. Parties and judges are not exported. Rajasthan has far more `case_id` values (1,056,767) than distinct case numbers (about 308,000), so its counts are records, not cases.
 
 ## Where the case pages are read from
 `src/lib/judgments/hcData.ts`: `JUDGMENTS_DATA_DIR` (local folder, development) or `JUDGMENTS_DATA_URL` (https base serving the same layout). With neither set, High Courts are honestly count-only: `listable:false`, cards say "(counts by year only)", year cards are inert, copy says case lists are not available. The Supreme Court is bundled (`src/data/judgments/sc/*.json`, 12 MB) and always works.
@@ -83,7 +108,8 @@ Case number is the weakest identifier: Calcutta 43%, Punjab and Haryana 52%, All
 scripts/judgments/export-judgments-hc.sh                      # full High Court export, about 3 minutes, needs the DuckDB CLI
 HC_COURTS=delhi-high-court HC_YEARS=2024-2025 scripts/judgments/export-judgments-hc.sh   # a subset (does not refresh counts)
 scripts/judgments/export-judgments.sh                         # Supreme Court case files (unchanged)
-echo "JUDGMENTS_DATA_DIR=../lexbharat-data/judgments-hc" > .env.local      # local dev and local production build
+scripts/judgments/export-sc-preview.sh /Volumes/LAWSSD/open-india-law ../lexbharat-data/judgments-hc-v2   # Supreme Court opening text into the same folder (script unchanged)
+echo "JUDGMENTS_DATA_DIR=../lexbharat-data/judgments-hc-v2" > .env.local   # local dev and local production build
 npm run build && npm start
 ```
 
@@ -91,8 +117,11 @@ npm run build && npm start
 The folder is too big for the repo or a Vercel function, so production reads it from a bucket: set `JUDGMENTS_DATA_URL` to the bucket's public base URL (no code change, no dependency). Without it production High Courts stay honestly count-only.
 ```bash
 scripts/judgments/export-judgments-hc.sh          # about 6 minutes, SSD attached
-scripts/judgments/gzip-for-upload.sh              # ../lexbharat-data/judgments-hc-gz, about 2.5 GB, about 40 minutes (328,000 small files)
-rclone copy ../lexbharat-data/judgments-hc-gz r2:lexbharat-judgments --header-upload "Content-Encoding: gzip" --header-upload "Content-Type: application/json" --transfers 32 --checkers 32 --progress
+scripts/judgments/export-sc-preview.sh /Volumes/LAWSSD/open-india-law ../lexbharat-data/judgments-hc-v2   # Supreme Court opening text lives in the same folder
+node scripts/judgments/build-hc-search-index.mjs   # case-number index into judgments-hc-v2/search
+node scripts/judgments/check-hc-output.mjs         # the guard, over everything just built
+scripts/judgments/gzip-for-upload.sh              # ../lexbharat-data/judgments-hc-v2-gz
+rclone copy ../lexbharat-data/judgments-hc-v2-gz r2:lexbharat-judgments --header-upload "Content-Encoding: gzip" --header-upload "Content-Type: application/json" --transfers 32 --checkers 32 --progress
 ```
 Uploading the uncompressed folder also works but is 11.7 GB (over R2's 10 GB free tier). The gzip upload relies on the objects being served with `Content-Encoding: gzip`, which `fetch()` decompresses transparently.
 
@@ -100,18 +129,18 @@ Uploading the uncompressed folder also works but is 11.7 GB (over R2's 10 GB fre
 | Item | Why it is not in this build |
 |---|---|
 | **Short text snippet** | No clean source. The `description` field is the first ~300 characters of the raw document (letterhead such as "IN THE HIGH COURT OF JUDICATURE AT BOMBAY BENCH AT NAGPUR", file names like "6391-2012.odt", "Page 1 of 4 $~24"); the first text chunk starts with the same boilerplate. A real preview needs a verified rule for finding the operative text of each court's judgments. |
-| **Search by party name inside a High Court year** | A year can hold up to 158,000 cases in up to 1,600 files read 100 at a time. Name search needs an index (a database or search service), which is the hosting decision still open. Filters were possible without one because they are shaped at export time: each filter value has its own pre-built list. |
-| **Combined filters** (disposition and bench together) | Each filtered list is pre-built, so only one filter applies at a time. Combining them would multiply the stored files. |
+| **Search by party name (High Courts)** | Removed on purpose (personal data). Not deferred. |
+| **Search by party name inside a High Court year (historical note)** | A year can hold up to 158,000 cases in up to 1,600 files read 100 at a time. Name search needs an index (a database or search service), which is the hosting decision still open. Filters were possible without one because they are shaped at export time: each filter value has its own pre-built list. |
 | **Supreme Court bench-size filter** | The source's bench field understates real benches (see above). |
 | A way to find a High Court case from its id alone; judgment text; reporter citations for High Courts | No index; text not exported; the source has none. |
 
-Filters are live: the Supreme Court (disposition, values from the year's data) and every High Court (disposition chips; bench size for Bombay, Gujarat and Orissa). Filter counts are exact because they are counted at export time.
+Filters are live: the Supreme Court (disposition, values from the year's data) and every High Court (disposition chips). The High Court bench-size filter was removed. Filter counts are exact because they are counted at export time.
 
 ## Lawyer-facing additions (case detail, Supreme Court search and opening text)
 **Keep the export folders outside the project.** With 328,000 to 656,000 files inside the project folder, `next build` ran out of memory (4 GB heap, 7+ minutes); outside it builds in about 15 seconds. All scripts now default to `../lexbharat-data/`.
 
 ### Case detail (`/workspace/browse/judgments/<court>/<year>/<caseId>`, all courts)
-Heading is the parties line (petitioner v. respondent) when both passed the sanity check, otherwise the title or case number. Then court, citation (Supreme Court: monospace, copyable) or case number with the note "None in this dataset for High Courts. Cite by case number.", decision date, disposition, judges and bench where verified, pages, record ID, and a Copy button (Supreme Court: the citation; High Courts: "Case no. X, Court (decided date)", never an invented citation). Supreme Court list rows show the citation next to the date with the same copy button.
+Supreme Court: heading is the parties line (petitioner v. respondent) when both passed the sanity check, otherwise the title. High Courts: heading is the title in registration form, or the case number; no parties, judges or bench. Then court, citation (Supreme Court: monospace, copyable) or case number with the note "None in this dataset for High Courts. Cite by case number." (and the recorded number when it differs from the title), decision date, disposition, Supreme Court authoring judge and bench, pages, record ID, and a Copy button (Supreme Court: the citation; High Courts: "Case no. X, Court (decided date)", never an invented citation). Supreme Court list rows show the citation next to the date with the same copy button.
 The page ends with **Where each field comes from**: every field marked as recorded, imperfect or absent, with the reason (`src/lib/judgments/provenance.ts`).
 
 ### Supreme Court opening text (`export-sc-preview.sh`)
@@ -140,9 +169,11 @@ Both fields are shown as "from the judgment text" (◐) and are left **absent** 
 **Bad-match guard:** a match that covers more than 5% of the text is logged with `console.warn` and ignored. The allowance grows with the number of names (40 characters each), because the genuine 13-judge Kesavananda bench is already 5.1% of its opening chunk; without that it would be discarded.
 Regenerate with the SSD attached: `scripts/judgments/export-sc-fields.sh` (also the last step of `export-judgments.sh`); commit the rewritten year files.
 
-## High Court search by party name and case number (`build-hc-search-index.mjs`)
+## High Court search by case number (`build-hc-search-index.mjs`)
+**Changed 2026-11-10 (issue #1):** the index holds only case-number keys (`#933/2024`, from the title and the recorded number) and year keys (`@2024`); no words, so party names are not searchable. The guard fails on any word key. The text below describes the earlier party-name index and is kept for its measurements.
+
 **What it is:** `GET /api/judgments/search-hc?q=&court=&year=&page=&pageSize=` finds High Court cases across all years (and all courts, or one court, or one court-year) by **party names and case numbers as recorded in the dataset**, newest first. It is not a search of judgment text, and the pages say so. A pure case number ("933/2024", "933 of 2024", "WP/933/2024") returns exactly the cases carrying that number (15 courts for 1725/2024, for instance); words are matched as whole words, and a typed word that matches nothing exactly falls back to words that start with it. The Supreme Court keeps its own endpoint (`/api/judgments/search`, unchanged).
-**How:** a static inverted index built from the exported case pages, nothing else: `npm run index:hc-search` (about 2 minutes, reads `../lexbharat-data/judgments-hc`, writes `search/` beside it). Document ids run newest year first, then court, then position in the list, so the smallest ids are the newest cases and an id maps to (court, year, page, row) with a binary search over `meta.json`. 512 shard files hold `word -> delta-encoded ids`; a query reads only the shards of its words. Words come from the petitioner and respondent (or the title when parties were not extracted), without case-type words and stop words; case numbers are read from the recorded number and from references in the title, and a type code with digits ("A482/42016/2023") yields 42016/2023, not fragments. Shared code: `src/lib/judgments/hcSearchCore.mjs` (tested: `npm run test:extract`).
+**How:** a static inverted index built from the exported case pages, nothing else: `npm run index:hc-search` (about 2 minutes, reads `../lexbharat-data/judgments-hc-v2`, writes `search/` beside it). Document ids run newest year first, then court, then position in the list, so the smallest ids are the newest cases and an id maps to (court, year, page, row) with a binary search over `meta.json`. 512 shard files hold `word -> delta-encoded ids`; a query reads only the shards of its words. Words come from the petitioner and respondent (or the title when parties were not extracted), without case-type words and stop words; case numbers are read from the recorded number and from references in the title, and a type code with digits ("A482/42016/2023") yields 42016/2023, not fragments. Shared code: `src/lib/judgments/hcSearchCore.mjs` (tested: `npm run test:extract`).
 **Size, measured:** 15,656,461 cases, 141.6 million postings, 3.46 million distinct words: **565 MB of shards, 224 MB gzipped** (largest shard 21 MB raw, 3.5 MB gzipped; `meta.json` 24 KB). Year keys (below) added 9 MB gzipped. **This is far above the 15 MB target, and a full-coverage index cannot be that small:** every case contributes about 8 words, and names are high-entropy. Splitting per court does not help (Bombay alone is about 26 MB gzipped), and nothing near this size can be bundled with the app or the repo. So the index lives next to the case pages and is read the same way (`JUDGMENTS_DATA_DIR` locally, `JUDGMENTS_DATA_URL` in production, included by `gzip-for-upload.sh`). A query costs 8 to 200 ms locally once its shards are loaded.
 **Without the index:** `indexAvailable: false` with HTTP 200 (never an error page); the court-year pages then say name search is not available, and the browse page says so under "High Court cases". **Production therefore has no High Court search until the data folder is hosted** (the same step that turns on High Court case lists).
 **Not covered:** case type ("bail", "writ" are not indexed), words inside a word, judgment text, and spelling variants of a name. Names that the source garbled or did not extract cleanly are found only through the words that survived (for example "Learned counsel for the applicant ..." appears as a party in some Allahabad records). Results are year-major, then court, then date within the court-year, so "newest" is exact within a court and by year across courts.
