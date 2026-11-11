@@ -91,6 +91,18 @@ export function explainTitle(raw: unknown, courtType: CourtType = "high_court"):
 /** The High Court case title to show, or null. */
 export const cleanTitle = (raw: unknown): string | null => explainTitle(raw)[0];
 
+const IN_JAIL = /\(\s*in\s+jail\s*\)/i;   // "(IN JAIL)": says the party is a prisoner
+/** What the export writes (hc-display-titles.mjs, hc-merge-aws.mjs): explainTitle, then two fallbacks this site adds on top of the Python rule, which stays
+ *  unchanged. "in_jail": the title says a party is in jail. "guard_check": the guard (titleHits) would flag it, e.g. a letter date "12/07/2017 Of" read as
+ *  a registration prefix. Either way the title is left out and counted, and the case number shows instead. */
+export function exportTitle(raw: unknown): [string | null, string] {
+  const [shown, reason] = explainTitle(raw);
+  if (shown === null) return [null, reason];
+  if (IN_JAIL.test(shown)) return [null, "in_jail"];
+  if (titleHits(shown).length) return [null, "guard_check"];
+  return [shown, reason];
+}
+
 /** Why a title about to be shown is not clean (empty when it is): the guard's check on the `title` field. The same blockers as explainTitle, plus every
  *  relation / age / address / occupation marker and any registration prefix or "None" (cleanTitle cuts those, so one left over is a bug, or a title that
  *  was never cleaned). " Vs " and " v. " are allowed here. */

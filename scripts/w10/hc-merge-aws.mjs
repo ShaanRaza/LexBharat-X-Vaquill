@@ -2,14 +2,15 @@
 // W10 item 11: restores case lists for High Court years where the dataset has far fewer cases than the AWS Open Data release (s3://indian-high-court-judgments, public). METADATA ONLY: the PDFs were not downloaded.
 // Metadata Parquet files are in ../lexbharat-data/aws-hc-meta. Case ids in the dataset ARE the court's CNR, so the two are merged by CNR: every case already listed stays untouched; AWS cases whose CNR is not listed are added.
 // Reads ONLY cnr, title, decision_date, disposal_nature, date_of_registration: never the PDF flag (never true in this release), judge, advocate fields, description or raw_html.
-// An added case carries: id (CNR), title (cleaned by the A225 rule, or none), caseNumber (the registration form read from the title), decision date, disposition (as recorded), date of registration.
+// An added case carries: id (CNR), title (exportTitle: the A225 rule plus the in-jail and guard fallbacks, or none; drops counted), caseNumber (the registration form read from the title), decision date, disposition (as recorded), date of registration.
 // No parties, judges or pages. A row whose CNR prefix names another court (src/lib/judgments/hcRecord.mjs) is skipped and counted, never added.
 // Rewrites that court-year's pages under ../lexbharat-data/judgments-hc-v2 (main list, disposition lists, facets), _manifest, src/data/judgments/court-years.json + courts.meta.json, and src/config/hc-aws-years.json.
 // usage: node scripts/w10/hc-merge-aws.mjs [--apply]
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
-import { caseNumberOf, cleanTitle, courtOfId, pickHcFields } from "../../src/lib/judgments/hcRecord.mjs";
+import { caseNumberOf, courtOfId, pickHcFields } from "../../src/lib/judgments/hcRecord.mjs";
+import { exportTitle } from "../../src/lib/judgments/displayTitle.ts";
 
 const APPLY = process.argv.includes("--apply"), ROOT = "../lexbharat-data/judgments-hc-v2", AWS = "../lexbharat-data/aws-hc-meta", PER = 100;
 const COURTS = { "3_22": "punjab-and-haryana-high-court", "9_13": "allahabad-high-court", "23_23": "madhya-pradesh-high-court", "24_17": "gujarat-high-court", "33_10": "madras-high-court", "7_26": "delhi-high-court", "29_3": "karnataka-high-court" };
@@ -20,6 +21,7 @@ const slugOf = (s) => s.toLowerCase().replace(/ /g, "-");
 const clean = (t) => { const x = String(t ?? "").replace(/\s*\bNone\s*$/, "").replace(/^None\s+/, "").replace(/\s+/g, " ").trim(); return x && x !== "None" ? x : null; };
 
 const report = [], restored = JSON.parse(fs.existsSync("src/config/hc-aws-years.json") ? fs.readFileSync("src/config/hc-aws-years.json", "utf8") : '{"_note":"","years":{}}');
+const droppedWhy = {};   // titles of added cases left out, by exportTitle reason
 restored._note = "High Court years whose case list was extended in W10 with cases from the AWS Open Data metadata (CNR not already listed). Metadata only; no judgment text. Written by scripts/w10/hc-merge-aws.mjs.";
 for (const [code, year] of PAIRS) {
   const slug = COURTS[code], dir = path.join(ROOT, `court=${slug}`, `year=${year}`);
@@ -29,15 +31,16 @@ for (const [code, year] of PAIRS) {
   const existing = [];
   if (fs.existsSync(dir)) for (const p of fs.readdirSync(dir).filter((x) => /^page=\d+$/.test(x))) existing.push(...JSON.parse(fs.readFileSync(path.join(dir, p, "data_0.json"), "utf8")));
   const have = new Set(existing.map((c) => c.caseId)), added = [];
-  let otherCourt = 0;
+  let otherCourt = 0, titleDropped = 0;
   for (const r of aws) {
     if (have.has(r.cnr)) continue;
     if (courtOfId(r.cnr) !== slug) { otherCourt++; continue; }
     const disp = clean(r.disp), label = disp ? LABEL[disp.toUpperCase()] : undefined;
-    const shown = cleanTitle(r.title), num = caseNumberOf(r.title);
+    const [shown, why] = exportTitle(r.title), num = caseNumberOf(r.title);
+    if (r.title && !shown) { titleDropped++; droppedWhy[why] = (droppedWhy[why] ?? 0) + 1; }
     added.push({ caseId: r.cnr, ...(shown ? { title: shown } : {}), ...(num ? { caseNumber: num } : {}), ...(r.dd ? { decisionDate: r.dd } : {}), ...(disp ? { disposition: disp } : {}), ...(label ? { dispositionLabel: label } : {}), ...(clean(r.reg) ? { dateOfRegistration: clean(r.reg) } : {}) });
   }
-  report.push({ slug, year, existing: existing.length, aws: aws.length, added: added.length, otherCourt });
+  report.push({ slug, year, existing: existing.length, aws: aws.length, added: added.length, otherCourt, titleDropped });
   if (!APPLY || !added.length) continue;
   const all = [...existing.map((c) => pickHcFields(c, { titles: true })), ...added].sort((a, b) => (b.decisionDate ?? "").localeCompare(a.decisionDate ?? "") || (a.caseId < b.caseId ? -1 : 1));
   all.forEach((c, i) => { c._p = Math.floor(i / PER) + 1; });
@@ -65,6 +68,7 @@ for (const [code, year] of PAIRS) {
   (restored.years[slug] ??= {})[year] = { added: added.length, awsCases: aws.length, listedBefore: existing.length };
 }
 console.table(report);
+console.log("titles left out of added cases, by reason:", JSON.stringify(droppedWhy));
 if (APPLY) {
   fs.writeFileSync("src/config/hc-aws-years.json", JSON.stringify(restored, null, 1) + "\n");
   // The guard: fails if any person field or name pattern reached the courts just rewritten.
